@@ -1,4 +1,5 @@
-import { getMetadata, loadCSS } from '../../scripts/aem.js';
+import { getMetadata } from '../../scripts/aem.js';
+import loadHersheyTheme from '../../scripts/hershey-theme.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 /**
@@ -12,7 +13,7 @@ export default async function decorate(block) {
   const fragment = await loadFragment(footerPath);
   if (fragment.querySelector('.newsletter')) {
     block.classList.add('hershey-footer');
-    await loadCSS(`${window.hlx.codeBasePath}/styles/hershey-home.css`);
+    await loadHersheyTheme();
   }
 
   // decorate footer DOM

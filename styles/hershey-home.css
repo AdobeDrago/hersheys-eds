@@ -42,81 +42,81 @@
 }
 
 .hershey-home {
-  --nav-height: 80px;
+  --nav-height: var(--hershey-system-layout-nav-height);
 }
 
 .hershey-home main {
-  --body-font-family: hershey-tt, sans-serif;
-  --heading-font-family: hershey-gazpacho, sans-serif;
-  --text-color: #3f000b;
-  --link-color: #3f000b;
-  --link-hover-color: #640010;
-  --background-color: #fff;
+  --body-font-family: var(--hershey-system-font-family-body);
+  --heading-font-family: var(--hershey-system-font-family-heading);
+  --text-color: var(--hershey-system-color-text);
+  --link-color: var(--hershey-system-color-text);
+  --link-hover-color: var(--hershey-system-color-link-hover);
+  --background-color: var(--hershey-system-color-surface);
 
   color: var(--text-color);
   font-family: var(--body-font-family);
-  font-size: 18px;
-  line-height: 1.5;
+  font-size: var(--hershey-system-font-size-body);
+  line-height: var(--hershey-system-font-line-height-body);
 }
 
 .hershey-home main > .section {
   margin: 0;
-  padding: 64px 24px;
+  padding: var(--hershey-system-spacing-section) var(--hershey-system-spacing-large);
 }
 
 .hershey-home main > .section > div {
-  max-width: 1200px;
+  max-width: var(--hershey-system-layout-content);
   padding: 0;
 }
 
 .hershey-home main h1,
 .hershey-home main h2,
 .hershey-home main h3 {
-  font-weight: 900;
-  line-height: 1.2;
+  font-weight: var(--hershey-system-font-weight-black);
+  line-height: var(--hershey-system-font-line-height-heading);
 }
 
 .hershey-home main h1 {
-  font-size: 36px;
+  font-size: var(--hershey-system-font-size-h1-mobile);
 }
 
 .hershey-home main h2 {
-  margin: 0 0 24px;
-  font-size: 30px;
+  margin: 0 0 var(--hershey-system-spacing-large);
+  font-size: var(--hershey-system-font-size-h2-mobile);
 }
 
 .hershey-home main a.button {
-  background: #007bbd;
-  color: #fff;
-  border: 2px solid #007bbd;
-  padding: 14px 28px;
-  font-weight: 700;
+  background: var(--hershey-system-color-action);
+  color: var(--hershey-system-color-on-dark);
+  border: var(--hershey-system-border-control) solid var(--hershey-system-color-action);
+  padding: var(--hershey-system-spacing-action-block) var(--hershey-system-spacing-action-inline);
+  font-weight: var(--hershey-system-font-weight-bold);
   white-space: normal;
 }
 
 .hershey-home main a.button:hover {
-  background: #005f84;
-  border-color: #005f84;
+  background: var(--hershey-system-color-action-hover);
+  border-color: var(--hershey-system-color-action-hover);
 }
 
 .hershey-home main :focus-visible {
-  outline: 3px solid currentcolor;
-  outline-offset: 4px;
+  outline: var(--hershey-system-border-focus-main) solid currentcolor;
+  outline-offset: var(--hershey-system-spacing-compact);
 }
 
 .hershey-home main > .halloween {
-  --text-color: #fff;
-  --link-color: #fff;
+  --text-color: var(--hershey-system-color-on-dark);
+  --link-color: var(--hershey-system-color-on-dark);
 
-  color: #fff;
-  background: #460e3d;
+  color: var(--hershey-system-color-on-dark);
+  background: var(--hershey-system-color-surface-seasonal);
   padding-bottom: 0;
 }
 
 .hershey-home main > .welcome {
   padding: 0;
   text-align: center;
-  background: #f6f6f6;
+  background: var(--hershey-system-color-surface-muted);
 }
 
 .hershey-home .welcome > .default-content-wrapper {
@@ -124,7 +124,7 @@
 }
 
 .hershey-home .welcome > .cards-wrapper {
-  padding: 24px;
+  padding: var(--hershey-system-spacing-large);
 }
 
 .hershey-home .welcome p:has(picture),
@@ -134,7 +134,7 @@
 }
 
 .hershey-home .welcome > .default-content-wrapper:where(:first-child) > p:has(picture) {
-  background: #460e3d;
+  background: var(--hershey-system-color-surface-seasonal);
 }
 
 .hershey-home .welcome picture img,
@@ -150,7 +150,7 @@
 
 .hershey-home .social,
 .hershey-home .related {
-  background: #f6f6f6;
+  background: var(--hershey-system-color-surface-muted);
 }
 
 .hershey-home .newest h2,
@@ -161,30 +161,30 @@
 
 .hershey-home .welcome > .default-content-wrapper > h2,
 .hershey-home .welcome > .default-content-wrapper > p:not(:has(picture)) {
-  max-width: 800px;
-  padding: 0 24px;
-  margin: 24px auto;
+  max-width: var(--hershey-system-layout-intro);
+  padding: 0 var(--hershey-system-spacing-large);
+  margin: var(--hershey-system-spacing-large) auto;
 }
 
 .hershey-home main > .chocolate {
-  --text-color: #fff;
-  --link-color: #fff;
-  --link-hover-color: #fff;
+  --text-color: var(--hershey-system-color-on-dark);
+  --link-color: var(--hershey-system-color-on-dark);
+  --link-hover-color: var(--hershey-system-color-on-dark);
 
   position: relative;
   padding-top: 0;
-  background: #3f000b;
-  color: #fff;
+  background: var(--hershey-system-color-surface-dark);
+  color: var(--hershey-system-color-on-dark);
 }
 
 .hershey-home .chocolate > .default-content-wrapper {
   max-width: none;
-  margin: 0 -24px 48px;
-  background: #fff;
+  margin: 0 calc(-1 * var(--hershey-system-spacing-large)) var(--hershey-system-spacing-xx-large);
+  background: var(--hershey-system-color-surface);
 }
 
 .hershey-home .social > .default-content-wrapper {
-  margin-bottom: 32px;
+  margin-bottom: var(--hershey-system-spacing-x-large);
 }
 
 .hershey-home .social > .default-content-wrapper a.button {
@@ -192,25 +192,25 @@
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: #3f000b;
-  font-size: 24px;
+  color: var(--hershey-system-color-text);
+  font-size: var(--hershey-system-font-size-card);
 }
 
 @media (width >= 900px) {
   .hershey-home main h1 {
-    font-size: 48px;
+    font-size: var(--hershey-system-font-size-h1-desktop);
   }
 
   .hershey-home main h2 {
-    font-size: 36px;
+    font-size: var(--hershey-system-font-size-h2-desktop);
   }
 
   .hershey-home main > .section {
-    padding: 80px 32px;
+    padding: var(--hershey-system-spacing-section-large) var(--hershey-system-spacing-x-large);
   }
 
   .hershey-home main > .halloween {
-    padding: 64px 32px 0;
+    padding: var(--hershey-system-spacing-section) var(--hershey-system-spacing-x-large) 0;
   }
 
   .hershey-home main > .welcome {
@@ -230,6 +230,6 @@
   }
 
   .hershey-home .chocolate > .default-content-wrapper {
-    margin-inline: -32px;
+    margin-inline: calc(-1 * var(--hershey-system-spacing-x-large));
   }
 }

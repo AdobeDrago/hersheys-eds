@@ -1,19 +1,19 @@
 .tabs .tabs-list {
   display: flex;
-  gap: 8px;
+  gap: var(--hershey-component-tabs-list-gap, 8px);
   overflow-x: auto;
-  padding: 8px 0 16px;
+  padding: var(--hershey-component-tabs-list-gap, 8px) 0 var(--hershey-component-tabs-list-padding-bottom, 16px);
 }
 
 .tabs .tabs-list button {
   flex-shrink: 0;
-  padding: 12px 18px;
-  border: 2px solid currentcolor;
-  border-radius: 30px;
+  padding: var(--hershey-component-tabs-control-padding-block, 12px) var(--hershey-component-tabs-control-padding-inline, 18px);
+  border: var(--hershey-component-tabs-control-border, 2px) var(--hershey-component-tabs-border-style, solid) currentcolor;
+  border-radius: var(--hershey-component-tabs-control-radius, 30px);
   background: transparent;
   color: inherit;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: var(--hershey-component-tabs-control-weight, 700);
 }
 
 .tabs .tabs-list button[aria-selected="true"] {
@@ -25,8 +25,8 @@
 .tabs .tabs-panel {
   display: grid;
   align-items: center;
-  gap: 24px;
-  padding: 24px 0;
+  gap: var(--hershey-component-tabs-panel-spacing, 24px);
+  padding: var(--hershey-component-tabs-panel-spacing, 24px) 0;
 }
 
 .tabs .tabs-panel[hidden] {
@@ -37,7 +37,7 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 24px;
+  border-radius: var(--hershey-component-tabs-image-radius, 24px);
 }
 
 .tabs.recipes .tabs-panel-content h3 {
@@ -51,6 +51,6 @@
 
   .tabs .tabs-panel:has(> picture) {
     grid-template-columns: 1fr 1fr;
-    gap: 48px;
+    gap: var(--hershey-component-tabs-panel-gap-desktop, 48px);
   }
 }

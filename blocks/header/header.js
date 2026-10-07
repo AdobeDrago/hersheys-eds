@@ -1,4 +1,5 @@
-import { getMetadata, loadCSS } from '../../scripts/aem.js';
+import { getMetadata } from '../../scripts/aem.js';
+import loadHersheyTheme from '../../scripts/hershey-theme.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -98,7 +99,7 @@ export default async function decorate(block) {
   const fragment = await loadFragment(navPath);
   if (fragment.querySelector('.hershey-nav')) {
     block.classList.add('hershey-nav');
-    await loadCSS(`${window.hlx.codeBasePath}/styles/hershey-home.css`);
+    await loadHersheyTheme();
   }
 
   // decorate nav DOM

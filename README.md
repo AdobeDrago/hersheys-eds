@@ -47,6 +47,15 @@ Font Awesome. Cookie preferences link to Hersheyland; its OneTrust CMP and
 tracking scripts are not installed here. Existing local consent behavior is
 unchanged.
 
+## Design tokens
+
+The [design folder](./design/README.md) contains a DTCG 2025.10 token catalog,
+original Hersheyland AEM clientlib measurements, and a generated CSS variable
+stylesheet consumed by the homepage, cards, columns, tabs, header and footer.
+Original source values are separate from documented EDS compatibility mappings.
+After changing tokens, run `node design/generate-tokens.mjs`, then
+`node design/generate-tokens.mjs --check`. No runtime build is required.
+
 ## Environments
 - Preview: https://main--hersheys-eds--AdobeDrago.aem.page/
 - Live: https://main--hersheys-eds--AdobeDrago.aem.live/

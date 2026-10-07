@@ -2,7 +2,7 @@
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
-  z-index: 2;
+  z-index: var(--hershey-component-header-layer, 2);
   position: fixed;
 }
 
@@ -273,16 +273,16 @@ header nav .nav-tools {
 }
 
 .header.hershey-nav {
-  --body-font-family: hershey-tt, sans-serif;
-  --text-color: #3f000b;
-  --body-font-size-s: 16px;
+  --body-font-family: var(--hershey-component-header-font-family);
+  --text-color: var(--hershey-component-header-text);
+  --body-font-size-s: var(--hershey-component-header-font-size);
 
   color: var(--text-color);
 }
 
 .header.hershey-nav nav {
-  max-width: 1600px;
-  gap: 0 20px;
+  max-width: var(--hershey-component-header-max-width);
+  gap: 0 var(--hershey-component-header-gap);
 }
 
 .header.hershey-nav nav .nav-tools {
@@ -296,10 +296,10 @@ header nav .nav-tools {
 
 .header.hershey-nav .nav-tools form {
   display: flex;
-  gap: 8px;
-  padding: 8px;
-  border-radius: 24px;
-  background: #f6f6f6;
+  gap: var(--hershey-component-header-search-spacing);
+  padding: var(--hershey-component-header-search-spacing);
+  border-radius: var(--hershey-component-header-search-radius);
+  background: var(--hershey-component-header-search-surface);
 }
 
 .header.hershey-nav .nav-tools input {
@@ -307,51 +307,51 @@ header nav .nav-tools {
   width: 100%;
   border: 0;
   background: transparent;
-  font-size: 14px;
+  font-size: var(--hershey-component-header-search-font-size);
 }
 
 header .header.hershey-nav nav .nav-tools button {
-  padding: 4px 8px;
+  padding: var(--hershey-component-header-search-button-padding) var(--hershey-component-header-search-spacing);
   border: 0;
   background: transparent;
   color: inherit;
-  font-size: 14px;
+  font-size: var(--hershey-component-header-search-font-size);
   cursor: pointer;
 }
 
 .header.hershey-nav .nav-sections li > ul a {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--hershey-component-header-submenu-gap);
 }
 
 .header.hershey-nav .nav-sections li > ul img {
-  width: 36px;
-  height: 36px;
+  width: var(--hershey-component-header-icon-size);
+  height: var(--hershey-component-header-icon-size);
   object-fit: contain;
 }
 
 .header.hershey-nav :focus-visible {
-  outline: 2px solid currentcolor;
-  outline-offset: 3px;
+  outline: var(--hershey-component-header-focus-width) var(--hershey-component-header-border-style) currentcolor;
+  outline-offset: var(--hershey-component-header-focus-offset);
 }
 
 @media (width >= 900px) {
   .header.hershey-nav nav .nav-tools {
     display: block;
-    flex: 0 1 320px;
+    flex: 0 1 var(--hershey-component-header-search-width);
   }
 
   .header.hershey-nav nav .nav-sections ul {
-    gap: 20px;
+    gap: var(--hershey-component-header-gap);
   }
 
   .header.hershey-nav nav .nav-sections .default-content-wrapper > ul > li > button[aria-expanded="true"] + ul {
-    width: 260px;
-    max-height: calc(100dvh - 100px);
+    width: var(--hershey-component-header-submenu-width);
+    max-height: calc(100dvh - var(--hershey-component-header-submenu-clearance));
     overflow-y: auto;
-    background: #fff;
-    border-radius: 0 0 16px 16px;
-    box-shadow: 0 6px 12px #0002;
+    background: var(--hershey-component-header-submenu-surface);
+    border-radius: 0 0 var(--hershey-component-header-submenu-radius) var(--hershey-component-header-submenu-radius);
+    box-shadow: var(--hershey-component-header-submenu-shadow);
   }
 }

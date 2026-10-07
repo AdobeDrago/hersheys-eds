@@ -33,7 +33,7 @@
   grid-auto-columns: 80%;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 0 0 16px;
+  padding: 0 0 var(--hershey-component-cards-slider-padding, 16px);
 }
 
 .cards.slider > ul > li {
@@ -43,14 +43,14 @@
 .cards .cards-slider-controls {
   display: flex;
   justify-content: center;
-  gap: 24px;
-  margin-top: 24px;
+  gap: var(--hershey-component-cards-gap, 24px);
+  margin-top: var(--hershey-component-cards-gap, 24px);
 }
 
 .cards .cards-slider-controls button {
-  width: 48px;
-  height: 48px;
-  border: 2px solid currentcolor;
+  width: var(--hershey-component-cards-control-size, 48px);
+  height: var(--hershey-component-cards-control-size, 48px);
+  border: var(--hershey-component-cards-control-border, 2px) var(--hershey-component-cards-border-style, solid) currentcolor;
   border-radius: 50%;
   color: inherit;
   background: transparent;
@@ -58,7 +58,7 @@
 }
 
 .cards .cards-slider-controls button:disabled {
-  opacity: 0.35;
+  opacity: var(--hershey-component-cards-disabled-opacity, 0.35);
   cursor: default;
 }
 
@@ -73,12 +73,12 @@
 .cards.welcome-cards .cards-card-body,
 .cards.products .cards-card-body,
 .cards.related .cards-card-body {
-  margin: 20px 0 0;
+  margin: var(--hershey-component-cards-body-margin, 20px) 0 0;
 }
 
 .cards.welcome-cards img,
 .cards.related img {
-  border-radius: 24px;
+  border-radius: var(--hershey-component-cards-image-radius, 24px);
 }
 
 .cards.products > ul > li img {
@@ -89,18 +89,18 @@
 
 .cards.products h3 {
   font-family: var(--body-font-family);
-  font-size: 24px;
-  font-weight: 900;
+  font-size: var(--hershey-component-cards-title-size, 24px);
+  font-weight: var(--hershey-component-cards-title-weight, 900);
 }
 
 .cards.welcome-cards h3,
 .cards.related h3 {
-  font-size: 24px;
+  font-size: var(--hershey-component-cards-title-size, 24px);
 }
 
 .cards.social > ul {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  gap: var(--hershey-component-cards-social-spacing, 8px);
 }
 
 .cards.social > ul > li img {
@@ -108,24 +108,24 @@
 }
 
 .cards.social .cards-card-body {
-  margin: 8px;
-  font-size: 14px;
+  margin: var(--hershey-component-cards-social-spacing, 8px);
+  font-size: var(--hershey-component-cards-caption-size, 14px);
 }
 
 @media (width >= 600px) {
   .cards.slider > ul {
-    grid-auto-columns: calc((100% - 24px) / 2);
+    grid-auto-columns: calc((100% - var(--hershey-component-cards-gap, 24px)) / 2);
   }
 }
 
 @media (width >= 900px) {
   .cards.welcome-cards > ul {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 32px;
+    gap: var(--hershey-component-cards-welcome-gap, 32px);
   }
 
   .cards.slider > ul {
-    grid-auto-columns: calc((100% - 48px) / 3);
+    grid-auto-columns: calc((100% - var(--hershey-component-cards-desktop-slider-gutters, 48px)) / 3);
   }
 
   .cards.social > ul {

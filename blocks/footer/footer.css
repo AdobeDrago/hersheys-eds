@@ -20,16 +20,16 @@ footer .footer p {
 }
 
 .footer.hershey-footer {
-  --body-font-family: hershey-tt, sans-serif;
-  --heading-font-family: hershey-gazpacho, sans-serif;
-  --text-color: #3f000b;
-  --link-color: #fff;
-  --link-hover-color: #fff;
+  --body-font-family: var(--hershey-component-footer-font-family);
+  --heading-font-family: var(--hershey-component-footer-heading-family);
+  --text-color: var(--hershey-component-footer-text);
+  --link-color: var(--hershey-component-footer-on-dark);
+  --link-hover-color: var(--hershey-component-footer-on-dark);
 
   font-family: var(--body-font-family);
-  background: #3f000b;
-  color: #fff;
-  font-size: 16px;
+  background: var(--hershey-component-footer-surface);
+  color: var(--hershey-component-footer-on-dark);
+  font-size: var(--hershey-component-footer-font-size);
 }
 
 .footer.hershey-footer > div {
@@ -40,57 +40,57 @@ footer .footer p {
 
 .footer.hershey-footer .section {
   margin: 0;
-  padding: 32px 24px;
+  padding: var(--hershey-component-footer-spacing-large) var(--hershey-component-footer-spacing);
 }
 
 .footer.hershey-footer .section > div {
-  max-width: 1200px;
+  max-width: var(--hershey-component-footer-content-width);
   margin: auto;
 }
 
 .footer.hershey-footer .newsletter {
-  background: #fff;
-  color: #3f000b;
+  background: var(--hershey-component-footer-newsletter-surface);
+  color: var(--hershey-component-footer-text);
   text-align: center;
-  padding-block: 64px;
+  padding-block: var(--hershey-component-footer-newsletter-padding);
 }
 
 .footer.hershey-footer h2 {
   margin-top: 0;
-  font-size: 36px;
-  font-weight: 900;
+  font-size: var(--hershey-component-footer-heading-size);
+  font-weight: var(--hershey-component-footer-heading-weight);
 }
 
 .footer.hershey-footer .newsletter p {
-  margin-top: 16px;
+  margin-top: var(--hershey-component-footer-gap);
 }
 
 .footer.hershey-footer .newsletter a.button {
-  margin-block: 8px;
-  color: #fff;
-  background: #007bbd;
-  font-weight: 700;
+  margin-block: var(--hershey-component-footer-action-margin);
+  color: var(--hershey-component-footer-on-dark);
+  background: var(--hershey-component-footer-action-surface);
+  font-weight: var(--hershey-component-footer-action-weight);
 }
 
 .footer.hershey-footer .newsletter img {
   display: block;
-  max-width: 300px;
+  max-width: var(--hershey-component-footer-newsletter-image-width);
   height: auto;
-  margin: 32px auto 0;
+  margin: var(--hershey-component-footer-spacing-large) auto 0;
 }
 
 .footer.hershey-footer .footer-brand img {
-  width: 200px;
+  width: var(--hershey-component-footer-logo-width);
   height: auto;
 }
 
 .footer.hershey-footer ul {
   list-style: none;
   padding: 0;
-  margin: 24px 0 0;
+  margin: var(--hershey-component-footer-spacing) 0 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px 24px;
+  gap: var(--hershey-component-footer-gap) var(--hershey-component-footer-spacing);
 }
 
 .footer.hershey-footer .footer-links ul {
@@ -100,13 +100,13 @@ footer .footer p {
 }
 
 .footer.hershey-footer .footer-legal {
-  border-top: 1px solid #fff4;
-  font-size: 14px;
+  border-top: var(--hershey-component-footer-divider-width) var(--hershey-component-footer-border-style) var(--hershey-component-footer-divider-color);
+  font-size: var(--hershey-component-footer-legal-size);
 }
 
 .footer.hershey-footer :focus-visible {
-  outline: 2px solid currentcolor;
-  outline-offset: 4px;
+  outline: var(--hershey-component-footer-focus-width) var(--hershey-component-footer-border-style) currentcolor;
+  outline-offset: var(--hershey-component-footer-focus-offset);
 }
 
 @media (width >= 900px) {
@@ -120,10 +120,10 @@ footer .footer p {
   }
 
   .footer.hershey-footer .footer-brand {
-    padding-left: max(32px, calc((100vw - 1200px) / 2));
+    padding-left: max(var(--hershey-component-footer-spacing-large), calc((100vw - var(--hershey-component-footer-content-width)) / 2));
   }
 
   .footer.hershey-footer .footer-links {
-    padding-right: max(32px, calc((100vw - 1200px) / 2));
+    padding-right: max(var(--hershey-component-footer-spacing-large), calc((100vw - var(--hershey-component-footer-content-width)) / 2));
   }
 }
