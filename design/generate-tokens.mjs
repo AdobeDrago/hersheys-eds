@@ -13,6 +13,9 @@ function collect(group, inheritedType, path = []) {
     }
     const tokenPath = [...path, name];
     if (Object.hasOwn(node, '$value')) {
+      if (Object.keys(node).some((key) => !key.startsWith('$'))) {
+        throw new Error(`Tokens cannot contain child groups: ${tokenPath.join('.')}`);
+      }
       tokens.set(tokenPath.join('.'), { type: node.$type ?? type, value: node.$value });
     } else {
       collect(node, type, tokenPath);

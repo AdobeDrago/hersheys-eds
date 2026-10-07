@@ -78,7 +78,7 @@ Some semantic aliases pass through `reference.source` to preserve provenance.
 | Spacing and layout | Component padding/margins, content/search/submenu widths, grid gutters and flex/grid gaps |
 | Shape and borders | Card/tab/search/menu radii, control/divider/focus widths, solid stroke style |
 | Depth and elevation | Original search shadow, EDS submenu shadow, original stacking layers and safe EDS header layer |
-| Motion and animation | Original 150/250/300/400/2000ms durations, zero delay, standard/linear/out/in-out cubic curves and reduced duration |
+| Motion and animation | Original 150/250/300/400/1000/2000ms durations, zero interaction delay, animation-library delays of 1-5s, standard/linear/out/in-out cubic curves and reduced duration |
 
 No original end-user success, warning or informational feedback palette was
 established. Do not invent colors or repurpose `.author-alert` for users.

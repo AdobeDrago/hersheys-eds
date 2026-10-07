@@ -75,8 +75,14 @@
   --hershey-reference-motion-duration-image: 300ms;
   --hershey-reference-motion-duration-search: 400ms;
   --hershey-reference-motion-duration-loading: 2000ms;
+  --hershey-reference-motion-duration-animation: 1000ms;
   --hershey-reference-motion-duration-none: 0ms;
   --hershey-reference-motion-delay-none: 0ms;
+  --hershey-reference-motion-delay-animation-1: 1000ms;
+  --hershey-reference-motion-delay-animation-2: 2000ms;
+  --hershey-reference-motion-delay-animation-3: 3000ms;
+  --hershey-reference-motion-delay-animation-4: 4000ms;
+  --hershey-reference-motion-delay-animation-5: 5000ms;
   --hershey-reference-motion-easing-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
   --hershey-reference-motion-easing-linear: cubic-bezier(0, 0, 1, 1);
   --hershey-reference-motion-easing-out: cubic-bezier(0, 0, 0.58, 1);
@@ -146,6 +152,7 @@
   --hershey-system-motion-duration-interaction: var(--hershey-reference-motion-duration-normal);
   --hershey-system-motion-duration-reduced: var(--hershey-reference-motion-duration-none);
   --hershey-system-motion-delay-interaction: var(--hershey-reference-motion-delay-none);
+  --hershey-system-motion-delay-entrance: var(--hershey-reference-motion-delay-animation-1);
   --hershey-system-motion-easing-interaction: var(--hershey-reference-motion-easing-standard);
   --hershey-system-spacing-hairline: var(--hershey-reference-space-1);
   --hershey-system-spacing-minimum: var(--hershey-reference-space-2);

@@ -92,6 +92,7 @@ const invalidCases = [
   ['invalid duration', { x: { $type: 'duration', $value: { value: -1, unit: 'ms' } } }, /Durations require/],
   ['invalid easing', { x: { $type: 'cubicBezier', $value: [2, 0, 1, 1] } }, /Easing requires/],
   ['invalid stroke style', { x: { $type: 'strokeStyle', $value: 'invented' } }, /Unsupported named stroke/],
+  ['mixed token and group', { x: { $type: 'number', $value: 1, child: { $type: 'number', $value: 2 } } }, /Tokens cannot contain child groups/],
 ];
 invalidCases.forEach(([name, tokens, error]) => {
   test(`rejects ${name}`, (t) => {
@@ -110,6 +111,10 @@ test('original-site typography remains distinct from EDS mappings', () => {
     assert.equal(`${tokens.reference.source.font.size.body.$value.value}px`, styles.body['font-size']);
   });
   assert.equal(tokens.system.font.size['h2-mobile'].$value, '{reference.space.30}');
+  const foundations = JSON.parse(readFileSync(new URL('../design/source-clientlib-foundations.json', import.meta.url), 'utf8'));
+  assert.equal(foundations.animationLibrary.computedRoot['--animate-delay'], '1s');
+  assert.equal(tokens.reference.motion.delay['animation-1'].$value.value, 1000);
+  assert.equal(tokens.reference.motion.delay['animation-5'].$value.value, 5000);
 });
 
 test('catalog contains all three architecture layers and requested categories', () => {

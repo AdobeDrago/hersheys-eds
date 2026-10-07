@@ -1,6 +1,17 @@
 {
   "source": "https://www.hersheyland.com/",
   "capturedAt": "2026-10-07",
+  "animationLibrary": {
+    "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-animation.lc-5597da3b3dcc81aea68a814fd18071d1-lc.min.css",
+    "computedRoot": { "--animate-duration": "1s", "--animate-delay": "1s", "--animate-repeat": "1" },
+    "delaySelectors": {
+      ".animate__animated.animate__delay-1s": "var(--animate-delay)",
+      ".animate__animated.animate__delay-2s": "calc(var(--animate-delay) * 2)",
+      ".animate__animated.animate__delay-3s": "calc(var(--animate-delay) * 3)",
+      ".animate__animated.animate__delay-4s": "calc(var(--animate-delay) * 4)",
+      ".animate__animated.animate__delay-5s": "calc(var(--animate-delay) * 5)"
+    }
+  },
   "description": "Original AEM clientlib foundation declarations, including cross-component rules. These are not all active on the homepage.",
   "categories": {
     "feedback": [
