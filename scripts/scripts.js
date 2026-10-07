@@ -162,6 +162,9 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  if (document.body.classList.contains('hershey-home')) {
+    await loadCSS(`${window.hlx.codeBasePath}/styles/hershey-home.css`);
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);

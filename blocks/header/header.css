@@ -271,3 +271,87 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
 header nav .nav-tools {
   grid-area: tools;
 }
+
+.header.hershey-nav {
+  --body-font-family: hershey-tt, sans-serif;
+  --text-color: #3f000b;
+  --body-font-size-s: 16px;
+
+  color: var(--text-color);
+}
+
+.header.hershey-nav nav {
+  max-width: 1600px;
+  gap: 0 20px;
+}
+
+.header.hershey-nav nav .nav-tools {
+  display: none;
+}
+
+.header.hershey-nav nav[aria-expanded="true"] .nav-tools {
+  display: block;
+  align-self: start;
+}
+
+.header.hershey-nav .nav-tools form {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 24px;
+  background: #f6f6f6;
+}
+
+.header.hershey-nav .nav-tools input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-size: 14px;
+}
+
+header .header.hershey-nav nav .nav-tools button {
+  padding: 4px 8px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.header.hershey-nav .nav-sections li > ul a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header.hershey-nav .nav-sections li > ul img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.header.hershey-nav :focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 3px;
+}
+
+@media (width >= 900px) {
+  .header.hershey-nav nav .nav-tools {
+    display: block;
+    flex: 0 1 320px;
+  }
+
+  .header.hershey-nav nav .nav-sections ul {
+    gap: 20px;
+  }
+
+  .header.hershey-nav nav .nav-sections .default-content-wrapper > ul > li > button[aria-expanded="true"] + ul {
+    width: 260px;
+    max-height: calc(100dvh - 100px);
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 6px 12px #0002;
+  }
+}

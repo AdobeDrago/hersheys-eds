@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata, loadCSS } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -73,6 +73,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   else nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+  button.setAttribute('aria-expanded', String(!expanded));
 
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
@@ -95,6 +96,10 @@ export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
+  if (fragment.querySelector('.hershey-nav')) {
+    block.classList.add('hershey-nav');
+    await loadCSS(`${window.hlx.codeBasePath}/styles/hershey-home.css`);
+  }
 
   // decorate nav DOM
   block.textContent = '';
@@ -109,15 +114,16 @@ export default async function decorate(block) {
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
+  const brandLink = navBrand?.querySelector('.button');
   if (brandLink) {
     brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
+    const wrapper = brandLink.closest('.button-container, .button-wrapper');
+    if (wrapper) wrapper.className = '';
   }
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection, index) => {
       const subList = navSection.querySelector(':scope > ul');
       if (!subList) return;
       navSection.classList.add('nav-drop');
@@ -125,6 +131,8 @@ export default async function decorate(block) {
       const button = document.createElement('button');
       button.type = 'button';
       button.setAttribute('aria-expanded', false);
+      subList.id = `nav-submenu-${index}`;
+      button.setAttribute('aria-controls', subList.id);
       [...navSection.childNodes].forEach((node) => {
         if (node !== subList) button.append(node);
       });
@@ -138,6 +146,38 @@ export default async function decorate(block) {
         button.setAttribute('aria-expanded', !expanded);
       });
     });
+  }
+
+  if (block.classList.contains('hershey-nav')) {
+    navSections?.querySelectorAll('li').forEach((item) => {
+      const links = [...item.querySelectorAll(':scope > a, :scope > p > a')];
+      const imageLink = links.find((link) => link.querySelector('picture'));
+      const textLink = links.find((link) => link !== imageLink
+        && link.href === imageLink?.href && link.textContent.trim());
+      if (imageLink && textLink) {
+        textLink.prepend(imageLink.querySelector('picture'));
+        imageLink.remove();
+      }
+    });
+    const searchLink = nav.querySelector('.nav-tools a[href]');
+    if (searchLink) {
+      const form = document.createElement('form');
+      form.role = 'search';
+      form.action = searchLink.href;
+      form.method = 'get';
+      const input = document.createElement('input');
+      input.type = 'search';
+      input.name = 'searchQuery';
+      input.required = true;
+      input.maxLength = 512;
+      input.placeholder = searchLink.textContent.trim();
+      input.setAttribute('aria-label', input.placeholder);
+      const submit = document.createElement('button');
+      submit.type = 'submit';
+      submit.textContent = 'Search';
+      form.append(input, submit);
+      searchLink.parentElement.replaceWith(form);
+    }
   }
 
   // hamburger for mobile

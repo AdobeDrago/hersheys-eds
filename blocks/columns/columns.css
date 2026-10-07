@@ -7,6 +7,12 @@
   width: 100%;
 }
 
+.columns.homepage-hero img,
+.columns.feature img {
+  display: block;
+  height: auto;
+}
+
 .columns > div > div {
   order: 1;
 }
@@ -29,5 +35,34 @@
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+}
+
+.columns.homepage-hero > div,
+.columns.feature > div {
+  gap: 32px;
+}
+
+.columns.homepage-hero > div > .columns-img-col {
+  order: 2;
+}
+
+.columns.homepage-hero h1,
+.columns.feature h2 {
+  margin-top: 0;
+}
+
+@media (width >= 900px) {
+  .columns.homepage-hero > div,
+  .columns.feature > div {
+    gap: 64px;
+  }
+
+  .columns.homepage-hero > div > .columns-img-col {
+    flex: 1.3;
+  }
+
+  .columns.feature > div > .columns-img-col {
+    order: 2;
   }
 }

@@ -1,0 +1,235 @@
+@font-face {
+  font-family: hershey-tt;
+  src: url('../fonts/subset-TTNormsPro-Normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-tt;
+  src: url('../fonts/subset-TTNormsPro-NormalIt.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-tt;
+  src: url('../fonts/subset-TTNormsPro-Bd.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-tt;
+  src: url('../fonts/subset-TTNormsPro-Blk.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-gazpacho;
+  src: url('../fonts/subset-Gazpacho-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-gazpacho;
+  src: url('../fonts/subset-Gazpacho-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+}
+
+.hershey-home {
+  --nav-height: 80px;
+}
+
+.hershey-home main {
+  --body-font-family: hershey-tt, sans-serif;
+  --heading-font-family: hershey-gazpacho, sans-serif;
+  --text-color: #3f000b;
+  --link-color: #3f000b;
+  --link-hover-color: #640010;
+  --background-color: #fff;
+
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.hershey-home main > .section {
+  margin: 0;
+  padding: 64px 24px;
+}
+
+.hershey-home main > .section > div {
+  max-width: 1200px;
+  padding: 0;
+}
+
+.hershey-home main h1,
+.hershey-home main h2,
+.hershey-home main h3 {
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.hershey-home main h1 {
+  font-size: 36px;
+}
+
+.hershey-home main h2 {
+  margin: 0 0 24px;
+  font-size: 30px;
+}
+
+.hershey-home main a.button {
+  background: #007bbd;
+  color: #fff;
+  border: 2px solid #007bbd;
+  padding: 14px 28px;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.hershey-home main a.button:hover {
+  background: #005f84;
+  border-color: #005f84;
+}
+
+.hershey-home main :focus-visible {
+  outline: 3px solid currentcolor;
+  outline-offset: 4px;
+}
+
+.hershey-home main > .halloween {
+  --text-color: #fff;
+  --link-color: #fff;
+
+  color: #fff;
+  background: #460e3d;
+  padding-bottom: 0;
+}
+
+.hershey-home main > .welcome {
+  padding: 0;
+  text-align: center;
+  background: #f6f6f6;
+}
+
+.hershey-home .welcome > .default-content-wrapper {
+  max-width: none;
+}
+
+.hershey-home .welcome > .cards-wrapper {
+  padding: 24px;
+}
+
+.hershey-home .welcome p:has(picture),
+.hershey-home .chocolate p:has(picture) {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home .welcome > .default-content-wrapper:where(:first-child) > p:has(picture) {
+  background: #460e3d;
+}
+
+.hershey-home .welcome picture img,
+.hershey-home .chocolate > .default-content-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hershey-home .welcome p > picture:first-child {
+  display: none;
+}
+
+.hershey-home .social,
+.hershey-home .related {
+  background: #f6f6f6;
+}
+
+.hershey-home .newest h2,
+.hershey-home .recipes > .default-content-wrapper,
+.hershey-home .related h2 {
+  text-align: center;
+}
+
+.hershey-home .welcome > .default-content-wrapper > h2,
+.hershey-home .welcome > .default-content-wrapper > p:not(:has(picture)) {
+  max-width: 800px;
+  padding: 0 24px;
+  margin: 24px auto;
+}
+
+.hershey-home main > .chocolate {
+  --text-color: #fff;
+  --link-color: #fff;
+  --link-hover-color: #fff;
+
+  position: relative;
+  padding-top: 0;
+  background: #3f000b;
+  color: #fff;
+}
+
+.hershey-home .chocolate > .default-content-wrapper {
+  max-width: none;
+  margin: 0 -24px 48px;
+  background: #fff;
+}
+
+.hershey-home .social > .default-content-wrapper {
+  margin-bottom: 32px;
+}
+
+.hershey-home .social > .default-content-wrapper a.button {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #3f000b;
+  font-size: 24px;
+}
+
+@media (width >= 900px) {
+  .hershey-home main h1 {
+    font-size: 48px;
+  }
+
+  .hershey-home main h2 {
+    font-size: 36px;
+  }
+
+  .hershey-home main > .section {
+    padding: 80px 32px;
+  }
+
+  .hershey-home main > .halloween {
+    padding: 64px 32px 0;
+  }
+
+  .hershey-home main > .welcome {
+    padding: 0;
+  }
+
+  .hershey-home .welcome p > picture:first-child {
+    display: block;
+  }
+
+  .hershey-home .welcome p > picture:nth-child(2) {
+    display: none;
+  }
+
+  .hershey-home main > .chocolate {
+    padding-top: 0;
+  }
+
+  .hershey-home .chocolate > .default-content-wrapper {
+    margin-inline: -32px;
+  }
+}

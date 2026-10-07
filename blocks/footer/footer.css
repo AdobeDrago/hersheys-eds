@@ -18,3 +18,112 @@ footer .footer p {
     padding: 40px 32px 24px;
   }
 }
+
+.footer.hershey-footer {
+  --body-font-family: hershey-tt, sans-serif;
+  --heading-font-family: hershey-gazpacho, sans-serif;
+  --text-color: #3f000b;
+  --link-color: #fff;
+  --link-hover-color: #fff;
+
+  font-family: var(--body-font-family);
+  background: #3f000b;
+  color: #fff;
+  font-size: 16px;
+}
+
+.footer.hershey-footer > div {
+  max-width: none;
+  padding: 0;
+  display: grid;
+}
+
+.footer.hershey-footer .section {
+  margin: 0;
+  padding: 32px 24px;
+}
+
+.footer.hershey-footer .section > div {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer.hershey-footer .newsletter {
+  background: #fff;
+  color: #3f000b;
+  text-align: center;
+  padding-block: 64px;
+}
+
+.footer.hershey-footer h2 {
+  margin-top: 0;
+  font-size: 36px;
+  font-weight: 900;
+}
+
+.footer.hershey-footer .newsletter p {
+  margin-top: 16px;
+}
+
+.footer.hershey-footer .newsletter a.button {
+  margin-block: 8px;
+  color: #fff;
+  background: #007bbd;
+  font-weight: 700;
+}
+
+.footer.hershey-footer .newsletter img {
+  display: block;
+  max-width: 300px;
+  height: auto;
+  margin: 32px auto 0;
+}
+
+.footer.hershey-footer .footer-brand img {
+  width: 200px;
+  height: auto;
+}
+
+.footer.hershey-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}
+
+.footer.hershey-footer .footer-links ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.footer.hershey-footer .footer-legal {
+  border-top: 1px solid #fff4;
+  font-size: 14px;
+}
+
+.footer.hershey-footer :focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 4px;
+}
+
+@media (width >= 900px) {
+  .footer.hershey-footer > div {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer.hershey-footer .newsletter,
+  .footer.hershey-footer .footer-legal {
+    grid-column: 1 / -1;
+  }
+
+  .footer.hershey-footer .footer-brand {
+    padding-left: max(32px, calc((100vw - 1200px) / 2));
+  }
+
+  .footer.hershey-footer .footer-links {
+    padding-right: max(32px, calc((100vw - 1200px) / 2));
+  }
+}

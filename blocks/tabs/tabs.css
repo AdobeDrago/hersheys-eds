@@ -1,0 +1,56 @@
+.tabs .tabs-list {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 0 16px;
+}
+
+.tabs .tabs-list button {
+  flex-shrink: 0;
+  padding: 12px 18px;
+  border: 2px solid currentcolor;
+  border-radius: 30px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.tabs .tabs-list button[aria-selected="true"] {
+  background: var(--text-color);
+  border-color: var(--text-color);
+  color: var(--background-color);
+}
+
+.tabs .tabs-panel {
+  display: grid;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+}
+
+.tabs .tabs-panel[hidden] {
+  display: none;
+}
+
+.tabs .tabs-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+}
+
+.tabs.recipes .tabs-panel-content h3 {
+  margin-top: 0;
+}
+
+@media (width >= 900px) {
+  .tabs .tabs-list {
+    justify-content: center;
+  }
+
+  .tabs .tabs-panel:has(> picture) {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+}
