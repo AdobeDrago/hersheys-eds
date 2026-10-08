@@ -5,15 +5,21 @@
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  isolation: isolate;
+  padding: var(--hershey-component-hero-layout-padding-block, 40px) var(--hershey-component-hero-layout-padding-inline-mobile, 24px);
+  min-height: var(--hershey-component-hero-layout-min-height, 300px);
+  color: var(--hershey-component-hero-color-foreground, var(--background-color));
+}
+
+.hero:not(:has(picture)) {
+  color: var(--text-color);
 }
 
 .hero h1 {
-  max-width: 1200px;
+  max-width: var(--hershey-component-hero-heading-max-width, 1200px);
   margin-left: auto;
   margin-right: auto;
-  color: var(--background-color);
+  color: inherit;
 }
 
 .hero picture {
@@ -32,6 +38,6 @@
 
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    padding: var(--hershey-component-hero-layout-padding-block, 40px) var(--hershey-component-hero-layout-padding-inline-desktop, 32px);
   }
 }

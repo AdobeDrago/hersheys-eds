@@ -1,0 +1,226 @@
+{
+  "$description": "Storybook-only Cocoa preview. Existing showcase colors, not original Hersheyland measurements and not a production brand theme.",
+  "$extensions": {
+    "com.hersheyland.theme": {
+      "name": "Cocoa",
+      "className": "theme-cocoa-dark",
+      "previewOnly": true
+    }
+  },
+  "reference": {
+    "color": {
+      "preview": {
+        "302125": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.18823529411764706,
+              0.12941176470588237,
+              0.1450980392156863
+            ],
+            "alpha": 1,
+            "hex": "#302125"
+          },
+          "$description": "Existing Cocoa showcase value; preview only."
+        },
+        "$type": "color",
+        "$extensions": {
+          "com.hersheyland.tokens": {
+            "scope": "preview",
+            "category": "brand",
+            "cssProperty": "background-color",
+            "origin": "preview"
+          }
+        },
+        "fff8f5": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              0.9725490196078431,
+              0.9607843137254902
+            ],
+            "alpha": 1,
+            "hex": "#fff8f5"
+          },
+          "$description": "Existing Cocoa showcase value; preview only."
+        },
+        "ffc0cb": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              0.7529411764705882,
+              0.796078431372549
+            ],
+            "alpha": 1,
+            "hex": "#ffc0cb"
+          },
+          "$description": "Existing Cocoa showcase value; preview only."
+        },
+        "1a1113": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.10196078431372549,
+              0.06666666666666667,
+              0.07450980392156863
+            ],
+            "alpha": 1,
+            "hex": "#1a1113"
+          },
+          "$description": "Existing Cocoa showcase value; preview only."
+        },
+        "10090b": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.06274509803921569,
+              0.03529411764705882,
+              0.043137254901960784
+            ],
+            "alpha": 1,
+            "hex": "#10090b"
+          },
+          "$description": "Existing Cocoa showcase value; preview only."
+        },
+        "38172f": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2196078431372549,
+              0.09019607843137255,
+              0.1843137254901961
+            ],
+            "alpha": 1,
+            "hex": "#38172f"
+          },
+          "$description": "Existing Cocoa showcase value; preview only."
+        },
+        "68c8ef": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.40784313725490196,
+              0.7843137254901961,
+              0.9372549019607843
+            ],
+            "alpha": 1,
+            "hex": "#68c8ef"
+          },
+          "$description": "Existing Cocoa showcase value; preview only."
+        },
+        "a8e5ff": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6588235294117647,
+              0.8980392156862745,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#a8e5ff"
+          },
+          "$description": "Existing Cocoa showcase value; preview only."
+        },
+        "170b0e": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.09019607843137255,
+              0.043137254901960784,
+              0.054901960784313725
+            ],
+            "alpha": 1,
+            "hex": "#170b0e"
+          },
+          "$description": "Existing Cocoa showcase value; preview only."
+        },
+        "ffffff4d": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 0.30196078431372547,
+            "hex": "#ffffff"
+          },
+          "$description": "Existing Cocoa showcase value; preview only."
+        },
+        "60444b": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3764705882352941,
+              0.26666666666666666,
+              0.29411764705882354
+            ],
+            "alpha": 1,
+            "hex": "#60444b"
+          },
+          "$description": "Existing Cocoa showcase value; preview only."
+        }
+      }
+    }
+  },
+  "system": {
+    "color": {
+      "$type": "color",
+      "text": {
+        "primary": {
+          "$value": "{reference.color.preview.fff8f5}"
+        },
+        "inverse": {
+          "$value": "{reference.color.preview.fff8f5}"
+        }
+      },
+      "link": {
+        "hover": {
+          "$value": "{reference.color.preview.ffc0cb}"
+        }
+      },
+      "surface": {
+        "default": {
+          "$value": "{reference.color.preview.1a1113}"
+        },
+        "subtle": {
+          "$value": "{reference.color.preview.302125}"
+        },
+        "inverse": {
+          "$value": "{reference.color.preview.10090b}"
+        },
+        "seasonal": {
+          "$value": "{reference.color.preview.38172f}"
+        }
+      },
+      "action": {
+        "primary": {
+          "background": {
+            "default": {
+              "$value": "{reference.color.preview.68c8ef}"
+            },
+            "hover": {
+              "$value": "{reference.color.preview.a8e5ff}"
+            }
+          },
+          "foreground": {
+            "$value": "{reference.color.preview.170b0e}"
+          }
+        }
+      },
+      "border": {
+        "card": {
+          "$value": "{system.color.border.subtle}"
+        },
+        "inverse": {
+          "$value": "{reference.color.preview.ffffff4d}"
+        },
+        "subtle": {
+          "$value": "{reference.color.preview.60444b}"
+        }
+      }
+    }
+  }
+}

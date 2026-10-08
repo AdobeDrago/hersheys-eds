@@ -11,6 +11,7 @@ import {
   loadCSS,
   buildBlock,
 } from './aem.js';
+import loadHersheyTheme from './hershey-theme.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -162,6 +163,9 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  if (document.body.classList.contains('hershey-home')) {
+    await loadHersheyTheme();
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);

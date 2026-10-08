@@ -1,13 +1,22 @@
 import { loadCSS } from '../../scripts/aem.js';
 
+const widgetStyles = new Map();
+
 /**
  * Parses a widget href into folder path and name.
  * @param {string} pathname URL pathname (e.g. `/widgets/path1/name.html`)
  * @returns {{ widgetPath: string, widgetName: string }}
  */
 function parseWidgetHref(pathname) {
+  if (!pathname.startsWith('/widgets/') || pathname.endsWith('/')) {
+    throw new Error('Widget source must point to a file under /widgets/');
+  }
   const pathSegments = pathname.split('/').filter((p) => p);
-  const widgetName = pathSegments[pathSegments.length - 1].split('.')[0];
+  const fileName = pathSegments[pathSegments.length - 1];
+  const widgetName = fileName.replace(/\.html$/, '');
+  if (!widgetName || (fileName.includes('.') && !fileName.endsWith('.html'))) {
+    throw new Error('Widget source must be an HTML document or an extensionless widget name');
+  }
   const widgetPath = pathSegments.slice(1, -1).join('/');
   return { widgetPath, widgetName };
 }
@@ -23,6 +32,11 @@ function widgetUrl(widgetPath, widgetName, extension) {
   return `${window.hlx.codeBasePath}/widgets/${prefix}${widgetName}.${extension}`;
 }
 
+function loadWidgetStyles(url) {
+  if (!widgetStyles.has(url)) widgetStyles.set(url, loadCSS(url));
+  return widgetStyles.get(url);
+}
+
 /**
  * Applies widget metadata, block classes, and section shell classes.
  * Must run before widget HTML/JS load so decorate can read config from the DOM.
@@ -36,7 +50,8 @@ function applyWidgetShell(widget, source, widgetName, searchParams) {
   widget.classList.remove('block');
   widget.dataset.source = source.href;
   searchParams.forEach((value, key) => {
-    widget.dataset[key] = value;
+    const attribute = key.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
+    widget.setAttribute(`data-${attribute}`, value);
   });
 
   const wrapper = widget.closest('.widget-wrapper');
@@ -57,6 +72,7 @@ function applyWidgetShell(widget, source, widgetName, searchParams) {
  */
 export default async function decorate(widget) {
   const source = widget.querySelector('a[href]');
+  if (!source) throw new Error('Widget block requires an authored source link');
   const { pathname, searchParams } = new URL(source.href);
   const { widgetPath, widgetName } = parseWidgetHref(pathname);
 
@@ -64,16 +80,16 @@ export default async function decorate(widget) {
     applyWidgetShell(widget, source, widgetName, searchParams);
 
     const resp = await fetch(widgetUrl(widgetPath, widgetName, 'html'));
+    if (!resp.ok) throw new Error(`Widget HTML request failed with HTTP ${resp.status}`);
     widget.innerHTML = await resp.text();
 
-    const cssLoaded = loadCSS(widgetUrl(widgetPath, widgetName, 'css'));
+    const cssLoaded = loadWidgetStyles(widgetUrl(widgetPath, widgetName, 'css'));
     const decorationComplete = (async () => {
       const mod = await import(widgetUrl(widgetPath, widgetName, 'js'));
       if (mod.default) await mod.default(widget);
     })();
     await Promise.all([cssLoaded, decorationComplete]);
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(`failed to load widget ${widgetPath}/${widgetName}`, error);
+    throw new Error(`Unable to load widget ${widgetPath ? `${widgetPath}/` : ''}${widgetName}`, { cause: error });
   }
 }

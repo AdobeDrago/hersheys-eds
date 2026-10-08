@@ -1,0 +1,9 @@
+.storybook-demo button {
+  padding: 12px 24px;
+  border: 0;
+  border-radius: var(--hershey-system-shape-radius-action);
+  background: var(--hershey-system-color-action-primary-background-default);
+  color: var(--hershey-system-color-action-primary-foreground);
+  font: inherit;
+  cursor: pointer;
+}

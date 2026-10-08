@@ -1,16 +1,18 @@
 import { getMetadata } from '../../scripts/aem.js';
+import loadHersheyTheme from '../../scripts/hershey-theme.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
+let navigationId = 0;
 
 /**
  * Closes the open nav dropdown (desktop) or the nav menu (mobile) on Escape
  * @param {KeyboardEvent} e keydown event
  */
 function closeOnEscape(e) {
-  if (e.code === 'Escape') {
-    const nav = document.getElementById('nav');
+  if (e.key === 'Escape') {
+    const nav = e.currentTarget;
     const navSections = nav.querySelector('.nav-sections');
     if (!navSections) return;
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
@@ -73,15 +75,16 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   else nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+  button.setAttribute('aria-expanded', String(!expanded));
 
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
     // collapse menu on escape press
-    window.addEventListener('keydown', closeOnEscape);
+    nav.addEventListener('keydown', closeOnEscape);
     // collapse menu on focus lost
     nav.addEventListener('focusout', closeOnFocusLost);
   } else {
-    window.removeEventListener('keydown', closeOnEscape);
+    nav.removeEventListener('keydown', closeOnEscape);
     nav.removeEventListener('focusout', closeOnFocusLost);
   }
 }
@@ -95,11 +98,17 @@ export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
+  if (!fragment) throw new Error(`Unable to load navigation fragment: ${navPath}`);
+  if (fragment.querySelector('.hershey-nav')) {
+    block.classList.add('hershey-nav');
+    await loadHersheyTheme();
+  }
 
   // decorate nav DOM
   block.textContent = '';
   const nav = document.createElement('nav');
-  nav.id = 'nav';
+  navigationId += 1;
+  nav.id = `nav-${navigationId}`;
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
   const classes = ['brand', 'sections', 'tools'];
@@ -109,15 +118,16 @@ export default async function decorate(block) {
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
+  const brandLink = navBrand?.querySelector('.button');
   if (brandLink) {
     brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
+    const wrapper = brandLink.closest('.button-container, .button-wrapper');
+    if (wrapper) wrapper.className = '';
   }
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection, index) => {
       const subList = navSection.querySelector(':scope > ul');
       if (!subList) return;
       navSection.classList.add('nav-drop');
@@ -125,6 +135,8 @@ export default async function decorate(block) {
       const button = document.createElement('button');
       button.type = 'button';
       button.setAttribute('aria-expanded', false);
+      subList.id = `${nav.id}-submenu-${index}`;
+      button.setAttribute('aria-controls', subList.id);
       [...navSection.childNodes].forEach((node) => {
         if (node !== subList) button.append(node);
       });
@@ -140,10 +152,42 @@ export default async function decorate(block) {
     });
   }
 
+  if (block.classList.contains('hershey-nav')) {
+    navSections?.querySelectorAll('li').forEach((item) => {
+      const links = [...item.querySelectorAll(':scope > a, :scope > p > a')];
+      const imageLink = links.find((link) => link.querySelector('picture'));
+      const textLink = links.find((link) => link !== imageLink
+        && link.href === imageLink?.href && link.textContent.trim());
+      if (imageLink && textLink) {
+        textLink.prepend(imageLink.querySelector('picture'));
+        imageLink.remove();
+      }
+    });
+    const searchLink = nav.querySelector('.nav-tools a[href]');
+    if (searchLink) {
+      const form = document.createElement('form');
+      form.role = 'search';
+      form.action = searchLink.href;
+      form.method = 'get';
+      const input = document.createElement('input');
+      input.type = 'search';
+      input.name = 'searchQuery';
+      input.required = true;
+      input.maxLength = 512;
+      input.placeholder = searchLink.textContent.trim();
+      input.setAttribute('aria-label', input.placeholder);
+      const submit = document.createElement('button');
+      submit.type = 'submit';
+      submit.textContent = 'Search';
+      form.append(input, submit);
+      searchLink.parentElement.replaceWith(form);
+    }
+  }
+
   // hamburger for mobile
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
-  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
+  hamburger.innerHTML = `<button type="button" aria-controls="${nav.id}" aria-label="Open navigation">
       <span class="nav-hamburger-icon"></span>
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));

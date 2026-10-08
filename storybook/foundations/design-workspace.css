@@ -1,0 +1,347 @@
+.design-workspace {
+  padding: clamp(16px, 3vw, 32px);
+}
+
+.design-workspace *,
+.design-workspace *::before,
+.design-workspace *::after {
+  box-sizing: border-box;
+}
+
+.design-workspace .design-board {
+  min-width: 0;
+  padding: 0;
+}
+
+.design-workspace :where(h1, h2, h3, h4, h5, h6) {
+  color: var(--design-heading-color, inherit);
+  overflow-wrap: anywhere;
+}
+
+.design-workspace .design-annotation {
+  margin: 0 0 10px;
+  font-family: var(--hershey-system-typography-body-font-family);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.design-workspace .design-annotation[hidden] {
+  display: none;
+}
+
+.design-workspace .design-color-value {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.design-workspace .design-group + .design-group {
+  margin-top: 40px;
+}
+
+.design-workspace .design-group-title {
+  margin: 0 0 8px;
+  font-family: var(--hershey-system-typography-body-font-family);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.design-workspace .design-group-description {
+  margin-bottom: 20px;
+  max-width: 70ch;
+  font-size: 15px;
+}
+
+.design-workspace .design-comparison {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--hershey-system-color-border-subtle);
+}
+
+.design-workspace .design-comparison:last-child {
+  border-bottom: 0;
+}
+
+.design-workspace .design-comparison-sample {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.design-workspace.design-hide-labels .design-comparison {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.design-workspace .design-comparison-sample > p:last-child {
+  margin-bottom: 0;
+}
+
+.design-workspace .design-type-line {
+  padding: 0;
+}
+
+.design-workspace .design-glyphs {
+  margin: 12px 0 0;
+  font-size: 20px;
+}
+
+.design-workspace .design-palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 104px), 1fr));
+  gap: 16px;
+}
+
+.design-workspace .design-swatch {
+  height: 96px;
+  margin-bottom: 12px;
+  border: 1px solid var(--hershey-system-color-border-subtle);
+}
+
+.design-workspace .design-surface-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 20px;
+}
+
+.design-workspace .design-surface {
+  padding: 24px;
+  border: 1px solid var(--hershey-system-color-border-subtle);
+}
+
+.design-workspace .design-surface h3 {
+  margin-top: 12px;
+}
+
+.design-workspace .design-state-rail,
+.design-workspace .design-shape-rail,
+.design-workspace .content-action-rail,
+.design-workspace .design-elevation-rail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: 28px;
+}
+
+.design-workspace .design-action {
+  border-color: transparent;
+}
+
+.design-workspace .design-focus {
+  outline: 3px solid currentcolor;
+  outline-offset: 4px;
+}
+
+.design-workspace .design-shape-item {
+  min-width: 130px;
+}
+
+.design-workspace .design-shape-sample {
+  padding: 12px 20px;
+  border: 2px solid currentcolor;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.design-workspace .design-reading-sample {
+  max-width: 66ch;
+}
+
+.design-workspace .design-text-color,
+.design-workspace .design-boundary {
+  padding: 16px;
+}
+
+.design-workspace .design-boundary {
+  border: 2px solid;
+}
+
+.design-workspace .design-inset-sample {
+  background: var(--hershey-system-color-surface-subtle);
+}
+
+.design-workspace .design-gap-sample {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.design-workspace .design-spacing-item {
+  padding: 10px;
+  background: var(--hershey-system-color-action-primary-background-default);
+  color: var(--hershey-system-color-action-primary-foreground);
+}
+
+.design-workspace .design-container-sample {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid currentcolor;
+}
+
+.design-workspace .design-elevation-sample {
+  width: min(100%, 360px);
+  padding: 24px;
+  border: 1px solid var(--hershey-system-color-border-subtle);
+  background: var(--hershey-system-color-surface-subtle);
+  color: var(--hershey-system-color-text-primary);
+}
+
+.design-workspace .design-layer-scene {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 560px);
+  padding: 0 0 24px;
+}
+
+.design-workspace .design-layer-panel {
+  position: relative;
+  width: 75%;
+  padding: 32px 20px;
+  border: 1px solid currentcolor;
+  background: var(--hershey-system-color-surface-subtle);
+  color: var(--hershey-system-color-text-primary);
+}
+
+.design-workspace .design-layer-panel + .design-layer-panel {
+  margin: -32px 0 0 20%;
+  background: var(--hershey-system-color-action-primary-background-default);
+  color: var(--hershey-system-color-action-primary-foreground);
+}
+
+.design-workspace .design-motion-track {
+  width: min(100%, 168px);
+  height: 24px;
+  margin-bottom: 12px;
+  background: var(--hershey-system-color-surface-subtle);
+}
+
+.design-workspace .design-motion-dot {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--hershey-system-color-action-primary-background-default);
+}
+
+.design-workspace .design-motion-status {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.design-workspace .design-error-field {
+  display: grid;
+  gap: 8px;
+  max-width: 40ch;
+}
+
+.design-workspace .design-error-field input {
+  padding: 12px;
+  border: 3px solid var(--hershey-system-color-feedback-error);
+  background: var(--hershey-system-color-surface-default);
+  color: var(--hershey-system-color-text-primary);
+  font: inherit;
+}
+
+.design-workspace .design-error-message {
+  font-size: 14px;
+}
+
+.design-workspace .content-fragment,
+.design-workspace .content-article {
+  width: 100%;
+  min-width: 0;
+}
+
+.design-workspace .content-fragment > :last-child {
+  margin-bottom: 0;
+}
+
+.design-workspace .content-heading-experiment {
+  font-size: calc(var(--design-heading-size) * var(--design-heading-scale, 1));
+}
+
+.design-workspace h1.content-heading-experiment {
+  --design-heading-size: var(--hershey-system-typography-heading-1-font-size-mobile);
+}
+
+.design-workspace h2.content-heading-experiment {
+  --design-heading-size: var(--hershey-system-typography-heading-2-font-size-mobile);
+}
+
+.design-workspace h3.content-heading-experiment { --design-heading-size: var(--hershey-system-typography-card-title-font-size); }
+.design-workspace h4.content-heading-experiment { --design-heading-size: 22px; }
+.design-workspace h5.content-heading-experiment { --design-heading-size: 20px; }
+.design-workspace h6.content-heading-experiment { --design-heading-size: 18px; }
+
+.design-workspace .content-article > h2,
+.design-workspace .content-article > h3 {
+  margin-top: 32px;
+}
+
+.design-workspace .content-article figure {
+  margin: 28px 0;
+}
+
+.design-workspace .content-article img {
+  width: 100%;
+}
+
+.design-workspace .content-intro {
+  font-size: 1.2em;
+}
+
+.design-workspace .content-action-context {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hershey-system-color-border-subtle);
+}
+
+.design-workspace .content-image-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 28px;
+}
+
+.design-workspace .content-variant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 32px;
+}
+
+.design-workspace .content-variant-grid .content-comparison {
+  grid-template-columns: minmax(0, 1fr);
+  border-bottom: 0;
+  padding: 0;
+  align-content: start;
+}
+
+.design-workspace .content-image-comparison img {
+  width: 100%;
+}
+
+.design-workspace hr {
+  margin: 24px 0;
+  border: 0;
+  border-top: 1px solid var(--hershey-system-color-border-subtle);
+}
+
+@media (width >= 700px) {
+  .design-workspace .design-comparison {
+    grid-template-columns: 152px minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  @media (width >= 900px) {
+    .design-workspace h1.content-heading-experiment {
+      --design-heading-size: var(--hershey-system-typography-heading-1-font-size-desktop);
+    }
+
+    .design-workspace h2.content-heading-experiment {
+      --design-heading-size: var(--hershey-system-typography-heading-2-font-size-desktop);
+    }
+  }
+}

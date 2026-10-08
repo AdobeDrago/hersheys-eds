@@ -15,4 +15,12 @@ module.exports = {
     'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
     'no-param-reassign': [2, { props: false }], // allow modifying properties of param
   },
+  overrides: [{
+    files: ['design/*.mjs', 'test/*.mjs'],
+    env: { node: true },
+    rules: { 'import/extensions': ['error', { js: 'always', mjs: 'always' }] },
+  }, {
+    files: ['design/generate-tokens.mjs'],
+    rules: { 'no-restricted-syntax': 'off', 'no-await-in-loop': 'off' },
+  }],
 };

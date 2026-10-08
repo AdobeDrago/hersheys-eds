@@ -3,17 +3,17 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(var(--hershey-component-cards-grid-minimum-width, 257px), 1fr));
+  gap: var(--hershey-component-cards-layout-gap, 24px);
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+  border: var(--hershey-component-cards-border-width, 1px) var(--hershey-component-cards-border-style, solid) var(--hershey-component-cards-border-color, #dadada);
+  background-color: var(--hershey-component-cards-color-background, var(--background-color));
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  margin: var(--hershey-component-cards-body-inset, 16px);
 }
 
 .cards .cards-card-image {
@@ -24,4 +24,112 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+.cards.slider > ul {
+  display: grid;
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: 80%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0 0 var(--hershey-component-cards-slider-padding-block-end, 16px);
+}
+
+.cards.slider > ul > li {
+  scroll-snap-align: start;
+}
+
+.cards .cards-slider-controls {
+  display: flex;
+  justify-content: center;
+  gap: var(--hershey-component-cards-layout-gap, 24px);
+  margin-top: var(--hershey-component-cards-layout-gap, 24px);
+}
+
+.cards .cards-slider-controls button {
+  width: var(--hershey-component-cards-slider-control-size, 48px);
+  height: var(--hershey-component-cards-slider-control-size, 48px);
+  border: var(--hershey-component-cards-slider-control-border-width, 2px) var(--hershey-component-cards-border-style, solid) currentcolor;
+  border-radius: 50%;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cards .cards-slider-controls button:disabled {
+  opacity: var(--hershey-component-cards-slider-control-disabled-opacity, 0.35);
+  cursor: default;
+}
+
+.cards.welcome-cards > ul > li,
+.cards.products > ul > li,
+.cards.related > ul > li,
+.cards.social > ul > li {
+  border: 0;
+  background: transparent;
+}
+
+.cards.welcome-cards .cards-card-body,
+.cards.products .cards-card-body,
+.cards.related .cards-card-body {
+  margin: var(--hershey-component-cards-body-margin-block-start, 20px) 0 0;
+}
+
+.cards.welcome-cards img,
+.cards.related img {
+  border-radius: var(--hershey-component-cards-image-border-radius, 24px);
+}
+
+.cards.products > ul > li img {
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.cards.products h3 {
+  font-family: var(--hershey-component-cards-product-title-font-family, var(--body-font-family));
+  font-size: var(--hershey-component-cards-title-font-size, 24px);
+  font-weight: var(--hershey-component-cards-title-font-weight, 900);
+}
+
+.cards.welcome-cards h3,
+.cards.related h3 {
+  font-family: var(--hershey-component-cards-title-font-family, var(--heading-font-family));
+  font-size: var(--hershey-component-cards-title-font-size, 24px);
+}
+
+.cards.social > ul {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--hershey-component-cards-social-spacing, 8px);
+}
+
+.cards.social > ul > li img {
+  aspect-ratio: 1;
+}
+
+.cards.social .cards-card-body {
+  margin: var(--hershey-component-cards-social-spacing, 8px);
+  font-size: var(--hershey-component-cards-caption-font-size, 14px);
+}
+
+@media (width >= 600px) {
+  .cards.slider > ul {
+    grid-auto-columns: calc((100% - var(--hershey-component-cards-layout-gap, 24px)) / 2);
+  }
+}
+
+@media (width >= 900px) {
+  .cards.welcome-cards > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--hershey-component-cards-welcome-gap, 32px);
+  }
+
+  .cards.slider > ul {
+    grid-auto-columns: calc((100% - var(--hershey-component-cards-slider-gutters-desktop, 48px)) / 3);
+  }
+
+  .cards.social > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }

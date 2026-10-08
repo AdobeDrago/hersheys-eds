@@ -1,0 +1,550 @@
+{
+  "source": "https://www.hersheyland.com/",
+  "capturedAt": "2026-10-07",
+  "description": "Original AEM clientlib rules and computed values. Pixel values reflect the source 10px root font size, not the EDS root.",
+  "samples": [
+    {
+      "width": 375,
+      "styles": {
+        "body": {
+          "selector": "body",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgb(255, 255, 255)",
+          "border-radius": "0px",
+          "padding": "60px 0px 0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "h1": {
+          "selector": "h1",
+          "font-family": "Gazpacho, \"TT Norms Pro\", sans-serif",
+          "font-size": "36px",
+          "font-weight": "900",
+          "line-height": "43.2px",
+          "color": "rgb(255, 255, 255)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "h2": {
+          "selector": "h2",
+          "font-family": "Gazpacho, \"TT Norms Pro\", sans-serif",
+          "font-size": "28px",
+          "font-weight": "900",
+          "line-height": "36.4px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "hero": {
+          "selector": ".generic-hero",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "heroButton": {
+          "selector": ".cmp-generic-hero__button--primary",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "16px",
+          "font-weight": "700",
+          "line-height": "16px",
+          "color": "rgb(255, 255, 255)",
+          "background-color": "rgb(0, 123, 189)",
+          "border-radius": "50px",
+          "padding": "13px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "tab": {
+          "selector": ".cmp-tabs__tab",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "10px",
+          "font-weight": "500",
+          "line-height": "15px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgb(255, 255, 255)",
+          "border-radius": "50px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "tabActive": {
+          "selector": ".cmp-tabs__tab--active",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "10px",
+          "font-weight": "500",
+          "line-height": "15px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgb(255, 255, 255)",
+          "border-radius": "50px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "cardImage": {
+          "selector": ".call-out-card img",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "8px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "footer": {
+          "selector": ".cmp-experiencefragment--hub-footer",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        }
+      }
+    },
+    {
+      "width": 768,
+      "styles": {
+        "body": {
+          "selector": "body",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgb(255, 255, 255)",
+          "border-radius": "0px",
+          "padding": "60px 0px 0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "h1": {
+          "selector": "h1",
+          "font-family": "Gazpacho, \"TT Norms Pro\", sans-serif",
+          "font-size": "36px",
+          "font-weight": "900",
+          "line-height": "43.2px",
+          "color": "rgb(255, 255, 255)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "h2": {
+          "selector": "h2",
+          "font-family": "Gazpacho, \"TT Norms Pro\", sans-serif",
+          "font-size": "28px",
+          "font-weight": "900",
+          "line-height": "36.4px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "hero": {
+          "selector": ".generic-hero",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "heroButton": {
+          "selector": ".cmp-generic-hero__button--primary",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "16px",
+          "font-weight": "700",
+          "line-height": "16px",
+          "color": "rgb(255, 255, 255)",
+          "background-color": "rgb(0, 123, 189)",
+          "border-radius": "50px",
+          "padding": "13px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "tab": {
+          "selector": ".cmp-tabs__tab",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "10px",
+          "font-weight": "500",
+          "line-height": "15px",
+          "color": "rgb(153, 153, 153)",
+          "background-color": "rgb(255, 255, 255)",
+          "border-radius": "50px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "tabActive": {
+          "selector": ".cmp-tabs__tab--active",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "10px",
+          "font-weight": "500",
+          "line-height": "15px",
+          "color": "rgb(153, 153, 153)",
+          "background-color": "rgb(255, 255, 255)",
+          "border-radius": "50px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "cardImage": {
+          "selector": ".call-out-card img",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "8px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "footer": {
+          "selector": ".cmp-experiencefragment--hub-footer",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        }
+      }
+    },
+    {
+      "width": 1440,
+      "styles": {
+        "body": {
+          "selector": "body",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgb(255, 255, 255)",
+          "border-radius": "0px",
+          "padding": "80px 0px 0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "h1": {
+          "selector": "h1",
+          "font-family": "Gazpacho, \"TT Norms Pro\", sans-serif",
+          "font-size": "48px",
+          "font-weight": "900",
+          "line-height": "57.6px",
+          "color": "rgb(255, 255, 255)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "h2": {
+          "selector": "h2",
+          "font-family": "Gazpacho, \"TT Norms Pro\", sans-serif",
+          "font-size": "36px",
+          "font-weight": "900",
+          "line-height": "46.8px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "hero": {
+          "selector": ".generic-hero",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "heroButton": {
+          "selector": ".cmp-generic-hero__button--primary",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "18px",
+          "font-weight": "700",
+          "line-height": "18px",
+          "color": "rgb(255, 255, 255)",
+          "background-color": "rgb(0, 123, 189)",
+          "border-radius": "50px",
+          "padding": "18.5px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "tab": {
+          "selector": ".cmp-tabs__tab",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "10px",
+          "font-weight": "500",
+          "line-height": "15px",
+          "color": "rgb(153, 153, 153)",
+          "background-color": "rgb(255, 255, 255)",
+          "border-radius": "50px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "tabActive": {
+          "selector": ".cmp-tabs__tab--active",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "10px",
+          "font-weight": "500",
+          "line-height": "15px",
+          "color": "rgb(153, 153, 153)",
+          "background-color": "rgb(255, 255, 255)",
+          "border-radius": "50px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "cardImage": {
+          "selector": ".call-out-card img",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "8px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        },
+        "footer": {
+          "selector": ".cmp-experiencefragment--hub-footer",
+          "font-family": "\"TT Norms Pro\", sans-serif",
+          "font-size": "17px",
+          "font-weight": "500",
+          "line-height": "25.5px",
+          "color": "rgb(63, 0, 11)",
+          "background-color": "rgba(0, 0, 0, 0)",
+          "border-radius": "0px",
+          "padding": "0px",
+          "gap": "normal",
+          "max-width": "none"
+        }
+      }
+    }
+  ],
+  "rules": [
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+      "selector": ".ais-ClearRefinements-button:focus, .ais-ClearRefinements-button:hover, .ais-CurrentRefinements-reset:focus, .ais-CurrentRefinements-reset:hover, .ais-GeoSearch-redo:focus, .ais-GeoSearch-redo:hover, .ais-GeoSearch-reset:focus, .ais-GeoSearch-reset:hover, .ais-HierarchicalMenu-showMore:focus, .ais-HierarchicalMenu-showMore:hover, .ais-InfiniteHits-loadMore:focus, .ais-InfiniteHits-loadMore:hover, .ais-InfiniteHits-loadPrevious:focus, .ais-InfiniteHits-loadPrevious:hover, .ais-InfiniteResults-loadMore:focus, .ais-InfiniteResults-loadMore:hover, .ais-Menu-showMore:focus, .ais-Menu-showMore:hover, .ais-RefinementList-showMore:focus, .ais-RefinementList-showMore:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(0, 115, 168)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+      "selector": ".ais-ClearRefinements-button--disabled:focus, .ais-ClearRefinements-button--disabled:hover, .ais-GeoSearch-redo--disabled:focus, .ais-GeoSearch-redo--disabled:hover, .ais-GeoSearch-reset--disabled:focus, .ais-GeoSearch-reset--disabled:hover, .ais-HierarchicalMenu-showMore--disabled:focus, .ais-HierarchicalMenu-showMore--disabled:hover, .ais-InfiniteHits-loadMore--disabled:focus, .ais-InfiniteHits-loadMore--disabled:hover, .ais-InfiniteResults-loadMore--disabled:focus, .ais-InfiniteResults-loadMore--disabled:hover, .ais-Menu-showMore--disabled:focus, .ais-Menu-showMore--disabled:hover, .ais-RefinementList-showMore--disabled:focus, .ais-RefinementList-showMore--disabled:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(0, 150, 219)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+      "selector": ".ais-VoiceSearch-button:hover",
+      "condition": "",
+      "property": "color",
+      "value": "rgb(255, 255, 255)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+      "selector": ".ais-VoiceSearch-button:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(165, 174, 209)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+      "selector": ".ais-VoiceSearch-button:disabled:hover",
+      "condition": "",
+      "property": "color",
+      "value": "rgb(165, 174, 209)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+      "selector": ".ais-VoiceSearch-button:disabled:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "inherit"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+      "selector": ".ais-VoiceSearch-button:hover",
+      "condition": "",
+      "property": "color",
+      "value": "rgb(0, 123, 189)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.high-contrast-mode .cmp-generic-hero .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(128, 189, 222)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": ".cmp-generic-hero .cmp-generic-hero__detail-container .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(38, 143, 199)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.chocolate-world-base-theme .cmp-generic-hero .core-primary-3 .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary:hover",
+      "condition": "",
+      "property": "color",
+      "value": "rgb(255, 255, 255)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.chocolate-world-base-theme .cmp-generic-hero .core-primary-3 .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(63, 0, 11)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.pirate-primary .cmp-generic-hero .core-primary-1 .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary:hover",
+      "condition": "",
+      "property": "color",
+      "value": "rgb(0, 34, 105)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.pirate-primary .cmp-generic-hero .core-primary-1 .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(255, 255, 255)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.high-contrast-mode .cmp-location-hero .other-cta-container a.all-location-cta.button-primary:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(128, 189, 222)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": ".cmp-location-hero .other-cta-container a.all-location-cta.button-tertiary:hover, .cmp-location-hero .other-cta-container a.all-location-cta.button-tertiary:focus",
+      "condition": "",
+      "property": "color",
+      "value": "rgb(63, 0, 11)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": ".cmp-location-hero .other-cta-container a.all-location-cta.button-primary:hover, .cmp-location-hero .other-cta-container a.all-location-cta.button-primary:focus",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(38, 143, 199)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/call-out-card/clientlib-call-out-card-default-theme.lc-cdcd38a514ab97a09177271349555526-lc.min.css",
+      "selector": "body.high-contrast-mode .call-out-card .btn-container a.button:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(128, 189, 222)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/call-out-card/clientlib-call-out-card-default-theme.lc-cdcd38a514ab97a09177271349555526-lc.min.css",
+      "selector": "body.high-contrast-mode .call-out-card .btn-container.recipe > div a.button-cmp--2nd:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(128, 189, 222)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/call-out-card/clientlib-call-out-card-default-theme.lc-cdcd38a514ab97a09177271349555526-lc.min.css",
+      "selector": "body.high-contrast-mode .call-out-card .btn-container.recipe > div a.button-cmp--2nd-white:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(128, 189, 222)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/call-out-card/clientlib-call-out-card-default-theme.lc-cdcd38a514ab97a09177271349555526-lc.min.css",
+      "selector": "body.high-contrast-mode .call-out-card .btn-container.recipe > div a.button-cmp--2nd-white:hover",
+      "condition": "",
+      "property": "color",
+      "value": "rgb(0, 0, 0)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/call-out-card/clientlib-call-out-card-default-theme.lc-cdcd38a514ab97a09177271349555526-lc.min.css",
+      "selector": ".call-out-card .btn-container a.button:hover, .call-out-card .btn-container a.button:focus",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(38, 143, 199)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/call-out-card/clientlib-call-out-card-default-theme.lc-cdcd38a514ab97a09177271349555526-lc.min.css",
+      "selector": ".call-out-card .btn-container.recipe > div a.button-cmp--2nd:hover, .call-out-card .btn-container.recipe > div a.button-cmp--2nd:focus",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(38, 143, 199)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/call-out-card/clientlib-call-out-card-default-theme.lc-cdcd38a514ab97a09177271349555526-lc.min.css",
+      "selector": ".call-out-card .btn-container.recipe > div a.button-cmp--2nd-white:hover, .call-out-card .btn-container.recipe > div a.button-cmp--2nd-white:focus",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(38, 143, 199)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/button/clientlib-button-default-theme.lc-0df5b8c8384a3c056267aa87d76ea16c-lc.min.css",
+      "selector": "body.high-contrast-mode .button-cmp .btn-comp-container .button-cmp--primary:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(128, 189, 222)"
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/button/clientlib-button-default-theme.lc-0df5b8c8384a3c056267aa87d76ea16c-lc.min.css",
+      "selector": "body.high-contrast-mode .button-cmp .btn-comp-container .button-cmp--2nd:hover",
+      "condition": "",
+      "property": "background-color",
+      "value": "rgb(128, 189, 222)"
+    }
+  ]
+}

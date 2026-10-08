@@ -1,5 +1,73 @@
-# Your Project's Title...
-Your project's description...
+# Hersheyland Edge Delivery Services
+
+Authorable migration of the Hersheyland homepage using original source images
+and licensed Gazpacho and TT Norms Pro fonts.
+
+## Homepage authoring
+
+Edit [the homepage in DA](https://da.live/edit#/adobedrago/hersheys-eds/index).
+The `Template` metadata value `hershey-home` loads the homepage-only theme.
+Navigation and footer content are also migrated and managed separately.
+
+- **Columns (homepage-hero):** text, heading and CTA in the first cell;
+  desktop and mobile images (in that order) in the second. One image also works.
+- **Cards (welcome-cards):** one row per category, image | heading/link and text.
+- **Cards (slider, products)** and **Cards (slider, related):** one row per card,
+  image | heading/link and optional description. Native scrolling and arrow
+  controls work without a third-party carousel.
+- **Columns (feature):** text and CTA | image.
+- **Tabs (recipes):** one row per recipe collection, label | image, heading and
+  paragraph. Additional content cells are retained. Tabs support Left/Right,
+  Home and End keys.
+- **Cards (social):** image | caption with the original Instagram post link.
+  This is an editable eight-post snapshot, not a live Instagram widget.
+
+Section `Style` values are `halloween`, `welcome`, `newest`, `creme`, `recipes`,
+`chocolate`, `social` and `related`. The welcome section contains the original
+desktop/mobile decorative images in pairs. Preserve their order.
+
+Images are stored in DA under `.index/`; EDS ingests them into its media bus
+when the document is previewed. Preview content after editing it in DA.
+Code changes and content publishing are separate: merging code does not publish
+the homepage content.
+
+### Header and footer
+
+Edit [navigation in DA](https://da.live/edit#/adobedrago/hersheys-eds/nav) and
+[the footer in DA](https://da.live/edit#/adobedrago/hersheys-eds/footer).
+Navigation uses three sections: linked logo (`Style: hershey-nav`), a nested
+list of categories and links, and a link to the existing Hersheyland search page.
+The search link becomes a GET form using the source service's `searchQuery`
+parameter. Submenu images are the original source icons.
+
+Footer section styles are `newsletter`, `footer-brand`, `footer-links` and
+`footer-legal`. Newsletter signup continues on Hersheyland; this site does not
+collect email addresses. Social links are text-labelled instead of loading
+Font Awesome. Cookie preferences link to Hersheyland; its OneTrust CMP and
+tracking scripts are not installed here. Existing local consent behavior is
+unchanged.
+
+## Design tokens
+
+The [design folder](./design/README.md) contains a DTCG 2025.10 token catalog,
+original Hersheyland AEM clientlib measurements, and a generated CSS variable
+stylesheet consumed by the homepage, cards, columns, tabs, header and footer.
+Original source values are separate from documented EDS compatibility mappings.
+After changing tokens, run `node design/generate-tokens.mjs`, then
+`node design/generate-tokens.mjs --check`. No runtime build is required.
+
+## Storybook
+
+[Storybook](./storybook/README.md) provides live Foundations, Default Content,
+Blocks and Widgets specimens with element-level Autodocs, editable controls,
+interaction actions and accessibility checks. Themes affect specimens only.
+Install its isolated development dependencies with `npm --prefix storybook ci`,
+then run `npm run storybook` and open http://localhost:6006.
+Use `npm run storybook:build` for a standalone static build and
+`npm run storybook:test` for catalog coverage tests, or
+`npm run storybook:test:browser` for themed, responsive and accessibility
+regressions in installed Chrome. Storybook is excluded from
+EDS delivery and does not add a build step to the site.
 
 ## Environments
 - Preview: https://main--hersheys-eds--AdobeDrago.aem.page/
