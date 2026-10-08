@@ -1,0 +1,240 @@
+.story-shell {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  color: #30343b;
+  font: 16px/1.5 system-ui, sans-serif;
+}
+
+.story-shell .story-note {
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.story-shell .foundation-provenance {
+  margin-top: 16px;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+.story-shell .foundation-provenance summary {
+  cursor: pointer;
+}
+
+.story-shell .foundation-provenance code {
+  display: block;
+  margin-top: 12px;
+}
+
+.story-shell [data-showcase] {
+  --background-color: var(--hershey-system-color-surface-default);
+  --text-color: var(--hershey-system-color-text-primary);
+  --light-color: var(--hershey-system-color-surface-subtle);
+  --dark-color: var(--hershey-system-color-text-primary);
+  --link-color: var(--hershey-system-color-text-primary);
+  --link-hover-color: var(--hershey-system-color-link-hover);
+  --body-font-family: var(--hershey-system-typography-body-font-family);
+  --heading-font-family: var(--hershey-system-typography-heading-font-family);
+  --body-font-size-xs: 14px;
+  --nav-height: var(--hershey-system-size-navigation-height);
+  --story-border: var(--hershey-system-color-border-subtle);
+
+  box-sizing: border-box;
+  background: var(--hershey-system-color-surface-default);
+  color: var(--hershey-system-color-text-primary);
+  color-scheme: light;
+  font-family: var(--hershey-system-typography-body-font-family);
+  font-size: var(--hershey-system-typography-body-font-size);
+  line-height: var(--hershey-system-typography-body-line-height);
+}
+
+.story-shell .theme-cocoa-dark,
+.story-shell .theme-cocoa-dark :where(.header.hershey-nav, .footer.hershey-footer) {
+  color-scheme: dark;
+}
+
+.eds-markup *,
+.eds-markup *::before,
+.eds-markup *::after {
+  box-sizing: inherit;
+}
+
+.eds-markup main > .section {
+  padding: clamp(16px, 4vw, 40px);
+}
+
+.eds-markup main > .section > div {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.eds-markup :where(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 16px;
+  font-family: var(--hershey-system-typography-heading-font-family);
+  font-weight: var(--hershey-system-typography-heading-font-weight);
+  line-height: var(--hershey-system-typography-heading-line-height);
+  overflow-wrap: anywhere;
+}
+
+.eds-markup h3 { font-size: var(--hershey-system-typography-card-title-font-size); }
+.eds-markup h4 { font-size: 22px; }
+.eds-markup h5 { font-size: 20px; }
+.eds-markup h6 { font-size: 18px; }
+
+.eds-markup :where(p, ul, ol) {
+  margin: 0 0 20px;
+}
+
+.eds-markup a {
+  color: var(--link-color);
+}
+
+.eds-markup a:hover {
+  color: var(--link-hover-color);
+}
+
+.eds-markup :where(img, picture) {
+  max-width: 100%;
+}
+
+.eds-markup img {
+  display: block;
+  height: auto;
+}
+
+.eds-markup :where(button, input, select) {
+  font: inherit;
+}
+
+.eds-markup .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: 2px solid var(--hershey-system-color-action-primary-background-default);
+  border-radius: var(--hershey-system-shape-radius-action);
+  background: var(--hershey-system-color-action-primary-background-default);
+  color: var(--hershey-system-color-action-primary-foreground);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.eds-markup main a.button {
+  color: var(--hershey-system-color-action-primary-foreground);
+}
+
+.eds-markup main a.button.secondary {
+  background: transparent;
+  color: var(--hershey-system-color-text-primary);
+  border-color: currentcolor;
+}
+
+.eds-markup main a.button.accent {
+  background: var(--hershey-system-color-surface-inverse);
+  color: var(--hershey-system-color-text-inverse);
+  border-color: var(--hershey-system-color-surface-inverse);
+}
+
+.eds-markup main a.button:hover {
+  background: var(--hershey-system-color-action-primary-background-hover);
+  color: var(--hershey-system-color-action-primary-foreground);
+}
+
+.eds-markup blockquote {
+  margin: 24px 0;
+  padding-left: 20px;
+  border-inline-start: 4px solid var(--hershey-system-color-action-primary-background-default);
+  font-family: var(--hershey-system-typography-heading-font-family);
+  font-size: 24px;
+}
+
+.eds-markup cite,
+.eds-markup figcaption {
+  font-family: var(--hershey-system-typography-body-font-family);
+  font-size: 14px;
+}
+
+.eds-markup figure {
+  margin: 0;
+}
+
+.eds-markup figcaption {
+  margin-top: 12px;
+}
+
+.eds-markup .markup-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.eds-markup .markup-table :where(th, td) {
+  padding: 12px;
+  border-bottom: 1px solid var(--story-border);
+}
+
+.eds-markup .markup-table caption {
+  padding-bottom: 16px;
+  text-align: left;
+  font-weight: 700;
+}
+
+.eds-markup .cards:not(.slider, .social, .welcome-cards) > ul {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--hershey-component-cards-grid-minimum-width)), 1fr));
+}
+
+.eds-markup .widget-demo form {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.eds-markup .widget-demo label {
+  display: grid;
+  gap: 8px;
+}
+
+.eds-markup .widget-demo select,
+.eds-markup input {
+  max-width: 100%;
+  padding: 10px;
+  border: 1px solid currentcolor;
+  background: var(--hershey-system-color-surface-default);
+  color: inherit;
+}
+
+.eds-markup .widget-demo h2 {
+  margin-top: 24px;
+}
+
+.eds-markup .widget-demo [role="status"] {
+  margin: 20px 0 0;
+}
+
+.eds-markup header {
+  min-height: var(--nav-height);
+}
+
+.eds-markup header .nav-wrapper {
+  position: relative;
+}
+
+.eds-markup header nav[aria-expanded="true"] {
+  min-height: 0;
+}
+
+.eds-markup .footer.hershey-footer .footer-brand,
+.eds-markup .footer.hershey-footer .footer-links {
+  padding-inline: 24px;
+}
+
+.eds-markup .footer.hershey-footer .newsletter a.button {
+  color: var(--hershey-system-color-action-primary-foreground);
+}
+
+.eds-markup :focus-visible,
+.story-shell summary:focus-visible {
+  outline: 3px solid currentcolor;
+  outline-offset: 3px;
+}

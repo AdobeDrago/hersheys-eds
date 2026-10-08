@@ -20,16 +20,16 @@ footer .footer p {
 }
 
 .footer.hershey-footer {
-  --body-font-family: var(--hershey-component-footer-font-family);
-  --heading-font-family: var(--hershey-component-footer-heading-family);
-  --text-color: var(--hershey-component-footer-text);
-  --link-color: var(--hershey-component-footer-on-dark);
-  --link-hover-color: var(--hershey-component-footer-on-dark);
+  --body-font-family: var(--hershey-component-footer-typography-body-font-family);
+  --heading-font-family: var(--hershey-component-footer-heading-font-family);
+  --text-color: var(--hershey-component-footer-newsletter-foreground);
+  --link-color: var(--hershey-component-footer-color-foreground);
+  --link-hover-color: var(--hershey-component-footer-color-foreground);
 
   font-family: var(--body-font-family);
-  background: var(--hershey-component-footer-surface);
-  color: var(--hershey-component-footer-on-dark);
-  font-size: var(--hershey-component-footer-font-size);
+  background: var(--hershey-component-footer-color-background);
+  color: var(--hershey-component-footer-color-foreground);
+  font-size: var(--hershey-component-footer-typography-body-font-size);
 }
 
 .footer.hershey-footer > div {
@@ -40,57 +40,57 @@ footer .footer p {
 
 .footer.hershey-footer .section {
   margin: 0;
-  padding: var(--hershey-component-footer-spacing-large) var(--hershey-component-footer-spacing);
+  padding: var(--hershey-component-footer-layout-padding-block) var(--hershey-component-footer-layout-padding-inline);
 }
 
 .footer.hershey-footer .section > div {
-  max-width: var(--hershey-component-footer-content-width);
+  max-width: var(--hershey-component-footer-layout-max-width);
   margin: auto;
 }
 
 .footer.hershey-footer .newsletter {
-  background: var(--hershey-component-footer-newsletter-surface);
-  color: var(--hershey-component-footer-text);
+  background: var(--hershey-component-footer-newsletter-background);
+  color: var(--hershey-component-footer-newsletter-foreground);
   text-align: center;
-  padding-block: var(--hershey-component-footer-newsletter-padding);
+  padding-block: var(--hershey-component-footer-newsletter-padding-block);
 }
 
 .footer.hershey-footer h2 {
   margin-top: 0;
-  font-size: var(--hershey-component-footer-heading-size);
-  font-weight: var(--hershey-component-footer-heading-weight);
+  font-size: var(--hershey-component-footer-heading-font-size);
+  font-weight: var(--hershey-component-footer-heading-font-weight);
 }
 
 .footer.hershey-footer .newsletter p {
-  margin-top: var(--hershey-component-footer-gap);
+  margin-top: var(--hershey-component-footer-layout-gap);
 }
 
 .footer.hershey-footer .newsletter a.button {
-  margin-block: var(--hershey-component-footer-action-margin);
-  color: var(--hershey-component-footer-on-dark);
-  background: var(--hershey-component-footer-action-surface);
-  font-weight: var(--hershey-component-footer-action-weight);
+  margin-block: var(--hershey-component-footer-newsletter-action-margin-block);
+  color: var(--hershey-component-footer-newsletter-action-foreground);
+  background: var(--hershey-component-footer-newsletter-action-background);
+  font-weight: var(--hershey-component-footer-newsletter-action-font-weight);
 }
 
 .footer.hershey-footer .newsletter img {
   display: block;
-  max-width: var(--hershey-component-footer-newsletter-image-width);
+  max-width: var(--hershey-component-footer-newsletter-image-max-width);
   height: auto;
-  margin: var(--hershey-component-footer-spacing-large) auto 0;
+  margin: var(--hershey-component-footer-layout-padding-block) auto 0;
 }
 
 .footer.hershey-footer .footer-brand img {
-  width: var(--hershey-component-footer-logo-width);
+  width: var(--hershey-component-footer-brand-mark-width);
   height: auto;
 }
 
 .footer.hershey-footer ul {
   list-style: none;
   padding: 0;
-  margin: var(--hershey-component-footer-spacing) 0 0;
+  margin: var(--hershey-component-footer-layout-padding-inline) 0 0;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--hershey-component-footer-gap) var(--hershey-component-footer-spacing);
+  gap: var(--hershey-component-footer-layout-gap) var(--hershey-component-footer-layout-padding-inline);
 }
 
 .footer.hershey-footer .footer-links ul {
@@ -101,7 +101,7 @@ footer .footer p {
 
 .footer.hershey-footer .footer-legal {
   border-top: var(--hershey-component-footer-divider-width) var(--hershey-component-footer-border-style) var(--hershey-component-footer-divider-color);
-  font-size: var(--hershey-component-footer-legal-size);
+  font-size: var(--hershey-component-footer-legal-font-size);
 }
 
 .footer.hershey-footer :focus-visible {
@@ -120,10 +120,10 @@ footer .footer p {
   }
 
   .footer.hershey-footer .footer-brand {
-    padding-left: max(var(--hershey-component-footer-spacing-large), calc((100vw - var(--hershey-component-footer-content-width)) / 2));
+    padding-left: max(var(--hershey-component-footer-layout-padding-block), calc((100vw - var(--hershey-component-footer-layout-max-width)) / 2));
   }
 
   .footer.hershey-footer .footer-links {
-    padding-right: max(var(--hershey-component-footer-spacing-large), calc((100vw - var(--hershey-component-footer-content-width)) / 2));
+    padding-right: max(var(--hershey-component-footer-layout-padding-block), calc((100vw - var(--hershey-component-footer-layout-max-width)) / 2));
   }
 }

@@ -23,9 +23,15 @@ export default function decorate(block) {
             responsive.append(source);
           }
           [...desktop.children].forEach((child) => responsive.append(child));
-          const img = responsive.querySelector('img');
-          img.loading = 'eager';
-          img.setAttribute('fetchpriority', 'high');
+          const img = responsive.querySelector('img') || mobileImage;
+          if (img) {
+            if (!responsive.contains(img)) responsive.append(img);
+            img.loading = 'eager';
+            img.setAttribute('fetchpriority', 'high');
+          } else {
+            // eslint-disable-next-line no-console
+            console.error('Homepage hero pictures require a fallback image', block);
+          }
           col.replaceChildren(responsive);
         }
         col.classList.add('columns-img-col');

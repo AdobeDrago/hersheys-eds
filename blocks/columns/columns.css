@@ -29,7 +29,7 @@
   .columns > div {
     align-items: center;
     flex-direction: unset;
-    gap: 24px;
+    gap: var(--hershey-component-columns-layout-gap-default, 24px);
   }
 
   .columns > div > div {
@@ -40,7 +40,7 @@
 
 .columns.homepage-hero > div,
 .columns.feature > div {
-  gap: var(--hershey-component-columns-gap-mobile, 32px);
+  gap: var(--hershey-component-columns-layout-gap-mobile, 32px);
 }
 
 .columns.homepage-hero > div > .columns-img-col {
@@ -55,7 +55,7 @@
 @media (width >= 900px) {
   .columns.homepage-hero > div,
   .columns.feature > div {
-    gap: var(--hershey-component-columns-gap-desktop, 64px);
+    gap: var(--hershey-component-columns-layout-gap-desktop, 64px);
   }
 
   .columns.homepage-hero > div > .columns-img-col {

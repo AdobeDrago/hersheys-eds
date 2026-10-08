@@ -51,9 +51,12 @@ export default function decorate(block) {
       const picture = card.querySelector('.cards-card-image picture');
       const link = card.querySelector('.cards-card-body a[href]');
       if (picture && link && !picture.closest('a')) {
+        const label = link.getAttribute('aria-label') || link.textContent.trim()
+          || picture.querySelector('img')?.alt;
+        if (!label) return;
         const imageLink = document.createElement('a');
         imageLink.href = link.href;
-        imageLink.setAttribute('aria-label', link.textContent.trim());
+        imageLink.setAttribute('aria-label', label);
         picture.replaceWith(imageLink);
         imageLink.append(picture);
       }

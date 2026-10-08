@@ -56,6 +56,19 @@ Original source values are separate from documented EDS compatibility mappings.
 After changing tokens, run `node design/generate-tokens.mjs`, then
 `node design/generate-tokens.mjs --check`. No runtime build is required.
 
+## Storybook
+
+[Storybook](./storybook/README.md) provides live Foundations, Default Content,
+Blocks and Widgets specimens with element-level Autodocs, editable controls,
+interaction actions and accessibility checks. Themes affect specimens only.
+Install its isolated development dependencies with `npm --prefix storybook ci`,
+then run `npm run storybook` and open http://localhost:6006.
+Use `npm run storybook:build` for a standalone static build and
+`npm run storybook:test` for catalog coverage tests, or
+`npm run storybook:test:browser` for themed, responsive and accessibility
+regressions in installed Chrome. Storybook is excluded from
+EDS delivery and does not add a build step to the site.
+
 ## Environments
 - Preview: https://main--hersheys-eds--AdobeDrago.aem.page/
 - Live: https://main--hersheys-eds--AdobeDrago.aem.live/

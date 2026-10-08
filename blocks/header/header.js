@@ -4,14 +4,15 @@ import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
+let navigationId = 0;
 
 /**
  * Closes the open nav dropdown (desktop) or the nav menu (mobile) on Escape
  * @param {KeyboardEvent} e keydown event
  */
 function closeOnEscape(e) {
-  if (e.code === 'Escape') {
-    const nav = document.getElementById('nav');
+  if (e.key === 'Escape') {
+    const nav = e.currentTarget;
     const navSections = nav.querySelector('.nav-sections');
     if (!navSections) return;
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
@@ -79,11 +80,11 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
     // collapse menu on escape press
-    window.addEventListener('keydown', closeOnEscape);
+    nav.addEventListener('keydown', closeOnEscape);
     // collapse menu on focus lost
     nav.addEventListener('focusout', closeOnFocusLost);
   } else {
-    window.removeEventListener('keydown', closeOnEscape);
+    nav.removeEventListener('keydown', closeOnEscape);
     nav.removeEventListener('focusout', closeOnFocusLost);
   }
 }
@@ -97,6 +98,7 @@ export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
+  if (!fragment) throw new Error(`Unable to load navigation fragment: ${navPath}`);
   if (fragment.querySelector('.hershey-nav')) {
     block.classList.add('hershey-nav');
     await loadHersheyTheme();
@@ -105,7 +107,8 @@ export default async function decorate(block) {
   // decorate nav DOM
   block.textContent = '';
   const nav = document.createElement('nav');
-  nav.id = 'nav';
+  navigationId += 1;
+  nav.id = `nav-${navigationId}`;
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
   const classes = ['brand', 'sections', 'tools'];
@@ -132,7 +135,7 @@ export default async function decorate(block) {
       const button = document.createElement('button');
       button.type = 'button';
       button.setAttribute('aria-expanded', false);
-      subList.id = `nav-submenu-${index}`;
+      subList.id = `${nav.id}-submenu-${index}`;
       button.setAttribute('aria-controls', subList.id);
       [...navSection.childNodes].forEach((node) => {
         if (node !== subList) button.append(node);
@@ -184,7 +187,7 @@ export default async function decorate(block) {
   // hamburger for mobile
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
-  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
+  hamburger.innerHTML = `<button type="button" aria-controls="${nav.id}" aria-label="Open navigation">
       <span class="nav-hamburger-icon"></span>
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
