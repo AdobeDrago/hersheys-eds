@@ -64,7 +64,8 @@ export default async function decorate(widget) {
     applyWidgetShell(widget, source, widgetName, searchParams);
 
     const resp = await fetch(widgetUrl(widgetPath, widgetName, 'html'));
-    widget.innerHTML = await resp.text();
+    // widget html is optional; the widget js can build its own markup
+    widget.innerHTML = resp.ok ? await resp.text() : '';
 
     const cssLoaded = loadCSS(widgetUrl(widgetPath, widgetName, 'css'));
     const decorationComplete = (async () => {
@@ -73,6 +74,7 @@ export default async function decorate(widget) {
     })();
     await Promise.all([cssLoaded, decorationComplete]);
   } catch (error) {
+    widget.replaceChildren();
     // eslint-disable-next-line no-console
     console.error(`failed to load widget ${widgetPath}/${widgetName}`, error);
   }

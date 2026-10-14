@@ -1,0 +1,33 @@
+.reviews {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/*
+ * Bazaarvoice sizes its shadow content with `height: 100%`. In quirks mode
+ * (no doctype, e.g. the local html-folder preview) that resolves against the
+ * viewport, clipping the reviews list under the next section. A grid host
+ * stops the quirk walking up; no effect in standards mode.
+ */
+.reviews .reviews-section {
+  display: grid;
+}
+
+.reviews .reviews-section + .reviews-section {
+  margin-top: 48px;
+}
+
+.reviews .reviews-fallback {
+  padding: 32px 24px;
+  border-radius: 8px;
+  background-color: var(--light-color);
+  text-align: center;
+}
+
+.reviews .reviews-fallback h2 {
+  margin-top: 0;
+}
+
+.reviews .reviews-fallback p {
+  margin-bottom: 0;
+}

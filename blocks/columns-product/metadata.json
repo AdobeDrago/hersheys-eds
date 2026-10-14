@@ -1,0 +1,24 @@
+{
+  "variantName": "columns-product",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "product-overview",
+    "imagePattern": "gallery",
+    "structure": "image gallery + heading + rating + size links + paragraph + CTA"
+  },
+  "contentPattern": "1 row x 2 columns. Cell 1: product images (front, back) - multiple images become the gallery. Cell 2: h1 product name; paragraph 'Choose a size:'; list of size links (current size first/bold); description paragraph; 'Shop Now' link (button). Rating is rendered from the bvId page metadata.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.hersheyland.com/products/hersheys-milk-chocolate-candy-bars-9-3-oz-6-pack.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "columns-product"
+  ]
+}

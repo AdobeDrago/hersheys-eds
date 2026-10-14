@@ -1,0 +1,24 @@
+{
+  "variantName": "tabs-nutrition",
+  "baseBlock": "tabs",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "nutrition-info",
+    "imagePattern": "icon",
+    "structure": "3 tabs + nutrient rows + ingredients + dietary icons"
+  },
+  "contentPattern": "3 rows x 2 columns (label | content). Row 1 'Nutrition Facts': serving size / servings paragraphs, macro summary (Calories 210, Protein 3g, Total Carbohydrates 26g), nutrient lines as paragraphs or a list of 'Name | amount | %DV' and the %DV footnote paragraph. Row 2 'Ingredients': ingredient paragraph + 'Contains: Milk, Soy' paragraph. Row 3 'Dietary Info': icon images each followed by label (OU-D, GLUTEN FREE). No nested blocks inside tab cells.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.hersheyland.com/products/hersheys-milk-chocolate-candy-bars-9-3-oz-6-pack.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "tabs-nutrition"
+  ]
+}

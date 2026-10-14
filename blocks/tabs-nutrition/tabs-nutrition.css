@@ -1,0 +1,311 @@
+/* Tabs (Nutrition): values extracted from hersheyland.com .nutritional-ingredient-comp .tab-container */
+.tabs-nutrition {
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  color: var(--brand-maroon);
+}
+
+/* tab list */
+.tabs-nutrition .tabs-nutrition-list {
+  display: flex;
+  height: 90px;
+}
+
+.tabs-nutrition .tabs-nutrition-tab {
+  flex: 1 1 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid #c1c1c1;
+  border-radius: 0;
+  background-color: var(--background-color);
+  color: var(--brand-maroon);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: normal;
+  text-align: center;
+  cursor: pointer;
+}
+
+.tabs-nutrition .tabs-nutrition-tab:first-child {
+  border-top-left-radius: 8px;
+}
+
+.tabs-nutrition .tabs-nutrition-tab:last-child {
+  border-top-right-radius: 8px;
+}
+
+.tabs-nutrition .tabs-nutrition-tab[aria-selected='true'] {
+  border-bottom: 5px solid var(--brand-maroon);
+  background-color: #f3f3f3;
+  font-weight: 700;
+}
+
+/* panels */
+.tabs-nutrition .tabs-nutrition-panel {
+  padding: 0;
+}
+
+.tabs-nutrition .tabs-nutrition-panel[hidden] {
+  display: none;
+}
+
+.tabs-nutrition .tabs-nutrition-panel p {
+  margin: 0;
+}
+
+/* shared row structure */
+.tabs-nutrition .tabs-nutrition-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs-nutrition .tabs-nutrition-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* serving rows (paragraph "Label | value" lines) */
+.tabs-nutrition .tabs-nutrition-serving {
+  padding: 12px 18px 12px 17px;
+  border-bottom: 1px solid rgb(63 0 11 / 17%);
+}
+
+.tabs-nutrition .tabs-nutrition-serving .tabs-nutrition-row {
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 32px;
+}
+
+.tabs-nutrition .tabs-nutrition-serving .tabs-nutrition-row-strong {
+  font-weight: 700;
+}
+
+.tabs-nutrition .tabs-nutrition-serving .tabs-nutrition-name {
+  text-transform: capitalize;
+}
+
+/* macro summary (list of "Label | value") */
+.tabs-nutrition .tabs-nutrition-summary {
+  flex-direction: row;
+  box-sizing: border-box;
+  height: 100px;
+  border-bottom: 1px solid rgb(63 0 11 / 17%);
+}
+
+.tabs-nutrition .tabs-nutrition-summary .tabs-nutrition-row {
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+}
+
+.tabs-nutrition .tabs-nutrition-summary .tabs-nutrition-row:where(:last-child:not(:first-child)) {
+  flex-grow: 2;
+}
+
+.tabs-nutrition .tabs-nutrition-summary .tabs-nutrition-name {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+.tabs-nutrition .tabs-nutrition-summary .tabs-nutrition-value {
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 32px;
+  text-align: center;
+}
+
+/* nutrient facts (list of "Name | amount | %DV") */
+.tabs-nutrition .tabs-nutrition-facts {
+  padding: 24px 18px 0 17px;
+}
+
+.tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  margin: 0 0 5px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-row:where(:first-child) {
+  margin-top: 9px;
+}
+
+.tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-row:where(:first-child),
+.tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-row-indent:where(:nth-child(1 of .tabs-nutrition-row-indent)) {
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgb(63 0 11 / 17%);
+}
+
+.tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-row:where(:last-child) {
+  margin: 0;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(63 0 11 / 17%);
+}
+
+.tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-row-indent {
+  padding-left: 8px;
+  font-weight: 450;
+}
+
+.tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-value {
+  font-weight: 450;
+  text-align: right;
+}
+
+.tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-value:last-child {
+  min-width: 28px;
+  margin-left: 68px;
+  font-weight: 700;
+}
+
+/* footnote */
+.tabs-nutrition .tabs-nutrition-panel-facts > p {
+  padding: 20px 18px 25px;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+/* ingredients */
+.tabs-nutrition .tabs-nutrition-panel-text:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 24px 27px 21px 28px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.tabs-nutrition .tabs-nutrition-panel-text > p:not(.tabs-nutrition-allergen) {
+  font-weight: 450;
+  line-height: 24px;
+}
+
+.tabs-nutrition .tabs-nutrition-allergen {
+  font-weight: 700;
+}
+
+/* dietary badges */
+.tabs-nutrition .tabs-nutrition-panel-badges {
+  padding: 30px 10px;
+}
+
+.tabs-nutrition .tabs-nutrition-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 23px 10px;
+}
+
+.tabs-nutrition .tabs-nutrition-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 116px;
+  text-align: center;
+}
+
+.tabs-nutrition .tabs-nutrition-badge .icon {
+  display: block;
+  width: 92px;
+  height: 91px;
+}
+
+.tabs-nutrition .tabs-nutrition-badge img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tabs-nutrition .tabs-nutrition-badge-label {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+@media (width >= 768px) {
+  .tabs-nutrition .tabs-nutrition-list {
+    height: 103px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-tab {
+    font-size: 18px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-serving {
+    padding: 12px 32px 12px 34px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-serving .tabs-nutrition-row {
+    font-size: 18px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-summary .tabs-nutrition-row:where(:last-child:not(:first-child)) {
+    flex-grow: 1.6;
+  }
+
+  .tabs-nutrition .tabs-nutrition-summary .tabs-nutrition-name {
+    font-size: 20px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-summary .tabs-nutrition-value {
+    font-size: 18px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-facts {
+    padding: 27px 32px 0 34px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-row {
+    font-size: 16px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-value:last-child {
+    min-width: 32px;
+    margin-left: 90px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-panel-facts > p {
+    padding: 23px 32px 25px 34px;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  .tabs-nutrition .tabs-nutrition-panel-text:not([hidden]) {
+    padding: 33px 38px 31px 37px;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  .tabs-nutrition .tabs-nutrition-panel-text > p:not(.tabs-nutrition-allergen) {
+    font-weight: inherit;
+  }
+
+  .tabs-nutrition .tabs-nutrition-panel-badges {
+    padding: 45px 65px 42px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-badges {
+    column-gap: 42px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-badge {
+    width: auto;
+  }
+
+  .tabs-nutrition .tabs-nutrition-badge .icon {
+    width: 127px;
+    height: 127px;
+  }
+}
