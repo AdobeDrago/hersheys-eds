@@ -129,6 +129,40 @@ function linkTextToAlt(linkText) {
   return linkText === EMPTY_ALT_SENTINEL ? '' : linkText;
 }
 
+// Document Authoring slugifies Scene7 paths (`_` → `-`, lowercased, host
+// stripped). The canonical detector above rejects those relative URLs on
+// purpose. Repair only hersheyprodcloud assets, and leave an already
+// absolute underscore name untouched.
+const HERSHEY_SCENE7_PREFIX = '/is/image/hersheyprodcloud/';
+
+function restoreHersheyScene7Url(urlStr) {
+  if (!urlStr || typeof urlStr !== 'string') return urlStr;
+  let url;
+  try {
+    url = new URL(urlStr, 'https://local.invalid');
+  } catch {
+    return urlStr;
+  }
+  if (!url.pathname.startsWith(HERSHEY_SCENE7_PREFIX)) return urlStr;
+  const asset = decodeURIComponent(url.pathname.slice(HERSHEY_SCENE7_PREFIX.length));
+  if (!asset.includes('-')) return urlStr;
+  const restored = asset.split('-').map((part) => (
+    /^\d+$/.test(part) ? part : part.charAt(0).toUpperCase() + part.slice(1)
+  )).join('_');
+  return `https://s7d1.scene7.com${HERSHEY_SCENE7_PREFIX}${restored}${url.search}`;
+}
+
+function rewriteHersheyScene7Anchors(main) {
+  main.querySelectorAll('a').forEach((anchor) => {
+    ['href', 'title'].forEach((attr) => {
+      const value = anchor.getAttribute(attr);
+      if (!value) return;
+      const restored = restoreHersheyScene7Url(value);
+      if (restored !== value) anchor.setAttribute(attr, restored);
+    });
+  });
+}
+
 // ---- Rendering ----
 function appendSource(picture, { type, srcset, media }) {
   const source = document.createElement('source');
@@ -178,6 +212,7 @@ function buildDynamicMediaImages(main) {
   // for the linked case); CommonMark's [text](url "title") syntax
   // survives docx and the title attribute round-trips back to a real
   // HTML attribute at render time.
+  rewriteHersheyScene7Anchors(main);
   main.querySelectorAll('a').forEach((a) => {
     const match = findDmOnAnchor(a);
     if (!match) return;
@@ -248,11 +283,12 @@ function buildDynamicMediaImages(main) {
 // fall through to its standard path-only optimization. This is the
 // regression guard for non-DM images on the same page.
 window.__dmRender__ = (src, alt) => {
-  const family = detectDynamicMediaUrl(src);
+  const restored = restoreHersheyScene7Url(src);
+  const family = detectDynamicMediaUrl(restored);
   if (!family) return null;
   return family === 'scene7'
-    ? renderScene7Picture(src, alt)
-    : renderDmOpenApiPicture(src, alt);
+    ? renderScene7Picture(restored, alt)
+    : renderDmOpenApiPicture(restored, alt);
 };
 
 // --- END DM/Scene7 auto-block ---

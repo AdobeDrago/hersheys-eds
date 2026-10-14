@@ -63,7 +63,34 @@ main > .section.columns-product-container::after {
   display: block;
 }
 
+.columns-product .columns-product-slide.active {
+  position: relative;
+  width: min(100%, 435px);
+  margin-inline: auto;
+}
+
+/* Ground shadow from hersheyland .product-overview-hersheyland .shadow.
+   Lives on the slide, not the stage: the prev/next controls are absolutely
+   positioned against the gallery so they sit beside the thumbnails. */
+.columns-product .columns-product-slide.active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0.5rem;
+  z-index: 0;
+  width: 60%;
+  height: 10px;
+  border-radius: 50%;
+  background: #00000069;
+  opacity: 0.6;
+  filter: blur(4.5px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
 .columns-product .columns-product-slide img {
+  position: relative;
+  z-index: 1;
   max-width: 435px;
   margin: 0 auto;
   aspect-ratio: 1 / 1;
