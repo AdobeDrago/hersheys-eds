@@ -2,8 +2,8 @@
 Your project's description...
 
 ## Environments
-- Preview: https://main--hersheys-eds--AdobeDrago.aem.page/
-- Live: https://main--hersheys-eds--AdobeDrago.aem.live/
+- Preview: https://main--hersheys-eds--codeandtheory.aem.page/
+- Live: https://main--hersheys-eds--codeandtheory.aem.live/
 
 ## Documentation
 
