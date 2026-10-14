@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "products",
+      "urls": [
+        "https://www.hersheyland.com/products/hersheys-milk-chocolate-candy-bars-9-3-oz-6-pack.html"
+      ],
+      "representativeUrl": "https://www.hersheyland.com/products/hersheys-milk-chocolate-candy-bars-9-3-oz-6-pack.html",
+      "description": "Product detail page: breadcrumb, product overview (gallery + details), nutritional information tabs, Bazaarvoice ratings & reviews",
+      "blocks": [
+        {
+          "name": "breadcrumb-trail",
+          "instances": [
+            ".breadcrumb .cmp-breadcrumb"
+          ]
+        },
+        {
+          "name": "columns-product",
+          "instances": [
+            ".product-overview-hersheyland .product-grid"
+          ]
+        },
+        {
+          "name": "tabs-nutrition",
+          "instances": [
+            ".nutritional-ingredient-comp .tab-container"
+          ]
+        },
+        {
+          "name": "widget",
+          "instances": [
+            ".ratings-and-reviews"
+          ]
+        }
+      ],
+      "urlPattern": "/products/*",
+      "sections": [
+        {
+          "id": "rc1",
+          "name": "breadcrumb",
+          "selector": [
+            "div.breadcrumb"
+          ],
+          "style": null,
+          "blocks": [
+            "breadcrumb-trail"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc3",
+          "name": "product-overview",
+          "selector": [
+            ".product-overview-hersheyland"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-product"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc6",
+          "name": "nutritional-information",
+          "selector": [
+            "section.light-gray-background",
+            ".nutritionfacts"
+          ],
+          "style": "light-gray",
+          "blocks": [
+            "tabs-nutrition"
+          ],
+          "defaultContent": [
+            ".nutritional-ingredient-comp .card-header h2",
+            ".nutritional-ingredient-comp .card-header p"
+          ]
+        },
+        {
+          "id": "rc7",
+          "name": "ratings-and-reviews",
+          "selector": [
+            ".ratings-and-reviews"
+          ],
+          "style": null,
+          "blocks": [
+            "widget"
+          ],
+          "defaultContent": []
+        }
+      ]
+    }
+  ]
+}

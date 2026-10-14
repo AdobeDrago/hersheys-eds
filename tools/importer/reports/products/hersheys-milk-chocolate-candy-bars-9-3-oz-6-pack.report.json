@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://www.hersheyland.com/products/hersheys-milk-chocolate-candy-bars-9-3-oz-6-pack.html",
+  "path": "products/hersheys-milk-chocolate-candy-bars-9-3-oz-6-pack",
+  "timestamp": "2026-10-14T20:46:21.504Z",
+  "title": "HERSHEY'S Milk Chocolate Candy Bars, 9.3 oz, 6 pack",
+  "template": "products",
+  "blocks": [
+    "breadcrumb-trail",
+    "columns-product",
+    "tabs-nutrition",
+    "widget"
+  ],
+  "bvid": "00034000290055"
+}
