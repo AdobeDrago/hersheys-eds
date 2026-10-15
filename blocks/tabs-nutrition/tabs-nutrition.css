@@ -125,6 +125,21 @@
   padding: 24px 18px 0 17px;
 }
 
+/* "Amount per serving | % DV*" column header: the serving row right before the facts */
+.tabs-nutrition .tabs-nutrition-serving:has(+ .tabs-nutrition-facts) {
+  margin: 0 18px 0 17px; /* same insets as the facts rows */
+  padding: 27px 0 10px;
+}
+
+.tabs-nutrition .tabs-nutrition-serving:has(+ .tabs-nutrition-facts) .tabs-nutrition-row {
+  color: #757575;
+  font-size: 18px;
+}
+
+.tabs-nutrition .tabs-nutrition-serving + .tabs-nutrition-facts {
+  padding-top: 0;
+}
+
 .tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
@@ -265,6 +280,10 @@
 
   .tabs-nutrition .tabs-nutrition-facts {
     padding: 27px 32px 0 34px;
+  }
+
+  .tabs-nutrition .tabs-nutrition-serving:has(+ .tabs-nutrition-facts) {
+    margin: 0 32px 0 34px;
   }
 
   .tabs-nutrition .tabs-nutrition-facts .tabs-nutrition-row {

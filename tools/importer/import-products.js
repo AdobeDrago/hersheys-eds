@@ -130,8 +130,8 @@ function findBlocksOnPage(document, template) {
 
 /**
  * Builds the page Metadata block. Mirrors WebImporter.rules.createMetadata
- * (title, description, image) and adds `bvid`, which columns-product reads
- * to render the Bazaarvoice inline rating.
+ * (title, description, image) and adds `theme` (brand color theme) and `bvid`,
+ * which columns-product reads to render the Bazaarvoice inline rating.
  * @param {Element} main
  * @param {Document} document
  */
@@ -157,6 +157,14 @@ function createMetadataBlock(main, document) {
     const img = document.createElement('img');
     img.src = ogImage.content;
     meta.Image = img;
+  }
+
+  // Brand theme: source sets it as a body class (e.g. reese-primary, hershey-primary);
+  // theme metadata reproduces that class on the EDS body for brand-colored blocks.
+  // Lowercase key: getMetadata() matches meta[name="theme"] exactly.
+  const brandTheme = [...document.body.classList].find((c) => /^[a-z]+-primary$/.test(c));
+  if (brandTheme) {
+    meta.theme = brandTheme;
   }
 
   const bvMeta = document.querySelector('meta[name="bvId"], meta[name="bvid"], meta[name="bv-id"]');

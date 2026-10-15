@@ -6,7 +6,8 @@
     {
       "name": "products",
       "urls": [
-        "https://www.hersheyland.com/products/hersheys-milk-chocolate-candy-bars-9-3-oz-6-pack.html"
+        "https://www.hersheyland.com/products/hersheys-milk-chocolate-candy-bars-9-3-oz-6-pack.html",
+        "https://www.hersheyland.com/products/reeses-oreo-milk-chocolate-peanut-butter-cups-1-4-oz.html"
       ],
       "representativeUrl": "https://www.hersheyland.com/products/hersheys-milk-chocolate-candy-bars-9-3-oz-6-pack.html",
       "description": "Product detail page: breadcrumb, product overview (gallery + details), nutritional information tabs, Bazaarvoice ratings & reviews",
