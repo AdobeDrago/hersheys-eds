@@ -379,8 +379,12 @@ var CustomImportScript = (() => {
         // product image lightbox overlay (duplicate of gallery image)
         ".mobile-buy-now-container",
         // sticky mobile "Shop Now" duplicate CTA
-        "img#amz-px"
+        "img#amz-px",
         // Amazon tracking pixel
+        'img[src*="ispot.tv"]',
+        // iSpot.tv tracking pixel
+        "div.algolia-recommend"
+        // client-rendered "Related Products" carousel (Algolia); empty in source HTML
       ]);
     }
     if (hookName === TransformHook.afterTransform) {
@@ -629,6 +633,10 @@ var CustomImportScript = (() => {
       const img = document.createElement("img");
       img.src = ogImage.content;
       meta.Image = img;
+    }
+    const brandTheme = [...document.body.classList].find((c) => /^[a-z]+-primary$/.test(c));
+    if (brandTheme) {
+      meta.theme = brandTheme;
     }
     const bvMeta = document.querySelector('meta[name="bvId"], meta[name="bvid"], meta[name="bv-id"]');
     if (bvMeta && bvMeta.content) {

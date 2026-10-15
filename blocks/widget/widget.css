@@ -1,3 +1,20 @@
 .widget {
   display: block;
 }
+
+/*
+ * Ratings & reviews: the source container (.ratings-and-reviews) is
+ * min(1260px, viewport) wide, centered, with no side padding. Bleed into the
+ * section gutter (24px mobile / 32px desktop) and cap at 1260px.
+ * `.widget.reviews` outranks the 1200px rule in widgets/bazaarvoice/reviews.css.
+ */
+.widget.reviews {
+  max-width: 1260px;
+  margin-inline: max(-24px, calc((100% - 1260px) / 2));
+}
+
+@media (width >= 900px) {
+  .widget.reviews {
+    margin-inline: max(-32px, calc((100% - 1260px) / 2));
+  }
+}
