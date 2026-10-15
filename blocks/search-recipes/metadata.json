@@ -1,0 +1,24 @@
+{
+  "variantName": "search-recipes",
+  "baseBlock": "search-recipes",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "recipe-search",
+    "imagePattern": "card-grid",
+    "structure": "search + facets + sort + hit cards + pagination"
+  },
+  "contentPattern": "Empty block (self-initializing). Optional config rows: hits-per-page | N; endpoint | proxy URL; asset-origin | https://www.hersheyland.com. Data comes from Algolia (or a future Worker proxy), not authored cells.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.hersheyland.com/all-recipes"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "search-recipes"
+  ]
+}
