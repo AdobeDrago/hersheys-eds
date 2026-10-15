@@ -37,7 +37,6 @@
           ]
         }
       ],
-      "urlPattern": "/products/*",
       "sections": [
         {
           "id": "rc1",
@@ -81,6 +80,166 @@
         },
         {
           "id": "rc7",
+          "name": "ratings-and-reviews",
+          "selector": [
+            ".ratings-and-reviews"
+          ],
+          "style": null,
+          "blocks": [
+            "widget"
+          ],
+          "defaultContent": []
+        }
+      ],
+      "urlPattern": "/products/*"
+    },
+    {
+      "name": "recipe-category",
+      "urls": [
+        "https://www.hersheyland.com/recipes/blondies-bars.html"
+      ],
+      "representativeUrl": "https://www.hersheyland.com/recipes/blondies-bars.html",
+      "description": "Recipe category listing page (e.g. Blondies & Bars): grid of recipe cards — not yet mapped",
+      "blocks": [],
+      "urlPattern": "/recipes/*"
+    },
+    {
+      "name": "recipe-detail",
+      "urls": [
+        "https://www.hersheyland.com/recipes/reeses-oreo-cup-brownies.html"
+      ],
+      "representativeUrl": "https://www.hersheyland.com/recipes/reeses-oreo-cup-brownies.html",
+      "description": "Recipe detail page: overview hero, ingredients & directions, newsletter fragment, related recipes, nutrition facts, reviews",
+      "blocks": [
+        {
+          "name": "breadcrumb-trail",
+          "instances": [
+            ".breadcrumb .cmp-breadcrumb"
+          ]
+        },
+        {
+          "name": "hero-recipe",
+          "instances": [
+            ".recipe-craft-overview .hersheyland-us-recipe"
+          ]
+        },
+        {
+          "name": "columns-recipe",
+          "instances": [
+            ".ingredients-and-directions .new-ingred-and-direct"
+          ]
+        },
+        {
+          "name": "fragment",
+          "instances": [
+            "#responsiveNewsletterV2"
+          ]
+        },
+        {
+          "name": "cards-recipe",
+          "instances": [
+            ".algolia-recommend .card-container"
+          ]
+        },
+        {
+          "name": "columns-nutrition",
+          "instances": [
+            ".nutritionfacts .nutritional-ingredient-comp"
+          ]
+        },
+        {
+          "name": "widget",
+          "instances": [
+            ".ratings-and-reviews"
+          ]
+        }
+      ],
+      "urlPattern": "/recipes/*",
+      "sections": [
+        {
+          "id": "rc2",
+          "name": "breadcrumb",
+          "selector": [
+            "div.breadcrumb"
+          ],
+          "style": null,
+          "blocks": [
+            "breadcrumb-trail"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc3-overview",
+          "name": "recipe-overview",
+          "selector": [
+            ".recipe-craft-overview"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-recipe"
+          ],
+          "defaultContent": [
+            ".recipe-craft-overview .desc-section"
+          ]
+        },
+        {
+          "id": "rc3-ingredients",
+          "name": "ingredients-and-directions",
+          "selector": [
+            ".directions-and-ingredients .ingredients-and-directions",
+            ".ingredients-and-directions"
+          ],
+          "style": "light-gray, wave",
+          "blocks": [
+            "columns-recipe"
+          ],
+          "defaultContent": [
+            ".ingredients-and-directions .time-parent.new-recipe h2",
+            ".ingredients-and-directions .time-parent.new-recipe dl"
+          ]
+        },
+        {
+          "id": "rc3-newsletter",
+          "name": "newsletter-signup",
+          "selector": [
+            ".directions-and-ingredients .xfpage",
+            "#responsiveNewsletterV2"
+          ],
+          "style": null,
+          "blocks": [
+            "fragment"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc3-related",
+          "name": "related-recipes",
+          "selector": [
+            ".algolia-recommend"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-recipe"
+          ],
+          "defaultContent": [
+            ".algolia-recommend .header h2",
+            ".algolia-recommend .button-section a.button"
+          ]
+        },
+        {
+          "id": "rc3-nutrition",
+          "name": "nutrition",
+          "selector": [
+            ".nutritionfacts"
+          ],
+          "style": "light-gray",
+          "blocks": [
+            "columns-nutrition"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc4",
           "name": "ratings-and-reviews",
           "selector": [
             ".ratings-and-reviews"

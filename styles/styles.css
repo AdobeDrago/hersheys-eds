@@ -328,66 +328,216 @@ main .section.highlight {
   padding: var(--section-padding) 0;
 }
 
-/* light-gray: centered white content card (Nutritional Information) */
-main .section.light-gray > div {
+/* light-gray on product pages: centered white content card (Nutritional Information) */
+main .section.light-gray.tabs-nutrition-container > div {
   max-width: 740px;
   box-sizing: border-box;
   background-color: var(--background-color);
   padding: 0 24px;
 }
 
-main .section.light-gray > div:first-child {
+main .section.light-gray.tabs-nutrition-container > div:first-child {
   padding-top: 40px;
 }
 
-main .section.light-gray > div:last-child {
+main .section.light-gray.tabs-nutrition-container > div:last-child {
   padding-bottom: 40px;
 }
 
-main .section.light-gray .default-content-wrapper {
+main .section.light-gray.tabs-nutrition-container .default-content-wrapper {
   display: flow-root; /* keep the intro's bottom margin inside the white card */
   text-align: center;
 }
 
-main .section.light-gray .default-content-wrapper h2 {
+main .section.light-gray.tabs-nutrition-container .default-content-wrapper h2 {
   margin: 10px 0 9px;
   line-height: 48px;
 }
 
-main .section.light-gray .default-content-wrapper p {
+main .section.light-gray.tabs-nutrition-container .default-content-wrapper p {
   margin: 0 0 37px;
   font-size: var(--body-font-size-s);
   font-style: italic;
 }
 
-main .section.light-gray .default-content-wrapper p a:any-link {
+main .section.light-gray.tabs-nutrition-container .default-content-wrapper p a:any-link {
   border-bottom: 1px solid currentcolor;
   text-decoration: none;
 }
 
-main .section.light-gray .default-content-wrapper p a:hover {
+main .section.light-gray.tabs-nutrition-container .default-content-wrapper p a:hover {
   border-bottom-color: transparent;
   text-decoration: none;
 }
 
 @media (width >= 900px) {
-  main .section.light-gray {
+  main .section.light-gray.tabs-nutrition-container {
     padding-bottom: 90px;
   }
 
-  main .section.light-gray > div {
+  main .section.light-gray.tabs-nutrition-container > div {
     padding: 0 70px;
   }
 
-  main .section.light-gray > div:first-child {
+  main .section.light-gray.tabs-nutrition-container > div:first-child {
     padding-top: 60px;
   }
 
-  main .section.light-gray > div:last-child {
+  main .section.light-gray.tabs-nutrition-container > div:last-child {
     padding-bottom: 70px;
   }
 
-  main .section.light-gray .default-content-wrapper p {
+  main .section.light-gray.tabs-nutrition-container .default-content-wrapper p {
     padding: 0 43px;
+  }
+}
+
+/* wave: decorative purple wave across the top edge (recipe Ingredients & Directions) */
+main .section.wave {
+  padding-top: 0;
+}
+
+main .section.wave::before {
+  content: '';
+  display: block;
+  aspect-ratio: 1440 / 156;
+  margin-bottom: 15px;
+  background: url('/icons/section-wave.svg') center / 100% 100% no-repeat;
+}
+
+/* light-gray on recipe pages: full-width gray band */
+main .section.light-gray.columns-recipe-container {
+  padding-bottom: 70px;
+}
+
+/* recipe intro copy below the hero */
+main .section.hero-recipe-container .default-content-wrapper {
+  max-width: 713px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+main .section.hero-recipe-container .default-content-wrapper p {
+  margin: 0 0 24px;
+  font-size: var(--body-font-size-s);
+  line-height: 24px;
+}
+
+main .section.hero-recipe-container .default-content-wrapper p:last-child {
+  margin-bottom: 0;
+}
+
+main .section.hero-recipe-container .default-content-wrapper p em {
+  font-size: 12px;
+}
+
+main .section.hero-recipe-container .default-content-wrapper a:any-link {
+  border-bottom: 1px solid currentcolor;
+  color: var(--brand-blue);
+  text-decoration: none;
+}
+
+main .section.hero-recipe-container .default-content-wrapper a:hover {
+  border-bottom-color: transparent;
+  color: var(--link-hover-color);
+  text-decoration: none;
+}
+
+/* recipe yields + prep/bake/total times above the ingredients */
+main .section.columns-recipe-container .default-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 50px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid var(--text-color);
+  padding-bottom: 25px;
+}
+
+main .section.columns-recipe-container .default-content-wrapper h2 {
+  flex-basis: 100%;
+  margin: 0;
+  padding-bottom: 15px;
+  font-size: 30px;
+  line-height: 32px;
+}
+
+main .section.columns-recipe-container .default-content-wrapper p {
+  margin: 5px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+}
+
+main .section.columns-recipe-container .default-content-wrapper h2 + p {
+  flex-basis: 100%;
+  margin: 0 0 10px;
+  font-size: 21px;
+  line-height: 27px;
+}
+
+/* related recipes heading + "View All Recipes" button */
+main .section.cards-recipe-container .default-content-wrapper {
+  text-align: center;
+}
+
+main .section.cards-recipe-container .default-content-wrapper h2 {
+  margin: 0 0 19px;
+  font-size: 24px;
+  line-height: 1.05;
+}
+
+main .section.cards-recipe-container .default-content-wrapper p.button-wrapper {
+  margin: 35px 0 0;
+}
+
+main .section.cards-recipe-container a.button:any-link {
+  width: 312px;
+  border-color: var(--brand-blue);
+  padding: 10px 16px;
+  background-color: var(--brand-blue);
+  color: var(--background-color);
+  font-size: var(--body-font-size-s);
+  line-height: 24px;
+}
+
+main .section.cards-recipe-container a.button:hover,
+main .section.cards-recipe-container a.button:focus-visible {
+  border-color: var(--brand-blue-light);
+  background-color: var(--brand-blue-light);
+  color: var(--background-color);
+}
+
+@media (width >= 900px) {
+  main .section.hero-recipe-container .default-content-wrapper {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  main .section.columns-recipe-container .default-content-wrapper h2 {
+    padding-bottom: 25px;
+    font-size: 36px;
+    line-height: 42px;
+  }
+
+  main .section.columns-recipe-container .default-content-wrapper p {
+    font-size: 21px;
+    line-height: 27px;
+  }
+
+  main .section.columns-recipe-container .default-content-wrapper h2 + p {
+    margin-bottom: 25px;
+    font-size: 24px;
+  }
+
+  main .section.cards-recipe-container .default-content-wrapper h2 {
+    margin-bottom: 40px;
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  main .section.cards-recipe-container a.button:any-link {
+    width: 346px;
+    padding: 18px 16px;
   }
 }
