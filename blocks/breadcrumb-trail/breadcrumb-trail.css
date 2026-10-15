@@ -2,12 +2,16 @@
 .breadcrumb-trail {
   /* full-bleed to the viewport's left edge like the source (x = 0); left-only so it can't add a horizontal scrollbar */
   margin-left: calc(50% - 50vw);
+  color: var(--brand-maroon);
+}
+
+/* source: nav.cmp-breadcrumb carries the padding and the grey divider */
+.breadcrumb-trail nav {
   border-bottom: 1px solid rgb(207 207 207);
 
   /* stretch the divider to the right edge of the viewport (outset is ink overflow, never scrollable) */
   border-image: linear-gradient(rgb(207 207 207), rgb(207 207 207)) 0 0 1 0 / 0 0 1px 0 / 0 100vw 0 0;
   padding: 10px;
-  color: var(--brand-maroon);
 }
 
 .breadcrumb-trail .breadcrumb-trail-list {
@@ -55,9 +59,8 @@
   text-decoration: none;
 }
 
-/* home item: icon only, no underline */
+/* home item: icon only, no underline; the link keeps the blue link color like the source */
 .breadcrumb-trail .breadcrumb-trail-home a.breadcrumb-trail-link:any-link {
-  color: rgb(0 53 148);
   text-decoration: none;
 }
 
@@ -66,6 +69,9 @@
   width: 1.125em;
   height: 1em;
   vertical-align: -0.125em;
+
+  /* source draws the house glyph (a::after) in navy, not the link blue */
+  color: rgb(0 53 148);
 }
 
 /* home item shows only the icon; keep the label for assistive technology */
