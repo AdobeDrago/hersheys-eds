@@ -1,0 +1,29 @@
+/* Hersheyland brand tokens, extracted from hersheyland.com */
+:root {
+  /* brand fonts are not loaded yet (licensing pending); metric fallbacks apply */
+  --heading-font-family: gazpacho, gazpacho-fallback, georgia, serif;
+  --body-font-family: "TT Norms Pro", tt-norms-pro-fallback, arial, sans-serif;
+
+  /* colors */
+  --brand-maroon: #3f000b;
+  --brand-maroon-deep: #3f000f;
+  --brand-cream: #feebd0;
+  --brand-blue: #007bbd;
+  --background-color: #fff;
+  --light-color: #f6f6f6;
+  --dark-color: #3f000f;
+  --text-color: var(--brand-maroon);
+  --link-color: var(--brand-maroon);
+  --link-hover-color: var(--brand-maroon);
+
+  /* spacing */
+  --section-padding: 50px;
+  --nav-height: 60px;
+}
+
+@media (width >= 900px) {
+  :root {
+    /* source hub navigation bar is 80px tall on desktop */
+    --nav-height: 80px;
+  }
+}

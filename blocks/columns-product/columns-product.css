@@ -1,0 +1,383 @@
+/* Columns (Product): product overview on a full-bleed maroon band. */
+
+/* section: full-bleed maroon band with the lighter angled bottom edge */
+main > .section.columns-product-container {
+  position: relative;
+  margin: 0;
+  padding-bottom: 40px;
+  overflow: hidden;
+  background-color: var(--brand-maroon);
+}
+
+main > .section.columns-product-container > .columns-product-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: none;
+  padding: 0;
+}
+
+main > .section.columns-product-container::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 400%;
+  height: 400%;
+  background-color: #6f4048;
+  transform: rotate(5deg);
+  transform-origin: right top;
+}
+
+.columns-product {
+  color: #fff;
+}
+
+.columns-product .columns-product-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-product img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* gallery */
+.columns-product .columns-product-media {
+  order: 0;
+  min-width: 0;
+}
+
+.columns-product .columns-product-gallery {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-product .columns-product-slide {
+  display: none;
+}
+
+.columns-product .columns-product-slide.active {
+  display: block;
+}
+
+.columns-product .columns-product-slide.active {
+  position: relative;
+  width: min(100%, 435px);
+  margin-inline: auto;
+}
+
+/* Ground shadow from hersheyland .product-overview-hersheyland .shadow.
+   Lives on the slide, not the stage: the prev/next controls are absolutely
+   positioned against the gallery so they sit beside the thumbnails. */
+.columns-product .columns-product-slide.active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0.5rem;
+  z-index: 0;
+  width: 60%;
+  height: 10px;
+  border-radius: 50%;
+  background: #00000069;
+  opacity: 0.6;
+  filter: blur(4.5px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.columns-product .columns-product-slide img {
+  position: relative;
+  z-index: 1;
+  max-width: 435px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+/* prev/next: white circles beside the thumbnails */
+.columns-product .columns-product-nav {
+  position: absolute;
+  bottom: 22.5px;
+  z-index: 2;
+  width: 45px;
+  height: 45px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 30px;
+  background-color: #fff;
+  color: var(--brand-blue);
+  cursor: pointer;
+}
+
+.columns-product .columns-product-nav::before {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: auto;
+  border-top: 3px solid currentcolor;
+  border-right: 3px solid currentcolor;
+}
+
+.columns-product .columns-product-prev {
+  left: max(20px, calc(50% - 210px));
+}
+
+.columns-product .columns-product-prev::before {
+  transform: translateX(2px) rotate(-135deg);
+}
+
+.columns-product .columns-product-next {
+  right: max(20px, calc(50% - 210px));
+}
+
+.columns-product .columns-product-next::before {
+  transform: translateX(-2px) rotate(45deg);
+}
+
+.columns-product .columns-product-thumbs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.columns-product .columns-product-thumb {
+  box-sizing: border-box;
+  width: 68px;
+  height: 70px;
+  margin: 0;
+  padding: 0;
+  border: 3px solid transparent;
+  border-radius: 5px;
+  background-color: #6f4048;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.columns-product .columns-product-thumb[aria-current='true'] {
+  border-color: #fff;
+}
+
+.columns-product .columns-product-thumb img {
+  height: 100%;
+  object-fit: contain;
+}
+
+/* details (mobile: its children join the row so the title can sit above the gallery) */
+.columns-product .columns-product-details {
+  display: contents;
+}
+
+.columns-product .columns-product-details > * {
+  order: 1;
+  margin-inline: 14px;
+}
+
+.columns-product .columns-product-details > h1 {
+  order: -2;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 55px 20px 12px;
+  color: #fff;
+  font-size: 36px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.columns-product .columns-product-rating {
+  order: -1;
+  align-self: center;
+  min-height: 20px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding-bottom: 2px;
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.columns-product .columns-product-details > p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.columns-product .columns-product-details > .columns-product-size-label {
+  margin-top: 35px;
+  margin-bottom: 22px;
+  font-weight: 700;
+}
+
+/* size links */
+.columns-product .columns-product-sizes ul {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.columns-product .columns-product-sizes li {
+  flex: none;
+  margin: 0 11px 11px 0;
+}
+
+.columns-product .columns-product-size {
+  display: block;
+  padding: 10px 16px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  color: var(--light-color);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.25s;
+}
+
+.columns-product a.columns-product-size:hover {
+  text-decoration: none;
+}
+
+.columns-product .columns-product-size[aria-current='true'] {
+  background-color: #fff;
+  color: var(--brand-maroon);
+}
+
+.columns-product .columns-product-sizes + p {
+  margin-top: 20px;
+}
+
+.columns-product .columns-product-details > p:not(.columns-product-size-label, .columns-product-cta) {
+  margin-bottom: 27px;
+}
+
+/* Shop Now */
+.columns-product .columns-product-details > .columns-product-cta {
+  margin-bottom: 43px;
+  text-align: center;
+}
+
+main .columns-product .columns-product-cta a.button:any-link {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  border: 0;
+  border-radius: 35px;
+  padding: 9px 0;
+  background-color: var(--brand-cream);
+  color: var(--brand-maroon);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: center;
+}
+
+main .columns-product .columns-product-cta a.button:hover,
+main .columns-product .columns-product-cta a.button:focus-visible {
+  background-color: #fff;
+  color: var(--brand-maroon);
+}
+
+@media (width >= 900px) {
+  main > .section.columns-product-container {
+    padding-bottom: 90px;
+  }
+
+  main > .section.columns-product-container::after {
+    transform: rotate(3deg);
+  }
+
+  .columns-product .columns-product-row {
+    display: grid;
+    grid-template-columns: 52% 48%;
+    align-items: start;
+  }
+
+  /* gallery */
+  .columns-product .columns-product-stage {
+    padding-bottom: 10px;
+  }
+
+  .columns-product .columns-product-nav {
+    bottom: 55px;
+  }
+
+  .columns-product .columns-product-thumbs {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 22px 17px 22px 13px;
+  }
+
+  .columns-product .columns-product-thumb {
+    width: 111px;
+    height: 111px;
+  }
+
+  /* details */
+  .columns-product .columns-product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-self: center;
+    box-sizing: border-box;
+    width: min(500px, 100% - 14px);
+    padding-top: 30px;
+  }
+
+  .columns-product .columns-product-details > * {
+    margin-inline: 0;
+  }
+
+  .columns-product .columns-product-details > h1 {
+    padding: 30px 0 15px;
+    line-height: 42px;
+    text-align: left;
+  }
+
+  .columns-product .columns-product-rating {
+    align-self: flex-start;
+  }
+
+  .columns-product .columns-product-details > .columns-product-size-label {
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+
+  .columns-product .columns-product-sizes ul {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .columns-product .columns-product-sizes + p {
+    margin-top: 10px;
+  }
+
+  .columns-product .columns-product-details > .columns-product-cta {
+    align-self: stretch;
+    margin-bottom: 25px;
+    text-align: left;
+  }
+
+  main .columns-product .columns-product-cta a.button:any-link {
+    display: inline-block;
+    max-width: 266px;
+    min-height: 0;
+    height: 60px;
+    padding: 16.5px 20px;
+    font-size: 18px;
+    line-height: 27px;
+  }
+}
