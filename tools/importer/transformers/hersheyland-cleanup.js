@@ -18,6 +18,8 @@ export default function transform(hookName, element, payload) {
       '#lightbox', // product image lightbox overlay (duplicate of gallery image)
       '.mobile-buy-now-container', // sticky mobile "Shop Now" duplicate CTA
       'img#amz-px', // Amazon tracking pixel
+      'img[src*="ispot.tv"]', // iSpot.tv tracking pixel
+      'div.algolia-recommend', // client-rendered "Related Products" carousel (Algolia); empty in source HTML
     ]);
   }
 

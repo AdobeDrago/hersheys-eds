@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://www.hersheyland.com/products/reeses-oreo-milk-chocolate-peanut-butter-cups-1-4-oz.html",
+  "path": "products/reeses-oreo-milk-chocolate-peanut-butter-cups-1-4-oz",
+  "timestamp": "2026-10-15T09:25:41.440Z",
+  "title": "REESE'S OREO® Milk Chocolate Peanut Butter Cups, 1.4 oz",
+  "template": "products",
+  "blocks": [
+    "breadcrumb-trail",
+    "columns-product",
+    "tabs-nutrition",
+    "widget"
+  ],
+  "bvid": "00034000458134"
+}
