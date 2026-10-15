@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://www.hersheyland.com/recipes/reeses-oreo-cup-brownies.html",
+  "path": "recipes/reeses-oreo-cup-brownies",
+  "timestamp": "2026-10-15T11:39:27.870Z",
+  "title": "REESE’S OREO® Cup Brownies",
+  "template": "recipe-detail",
+  "blocks": [
+    "breadcrumb-trail",
+    "hero-recipe",
+    "columns-recipe",
+    "fragment",
+    "cards-recipe",
+    "columns-nutrition",
+    "widget"
+  ],
+  "bvid": "990"
+}
