@@ -4,6 +4,49 @@
   },
   "templates": [
     {
+      "name": "where-to-buy",
+      "urls": [
+        "https://www.hersheyland.com/where-to-buy.html"
+      ],
+      "representativeUrl": "https://www.hersheyland.com/where-to-buy.html",
+      "description": "Where to Buy page: retailer/store locator content",
+      "blocks": [
+        {
+          "name": "widget-pricespider",
+          "instances": [
+            "div.where-to-buy div.ps-widget"
+          ]
+        }
+      ],
+      "urlPattern": "/where-to-buy*",
+      "sections": [
+        {
+          "id": "s1",
+          "name": "back-to-products",
+          "selector": [
+            "div.where-to-buy > div.back-to-product"
+          ],
+          "style": "maroon",
+          "blocks": [],
+          "defaultContent": [
+            "div.back-to-product > a"
+          ]
+        },
+        {
+          "id": "s2",
+          "name": "store-locator",
+          "selector": [
+            "div.where-to-buy > div.ps-widget"
+          ],
+          "style": null,
+          "blocks": [
+            "widget-pricespider"
+          ],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
       "name": "products",
       "urls": [
         "https://www.hersheyland.com/products/hersheys-milk-chocolate-candy-bars-9-3-oz-6-pack.html",

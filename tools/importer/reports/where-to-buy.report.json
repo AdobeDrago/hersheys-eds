@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.hersheyland.com/where-to-buy.html",
+  "path": "where-to-buy",
+  "timestamp": "2026-10-15T17:37:54.387Z",
+  "title": "Where to Buy",
+  "template": "where-to-buy",
+  "blocks": [
+    "widget-pricespider"
+  ]
+}
