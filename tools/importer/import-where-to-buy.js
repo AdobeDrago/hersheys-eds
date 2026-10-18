@@ -137,6 +137,12 @@ function createMetadataBlock(main, document) {
     meta.theme = brandTheme;
   }
 
+  // PriceSpider account settings (ps-key, ps-country, ps-language, ps-library, ps-token):
+  // authored as page metadata so EDS renders them as <meta> tags in this page's head.
+  document.querySelectorAll('meta[name^="ps-"]').forEach((m) => {
+    if (m.content && m.content.trim()) meta[m.getAttribute('name')] = m.content.trim();
+  });
+
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
   return meta;

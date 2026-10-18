@@ -3,14 +3,3 @@
   min-height: 600px;
   margin: 0 auto;
 }
-
-.where-to-buy .where-to-buy-fallback {
-  padding: 32px 24px;
-  border-radius: 8px;
-  background-color: var(--light-color);
-  text-align: center;
-}
-
-.where-to-buy .where-to-buy-fallback h2 {
-  margin-top: 0;
-}
