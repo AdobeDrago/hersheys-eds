@@ -12,7 +12,7 @@ import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
  */
 
 const SIZE_LABEL = /choose\s+a\s+size/i;
-const WHERE_TO_BUY = 'https://www.hersheyland.com/where-to-buy.html';
+const WHERE_TO_BUY = '/where-to-buy';
 
 /**
  * Re-renders a picture as an optimized picture when the image is served from this origin.
@@ -252,7 +252,7 @@ function addRating(cell) {
 }
 
 /**
- * Document Authoring drops the `ps-sku` query. Send Shop Now to the live
+ * Document Authoring drops the `ps-sku` query. Send Shop Now to this site's
  * where-to-buy page with the Bazaarvoice product id from page metadata.
  * @param {HTMLAnchorElement} link
  */
@@ -265,7 +265,7 @@ function pointShopNow(link) {
   if (!/\/where-to-buy(?:\.html)?\/?$/i.test(pathname)) return;
   const productId = getMetadata('bvid') || getMetadata('bv-id');
   if (!productId) return;
-  const url = new URL(WHERE_TO_BUY);
+  const url = new URL(WHERE_TO_BUY, window.location.origin);
   url.searchParams.set('ps-sku', productId);
   link.href = url.href;
 }
