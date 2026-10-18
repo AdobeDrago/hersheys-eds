@@ -13,7 +13,27 @@ import {
   readBlockConfig,
   toCamelCase,
   toClassName,
+  getMetadata,
 } from './aem.js';
+
+/* PriceSpider (Wayvia) where-to-buy loader, shared by the widget and product Shop Now */
+export const PRICESPIDER_CDN = 'https://cdn.pricespider.com/1';
+export const PRICESPIDER_LOADER = `${PRICESPIDER_CDN}/lib/ps-widget.js`;
+
+/**
+ * Adds a resource hint to <head> once.
+ * @param {string} rel e.g. preconnect, preload, prefetch
+ * @param {string} href
+ * @param {string} [as] destination for preload
+ */
+export function addResourceHint(rel, href, as) {
+  if (document.head.querySelector(`link[rel="${rel}"][href="${href}"]`)) return;
+  const link = document.createElement('link');
+  link.rel = rel;
+  link.href = href;
+  if (as) link.as = as;
+  document.head.append(link);
+}
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -432,7 +452,6 @@ function decorateSectionMetadata(main) {
  * Decorates the main element.
  * @param {Element} main The main element
  */
-// eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
@@ -449,6 +468,11 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  // where-to-buy: start the PriceSpider connection and loader download before the widget block loads
+  if (getMetadata('ps-key')) {
+    addResourceHint('preconnect', new URL(PRICESPIDER_CDN).origin);
+    addResourceHint('preload', PRICESPIDER_LOADER, 'script');
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);

@@ -1,6 +1,5 @@
 import { getMetadata, loadScript } from '../../scripts/aem.js';
-
-const PS_CDN = 'https://cdn.pricespider.com/1';
+import { PRICESPIDER_CDN, PRICESPIDER_LOADER } from '../../scripts/scripts.js';
 
 /**
  * PriceSpider (Wayvia) Where to Buy store locator.
@@ -23,7 +22,7 @@ export default async function decorate(widget) {
 
   const account = psKey.split('-')[0];
   await Promise.all([
-    loadScript(`${PS_CDN}/lib/ps-widget.js`, { async: '' }),
-    loadScript(`${PS_CDN}/${account}/ps-utid.js`, { async: '' }),
+    loadScript(PRICESPIDER_LOADER, { async: '' }),
+    loadScript(`${PRICESPIDER_CDN}/${account}/ps-utid.js`, { async: '' }),
   ]);
 }
