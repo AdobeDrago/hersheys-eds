@@ -44,11 +44,16 @@ export async function loadFragment(path) {
 
 export default async function decorate(block) {
   const link = block.querySelector('a');
-  const path = link ? link.getAttribute('href') : block.textContent.trim();
+  const source = link ? link.getAttribute('href')?.trim() : block.textContent.trim();
+  if (!source) throw new Error('Fragment block requires an authored source');
+  const url = new URL(source, window.location);
+  if (!['http:', 'https:'].includes(url.protocol)) throw new Error('Fragment source must be a page URL');
+  const path = url.pathname;
   const fragment = await loadFragment(path);
-  if (!fragment) return;
+  if (!fragment) throw new Error(`Unable to load fragment: ${path}`);
 
   const wrapper = block.closest('.fragment-wrapper');
+  if (!wrapper) throw new Error('Fragment block requires a fragment-wrapper');
   const section = wrapper.closest('.section');
 
   if (section && section.children.length === 1) {

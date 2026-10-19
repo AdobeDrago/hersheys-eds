@@ -1,0 +1,790 @@
+{
+  "source": "https://www.hersheyland.com/",
+  "capturedAt": "2026-10-07",
+  "animationLibrary": {
+    "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-animation.lc-5597da3b3dcc81aea68a814fd18071d1-lc.min.css",
+    "computedRoot": { "--animate-duration": "1s", "--animate-delay": "1s", "--animate-repeat": "1" },
+    "delaySelectors": {
+      ".animate__animated.animate__delay-1s": "var(--animate-delay)",
+      ".animate__animated.animate__delay-2s": "calc(var(--animate-delay) * 2)",
+      ".animate__animated.animate__delay-3s": "calc(var(--animate-delay) * 3)",
+      ".animate__animated.animate__delay-4s": "calc(var(--animate-delay) * 4)",
+      ".animate__animated.animate__delay-5s": "calc(var(--animate-delay) * 5)"
+    }
+  },
+  "description": "Original AEM clientlib foundation declarations, including cross-component rules. These are not all active on the homepage.",
+  "categories": {
+    "feedback": [
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body .is-invalid",
+        "condition": "",
+        "property": "outline-color",
+        "value": "initial"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body .is-invalid",
+        "condition": "",
+        "property": "border-top-color",
+        "value": "rgb(235, 0, 41)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body .is-invalid",
+        "condition": "",
+        "property": "border-right-color",
+        "value": "rgb(235, 0, 41)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body .is-invalid",
+        "condition": "",
+        "property": "border-bottom-color",
+        "value": "rgb(235, 0, 41)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body .is-invalid",
+        "condition": "",
+        "property": "border-left-color",
+        "value": "rgb(235, 0, 41)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": ".author-alert",
+        "condition": "",
+        "property": "background-color",
+        "value": "rgb(255, 255, 0)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": ".author-alert",
+        "condition": "",
+        "property": "color",
+        "value": "black"
+      }
+    ],
+    "neutral": [
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-base.lc-b1a1134438a7c13d59a331c848e880ae-lc.min.css",
+        "selector": ".cmp-search__loading-indicator",
+        "condition": "",
+        "property": "border-right-color",
+        "value": "rgb(204, 204, 204)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-base.lc-b1a1134438a7c13d59a331c848e880ae-lc.min.css",
+        "selector": ".cmp-search__loading-indicator",
+        "condition": "",
+        "property": "border-bottom-color",
+        "value": "rgb(204, 204, 204)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-base.lc-b1a1134438a7c13d59a331c848e880ae-lc.min.css",
+        "selector": ".cmp-search__loading-indicator",
+        "condition": "",
+        "property": "border-left-color",
+        "value": "rgb(204, 204, 204)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-base.lc-b1a1134438a7c13d59a331c848e880ae-lc.min.css",
+        "selector": ".cmp-search__loading-indicator",
+        "condition": "",
+        "property": "border-top-color",
+        "value": "rgb(51, 51, 51)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-base.lc-b1a1134438a7c13d59a331c848e880ae-lc.min.css",
+        "selector": ".cmp-search__results",
+        "condition": "",
+        "property": "border-top-color",
+        "value": "rgb(204, 204, 204)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-base.lc-b1a1134438a7c13d59a331c848e880ae-lc.min.css",
+        "selector": ".cmp-search__results",
+        "condition": "",
+        "property": "background-color",
+        "value": "rgb(255, 255, 255)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-base.lc-b1a1134438a7c13d59a331c848e880ae-lc.min.css",
+        "selector": ".cmp-search__item--is-focused",
+        "condition": "",
+        "property": "background-color",
+        "value": "rgb(204, 204, 204)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-dependencies.lc-89311e3d4d35304da21ba33905c69049-lc.min.css",
+        "selector": ".icons-selector.fip-coral .selector-popup",
+        "condition": "",
+        "property": "border-top-color",
+        "value": "rgb(17, 17, 17)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-dependencies.lc-89311e3d4d35304da21ba33905c69049-lc.min.css",
+        "selector": ".icons-selector.fip-coral .selector-popup",
+        "condition": "",
+        "property": "border-right-color",
+        "value": "rgb(17, 17, 17)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-dependencies.lc-89311e3d4d35304da21ba33905c69049-lc.min.css",
+        "selector": ".icons-selector.fip-coral .selector-popup",
+        "condition": "",
+        "property": "border-bottom-color",
+        "value": "rgb(17, 17, 17)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-dependencies.lc-89311e3d4d35304da21ba33905c69049-lc.min.css",
+        "selector": ".icons-selector.fip-coral .selector-popup",
+        "condition": "",
+        "property": "border-left-color",
+        "value": "rgb(17, 17, 17)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-dependencies.lc-89311e3d4d35304da21ba33905c69049-lc.min.css",
+        "selector": ".coral--light .icons-selector.fip-coral .selector-popup",
+        "condition": "",
+        "property": "background-color",
+        "value": "rgb(245, 245, 245)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-dependencies.lc-89311e3d4d35304da21ba33905c69049-lc.min.css",
+        "selector": ".coral--dark .icons-selector.fip-coral .selector-popup",
+        "condition": "",
+        "property": "background-color",
+        "value": "rgb(68, 68, 68)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": ".light-gray-background",
+        "condition": "",
+        "property": "background-color",
+        "value": "rgb(246, 246, 246)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": ".dark-gray-background",
+        "condition": "",
+        "property": "background-color",
+        "value": "rgb(153, 153, 153)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": ".dark-gray-background.has-angle.top-right-angle::before, .dark-gray-background.has-angle.top-left-angle::before, .dark-gray-background.has-angle.bottom-right-angle::before, .dark-gray-background.has-angle.bottom-left-angle::before, .dark-gray-background.has-angle.left-tapers-up-angle::before, .dark-gray-background.has-angle.left-tapers-down-angle::before, .dark-gray-background.has-angle.right-tapers-down-angle::before, .dark-gray-background.has-angle.right-tapers-up-angle::before",
+        "condition": "",
+        "property": "background-color",
+        "value": "rgb(179, 179, 179)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body blockquote",
+        "condition": "",
+        "property": "color",
+        "value": "rgb(255, 255, 255)"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body.shaqalicious-primary",
+        "condition": "",
+        "property": "color",
+        "value": "rgb(0, 0, 0)"
+      }
+    ],
+    "motion": [
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-base.lc-b1a1134438a7c13d59a331c848e880ae-lc.min.css",
+        "selector": ".cmp-search__loading-indicator",
+        "condition": "",
+        "property": "animation-duration",
+        "value": "2s"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-base.lc-b1a1134438a7c13d59a331c848e880ae-lc.min.css",
+        "selector": ".cmp-search__loading-indicator",
+        "condition": "",
+        "property": "animation-timing-function",
+        "value": "linear"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-base.lc-b1a1134438a7c13d59a331c848e880ae-lc.min.css",
+        "selector": ".cmp-search__loading-indicator",
+        "condition": "",
+        "property": "animation-delay",
+        "value": "0s"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "a",
+        "condition": "",
+        "property": "transition-duration",
+        "value": "0.25s"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "a",
+        "condition": "",
+        "property": "transition-timing-function",
+        "value": "ease"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "a",
+        "condition": "",
+        "property": "transition-delay",
+        "value": "0s"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "a.skip-content",
+        "condition": "",
+        "property": "transition-duration",
+        "value": "0.25s, 0.25s, 0.25s"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "a.skip-content",
+        "condition": "",
+        "property": "transition-timing-function",
+        "value": "ease, ease, ease"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "a.skip-content",
+        "condition": "",
+        "property": "transition-delay",
+        "value": "0s, 0s, 0s"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body > header.t-only nav, .cmp-header.t-only nav",
+        "condition": "",
+        "property": "transition-duration",
+        "value": "0.25s, 0.25s"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body > header.t-only nav, .cmp-header.t-only nav",
+        "condition": "",
+        "property": "transition-timing-function",
+        "value": "linear, ease-out"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body > header.t-only nav, .cmp-header.t-only nav",
+        "condition": "",
+        "property": "transition-delay",
+        "value": "0s, 0s"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body > header.mn-root nav, .cmp-header.mn-root nav",
+        "condition": "screen and (max-width: 991.9px)",
+        "property": "transition-timing-function",
+        "value": "ease-out"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body > header.st .search, .cmp-header.st .search",
+        "condition": "",
+        "property": "transition-timing-function",
+        "value": "ease, ease"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": ".cropped-image.one-one > img, .cropped-image.two-one > img, .cropped-image.three-two > img, .cropped-image.four-three > img, .cropped-image.sixteen-nine > img",
+        "condition": "",
+        "property": "transition-duration",
+        "value": "0.3s"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": ".cropped-image.one-one > img, .cropped-image.two-one > img, .cropped-image.three-two > img, .cropped-image.four-three > img, .cropped-image.sixteen-nine > img",
+        "condition": "",
+        "property": "transition-timing-function",
+        "value": "ease-in-out"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+        "selector": ".sbx-sffv__input",
+        "condition": "",
+        "property": "transition-duration",
+        "value": "0.4s, 0.4s"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+        "selector": ".sbx-sffv__input:valid ~ .sbx-sffv__reset",
+        "condition": "",
+        "property": "animation-duration",
+        "value": "0.15s"
+      }
+    ],
+    "elevation": [
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-base.lc-b1a1134438a7c13d59a331c848e880ae-lc.min.css",
+        "selector": ".cmp-search__results",
+        "condition": "",
+        "property": "z-index",
+        "value": "999999"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "a.skip-content",
+        "condition": "",
+        "property": "z-index",
+        "value": "-999"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "a.skip-content:focus",
+        "condition": "",
+        "property": "z-index",
+        "value": "99999999"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": ".sr-only",
+        "condition": "",
+        "property": "z-index",
+        "value": "0"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body > header, .cmp-header",
+        "condition": "",
+        "property": "z-index",
+        "value": "1000"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body > header.mn-w-ub > div .utility-bar::before, .cmp-header.mn-w-ub > div .utility-bar::before",
+        "condition": "screen and (min-width: 992px)",
+        "property": "z-index",
+        "value": "-1"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body > header.t-only .toggle, .cmp-header.t-only .toggle",
+        "condition": "",
+        "property": "z-index",
+        "value": "100"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body > header.t-only nav, .cmp-header.t-only nav",
+        "condition": "",
+        "property": "z-index",
+        "value": "1"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": ".aem-AuthorLayer-Edit body header.hero, .aem-AuthorLayer-Developer body header.hero, .aem-AuthorLayer-Design body header.hero",
+        "condition": "",
+        "property": "z-index",
+        "value": "500"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": ".aem-AuthorLayer-Edit body .hot-spot.component figcaption input[type=\"checkbox\"] ~ div, .aem-AuthorLayer-Developer body .hot-spot.component figcaption input[type=\"checkbox\"] ~ div, .aem-AuthorLayer-Design body .hot-spot.component figcaption input[type=\"checkbox\"] ~ div",
+        "condition": "",
+        "property": "box-shadow",
+        "value": "none"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "nav.jn",
+        "condition": "",
+        "property": "z-index",
+        "value": "5000"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+        "selector": ".sbx-sffv__input",
+        "condition": "",
+        "property": "box-shadow",
+        "value": "rgb(204, 204, 204) 0px 0px 0px 1px inset"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+        "selector": ".sbx-sffv__input:hover",
+        "condition": "",
+        "property": "box-shadow",
+        "value": "rgb(179, 179, 179) 0px 0px 0px 1px inset"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+        "selector": ".sbx-sffv__input:active, .sbx-sffv__input:focus",
+        "condition": "",
+        "property": "box-shadow",
+        "value": "rgb(51, 122, 183) 0px 0px 0px 1px inset"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+        "selector": ".ais-range-slider .ais-range-slider--stacking .ais-range-slider--handle",
+        "condition": "",
+        "property": "z-index",
+        "value": "20"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+        "selector": ".ais-GeoSearch-label",
+        "condition": "",
+        "property": "box-shadow",
+        "value": "rgba(0, 0, 0, 0.1) 0px 1px 1px"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+        "selector": ".ais-Hits-item, .ais-InfiniteHits-item, .ais-InfiniteResults-item, .ais-Results-item",
+        "condition": "",
+        "property": "box-shadow",
+        "value": "rgb(227, 229, 236) 0px 2px 5px 0px"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/instant-search-box/clientlibs-instant-search-box-default-theme.lc-6ebc17ce52d0dd215070513d87b40416-lc.min.css",
+        "selector": ".aa-Form[focus-within]",
+        "condition": "",
+        "property": "box-shadow",
+        "value": "rgba(var(--aa-primary-color-rgb),var(--aa-primary-color-alpha)) 0 0 0 2px,inset rgba(var(--aa-primary-color-rgb),var(--aa-primary-color-alpha)) 0 0 0 2px"
+      }
+    ],
+    "shape": [],
+    "letterSpacing": [
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+        "selector": "body blockquote .author",
+        "condition": "",
+        "property": "letter-spacing",
+        "value": "1px"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/hub-navigation/clientlib-singlelayer-hub-navigation-default-theme.lc-1855d62222e7256b508d56e30939d904-lc.min.css",
+        "selector": ".aa-Input::placeholder",
+        "condition": "",
+        "property": "letter-spacing",
+        "value": "0.2px"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/slider/clientlib-slider-default-theme.lc-7c90c921c13adcec5b1f1c18a18f541e-lc.min.css",
+        "selector": ".cmp-slider-container .cmp-product-slider__item.hersheyland-variation .cmp-product-slider__content .cmp-product-slider__detail div.h6",
+        "condition": "",
+        "property": "letter-spacing",
+        "value": "0px"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/slider/clientlib-slider-default-theme.lc-7c90c921c13adcec5b1f1c18a18f541e-lc.min.css",
+        "selector": ".cmp-slider .cmp-article-slider__item .cmp-article-slider__content .cmp-article-slider__detail > div span.h6",
+        "condition": "",
+        "property": "letter-spacing",
+        "value": "0.5px"
+      },
+      {
+        "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/slider/clientlib-slider-default-theme.lc-7c90c921c13adcec5b1f1c18a18f541e-lc.min.css",
+        "selector": ".cmp-slider.recipe-craft .cmp-recipe-slider__item .cmp-recipe-slider__content .recipe-details .recipe-details-tag",
+        "condition": "",
+        "property": "letter-spacing",
+        "value": "0.05rem"
+      }
+    ]
+  },
+  "componentRules": [
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+      "selector": "body .is-invalid",
+      "condition": "",
+      "values": {
+        "border-radius": "3px",
+        "border-top-width": "3px",
+        "border-top-style": "solid"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/clientlibs/clientlib-site-revised.lc-23703a6bef0972d5a9b4832c46a00b7b-lc.min.css",
+      "selector": ".author-alert",
+      "condition": "",
+      "values": {
+        "color": "black",
+        "background-color": "rgb(255, 255, 0)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/hub-navigation/clientlib-singlelayer-hub-navigation-default-theme.lc-1855d62222e7256b508d56e30939d904-lc.min.css",
+      "selector": ".hub-navigation .main-menu ul li.li-image::before",
+      "condition": "",
+      "values": {
+        "background-color": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.high-contrast-mode .cmp-generic-hero .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary",
+      "condition": "",
+      "values": {
+        "color": "rgb(0, 0, 0)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.high-contrast-mode .cmp-generic-hero .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary",
+      "condition": "",
+      "values": {
+        "background-color": "rgb(0, 123, 189)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.high-contrast-mode .cmp-generic-hero .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary:hover",
+      "condition": "",
+      "values": {
+        "background-color": "rgb(128, 189, 222)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": ".cmp-generic-hero .cmp-generic-hero__detail-container.cmp-generic-hero--medium-image-with-colored.cmp-generic-hero-full-video > .cmp-generic-hero__button-container",
+      "condition": "screen and (max-width: 991.9px)",
+      "values": {
+        "z-index": "1"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": ".cmp-generic-hero .cmp-generic-hero__detail-container .cmp-generic-hero__button-container .cmp-generic-hero__button",
+      "condition": "",
+      "values": {
+        "border-radius": "5rem",
+        "border-top-width": "0px",
+        "border-top-style": "none",
+        "transition-duration": "0.3s",
+        "transition-delay": "0s",
+        "transition-timing-function": "ease-in-out"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": ".cmp-generic-hero .cmp-generic-hero__detail-container .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary",
+      "condition": "",
+      "values": {
+        "color": "rgb(255, 255, 255)",
+        "background-color": "rgb(0, 123, 189)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": ".cmp-generic-hero .cmp-generic-hero__detail-container .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary:hover",
+      "condition": "",
+      "values": {
+        "background-color": "rgb(38, 143, 199)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": ".cmp-generic-hero .cmp-generic-hero__detail-container .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--secondary",
+      "condition": "",
+      "values": {
+        "background-color": "transparent"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.chocolate-world-base-theme .cmp-generic-hero .core-primary-3 .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary",
+      "condition": "",
+      "values": {
+        "color": "rgb(63, 0, 11)",
+        "background-color": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.chocolate-world-base-theme .cmp-generic-hero .core-primary-3 .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary:hover",
+      "condition": "",
+      "values": {
+        "color": "rgb(255, 255, 255)",
+        "background-color": "rgb(63, 0, 11)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.pirate-primary .cmp-generic-hero .core-primary-1 .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary",
+      "condition": "",
+      "values": {
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "color": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": "body.pirate-primary .cmp-generic-hero .core-primary-1 .cmp-generic-hero__button-container .cmp-generic-hero__button.cmp-generic-hero__button--primary:hover",
+      "condition": "",
+      "values": {
+        "color": "rgb(0, 34, 105)",
+        "background-color": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/generic-hero/clientlib-generic-hero-default-theme.lc-69caca2c23b0d23f23b17f2410d8ea28-lc.min.css",
+      "selector": ".cmp-generic-hero.copy-default-mobile.full-video-top .cmp-generic-hero__detail-container.cmp-generic-hero-full-video .h1Tagwrapped .cmp-generic-hero__button-container",
+      "condition": "screen and (max-width: 991.9px)",
+      "values": {
+        "z-index": "1"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs .cmp-tabs__tabpanel, .cmp-tabs .cmp-tabs__tabpanel-sub",
+      "condition": "",
+      "values": {
+        "z-index": "5",
+        "background-color": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading::after",
+      "condition": "",
+      "values": {
+        "z-index": "2",
+        "background-color": "initial"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.scroll-ended::after",
+      "condition": "",
+      "values": {
+        "background-color": "initial"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.theme-accent-color::after",
+      "condition": "",
+      "values": {
+        "background-color": "initial"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.light-gray-background > li[aria-selected=\"false\"] > .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.light-gray-background > li[aria-selected=\"false\"] > .tabs-comp-item i",
+      "condition": "",
+      "values": {
+        "color": "rgb(63, 0, 11)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.light-gray-background > li[aria-selected=\"false\"]:hover .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.light-gray-background > li[aria-selected=\"false\"]:focus .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.light-gray-background > li[aria-selected=\"false\"]:hover .tabs-comp-item i, .cmp-tabs ul.tabs-heading.light-gray-background > li[aria-selected=\"false\"]:focus .tabs-comp-item i",
+      "condition": "",
+      "values": {
+        "color": "rgb(63, 0, 11)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.corporate-purple-variant-300.scroll-ended::after, .cmp-tabs ul.tabs-heading.corporate-purple-variant-100.scroll-ended::after",
+      "condition": "",
+      "values": {
+        "background-color": "initial"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.corporate-purple-variant-300::after, .cmp-tabs ul.tabs-heading.corporate-purple-variant-100::after",
+      "condition": "",
+      "values": {
+        "background-color": "initial"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.brown-background > li[aria-selected=\"false\"] > .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.dark-brown-background > li[aria-selected=\"false\"] > .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.brown-background > li[aria-selected=\"false\"] > .tabs-comp-item i, .cmp-tabs ul.tabs-heading.dark-brown-background > li[aria-selected=\"false\"] > .tabs-comp-item i",
+      "condition": "",
+      "values": {
+        "color": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.brown-background > li[aria-selected=\"false\"]:hover .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.dark-brown-background > li[aria-selected=\"false\"]:hover .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.brown-background > li[aria-selected=\"false\"]:focus .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.dark-brown-background > li[aria-selected=\"false\"]:focus .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.brown-background > li[aria-selected=\"false\"]:hover .tabs-comp-item i, .cmp-tabs ul.tabs-heading.dark-brown-background > li[aria-selected=\"false\"]:hover .tabs-comp-item i, .cmp-tabs ul.tabs-heading.brown-background > li[aria-selected=\"false\"]:focus .tabs-comp-item i, .cmp-tabs ul.tabs-heading.dark-brown-background > li[aria-selected=\"false\"]:focus .tabs-comp-item i",
+      "condition": "",
+      "values": {
+        "color": "rgb(246, 246, 246)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.dark-gray-background > li[aria-selected=\"false\"] > .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.dark-gray-background > li[aria-selected=\"false\"] > .tabs-comp-item i",
+      "condition": "",
+      "values": {
+        "color": "rgb(63, 0, 11)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.dark-gray-background > li[aria-selected=\"false\"]:hover .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.dark-gray-background > li[aria-selected=\"false\"]:focus .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.dark-gray-background > li[aria-selected=\"false\"]:hover .tabs-comp-item i, .cmp-tabs ul.tabs-heading.dark-gray-background > li[aria-selected=\"false\"]:focus .tabs-comp-item i",
+      "condition": "",
+      "values": {
+        "color": "rgb(246, 246, 246)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.corporate-purple-variant-300 > li[aria-selected=\"false\"] > .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.corporate-purple-variant-300 > li[aria-selected=\"false\"] > .tabs-comp-item i",
+      "condition": "",
+      "values": {
+        "color": "rgb(38, 22, 52)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading.corporate-purple-variant-100 > li[aria-selected=\"false\"] > .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading.corporate-purple-variant-100 > li[aria-selected=\"false\"] > .tabs-comp-item i",
+      "condition": "",
+      "values": {
+        "color": "rgb(64, 38, 87)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading > li[aria-selected=\"true\"]",
+      "condition": "",
+      "values": {
+        "background-color": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading > li[aria-selected=\"true\"] > .tabs-comp-item",
+      "condition": "",
+      "values": {
+        "border-top-width": "0px",
+        "border-top-style": "none"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading > li[aria-selected=\"true\"] > .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading > li[aria-selected=\"true\"] > .tabs-comp-item i",
+      "condition": "",
+      "values": {
+        "color": "rgb(0, 123, 189)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading > li[aria-selected=\"false\"] > .tabs-comp-item span.h6, .cmp-tabs ul.tabs-heading > li[aria-selected=\"false\"] > .tabs-comp-item i",
+      "condition": "",
+      "values": {
+        "color": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "url": "https://www.hersheyland.com/etc.clientlibs/hershey/components/tabs/clientlibs-tabs-default-theme.lc-1a8ecb188ab48d6f82f98f37a3802a0e-lc.min.css",
+      "selector": ".cmp-tabs ul.tabs-heading > li > span",
+      "condition": "",
+      "values": {
+        "color": "rgb(255, 255, 255)"
+      }
+    }
+  ]
+}

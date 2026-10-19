@@ -2,6 +2,12 @@
 coverage/*
 logs/*
 node_modules/*
+storybook/node_modules/
+storybook/storybook-static/
+storybook/.cache/
+storybook/test-results/
+storybook/playwright-report/
+storybook/*.log
 
 helix-importer-ui
 .DS_Store
