@@ -383,14 +383,60 @@ var CustomImportScript = (() => {
         // Amazon tracking pixel
         'img[src*="ispot.tv"]',
         // iSpot.tv tracking pixel
-        "div.algolia-recommend"
-        // client-rendered "Related Products" carousel (Algolia); empty in source HTML
+        // recipe-detail: non-authorable recipe widgets/data
+        "div.tags",
+        // "More Like This" hidden tag links
+        "div.recipe-unique-id",
+        // empty recipe id container
+        ".new-ScreenLock",
+        // "BAKE MODE" wakelock toggle (wraps .wakelockParent)
+        ".wakelockParent",
+        ".ingredients-and-directions .new-svg-parent",
+        // decorative wave svg (section style "wave")
+        "#maxRecommend",
+        // hidden Algolia config inputs
+        "#threshold",
+        "#pageType",
+        "#productTheme",
+        ".ready-recipe",
+        // "READY TO MAKE THIS?" buy widget label
+        ".ingredient-action",
+        // sticky buy widget container
+        ".ps-ng-widget"
+        // PriceSpider buy widget
       ]);
+      element.querySelectorAll("div.algolia-recommend").forEach((el) => {
+        if (!el.querySelector(".card-container") || el.querySelector(".algolia-recommend_container.product-page")) el.remove();
+      });
+      element.querySelectorAll(".algolia-recommend .button-section a.button").forEach((a) => {
+        if (a.closest("strong")) return;
+        const strong = a.ownerDocument.createElement("strong");
+        a.replaceWith(strong);
+        strong.append(a);
+      });
+      element.querySelectorAll(".ingredients-and-directions .time-summary dl").forEach((dl) => {
+        const doc = dl.ownerDocument;
+        const frag = doc.createDocumentFragment();
+        dl.querySelectorAll("dt").forEach((dt) => {
+          const dd = dt.nextElementSibling;
+          const label = dt.textContent.trim();
+          const value = dd && dd.tagName === "DD" ? dd.textContent.trim() : "";
+          if (!label && !value) return;
+          const p = doc.createElement("p");
+          const strong = doc.createElement("strong");
+          strong.textContent = label;
+          p.append(strong, ` ${value}`);
+          frag.append(p);
+        });
+        dl.replaceWith(frag);
+      });
     }
     if (hookName === TransformHook.afterTransform) {
+      element.querySelectorAll("div.experiencefragment").forEach((el) => {
+        const isChrome = [...el.children].some((c) => c.classList.contains("cmp-experiencefragment--hub-navigation") || c.classList.contains("cmp-experiencefragment--hub-footer"));
+        if (isChrome) el.remove();
+      });
       WebImporter.DOMUtils.remove(element, [
-        "div.experiencefragment",
-        // hub-navigation (header) and hub-footer experience fragments
         "div.embed",
         // empty script/tracking embeds (div.embed > div.cmp-embed)
         "div.product-detail.aem-GridColumn",

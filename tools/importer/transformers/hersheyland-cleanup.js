@@ -36,10 +36,11 @@ export default function transform(hookName, element, payload) {
       '.ps-ng-widget', // PriceSpider buy widget
     ]);
 
-    // Algolia "related" carousel: empty on product pages (client-rendered),
-    // but holds related-recipe cards (cards-recipe) on recipe pages.
+    // Algolia "related" carousel: client-rendered on product pages (empty, or
+    // non-authorable product cards once it has loaded), but holds
+    // related-recipe cards (cards-recipe) on recipe pages.
     element.querySelectorAll('div.algolia-recommend').forEach((el) => {
-      if (!el.querySelector('.card-container')) el.remove();
+      if (!el.querySelector('.card-container') || el.querySelector('.algolia-recommend_container.product-page')) el.remove();
     });
 
     // "View All Recipes" CTA: bold so EDS decorateButtons renders it as a button.
