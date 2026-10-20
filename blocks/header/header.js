@@ -120,6 +120,12 @@ function buildDropdown(list) {
   [...list.children].forEach((li) => {
     const link = li.querySelector('a');
     if (!link) return;
+    // DA authoring may put the card label in a sibling paragraph of the image link
+    if (!link.textContent.trim()) {
+      [...li.children]
+        .filter((el) => !el.contains(link))
+        .forEach((el) => link.append(' ', ...el.childNodes));
+    }
     const media = li.querySelector('picture') || li.querySelector('img');
     if (media) {
       // authoring tools may place the image next to (not inside) the link
@@ -158,6 +164,8 @@ function decorateSections(sections) {
   list.classList.add('nav-list');
   [...list.children].forEach((item) => {
     item.classList.add('nav-item');
+    // DA authoring wraps top-level labels and links in paragraphs: unwrap them
+    item.querySelectorAll(':scope > p').forEach((p) => p.replaceWith(...p.childNodes));
     let trigger = item.querySelector(':scope > a');
     if (!trigger) {
       // a top-level label without a link: make it a non-navigating trigger
