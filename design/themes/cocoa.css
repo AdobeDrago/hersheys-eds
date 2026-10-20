@@ -5,6 +5,8 @@
   --hershey-reference-color-brand-purple: #460e3d;
   --hershey-reference-color-brand-blue: #007bbd;
   --hershey-reference-color-brand-blue-deep: #005f84;
+  --hershey-reference-color-brand-blue-royal: #003594;
+  --hershey-reference-color-brand-dark-brown: #3c131c;
   --hershey-reference-color-neutral-0: #000;
   --hershey-reference-color-neutral-51: #333;
   --hershey-reference-color-neutral-153: #999;
@@ -33,18 +35,22 @@
   --hershey-reference-spacing-4: 4px;
   --hershey-reference-spacing-6: 6px;
   --hershey-reference-spacing-8: 8px;
+  --hershey-reference-spacing-10: 10px;
   --hershey-reference-spacing-12: 12px;
   --hershey-reference-spacing-14: 14px;
+  --hershey-reference-spacing-15: 15px;
   --hershey-reference-spacing-16: 16px;
   --hershey-reference-spacing-18: 18px;
   --hershey-reference-spacing-20: 20px;
   --hershey-reference-spacing-24: 24px;
+  --hershey-reference-spacing-25: 25px;
   --hershey-reference-spacing-28: 28px;
   --hershey-reference-spacing-30: 30px;
   --hershey-reference-spacing-32: 32px;
   --hershey-reference-spacing-36: 36px;
   --hershey-reference-spacing-40: 40px;
   --hershey-reference-spacing-48: 48px;
+  --hershey-reference-spacing-50: 50px;
   --hershey-reference-spacing-64: 64px;
   --hershey-reference-spacing-80: 80px;
   --hershey-reference-typography-tracking-0: 0px;
@@ -58,6 +64,7 @@
   --hershey-reference-typography-weight-700: 700;
   --hershey-reference-typography-weight-900: 900;
   --hershey-reference-typography-size-14: 14px;
+  --hershey-reference-typography-size-15: 15px;
   --hershey-reference-typography-size-16: 16px;
   --hershey-reference-typography-size-18: 18px;
   --hershey-reference-typography-size-24: 24px;
@@ -113,6 +120,7 @@
   --hershey-reference-size-width-600: 600px;
   --hershey-reference-size-width-800: 800px;
   --hershey-reference-size-width-900: 900px;
+  --hershey-reference-size-width-910: 910px;
   --hershey-reference-size-width-1200: 1200px;
   --hershey-reference-size-width-1600: 1600px;
   --hershey-reference-size-height-22: 22px;
@@ -127,6 +135,8 @@
   --hershey-system-color-surface-subtle: var(--hershey-reference-color-preview-302125);
   --hershey-system-color-surface-inverse: var(--hershey-reference-color-preview-10090b);
   --hershey-system-color-surface-seasonal: var(--hershey-reference-color-preview-38172f);
+  --hershey-system-color-surface-accent: var(--hershey-reference-color-brand-blue-royal);
+  --hershey-system-color-surface-dark: var(--hershey-reference-color-brand-dark-brown);
   --hershey-system-color-action-primary-background-default: var(--hershey-reference-color-preview-68c8ef);
   --hershey-system-color-action-primary-background-hover: var(--hershey-reference-color-preview-a8e5ff);
   --hershey-system-color-action-primary-foreground: var(--hershey-reference-color-preview-170b0e);
@@ -158,6 +168,7 @@
   --hershey-system-typography-heading-2-font-size-mobile: var(--hershey-reference-typography-size-30);
   --hershey-system-typography-heading-2-font-size-desktop: var(--hershey-reference-typography-size-36);
   --hershey-system-typography-label-letter-spacing: var(--hershey-reference-typography-tracking-0-5);
+  --hershey-system-typography-meta-font-size: var(--hershey-reference-typography-size-15);
   --hershey-system-shape-radius-card: var(--hershey-reference-shape-radius-24);
   --hershey-system-shape-radius-tab: var(--hershey-reference-shape-radius-30);
   --hershey-system-shape-radius-popover: var(--hershey-reference-shape-radius-16);
@@ -179,6 +190,7 @@
   --hershey-system-layout-container-navigation: var(--hershey-reference-size-width-1600);
   --hershey-system-layout-container-search: var(--hershey-reference-size-width-320);
   --hershey-system-layout-container-popover: var(--hershey-reference-size-width-260);
+  --hershey-system-layout-container-article-media: var(--hershey-reference-size-width-910);
   --hershey-system-layout-clearance-popover: var(--hershey-reference-size-width-100);
   --hershey-system-layout-breakpoint-tablet: var(--hershey-reference-size-width-600);
   --hershey-system-layout-breakpoint-desktop: var(--hershey-reference-size-width-900);
@@ -210,6 +222,9 @@
   --hershey-system-spacing-inset-comfortable: var(--hershey-reference-spacing-24);
   --hershey-system-spacing-inset-large: var(--hershey-reference-spacing-32);
   --hershey-system-spacing-inset-x-large: var(--hershey-reference-spacing-48);
+  --hershey-system-spacing-inset-narrow: var(--hershey-reference-spacing-10);
+  --hershey-system-spacing-inset-snug: var(--hershey-reference-spacing-15);
+  --hershey-system-spacing-inset-medium: var(--hershey-reference-spacing-25);
   --hershey-system-spacing-control-block: var(--hershey-reference-spacing-12);
   --hershey-system-spacing-control-inline: var(--hershey-reference-spacing-18);
   --hershey-system-spacing-action-block: var(--hershey-reference-spacing-14);
@@ -225,6 +240,9 @@
   --hershey-system-spacing-gap-x-large: var(--hershey-reference-spacing-48);
   --hershey-system-spacing-gap-section: var(--hershey-reference-spacing-64);
   --hershey-system-spacing-gap-tight: var(--hershey-reference-spacing-6);
+  --hershey-system-spacing-gap-compact: var(--hershey-reference-spacing-15);
+  --hershey-system-spacing-gap-media: var(--hershey-reference-spacing-50);
+  --hershey-system-spacing-gap-heading: var(--hershey-reference-spacing-12);
   --hershey-component-header-typography-font-family: var(--hershey-system-typography-body-font-family);
   --hershey-component-header-typography-font-size: var(--hershey-system-typography-navigation-font-size);
   --hershey-component-header-typography-font-weight: var(--hershey-system-typography-navigation-font-weight);
@@ -336,4 +354,24 @@
   --hershey-component-hero-layout-min-height: var(--hershey-system-size-region-hero-minimum);
   --hershey-component-hero-heading-max-width: var(--hershey-system-layout-container-page);
   --hershey-component-hero-color-foreground: var(--hershey-system-color-text-inverse);
+  --hershey-component-hero-article-color-background: var(--hershey-system-color-surface-accent);
+  --hershey-component-hero-article-color-foreground: var(--hershey-system-color-text-inverse);
+  --hershey-component-hero-article-layout-padding-block-mobile: var(--hershey-system-spacing-inset-card);
+  --hershey-component-hero-article-layout-padding-block-desktop: var(--hershey-system-spacing-inset-medium);
+  --hershey-component-hero-article-layout-padding-inline-mobile: var(--hershey-system-spacing-inset-narrow);
+  --hershey-component-hero-article-title-font-size-mobile: var(--hershey-system-typography-heading-1-font-size-mobile);
+  --hershey-component-hero-article-title-font-size-desktop: var(--hershey-system-typography-heading-1-font-size-desktop);
+  --hershey-component-hero-article-title-line-height: var(--hershey-system-typography-heading-line-height);
+  --hershey-component-hero-article-title-margin-block-end: var(--hershey-system-spacing-gap-heading);
+  --hershey-component-hero-article-meta-font-size: var(--hershey-system-typography-meta-font-size);
+  --hershey-component-hero-article-meta-margin-block: var(--hershey-system-spacing-inset-card);
+  --hershey-component-columns-image-pair-layout-gap-mobile: var(--hershey-system-spacing-gap-compact);
+  --hershey-component-columns-image-pair-layout-gap-desktop: var(--hershey-system-spacing-gap-media);
+  --hershey-component-columns-image-pair-layout-max-width: var(--hershey-system-layout-container-article-media);
+  --hershey-component-columns-image-pair-layout-padding-inline-desktop: var(--hershey-system-spacing-inset-medium);
+  --hershey-component-section-dark-brown-color-background: var(--hershey-system-color-surface-dark);
+  --hershey-component-section-dark-brown-color-foreground: var(--hershey-system-color-text-inverse);
+  --hershey-component-section-dark-brown-layout-padding-block-mobile: var(--hershey-system-spacing-inset-narrow);
+  --hershey-component-section-dark-brown-layout-padding-block-desktop: var(--hershey-system-spacing-inset-snug);
+  --hershey-component-section-dark-brown-layout-padding-block-centered: var(--hershey-system-spacing-section-default);
 }

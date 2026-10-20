@@ -36,7 +36,7 @@ test('inherited types and aliases generate scoped variables', (t) => {
     space: { $type: 'dimension', base: { $value: { value: 24, unit: 'px' } }, card: { $value: '{space.base}' } },
   });
   f.run();
-  assert.match(f.css(), /:where\(\.hershey-home, \.header\.hershey-nav, \.footer\.hershey-footer\)/);
+  assert.match(f.css(), /:where\(\.hershey-home, \.hershey-story, \.header\.hershey-nav, \.footer\.hershey-footer\)/);
   assert.match(f.css(), /--hershey-space-base: 24px/);
   assert.match(f.css(), /--hershey-space-card: var\(--hershey-space-base\)/);
   assert.doesNotMatch(f.css(), /:root/);

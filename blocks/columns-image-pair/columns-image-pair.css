@@ -1,0 +1,28 @@
+/* Columns (Image Pair): two 16:9 images, stacked on mobile and side by side on desktop. */
+.columns-image-pair > div {
+  display: grid;
+  box-sizing: border-box;
+  max-width: var(--hershey-component-columns-image-pair-layout-max-width, 910px);
+  margin-inline: auto;
+  gap: var(--hershey-component-columns-image-pair-layout-gap-mobile, 15px);
+}
+
+.columns-image-pair .columns-image-pair-image picture,
+.columns-image-pair .columns-image-pair-image img {
+  display: block;
+  width: 100%;
+}
+
+.columns-image-pair .columns-image-pair-image img {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (width >= 900px) {
+  .columns-image-pair > div {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--hershey-component-columns-image-pair-layout-gap-desktop, 50px);
+    padding-inline: var(--hershey-component-columns-image-pair-layout-padding-inline-desktop, 25px);
+  }
+}

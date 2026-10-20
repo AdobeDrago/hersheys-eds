@@ -10,8 +10,9 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  getMetadata,
 } from './aem.js';
-import loadHersheyTheme from './hershey-theme.js';
+import loadHersheyTheme, { loadHersheyTokens } from './hershey-theme.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -165,6 +166,11 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   if (document.body.classList.contains('hershey-home')) {
     await loadHersheyTheme();
+  }
+  // story pages: scope and load the generated design tokens (template metadata or /stories/ path)
+  if (getMetadata('template') === 'hershey-story' || window.location.pathname.startsWith('/stories/')) {
+    document.body.classList.add('hershey-story');
+    await loadHersheyTokens();
   }
   const main = doc.querySelector('main');
   if (main) {

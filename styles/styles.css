@@ -323,3 +323,34 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/* dark-brown section (stories): dark brown band with inverse text; measured on the live story page */
+main .section.dark-brown {
+  margin: 0;
+  padding: var(--hershey-component-section-dark-brown-layout-padding-block-mobile, 10px) 0;
+  background-color: var(--hershey-component-section-dark-brown-color-background, #3c131c);
+  color: var(--hershey-component-section-dark-brown-color-foreground, var(--background-color));
+}
+
+@media (width >= 900px) {
+  main .section.dark-brown {
+    padding: var(--hershey-component-section-dark-brown-layout-padding-block-desktop, 15px) 0;
+  }
+}
+
+main .section.dark-brown:not(.centered) p {
+  margin: 0;
+}
+
+main .section.dark-brown a:any-link {
+  color: inherit;
+}
+
+main .section.centered {
+  text-align: center;
+}
+
+/* EDS adaptation: dark band holding the related-stories slider (source uses an angled shape) */
+main .section.dark-brown.centered {
+  padding: var(--hershey-component-section-dark-brown-layout-padding-block-centered, 64px) 0;
+}
