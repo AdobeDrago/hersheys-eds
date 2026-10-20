@@ -1,0 +1,235 @@
+@font-face {
+  font-family: hershey-tt;
+  src: url('../fonts/subset-TTNormsPro-Normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-tt;
+  src: url('../fonts/subset-TTNormsPro-NormalIt.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-tt;
+  src: url('../fonts/subset-TTNormsPro-Bd.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-tt;
+  src: url('../fonts/subset-TTNormsPro-Blk.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-gazpacho;
+  src: url('../fonts/subset-Gazpacho-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-gazpacho;
+  src: url('../fonts/subset-Gazpacho-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+}
+
+.hershey-home {
+  --nav-height: var(--hershey-system-size-navigation-height);
+}
+
+.hershey-home main {
+  --body-font-family: var(--hershey-system-typography-body-font-family);
+  --heading-font-family: var(--hershey-system-typography-heading-font-family);
+  --text-color: var(--hershey-system-color-text-primary);
+  --link-color: var(--hershey-system-color-link-default);
+  --link-hover-color: var(--hershey-system-color-link-hover);
+  --background-color: var(--hershey-system-color-surface-default);
+
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--hershey-system-typography-body-font-size);
+  line-height: var(--hershey-system-typography-body-line-height);
+}
+
+.hershey-home main > .section {
+  margin: 0;
+  padding: var(--hershey-system-spacing-section-default) var(--hershey-system-spacing-inset-comfortable);
+}
+
+.hershey-home main > .section > div {
+  max-width: var(--hershey-system-layout-container-page);
+  padding: 0;
+}
+
+.hershey-home main h1,
+.hershey-home main h2,
+.hershey-home main h3 {
+  font-weight: var(--hershey-system-typography-heading-font-weight);
+  line-height: var(--hershey-system-typography-heading-line-height);
+}
+
+.hershey-home main h1 {
+  font-size: var(--hershey-system-typography-heading-1-font-size-mobile);
+}
+
+.hershey-home main h2 {
+  margin: 0 0 var(--hershey-system-spacing-inset-comfortable);
+  font-size: var(--hershey-system-typography-heading-2-font-size-mobile);
+}
+
+.hershey-home main a.button {
+  background: var(--hershey-system-color-action-primary-background-default);
+  color: var(--hershey-system-color-action-primary-foreground);
+  border: var(--hershey-system-border-width-control) solid var(--hershey-system-color-action-primary-background-default);
+  padding: var(--hershey-system-spacing-action-block) var(--hershey-system-spacing-action-inline);
+  font-weight: var(--hershey-system-typography-action-font-weight);
+  white-space: normal;
+}
+
+.hershey-home main a.button:hover {
+  background: var(--hershey-system-color-action-primary-background-hover);
+  border-color: var(--hershey-system-color-action-primary-background-hover);
+}
+
+.hershey-home main :focus-visible {
+  outline: var(--hershey-system-focus-width-prominent) solid currentcolor;
+  outline-offset: var(--hershey-system-spacing-inset-compact);
+}
+
+.hershey-home main > .halloween {
+  --text-color: var(--hershey-system-color-text-inverse);
+  --link-color: var(--hershey-system-color-text-inverse);
+
+  color: var(--hershey-system-color-text-inverse);
+  background: var(--hershey-system-color-surface-seasonal);
+  padding-bottom: 0;
+}
+
+.hershey-home main > .welcome {
+  padding: 0;
+  text-align: center;
+  background: var(--hershey-system-color-surface-subtle);
+}
+
+.hershey-home .welcome > .default-content-wrapper {
+  max-width: none;
+}
+
+.hershey-home .welcome > .cards-wrapper {
+  padding: var(--hershey-system-spacing-inset-comfortable);
+}
+
+.hershey-home .welcome p:has(picture),
+.hershey-home .chocolate p:has(picture) {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home .welcome > .default-content-wrapper:where(:first-child) > p:has(picture) {
+  background: var(--hershey-system-color-surface-seasonal);
+}
+
+.hershey-home .welcome picture img,
+.hershey-home .chocolate > .default-content-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hershey-home .welcome p > picture:first-child {
+  display: none;
+}
+
+.hershey-home .social,
+.hershey-home .related {
+  background: var(--hershey-system-color-surface-subtle);
+}
+
+.hershey-home .newest h2,
+.hershey-home .recipes > .default-content-wrapper,
+.hershey-home .related h2 {
+  text-align: center;
+}
+
+.hershey-home .welcome > .default-content-wrapper > h2,
+.hershey-home .welcome > .default-content-wrapper > p:not(:has(picture)) {
+  max-width: var(--hershey-system-layout-container-intro);
+  padding: 0 var(--hershey-system-spacing-inset-comfortable);
+  margin: var(--hershey-system-spacing-inset-comfortable) auto;
+}
+
+.hershey-home main > .chocolate {
+  --text-color: var(--hershey-system-color-text-inverse);
+  --link-color: var(--hershey-system-color-text-inverse);
+  --link-hover-color: var(--hershey-system-color-text-inverse);
+
+  position: relative;
+  padding-top: 0;
+  background: var(--hershey-system-color-surface-inverse);
+  color: var(--hershey-system-color-text-inverse);
+}
+
+.hershey-home .chocolate > .default-content-wrapper {
+  max-width: none;
+  margin: 0 calc(-1 * var(--hershey-system-spacing-inset-comfortable)) var(--hershey-system-spacing-inset-x-large);
+  background: var(--hershey-system-color-surface-default);
+}
+
+.hershey-home .social > .default-content-wrapper {
+  margin-bottom: var(--hershey-system-spacing-inset-large);
+}
+
+.hershey-home .social > .default-content-wrapper a.button {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--hershey-system-color-text-primary);
+  font-size: var(--hershey-system-typography-card-title-font-size);
+}
+
+@media (width >= 900px) {
+  .hershey-home main h1 {
+    font-size: var(--hershey-system-typography-heading-1-font-size-desktop);
+  }
+
+  .hershey-home main h2 {
+    font-size: var(--hershey-system-typography-heading-2-font-size-desktop);
+  }
+
+  .hershey-home main > .section {
+    padding: var(--hershey-system-spacing-section-large) var(--hershey-system-spacing-inset-large);
+  }
+
+  .hershey-home main > .halloween {
+    padding: var(--hershey-system-spacing-section-default) var(--hershey-system-spacing-inset-large) 0;
+  }
+
+  .hershey-home main > .welcome {
+    padding: 0;
+  }
+
+  .hershey-home .welcome p > picture:first-child {
+    display: block;
+  }
+
+  .hershey-home .welcome p > picture:nth-child(2) {
+    display: none;
+  }
+
+  .hershey-home main > .chocolate {
+    padding-top: 0;
+  }
+
+  .hershey-home .chocolate > .default-content-wrapper {
+    margin-inline: calc(-1 * var(--hershey-system-spacing-inset-large));
+  }
+}

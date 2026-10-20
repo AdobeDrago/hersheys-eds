@@ -1,0 +1,32 @@
+/* Generated from DTCG 2025.10 tokens. Do not edit directly. */
+:where(.foundations.hershey-home) {
+  --hershey-reference-source-color-text: var(--hershey-reference-color-brand-chocolate);
+  --hershey-reference-source-color-surface: var(--hershey-reference-color-neutral-255);
+  --hershey-reference-source-color-surface-muted: var(--hershey-reference-color-neutral-246);
+  --hershey-reference-source-color-seasonal: var(--hershey-reference-color-brand-purple);
+  --hershey-reference-source-color-action: var(--hershey-reference-color-brand-blue);
+  --hershey-reference-source-color-action-hover: #268fc7;
+  --hershey-reference-source-font-family-body: "TT Norms Pro", sans-serif;
+  --hershey-reference-source-font-family-heading: "Gazpacho", "TT Norms Pro", sans-serif;
+  --hershey-reference-source-font-size-body: 17px;
+  --hershey-reference-source-font-size-h1-mobile: 36px;
+  --hershey-reference-source-font-size-h1-desktop: 48px;
+  --hershey-reference-source-font-size-h2-mobile: 28px;
+  --hershey-reference-source-font-size-h2-desktop: 36px;
+  --hershey-reference-source-font-size-action-mobile: 16px;
+  --hershey-reference-source-font-size-action-desktop: 18px;
+  --hershey-reference-source-font-weight-body: 500;
+  --hershey-reference-source-font-weight-heading: 900;
+  --hershey-reference-source-font-line-height-body: 1.5;
+  --hershey-reference-source-font-line-height-hero: 1.2;
+  --hershey-reference-source-font-line-height-rich-text: 1.3;
+  --hershey-reference-source-radius-action: 50px;
+  --hershey-reference-source-radius-tab: 50px;
+  --hershey-reference-source-radius-card-image: 8px;
+  --hershey-reference-source-navigation-mobile-height: 60px;
+  --hershey-reference-source-navigation-desktop-height: 80px;
+  --hershey-reference-source-feedback-author-warning: #ff0;
+  --hershey-reference-source-authoring-neutral-17: #111;
+  --hershey-reference-source-authoring-neutral-68: #444;
+  --hershey-reference-source-authoring-neutral-245: #f5f5f5;
+}

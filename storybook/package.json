@@ -1,0 +1,25 @@
+{
+  "name": "hersheyland-storybook",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006 --host 127.0.0.1 --no-open --disable-telemetry",
+    "build": "storybook build --disable-telemetry",
+    "test": "node --test test/*.test.mjs",
+    "test:browser": "playwright test"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
+    "@playwright/test": "^1.58.0",
+    "@storybook/addon-a11y": "10.6.1",
+    "@storybook/addon-docs": "10.6.1",
+    "@storybook/addon-themes": "^10.6.1",
+    "@storybook/html-vite": "10.6.1",
+    "react": "^19.3.0",
+    "storybook": "10.6.1",
+    "vite": "8.3.3"
+  }
+}

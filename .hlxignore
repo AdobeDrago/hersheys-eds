@@ -1,0 +1,13 @@
+.*
+*.md
+karma.config.js
+LICENSE
+package.json
+package-lock.json
+test/*
+sync-block-collection.sh
+design/generate-tokens.mjs
+design/token-dictionary.mjs
+design/source-tokens.css
+design/themes/**
+storybook/**
