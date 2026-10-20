@@ -1,4 +1,9 @@
 const SUBMIT_TEXT = /submit|sign\s*up|subscribe/i;
+const DEFAULT_PLACEHOLDER = 'Enter your email to sign up';
+// social networks rendered as /icons/<name>.svg; value = icon width (px) at 24px height
+const SOCIAL_ICONS = {
+  instagram: 21, tiktok: 21, youtube: 27, facebook: 24, pinterest: 23,
+};
 
 /**
  * Fetches the footer fragment. Metadata-independent dual fetch:
@@ -32,11 +37,14 @@ function rebaseImages(root, base) {
 
 /**
  * Paragraph containing only one image (decorative / artwork).
+ * DA wraps images in <picture>, and linked images in <a>.
  * @param {Element} p
  */
 function isImageOnly(p) {
-  return p.tagName === 'P' && p.children.length === 1
-    && p.firstElementChild.tagName === 'IMG' && !p.textContent.trim();
+  if (p.tagName !== 'P' || p.children.length !== 1 || p.textContent.trim()) return false;
+  let el = p.firstElementChild;
+  if (el.tagName === 'A' && el.children.length === 1) el = el.firstElementChild;
+  return el.tagName === 'IMG' || el.tagName === 'PICTURE';
 }
 
 /**
@@ -44,8 +52,11 @@ function isImageOnly(p) {
  * @param {Element} band
  */
 function decorateMedia(band) {
-  [...band.querySelectorAll(':scope > p')].filter(isImageOnly).forEach((p, i) => {
-    p.classList.add('footer-media', `footer-media-${i + 1}`);
+  const media = [...band.querySelectorAll(':scope > p')].filter(isImageOnly);
+  // a sign-up band with a single image only carries the Kisses art (the wave is then CSS)
+  const first = band.classList.contains('footer-band-signup') && media.length === 1 ? 2 : 1;
+  media.forEach((p, i) => {
+    p.classList.add('footer-media', `footer-media-${first + i}`);
     const img = p.querySelector('img');
     img.loading = 'lazy';
     if (!img.alt) img.setAttribute('aria-hidden', 'true');
@@ -72,11 +83,13 @@ function decorateNewsletter(band) {
   const labelP = hasPlaceholder ? placeholderP.previousElementSibling : cta.previousElementSibling;
   const hasLabel = labelP && labelP.tagName === 'P' && labelP.querySelector('img')
     && labelP.textContent.trim();
+  // DA footer authors only the label text: it gets the envelope icon and a default placeholder
+  const textOnlyLabel = hasPlaceholder && !hasLabel;
 
   const form = document.createElement('form');
   form.className = 'footer-newsletter';
   form.method = 'post';
-  form.action = url.pathname;
+  form.action = `${url.origin}${url.pathname}`;
   url.searchParams.forEach((value, name) => {
     const hidden = document.createElement('input');
     hidden.type = 'hidden';
@@ -94,6 +107,12 @@ function decorateNewsletter(band) {
     icon.setAttribute('aria-hidden', 'true');
     label.append(icon, document.createTextNode(labelP.textContent.trim()));
     labelP.remove();
+  } else if (textOnlyLabel) {
+    const icon = document.createElement('img');
+    icon.src = `${window.hlx.codeBasePath}/icons/envelope.svg`;
+    icon.alt = '';
+    icon.setAttribute('aria-hidden', 'true');
+    label.append(icon, document.createTextNode(placeholderP.textContent.trim()));
   }
 
   const field = document.createElement('div');
@@ -105,7 +124,7 @@ function decorateNewsletter(band) {
   input.required = true;
   input.autocomplete = 'email';
   if (hasPlaceholder) {
-    input.placeholder = placeholderP.textContent.trim();
+    input.placeholder = textOnlyLabel ? DEFAULT_PLACEHOLDER : placeholderP.textContent.trim();
     placeholderP.remove();
   }
   const submit = document.createElement('button');
@@ -120,9 +139,19 @@ function decorateNewsletter(band) {
 }
 
 /**
- * Lists whose items are all image links become icon lists; the image is
- * rendered as a CSS mask so the icon follows the link color (hover states).
- * Other lists are plain link lists.
+ * Known social network of a link, by hostname.
+ * @param {HTMLAnchorElement} a
+ * @returns {string|undefined} network name
+ */
+function socialNetwork(a) {
+  const { hostname } = new URL(a.href, window.location.href);
+  return Object.keys(SOCIAL_ICONS).find((name) => hostname.includes(`${name}.com`));
+}
+
+/**
+ * Lists whose items are all image links (or text links to known social
+ * networks) become icon lists; the image is rendered as a CSS mask so the
+ * icon follows the link color (hover states). Other lists are plain link lists.
  * @param {Element} band
  */
 function decorateLists(band) {
@@ -130,7 +159,7 @@ function decorateLists(band) {
     const items = [...ul.children];
     const iconList = items.length && items.every((li) => {
       const a = li.querySelector('a');
-      return a && a.querySelector('img') && !a.textContent.trim();
+      return a && ((a.querySelector('img') && !a.textContent.trim()) || socialNetwork(a));
     });
     if (!iconList) {
       ul.classList.add('footer-links');
@@ -143,12 +172,52 @@ function decorateLists(band) {
       const icon = document.createElement('span');
       icon.className = 'footer-social-icon';
       icon.setAttribute('aria-hidden', 'true');
-      icon.style.setProperty('--icon', `url("${img.getAttribute('src')}")`);
-      a.setAttribute('aria-label', img.alt);
-      a.title = img.alt;
-      img.replaceWith(icon);
+      if (img) {
+        icon.style.setProperty('--icon', `url("${img.getAttribute('src')}")`);
+        a.setAttribute('aria-label', img.alt);
+        a.title = img.alt;
+        img.replaceWith(icon);
+        return;
+      }
+      // DA footer authors the network name as link text
+      const name = socialNetwork(a);
+      const label = a.textContent.trim();
+      icon.style.setProperty('--icon', `url("${window.hlx.codeBasePath}/icons/${name}.svg")`);
+      icon.style.width = `${SOCIAL_ICONS[name]}px`;
+      a.setAttribute('aria-label', label);
+      a.title = label;
+      a.replaceChildren(icon);
     });
   });
+}
+
+/**
+ * Splits a band's single long link list into two columns (source layout).
+ * @param {Element} band
+ */
+function splitLinkColumns(band) {
+  const lists = band.querySelectorAll(':scope > ul.footer-links');
+  if (lists.length !== 1 || lists[0].children.length < 4) return;
+  const [list] = lists;
+  const column = list.cloneNode(false);
+  column.append(...[...list.children].slice(Math.ceil(list.children.length / 2)));
+  list.after(column);
+}
+
+/**
+ * Merges link-only sections into the preceding band: the DA footer authors
+ * the corporate links as their own section, but they share the social band.
+ * @param {Element[]} sections footer fragment sections
+ * @returns {Element[]} bands
+ */
+function groupBands(sections) {
+  return sections.reduce((bands, section, i) => {
+    const linksOnly = i > 1 && i < sections.length - 1
+      && [...section.children].every((el) => el.tagName === 'UL');
+    if (linksOnly) bands[bands.length - 1].append(...section.children);
+    else bands.push(section);
+    return bands;
+  }, []);
 }
 
 /**
@@ -178,12 +247,15 @@ export default async function decorate(block) {
 
   const footer = document.createElement('div');
   footer.className = 'footer-inner';
-  [...fragment.body.children].filter((el) => el.tagName === 'DIV').forEach((section, i, all) => {
+  const sections = [...fragment.body.children].filter((el) => el.tagName === 'DIV');
+  groupBands(sections).forEach((section, i, all) => {
     section.classList.add('footer-band', `footer-band-${i + 1}`);
-    if (i === all.length - 1 && all.length > 1) section.classList.add('footer-band-legal');
-    decorateMedia(section);
+    const legal = i === all.length - 1 && all.length > 1;
+    if (legal) section.classList.add('footer-band-legal');
     decorateNewsletter(section);
+    decorateMedia(section);
     decorateLists(section);
+    if (!legal) splitLinkColumns(section);
     footer.append(section);
   });
   decorateConsentLinks(footer);

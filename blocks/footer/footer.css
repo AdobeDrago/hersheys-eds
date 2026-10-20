@@ -53,6 +53,24 @@ footer .footer .footer-band-1 .footer-media-2 {
   display: none;
 }
 
+/* no authored wave image: "moments of goodness" lettering as a background (source behaviour) */
+footer .footer .footer-band-1:not(:has(.footer-media-1)) {
+  --footer-wave-rise: 33vw;
+  --footer-wave-size: 200%;
+
+  /* room for the wave so it never covers the end of the page */
+  margin-top: var(--footer-wave-rise);
+}
+
+footer .footer .footer-band-1:not(:has(.footer-media-1))::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--footer-wave-rise)) 0 auto;
+  height: calc(100% + var(--footer-wave-rise));
+  background: url('./moments-wave.svg') 49% 0 / var(--footer-wave-size) no-repeat;
+  pointer-events: none;
+}
+
 footer .footer .footer-band-1 h2 {
   margin: 0 0 5px;
   color: #fff;
@@ -267,6 +285,12 @@ footer .footer .footer-band-legal .footer-links li:first-child a {
     grid-template-rows: auto auto 1fr;
     height: 302px;
     padding: 108px 90px 0;
+  }
+
+  footer .footer .footer-band-1:not(:has(.footer-media-1)) {
+    /* 180px at the 1440 reference */
+    --footer-wave-rise: 12.5vw;
+    --footer-wave-size: 100%;
   }
 
   footer .footer .footer-band-1 h2 {
