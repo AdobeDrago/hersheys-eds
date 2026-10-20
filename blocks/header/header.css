@@ -1,3 +1,29 @@
+/* brand font (TT Norms Pro), header only; Normal also serves the source's 500 weight */
+@font-face {
+  font-family: hershey-header-tt;
+  src: url('../../fonts/subset-TTNormsPro-Normal.woff2') format('woff2');
+  font-weight: 400 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-header-tt;
+  src: url('../../fonts/subset-TTNormsPro-Bd.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-header-tt;
+  src: url('../../fonts/subset-TTNormsPro-Blk.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+}
+
+header {
+  --header-font-family: hershey-header-tt, var(--body-font-family);
+}
+
 /* Hersheyland hub navigation: solid white fixed bar (mobile-first) */
 header .nav-wrapper {
   position: fixed;
@@ -17,7 +43,7 @@ header nav {
   height: var(--nav-height);
   padding: 0 20px;
   color: var(--brand-maroon);
-  font-family: var(--body-font-family);
+  font-family: var(--header-font-family);
   font-size: 17px;
   font-weight: 500;
   line-height: 25.5px;
@@ -278,7 +304,7 @@ header nav .nav-search-input {
   outline: none;
   background: transparent;
   color: #333;
-  font-family: var(--body-font-family);
+  font-family: var(--header-font-family);
   font-size: 16px;
   font-weight: 400;
   line-height: 16px;

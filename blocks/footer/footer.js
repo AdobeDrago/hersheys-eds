@@ -1,6 +1,6 @@
 const SUBMIT_TEXT = /submit|sign\s*up|subscribe/i;
 const DEFAULT_PLACEHOLDER = 'Enter your email to sign up';
-// social networks rendered as /icons/<name>.svg; value = icon width (px) at 24px height
+// social networks rendered as /icons/<name>.svg; value = icon width at 24 height (aspect ratio)
 const SOCIAL_ICONS = {
   instagram: 21, tiktok: 21, youtube: 27, facebook: 24, pinterest: 23,
 };
@@ -183,7 +183,7 @@ function decorateLists(band) {
       const name = socialNetwork(a);
       const label = a.textContent.trim();
       icon.style.setProperty('--icon', `url("${window.hlx.codeBasePath}/icons/${name}.svg")`);
-      icon.style.width = `${SOCIAL_ICONS[name]}px`;
+      icon.style.aspectRatio = `${SOCIAL_ICONS[name]} / 24`;
       a.setAttribute('aria-label', label);
       a.title = label;
       a.replaceChildren(icon);
