@@ -1,4 +1,4 @@
-import { decorateIcons, toClassName } from '../../scripts/aem.js';
+import { decorateIcons, getMetadata, toClassName } from '../../scripts/aem.js';
 
 /**
  * Tabs (Nutrition) block.
@@ -8,10 +8,114 @@ import { decorateIcons, toClassName } from '../../scripts/aem.js';
  *     (or "Label | value") become aligned rows; other paragraphs stay as text.
  *   Ingredients: plain paragraphs.
  *   Dietary Info: icon images (or :icon: tokens) each followed by a label.
+ * Nutrition Facts comes from the page brand's tab of the nutrition sheet
+ * (/products/nutrition.json?sheet=<brand>, row matched by `bvid` GTIN) when
+ * there is one; otherwise the authored content is used.
  */
 
 const CELL_SEPARATOR = /\s+\|\s+/;
+const NUTRITION_SHEET = '/products/nutrition.json';
+const DV_FOOTNOTE = '* The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.';
+/* [label, sheet column, sub-rows]; each column has a matching `<column>DV` */
+const FACTS = [
+  ['Calories', 'calories'],
+  ['Total Fat', 'totalFat', [['Saturated Fat', 'saturatedFat'], ['Trans Fat', 'transFat']]],
+  ['Cholesterol', 'cholesterol'],
+  ['Sodium', 'sodium'],
+  ['Total Carbohydrates', 'totalCarbohydrates', [['Dietary Fiber', 'dietaryFiber']]],
+  ['Total Sugars', 'totalSugars', [['Added Sugars', 'addedSugars']]],
+  ['Protein', 'protein'],
+  ['Vitamin D', 'vitaminD'],
+  ['Calcium', 'calcium'],
+  ['Iron', 'iron'],
+  ['Potassium', 'potassium'],
+];
 let blockCount = 0;
+
+/**
+ * Sheet tab for the page's brand, from the last breadcrumb item
+ * (HERSHEY'S -> hersheys, ROLO® -> rolo).
+ * @returns {string}
+ */
+function brandSheetName() {
+  const items = document.querySelectorAll('main .breadcrumb-trail li');
+  const brand = items.length ? items[items.length - 1].textContent : '';
+  return brand.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '');
+}
+
+/**
+ * Loads only the page brand's nutrition tab and returns this product's row.
+ * @returns {Promise<Object|null>}
+ */
+async function fetchNutritionRow() {
+  const gtin = getMetadata('bvid');
+  const sheet = brandSheetName();
+  if (!gtin || !sheet) return null;
+  try {
+    const resp = await fetch(`${NUTRITION_SHEET}?sheet=${sheet}`);
+    if (!resp.ok) return null;
+    const { data = [] } = await resp.json();
+    return data
+      .map((row) => Object.fromEntries(Object.entries(row)
+        .map(([key, value]) => [key.trim(), String(value).trim()])))
+      .find((row) => row.gtin === gtin) || null;
+  } catch {
+    return null; // missing tab or network error: keep the authored table
+  }
+}
+
+function textEl(tag, text) {
+  const el = document.createElement(tag);
+  el.textContent = text;
+  return el;
+}
+
+/**
+ * Builds Nutrition Facts content from a sheet row, in the authored line format.
+ * @param {Object} row
+ * @returns {Element[]}
+ */
+function buildFacts(row) {
+  const out = [];
+  if (row.servingSize) {
+    const p = document.createElement('p');
+    p.append(textEl('strong', `Serving size | ${row.servingSize}`));
+    out.push(p);
+  }
+  if (row.servingsPerContainer) out.push(textEl('p', `Servings Per Container | ${row.servingsPerContainer}`));
+
+  const summary = document.createElement('ul');
+  [['Calories', 'calories'], ['Protein', 'protein'], ['Total Carbohydrates', 'totalCarbohydrates']]
+    .filter(([, key]) => row[key])
+    .forEach(([label, key]) => summary.append(textEl('li', `${label} | ${row[key]}`)));
+  if (summary.children.length) out.push(summary);
+
+  out.push(textEl('p', 'Amount per serving | % DV*'));
+  const line = (label, key) => {
+    const amount = row[key] || '-';
+    const dv = row[`${key}DV`] || '-';
+    if (amount === '-' && dv === '-') return null;
+    return key === 'addedSugars'
+      ? `Includes ${amount} Added Sugars | - | ${dv}`
+      : `${label} | ${amount} | ${dv}`;
+  };
+  const facts = document.createElement('ul');
+  FACTS.forEach(([label, key, subRows = []]) => {
+    const text = line(label, key);
+    if (!text) return;
+    const li = document.createElement('li');
+    li.append(textEl('p', text));
+    const subs = subRows.map(([subLabel, subKey]) => line(subLabel, subKey)).filter(Boolean);
+    if (subs.length) {
+      const ul = document.createElement('ul');
+      subs.forEach((sub) => ul.append(textEl('li', sub)));
+      li.append(ul);
+    }
+    facts.append(li);
+  });
+  out.push(facts, textEl('p', DV_FOOTNOTE));
+  return out;
+}
 
 /**
  * Splits "a | b | c" text into trimmed parts, or returns null when it is not a row.
@@ -180,11 +284,12 @@ function decoratePanelType(panel) {
   });
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
   blockCount += 1;
   const prefix = `tabs-nutrition-${blockCount}`;
   const rows = [...block.children].filter((row) => row.children.length);
   if (!rows.length) return;
+  const sheetRow = await fetchNutritionRow();
 
   const tablist = document.createElement('div');
   tablist.className = 'tabs-nutrition-list';
@@ -207,7 +312,12 @@ export default function decorate(block) {
     panel.setAttribute('role', 'tabpanel');
     panel.setAttribute('aria-labelledby', `${prefix}-tab-${id}`);
     panel.tabIndex = 0;
-    contentCells.forEach((cell) => panel.append(...cell.childNodes));
+    if (id === 'nutrition-facts' && sheetRow) {
+      panel.append(...buildFacts(sheetRow));
+      panel.dataset.source = 'sheet';
+    } else {
+      contentCells.forEach((cell) => panel.append(...cell.childNodes));
+    }
     decorateRows(panel);
     decorateIconTokens(panel);
     decorateBadges(panel);

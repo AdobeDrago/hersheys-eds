@@ -1,4 +1,5 @@
 import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
+import { addResourceHint, PRICESPIDER_LOADER } from '../../scripts/scripts.js';
 
 /**
  * Columns (Product) block.
@@ -12,7 +13,7 @@ import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
  */
 
 const SIZE_LABEL = /choose\s+a\s+size/i;
-const WHERE_TO_BUY = 'https://www.hersheyland.com/where-to-buy.html';
+const WHERE_TO_BUY = '/where-to-buy';
 
 /**
  * Re-renders a picture as an optimized picture when the image is served from this origin.
@@ -252,7 +253,29 @@ function addRating(cell) {
 }
 
 /**
- * Document Authoring drops the `ps-sku` query. Send Shop Now to the live
+ * Makes Shop Now near-instant, like hersheyland.com: prefetch the PriceSpider
+ * loader and the where-to-buy page now, and prerender it on hover/press.
+ * Falls back to a plain prefetch where Speculation Rules aren't supported.
+ * @param {string} href
+ */
+function speculateShopNow(href) {
+  addResourceHint('prefetch', PRICESPIDER_LOADER);
+  if (!HTMLScriptElement.supports?.('speculationrules')) {
+    addResourceHint('prefetch', href);
+    return;
+  }
+  const rules = document.createElement('script');
+  rules.type = 'speculationrules';
+  rules.nonce = document.querySelector('script[nonce]')?.nonce || '';
+  rules.textContent = JSON.stringify({
+    prefetch: [{ source: 'list', urls: [href], eagerness: 'immediate' }],
+    prerender: [{ source: 'list', urls: [href], eagerness: 'moderate' }],
+  });
+  document.head.append(rules);
+}
+
+/**
+ * Document Authoring drops the `ps-sku` query. Send Shop Now to this site's
  * where-to-buy page with the Bazaarvoice product id from page metadata.
  * @param {HTMLAnchorElement} link
  */
@@ -265,9 +288,10 @@ function pointShopNow(link) {
   if (!/\/where-to-buy(?:\.html)?\/?$/i.test(pathname)) return;
   const productId = getMetadata('bvid') || getMetadata('bv-id');
   if (!productId) return;
-  const url = new URL(WHERE_TO_BUY);
+  const url = new URL(WHERE_TO_BUY, window.location.origin);
   url.searchParams.set('ps-sku', productId);
   link.href = url.href;
+  speculateShopNow(url.href);
 }
 
 /**
