@@ -42,7 +42,13 @@
 }
 
 .hershey-home {
-  --nav-height: var(--hershey-system-size-navigation-height);
+  --nav-height: var(--hershey-component-header-layout-height-mobile);
+}
+
+@media (width >= 768px) {
+  .hershey-home {
+    --nav-height: var(--hershey-system-size-navigation-height);
+  }
 }
 
 .hershey-home main {
@@ -196,7 +202,7 @@
   font-size: var(--hershey-system-typography-card-title-font-size);
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .hershey-home main h1 {
     font-size: var(--hershey-system-typography-heading-1-font-size-desktop);
   }
