@@ -35,7 +35,7 @@
 .hero-recipe .hero-recipe-content > .hero-recipe-category {
   margin-bottom: 15px;
   border-radius: 20px;
-  background-color: var(--hershey-component-hero-recipe-category-background, #460e3d);
+  background-color: var(--hershey-component-hero-recipe-category-background, #5a357b);
   font-size: 14px;
   line-height: 14px;
 }
@@ -44,7 +44,7 @@
   display: block;
   padding: 11px 15px 8px;
   color: var(--hershey-component-hero-recipe-category-foreground, var(--background-color));
-  font-family: var(--hershey-component-hero-recipe-category-font-family, var(--body-font-family));
+  font-family: var(--hershey-component-hero-recipe-category-font-family, hershey-tt, sans-serif);
   font-size: var(--hershey-component-hero-recipe-category-font-size, 14px);
   font-weight: var(--hershey-component-hero-recipe-category-font-weight, 700);
   line-height: 14px;
@@ -60,8 +60,9 @@
 
   /* source margins collapse (15px above, 10px below); flex items do not */
   margin: 0;
-  color: var(--hershey-component-hero-recipe-title-color, var(--text-color));
-  font-family: var(--hershey-component-hero-recipe-title-font-family, var(--heading-font-family));
+  padding: 0 20px;
+  color: var(--hershey-component-hero-recipe-title-color, #3f000b);
+  font-family: var(--hershey-component-hero-recipe-title-font-family, hershey-gazpacho, sans-serif);
   font-size: 32px;
   font-weight: var(--hershey-component-hero-recipe-title-font-weight, 900);
   line-height: 36px;
@@ -113,8 +114,8 @@
 .hero-recipe .hero-recipe-skill {
   position: relative;
   top: -3px;
-  color: var(--hershey-component-hero-recipe-skill-color, #460e3d);
-  font-family: var(--hershey-component-hero-recipe-skill-font-family, var(--body-font-family));
+  color: var(--hershey-component-hero-recipe-skill-color, #5a357b);
+  font-family: var(--hershey-component-hero-recipe-skill-font-family, hershey-tt, sans-serif);
   font-size: 20px;
   font-weight: var(--hershey-component-hero-recipe-skill-font-weight, 700);
   line-height: 30px;
@@ -268,6 +269,35 @@
   object-fit: cover;
 }
 
+/* intro sits under the image: 16/24 TT Norms, chocolate, centered 8/12 measure */
+.hero-recipe .hero-recipe-description {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--hershey-component-hero-recipe-description-padding-inline, 10px);
+  color: var(--hershey-component-hero-recipe-description-color, #3f000b);
+  font-family: var(--hershey-component-hero-recipe-description-font-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-component-hero-recipe-description-font-size, 16px);
+  font-weight: var(--hershey-component-hero-recipe-description-font-weight, 500);
+  line-height: var(--hershey-component-hero-recipe-description-line-height, 1.5);
+  text-align: left;
+}
+
+.hero-recipe .hero-recipe-description > :first-child {
+  margin-top: 0;
+}
+
+.hero-recipe .hero-recipe-description > :last-child {
+  margin-bottom: 0;
+}
+
+.hero-recipe .hero-recipe-description a:any-link {
+  border-bottom: 1px solid currentcolor;
+  color: var(--hershey-component-hero-recipe-share-copy-foreground, #007bbd);
+  font-weight: var(--hershey-component-hero-recipe-category-font-weight, 700);
+  text-decoration: none;
+}
+
 @media (width >= 900px) {
   .hero-recipe .hero-recipe-content > .hero-recipe-title {
     padding: 0 20px;
@@ -328,6 +358,11 @@
     width: 100%;
     max-width: 850px;
     margin: 20px 0 0;
+  }
+
+  .hero-recipe .hero-recipe-description {
+    max-width: var(--hershey-component-hero-recipe-description-max-width, 733px);
+    padding-block: var(--hershey-component-hero-recipe-description-padding-block, 40px);
   }
 }
 

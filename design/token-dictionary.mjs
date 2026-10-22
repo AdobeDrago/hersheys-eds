@@ -21,7 +21,7 @@ const specimenContracts = {
   weight: { types: ['fontWeight'], properties: ['font-weight'] },
   tracking: { types: ['dimension'], properties: ['letter-spacing'] },
   spacing: { types: ['dimension'], properties: ['padding', 'margin'] },
-  layout: { types: ['dimension'], properties: ['width', 'height'] },
+  layout: { types: ['dimension'], properties: ['width', 'height', 'max-width'] },
   gaps: { types: ['dimension'], properties: ['gap'] },
   radius: { types: ['dimension'], properties: ['border-radius'] },
   width: { types: ['dimension'], properties: ['border-width', 'outline-width', 'outline-offset'] },

@@ -3,6 +3,7 @@
   --hershey-reference-color-brand-chocolate: #3f000b;
   --hershey-reference-color-brand-chocolate-deep: #640010;
   --hershey-reference-color-brand-purple: #460e3d;
+  --hershey-reference-color-brand-corporate-purple: #5a357b;
   --hershey-reference-color-brand-blue: #007bbd;
   --hershey-reference-color-brand-blue-deep: #005f84;
   --hershey-reference-color-brand-lilac: #ac9abd;
@@ -39,6 +40,7 @@
   --hershey-reference-spacing-4: 4px;
   --hershey-reference-spacing-6: 6px;
   --hershey-reference-spacing-8: 8px;
+  --hershey-reference-spacing-10: 10px;
   --hershey-reference-spacing-12: 12px;
   --hershey-reference-spacing-14: 14px;
   --hershey-reference-spacing-16: 16px;
@@ -117,6 +119,7 @@
   --hershey-reference-size-width-300: 300px;
   --hershey-reference-size-width-320: 320px;
   --hershey-reference-size-width-600: 600px;
+  --hershey-reference-size-width-733: 733px;
   --hershey-reference-size-width-800: 800px;
   --hershey-reference-size-width-900: 900px;
   --hershey-reference-size-width-1200: 1200px;
@@ -128,6 +131,7 @@
   --hershey-system-color-text-primary: var(--hershey-reference-color-preview-fff8f5);
   --hershey-system-color-text-inverse: var(--hershey-reference-color-preview-fff8f5);
   --hershey-system-color-text-seasonal: var(--hershey-reference-color-brand-purple);
+  --hershey-system-color-text-corporate: var(--hershey-reference-color-brand-corporate-purple);
   --hershey-system-color-link-hover: var(--hershey-reference-color-preview-ffc0cb);
   --hershey-system-color-link-default: var(--hershey-system-color-text-primary);
   --hershey-system-color-link-accent: var(--hershey-reference-color-brand-blue);
@@ -135,6 +139,7 @@
   --hershey-system-color-surface-subtle: var(--hershey-reference-color-preview-302125);
   --hershey-system-color-surface-inverse: var(--hershey-reference-color-preview-10090b);
   --hershey-system-color-surface-seasonal: var(--hershey-reference-color-preview-38172f);
+  --hershey-system-color-surface-corporate: var(--hershey-reference-color-brand-corporate-purple);
   --hershey-system-color-action-primary-background-default: var(--hershey-reference-color-preview-68c8ef);
   --hershey-system-color-action-primary-background-hover: var(--hershey-reference-color-preview-a8e5ff);
   --hershey-system-color-action-primary-background-hover-light: var(--hershey-reference-color-brand-blue-light);
@@ -192,6 +197,7 @@
   --hershey-system-focus-offset-compact: var(--hershey-reference-spacing-4);
   --hershey-system-layout-container-page: var(--hershey-reference-size-width-1200);
   --hershey-system-layout-container-intro: var(--hershey-reference-size-width-800);
+  --hershey-system-layout-container-recipe-intro: var(--hershey-reference-size-width-733);
   --hershey-system-layout-container-navigation: var(--hershey-reference-size-width-1600);
   --hershey-system-layout-container-search: var(--hershey-reference-size-width-320);
   --hershey-system-layout-container-popover: var(--hershey-reference-size-width-260);
@@ -223,6 +229,7 @@
   --hershey-system-spacing-inset-compact: var(--hershey-reference-spacing-4);
   --hershey-system-spacing-inset-tight: var(--hershey-reference-spacing-6);
   --hershey-system-spacing-inset-small: var(--hershey-reference-spacing-8);
+  --hershey-system-spacing-inset-copy: var(--hershey-reference-spacing-10);
   --hershey-system-spacing-inset-default: var(--hershey-reference-spacing-16);
   --hershey-system-spacing-inset-card: var(--hershey-reference-spacing-20);
   --hershey-system-spacing-inset-comfortable: var(--hershey-reference-spacing-24);
@@ -360,7 +367,7 @@
   --hershey-component-breadcrumb-trail-divider-color: var(--hershey-system-color-border-page-divider);
   --hershey-component-breadcrumb-trail-divider-width: var(--hershey-system-border-width-divider);
   --hershey-component-breadcrumb-trail-link-font-weight: var(--hershey-system-typography-action-font-weight);
-  --hershey-component-hero-recipe-category-background: var(--hershey-system-color-surface-seasonal);
+  --hershey-component-hero-recipe-category-background: var(--hershey-system-color-surface-corporate);
   --hershey-component-hero-recipe-category-foreground: var(--hershey-system-color-text-inverse);
   --hershey-component-hero-recipe-category-font-family: var(--hershey-system-typography-body-font-family);
   --hershey-component-hero-recipe-category-font-size: var(--hershey-system-typography-caption-font-size);
@@ -369,10 +376,18 @@
   --hershey-component-hero-recipe-title-color: var(--hershey-system-color-text-primary);
   --hershey-component-hero-recipe-title-font-family: var(--hershey-system-typography-heading-font-family);
   --hershey-component-hero-recipe-title-font-weight: var(--hershey-system-typography-heading-font-weight);
-  --hershey-component-hero-recipe-skill-color: var(--hershey-system-color-text-seasonal);
+  --hershey-component-hero-recipe-skill-color: var(--hershey-system-color-text-corporate);
   --hershey-component-hero-recipe-skill-font-family: var(--hershey-system-typography-body-font-family);
   --hershey-component-hero-recipe-skill-font-weight: var(--hershey-system-typography-action-font-weight);
   --hershey-component-hero-recipe-skill-label-font-size: var(--hershey-system-typography-caption-font-size);
+  --hershey-component-hero-recipe-description-color: var(--hershey-system-color-text-primary);
+  --hershey-component-hero-recipe-description-font-family: var(--hershey-system-typography-body-font-family);
+  --hershey-component-hero-recipe-description-font-size: var(--hershey-system-typography-body-compact-font-size);
+  --hershey-component-hero-recipe-description-font-weight: var(--hershey-system-typography-navigation-font-weight);
+  --hershey-component-hero-recipe-description-line-height: var(--hershey-system-typography-body-line-height);
+  --hershey-component-hero-recipe-description-max-width: var(--hershey-system-layout-container-recipe-intro);
+  --hershey-component-hero-recipe-description-padding-block: var(--hershey-system-spacing-section-hero);
+  --hershey-component-hero-recipe-description-padding-inline: var(--hershey-system-spacing-inset-copy);
   --hershey-component-hero-recipe-share-border-color: var(--hershey-system-color-action-primary-background-default);
   --hershey-component-hero-recipe-share-border-width: var(--hershey-system-border-width-emphasis);
   --hershey-component-hero-recipe-share-background: var(--hershey-system-color-surface-default);

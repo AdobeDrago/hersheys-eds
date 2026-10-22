@@ -163,7 +163,7 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
-  if (document.body.classList.contains('hershey-home')) {
+  if (document.body.classList.contains('hershey-home') || document.body.classList.contains('hershey-recipe')) {
     await loadHersheyTheme();
   }
   const main = doc.querySelector('main');

@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { createDictionary, generateCSS, mergeTheme } from './token-dictionary.mjs';
 
 const document = JSON.parse(await readFile(new URL('./tokens.json', import.meta.url), 'utf8'));
-const scope = ':where(.hershey-home, .header.hershey-nav, .footer.hershey-footer)';
+const scope = ':where(.hershey-home, .hershey-recipe, .header.hershey-nav, .footer.hershey-footer)';
 const header = '/* Generated from DTCG 2025.10 tokens. Do not edit directly. */\n';
 const artifacts = [[new URL('./tokens.css', import.meta.url), header + generateCSS(document, scope)]];
 artifacts.push([

@@ -4,6 +4,7 @@ import {
   copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync,
 } from 'node:fs';
 import { tmpdir } from 'node:os';
+import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import test from 'node:test';
 import {
@@ -28,7 +29,7 @@ function fixture(t, tokens) {
 }
 
 test('committed token CSS is current', () => {
-  assert.match(execFileSync(process.execPath, [generator.pathname, '--check'], { encoding: 'utf8' }), /tokens validated/);
+  assert.match(execFileSync(process.execPath, [fileURLToPath(generator), '--check'], { encoding: 'utf8' }), /tokens validated/);
 });
 
 test('inherited types and aliases generate scoped variables', (t) => {
@@ -36,7 +37,7 @@ test('inherited types and aliases generate scoped variables', (t) => {
     space: { $type: 'dimension', base: { $value: { value: 24, unit: 'px' } }, card: { $value: '{space.base}' } },
   });
   f.run();
-  assert.match(f.css(), /:where\(\.hershey-home, \.header\.hershey-nav, \.footer\.hershey-footer\)/);
+  assert.match(f.css(), /:where\(\.hershey-home, \.hershey-recipe, \.header\.hershey-nav, \.footer\.hershey-footer\)/);
   assert.match(f.css(), /--hershey-space-base: 24px/);
   assert.match(f.css(), /--hershey-space-card: var\(--hershey-space-base\)/);
   assert.doesNotMatch(f.css(), /:root/);

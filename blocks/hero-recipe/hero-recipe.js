@@ -198,8 +198,10 @@ export default function decorate(block) {
 
   if (heading) heading.classList.add('hero-recipe-title');
 
+  const descriptionEls = textEls.filter((el) => el !== skill && el !== heading && el !== category);
+
   textEls.forEach((el) => {
-    if (el === skill) return;
+    if (el === skill || descriptionEls.includes(el)) return;
     content.append(el);
     if (el === heading && meta.children.length) content.append(meta);
   });
@@ -225,6 +227,14 @@ export default function decorate(block) {
 
   content.append(buildShareBar(heading ? heading.textContent.trim() : '', imageUrl));
 
+  let description = null;
+  if (descriptionEls.length) {
+    description = document.createElement('div');
+    description.className = 'hero-recipe-description';
+    description.append(...descriptionEls);
+  }
+
   block.replaceChildren(content);
   if (media) block.append(media);
+  if (description) block.append(description);
 }
