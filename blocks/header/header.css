@@ -596,6 +596,33 @@ header nav .nav-tools {
     font-weight: var(--hershey-component-header-brand-mark-font-weight);
   }
 
+  /* chevron: nudged up so it centres with the label */
+  .header.hershey-nav nav .nav-sections .nav-drop > button::after {
+    translate: 0 calc(-1 * var(--hershey-component-header-menu-chevron-offset));
+  }
+
+  .header.hershey-nav nav .nav-sections .nav-drop > button[aria-expanded='true']::after {
+    translate: 0 var(--hershey-component-header-menu-chevron-offset-expanded);
+  }
+
+  /* hover marker: icon to the left of the open item, as on the original site */
+  .header.hershey-nav nav .nav-sections .nav-drop > button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-right: var(--hershey-system-spacing-inset-compact);
+    width: var(--hershey-component-header-menu-hover-icon-size);
+    height: var(--hershey-component-header-menu-hover-icon-size);
+    background: url('../../icons/nav-hover.ico') center / contain no-repeat;
+    translate: 0 calc(-50% - var(--hershey-component-header-menu-hover-icon-offset));
+    visibility: hidden;
+  }
+
+  .header.hershey-nav nav .nav-sections .nav-drop > button[aria-expanded='true']::before {
+    visibility: visible;
+  }
+
   .header.hershey-nav nav .nav-sections .nav-drop > ul,
   .header.hershey-nav nav .nav-sections .nav-drop > button[aria-expanded='true'] + ul {
     display: grid;
@@ -665,7 +692,18 @@ header nav .nav-tools {
     width: 100%;
     border: 0;
     background: transparent;
+    outline: 0;
     font-size: var(--hershey-component-header-search-font-size);
+  }
+
+  .header.hershey-nav .nav-tools input::placeholder {
+    color: var(--hershey-component-header-search-placeholder-color);
+    opacity: 1;
+  }
+
+  /* the ring on the pill replaces the input's default outline as the focus indicator */
+  .header.hershey-nav nav .nav-tools form:focus-within {
+    box-shadow: var(--hershey-component-header-search-focus-shadow);
   }
 
   /* submit shows the search icon; the visible label stays available to assistive tech */
@@ -697,6 +735,14 @@ header nav .nav-tools {
     gap: var(--hershey-component-header-layout-gap-desktop);
   }
 
+  .header.hershey-nav nav .nav-tools {
+    transition: flex-basis var(--hershey-component-header-motion-search-duration) var(--hershey-component-header-motion-search-easing);
+  }
+
+  .header.hershey-nav nav .nav-tools:focus-within {
+    flex-basis: var(--hershey-component-header-search-width-focus);
+  }
+
   .header.hershey-nav nav .nav-sections .default-content-wrapper > ul > li > a,
   .header.hershey-nav nav .nav-sections .default-content-wrapper > ul > li > p > a,
   .header.hershey-nav nav .nav-sections .nav-drop > button {
@@ -709,4 +755,10 @@ header nav .nav-tools {
   padding: var(--hershey-component-header-search-spacing) var(--hershey-system-spacing-inset-default);
   border-radius: var(--hershey-component-header-search-border-radius);
   background: var(--hershey-component-header-search-background);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header.hershey-nav nav .nav-tools {
+    transition: none;
+  }
 }
