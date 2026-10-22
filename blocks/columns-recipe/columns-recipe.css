@@ -1,0 +1,341 @@
+/* Columns (Recipe): ingredients panel | tools disclosure + numbered directions with step photos.
+   Values extracted from hersheyland.com (.ingredients-and-directions .new-ingred-and-direct). */
+
+.columns-recipe {
+  --columns-recipe-panel-border: var(--hershey-component-columns-recipe-panel-border-color, #ac9abd);
+  --columns-recipe-rule: var(--hershey-component-columns-recipe-rule-color, #9f8085);
+  --columns-recipe-radius: 5px;
+}
+
+.columns-recipe .columns-recipe-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-recipe .columns-recipe-row > div {
+  min-width: 0;
+}
+
+/* shared panel look: white card, lilac border */
+.columns-recipe .columns-recipe-ingredient-list,
+.columns-recipe .columns-recipe-tools,
+.columns-recipe .columns-recipe-steps {
+  box-sizing: border-box;
+  border: var(--hershey-component-columns-recipe-panel-border-width, 3px) solid var(--columns-recipe-panel-border);
+  border-radius: var(--columns-recipe-radius);
+  background-color: var(--hershey-component-columns-recipe-panel-background, var(--background-color));
+}
+
+/* section headings: "Ingredients", "Directions" */
+.columns-recipe h3 {
+  margin: 0 0 15px;
+  font-size: 21px;
+  line-height: 27px;
+}
+
+.columns-recipe .columns-recipe-directions > h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.columns-recipe .columns-recipe-panel > :first-child {
+  margin-top: 0;
+}
+
+/* ingredients */
+.columns-recipe .columns-recipe-ingredient-list {
+  margin: 0;
+  padding: 15px 0 20px 25px;
+  list-style: none;
+}
+
+.columns-recipe .columns-recipe-ingredient-list li {
+  min-height: 40px;
+  padding-right: 25px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.columns-recipe .columns-recipe-ingredient-list a:any-link {
+  border-bottom: 1px solid currentcolor;
+  color: var(--hershey-component-columns-recipe-link-color, #007bbd);
+  font-weight: var(--hershey-component-columns-recipe-link-font-weight, 700);
+  text-decoration: none;
+}
+
+.columns-recipe .columns-recipe-ingredient-list a:hover {
+  border-bottom-color: transparent;
+  color: var(--hershey-component-columns-recipe-link-hover-color, var(--text-color));
+  text-decoration: none;
+}
+
+/* method column */
+.columns-recipe .columns-recipe-method {
+  display: flex;
+  flex-direction: column;
+}
+
+/* tools disclosure ("You'll Need") */
+.columns-recipe .columns-recipe-tools {
+  margin: 0 0 25px;
+  padding: 10px 25px 20px;
+}
+
+.columns-recipe .columns-recipe-tools-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 5px;
+  border-bottom: var(--hershey-component-columns-recipe-rule-width, 2px) solid var(--columns-recipe-rule);
+  cursor: pointer;
+  list-style: none;
+}
+
+.columns-recipe .columns-recipe-tools-summary::-webkit-details-marker {
+  display: none;
+}
+
+.columns-recipe .columns-recipe-tools-summary > h3 {
+  margin: 0 10px 5px 0;
+  font-size: 21px;
+  line-height: 32px;
+}
+
+/* chevron: up when open, down when closed */
+.columns-recipe .columns-recipe-tools-summary::after {
+  content: '';
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin: 0 4px 0 0;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  transform: translateY(1px) rotate(-135deg);
+}
+
+.columns-recipe .columns-recipe-tools:not([open]) .columns-recipe-tools-summary {
+  margin-bottom: 0;
+}
+
+.columns-recipe .columns-recipe-tools:not([open]) .columns-recipe-tools-summary::after {
+  transform: translateY(-3px) rotate(45deg);
+}
+
+.columns-recipe .columns-recipe-tools-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.columns-recipe .columns-recipe-tools-list li {
+  padding: 10px 10px 0 0;
+  font-size: 18px;
+  line-height: 21px;
+  text-transform: capitalize;
+}
+
+/* directions */
+.columns-recipe .columns-recipe-steps {
+  margin: 15px 0 0;
+  padding: 15px 25px;
+  list-style: none;
+  counter-reset: columns-recipe-step;
+}
+
+.columns-recipe .columns-recipe-step {
+  display: grid;
+  grid-template-columns: 31px minmax(0, 1fr);
+  column-gap: 29px;
+  align-items: start;
+  margin-top: 20px;
+  counter-increment: columns-recipe-step;
+}
+
+/* step without a photo keeps the source's trailing space */
+.columns-recipe .columns-recipe-step:not(:has(.columns-recipe-step-media)) {
+  padding-bottom: 30px;
+}
+
+.columns-recipe .columns-recipe-step-check {
+  box-sizing: border-box;
+  width: 31px;
+  height: 31px;
+  margin: 2px 0 0;
+  border: var(--hershey-component-columns-recipe-check-border-width, 2px) solid var(--hershey-component-columns-recipe-check-border-color, var(--text-color));
+  border-radius: 0;
+  background-color: var(--hershey-component-columns-recipe-check-background, var(--background-color));
+  appearance: none;
+  cursor: pointer;
+}
+
+.columns-recipe .columns-recipe-step-check:checked {
+  background: var(--background-color) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%233f000b' d='M441 103c9 9 9 25 0 34L177 401c-9 9-25 9-34 0L7 265c-9-9-9-25 0-34s25-9 34 0l119 119L407 103c9-9 25-9 34 0z'/%3E%3C/svg%3E") center / 20px 20px no-repeat;
+}
+
+.columns-recipe .columns-recipe-step-check:focus-visible {
+  outline: var(--hershey-component-columns-recipe-focus-width, 2px) solid var(--hershey-component-columns-recipe-focus-color, #007bbd);
+  outline-offset: 2px;
+}
+
+.columns-recipe .columns-recipe-step-text {
+  position: relative;
+  font-size: var(--body-font-size-m);
+  line-height: 25.5px;
+}
+
+/* hanging step number: "1." sits just left of the text column */
+.columns-recipe .columns-recipe-step-text::before {
+  content: counter(columns-recipe-step) '.';
+  position: absolute;
+  top: 1px;
+  right: calc(100% + 6px);
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.columns-recipe .columns-recipe-step-text p {
+  margin: 0;
+}
+
+.columns-recipe .columns-recipe-step.is-done .columns-recipe-step-check,
+.columns-recipe .columns-recipe-step.is-done .columns-recipe-step-text {
+  opacity: 0.6;
+}
+
+.columns-recipe .columns-recipe-step.is-done .columns-recipe-step-text {
+  font-style: italic;
+}
+
+/* step photo: full step width, 16:9 crop */
+.columns-recipe .columns-recipe-step-media {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.columns-recipe .columns-recipe-step-media picture {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  margin: 15px 0 25px;
+}
+
+.columns-recipe .columns-recipe-step-media picture + picture {
+  margin-top: 0;
+}
+
+.columns-recipe .columns-recipe-step-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+@media (width >= 600px) {
+  .columns-recipe .columns-recipe-tools-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 900px) {
+  .columns-recipe {
+    --columns-recipe-radius: 8px;
+
+    /* source block has 35px top padding; the section's intro row already leaves 25px */
+    padding-top: 10px;
+  }
+
+  .columns-recipe h3,
+  .columns-recipe .columns-recipe-directions > h3 {
+    margin: 0;
+    font-size: 27px;
+    line-height: 32px;
+  }
+
+  .columns-recipe .columns-recipe-ingredients > h3 {
+    margin-bottom: 15px;
+  }
+
+  .columns-recipe .columns-recipe-ingredient-list {
+    padding: 15px 0 30px 30px;
+  }
+
+  .columns-recipe .columns-recipe-ingredient-list li {
+    min-height: 0;
+    margin-top: 15px;
+    line-height: 27px;
+  }
+
+  .columns-recipe .columns-recipe-tools {
+    margin-bottom: 40px;
+    padding: 20px 25px 15px;
+  }
+
+  .columns-recipe .columns-recipe-tools-list li {
+    line-height: 27px;
+    letter-spacing: 1px;
+  }
+
+  .columns-recipe .columns-recipe-steps {
+    padding: 10px 25px 30px;
+  }
+
+  .columns-recipe .columns-recipe-step {
+    column-gap: 39px;
+  }
+
+  .columns-recipe .columns-recipe-step-text::before {
+    right: calc(100% + 8px);
+  }
+
+  .columns-recipe .columns-recipe-step-media {
+    padding: 0 50px;
+  }
+
+  /* source crops a 16:9 photo into a 500 x 297 frame */
+  .columns-recipe .columns-recipe-step-media img {
+    aspect-ratio: 500 / 297;
+  }
+}
+
+@media (width >= 1200px) {
+  .columns-recipe {
+    max-width: 1190px;
+    margin: 0 auto;
+  }
+
+  .columns-recipe .columns-recipe-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  /* source grid: 1/3 ingredients (36.6px inner gutter) | 2/3 method (38.3px inner gutter) */
+  .columns-recipe .columns-recipe-ingredients {
+    box-sizing: border-box;
+    flex: 0 0 calc(100% / 3);
+    padding-right: 36.6px;
+  }
+
+  .columns-recipe .columns-recipe-method {
+    box-sizing: border-box;
+    flex: 1 1 0;
+    padding-left: 38.3px;
+  }
+
+  .columns-recipe .columns-recipe-single > div {
+    flex: 1 1 100%;
+    padding: 0;
+  }
+}
+
+@media print {
+  .columns-recipe .columns-recipe-step-check {
+    display: none;
+  }
+}

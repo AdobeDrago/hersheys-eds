@@ -1,0 +1,85 @@
+/* Breadcrumb Trail: values extracted from hersheyland.com .cmp-breadcrumb */
+.breadcrumb-trail {
+  /* full-bleed to the viewport's left edge like the source (x = 0); left-only so it can't add a horizontal scrollbar */
+  margin-left: calc(50% - 50vw);
+  color: var(--hershey-component-breadcrumb-trail-color-text, #3f000b);
+}
+
+/* source: nav.cmp-breadcrumb carries the padding and the grey divider */
+.breadcrumb-trail nav {
+  border-bottom: var(--hershey-component-breadcrumb-trail-divider-width, 1px) solid var(--hershey-component-breadcrumb-trail-divider-color, rgb(207 207 207));
+
+  /* stretch the divider to the right edge of the viewport (outset is ink overflow, never scrollable) */
+  border-image: linear-gradient(var(--hershey-component-breadcrumb-trail-divider-color, rgb(207 207 207)), var(--hershey-component-breadcrumb-trail-divider-color, rgb(207 207 207))) 0 0 1 0 / 0 0 var(--hershey-component-breadcrumb-trail-divider-width, 1px) 0 / 0 100vw 0 0;
+  padding: 10px;
+}
+
+.breadcrumb-trail .breadcrumb-trail-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumb-trail .breadcrumb-trail-item {
+  /* the 34px line box comes from the separator's line-height on the source */
+  padding-left: 5px;
+  line-height: 34px;
+  white-space: nowrap;
+}
+
+/* ">" separator after every item except the last */
+.breadcrumb-trail .breadcrumb-trail-item:not(:last-child)::after {
+  content: '>';
+  padding-left: 8px;
+  color: var(--hershey-component-breadcrumb-trail-color-text, #3f000b);
+  font-weight: var(--hershey-component-breadcrumb-trail-link-font-weight, 700);
+}
+
+.breadcrumb-trail .breadcrumb-trail-link {
+  display: inline-block;
+  font-size: var(--body-font-size-m);
+  font-weight: var(--hershey-component-breadcrumb-trail-link-font-weight, 700);
+  line-height: 1.5;
+  vertical-align: baseline;
+}
+
+.breadcrumb-trail a.breadcrumb-trail-link:any-link {
+  color: var(--hershey-component-breadcrumb-trail-color-link, #007bbd);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color var(--hershey-component-action-motion-duration, 0.25s) var(--hershey-component-action-motion-easing, ease);
+}
+
+.breadcrumb-trail a.breadcrumb-trail-link:hover {
+  color: var(--hershey-component-breadcrumb-trail-color-link, #007bbd);
+  text-decoration: none;
+}
+
+/* home item: icon only, no underline; the link keeps the blue link color like the source */
+.breadcrumb-trail .breadcrumb-trail-home a.breadcrumb-trail-link:any-link {
+  text-decoration: none;
+}
+
+.breadcrumb-trail .breadcrumb-trail-home-icon {
+  display: inline-block;
+  width: 1.125em;
+  height: 1em;
+  vertical-align: -0.125em;
+
+  /* source draws the house glyph (a::after) in navy, not the link blue */
+  color: var(--hershey-component-breadcrumb-trail-color-home-icon, rgb(0 53 148));
+}
+
+/* home item shows only the icon; keep the label for assistive technology */
+.breadcrumb-trail .breadcrumb-trail-home .breadcrumb-trail-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
