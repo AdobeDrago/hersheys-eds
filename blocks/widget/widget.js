@@ -33,7 +33,8 @@ function widgetUrl(widgetPath, widgetName, extension) {
 }
 
 function loadWidgetStyles(url) {
-  if (!widgetStyles.has(url)) widgetStyles.set(url, loadCSS(url));
+  // widget css is optional: a widget without styles still loads
+  if (!widgetStyles.has(url)) widgetStyles.set(url, loadCSS(url).catch(() => {}));
   return widgetStyles.get(url);
 }
 
@@ -80,8 +81,8 @@ export default async function decorate(widget) {
     applyWidgetShell(widget, source, widgetName, searchParams);
 
     const resp = await fetch(widgetUrl(widgetPath, widgetName, 'html'));
-    if (!resp.ok) throw new Error(`Widget HTML request failed with HTTP ${resp.status}`);
-    widget.innerHTML = await resp.text();
+    // widget html is optional; the widget js can build its own markup
+    widget.innerHTML = resp.ok ? await resp.text() : '';
 
     const cssLoaded = loadWidgetStyles(widgetUrl(widgetPath, widgetName, 'css'));
     const decorationComplete = (async () => {

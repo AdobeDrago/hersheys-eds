@@ -10,6 +10,7 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  getMetadata,
 } from './aem.js';
 import loadHersheyTheme from './hershey-theme.js';
 
@@ -166,6 +167,10 @@ async function loadEager(doc) {
   if (document.body.classList.contains('hershey-home')) {
     await loadHersheyTheme();
   }
+  // where-to-buy: warm up the PriceSpider connection and loader before the widget block loads
+  if (getMetadata('ps-key')) {
+    import('./pricespider.js').then(({ warmUp }) => warmUp());
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
@@ -192,6 +197,11 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+
+  // product pages: Shop Now to where-to-buy, PriceSpider hints and loader (as on hersheyland.com)
+  if (main.querySelector('a[href*="/where-to-buy"]')) {
+    import('./pricespider.js').then(({ default: decorateShopNow }) => decorateShopNow(main));
+  }
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
