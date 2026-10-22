@@ -5,6 +5,7 @@
   --columns-recipe-panel-border: var(--hershey-component-columns-recipe-panel-border-color, #ac9abd);
   --columns-recipe-rule: var(--hershey-component-columns-recipe-rule-color, #9f8085);
   --columns-recipe-radius: 5px;
+  color: var(--hershey-component-columns-recipe-color-foreground, #3f000b);
 }
 
 .columns-recipe .columns-recipe-row {

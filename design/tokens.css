@@ -370,6 +370,7 @@
   --hershey-component-hero-recipe-share-copy-foreground: var(--hershey-system-color-link-accent);
   --hershey-component-hero-recipe-share-divider-color: var(--hershey-system-color-border-divider-light);
   --hershey-component-hero-recipe-share-focus-width: var(--hershey-system-focus-width-default);
+  --hershey-component-columns-recipe-color-foreground: var(--hershey-system-color-text-primary);
   --hershey-component-columns-recipe-panel-border-color: var(--hershey-system-color-border-panel);
   --hershey-component-columns-recipe-panel-border-width: var(--hershey-system-border-width-emphasis);
   --hershey-component-columns-recipe-panel-background: var(--hershey-system-color-surface-default);
