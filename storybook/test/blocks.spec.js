@@ -136,10 +136,21 @@ test('responsive Columns retains a mobile fallback when the desktop picture has 
 test('Hero uses production foreground and has a readable image-omitted state', async ({ page }) => {
   await open(page, 'blocks-hero--default');
   await expect(page.locator('.hero')).toHaveCSS('isolation', 'isolate');
+  await expect(page.locator('.hero-wrapper')).toHaveCSS('max-width', 'none');
   await expect(page.locator('.hero h1')).toHaveCSS('color', 'rgb(255, 255, 255)');
   await expect(page.locator('.hero p')).toHaveCSS('color', 'rgb(255, 255, 255)');
   await open(page, 'blocks-hero--without-image');
   await expect(page.locator('.hero h1')).toHaveCSS('color', 'rgb(63, 0, 11)');
+});
+
+test('Hero recipe variant keeps section measure and builds the overview', async ({ page }) => {
+  await open(page, 'blocks-hero--recipe');
+  await expect(page.locator('.hero.recipe .hero-recipe-title')).toHaveText("Reese's Oreo Cup Brownies");
+  await expect(page.locator('.hero-recipe-skill-value')).toHaveText('Beginner');
+  await expect(page.locator('.hero.recipe nav')).toHaveAttribute('aria-label', 'Share this recipe');
+  await expect(page.locator('.hero.recipe')).toHaveCSS('min-height', '0px');
+  await expect(page.locator('.hero.recipe picture')).not.toHaveCSS('position', 'absolute');
+  await expect(page.locator('.hero-wrapper')).not.toHaveCSS('max-width', 'none');
 });
 
 test('real Fragment decorator accepts an absolute authored branch URL', async ({ page }) => {

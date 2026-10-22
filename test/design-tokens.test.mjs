@@ -249,7 +249,7 @@ test('all block/theme Hershey variables are declared in the generated catalog', 
   const paths = [
     'styles/hershey-home.css', 'blocks/cards/cards.css', 'blocks/columns/columns.css',
     'blocks/tabs/tabs.css', 'blocks/header/header.css', 'blocks/footer/footer.css', 'blocks/hero/hero.css',
-    'blocks/breadcrumb-trail/breadcrumb-trail.css', 'blocks/hero-recipe/hero-recipe.css',
+    'blocks/breadcrumb-trail/breadcrumb-trail.css',
     'blocks/columns-recipe/columns-recipe.css', 'blocks/columns-nutrition/columns-nutrition.css',
   ];
   paths.forEach((path) => {
