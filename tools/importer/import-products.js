@@ -3,6 +3,7 @@
 
 // PARSER IMPORTS
 import breadcrumbTrailParser from './parsers/breadcrumb-trail.js';
+import cardsRecipeParser from './parsers/cards-recipe.js';
 import columnsProductParser from './parsers/columns-product.js';
 import tabsNutritionParser from './parsers/tabs-nutrition.js';
 import widgetParser from './parsers/widget.js';
@@ -15,6 +16,7 @@ import dmImagesTransformer from './transformers/hersheyland-dm-images.js';
 // PARSER REGISTRY
 const parsers = {
   'breadcrumb-trail': breadcrumbTrailParser,
+  'cards-recipe': cardsRecipeParser,
   'columns-product': columnsProductParser,
   'tabs-nutrition': tabsNutritionParser,
   widget: widgetParser,
@@ -31,6 +33,7 @@ const PAGE_TEMPLATE = {
     { name: 'breadcrumb-trail', instances: ['.breadcrumb .cmp-breadcrumb'] },
     { name: 'columns-product', instances: ['.product-overview-hersheyland .product-grid'] },
     { name: 'tabs-nutrition', instances: ['.nutritional-ingredient-comp .tab-container'] },
+    { name: 'cards-recipe', instances: ['.algolia-recommend .card-container'] },
     { name: 'widget', instances: ['.ratings-and-reviews'] },
   ],
   sections: [
@@ -57,6 +60,14 @@ const PAGE_TEMPLATE = {
       style: 'light-gray',
       blocks: ['tabs-nutrition'],
       defaultContent: ['.nutritional-ingredient-comp .card-header h2', '.nutritional-ingredient-comp .card-header p'],
+    },
+    {
+      id: 'rc6-related',
+      name: 'related-products',
+      selector: ['.algolia-recommend'],
+      style: 'light-gray',
+      blocks: ['cards-recipe'],
+      defaultContent: ['.algolia-recommend .header h2'],
     },
     {
       id: 'rc7',
@@ -177,11 +188,50 @@ function createMetadataBlock(main, document) {
   return meta;
 }
 
+/**
+ * The Related Products slider (Algolia Recommend) only renders once it scrolls
+ * into view. Scroll it into view and wait for its cards before transforming.
+ * @param {Document} document
+ */
+async function renderRelatedProducts(document) {
+  const container = document.querySelector('.algolia-recommend');
+  if (!container) return;
+  const hasCards = () => container.querySelector('li.ais-RelatedProducts-item');
+  const wait = (ms) => new Promise((resolve) => { setTimeout(resolve, ms); });
+  // Step down the page: the slider's scripts load on scroll, not on a jump to the section.
+  window.scrollTo(0, 0);
+  for (let i = 0; i < 20 && !hasCards(); i += 1) {
+    window.scrollBy(0, 400);
+    window.dispatchEvent(new Event('scroll'));
+    // eslint-disable-next-line no-await-in-loop
+    await wait(300);
+  }
+  const deadline = Date.now() + 20000;
+  while (!hasCards() && Date.now() < deadline) {
+    container.scrollIntoView({ block: 'center' });
+    window.dispatchEvent(new Event('scroll'));
+    // eslint-disable-next-line no-await-in-loop
+    await wait(500);
+  }
+  if (!hasCards()) console.warn('Related products did not render; cards-recipe will be empty');
+  window.scrollTo(0, 0);
+}
+
 export default {
+  onLoad: async ({ document }) => {
+    await renderRelatedProducts(document);
+  },
+
   transform: (payload) => {
     const { document, url, params } = payload;
 
     const main = document.body;
+
+    // No nutrition data yet: the source shows a "coming soon" card instead of the tabs
+    const nutrition = PAGE_TEMPLATE.sections.find((s) => s.id === 'rc6');
+    nutrition.style = document.querySelector('.nutritional-ingredient-comp .card-header.no-nutrition')
+      ? 'light-gray, coming-soon'
+      : 'light-gray';
 
     // 1. beforeTransform transformers (cleanup, section breaks)
     executeTransformers('beforeTransform', main, payload);

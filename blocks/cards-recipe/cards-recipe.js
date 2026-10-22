@@ -126,6 +126,49 @@ function buildControls(block, track) {
 }
 
 /**
+ * Product variant: Kiss-shaped pagination dots (source slider), one per scroll position.
+ * @param {HTMLElement} block
+ * @param {HTMLUListElement} track
+ */
+function buildDots(block, track) {
+  const nav = document.createElement('div');
+  nav.className = 'cards-recipe-dots';
+  nav.setAttribute('role', 'group');
+  nav.setAttribute('aria-label', 'Carousel pagination');
+  const cards = [...track.children];
+  const step = () => (cards.length > 1
+    ? cards[1].offsetLeft - cards[0].offsetLeft
+    : track.clientWidth);
+
+  const update = () => {
+    const max = track.scrollWidth - track.clientWidth;
+    block.classList.toggle('cards-recipe-scrollable', max > 1);
+    const pages = Math.max(1, cards.length - Math.round(track.clientWidth / step()) + 1);
+    const current = Math.min(pages - 1, Math.round(track.scrollLeft / step()));
+    if (nav.children.length !== pages) {
+      nav.replaceChildren(...Array.from({ length: pages }, (_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'cards-recipe-dot';
+        dot.setAttribute('aria-label', `Show product ${i + 1}`);
+        dot.setAttribute('aria-controls', track.id);
+        dot.addEventListener('click', () => track.scrollTo({ left: i * step(), behavior: 'smooth' }));
+        return dot;
+      }));
+    }
+    [...nav.children].forEach((dot, i) => {
+      dot.setAttribute('aria-current', i === current ? 'true' : 'false');
+    });
+  };
+  track.addEventListener('scroll', update, { passive: true });
+  if (window.ResizeObserver) new ResizeObserver(update).observe(track);
+  else window.addEventListener('resize', update);
+  requestAnimationFrame(update);
+
+  block.append(nav);
+}
+
+/**
  * Finds the section heading authored right before the block (e.g. "You Might Also Enjoy...").
  * @param {HTMLElement} block
  * @returns {HTMLElement|null}
@@ -217,7 +260,8 @@ export default function decorate(block) {
 
   track.querySelectorAll('picture').forEach(optimize);
   block.replaceChildren(track);
-  buildControls(block, track);
+  if (block.classList.contains('product')) buildDots(block, track);
+  else buildControls(block, track);
 
   if (!ratings.length) return;
   if (window.IntersectionObserver) {

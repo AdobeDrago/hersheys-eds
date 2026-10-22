@@ -34,6 +34,26 @@ var CustomImportScript = (() => {
     return to;
   };
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+  var __async = (__this, __arguments, generator) => {
+    return new Promise((resolve, reject) => {
+      var fulfilled = (value) => {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var rejected = (value) => {
+        try {
+          step(generator.throw(value));
+        } catch (e) {
+          reject(e);
+        }
+      };
+      var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+      step((generator = generator.apply(__this, __arguments)).next());
+    });
+  };
 
   // tools/importer/import-products.js
   var import_products_exports = {};
@@ -75,8 +95,88 @@ var CustomImportScript = (() => {
     element.replaceWith(block);
   }
 
-  // tools/importer/parsers/columns-product.js
+  // tools/importer/parsers/cards-recipe.js
+  var clean = (s) => (s || "").replace(/\s+/g, " ").trim();
+  function toPath(href) {
+    if (!href) return "";
+    try {
+      const u = new URL(href, "https://www.hersheyland.com");
+      if (/(^|\.)hersheyland\.com$/i.test(u.hostname)) return `${u.pathname}${u.search}${u.hash}`;
+      return u.href;
+    } catch (e) {
+      return href;
+    }
+  }
+  function findBvId(item) {
+    const el = item.querySelector("[data-bv-product-id], [data-bv-productid], [data-product-id]");
+    if (!el) return "";
+    const v = el.getAttribute("data-bv-product-id") || el.getAttribute("data-bv-productid") || el.getAttribute("data-product-id") || "";
+    return /^\d+$/.test(v.trim()) ? v.trim() : "";
+  }
   function parse2(element, { document }) {
+    var _a;
+    let items = [...element.querySelectorAll("li.ais-RelatedProducts-item")];
+    if (!items.length) items = [...element.querySelectorAll(".cmp-feature-card__box, .cmp-feature-card")];
+    const seen = /* @__PURE__ */ new Set();
+    const cells = [];
+    items.forEach((item) => {
+      var _a2;
+      const linkEl = item.querySelector("a[href]") || item.closest("a[href]");
+      const href = toPath(linkEl ? linkEl.getAttribute("href") : "");
+      const titleEl = item.querySelector(".copy-container .h4, .card-content .h4, h3, h4") || item.querySelector(".copy-container");
+      const title = clean(titleEl ? titleEl.textContent : "");
+      if (!title && !href) return;
+      const key = href || title;
+      if (seen.has(key)) return;
+      seen.add(key);
+      const img = [...item.querySelectorAll("img")].find((i) => {
+        const src = i.getAttribute("src") || "";
+        return src && !src.startsWith("data:") && !i.closest(".review-container");
+      });
+      let imageCell = "";
+      if (img) {
+        const image = document.createElement("img");
+        image.src = img.getAttribute("src");
+        image.alt = img.getAttribute("alt") || title;
+        imageCell = image;
+      }
+      const body = [];
+      const h3 = document.createElement("h3");
+      if (href) {
+        const a = document.createElement("a");
+        a.href = href;
+        a.textContent = title || href;
+        h3.append(a);
+      } else {
+        h3.textContent = title;
+      }
+      body.push(h3);
+      const size = clean((_a2 = item.querySelector(".bag-value")) == null ? void 0 : _a2.textContent);
+      if (size) {
+        const p = document.createElement("p");
+        p.textContent = size;
+        body.push(p);
+      }
+      const bvId = findBvId(item);
+      if (bvId) {
+        const p = document.createElement("p");
+        p.textContent = `bvid: ${bvId}`;
+        body.push(p);
+      }
+      cells.push([imageCell, body]);
+    });
+    if (!cells.length) {
+      element.remove();
+      return;
+    }
+    const isProduct = !!((_a = element.closest(".algolia-recommend")) == null ? void 0 : _a.querySelector(".product-page"));
+    const name = isProduct ? "cards-recipe (product)" : "cards-recipe";
+    const block = WebImporter.Blocks.createBlock(document, { name, cells });
+    element.replaceWith(block);
+  }
+
+  // tools/importer/parsers/columns-product.js
+  function parse3(element, { document }) {
     let imgs = [...element.querySelectorAll(".product-image .hershey-slider__slide img, .product-image img.main-img")];
     if (!imgs.length) imgs = [...element.querySelectorAll(".image-carousel img.main-img, .image-carousel .product-image img")];
     if (!imgs.length) {
@@ -161,7 +261,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/tabs-nutrition.js
-  var clean = (el) => el ? el.textContent.replace(/\s+/g, " ").trim() : "";
+  var clean2 = (el) => el ? el.textContent.replace(/\s+/g, " ").trim() : "";
   function textP(document, text, bold) {
     const p = document.createElement("p");
     if (bold) {
@@ -176,8 +276,8 @@ var CustomImportScript = (() => {
   function buildNutrition(panel, document) {
     const out = [];
     panel.querySelectorAll(".nf-serving-row").forEach((row) => {
-      const label = clean(row.querySelector(".label"));
-      const val = clean(row.querySelector(".val"));
+      const label = clean2(row.querySelector(".label"));
+      const val = clean2(row.querySelector(".val"));
       if (!label && !val) return;
       out.push(textP(document, val ? `${label} | ${val}` : label, row.classList.contains("bold")));
     });
@@ -185,8 +285,8 @@ var CustomImportScript = (() => {
     if (macros.length) {
       const ul = document.createElement("ul");
       macros.forEach((cell) => {
-        const label = clean(cell.querySelector(".macro-label"));
-        const val = clean(cell.querySelector(".macro-val"));
+        const label = clean2(cell.querySelector(".macro-label"));
+        const val = clean2(cell.querySelector(".macro-val"));
         if (!label) return;
         const li = document.createElement("li");
         li.textContent = val ? `${label} | ${val}` : label;
@@ -196,7 +296,7 @@ var CustomImportScript = (() => {
     }
     const header = panel.querySelector(".nf-detail-header");
     if (header) {
-      let parts = [...header.querySelectorAll(":scope > span, :scope > div, :scope > p")].map(clean).filter(Boolean);
+      let parts = [...header.querySelectorAll(":scope > span, :scope > div, :scope > p")].map(clean2).filter(Boolean);
       if (parts.length < 2) {
         const copy = header.cloneNode(true);
         copy.querySelectorAll("br").forEach((br) => br.replaceWith("\n"));
@@ -209,9 +309,9 @@ var CustomImportScript = (() => {
       const ul = document.createElement("ul");
       let lastTop = null;
       rows.forEach((row) => {
-        const name = clean(row.querySelector(".name"));
-        const amount = clean(row.querySelector(".amount")) || "-";
-        const dv = clean(row.querySelector(".dv")) || "-";
+        const name = clean2(row.querySelector(".name"));
+        const amount = clean2(row.querySelector(".amount")) || "-";
+        const dv = clean2(row.querySelector(".dv")) || "-";
         if (!name) return;
         const li = document.createElement("li");
         li.append(document.createTextNode(`${name} | ${amount} | ${dv}`));
@@ -230,7 +330,7 @@ var CustomImportScript = (() => {
       if (ul.children.length) out.push(ul);
     }
     panel.querySelectorAll(".nf-footer p").forEach((p) => {
-      const t = clean(p);
+      const t = clean2(p);
       if (t) out.push(textP(document, t));
     });
     return out;
@@ -238,7 +338,7 @@ var CustomImportScript = (() => {
   function buildIngredients(panel, document) {
     const out = [];
     panel.querySelectorAll("p").forEach((p) => {
-      const t = clean(p);
+      const t = clean2(p);
       if (t) out.push(textP(document, t));
     });
     return out;
@@ -253,7 +353,7 @@ var CustomImportScript = (() => {
     cellsEls.forEach((cell) => {
       var _a;
       const img = cell.querySelector("img");
-      const label = clean(cell.querySelector(".icon-label")) || clean(cell.querySelector(":scope > span")) || (((_a = cell.querySelector("svg[aria-label]")) == null ? void 0 : _a.getAttribute("aria-label")) || "").replace(/\s*icon$/i, "");
+      const label = clean2(cell.querySelector(".icon-label")) || clean2(cell.querySelector(":scope > span")) || (((_a = cell.querySelector("svg[aria-label]")) == null ? void 0 : _a.getAttribute("aria-label")) || "").replace(/\s*icon$/i, "");
       const src = img ? img.getAttribute("src") || "" : "";
       if (src && !src.startsWith("data:")) {
         const p = document.createElement("p");
@@ -278,19 +378,19 @@ var CustomImportScript = (() => {
         img.alt = el.getAttribute("alt") || "";
         out.push(img);
       } else if (!el.querySelector("p, li")) {
-        const t = clean(el);
+        const t = clean2(el);
         if (t) out.push(textP(document, t));
       }
     });
     return out;
   }
-  function parse3(element, { document }) {
+  function parse4(element, { document }) {
     const buttons = [...element.querySelectorAll('.tabs button.tab-btn, .tabs [role="tab"]')];
     const panels = [...element.querySelectorAll('.tab-panel, [role="tabpanel"]')].filter((p, i, arr) => !arr.some((o) => o !== p && o.contains(p)));
     const cells = [];
     const used = /* @__PURE__ */ new Set();
     buttons.forEach((btn, i) => {
-      const label = clean(btn);
+      const label = clean2(btn);
       if (!label) return;
       const key = (btn.id || "").replace(/^btn-/, "");
       let panel = key ? element.querySelector(`#${CSS.escape(key)}`) : null;
@@ -313,7 +413,7 @@ var CustomImportScript = (() => {
   }
 
   // tools/importer/parsers/widget.js
-  function findBvId(element, document) {
+  function findBvId2(element, document) {
     const meta = document.querySelector('meta[name="bvId"], meta[name="bvid"], meta[name="bv-id"], meta[property="bvId"]');
     const fromMeta = meta && meta.getAttribute("content");
     if (fromMeta && fromMeta.trim()) return fromMeta.trim();
@@ -347,8 +447,8 @@ var CustomImportScript = (() => {
     }
     return "";
   }
-  function parse4(element, { document }) {
-    const bvId = findBvId(element, document);
+  function parse5(element, { document }) {
+    const bvId = findBvId2(element, document);
     if (!bvId) {
       element.replaceWith(...element.childNodes);
       return;
@@ -406,7 +506,7 @@ var CustomImportScript = (() => {
         // PriceSpider buy widget
       ]);
       element.querySelectorAll("div.algolia-recommend").forEach((el) => {
-        if (!el.querySelector(".card-container") || el.querySelector(".algolia-recommend_container.product-page")) el.remove();
+        if (!el.querySelector(".card-container li.ais-RelatedProducts-item, .card-container .cmp-feature-card")) el.remove();
       });
       element.querySelectorAll(".algolia-recommend .button-section a.button").forEach((a) => {
         if (a.closest("strong")) return;
@@ -572,9 +672,10 @@ var CustomImportScript = (() => {
   // tools/importer/import-products.js
   var parsers = {
     "breadcrumb-trail": parse,
-    "columns-product": parse2,
-    "tabs-nutrition": parse3,
-    widget: parse4
+    "cards-recipe": parse2,
+    "columns-product": parse3,
+    "tabs-nutrition": parse4,
+    widget: parse5
   };
   var PAGE_TEMPLATE = {
     name: "products",
@@ -586,6 +687,7 @@ var CustomImportScript = (() => {
       { name: "breadcrumb-trail", instances: [".breadcrumb .cmp-breadcrumb"] },
       { name: "columns-product", instances: [".product-overview-hersheyland .product-grid"] },
       { name: "tabs-nutrition", instances: [".nutritional-ingredient-comp .tab-container"] },
+      { name: "cards-recipe", instances: [".algolia-recommend .card-container"] },
       { name: "widget", instances: [".ratings-and-reviews"] }
     ],
     sections: [
@@ -612,6 +714,14 @@ var CustomImportScript = (() => {
         style: "light-gray",
         blocks: ["tabs-nutrition"],
         defaultContent: [".nutritional-ingredient-comp .card-header h2", ".nutritional-ingredient-comp .card-header p"]
+      },
+      {
+        id: "rc6-related",
+        name: "related-products",
+        selector: [".algolia-recommend"],
+        style: "light-gray",
+        blocks: ["cards-recipe"],
+        defaultContent: [".algolia-recommend .header h2"]
       },
       {
         id: "rc7",
@@ -692,10 +802,39 @@ var CustomImportScript = (() => {
     main.append(block);
     return meta;
   }
+  function renderRelatedProducts(document) {
+    return __async(this, null, function* () {
+      const container = document.querySelector(".algolia-recommend");
+      if (!container) return;
+      const hasCards = () => container.querySelector("li.ais-RelatedProducts-item");
+      const wait = (ms) => new Promise((resolve) => {
+        setTimeout(resolve, ms);
+      });
+      window.scrollTo(0, 0);
+      for (let i = 0; i < 20 && !hasCards(); i += 1) {
+        window.scrollBy(0, 400);
+        window.dispatchEvent(new Event("scroll"));
+        yield wait(300);
+      }
+      const deadline = Date.now() + 2e4;
+      while (!hasCards() && Date.now() < deadline) {
+        container.scrollIntoView({ block: "center" });
+        window.dispatchEvent(new Event("scroll"));
+        yield wait(500);
+      }
+      if (!hasCards()) console.warn("Related products did not render; cards-recipe will be empty");
+      window.scrollTo(0, 0);
+    });
+  }
   var import_products_default = {
+    onLoad: (_0) => __async(null, [_0], function* ({ document }) {
+      yield renderRelatedProducts(document);
+    }),
     transform: (payload) => {
       const { document, url, params } = payload;
       const main = document.body;
+      const nutrition = PAGE_TEMPLATE.sections.find((s) => s.id === "rc6");
+      nutrition.style = document.querySelector(".nutritional-ingredient-comp .card-header.no-nutrition") ? "light-gray, coming-soon" : "light-gray";
       executeTransformers("beforeTransform", main, payload);
       const pageBlocks = findBlocksOnPage(document, PAGE_TEMPLATE);
       pageBlocks.forEach((block) => {

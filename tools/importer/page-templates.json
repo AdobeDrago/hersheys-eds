@@ -74,6 +74,12 @@
           ]
         },
         {
+          "name": "cards-recipe",
+          "instances": [
+            ".algolia-recommend .card-container"
+          ]
+        },
+        {
           "name": "widget",
           "instances": [
             ".ratings-and-reviews"
@@ -119,6 +125,20 @@
           "defaultContent": [
             ".nutritional-ingredient-comp .card-header h2",
             ".nutritional-ingredient-comp .card-header p"
+          ]
+        },
+        {
+          "id": "rc6-related",
+          "name": "related-products",
+          "selector": [
+            ".algolia-recommend"
+          ],
+          "style": "light-gray",
+          "blocks": [
+            "cards-recipe"
+          ],
+          "defaultContent": [
+            ".algolia-recommend .header h2"
           ]
         },
         {

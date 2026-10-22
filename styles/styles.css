@@ -392,6 +392,75 @@ main .section.light-gray.tabs-nutrition-container .default-content-wrapper p a:h
   }
 }
 
+/* coming-soon on product pages: no nutrition data yet, centered white notice card */
+main .section.light-gray.coming-soon {
+  padding: 40px 0 0;
+}
+
+main .section.light-gray.coming-soon > .default-content-wrapper {
+  max-width: 740px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: var(--background-color);
+  padding: 60px 0;
+  text-align: center;
+}
+
+main .section.light-gray.coming-soon .default-content-wrapper h2 {
+  margin: 0 0 35px;
+  font-family: var(--body-font-family);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 43px;
+}
+
+main .section.light-gray.coming-soon .default-content-wrapper p {
+  margin: 0;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 24px;
+}
+
+main .section.light-gray.coming-soon .default-content-wrapper p a:any-link {
+  border-bottom: 1px solid currentcolor;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+main .section.light-gray.coming-soon .default-content-wrapper p a:hover {
+  border-bottom-color: transparent;
+}
+
+/* Related Products on product pages: centered heading over a 1240px card row */
+main .section.cards-recipe-container:has(.cards-recipe.product) {
+  padding-top: 80px;
+}
+
+main .section.cards-recipe-container:has(.cards-recipe.product) > div {
+  max-width: 1240px;
+}
+
+main .section.cards-recipe-container:has(.cards-recipe.product) .default-content-wrapper h2 {
+  margin: 0 0 25px;
+  font-family: var(--heading-font-family);
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 42px;
+  text-align: center;
+}
+
+@media (width >= 900px) {
+  main .section.light-gray.coming-soon > .default-content-wrapper {
+    padding: 60px 140px;
+  }
+
+  main .section.cards-recipe-container:has(.cards-recipe.product) .default-content-wrapper h2 {
+    margin-bottom: 50px;
+    font-size: 36px;
+    line-height: 54px;
+  }
+}
+
 /* wave: decorative purple wave across the top edge (recipe Ingredients & Directions) */
 main .section.wave {
   padding-top: 0;

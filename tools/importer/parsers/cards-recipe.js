@@ -4,6 +4,7 @@
  * Parser for cards-recipe. Base: cards (custom local block, blocks/cards-recipe/cards-recipe.js).
  * Source: https://www.hersheyland.com/recipes/reeses-oreo-cup-brownies.html
  * Block contract: N rows x 2 cells: [recipe image | linked recipe title].
+ *   Product pages ("Related Products"): variant cards-recipe (product), body adds the size line.
  *   Optional BV id per card as a "bvid: 990" paragraph in the body cell; when absent the
  *   block reads the `bvid` metadata of the linked recipe page. Ratings and prev/next
  *   controls are block-generated (not authored).
@@ -49,7 +50,9 @@ export default function parse(element, { document }) {
   items.forEach((item) => {
     const linkEl = item.querySelector('a[href]') || item.closest('a[href]');
     const href = toPath(linkEl ? linkEl.getAttribute('href') : '');
-    const titleEl = item.querySelector('.copy-container .h4, .copy-container, .card-content .h4, h3, h4');
+    // title element first: .copy-container also holds the product size line
+    const titleEl = item.querySelector('.copy-container .h4, .card-content .h4, h3, h4')
+      || item.querySelector('.copy-container');
     const title = clean(titleEl ? titleEl.textContent : '');
     if (!title && !href) return;
 
@@ -81,6 +84,14 @@ export default function parse(element, { document }) {
     }
     body.push(h3);
 
+    // product cards (product pages): description line under the title, e.g. "52 oz bag, 145 pieces"
+    const size = clean(item.querySelector('.bag-value')?.textContent);
+    if (size) {
+      const p = document.createElement('p');
+      p.textContent = size;
+      body.push(p);
+    }
+
     const bvId = findBvId(item);
     if (bvId) {
       const p = document.createElement('p');
@@ -98,6 +109,9 @@ export default function parse(element, { document }) {
     return;
   }
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'cards-recipe', cells });
+  // Related Products on product pages use the same source card, in the "product" variant
+  const isProduct = !!element.closest('.algolia-recommend')?.querySelector('.product-page');
+  const name = isProduct ? 'cards-recipe (product)' : 'cards-recipe';
+  const block = WebImporter.Blocks.createBlock(document, { name, cells });
   element.replaceWith(block);
 }
