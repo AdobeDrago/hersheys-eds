@@ -13,7 +13,8 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
  * The cell holding an ordered list is treated as the method cell, regardless of order.
  * Ingredients: when the /recipes/ingredients sheet has a row whose `pagepath` matches the
  * current page, its non-empty `ingredientN` columns replace the authored ingredient list
- * (cells may hold links and basic inline HTML; the authored list stays as the fallback when there is no row or the fetch fails).
+ * (cells may hold links and basic inline HTML; the authored list stays as the fallback
+ * when there is no row or the fetch fails).
  */
 
 const INGREDIENTS_SHEET = '/recipes/ingredients.json';
@@ -21,6 +22,7 @@ const INGREDIENTS_SHEET = '/recipes/ingredients.json';
 const TOOLS_HEADING = /you.?ll\s+need|tools|equipment/i;
 const DIRECTIONS_HEADING = /direction|instruction|method|steps/i;
 const HEADING = 'h1, h2, h3, h4, h5, h6';
+const SUMMARY_ITEM = /(Prep|Bake|Total):\s*([^|]+)/gi;
 
 let blockCount = 0;
 
@@ -136,6 +138,33 @@ function decorateSteps(list, id) {
 }
 
 /**
+ * Moves an authored Tip paragraph into an accessible disclosure on the last step.
+ * @param {HTMLElement} panel
+ * @param {HTMLOListElement} list
+ */
+function decorateTip(panel, list) {
+  const tip = [...panel.children]
+    .find((child) => child !== list && /^Tip:/i.test(child.textContent.trim()));
+  const lastStep = list.lastElementChild;
+  if (!tip || !lastStep) return;
+
+  const label = tip.querySelector('strong');
+  if (label && /^Tip:?$/i.test(label.textContent.trim())) label.remove();
+  const firstText = [...tip.childNodes].find((node) => node.nodeType === Node.TEXT_NODE);
+  if (firstText) firstText.textContent = firstText.textContent.replace(/^\s*:\s*/, '');
+
+  const details = document.createElement('details');
+  details.className = 'columns-recipe-tip';
+  const summary = document.createElement('summary');
+  summary.textContent = 'Tip';
+  const content = document.createElement('div');
+  content.className = 'columns-recipe-tip-content';
+  content.append(tip);
+  details.append(summary, content);
+  lastStep.append(details);
+}
+
+/**
  * Decorates the method cell (tools + directions).
  * @param {Element} cell
  * @param {number} id
@@ -149,7 +178,10 @@ function decorateMethod(cell, id) {
     if (heading && !ol && TOOLS_HEADING.test(title)) return buildTools(panel);
     if (ol || DIRECTIONS_HEADING.test(title)) {
       panel.classList.add('columns-recipe-directions');
-      if (ol) decorateSteps(ol, id);
+      if (ol) {
+        decorateSteps(ol, id);
+        decorateTip(panel, ol);
+      }
     }
     return panel;
   });
@@ -248,14 +280,175 @@ function renderIngredients(cell, items) {
  */
 function decorateIngredients(cell) {
   cell.classList.add('columns-recipe-ingredients');
-  cell.querySelectorAll(':scope > ul, :scope > ol').forEach((list) => list.classList.add('columns-recipe-ingredient-list'));
+  cell.querySelectorAll(':scope > ul, :scope > ol').forEach((list) => {
+    list.classList.add('columns-recipe-ingredient-list');
+    [...list.children].forEach((item) => {
+      const firstText = [...item.childNodes]
+        .find((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
+      const amount = firstText?.textContent.match(
+        /^(\s*(?:\d+\s+)?(?:\d+\/\d+|\d+)(?:\s+(?:cups?|tbsp|tsp))?)\s+/i,
+      );
+      if (!amount) return;
+
+      firstText.textContent = firstText.textContent.slice(amount[0].length);
+      const quantity = document.createElement('span');
+      quantity.className = 'columns-recipe-ingredient-amount';
+      quantity.textContent = amount[1].trim();
+      const name = document.createElement('span');
+      name.className = 'columns-recipe-ingredient-name';
+      name.append(...item.childNodes);
+      item.append(quantity, name);
+    });
+  });
   cell.querySelectorAll('picture').forEach(optimize);
+}
+
+/**
+ * Creates one label/value item for the recipe summary.
+ * @param {string} label
+ * @param {string} value
+ * @returns {HTMLDivElement}
+ */
+function buildSummaryItem(label, value) {
+  const item = document.createElement('div');
+  item.className = `columns-recipe-summary-item columns-recipe-summary-${label.toLowerCase()}`;
+  const term = document.createElement('dt');
+  term.textContent = `${label}:`;
+  const description = document.createElement('dd');
+  description.textContent = value;
+  item.append(term, description);
+  return item;
+}
+
+/**
+ * Requests or releases the screen wake lock used by Bake Mode.
+ * @param {HTMLInputElement} control
+ * @param {HTMLElement} status
+ * @param {{ sentinel: WakeLockSentinel|null }} state
+ */
+async function updateWakeLock(control, status, state) {
+  if (!control.checked) {
+    if (state.sentinel) await state.sentinel.release();
+    state.sentinel = null;
+    status.textContent = 'Bake Mode is off.';
+    return;
+  }
+
+  try {
+    state.sentinel = await navigator.wakeLock.request('screen');
+    status.textContent = 'Bake Mode is on.';
+    state.sentinel.addEventListener('release', () => {
+      state.sentinel = null;
+      if (document.visibilityState === 'visible' && control.checked) {
+        control.checked = false;
+        status.textContent = 'Bake Mode was turned off.';
+      }
+    });
+  } catch (e) {
+    control.checked = false;
+    status.textContent = 'Bake Mode is not available on this device.';
+  }
+}
+
+/**
+ * Builds the progressively enhanced Bake Mode control.
+ * @param {number} id
+ * @returns {HTMLDivElement}
+ */
+function buildBakeMode(id) {
+  const bakeMode = document.createElement('div');
+  bakeMode.className = 'columns-recipe-bake-mode';
+
+  const copy = document.createElement('div');
+  copy.className = 'columns-recipe-bake-copy';
+  const heading = document.createElement('p');
+  heading.className = 'columns-recipe-bake-heading';
+  heading.textContent = 'Bake Mode:';
+  const description = document.createElement('p');
+  description.textContent = 'Prevent your screen from going dark while you bake.';
+  copy.append(heading, description);
+
+  const label = document.createElement('label');
+  label.className = 'columns-recipe-bake-switch';
+  label.setAttribute('for', `columns-recipe-${id}-bake-mode`);
+  const control = document.createElement('input');
+  control.id = `columns-recipe-${id}-bake-mode`;
+  control.type = 'checkbox';
+  control.role = 'switch';
+  control.setAttribute('aria-label', 'Bake Mode');
+  const slider = document.createElement('span');
+  slider.className = 'columns-recipe-bake-slider';
+  label.append(control, slider);
+
+  const status = document.createElement('span');
+  status.className = 'columns-recipe-bake-status';
+  status.setAttribute('aria-live', 'polite');
+
+  if (!('wakeLock' in navigator)) {
+    control.disabled = true;
+    status.textContent = 'Bake Mode is not supported by this browser.';
+  } else {
+    const state = { sentinel: null };
+    control.addEventListener('change', () => updateWakeLock(control, status, state));
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && control.checked && !state.sentinel) {
+        updateWakeLock(control, status, state);
+      }
+    });
+  }
+
+  bakeMode.append(copy, label, status);
+  return bakeMode;
+}
+
+/**
+ * Converts the authored heading and summary paragraphs above the block into the
+ * production recipe summary layout and adds Bake Mode.
+ * @param {HTMLElement} block
+ * @param {number} id
+ */
+function decorateSummary(block, id) {
+  const section = block.closest('.columns-recipe-container');
+  const summary = section?.querySelector(':scope > .default-content-wrapper');
+  if (!summary || summary.classList.contains('columns-recipe-summary')) return;
+
+  const heading = summary.querySelector(':scope > h1, :scope > h2');
+  if (!heading) return;
+
+  summary.classList.add('columns-recipe-summary');
+  heading.classList.add('columns-recipe-summary-heading');
+  const main = document.createElement('div');
+  main.className = 'columns-recipe-summary-main';
+  main.append(heading);
+
+  const paragraphs = [...summary.querySelectorAll(':scope > p')];
+  const yields = paragraphs.find((paragraph) => /^Yields:/i.test(paragraph.textContent.trim()));
+  if (yields) {
+    const list = document.createElement('dl');
+    list.className = 'columns-recipe-yield';
+    list.append(buildSummaryItem('Yields', yields.textContent.replace(/^Yields:\s*/i, '')));
+    main.append(list);
+    yields.remove();
+  }
+
+  const times = document.createElement('dl');
+  times.className = 'columns-recipe-times';
+  paragraphs.forEach((paragraph) => {
+    [...paragraph.textContent.matchAll(SUMMARY_ITEM)].forEach(([, label, value]) => {
+      times.append(buildSummaryItem(label, value.trim()));
+    });
+    if (paragraph !== yields && paragraph.textContent.match(SUMMARY_ITEM)) paragraph.remove();
+  });
+  if (times.children.length) main.append(times);
+  main.append(...summary.children);
+  summary.replaceChildren(main, buildBakeMode(id));
 }
 
 export default async function decorate(block) {
   blockCount += 1;
   const id = blockCount;
 
+  decorateSummary(block, id);
   const sheetItems = await fetchIngredients();
 
   [...block.children].forEach((row) => {

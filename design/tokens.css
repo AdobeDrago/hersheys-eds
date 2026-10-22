@@ -386,6 +386,10 @@
   --hershey-component-hero-recipe-share-divider-color: var(--hershey-system-color-border-divider-light);
   --hershey-component-hero-recipe-share-focus-width: var(--hershey-system-focus-width-default);
   --hershey-component-columns-recipe-color-foreground: var(--hershey-system-color-text-primary);
+  --hershey-component-columns-recipe-color-background: var(--hershey-system-color-surface-subtle);
+  --hershey-component-columns-recipe-typography-body-font-family: var(--hershey-system-typography-body-font-family);
+  --hershey-component-columns-recipe-typography-heading-font-family: var(--hershey-system-typography-heading-font-family);
+  --hershey-component-columns-recipe-typography-heading-font-weight: var(--hershey-system-typography-heading-font-weight);
   --hershey-component-columns-recipe-panel-border-color: var(--hershey-system-color-border-panel);
   --hershey-component-columns-recipe-panel-border-width: var(--hershey-system-border-width-emphasis);
   --hershey-component-columns-recipe-panel-background: var(--hershey-system-color-surface-default);
@@ -397,6 +401,9 @@
   --hershey-component-columns-recipe-check-border-color: var(--hershey-system-color-border-strong);
   --hershey-component-columns-recipe-check-border-width: var(--hershey-system-border-width-control);
   --hershey-component-columns-recipe-check-background: var(--hershey-system-color-surface-default);
+  --hershey-component-columns-recipe-bake-mode-track-background: var(--hershey-system-color-border-subtle);
+  --hershey-component-columns-recipe-bake-mode-track-active-background: var(--hershey-system-color-action-primary-background-default);
+  --hershey-component-columns-recipe-bake-mode-thumb-background: var(--hershey-system-color-surface-default);
   --hershey-component-columns-recipe-focus-color: var(--hershey-system-color-action-primary-background-default);
   --hershey-component-columns-recipe-focus-width: var(--hershey-system-focus-width-default);
   --hershey-component-columns-nutrition-color-foreground: var(--hershey-system-color-text-primary);
