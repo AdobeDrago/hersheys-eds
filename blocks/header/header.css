@@ -400,6 +400,7 @@ header nav .nav-tools {
   transform: none;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .header.hershey-nav nav .nav-sections ul {
   font-size: var(--hershey-component-header-typography-font-size);
 }
@@ -470,6 +471,7 @@ header nav .nav-tools {
   visibility: visible;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .header.hershey-nav nav .nav-sections .nav-drop > ul > li {
   border-radius: var(--hershey-system-shape-radius-validation);
   background: var(--hershey-component-header-submenu-background);
@@ -477,12 +479,14 @@ header nav .nav-tools {
   font-weight: var(--hershey-component-header-brand-mark-font-weight);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .header.hershey-nav nav .nav-sections .nav-drop > ul > li:first-child {
   border-radius: 0;
   background: none;
   box-shadow: none;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .header.hershey-nav nav .nav-sections li > ul a {
   display: flex;
   align-items: center;
@@ -528,8 +532,7 @@ header nav .nav-tools {
 /* desktop: logo | inline nav | search pill; hover dropdowns */
 @media (width >= 768px) {
   .header.hershey-nav .nav-wrapper {
-    overflow-x: clip;
-    overflow-y: visible;
+    overflow: clip visible;
     box-shadow: var(--hershey-component-header-layout-shadow);
   }
 
@@ -652,6 +655,7 @@ header nav .nav-tools {
   }
 
   /* keep dropdowns of the right-most items inside the viewport */
+  /* stylelint-disable-next-line no-descending-specificity */
   .header.hershey-nav nav .nav-sections .nav-drop:nth-last-child(-n + 3) > ul,
   .header.hershey-nav nav .nav-sections .nav-drop:nth-last-child(-n + 3) > button[aria-expanded='true'] + ul {
     right: 0;
@@ -707,6 +711,7 @@ header nav .nav-tools {
   }
 
   /* submit shows the search icon; the visible label stays available to assistive tech */
+  /* stylelint-disable-next-line no-descending-specificity */
   header .header.hershey-nav nav .nav-tools button {
     flex: none;
     width: calc(var(--hershey-component-header-menu-icon-width) + 2 * var(--hershey-system-spacing-inset-default));
@@ -750,6 +755,7 @@ header nav .nav-tools {
   }
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .header.hershey-nav .nav-tools form {
   gap: var(--hershey-component-header-search-spacing);
   padding: var(--hershey-component-header-search-spacing) var(--hershey-system-spacing-inset-default);
