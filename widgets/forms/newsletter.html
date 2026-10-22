@@ -1,0 +1,44 @@
+<div class="newsletter-form-container">
+  <section class="newsletter-register">
+    <h1>Get Ready for Even More Hershey Goodness</h1>
+    <p class="newsletter-intro">Join our twice-a-month newsletter and receive recipe inspiration, celebration ideas, news on the latest candy innovations, contests and promotions, and more across Hershey's family of brands. Just tell us where to send it and where you're from.</p>
+    <p><small>Please note, visitors from countries in the EU/EEA should not use this form.</small></p>
+    <form name="newsletter-form" novalidate>
+      <div class="newsletter-row">
+        <div class="newsletter-field">
+          <label for="newsletter-first-name">First Name <span aria-hidden="true">*</span></label>
+          <input type="text" id="newsletter-first-name" name="firstName" maxlength="60" autocomplete="given-name" placeholder="Enter Your First Name">
+          <span class="newsletter-error">Please provide your first name.</span>
+        </div>
+        <div class="newsletter-field">
+          <label for="newsletter-last-name">Last Name <span aria-hidden="true">*</span></label>
+          <input type="text" id="newsletter-last-name" name="lastName" maxlength="60" autocomplete="family-name" placeholder="Enter Your Last Name">
+          <span class="newsletter-error">Please provide your last name.</span>
+        </div>
+      </div>
+      <div class="newsletter-field">
+        <label for="newsletter-email">Email <span aria-hidden="true">*</span></label>
+        <input type="email" id="newsletter-email" name="email" maxlength="255" autocomplete="email" placeholder="Enter Your Email">
+        <span class="newsletter-error">Please provide a valid email address.</span>
+      </div>
+      <div class="newsletter-row">
+        <div class="newsletter-field">
+          <label for="newsletter-zip">Zip Code <span aria-hidden="true">*</span></label>
+          <input type="text" id="newsletter-zip" name="zip" maxlength="16" autocomplete="postal-code" placeholder="Enter Your ZIP Code">
+          <span class="newsletter-error">Please provide a valid zip code.</span>
+        </div>
+      </div>
+      <div class="newsletter-field newsletter-optin">
+        <input type="checkbox" id="newsletter-optin" name="optin" value="y">
+        <label for="newsletter-optin">I’d like to receive product news, exciting offers, personalized content, services and more from The Hershey Company and its affiliates and partners, including through direct mail, digital media or digital communications. For further information, please refer to our <a href="https://www.thehersheycompany.com/en_us/home/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. <span aria-hidden="true">*</span></label>
+        <span class="newsletter-error">Please accept the terms and conditions to continue.</span>
+      </div>
+      <button type="submit">Sign Me Up</button>
+    </form>
+  </section>
+  <section class="newsletter-thanks" hidden>
+    <h2>You have successfully subscribed!</h2>
+    <!--<p>Check your inbox for a welcome email and connect with us on social media to see what's new.</p>-->
+    <a class="button" href="/">Explore Hersheyland</a>
+  </section>
+</div>

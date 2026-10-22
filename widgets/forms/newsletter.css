@@ -1,0 +1,88 @@
+.newsletter {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 16px;
+}
+
+.newsletter h1 {
+  font-size: var(--heading-font-size-xl);
+  text-align: center;
+}
+
+.newsletter .newsletter-intro {
+  text-align: center;
+}
+
+.newsletter form {
+  display: grid;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.newsletter .newsletter-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.newsletter .newsletter-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.newsletter .newsletter-field input[type='text'],
+.newsletter .newsletter-field input[type='email'] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid currentcolor;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.newsletter .newsletter-optin {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 12px;
+}
+
+.newsletter .newsletter-optin label {
+  margin: 0;
+  font-weight: 400;
+}
+
+.newsletter .newsletter-error {
+  display: none;
+  margin-top: 4px;
+  color: #c00;
+  font-size: var(--body-font-size-xs);
+}
+
+.newsletter .newsletter-optin .newsletter-error {
+  grid-column: 2;
+}
+
+.newsletter .has-error .newsletter-error {
+  display: block;
+}
+
+.newsletter .has-error input[type='text'],
+.newsletter .has-error input[type='email'] {
+  border-color: #c00;
+}
+
+.newsletter button[type='submit'] {
+  justify-self: center;
+  cursor: pointer;
+}
+
+.newsletter .newsletter-thanks {
+  text-align: center;
+}
+
+@media (width >= 600px) {
+  .newsletter .newsletter-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
