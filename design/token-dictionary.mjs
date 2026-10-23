@@ -17,7 +17,7 @@ const specimenContracts = {
   feedback: { types: ['color'], properties: ['background-color', 'border-color'] },
   family: { types: ['fontFamily'], properties: ['font-family'] },
   size: { types: ['dimension'], properties: ['font-size'] },
-  lineHeight: { types: ['number'], properties: ['line-height'] },
+  lineHeight: { types: ['number', 'dimension'], properties: ['line-height'] },
   weight: { types: ['fontWeight'], properties: ['font-weight'] },
   tracking: { types: ['dimension'], properties: ['letter-spacing'] },
   spacing: { types: ['dimension'], properties: ['padding', 'margin'] },
