@@ -15,7 +15,7 @@
 }
 
 .banner.halloween {
-  background-image: url('./halloween-pattern.svg');
+  background-image: url('../../icons/halloween-pattern.svg');
   background-position: center;
   background-size: cover;
 }
