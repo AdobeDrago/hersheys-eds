@@ -1,0 +1,99 @@
+/*
+ * Breadcrumb trail: values from hersheyland.com .cmp-breadcrumb via
+ * component.breadcrumb-trail.* tokens; literal fallbacks keep the block
+ * identical outside the branded theme scope.
+ */
+
+/* the trail spans the full width and sits flush against the next section, like the source */
+main > .section:has(> .breadcrumb-trail-wrapper) {
+  margin-bottom: 0;
+}
+
+main > .section > .breadcrumb-trail-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.breadcrumb-trail {
+  color: var(--hershey-component-breadcrumb-trail-foreground, #3f000b);
+  font-family: var(--hershey-component-breadcrumb-trail-base-font-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-component-breadcrumb-trail-base-font-size, 17px);
+  font-weight: var(--hershey-component-breadcrumb-trail-base-font-weight, 500);
+  line-height: var(--hershey-component-breadcrumb-trail-base-line-height, 1.5);
+}
+
+/* source: nav.cmp-breadcrumb carries the padding and the grey divider */
+.breadcrumb-trail nav {
+  border-bottom: var(--hershey-component-breadcrumb-trail-divider-width, 1px) var(--hershey-component-breadcrumb-trail-divider-style, solid) var(--hershey-component-breadcrumb-trail-divider-color, #cfcfcf);
+  padding: var(--hershey-component-breadcrumb-trail-nav-padding, 10px);
+}
+
+.breadcrumb-trail .breadcrumb-trail-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0 var(--hershey-component-breadcrumb-trail-list-gap, 4px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumb-trail .breadcrumb-trail-item {
+  /* the line box comes from the separator's line-height on the source */
+  padding-left: var(--hershey-component-breadcrumb-trail-item-padding-start, 5px);
+  line-height: var(--hershey-component-breadcrumb-trail-item-line-height, 34px);
+  white-space: nowrap;
+}
+
+/* ">" separator after every item except the last; the leading space matches the whitespace the source markup has before it */
+.breadcrumb-trail .breadcrumb-trail-item:not(:last-child)::after {
+  content: ' >';
+  padding-left: var(--hershey-component-breadcrumb-trail-separator-padding-start, 8px);
+  color: var(--hershey-component-breadcrumb-trail-separator-foreground, #3f000b);
+  font-weight: var(--hershey-component-breadcrumb-trail-separator-font-weight, 700);
+}
+
+.breadcrumb-trail .breadcrumb-trail-link {
+  display: inline-block;
+  font-size: var(--hershey-component-breadcrumb-trail-link-font-size, 17px);
+  font-weight: var(--hershey-component-breadcrumb-trail-link-font-weight, 700);
+  line-height: var(--hershey-component-breadcrumb-trail-link-line-height, 1.5);
+  vertical-align: baseline;
+}
+
+.breadcrumb-trail a.breadcrumb-trail-link:any-link {
+  color: var(--hershey-component-breadcrumb-trail-link-color, #007bbd);
+  text-decoration: underline;
+  text-underline-offset: var(--hershey-component-breadcrumb-trail-link-underline-offset, 4px);
+  transition: color var(--hershey-component-breadcrumb-trail-link-transition-duration, 250ms) var(--hershey-component-breadcrumb-trail-link-transition-easing, ease);
+}
+
+.breadcrumb-trail a.breadcrumb-trail-link:hover {
+  color: var(--hershey-component-breadcrumb-trail-link-color, #007bbd);
+  text-decoration: none;
+}
+
+/* home item: icon only, no underline; the link keeps the blue link color like the source */
+.breadcrumb-trail .breadcrumb-trail-home a.breadcrumb-trail-link:any-link {
+  text-decoration: none;
+}
+
+.breadcrumb-trail .breadcrumb-trail-home-icon {
+  display: inline-block;
+  width: 1.125em;
+  height: 1em;
+  vertical-align: -0.125em;
+
+  /* source draws the house glyph (a::after) in navy, not the link blue */
+  color: var(--hershey-component-breadcrumb-trail-home-icon-color, #003594);
+}
+
+/* home item shows only the icon; keep the label for assistive technology */
+.breadcrumb-trail .breadcrumb-trail-home .breadcrumb-trail-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

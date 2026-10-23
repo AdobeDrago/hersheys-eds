@@ -1,0 +1,418 @@
+/*
+ * Tabs (nutrition) variant, loaded by tabs.js for `Tabs (nutrition)`.
+ * Values come from hersheyland.com .nutritional-ingredient-comp via
+ * component.tabs.nutrition.* tokens; literal fallbacks keep the block
+ * identical outside the branded theme scope.
+ * The 768px media query mirrors system.layout.breakpoint.tablet-large.
+ */
+.tabs.nutrition {
+  border: var(--hershey-component-tabs-nutrition-container-border-width, 1px) var(--hershey-component-tabs-nutrition-container-border-style, solid) var(--hershey-component-tabs-nutrition-container-border-color, #d1d1d1);
+  border-radius: var(--hershey-component-tabs-nutrition-container-border-radius, 8px);
+  color: var(--hershey-component-tabs-nutrition-container-foreground, #3f000b);
+  font-family: var(--hershey-component-tabs-nutrition-container-font-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-component-tabs-nutrition-container-font-size, 17px);
+  font-weight: var(--hershey-component-tabs-nutrition-container-font-weight, 500);
+  line-height: var(--hershey-component-tabs-nutrition-container-line-height, 1.5);
+}
+
+/* tab list */
+.tabs.nutrition .tabs-nutrition-list {
+  display: flex;
+  height: var(--hershey-component-tabs-nutrition-list-height-mobile, 90px);
+}
+
+.tabs.nutrition .tabs-nutrition-tab {
+  flex: 1 1 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: var(--hershey-component-tabs-nutrition-tab-border-width, 1px) var(--hershey-component-tabs-nutrition-container-border-style, solid) var(--hershey-component-tabs-nutrition-tab-border-color, #c1c1c1);
+  border-radius: 0;
+  background-color: var(--hershey-component-tabs-nutrition-tab-background, var(--background-color));
+  color: var(--hershey-component-tabs-nutrition-tab-foreground, #3f000b);
+  font: inherit;
+  font-size: var(--hershey-component-tabs-nutrition-tab-font-size-mobile, 14px);
+  font-weight: var(--hershey-component-tabs-nutrition-tab-font-weight, 450);
+  line-height: normal;
+  text-align: center;
+  cursor: pointer;
+}
+
+.tabs.nutrition .tabs-nutrition-tab:first-child {
+  border-top-left-radius: var(--hershey-component-tabs-nutrition-container-border-radius, 8px);
+}
+
+.tabs.nutrition .tabs-nutrition-tab:last-child {
+  border-top-right-radius: var(--hershey-component-tabs-nutrition-container-border-radius, 8px);
+}
+
+.tabs.nutrition .tabs-nutrition-tab[aria-selected='true'] {
+  border-bottom: var(--hershey-component-tabs-nutrition-tab-selected-indicator-width, 5px) var(--hershey-component-tabs-nutrition-container-border-style, solid) var(--hershey-component-tabs-nutrition-tab-selected-indicator-color, #3f000b);
+  background-color: var(--hershey-component-tabs-nutrition-tab-selected-background, #f3f3f3);
+  font-weight: var(--hershey-component-tabs-nutrition-tab-selected-font-weight, 700);
+}
+
+/* panels */
+.tabs.nutrition .tabs-nutrition-panel {
+  padding: 0;
+}
+
+.tabs.nutrition .tabs-nutrition-panel[hidden] {
+  display: none;
+}
+
+.tabs.nutrition .tabs-nutrition-panel p {
+  margin: 0;
+}
+
+/* shared row structure */
+.tabs.nutrition .tabs-nutrition-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs.nutrition .tabs-nutrition-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* serving rows (paragraph "Label | value" lines) */
+.tabs.nutrition .tabs-nutrition-serving {
+  padding: var(--hershey-component-tabs-nutrition-serving-padding-block, 12px) var(--hershey-component-tabs-nutrition-layout-inline-end-mobile, 18px) var(--hershey-component-tabs-nutrition-serving-padding-block, 12px) var(--hershey-component-tabs-nutrition-layout-inline-start-mobile, 17px);
+  border-bottom: var(--hershey-component-tabs-nutrition-row-divider-width, 1px) var(--hershey-component-tabs-nutrition-container-border-style, solid) var(--hershey-component-tabs-nutrition-row-divider-color, rgb(63 0 11 / 17%));
+}
+
+.tabs.nutrition .tabs-nutrition-serving .tabs-nutrition-row {
+  font-size: var(--hershey-component-tabs-nutrition-serving-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-tabs-nutrition-row-font-weight, 450);
+  line-height: var(--hershey-component-tabs-nutrition-row-line-height, 32px);
+}
+
+.tabs.nutrition .tabs-nutrition-serving .tabs-nutrition-row-strong {
+  font-weight: var(--hershey-component-tabs-nutrition-row-strong-font-weight, 700);
+}
+
+.tabs.nutrition .tabs-nutrition-serving .tabs-nutrition-name {
+  text-transform: capitalize;
+}
+
+/* macro summary (list of "Label | value") */
+.tabs.nutrition .tabs-nutrition-summary {
+  flex-direction: row;
+  box-sizing: border-box;
+  height: var(--hershey-component-tabs-nutrition-summary-height, 100px);
+  border-bottom: var(--hershey-component-tabs-nutrition-row-divider-width, 1px) var(--hershey-component-tabs-nutrition-container-border-style, solid) var(--hershey-component-tabs-nutrition-row-divider-color, rgb(63 0 11 / 17%));
+}
+
+.tabs.nutrition .tabs-nutrition-summary .tabs-nutrition-row {
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+}
+
+.tabs.nutrition .tabs-nutrition-summary .tabs-nutrition-row:where(:last-child:not(:first-child)) {
+  flex-grow: 2;
+}
+
+.tabs.nutrition .tabs-nutrition-summary .tabs-nutrition-name {
+  font-size: var(--hershey-component-tabs-nutrition-summary-name-font-size-mobile, 18px);
+  font-weight: var(--hershey-component-tabs-nutrition-summary-name-font-weight, 600);
+  line-height: var(--hershey-component-tabs-nutrition-summary-name-line-height, 30px);
+}
+
+.tabs.nutrition .tabs-nutrition-summary .tabs-nutrition-value {
+  font-size: var(--hershey-component-tabs-nutrition-summary-value-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-tabs-nutrition-row-font-weight, 450);
+  line-height: var(--hershey-component-tabs-nutrition-row-line-height, 32px);
+  text-align: center;
+}
+
+/* nutrient facts (list of "Name | amount | %DV") */
+.tabs.nutrition .tabs-nutrition-facts {
+  padding: var(--hershey-component-tabs-nutrition-facts-padding-block-start-mobile, 24px) var(--hershey-component-tabs-nutrition-layout-inline-end-mobile, 18px) 0 var(--hershey-component-tabs-nutrition-layout-inline-start-mobile, 17px);
+}
+
+/* "Amount per serving | % DV*" column header: the serving row right before the facts */
+.tabs.nutrition .tabs-nutrition-serving:has(+ .tabs-nutrition-facts) {
+  margin: 0 var(--hershey-component-tabs-nutrition-layout-inline-end-mobile, 18px) 0 var(--hershey-component-tabs-nutrition-layout-inline-start-mobile, 17px); /* same insets as the facts rows */
+  padding: var(--hershey-component-tabs-nutrition-heading-padding-block-start-mobile, 24px) 0 var(--hershey-component-tabs-nutrition-heading-padding-block-end-mobile, 7px);
+  text-transform: capitalize;
+}
+
+.tabs.nutrition .tabs-nutrition-serving + .tabs-nutrition-facts {
+  padding-top: 0;
+}
+
+.tabs.nutrition .tabs-nutrition-facts .tabs-nutrition-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  margin: 0 0 var(--hershey-component-tabs-nutrition-facts-row-gap, 5px);
+  font-size: var(--hershey-component-tabs-nutrition-facts-font-size-mobile, 14px);
+  font-weight: var(--hershey-component-tabs-nutrition-row-strong-font-weight, 700);
+  line-height: var(--hershey-component-tabs-nutrition-row-line-height, 32px);
+}
+
+.tabs.nutrition .tabs-nutrition-facts .tabs-nutrition-row:where(:first-child) {
+  margin-top: var(--hershey-component-tabs-nutrition-facts-first-row-offset, 9px);
+}
+
+.tabs.nutrition .tabs-nutrition-facts .tabs-nutrition-row:where(:first-child),
+.tabs.nutrition .tabs-nutrition-facts .tabs-nutrition-row-indent:where(:nth-child(1 of .tabs-nutrition-row-indent)) {
+  padding-bottom: var(--hershey-component-tabs-nutrition-facts-divider-padding, 5px);
+  border-bottom: var(--hershey-component-tabs-nutrition-row-divider-width, 1px) var(--hershey-component-tabs-nutrition-container-border-style, solid) var(--hershey-component-tabs-nutrition-row-divider-color, rgb(63 0 11 / 17%));
+}
+
+.tabs.nutrition .tabs-nutrition-facts .tabs-nutrition-row:where(:last-child) {
+  margin: 0;
+  padding-bottom: var(--hershey-component-tabs-nutrition-facts-tail-padding, 15px);
+  border-bottom: var(--hershey-component-tabs-nutrition-row-divider-width, 1px) var(--hershey-component-tabs-nutrition-container-border-style, solid) var(--hershey-component-tabs-nutrition-row-divider-color, rgb(63 0 11 / 17%));
+}
+
+.tabs.nutrition .tabs-nutrition-facts .tabs-nutrition-row-indent {
+  padding-left: var(--hershey-component-tabs-nutrition-facts-indent, 8px);
+  font-weight: var(--hershey-component-tabs-nutrition-row-font-weight, 450);
+}
+
+.tabs.nutrition .tabs-nutrition-facts .tabs-nutrition-value {
+  font-weight: var(--hershey-component-tabs-nutrition-facts-amount-font-weight, 450);
+  text-align: right;
+}
+
+.tabs.nutrition .tabs-nutrition-facts .tabs-nutrition-value:last-child {
+  min-width: var(--hershey-component-tabs-nutrition-facts-dv-min-width-mobile, 28px);
+  margin-left: var(--hershey-component-tabs-nutrition-facts-dv-offset-mobile, 68px);
+  font-weight: var(--hershey-component-tabs-nutrition-facts-dv-font-weight, 700);
+}
+
+.tabs.nutrition .tabs-nutrition-serving:has(+ .tabs-nutrition-facts) .tabs-nutrition-row {
+  color: var(--hershey-component-tabs-nutrition-row-muted-foreground, #757575);
+  font-size: var(--hershey-component-tabs-nutrition-heading-font-size-mobile, 16px);
+}
+
+/* footnote */
+.tabs.nutrition .tabs-nutrition-panel-facts > p {
+  padding: var(--hershey-component-tabs-nutrition-footnote-padding-block-start-mobile, 20px) var(--hershey-component-tabs-nutrition-footnote-padding-inline-mobile, 18px) var(--hershey-component-tabs-nutrition-footnote-padding-block-end, 25px);
+  font-size: var(--hershey-component-tabs-nutrition-footnote-font-size-mobile, 14px);
+  line-height: var(--hershey-component-tabs-nutrition-footnote-line-height-mobile, 22px);
+}
+
+/* ingredients */
+.tabs.nutrition .tabs-nutrition-panel-text:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--hershey-component-tabs-nutrition-text-gap, 13px);
+  padding: var(--hershey-component-tabs-nutrition-text-padding-block-start-mobile, 24px) var(--hershey-component-tabs-nutrition-text-padding-inline-end-mobile, 27px) var(--hershey-component-tabs-nutrition-text-padding-block-end-mobile, 21px) var(--hershey-component-tabs-nutrition-text-padding-inline-start-mobile, 28px);
+  font-size: var(--hershey-component-tabs-nutrition-text-font-size-mobile, 16px);
+  line-height: var(--hershey-component-tabs-nutrition-text-line-height-mobile, 20px);
+}
+
+.tabs.nutrition .tabs-nutrition-panel-text > p:not(.tabs-nutrition-allergen) {
+  font-weight: var(--hershey-component-tabs-nutrition-row-font-weight, 450);
+  line-height: var(--hershey-component-tabs-nutrition-text-paragraph-line-height, 24px);
+}
+
+.tabs.nutrition .tabs-nutrition-allergen {
+  font-weight: var(--hershey-component-tabs-nutrition-text-allergen-font-weight, 700);
+}
+
+/* dietary badges */
+.tabs.nutrition .tabs-nutrition-panel-badges {
+  padding: var(--hershey-component-tabs-nutrition-badges-padding-block-mobile, 30px) var(--hershey-component-tabs-nutrition-badges-padding-inline-mobile, 10px);
+}
+
+.tabs.nutrition .tabs-nutrition-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--hershey-component-tabs-nutrition-badges-row-gap, 23px) var(--hershey-component-tabs-nutrition-badges-column-gap-mobile, 10px);
+}
+
+.tabs.nutrition .tabs-nutrition-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--hershey-component-tabs-nutrition-badge-gap, 14px);
+  width: var(--hershey-component-tabs-nutrition-badge-width-mobile, 116px);
+  text-align: center;
+}
+
+.tabs.nutrition .tabs-nutrition-badge .icon {
+  display: block;
+  width: var(--hershey-component-tabs-nutrition-badge-icon-width-mobile, 92px);
+  height: var(--hershey-component-tabs-nutrition-badge-icon-height-mobile, 91px);
+}
+
+.tabs.nutrition .tabs-nutrition-badge img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tabs.nutrition .tabs-nutrition-badge-label {
+  font-size: var(--hershey-component-tabs-nutrition-badge-label-font-size, 16px);
+  font-weight: var(--hershey-component-tabs-nutrition-badge-label-font-weight, 600);
+  line-height: var(--hershey-component-tabs-nutrition-row-line-height, 32px);
+}
+
+@media (width >= 768px) {
+  .tabs.nutrition .tabs-nutrition-list {
+    height: var(--hershey-component-tabs-nutrition-list-height-desktop, 103px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-tab {
+    font-size: var(--hershey-component-tabs-nutrition-tab-font-size-desktop, 18px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-serving {
+    padding: var(--hershey-component-tabs-nutrition-serving-padding-block, 12px) var(--hershey-component-tabs-nutrition-layout-inline-end-desktop, 32px) var(--hershey-component-tabs-nutrition-serving-padding-block, 12px) var(--hershey-component-tabs-nutrition-layout-inline-start-desktop, 34px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-serving .tabs-nutrition-row {
+    font-size: var(--hershey-component-tabs-nutrition-serving-font-size-desktop, 18px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-summary .tabs-nutrition-row:where(:last-child:not(:first-child)) {
+    flex-grow: 1.6;
+  }
+
+  .tabs.nutrition .tabs-nutrition-summary .tabs-nutrition-name {
+    font-size: var(--hershey-component-tabs-nutrition-summary-name-font-size-desktop, 20px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-summary .tabs-nutrition-value {
+    font-size: var(--hershey-component-tabs-nutrition-summary-value-font-size-desktop, 18px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-facts {
+    padding: var(--hershey-component-tabs-nutrition-facts-padding-block-start-desktop, 27px) var(--hershey-component-tabs-nutrition-layout-inline-end-desktop, 32px) 0 var(--hershey-component-tabs-nutrition-layout-inline-start-desktop, 34px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-serving:has(+ .tabs-nutrition-facts) {
+    margin: 0 var(--hershey-component-tabs-nutrition-layout-inline-end-desktop, 32px) 0 var(--hershey-component-tabs-nutrition-layout-inline-start-desktop, 34px);
+    padding: var(--hershey-component-tabs-nutrition-heading-padding-block-start-desktop, 27px) 0 var(--hershey-component-tabs-nutrition-heading-padding-block-end-desktop, 10px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-facts .tabs-nutrition-row {
+    font-size: var(--hershey-component-tabs-nutrition-facts-font-size-desktop, 16px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-facts .tabs-nutrition-value:last-child {
+    min-width: var(--hershey-component-tabs-nutrition-facts-dv-min-width-desktop, 32px);
+    margin-left: var(--hershey-component-tabs-nutrition-facts-dv-offset-desktop, 90px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-serving:has(+ .tabs-nutrition-facts) .tabs-nutrition-row {
+    font-size: var(--hershey-component-tabs-nutrition-heading-font-size-desktop, 18px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-panel-facts > p {
+    padding: var(--hershey-component-tabs-nutrition-footnote-padding-block-start-desktop, 23px) var(--hershey-component-tabs-nutrition-layout-inline-end-desktop, 32px) var(--hershey-component-tabs-nutrition-footnote-padding-block-end, 25px) var(--hershey-component-tabs-nutrition-layout-inline-start-desktop, 34px);
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  .tabs.nutrition .tabs-nutrition-panel-text:not([hidden]) {
+    padding: var(--hershey-component-tabs-nutrition-text-padding-block-start-desktop, 33px) var(--hershey-component-tabs-nutrition-text-padding-inline-end-desktop, 38px) var(--hershey-component-tabs-nutrition-text-padding-block-end-desktop, 31px) var(--hershey-component-tabs-nutrition-text-padding-inline-start-desktop, 37px);
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  .tabs.nutrition .tabs-nutrition-panel-text > p:not(.tabs-nutrition-allergen) {
+    font-weight: inherit;
+  }
+
+  .tabs.nutrition .tabs-nutrition-panel-badges {
+    padding: var(--hershey-component-tabs-nutrition-badges-padding-block-start-desktop, 45px) var(--hershey-component-tabs-nutrition-badges-padding-inline-desktop, 65px) var(--hershey-component-tabs-nutrition-badges-padding-block-end-desktop, 42px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-badges {
+    column-gap: var(--hershey-component-tabs-nutrition-badges-column-gap-desktop, 42px);
+  }
+
+  .tabs.nutrition .tabs-nutrition-badge {
+    width: auto;
+  }
+
+  .tabs.nutrition .tabs-nutrition-badge .icon {
+    width: var(--hershey-component-tabs-nutrition-badge-icon-width-desktop, 127px);
+    height: auto; /* the artwork sets its own height, e.g. 127x130 */
+  }
+}
+
+/*
+ * Section card (hersheyland .nutritional-ingredient-comp): grey band with a
+ * centered white card holding the heading, intro and the tabs.
+ */
+.section.tabs-container:has(.tabs.nutrition) {
+  margin: 0;
+  padding: 40px 25px;
+  background-color: var(--hershey-reference-color-neutral-246, #f6f6f6);
+}
+
+.section.tabs-container:has(.tabs.nutrition) > div {
+  display: flow-root; /* keep the intro's bottom margin inside the white card */
+  box-sizing: border-box;
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #fff;
+}
+
+.section.tabs-container:has(.tabs.nutrition) > .default-content-wrapper {
+  padding-top: 40px;
+  text-align: center;
+}
+
+.section.tabs-container:has(.tabs.nutrition) > .tabs-wrapper {
+  padding-bottom: 40px;
+}
+
+.section.tabs-container:has(.tabs.nutrition) h2 {
+  margin: 10px 0 9px;
+  color: #3f000b;
+  font-family: hershey-gazpacho, serif;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 48px;
+}
+
+.section.tabs-container:has(.tabs.nutrition) .default-content-wrapper p {
+  margin: 0 0 37px;
+  color: #3f000b;
+  font-family: hershey-tt, sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.section.tabs-container:has(.tabs.nutrition) .default-content-wrapper a {
+  border-bottom: 1px solid #3f000b;
+  color: #3f000b;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (width >= 768px) {
+  .section.tabs-container:has(.tabs.nutrition) > div {
+    padding: 0 70px;
+  }
+
+  .section.tabs-container:has(.tabs.nutrition) > .default-content-wrapper {
+    padding-top: 70px;
+  }
+
+  .section.tabs-container:has(.tabs.nutrition) > .tabs-wrapper {
+    padding-bottom: 70px;
+  }
+
+  .section.tabs-container:has(.tabs.nutrition) .default-content-wrapper p {
+    padding: 0 43px;
+  }
+}
