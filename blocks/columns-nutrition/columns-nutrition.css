@@ -1,11 +1,18 @@
 /* Columns (Nutrition): Nutrition Facts label | "Additional questions?" contact box.
-   Values extracted from hersheyland.com .nutritionfacts .nutritional-ingredient-comp */
+   Measured from hersheyland.com .nutritional-ingredient-comp. */
 
-/* white content panel inside the light-gray band
-   (source: full-bleed and flush with the band edges on mobile) */
-.columns-nutrition {
-  margin: calc(-1 * var(--section-padding)) -24px;
+main > .section.columns-nutrition-section {
+  background-color: var(--hershey-component-columns-nutrition-color-band, #f6f6f6);
+}
+
+main > .section.columns-nutrition-section > .columns-nutrition-wrapper {
+  max-width: none;
+  padding: 0;
   background-color: var(--hershey-component-columns-nutrition-color-background, var(--background-color));
+}
+
+.columns-nutrition {
+  margin: 0;
   color: var(--hershey-component-columns-nutrition-color-foreground, #3f000b);
 }
 
@@ -18,14 +25,13 @@
   min-width: 0;
 }
 
-/* label panel: 3px outer + 1px inner rule */
+/* label: 1px rule, 15px 10px 5px inset, 260px minimum */
 .columns-nutrition .columns-nutrition-panel {
   box-sizing: border-box;
-  min-width: 266px;
+  min-width: 260px;
   margin: 0 10px;
-  padding: 16px 11px 6px;
-  border: 3px solid currentcolor;
-  box-shadow: inset 0 0 0 1px currentcolor;
+  padding: 15px 10px 5px;
+  border: 1px solid currentcolor;
   background-color: var(--hershey-component-columns-nutrition-color-background, var(--background-color));
   font-size: var(--hershey-component-columns-nutrition-panel-font-size, 14px);
   font-weight: 400;
@@ -227,8 +233,17 @@ main .columns-nutrition .columns-nutrition-aside a.button:focus-visible {
 }
 
 @media (width >= 900px) {
+  main > .section.columns-nutrition-section {
+    padding: 40px 0;
+  }
+
+  main > .section.columns-nutrition-section > .columns-nutrition-wrapper {
+    /* 10 of 12 columns, inset 25px each side, matching .nutritional-ingredient-comp */
+    width: calc((100% * 10 / 12) - 50px);
+    max-width: none;
+  }
+
   .columns-nutrition {
-    margin: calc(40px - var(--section-padding)) 0;
     padding: 60px 50px;
   }
 
@@ -239,7 +254,8 @@ main .columns-nutrition .columns-nutrition-aside a.button:focus-visible {
   }
 
   .columns-nutrition .columns-nutrition-panel {
-    flex: 0 0 286px;
+    flex: 0 0 280px;
+    min-width: 280px;
     margin: 0;
   }
 
@@ -254,7 +270,7 @@ main .columns-nutrition .columns-nutrition-aside a.button:focus-visible {
 
   .columns-nutrition .columns-nutrition-aside {
     flex: 1 1 auto;
-    margin: 180px 0 20px 50px;
+    margin: 180px 100px 20px 50px;
     padding: 40px 20px 50px;
   }
 
@@ -269,16 +285,5 @@ main .columns-nutrition .columns-nutrition-aside a.button:focus-visible {
 
   .columns-nutrition .columns-nutrition-single > div {
     flex: 1 1 100%;
-  }
-}
-
-@media (width >= 1200px) {
-  /* source panel is 1150px wide (25px gutters inside the 1200px content box) */
-  .columns-nutrition {
-    margin-inline: 25px;
-  }
-
-  .columns-nutrition .columns-nutrition-aside {
-    margin-right: 100px;
   }
 }

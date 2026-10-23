@@ -215,6 +215,7 @@ function decorateAside(cell) {
 }
 
 export default function decorate(block) {
+  block.closest('.section')?.classList.add('columns-nutrition-section');
   [...block.children].forEach((row) => {
     row.classList.add('columns-nutrition-row-wrap');
     [...row.children].forEach((cell) => {

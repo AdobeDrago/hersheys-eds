@@ -585,10 +585,11 @@
   --hershey-component-columns-recipe-tip-box-shadow: var(--hershey-system-elevation-shadow-tip);
   --hershey-component-columns-nutrition-color-foreground: var(--hershey-system-color-text-primary);
   --hershey-component-columns-nutrition-color-background: var(--hershey-system-color-surface-default);
+  --hershey-component-columns-nutrition-color-band: var(--hershey-system-color-surface-subtle);
   --hershey-component-columns-nutrition-panel-title-font-family: var(--hershey-system-typography-body-font-family);
   --hershey-component-columns-nutrition-panel-title-font-weight: var(--hershey-system-typography-heading-font-weight);
   --hershey-component-columns-nutrition-panel-font-size: var(--hershey-system-typography-caption-font-size);
-  --hershey-component-columns-nutrition-aside-background: var(--hershey-system-color-surface-seasonal);
+  --hershey-component-columns-nutrition-aside-background: var(--hershey-system-color-surface-corporate);
   --hershey-component-columns-nutrition-aside-foreground: var(--hershey-system-color-text-inverse);
   --hershey-component-columns-nutrition-aside-font-family: var(--hershey-system-typography-body-font-family);
   --hershey-component-columns-nutrition-aside-font-size: var(--hershey-system-typography-body-compact-font-size);
