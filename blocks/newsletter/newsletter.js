@@ -81,7 +81,8 @@ function buildField(config, [labelCell, placeholderCell, errorCell]) {
   if (placeholderCell) input.placeholder = placeholderCell.textContent.trim();
 
   // the icon lives on the wrapper so browser autofill styling can't remove it
-  const wrap = el('div', `newsletter-input newsletter-input-${config.name}`);
+  const slug = config.name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
+  const wrap = el('div', `newsletter-input newsletter-input-${slug}`);
   wrap.append(input);
   field.append(label, wrap, el('span', 'newsletter-error', errorCell ? errorCell.textContent.trim() : ''));
   return field;
@@ -165,7 +166,9 @@ function buildSocial(caption, links) {
     social.append(p);
   }
   links.forEach((a) => {
-    const network = SOCIAL.find((name) => a.href.includes(name)) || SOCIAL.find((name) => a.textContent.toLowerCase().includes(name));
+    const linkText = a.textContent.toLowerCase();
+    const network = SOCIAL.find((name) => a.href.includes(name))
+      || SOCIAL.find((name) => linkText.includes(name));
     if (!network) return;
     const link = el('a', `newsletter-social-${network}`);
     link.href = a.href;
