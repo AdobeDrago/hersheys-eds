@@ -1,0 +1,24 @@
+/*
+ * PAYDAY product theme (`theme: payday-primary` page metadata).
+ * Overrides only the product hero and related-products tokens that differ from the
+ * default Hershey theme. Values measured on the hersheyland.com PAYDAY product page.
+ * Hand-authored, not generated from tokens.json.
+ */
+.hershey-product.payday-primary {
+  --hershey-component-hero-product-band-background: #ffc627;
+  --hershey-component-hero-product-band-accent: #ffd45d;
+  --hershey-component-hero-product-band-foreground: #3f000b;
+  --hershey-component-hero-product-title-foreground: #3f000b;
+  --hershey-component-hero-product-thumb-background: #ffd45d;
+  --hershey-component-hero-product-size-border-color: #3f000b;
+  --hershey-component-hero-product-size-foreground: #3f000b;
+  --hershey-component-hero-product-size-hover-background: #ffd45d;
+  --hershey-component-hero-product-size-current-background: #3f000b;
+  --hershey-component-hero-product-size-current-foreground: #fff;
+  --hershey-component-hero-product-cta-background: #007bbd;
+  --hershey-component-hero-product-cta-foreground: #fff;
+  --hershey-component-hero-product-cta-hover-background: #268fc7;
+  --hershey-component-hero-product-cta-hover-foreground: #fff;
+  --hershey-component-cards-product-hover-image-background: #fff8e4;
+  --hershey-component-cards-product-band-background: #ffc627;
+}

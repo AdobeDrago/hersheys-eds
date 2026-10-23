@@ -1,0 +1,390 @@
+/*
+ * Hero (product) variant, loaded by hero.js for `Hero (product)`.
+ * Values come from hersheyland.com via component.hero.product.* tokens;
+ * literal fallbacks keep the block identical outside the branded theme scope.
+ * The 900px media query mirrors system.layout.breakpoint.desktop.
+ */
+
+/* section: full-bleed band with the lighter angled bottom edge */
+main > .section:has(> .hero-wrapper > .hero.product) {
+  position: relative;
+  margin: 0;
+  padding-bottom: var(--hershey-component-hero-product-band-padding-bottom-mobile, 40px);
+  overflow: hidden;
+  background-color: var(--hershey-component-hero-product-band-background, #3f000b);
+}
+
+main > .section:has(> .hero-wrapper > .hero.product) > .hero-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: none;
+  padding: 0;
+}
+
+main > .section:has(> .hero-wrapper > .hero.product)::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 400%;
+  height: 400%;
+  background-color: var(--hershey-component-hero-product-band-accent, #6f4048);
+  transform: rotate(5deg);
+  transform-origin: right top;
+}
+
+.hero.product {
+  color: var(--hershey-component-hero-product-band-foreground, #fff);
+  font-family: var(--hershey-component-hero-product-base-font-family, hershey-tt, sans-serif);
+}
+
+.hero.product .hero-product-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.hero.product img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* gallery */
+.hero.product .hero-product-media {
+  order: 0;
+  min-width: 0;
+}
+
+.hero.product .hero-product-gallery {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero.product .hero-product-slide {
+  display: none;
+}
+
+.hero.product .hero-product-slide.active {
+  position: relative;
+  display: block;
+}
+
+.hero.product .hero-product-slide img {
+  position: relative;
+  z-index: 1;
+  max-width: calc(100% - 2 * var(--hershey-component-hero-product-slide-inset-inline-mobile, 10px));
+  margin: 0 auto;
+  border-radius: var(--hershey-component-hero-product-slide-image-border-radius, 8px);
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+/* soft blurred floor shadow under the product (source .product-image .shadow) */
+.hero.product .hero-product-slide.active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  width: calc(min(100%, var(--hershey-component-hero-product-floor-shadow-max-width, 445px)) * 0.6);
+  height: var(--hershey-component-hero-product-floor-shadow-height, 10px);
+  border-radius: 50%;
+  background: var(--hershey-component-hero-product-floor-shadow-color, rgb(0 0 0 / 41%));
+  opacity: var(--hershey-component-hero-product-floor-shadow-opacity, 0.6);
+  filter: blur(4.5px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* prev/next: white circles beside the thumbnails */
+.hero.product .hero-product-nav {
+  position: absolute;
+  bottom: var(--hershey-component-hero-product-nav-offset-bottom-mobile, 22.5px);
+  z-index: 2;
+  width: var(--hershey-component-hero-product-nav-width, 45px);
+  height: var(--hershey-component-hero-product-nav-height, 45px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--hershey-component-hero-product-nav-border-radius, 30px);
+  background-color: var(--hershey-component-hero-product-nav-background, #fff);
+  color: var(--hershey-component-hero-product-nav-foreground, #007bbd);
+  cursor: pointer;
+}
+
+.hero.product .hero-product-nav::before {
+  content: '';
+  display: block;
+  width: var(--hershey-component-hero-product-nav-chevron-size, 10px);
+  height: var(--hershey-component-hero-product-nav-chevron-size, 10px);
+  margin: auto;
+  border-top: var(--hershey-component-hero-product-nav-chevron-stroke, 3px) solid currentcolor;
+  border-right: var(--hershey-component-hero-product-nav-chevron-stroke, 3px) solid currentcolor;
+}
+
+.hero.product .hero-product-prev {
+  left: max(var(--hershey-component-hero-product-nav-offset-inline-minimum, 20px), calc(50% - var(--hershey-component-hero-product-nav-offset-inline-center, 210px)));
+}
+
+.hero.product .hero-product-prev::before {
+  transform: translateX(2px) rotate(-135deg);
+}
+
+.hero.product .hero-product-next {
+  right: max(var(--hershey-component-hero-product-nav-offset-inline-minimum, 20px), calc(50% - var(--hershey-component-hero-product-nav-offset-inline-center, 210px)));
+}
+
+.hero.product .hero-product-next::before {
+  transform: translateX(-2px) rotate(45deg);
+}
+
+.hero.product .hero-product-thumbs {
+  display: flex;
+  justify-content: center;
+  gap: var(--hershey-component-hero-product-thumbs-gap, 20px);
+  padding: var(--hershey-component-hero-product-thumbs-padding-block-mobile, 10px) 0;
+}
+
+.hero.product .hero-product-thumb {
+  box-sizing: border-box;
+  width: var(--hershey-component-hero-product-thumb-width-mobile, 68px);
+  height: var(--hershey-component-hero-product-thumb-height-mobile, 70px);
+  margin: 0;
+  padding: 0;
+  border: var(--hershey-component-hero-product-thumb-border-width, 3px) solid transparent;
+  border-radius: var(--hershey-component-hero-product-chip-border-radius, 5px);
+  background-color: var(--hershey-component-hero-product-thumb-background, #6f4048);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.hero.product .hero-product-thumb[aria-current='true'] {
+  border-color: var(--hershey-component-hero-product-thumb-selected-border, #fff);
+}
+
+.hero.product .hero-product-thumb img {
+  height: 100%;
+  object-fit: contain;
+}
+
+/* details (mobile: its children join the row so the title can sit above the gallery) */
+.hero.product .hero-product-details {
+  display: contents;
+}
+
+.hero.product .hero-product-details > * {
+  order: 1;
+  margin-inline: var(--hershey-component-hero-product-details-inset-mobile, 14px);
+}
+
+.hero.product .hero-product-details > h1 {
+  order: -2;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: var(--hershey-component-hero-product-title-padding-block-start-mobile, 55px) var(--hershey-component-hero-product-title-padding-inline-mobile, 20px) var(--hershey-component-hero-product-title-padding-block-end-mobile, 12px);
+  color: var(--hershey-component-hero-product-title-foreground, #fff);
+  font-family: var(--hershey-component-hero-product-title-font-family, hershey-gazpacho, sans-serif);
+  font-size: var(--hershey-component-hero-product-title-font-size, 36px);
+  font-weight: var(--hershey-component-hero-product-title-font-weight, 900);
+  line-height: var(--hershey-component-hero-product-title-line-height-mobile, 1.2);
+  text-align: center;
+}
+
+.hero.product .hero-product-rating {
+  order: -1;
+  align-self: center;
+  min-height: var(--hershey-component-hero-product-rating-min-height, 20px);
+  margin-top: 0;
+  margin-bottom: var(--hershey-component-hero-product-rating-margin-block-end, 15px);
+  padding-bottom: var(--hershey-component-hero-product-rating-padding-block-end, 2px);
+  font-size: var(--hershey-component-hero-product-rating-font-size, 10px);
+  line-height: var(--hershey-component-hero-product-rating-line-height, 15px);
+}
+
+.hero.product .hero-product-details > p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: var(--hershey-component-hero-product-text-font-size, 18px);
+  line-height: var(--hershey-component-hero-product-text-line-height, 1.5);
+}
+
+.hero.product .hero-product-details > .hero-product-size-label {
+  margin-top: var(--hershey-component-hero-product-size-label-margin-block-start-mobile, 35px);
+  margin-bottom: var(--hershey-component-hero-product-size-label-margin-block-end-mobile, 22px);
+  font-weight: var(--hershey-component-hero-product-size-label-font-weight, 700);
+}
+
+/* size links */
+.hero.product .hero-product-sizes ul {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.hero.product .hero-product-sizes li {
+  flex: none;
+  margin: 0 var(--hershey-component-hero-product-size-item-gap, 11px) var(--hershey-component-hero-product-size-item-gap, 11px) 0;
+}
+
+.hero.product .hero-product-size {
+  display: block;
+  padding: var(--hershey-component-hero-product-size-padding-block, 10px) var(--hershey-component-hero-product-size-padding-inline, 16px);
+  border: var(--hershey-component-hero-product-size-border-width, 2px) solid var(--hershey-component-hero-product-size-border-color, #fff);
+  border-radius: var(--hershey-component-hero-product-size-border-radius, 5px);
+  color: var(--hershey-component-hero-product-size-foreground, #f6f6f6);
+  font-size: var(--hershey-component-hero-product-size-font-size, 14px);
+  font-weight: var(--hershey-component-hero-product-size-font-weight, 700);
+  line-height: var(--hershey-component-hero-product-size-line-height, 21px);
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--hershey-component-hero-product-size-transition-duration, 250ms), background-color var(--hershey-component-hero-product-size-transition-duration, 250ms);
+}
+
+.hero.product a.hero-product-size:hover {
+  background-color: var(--hershey-component-hero-product-size-hover-background, #6f4048);
+  text-decoration: none;
+}
+
+.hero.product .hero-product-size[aria-current='true'] {
+  background-color: var(--hershey-component-hero-product-size-current-background, #fff);
+  color: var(--hershey-component-hero-product-size-current-foreground, #3f000b);
+}
+
+.hero.product .hero-product-sizes + p {
+  margin-top: var(--hershey-component-hero-product-sizes-following-margin-block-start-mobile, 20px);
+}
+
+.hero.product .hero-product-details > p:not(.hero-product-size-label, .hero-product-cta) {
+  margin-bottom: var(--hershey-component-hero-product-text-margin-block-end, 27px);
+}
+
+/* Shop Now */
+.hero.product .hero-product-details > .hero-product-cta {
+  margin-bottom: var(--hershey-component-hero-product-cta-margin-block-end-mobile, 43px);
+  text-align: center;
+}
+
+main .hero.product .hero-product-cta a.button:any-link {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-height: var(--hershey-component-hero-product-cta-min-height, 48px);
+  border: 0;
+  border-radius: var(--hershey-component-hero-product-cta-border-radius, 35px);
+  padding: var(--hershey-component-hero-product-cta-padding-block-mobile, 9px) 0;
+  background-color: var(--hershey-component-hero-product-cta-background, #feebd0);
+  color: var(--hershey-component-hero-product-cta-foreground, #3f000b);
+  font-size: var(--hershey-component-hero-product-cta-font-size-mobile, 20px);
+  font-weight: var(--hershey-component-hero-product-size-font-weight, 700);
+  line-height: var(--hershey-component-hero-product-cta-line-height-mobile, 30px);
+  text-align: center;
+}
+
+main .hero.product .hero-product-cta a.button:hover,
+main .hero.product .hero-product-cta a.button:focus-visible {
+  background-color: var(--hershey-component-hero-product-cta-hover-background, #e8cda8);
+  color: var(--hershey-component-hero-product-cta-hover-foreground, #3f000b);
+}
+
+@media (width >= 900px) {
+  main > .section:has(> .hero-wrapper > .hero.product) {
+    padding-bottom: var(--hershey-component-hero-product-band-padding-bottom-desktop, 90px);
+  }
+
+  main > .section:has(> .hero-wrapper > .hero.product)::after {
+    transform: rotate(3deg);
+  }
+
+  .hero.product .hero-product-row {
+    display: grid;
+    grid-template-columns: 52% 48%;
+    align-items: start;
+  }
+
+  /* gallery */
+  .hero.product .hero-product-stage {
+    padding-bottom: var(--hershey-component-hero-product-stage-padding-block-end-desktop, 10px);
+  }
+
+  .hero.product .hero-product-slide img {
+    max-width: var(--hershey-component-hero-product-slide-image-max-width, 435px);
+  }
+
+  .hero.product .hero-product-nav {
+    bottom: var(--hershey-component-hero-product-nav-offset-bottom-desktop, 55px);
+  }
+
+  .hero.product .hero-product-thumbs {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--hershey-component-hero-product-thumbs-max-width-desktop, 520px);
+    margin: 0 auto;
+    padding: var(--hershey-component-hero-product-thumbs-padding-block-desktop, 22px) var(--hershey-component-hero-product-thumbs-padding-inline-end-desktop, 17px) var(--hershey-component-hero-product-thumbs-padding-block-desktop, 22px) var(--hershey-component-hero-product-thumbs-padding-inline-start-desktop, 13px);
+  }
+
+  .hero.product .hero-product-thumb {
+    width: var(--hershey-component-hero-product-thumb-width-desktop, 111px);
+    height: var(--hershey-component-hero-product-thumb-height-desktop, 111px);
+  }
+
+  /* details */
+  .hero.product .hero-product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-self: center;
+    box-sizing: border-box;
+    width: min(var(--hershey-component-hero-product-details-width-desktop, 500px), 100% - var(--hershey-component-hero-product-details-clearance-desktop, 14px));
+    padding-top: var(--hershey-component-hero-product-details-padding-block-start-desktop, 30px);
+  }
+
+  .hero.product .hero-product-details > * {
+    margin-inline: 0;
+  }
+
+  .hero.product .hero-product-details > h1 {
+    padding: var(--hershey-component-hero-product-title-padding-block-start-desktop, 30px) 0 var(--hershey-component-hero-product-title-padding-block-end-desktop, 15px);
+    line-height: var(--hershey-component-hero-product-title-line-height-desktop, 42px);
+    text-align: left;
+  }
+
+  .hero.product .hero-product-rating {
+    align-self: flex-start;
+  }
+
+  .hero.product .hero-product-details > .hero-product-size-label {
+    margin-top: 0;
+    margin-bottom: var(--hershey-component-hero-product-size-label-margin-block-end-desktop, 12px);
+  }
+
+  .hero.product .hero-product-sizes ul {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .hero.product .hero-product-sizes + p {
+    margin-top: var(--hershey-component-hero-product-sizes-following-margin-block-start-desktop, 10px);
+  }
+
+  .hero.product .hero-product-details > .hero-product-cta {
+    align-self: stretch;
+    margin-bottom: var(--hershey-component-hero-product-cta-margin-block-end-desktop, 25px);
+    text-align: left;
+  }
+
+  main .hero.product .hero-product-cta a.button:any-link {
+    display: inline-block;
+    max-width: var(--hershey-component-hero-product-cta-max-width-desktop, 266px);
+    min-height: 0;
+    height: var(--hershey-component-hero-product-cta-height-desktop, 60px);
+    padding: var(--hershey-component-hero-product-cta-padding-block-desktop, 16.5px) var(--hershey-component-hero-product-cta-padding-inline-desktop, 20px);
+    font-size: var(--hershey-component-hero-product-cta-font-size-desktop, 18px);
+    line-height: var(--hershey-component-hero-product-cta-line-height-desktop, 27px);
+  }
+}
