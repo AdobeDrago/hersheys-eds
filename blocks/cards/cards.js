@@ -40,7 +40,7 @@ export default async function decorate(block) {
       import('./cards-product.js'),
       loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-product.css`),
     ]);
-    decorateProduct(block);
+    await decorateProduct(block);
     return;
   }
   /* change to ul, li */
