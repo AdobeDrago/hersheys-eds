@@ -1,6 +1,6 @@
 # columns
 
-Columns block. Layout variants keep authored rows. The `recipe` variant is the authored **Columns (Recipe)** ingredients and directions experience.
+Columns block. Layout variants keep authored rows. The `recipe` variant is the authored **Columns (Recipe)** ingredients and directions experience. The `nutrition` variant is the authored **Columns (Nutrition)** facts label and contact box.
 
 ## Default
 
@@ -24,6 +24,19 @@ The block uses one row with two cells:
 2. `You'll Need` heading and unordered list, followed by a `Directions` heading and ordered list. Step images belong inside their corresponding list items. An optional final paragraph beginning with `Tip:` becomes the Tip disclosure on the last step.
 
 Decoration adds Bake Mode and marks the section with `columns-recipe-section`. On supported browsers, its switch uses the Screen Wake Lock API to keep the display awake while the recipe is being followed. The wrapper and section remain `columns-wrapper` and `columns-container`.
+
+## Nutrition (`nutrition`)
+
+Authored as **Columns (Nutrition)**. Block classes: `columns nutrition`.
+
+Purpose: nutrition-label.
+
+The block uses one row with two cells:
+
+1. `Nutrition Facts` heading, servings and serving-size paragraphs, a calories paragraph, a nutrient list, and a footnote paragraph.
+2. `Additional questions?` heading and a contact link. The link is rendered as a button.
+
+Decoration marks the section with `columns-nutrition-section`. The wrapper and section remain `columns-wrapper` and `columns-container`.
 
 ## Universal Editor fields
 

@@ -9,7 +9,7 @@ export default {
   args: { heading: 'A favorite for every moment', copy: 'A little sweetness brings us together.', showImage: true },
   argTypes: contentArgTypes,
   parameters: {
-    docs: { description: { component: 'Production Columns decorator and CSS. Two authored cells stack on mobile. Columns (Recipe) builds the ingredients, tools, directions, summary, and Bake Mode. Controls edit copy and the optional image; links and the Bake Mode switch log in Actions. Check reading order and image alternatives with Accessibility and keyboard navigation.' } },
+    docs: { description: { component: 'Production Columns decorator and CSS. Two authored cells stack on mobile. Columns (Recipe) builds the ingredients, tools, directions, summary, and Bake Mode. Columns (Nutrition) builds the Nutrition Facts label and contact box. Controls edit copy and the optional image; links and the Bake Mode switch log in Actions. Check reading order and image alternatives with Accessibility and keyboard navigation.' } },
   },
   render: ({ heading, copy, showImage }) => {
     const root = createPage('Blocks', 'Columns');
@@ -74,6 +74,43 @@ function renderRecipe() {
   return root;
 }
 
+function renderNutrition() {
+  const root = createPage('Blocks', 'Columns');
+  const main = showcase(root);
+  const columns = element('div', 'columns nutrition block');
+  const row = element('div');
+  const label = element('div');
+  const nutrients = element('ul');
+  [
+    'Total Fat 14g 18%',
+    'Saturated Fat 8g 40%',
+    'Cholesterol 15mg 5%',
+    'Sodium 160mg 7%',
+    'Total Carbohydrate 39g 14%',
+    'Protein 3g',
+    'Vitamin D 0mcg 0%',
+    'Calcium 40mg 4%',
+  ].forEach((text) => nutrients.append(element('li', '', text)));
+  label.append(
+    element('h3', '', 'Nutrition Facts'),
+    element('p', '', 'Servings Per Container 12'),
+    element('p', '', 'Serving size 2 cookies (35g)'),
+    element('p', '', 'Calories 170'),
+    nutrients,
+    element('p', '', '*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet.'),
+  );
+  const aside = element('div');
+  const cta = element('p');
+  cta.append(link('Contact Customer Service'));
+  aside.append(element('h3', '', 'Additional questions?'), cta);
+  row.append(label, aside);
+  columns.append(row);
+  section(main, columns);
+  decorateColumns(columns);
+  return root;
+}
+
 export const Feature = {};
 export const TextOnly = { args: { showImage: false } };
 export const Recipe = { render: renderRecipe };
+export const Nutrition = { render: renderNutrition };
