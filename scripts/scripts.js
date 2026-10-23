@@ -239,12 +239,33 @@ async function loadLazy(doc) {
 }
 
 /**
+ * Product pages: warm up PriceSpider and the where-to-buy page behind Shop Now.
+ */
+function warmUpShopNow() {
+  const shopNow = window.location.pathname.startsWith('/products/')
+    && document.querySelector('a[href*="/where-to-buy"]');
+  if (!shopNow) return;
+  [
+    ['prefetch', '//cdn.pricespider.com/1/lib/ps-widget.js'],
+    ['prerender', shopNow.getAttribute('href')],
+  ].forEach(([rel, href]) => {
+    const hint = document.createElement('link');
+    hint.rel = rel;
+    hint.href = href;
+    document.head.append(hint);
+  });
+}
+
+/**
  * Loads everything that happens a lot later,
  * without impacting the user experience.
  */
 function loadDelayed() {
   // third-party tags and consent load after first paint (not while prerendered)
-  whenActivated().then(() => window.setTimeout(() => import('./delayed.js'), 3000));
+  whenActivated().then(() => {
+    warmUpShopNow();
+    window.setTimeout(() => import('./delayed.js'), 3000);
+  });
 }
 
 async function loadPage() {
