@@ -2,6 +2,7 @@ import {
   resolveConfig,
   searchRecipes,
 } from '../../scripts/recipes-search.js';
+import { whenVisible } from '../../scripts/scripts.js';
 
 /**
  * Search (Recipes) block — Algolia-backed all-recipes listing.
@@ -364,5 +365,6 @@ export default function decorate(block) {
     searchSoon();
   });
 
-  searchSoon();
+  // first query once the block is visible, so Algolia is never called before first paint
+  whenVisible(block, searchSoon);
 }

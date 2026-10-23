@@ -13,6 +13,34 @@ import {
 } from './aem.js';
 import loadHersheyTheme from './hershey-theme.js';
 
+/**
+ * Resolves once the page is shown to the user. A speculatively prerendered
+ * page waits for activation so third-party scripts never run unseen.
+ * @returns {Promise<void>}
+ */
+export function whenActivated() {
+  if (!document.prerendering) return Promise.resolve();
+  return new Promise((resolve) => {
+    document.addEventListener('prerenderingchange', () => resolve(), { once: true });
+  });
+}
+
+/**
+ * Runs a callback the first time an element scrolls into view, so blocks
+ * call third-party APIs only once they're visible (never before first paint).
+ * A hidden element never intersects, so the callback never runs.
+ * @param {Element} el
+ * @param {Function} callback
+ */
+export function whenVisible(el, callback) {
+  const io = new IntersectionObserver((entries) => {
+    if (!entries.some((e) => e.isIntersecting)) return;
+    io.disconnect();
+    callback();
+  });
+  io.observe(el);
+}
+
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
     createHTML: (s) => s, // avoid stack overflow
@@ -215,8 +243,8 @@ async function loadLazy(doc) {
  * without impacting the user experience.
  */
 function loadDelayed() {
-  import('./consent-check.js');
-  // load anything that can be postponed to the latest here
+  // third-party tags and consent load after first paint (not while prerendered)
+  whenActivated().then(() => window.setTimeout(() => import('./delayed.js'), 3000));
 }
 
 async function loadPage() {

@@ -88,7 +88,9 @@ async function fetchRelated() {
         objectID,
         threshold: 0,
         maxRecommendations: MAX_RELATED,
-        fallbackParameters: { facetFilters: ['metaTags.templateType:product-detail'] },
+        // Hershey's Algolia app: keep this prototype's requests out of their analytics
+        queryParameters: { analytics: false },
+        fallbackParameters: { facetFilters: ['metaTags.templateType:product-detail'], analytics: false },
       }],
     }),
   });

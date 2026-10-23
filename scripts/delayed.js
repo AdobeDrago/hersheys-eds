@@ -1,0 +1,32 @@
+import { getMetadata, loadScript } from './aem.js';
+
+/**
+ * Delayed phase: third parties that load after first paint.
+ *
+ * - OneTrust: cookie banner, then consent-check.js reads the visitor's choice.
+ * - Adobe Launch: consented.js, only after Performance (C0002) consent.
+ *
+ * Loaded in the lazy phase by the blocks that need them, never before first paint:
+ * - Algolia: blocks/search-recipes and cards (product, related), once the block is visible.
+ */
+
+// Hershey's OneTrust test domain script (stage.hersheyland.com); it handles consent only
+const ONETRUST_ID = '019aeff7-8232-75db-b3f5-0ed1b6a4b972-test';
+
+/**
+ * Loads the OneTrust CMP stub (cookie banner and consent state).
+ */
+async function loadOneTrust() {
+  const domainScript = getMetadata('onetrust-id') || ONETRUST_ID;
+  await loadScript('https://cdn.cookielaw.org/scripttemplates/otSDKStub.js', {
+    'data-domain-script': domainScript,
+    charset: 'UTF-8',
+  });
+}
+
+loadOneTrust()
+  .catch(() => {
+    // eslint-disable-next-line no-console
+    console.warn('delayed: failed to load onetrust');
+  })
+  .finally(() => import('./consent-check.js'));

@@ -142,6 +142,8 @@ function buildParams({ query = '', page = 0, hitsPerPage, facetFilters = [] }, c
   params.set('filters', config.baseFilter);
   params.set('facets', JSON.stringify(config.facetAttributes));
   params.set('maxValuesPerFacet', String(config.maxValuesPerFacet));
+  // Hershey's Algolia app: keep this prototype's searches out of their analytics
+  params.set('analytics', 'false');
   if (facetFilters.length) {
     params.set('facetFilters', JSON.stringify(groupFacetFilters(facetFilters)));
   }
