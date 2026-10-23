@@ -9,6 +9,7 @@
   --hershey-reference-color-brand-chocolate-soft: #6f4048;
   --hershey-reference-color-brand-cream: #feebd0;
   --hershey-reference-color-brand-cream-deep: #e8cda8;
+  --hershey-reference-color-brand-chocolate-night: #3c131c;
   --hershey-reference-color-neutral-0: #000;
   --hershey-reference-color-neutral-51: #333;
   --hershey-reference-color-neutral-117: #757575;
@@ -224,6 +225,7 @@
   --hershey-system-color-surface-inverse-accent: var(--hershey-reference-color-brand-chocolate-soft);
   --hershey-system-color-surface-floor-shadow: var(--hershey-reference-color-alpha-black-41);
   --hershey-system-color-surface-overlay: var(--hershey-reference-color-alpha-black-40);
+  --hershey-system-color-surface-seasonal-dark: var(--hershey-reference-color-brand-chocolate-night);
   --hershey-system-color-action-primary-background-default: var(--hershey-reference-color-brand-blue);
   --hershey-system-color-action-primary-background-hover: var(--hershey-reference-color-brand-blue-deep);
   --hershey-system-color-action-primary-foreground: var(--hershey-reference-color-neutral-255);
@@ -822,4 +824,9 @@
   --hershey-component-breadcrumb-trail-link-transition-duration: var(--hershey-system-motion-interaction-duration);
   --hershey-component-breadcrumb-trail-link-transition-easing: var(--hershey-system-motion-interaction-easing);
   --hershey-component-breadcrumb-trail-home-icon-color: var(--hershey-system-color-icon-home);
+  --hershey-component-banner-background: var(--hershey-system-color-surface-seasonal-dark);
+  --hershey-component-banner-foreground: var(--hershey-system-color-text-inverse);
+  --hershey-component-banner-cta-background: var(--hershey-system-color-action-secondary-background-default);
+  --hershey-component-banner-cta-hover-background: var(--hershey-system-color-action-secondary-background-hover);
+  --hershey-component-banner-cta-foreground: var(--hershey-system-color-text-primary);
 }

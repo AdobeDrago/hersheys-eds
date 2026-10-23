@@ -1,0 +1,96 @@
+/*
+ * Banner block. Colors come from component.banner.* tokens; literal fallbacks keep
+ * the block identical outside the branded theme scope.
+ * The 900px media query mirrors system.layout.breakpoint.desktop.
+ */
+.banner-container .banner-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.banner {
+  padding: 40px var(--hershey-system-spacing-inset-comfortable, 24px);
+  background-color: var(--hershey-component-banner-background, #3c131c);
+  color: var(--hershey-component-banner-foreground, #fff);
+}
+
+.banner.halloween {
+  background-image: url('./halloween-pattern.svg');
+  background-position: center;
+  background-size: cover;
+}
+
+.banner .banner-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hershey-system-spacing-gap-large, 32px);
+  max-width: 1228px;
+  margin: 0 auto;
+}
+
+.banner .banner-text h2 {
+  margin: 0 0 11px;
+  color: inherit;
+  font-family: hershey-gazpacho, serif;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.3;
+}
+
+.banner .banner-text p {
+  margin: 0;
+  color: inherit;
+  font-family: var(--hershey-system-typography-body-font-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-system-typography-body-font-size, 17px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.banner .banner-cta {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 17px 20px;
+  border-radius: var(--hershey-system-shape-radius-product-cta, 35px);
+  background-color: var(--hershey-component-banner-cta-background, #feebd0);
+  color: var(--hershey-component-banner-cta-foreground, #3f000b);
+  font-family: var(--hershey-system-typography-body-font-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-system-typography-body-font-size, 17px);
+  font-weight: var(--hershey-system-typography-action-font-weight, 700);
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.25s;
+}
+
+.banner .banner-cta:hover,
+.banner .banner-cta:focus-visible {
+  background-color: var(--hershey-component-banner-cta-hover-background, #e8cda8);
+}
+
+@media (width >= 900px) {
+  .banner {
+    padding: 50px 25px;
+  }
+
+  .banner .banner-content {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--hershey-system-spacing-gap-large, 32px);
+  }
+
+  .banner .banner-text {
+    flex: 0 1 66.6667%;
+    padding-bottom: 25px;
+  }
+
+  .banner .banner-text h2 {
+    font-size: 36px;
+    line-height: 1.3;
+  }
+
+  .banner .banner-action {
+    flex: none;
+    margin-top: 20px;
+  }
+}
