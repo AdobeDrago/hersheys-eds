@@ -92,8 +92,8 @@ export function mapHit(hit, config) {
     objectID: hit.objectID || '',
     title: hit.title || hit?.hero?.h1 || '',
     description: hit?.hero?.description || '',
-    // Recipe pages live on EDS: keep the path site-relative and drop the AEM .html suffix.
-    href: path.startsWith('/') ? path.replace(/\.html$/, '') : absoluteUrl(path, config.assetOrigin),
+    // Recipe pages open on production (assetOrigin), not on this EDS site.
+    href: absoluteUrl(path, config.assetOrigin),
     imageUrl: absoluteUrl(imagePath, config.assetOrigin),
     rating: hit?.hero?.rating ?? hit?.hero?.starRating ?? null,
     ratingQuantity: hit?.hero?.ratingQuantity ?? null,
