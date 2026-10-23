@@ -1,0 +1,45 @@
+{
+  "blockName": "columns",
+  "canonicalModel": "standalone",
+  "variants": [
+    {
+      "variantName": "default",
+      "authoredName": "Columns",
+      "visualCharacteristics": {
+        "colorScheme": "light",
+        "density": "medium",
+        "purpose": "side-by-side-content",
+        "imagePattern": "inline",
+        "structure": "authored rows and cells"
+      },
+      "contentPattern": "Authored rows and cells render as written. Named layout classes such as feature and homepage-hero keep that content and adjust image treatment.",
+      "options": []
+    },
+    {
+      "variantName": "recipe",
+      "authoredName": "Columns (Recipe)",
+      "baseBlock": "columns",
+      "canonicalModel": "standalone",
+      "visualCharacteristics": {
+        "colorScheme": "light",
+        "density": "dense",
+        "purpose": "recipe-method",
+        "imagePattern": "inline",
+        "structure": "ingredients list + tools list + numbered steps + step images"
+      },
+      "contentPattern": "1 row x 2 columns. Cell 1: H3 'Ingredients' + unordered list (quantity + ingredient, product links preserved). Cell 2: H3 'You'll Need' + unordered list of tools; H3 'Directions' + ordered list where each item holds step text followed by the step image. The section heading, yield, and times sit in default content before the block.",
+      "usage": {
+        "pagesUsing": [
+          "https://www.hersheyland.com/recipes/reeses-oreo-cup-brownies.html"
+        ],
+        "reuseCount": 1,
+        "lastUsed": "2026-10-15"
+      },
+      "options": []
+    }
+  ],
+  "memberVariantIds": [
+    "default",
+    "recipe"
+  ]
+}
