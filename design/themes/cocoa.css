@@ -968,6 +968,7 @@
   --hershey-component-newsletter-typography-line-height-caption: var(--hershey-system-typography-form-line-height-caption);
   --hershey-component-newsletter-typography-line-height-note: var(--hershey-system-typography-form-line-height-note);
   --hershey-component-newsletter-typography-line-height-error: var(--hershey-system-typography-form-line-height-error);
+  --hershey-component-newsletter-typography-body-weight: var(--hershey-system-typography-body-font-weight);
   --hershey-component-newsletter-spacing-card-block: var(--hershey-system-spacing-form-card-block);
   --hershey-component-newsletter-spacing-card-inline-mobile: var(--hershey-system-spacing-inset-card);
   --hershey-component-newsletter-spacing-card-inline-desktop: var(--hershey-system-spacing-section-large);

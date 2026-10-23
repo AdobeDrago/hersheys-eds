@@ -80,7 +80,10 @@ function buildField(config, [labelCell, placeholderCell, errorCell]) {
   input.autocomplete = config.autocomplete;
   if (placeholderCell) input.placeholder = placeholderCell.textContent.trim();
 
-  field.append(label, input, el('span', 'newsletter-error', errorCell ? errorCell.textContent.trim() : ''));
+  // the icon lives on the wrapper so browser autofill styling can't remove it
+  const wrap = el('div', `newsletter-input newsletter-input-${config.name}`);
+  wrap.append(input);
+  field.append(label, wrap, el('span', 'newsletter-error', errorCell ? errorCell.textContent.trim() : ''));
   return field;
 }
 
