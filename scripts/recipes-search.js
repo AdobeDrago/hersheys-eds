@@ -62,7 +62,11 @@ export const DEFAULT_CONFIG = {
  * @returns {typeof DEFAULT_CONFIG}
  */
 export function resolveConfig(overrides = {}) {
-  return { ...DEFAULT_CONFIG, ...overrides, indices: { ...DEFAULT_CONFIG.indices, ...overrides.indices } };
+  return {
+    ...DEFAULT_CONFIG,
+    ...overrides,
+    indices: { ...DEFAULT_CONFIG.indices, ...overrides.indices },
+  };
 }
 
 /**
@@ -113,39 +117,18 @@ export function orderFacetValues(attribute, values, config) {
     return entries.sort((a, b) => a.value.localeCompare(b.value));
   }
   const rank = new Map(preferred.map((v, i) => [v, i]));
-  // hide values not in preferred list when order is used (matches Algolia sortRemainingBy: hidden for rating/time)
+  // hide values not in preferred list when order is used
+  // (matches Algolia sortRemainingBy: hidden for rating/time)
   const known = entries.filter((e) => rank.has(e.value));
-  if (attribute === 'hero.rating' || attribute === 'metaTags.Time to Complete' || attribute === 'metaTags.skillLevel') {
+  if (attribute === 'hero.rating'
+    || attribute === 'metaTags.Time to Complete'
+    || attribute === 'metaTags.skillLevel') {
     return known.sort((a, b) => rank.get(a.value) - rank.get(b.value));
   }
-  const rest = entries.filter((e) => !rank.has(e.value)).sort((a, b) => a.value.localeCompare(b.value));
+  const rest = entries
+    .filter((e) => !rank.has(e.value))
+    .sort((a, b) => a.value.localeCompare(b.value));
   return [...known.sort((a, b) => rank.get(a.value) - rank.get(b.value)), ...rest];
-}
-
-/**
- * Encodes Algolia `params` query string for the multi-query endpoint.
- * @param {object} options
- * @param {string} [options.query]
- * @param {number} [options.page]
- * @param {number} [options.hitsPerPage]
- * @param {string[]|string[][]} [options.facetFilters]
- *   Flat `['attr:value']` or InstantSearch-style groups
- *   (OR within attribute, AND across attributes).
- * @param {typeof DEFAULT_CONFIG} config
- * @returns {string}
- */
-function buildParams({ query = '', page = 0, hitsPerPage, facetFilters = [] }, config) {
-  const params = new URLSearchParams();
-  params.set('query', query);
-  params.set('page', String(page));
-  params.set('hitsPerPage', String(hitsPerPage ?? config.hitsPerPage));
-  params.set('filters', config.baseFilter);
-  params.set('facets', JSON.stringify(config.facetAttributes));
-  params.set('maxValuesPerFacet', String(config.maxValuesPerFacet));
-  if (facetFilters.length) {
-    params.set('facetFilters', JSON.stringify(groupFacetFilters(facetFilters)));
-  }
-  return params.toString();
 }
 
 /**
@@ -170,17 +153,68 @@ export function groupFacetFilters(facetFilters) {
 }
 
 /**
+ * Encodes Algolia `params` query string for the multi-query endpoint.
+ * @param {object} options
+ * @param {string} [options.query]
+ * @param {number} [options.page]
+ * @param {number} [options.hitsPerPage]
+ * @param {string[]|string[][]} [options.facetFilters]
+ *   Flat `['attr:value']` or InstantSearch-style groups
+ *   (OR within attribute, AND across attributes).
+ * @param {typeof DEFAULT_CONFIG} config
+ * @returns {string}
+ */
+function buildParams({
+  query = '', page = 0, hitsPerPage, facetFilters = [],
+}, config) {
+  const params = new URLSearchParams();
+  params.set('query', query);
+  params.set('page', String(page));
+  params.set('hitsPerPage', String(hitsPerPage ?? config.hitsPerPage));
+  params.set('filters', config.baseFilter);
+  params.set('facets', JSON.stringify(config.facetAttributes));
+  params.set('maxValuesPerFacet', String(config.maxValuesPerFacet));
+  if (facetFilters.length) {
+    params.set('facetFilters', JSON.stringify(groupFacetFilters(facetFilters)));
+  }
+  return params.toString();
+}
+
+/**
+ * @param {object} result Algolia result or proxy-shaped result
+ * @param {typeof DEFAULT_CONFIG} config
+ */
+function normalizeResult(result, config) {
+  const facets = {};
+  config.facetAttributes.forEach((attr) => {
+    const raw = (result.facets && result.facets[attr]) || {};
+    facets[attr] = orderFacetValues(attr, raw, config);
+  });
+  return {
+    hits: (result.hits || []).map((hit) => mapHit(hit, config)),
+    nbHits: result.nbHits || 0,
+    page: result.page || 0,
+    nbPages: result.nbPages || 0,
+    hitsPerPage: result.hitsPerPage || config.hitsPerPage,
+    facets,
+    query: result.query || '',
+    index: result.index || '',
+  };
+}
+
+/**
  * Calls Algolia multi-query (or a proxy endpoint).
- * @param {object} request
- * @param {string} [request.query]
- * @param {number} [request.page]
- * @param {number} [request.hitsPerPage]
- * @param {string} [request.indexKey] newest | rating | alpha
- * @param {string[]} [request.facetFilters]
+ * @param {object} searchRequest
+ * @param {string} [searchRequest.query]
+ * @param {number} [searchRequest.page]
+ * @param {number} [searchRequest.hitsPerPage]
+ * @param {string} [searchRequest.indexKey] newest | rating | alpha
+ * @param {string[]} [searchRequest.facetFilters]
  * @param {Partial<typeof DEFAULT_CONFIG>} [overrides]
  * @param {AbortSignal} [signal]
  */
-export async function searchRecipes(request = {}, overrides = {}, signal) {
+export async function searchRecipes(searchRequest, overrides, signal) {
+  const request = searchRequest ?? {};
   const config = resolveConfig(overrides);
   const indexKey = request.indexKey || 'newest';
   const indexName = config.indices[indexKey] || config.indices.newest;
@@ -225,26 +259,4 @@ export async function searchRecipes(request = {}, overrides = {}, signal) {
   const data = await resp.json();
   const result = (data.results && data.results[0]) || {};
   return normalizeResult(result, config);
-}
-
-/**
- * @param {object} result Algolia result or proxy-shaped result
- * @param {typeof DEFAULT_CONFIG} config
- */
-function normalizeResult(result, config) {
-  const facets = {};
-  config.facetAttributes.forEach((attr) => {
-    const raw = (result.facets && result.facets[attr]) || {};
-    facets[attr] = orderFacetValues(attr, raw, config);
-  });
-  return {
-    hits: (result.hits || []).map((hit) => mapHit(hit, config)),
-    nbHits: result.nbHits || 0,
-    page: result.page || 0,
-    nbPages: result.nbPages || 0,
-    hitsPerPage: result.hitsPerPage || config.hitsPerPage,
-    facets,
-    query: result.query || '',
-    index: result.index || '',
-  };
 }
