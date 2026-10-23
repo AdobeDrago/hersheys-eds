@@ -171,7 +171,10 @@ async function loadEager(doc) {
     // brand themes (e.g. `theme: reese-primary`) override the product hero and card tokens
     const brandTheme = ['reese-primary', 'cadbury-primary', 'payday-primary', 'rolo-primary']
       .find((name) => document.body.classList.contains(name));
-    if (brandTheme) await loadCSS(`${window.hlx.codeBasePath}/design/themes/${brandTheme}.css`);
+    if (brandTheme) {
+      // a missing theme falls back to the default look instead of leaving the page hidden
+      await loadCSS(`${window.hlx.codeBasePath}/design/themes/${brandTheme}.css`).catch(() => {});
+    }
   }
   const main = doc.querySelector('main');
   if (main) {
