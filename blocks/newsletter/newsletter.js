@@ -80,7 +80,6 @@ function buildField(config, [labelCell, placeholderCell, errorCell]) {
   input.autocomplete = config.autocomplete;
   if (placeholderCell) input.placeholder = placeholderCell.textContent.trim();
 
-  // the icon lives on the wrapper so browser autofill styling can't remove it
   const slug = config.name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
   const wrap = el('div', `newsletter-input newsletter-input-${slug}`);
   wrap.append(input);
@@ -245,7 +244,6 @@ function applyBackground(block, rows) {
 /**
  * Newsletter sign-up. Every label, message, link and image is authored in DA;
  * the block builds the form, validates it and shows the thank-you message.
- * POC: nothing is sent anywhere on submit.
  * @param {Element} block
  */
 export default function decorate(block) {

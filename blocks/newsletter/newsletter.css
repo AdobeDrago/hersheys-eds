@@ -19,7 +19,6 @@
   font-display: swap;
 }
 
-/* section shell: full-width chocolate background, card spans the page like the live site */
 main div.section.newsletter-container {
   display: flow-root;
   margin: 0;
