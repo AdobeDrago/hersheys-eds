@@ -9,5 +9,5 @@ sync-block-collection.sh
 design/generate-tokens.mjs
 design/token-dictionary.mjs
 design/source-tokens.css
-design/themes/**
+design/themes/*.json
 storybook/**
