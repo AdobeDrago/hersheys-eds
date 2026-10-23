@@ -1,3 +1,5 @@
+import { whenActivated } from '../../scripts/scripts.js';
+
 const SCRIPTS = [
   '//cdn.pricespider.com/1/lib/ps-widget.js',
   '//cdn.pricespider.com/1/2366/ps-utid.js',
@@ -15,19 +17,22 @@ export default function decorate(widget) {
   if (sku) target.setAttribute('ps-sku', sku);
   if (widget.dataset.config) target.setAttribute('ps-config', widget.dataset.config);
 
-  [['preload', 'script'], ['dns-prefetch'], ['preconnect']].forEach(([rel, as]) => {
-    const link = document.createElement('link');
-    link.rel = rel;
-    link.href = widgetSrc;
-    if (as) link.as = as;
-    if (rel === 'preconnect') link.crossOrigin = '';
-    document.head.append(link);
-  });
+  // a prerendered (speculatively loaded) page runs no vendor code until it is shown
+  whenActivated().then(() => {
+    [['preload', 'script'], ['dns-prefetch'], ['preconnect']].forEach(([rel, as]) => {
+      const link = document.createElement('link');
+      link.rel = rel;
+      link.href = widgetSrc;
+      if (as) link.as = as;
+      if (rel === 'preconnect') link.crossOrigin = '';
+      document.head.append(link);
+    });
 
-  SCRIPTS.forEach((src) => {
-    const script = document.createElement('script');
-    script.src = src;
-    script.async = true;
-    document.head.append(script);
+    SCRIPTS.forEach((src) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+      document.head.append(script);
+    });
   });
 }
