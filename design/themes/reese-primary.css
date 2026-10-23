@@ -1,0 +1,22 @@
+/*
+ * REESE'S product theme (`theme: reese-primary` page metadata).
+ * Overrides only the product hero tokens that differ from the default Hershey
+ * theme. Values measured on hersheyland.com product pages with the
+ * `reese-primary` body class. Hand-authored, not generated from tokens.json.
+ */
+.hershey-product.reese-primary {
+  --hershey-component-hero-product-band-background: #ff5200;
+  --hershey-component-hero-product-band-accent: #ff7d40;
+  --hershey-component-hero-product-band-foreground: #440802;
+  --hershey-component-hero-product-title-foreground: #440802;
+  --hershey-component-hero-product-thumb-background: #ff7d40;
+  --hershey-component-hero-product-size-border-color: #fff;
+  --hershey-component-hero-product-size-foreground: #3f000b;
+  --hershey-component-hero-product-size-hover-background: #ff7d40;
+  --hershey-component-hero-product-cta-background: #ffee00;
+  --hershey-component-hero-product-cta-foreground: #440802;
+  --hershey-component-hero-product-cta-hover-background: #fff780;
+  --hershey-component-hero-product-cta-hover-foreground: #440802;
+  --hershey-component-cards-product-hover-image-background: #ffe9df;
+  --hershey-component-cards-product-band-background: #ff5200;
+}

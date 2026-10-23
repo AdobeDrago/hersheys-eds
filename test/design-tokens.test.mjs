@@ -36,7 +36,7 @@ test('inherited types and aliases generate scoped variables', (t) => {
     space: { $type: 'dimension', base: { $value: { value: 24, unit: 'px' } }, card: { $value: '{space.base}' } },
   });
   f.run();
-  assert.match(f.css(), /:where\(\.hershey-home, \.header\.hershey-nav, \.footer\.hershey-footer\)/);
+  assert.match(f.css(), /:where\(\.hershey-home, \.hershey-product, \.header\.hershey-nav, \.footer\.hershey-footer\)/);
   assert.match(f.css(), /--hershey-space-base: 24px/);
   assert.match(f.css(), /--hershey-space-card: var\(--hershey-space-base\)/);
   assert.doesNotMatch(f.css(), /:root/);
@@ -247,7 +247,7 @@ test('all block/theme Hershey variables are declared in the generated catalog', 
   const declared = new Set([...css.matchAll(/(--hershey-[\w-]+):/g)].map((match) => match[1]));
   const paths = [
     'styles/hershey-home.css', 'blocks/cards/cards.css', 'blocks/columns/columns.css',
-    'blocks/tabs/tabs.css', 'blocks/header/header.css', 'blocks/footer/footer.css', 'blocks/hero/hero.css',
+    'blocks/tabs/tabs.css', 'blocks/tabs/tabs-nutrition.css', 'blocks/hero/hero-product.css', 'blocks/breadcrumb-trail/breadcrumb-trail.css', 'blocks/header/header.css', 'blocks/footer/footer.css', 'blocks/hero/hero.css',
   ];
   paths.forEach((path) => {
     const content = readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');

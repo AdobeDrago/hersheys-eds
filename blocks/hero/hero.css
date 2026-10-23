@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-.hero {
+.hero:not(.product) {
   position: relative;
   isolation: isolate;
   padding: var(--hershey-component-hero-layout-padding-block, 40px) var(--hershey-component-hero-layout-padding-inline-mobile, 24px);
@@ -11,18 +11,18 @@
   color: var(--hershey-component-hero-color-foreground, var(--background-color));
 }
 
-.hero:not(:has(picture)) {
+.hero:not(.product):not(:has(picture)) {
   color: var(--text-color);
 }
 
-.hero h1 {
+.hero:not(.product) h1 {
   max-width: var(--hershey-component-hero-heading-max-width, 1200px);
   margin-left: auto;
   margin-right: auto;
   color: inherit;
 }
 
-.hero picture {
+.hero:not(.product) picture {
   position: absolute;
   z-index: -1;
   inset: 0;
@@ -30,14 +30,14 @@
   box-sizing: border-box;
 }
 
-.hero img {
+.hero:not(.product) img {
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
 @media (width >= 900px) {
-  .hero {
+  .hero:not(.product) {
     padding: var(--hershey-component-hero-layout-padding-block, 40px) var(--hershey-component-hero-layout-padding-inline-desktop, 32px);
   }
 }
