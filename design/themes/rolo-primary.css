@@ -1,0 +1,24 @@
+/*
+ * ROLO product theme (`theme: rolo-primary` page metadata).
+ * Overrides only the product hero and related-products tokens that differ from the
+ * default Hershey theme. Values measured on hersheyland.com product pages with the
+ * `rolo-primary` body class. Hand-authored, not generated from tokens.json.
+ */
+.hershey-product.rolo-primary {
+  --hershey-component-hero-product-band-background: #55281e;
+  --hershey-component-hero-product-band-accent: #8d4f41;
+  --hershey-component-hero-product-band-foreground: #fff;
+  --hershey-component-hero-product-title-foreground: #fff;
+  --hershey-component-hero-product-thumb-background: #8d4f41;
+  --hershey-component-hero-product-size-border-color: #fff;
+  --hershey-component-hero-product-size-foreground: #fff;
+  --hershey-component-hero-product-size-hover-background: #8d4f41;
+  --hershey-component-hero-product-size-current-background: #f6f6f6;
+  --hershey-component-hero-product-cta-background: #c0081c;
+  --hershey-component-hero-product-cta-foreground: #fff;
+  --hershey-component-hero-product-cta-hover-background: #fff780;
+  --hershey-component-hero-product-cta-hover-foreground: #fff;
+  --hershey-component-cards-product-hover-image-background: #dff5f4;
+  --hershey-component-cards-product-band-background: #55281e;
+  --hershey-component-cards-product-heading-foreground: #fff;
+}

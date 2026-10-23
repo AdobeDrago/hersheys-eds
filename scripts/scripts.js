@@ -163,8 +163,15 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
-  if (document.body.classList.contains('hershey-home')) {
+  // product pages author `theme: hershey-primary`; flag them so the Hershey tokens load
+  if (window.location.pathname.startsWith('/products/')) document.body.classList.add('hershey-product');
+  if (document.body.classList.contains('hershey-home')
+    || document.body.classList.contains('hershey-product')) {
     await loadHersheyTheme();
+    // brand themes (e.g. `theme: reese-primary`) override the product hero and card tokens
+    const brandTheme = ['reese-primary', 'cadbury-primary', 'payday-primary', 'rolo-primary']
+      .find((name) => document.body.classList.contains(name));
+    if (brandTheme) await loadCSS(`${window.hlx.codeBasePath}/design/themes/${brandTheme}.css`);
   }
   const main = doc.querySelector('main');
   if (main) {

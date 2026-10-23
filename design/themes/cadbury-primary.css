@@ -1,0 +1,22 @@
+/*
+ * CADBURY product theme (`theme: cadbury-primary` page metadata).
+ * Overrides only the product hero and related-products tokens that differ from the
+ * default Hershey theme. Values measured on hersheyland.com product pages with the
+ * `cadbury-primary` body class. Hand-authored, not generated from tokens.json.
+ */
+.hershey-product.cadbury-primary {
+  --hershey-component-hero-product-band-background: #40257c;
+  --hershey-component-hero-product-band-accent: #705c9d;
+  --hershey-component-hero-product-band-foreground: #fff;
+  --hershey-component-hero-product-title-foreground: #fff;
+  --hershey-component-hero-product-thumb-background: #705c9d;
+  --hershey-component-hero-product-size-border-color: #fff;
+  --hershey-component-hero-product-size-foreground: #fff;
+  --hershey-component-hero-product-size-hover-background: #705c9d;
+  --hershey-component-hero-product-cta-background: #e30488;
+  --hershey-component-hero-product-cta-foreground: #fff;
+  --hershey-component-hero-product-cta-hover-background: #f182c4;
+  --hershey-component-hero-product-cta-hover-foreground: #fff;
+  --hershey-component-cards-product-hover-image-background: #ebe3fc;
+  --hershey-component-cards-product-band-background: #40257c;
+}

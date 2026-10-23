@@ -1,6 +1,17 @@
+import { loadCSS } from '../../scripts/aem.js';
+
 let tabsId = 0;
 
-export default function decorate(block) {
+export default async function decorate(block) {
+  if (block.classList.contains('nutrition')) {
+    // the nutrition variant has its own markup, so it loads its own script and styles
+    const [{ default: decorateNutrition }] = await Promise.all([
+      import('./tabs-nutrition.js'),
+      loadCSS(`${window.hlx.codeBasePath}/blocks/tabs/tabs-nutrition.css`),
+    ]);
+    await decorateNutrition(block);
+    return;
+  }
   tabsId += 1;
   const id = `tabs-${tabsId}`;
   const list = document.createElement('div');

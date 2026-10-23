@@ -1,0 +1,105 @@
+/*
+ * Cards (product) variant, loaded by cards.js for `Cards (product)`.
+ * Related-product cards from hersheyland.com (.cmp-feature-card). Values use the
+ * system tokens; literals keep the block identical outside the branded theme scope.
+ */
+.cards.product > ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hershey-system-spacing-gap-large, 32px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards.product > ul > li {
+  border: 0;
+  background: transparent;
+}
+
+.cards.product .cards-product-card {
+  display: block;
+  height: 100%;
+  color: var(--hershey-system-color-text-primary, #3f000b);
+  font-family: var(--hershey-system-typography-body-font-family, hershey-tt, sans-serif);
+  text-decoration: none;
+}
+
+.cards.product .cards-product-image {
+  line-height: 0;
+  border-radius: var(--hershey-system-shape-radius-panel, 8px) var(--hershey-system-shape-radius-panel, 8px) 0 0;
+  background-color: rgb(255 255 255 / 75%); /* shows the section color through, e.g. peach on the orange band */
+  overflow: hidden;
+  transition: background-color 0.3s;
+}
+
+.cards.product .cards-product-card:hover .cards-product-image,
+.cards.product .cards-product-card:focus-visible .cards-product-image {
+  background-color: var(--hershey-component-cards-product-hover-image-background, #e4cace);
+}
+
+.cards.product .cards-product-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.cards.product .cards-product-body {
+  box-sizing: border-box;
+  min-height: 151px;
+  padding: var(--hershey-system-spacing-inset-comfortable, 24px) 21px;
+  border-radius: 0 0 var(--hershey-system-shape-radius-panel, 8px) var(--hershey-system-shape-radius-panel, 8px);
+  background-color: var(--hershey-system-color-surface-default, #fff);
+}
+
+.cards.product .cards-product-body h3 {
+  margin: 0;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: var(--hershey-system-typography-action-font-weight, 700);
+  line-height: 27px;
+}
+
+.cards.product .cards-product-size {
+  margin: var(--hershey-system-spacing-inset-compact, 4px) 0 0;
+  color: var(--hershey-system-color-text-muted, #757575);
+  font-size: var(--hershey-system-typography-caption-font-size, 14px);
+  font-weight: var(--hershey-system-typography-body-font-weight-medium, 450);
+  line-height: 21px;
+}
+
+@media (width >= 600px) {
+  .cards.product > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 900px) {
+  .cards.product > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* section band: grey background, centered intro heading (live .cmp-algolia-set) */
+.section.cards-container:has(.cards.product) {
+  margin: 0;
+  padding: var(--hershey-system-spacing-section-hero, 40px) clamp(24px, 5.85vw, 88px) 50px;
+  background-color: var(--hershey-component-cards-product-band-background, var(--hershey-reference-color-neutral-246, #f6f6f6));
+}
+
+.section.cards-container:has(.cards.product) > div {
+  max-width: none;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.section.cards-container:has(.cards.product) h2 {
+  margin: 0 0 var(--hershey-system-spacing-inset-large, 32px);
+  color: var(--hershey-component-cards-product-heading-foreground, var(--hershey-system-color-text-primary, #3f000b));
+  font-family: hershey-gazpacho, serif;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 54px;
+  text-align: center;
+}
