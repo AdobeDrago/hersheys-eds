@@ -11,7 +11,7 @@
   color: var(--hershey-component-hero-color-foreground, var(--background-color));
 }
 
-.hero:not(.product):not(:has(picture)) {
+.hero:not(.product, :has(picture)) {
   color: var(--text-color);
 }
 
