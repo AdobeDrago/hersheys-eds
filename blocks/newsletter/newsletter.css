@@ -217,7 +217,10 @@ main div.section.newsletter-container > .newsletter-wrapper {
 }
 
 .newsletter .newsletter-optin input[type='checkbox']:checked {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%233f000b' stroke-width='2'%3E%3Cpath d='M1.5 6.5l3 3 6-7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  border-color: var(--hershey-component-newsletter-color-border-focus, #3c131c);
+  background-color: var(--hershey-component-newsletter-color-border-focus, #3c131c);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 7.4l3.4 3.4L12 3'/%3E%3C/svg%3E");
+  background-size: 14px 14px;
 }
 
 .newsletter .newsletter-optin input[type='checkbox']:focus-visible {
