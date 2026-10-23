@@ -603,7 +603,6 @@
   --hershey-component-tabs-panel-spacing: var(--hershey-system-spacing-inset-comfortable);
   --hershey-component-tabs-panel-gap-desktop: var(--hershey-system-spacing-gap-x-large);
   --hershey-component-tabs-image-border-radius: var(--hershey-system-shape-radius-card);
-<<<<<<< HEAD
   --hershey-component-search-recipes-layout-gap: var(--hershey-system-spacing-gap-comfortable);
   --hershey-component-search-recipes-layout-gap-compact: var(--hershey-system-spacing-gap-default);
   --hershey-component-search-recipes-layout-facets-width: var(--hershey-system-layout-container-popover);
@@ -637,7 +636,6 @@
   --hershey-component-search-recipes-focus-width: var(--hershey-system-focus-width-default);
   --hershey-component-search-recipes-focus-offset: var(--hershey-system-focus-offset-default);
   --hershey-component-search-recipes-busy-opacity: var(--hershey-system-state-disabled-opacity);
-=======
   --hershey-component-tabs-nutrition-container-border-width: var(--hershey-system-border-width-divider);
   --hershey-component-tabs-nutrition-container-border-style: var(--hershey-system-border-style-default);
   --hershey-component-tabs-nutrition-container-border-color: var(--hershey-system-color-border-panel);
@@ -735,7 +733,6 @@
   --hershey-component-tabs-nutrition-badge-icon-height-mobile: var(--hershey-system-size-media-badge-icon-height-mobile);
   --hershey-component-tabs-nutrition-badge-label-font-size: var(--hershey-system-typography-body-compact-font-size);
   --hershey-component-tabs-nutrition-badge-label-font-weight: var(--hershey-system-typography-body-font-weight-semibold);
->>>>>>> main
   --hershey-component-action-motion-duration: var(--hershey-system-motion-interaction-duration);
   --hershey-component-action-motion-delay: var(--hershey-system-motion-interaction-delay);
   --hershey-component-action-motion-easing: var(--hershey-system-motion-interaction-easing);
