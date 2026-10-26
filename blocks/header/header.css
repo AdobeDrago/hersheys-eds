@@ -174,6 +174,7 @@ header nav .nav-sections ul > li {
 
 header nav .nav-sections .nav-drop > button {
   all: unset;
+  -webkit-tap-highlight-color: transparent;
   display: inline-block;
   position: relative;
   padding-right: var(--hershey-system-spacing-inset-default, 16px);
@@ -276,9 +277,10 @@ header nav .nav-tools {
   --body-font-family: var(--hershey-component-header-typography-font-family);
   --text-color: var(--hershey-component-header-color-text);
   --body-font-size-s: var(--hershey-component-header-typography-font-size);
-  --nav-accent: var(--hershey-system-color-action-primary-background-default);
+  --nav-accent: var(--hershey-system-color-icon-home);
   --nav-transition: var(--hershey-system-motion-interaction-duration) var(--hershey-system-motion-interaction-easing);
   --nav-panel-transition: var(--hershey-component-header-motion-panel-duration) var(--hershey-component-header-motion-panel-easing);
+  --nav-accordion-transition: var(--hershey-component-header-motion-accordion-duration) var(--hershey-component-header-motion-accordion-easing);
 
   color: var(--text-color);
 }
@@ -318,7 +320,7 @@ header nav .nav-tools {
   width: var(--hershey-system-spacing-inset-comfortable);
   height: var(--hershey-system-spacing-inset-comfortable);
   background: var(--nav-accent);
-  mask: url('../../icons/search.svg') center / contain no-repeat;
+  mask: var(--search-icon) center / contain no-repeat;
 }
 
 /* hamburger: three 4px bars (22/16/22px) that cross into an X */
@@ -391,9 +393,14 @@ header nav .nav-tools {
   width: 55%; /* original panel width is relative to the viewport */
   height: 100%;
   overflow-y: auto;
+  scrollbar-width: none;
   background: var(--hershey-component-header-submenu-background);
   transform: translateX(-100%);
   transition: transform var(--nav-panel-transition);
+}
+
+.header.hershey-nav nav .nav-sections .default-content-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .header.hershey-nav nav[aria-expanded='true'] .nav-sections .default-content-wrapper {
@@ -432,10 +439,10 @@ header nav .nav-tools {
 .header.hershey-nav nav .nav-sections .nav-drop > button::after {
   position: static;
   flex: none;
-  transform: rotate(135deg);
+  transform: rotate(-135deg);
   width: var(--hershey-system-spacing-inset-small);
   height: var(--hershey-system-spacing-inset-small);
-  transition: transform var(--nav-transition);
+  transition: transform var(--nav-accordion-transition);
 }
 
 .header.hershey-nav nav .nav-sections .nav-drop > button[aria-expanded='true']::after {
@@ -446,7 +453,7 @@ header nav .nav-tools {
 .header.hershey-nav nav .nav-sections .nav-drop {
   display: grid;
   grid-template-rows: auto 0fr;
-  transition: grid-template-rows var(--nav-transition);
+  transition: grid-template-rows var(--nav-accordion-transition);
 }
 
 .header.hershey-nav nav .nav-sections .nav-drop:has(> button[aria-expanded='true']) {
@@ -460,14 +467,15 @@ header nav .nav-tools {
   min-height: 0;
   overflow: hidden;
   margin: 0;
+  padding: 0 var(--hershey-system-spacing-inset-default);
   background: var(--hershey-system-color-surface-subtle);
   visibility: hidden;
-  transition: visibility var(--nav-transition);
+  transition: padding-block var(--nav-accordion-transition), visibility var(--nav-accordion-transition);
 }
 
 .header.hershey-nav nav .nav-sections .nav-drop > button[aria-expanded='true'] + ul {
   display: flex;
-  padding: var(--hershey-system-spacing-inset-small) var(--hershey-system-spacing-inset-default);
+  padding-block: var(--hershey-system-spacing-inset-small);
   visibility: visible;
 }
 
@@ -567,7 +575,7 @@ header nav .nav-tools {
 
   .header.hershey-nav nav .nav-sections ul {
     align-items: stretch;
-    gap: var(--hershey-component-header-layout-gap-compact);
+    gap: min(var(--hershey-component-header-layout-gap-compact), 2vw);
   }
 
   .header.hershey-nav nav .nav-sections .default-content-wrapper > ul > li {
@@ -599,8 +607,9 @@ header nav .nav-tools {
     font-weight: var(--hershey-component-header-brand-mark-font-weight);
   }
 
-  /* chevron: nudged up so it centres with the label */
+  /* chevron: nudged up so it centres with the label; desktop keeps the quicker rotation */
   .header.hershey-nav nav .nav-sections .nav-drop > button::after {
+    transition: transform var(--nav-transition);
     translate: 0 calc(-1 * var(--hershey-component-header-menu-chevron-offset));
   }
 
@@ -617,7 +626,7 @@ header nav .nav-tools {
     margin-right: var(--hershey-system-spacing-inset-compact);
     width: var(--hershey-component-header-menu-hover-icon-size);
     height: var(--hershey-component-header-menu-hover-icon-size);
-    background: url('../../icons/nav-hover.ico') center / contain no-repeat;
+    background: var(--nav-hover-icon) center / contain no-repeat;
     translate: 0 calc(-50% - var(--hershey-component-header-menu-hover-icon-offset));
     visibility: hidden;
   }
@@ -674,7 +683,7 @@ header nav .nav-tools {
   .header.hershey-nav nav .nav-tools {
     display: block;
     flex: 0 1 var(--hershey-component-header-search-width);
-    min-width: 0;
+    min-width: calc(var(--hershey-system-spacing-inset-card) + var(--hershey-component-header-menu-icon-width) + 2 * var(--hershey-system-spacing-inset-default));
   }
 
   .header.hershey-nav nav .nav-tools form {
@@ -697,6 +706,7 @@ header nav .nav-tools {
     border: 0;
     background: transparent;
     outline: 0;
+    text-overflow: ellipsis;
     font-size: var(--hershey-component-header-search-font-size);
   }
 
@@ -719,7 +729,7 @@ header nav .nav-tools {
     padding: 0;
     border: 0;
     background: var(--hershey-component-header-search-icon-color);
-    mask: url('../../icons/search.svg') center / var(--hershey-component-header-menu-icon-width) no-repeat;
+    mask: var(--search-icon) center / var(--hershey-component-header-menu-icon-width) no-repeat;
     font-size: 0;
     cursor: pointer;
   }
