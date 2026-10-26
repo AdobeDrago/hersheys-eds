@@ -8,9 +8,9 @@ import { decorateIcons, getMetadata, toClassName } from '../../scripts/aem.js';
  *     (or "Label | value") become aligned rows; other paragraphs stay as text.
  *   Ingredients: plain paragraphs.
  *   Dietary Info: icon images (or :icon: tokens) each followed by a label.
- * Nutrition Facts comes from the page brand's tab of the nutrition sheet
- * (/products/nutrition.json?sheet=<brand>, row matched by `bvid` GTIN) when
- * there is one; otherwise the authored content is used.
+ * Authored content wins. Only an empty Nutrition Facts tab is filled from the page brand's
+ * tab of the nutrition sheet (/products/nutrition.json?sheet=<brand>, row matched by `bvid`
+ * GTIN), and the sheet is only requested then.
  */
 
 const CELL_SEPARATOR = /\s+\|\s+/;
@@ -289,7 +289,12 @@ export default async function decorate(block) {
   const prefix = `tabs-nutrition-${blockCount}`;
   const rows = [...block.children].filter((row) => row.children.length);
   if (!rows.length) return;
-  const sheetRow = await fetchNutritionRow();
+
+  const isAuthored = (cells) => cells.some((cell) => cell.textContent.trim()
+    || cell.querySelector('picture, img'));
+  const factsRow = rows.find((row) => toClassName(row.firstElementChild.textContent) === 'nutrition-facts');
+  const sheetRow = factsRow && !isAuthored([...factsRow.children].slice(1))
+    ? await fetchNutritionRow() : null;
 
   const tablist = document.createElement('div');
   tablist.className = 'tabs-nutrition-list';
@@ -312,7 +317,7 @@ export default async function decorate(block) {
     panel.setAttribute('role', 'tabpanel');
     panel.setAttribute('aria-labelledby', `${prefix}-tab-${id}`);
     panel.tabIndex = 0;
-    if (id === 'nutrition-facts' && sheetRow) {
+    if (id === 'nutrition-facts' && sheetRow && !isAuthored(contentCells)) {
       panel.append(...buildFacts(sheetRow));
       panel.dataset.source = 'sheet';
     } else {
