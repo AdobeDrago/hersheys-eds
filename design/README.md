@@ -168,6 +168,7 @@ using the existing EDS `loadCSS` helper. Homepage, independently authored header
 and independently authored footer all use that shared loader.
 
 Variables have the prefix `--hershey-` and are scoped to `.hershey-home`,
+`.hershey-product` (the body theme of migrated product pages),
 `.header.hershey-nav` and `.footer.hershey-footer`. Nothing is assigned on
 `:root`. Reusable card, column and tab variants retain literal fallbacks outside
 the branded theme; default cards/columns and unbranded chrome are unchanged.
