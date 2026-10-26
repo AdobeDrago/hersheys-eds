@@ -3,6 +3,7 @@ import { getMetadata, loadScript } from './aem.js';
 /**
  * Delayed phase: third parties that load after first paint.
  *
+ * - Bazaarvoice: bazaarvoice.js, on pages with review containers; cookies follow consent.
  * - OneTrust: cookie banner, then consent-check.js reads the visitor's choice.
  * - Adobe Launch: consented.js, only after Performance (C0002) consent.
  *
@@ -24,6 +25,10 @@ async function loadOneTrust() {
   });
 }
 
+// ratings & reviews render for everyone; tracking cookies follow consent
+if (document.querySelector('[data-bv-show]')) {
+  import('./bazaarvoice.js').then(({ default: loadBazaarvoice }) => loadBazaarvoice());
+}
 loadOneTrust()
   .catch(() => {
     // eslint-disable-next-line no-console

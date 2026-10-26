@@ -16,7 +16,7 @@
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
@@ -55,14 +55,6 @@
 .search-recipes .search-recipes-query {
   flex: 1 1 var(--hershey-component-search-recipes-facets-width, 260px);
   min-width: 0;
-}
-
-.search-recipes .search-recipes-query:focus-visible,
-.search-recipes .search-recipes-sort:focus-visible,
-.search-recipes .search-recipes-stats:focus-visible,
-.search-recipes .search-recipes-card-link:focus-visible {
-  outline: var(--hershey-component-search-recipes-focus-width, 2px) solid var(--hershey-component-search-recipes-color-focus, var(--link-color));
-  outline-offset: var(--hershey-component-search-recipes-focus-offset, 3px);
 }
 
 .search-recipes .search-recipes-layout {
@@ -160,10 +152,6 @@
   color: inherit;
 }
 
-.search-recipes .search-recipes-card-link:hover .search-recipes-card-title {
-  text-decoration: underline;
-}
-
 .search-recipes .search-recipes-card-image {
   aspect-ratio: 4 / 3;
   background: var(--hershey-component-search-recipes-color-surface-subtle, var(--light-color));
@@ -188,6 +176,10 @@
   font-family: var(--hershey-component-search-recipes-card-title-font-family, var(--heading-font-family));
   font-size: var(--hershey-component-search-recipes-card-title-font-size, var(--heading-font-size-xs));
   font-weight: var(--hershey-component-search-recipes-card-title-font-weight, 700);
+}
+
+.search-recipes .search-recipes-card-link:hover .search-recipes-card-title {
+  text-decoration: underline;
 }
 
 .search-recipes .search-recipes-card-rating {
@@ -217,4 +209,12 @@
     grid-template-columns: var(--hershey-component-search-recipes-facets-width, 260px) 1fr;
     align-items: start;
   }
+}
+
+.search-recipes .search-recipes-query:focus-visible,
+.search-recipes .search-recipes-sort:focus-visible,
+.search-recipes .search-recipes-stats:focus-visible,
+.search-recipes .search-recipes-card-link:focus-visible {
+  outline: var(--hershey-component-search-recipes-focus-width, 2px) solid var(--hershey-component-search-recipes-color-focus, var(--link-color));
+  outline-offset: var(--hershey-component-search-recipes-focus-offset, 3px);
 }

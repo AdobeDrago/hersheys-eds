@@ -162,6 +162,11 @@ export default async function decorate(block) {
   }
 
   if (block.classList.contains('hershey-nav')) {
+    const hoverIcon = navSections?.querySelector(':scope .default-content-wrapper > p > picture img');
+    if (hoverIcon) {
+      nav.style.setProperty('--nav-hover-icon', `url("${hoverIcon.src}")`);
+      hoverIcon.closest('p').remove();
+    }
     navSections?.querySelectorAll('li').forEach((item) => {
       const links = [...item.querySelectorAll(':scope > a, :scope > p > a')];
       const imageLink = links.find((link) => link.querySelector('picture'));
@@ -181,6 +186,8 @@ export default async function decorate(block) {
     });
     const searchLink = nav.querySelector('.nav-tools a[href]');
     if (searchLink) {
+      const searchIcon = searchLink.parentElement.querySelector('img');
+      if (searchIcon) nav.style.setProperty('--search-icon', `url("${searchIcon.src}")`);
       const form = document.createElement('form');
       form.role = 'search';
       form.action = searchLink.href;

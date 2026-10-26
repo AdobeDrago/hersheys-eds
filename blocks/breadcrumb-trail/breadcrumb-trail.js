@@ -16,13 +16,12 @@ const SEPARATOR_ONLY = /^[\s>/|›»→-]+$/;
  */
 function buildHomeIcon() {
   const svg = document.createElementNS(SVG_NS, 'svg');
-  // cropped to the drawn house so CSS can size the icon like the source glyph
-  svg.setAttribute('viewBox', '2 3 20 18');
+  svg.setAttribute('viewBox', '0 0 576 512');
   svg.setAttribute('aria-hidden', 'true');
   svg.setAttribute('focusable', 'false');
   svg.classList.add('breadcrumb-trail-home-icon');
   const path = document.createElementNS(SVG_NS, 'path');
-  path.setAttribute('d', 'M12 3 2 12h3v9h6v-6h2v6h6v-9h3z');
+  path.setAttribute('d', 'M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1-1.4.1-2.8.1-4.2.1H416 392c-22.1 0-40-17.9-40-40v-24-64c0-17.7-14.3-32-32-32h-64c-17.7 0-32 14.3-32 32v88c0 22.1-17.9 40-40 40h-55.9c-1.5 0-3-.1-4.5-.2-1.2.1-2.4.2-3.6.2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9.1-2.8v-69.7h-32c-18 0-32-14-32-32.1 0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7l255.4 224.5c8 7 12 15 11 24z');
   path.setAttribute('fill', 'currentColor');
   svg.append(path);
   return svg;

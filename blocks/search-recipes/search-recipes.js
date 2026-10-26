@@ -175,8 +175,10 @@ function renderFacets(ui, state) {
  * @param {object} state
  */
 function renderHits(ui, state) {
-  const { hits, stats, pager, status } = ui;
-  const result = state.result;
+  const {
+    hits, stats, pager, status,
+  } = ui;
+  const { result } = state;
   hits.replaceChildren();
   pager.replaceChildren();
   hits.setAttribute('aria-busy', state.loading ? 'true' : 'false');
