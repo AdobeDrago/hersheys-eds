@@ -1,0 +1,65 @@
+/* Bazaarvoice hard-codes "TT Norms Pro" for this client; alias the hosted files to that name */
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../../fonts/subset-TTNormsPro-Normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../../fonts/subset-TTNormsPro-NormalIt.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('../../fonts/subset-TTNormsPro-Bd.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.reviews {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--hershey-component-reviews-color-text, #3f000b);
+  font-family: var(--hershey-component-reviews-typography-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-component-reviews-typography-size, 17px);
+  line-height: var(--hershey-component-reviews-typography-line-height, 1.5);
+}
+
+/*
+ * Bazaarvoice sizes its shadow content with `height: 100%`. In quirks mode
+ * (no doctype, e.g. the local html-folder preview) that resolves against the
+ * viewport, clipping the reviews list under the next section. A grid host
+ * stops the quirk walking up; no effect in standards mode. The track must be
+ * minmax(0, 1fr): an auto track grows to the width of Bazaarvoice's photo
+ * carousel (thousands of px) and stretches the whole reviews layout with it.
+ */
+.reviews .reviews-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.reviews .reviews-section + .reviews-section {
+  margin-top: var(--hershey-component-reviews-spacing-section-gap, 48px);
+}
+
+.reviews .reviews-fallback {
+  padding: var(--hershey-component-reviews-spacing-fallback-block, 32px) var(--hershey-component-reviews-spacing-fallback-inline, 24px);
+  border-radius: var(--hershey-component-reviews-shape-fallback-radius, 8px);
+  background-color: var(--hershey-component-reviews-color-fallback-surface, var(--light-color));
+  text-align: center;
+}
+
+.reviews .reviews-fallback h2 {
+  margin-top: 0;
+}
+
+.reviews .reviews-fallback p {
+  margin-bottom: 0;
+}

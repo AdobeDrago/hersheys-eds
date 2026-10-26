@@ -1115,4 +1115,13 @@
   --hershey-component-newsletter-size-submit-width: var(--hershey-system-size-form-submit-width);
   --hershey-component-newsletter-size-action-max-width: var(--hershey-system-size-form-action-max-width);
   --hershey-component-newsletter-size-image-max-width: var(--hershey-system-size-form-image-max-width);
+  --hershey-component-reviews-color-text: var(--hershey-system-color-text-primary);
+  --hershey-component-reviews-color-fallback-surface: var(--hershey-system-color-surface-subtle);
+  --hershey-component-reviews-typography-family: var(--hershey-system-typography-body-font-family);
+  --hershey-component-reviews-typography-size: var(--hershey-system-typography-copy-font-size);
+  --hershey-component-reviews-typography-line-height: var(--hershey-system-typography-body-line-height);
+  --hershey-component-reviews-spacing-section-gap: var(--hershey-system-spacing-gap-x-large);
+  --hershey-component-reviews-spacing-fallback-block: var(--hershey-system-spacing-inset-large);
+  --hershey-component-reviews-spacing-fallback-inline: var(--hershey-system-spacing-inset-comfortable);
+  --hershey-component-reviews-shape-fallback-radius: var(--hershey-system-shape-radius-panel);
 }

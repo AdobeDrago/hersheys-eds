@@ -73,8 +73,17 @@ function applyWidgetShell(widget, source, widgetName, searchParams) {
 export default async function decorate(widget) {
   const source = widget.querySelector('a[href]');
   if (!source) throw new Error('Widget block requires an authored source link');
-  const { pathname, searchParams } = new URL(source.href);
+  const { pathname, searchParams: hrefParams } = new URL(source.href);
   const { widgetPath, widgetName } = parseWidgetHref(pathname);
+  // DA can drop the query string from the href but keeps it in the link text
+  let searchParams = hrefParams;
+  if (![...hrefParams].length) {
+    try {
+      searchParams = new URL(source.textContent.trim(), source.href).searchParams;
+    } catch {
+      // link text is not a URL; keep the href params
+    }
+  }
 
   try {
     applyWidgetShell(widget, source, widgetName, searchParams);

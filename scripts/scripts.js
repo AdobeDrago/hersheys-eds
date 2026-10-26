@@ -230,6 +230,10 @@ function loadDelayed() {
     });
   }
   import('./consent-check.js');
+  // ratings & reviews render for everyone; tracking cookies follow consent
+  if (document.querySelector('[data-bv-show]')) {
+    import('./bazaarvoice.js').then(({ default: loadBazaarvoice }) => loadBazaarvoice());
+  }
   // load anything that can be postponed to the latest here
 }
 
