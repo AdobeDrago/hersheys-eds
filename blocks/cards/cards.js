@@ -23,13 +23,35 @@ function decorateSlider(block, list) {
     controls.append(button);
     return button;
   });
+  const dots = document.createElement('div');
+  dots.className = 'cards-slider-dots';
   const update = () => {
     buttons[0].disabled = list.scrollLeft <= 1;
     buttons[1].disabled = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
+    if (!block.classList.contains('related')) return;
+    // one kiss-shaped indicator per page of cards
+    const pages = Math.max(1, Math.round(list.scrollWidth / list.clientWidth));
+    const current = Math.min(pages - 1, Math.round(list.scrollLeft / list.clientWidth));
+    if (dots.children.length !== pages) {
+      dots.replaceChildren(...Array.from({ length: pages }, (_, page) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'cards-slider-dot';
+        dot.setAttribute('aria-label', `Go to page ${page + 1}`);
+        dot.setAttribute('aria-controls', list.id);
+        dot.addEventListener('click', () => list.scrollTo({
+          left: page * list.clientWidth,
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+        }));
+        return dot;
+      }));
+    }
+    [...dots.children].forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
   };
   list.addEventListener('scroll', update, { passive: true });
   new ResizeObserver(update).observe(list);
   block.append(controls);
+  if (block.classList.contains('related')) block.append(dots);
   update();
 }
 

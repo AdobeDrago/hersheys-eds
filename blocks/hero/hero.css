@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-.hero:not(.product) {
+.hero:not(.product, .article) {
   position: relative;
   isolation: isolate;
   padding: var(--hershey-component-hero-layout-padding-block, 40px) var(--hershey-component-hero-layout-padding-inline-mobile, 24px);
@@ -15,14 +15,14 @@
   color: var(--text-color);
 }
 
-.hero:not(.product) h1 {
+.hero:not(.product, .article) h1 {
   max-width: var(--hershey-component-hero-heading-max-width, 1200px);
   margin-left: auto;
   margin-right: auto;
   color: inherit;
 }
 
-.hero:not(.product) picture {
+.hero:not(.product, .article) picture {
   position: absolute;
   z-index: -1;
   inset: 0;
@@ -30,14 +30,14 @@
   box-sizing: border-box;
 }
 
-.hero:not(.product) img {
+.hero:not(.product, .article) img {
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
 @media (width >= 900px) {
-  .hero:not(.product) {
+  .hero:not(.product, .article) {
     padding: var(--hershey-component-hero-layout-padding-block, 40px) var(--hershey-component-hero-layout-padding-inline-desktop, 32px);
   }
 }

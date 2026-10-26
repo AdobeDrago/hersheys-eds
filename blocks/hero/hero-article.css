@@ -1,0 +1,83 @@
+/*
+ * Hero (article) variant, loaded by hero.js for `Hero (article)`.
+ * Blue band with the title on the left and the image filling the right half,
+ * as on hersheyland.com story pages. Values come from component.hero.article.*
+ * tokens; literal fallbacks keep the block identical outside the branded theme scope.
+ * The 900px media query mirrors system.layout.breakpoint.desktop.
+ */
+
+/* section: full-bleed band */
+main > .section:has(> .hero-wrapper > .hero.article) {
+  margin: 0;
+  background-color: var(--hershey-component-hero-article-band-background, #4068af);
+}
+
+main > .section:has(> .hero-wrapper > .hero.article) > .hero-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hero.article {
+  color: var(--hershey-component-hero-article-color-foreground, #fff);
+  font-family: var(--hershey-component-hero-article-base-font-family, hershey-tt, sans-serif);
+}
+
+.hero.article .hero-article-content {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.hero.article .hero-article-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero.article .hero-article-text {
+  padding:
+    var(--hershey-component-hero-article-text-padding-block-start-mobile, 32px)
+    var(--hershey-component-hero-article-text-padding-inline-mobile, 24px)
+    var(--hershey-component-hero-article-text-padding-block-end-mobile, 40px);
+}
+
+.hero.article h1 {
+  margin: 0;
+  color: inherit;
+  font-family: var(--hershey-component-hero-article-title-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-hero-article-title-font-size-mobile, 36px);
+  font-weight: var(--hershey-component-hero-article-title-font-weight, 900);
+  line-height: var(--hershey-component-hero-article-title-line-height, 1.2);
+}
+
+.hero.article .hero-article-date {
+  margin: var(--hershey-component-hero-article-date-margin-top, 16px) 0 0;
+  font-size: var(--hershey-component-hero-article-date-font-size, 16px);
+}
+
+@media (width >= 900px) {
+  .hero.article .hero-article-content {
+    flex-direction: row-reverse;
+    min-height: var(--hershey-component-hero-article-layout-min-height, 356px);
+  }
+
+  .hero.article .hero-article-media,
+  .hero.article .hero-article-text {
+    flex: 0 0 50%;
+    min-width: 0;
+  }
+
+  .hero.article .hero-article-text {
+    align-self: center;
+    box-sizing: border-box;
+    padding:
+      var(--hershey-component-hero-article-text-padding-block-desktop, 48px)
+      var(--hershey-component-hero-article-text-padding-inline-end-desktop, 103px)
+      var(--hershey-component-hero-article-text-padding-block-desktop, 48px)
+      var(--hershey-component-hero-article-text-padding-inline-start-desktop, 103px);
+  }
+
+  .hero.article h1 {
+    font-size: var(--hershey-component-hero-article-title-font-size-desktop, 48px);
+  }
+}
