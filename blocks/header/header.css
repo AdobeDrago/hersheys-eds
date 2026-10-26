@@ -575,7 +575,7 @@ header nav .nav-tools {
 
   .header.hershey-nav nav .nav-sections ul {
     align-items: stretch;
-    gap: var(--hershey-component-header-layout-gap-compact);
+    gap: min(var(--hershey-component-header-layout-gap-compact), 2vw);
   }
 
   .header.hershey-nav nav .nav-sections .default-content-wrapper > ul > li {
@@ -683,7 +683,7 @@ header nav .nav-tools {
   .header.hershey-nav nav .nav-tools {
     display: block;
     flex: 0 1 var(--hershey-component-header-search-width);
-    min-width: 0;
+    min-width: calc(var(--hershey-system-spacing-inset-card) + var(--hershey-component-header-menu-icon-width) + 2 * var(--hershey-system-spacing-inset-default));
   }
 
   .header.hershey-nav nav .nav-tools form {
@@ -706,6 +706,7 @@ header nav .nav-tools {
     border: 0;
     background: transparent;
     outline: 0;
+    text-overflow: ellipsis;
     font-size: var(--hershey-component-header-search-font-size);
   }
 
