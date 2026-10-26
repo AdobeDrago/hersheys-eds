@@ -341,14 +341,23 @@ main .section.dark-brown p {
   margin: 0;
 }
 
-main .section.light-blue {
+main .section.light-blue,
+main .section.light-gray {
   margin: 0;
   padding: var(--hershey-system-spacing-inset-x-large, 48px) 0;
-  background-color: var(--hershey-system-color-surface-story-intro, #bfcce4);
   color: var(--hershey-system-color-text-primary, var(--text-color));
 }
 
-main .section.light-blue > div {
+main .section.light-blue {
+  background-color: var(--hershey-system-color-surface-story-intro, #bfcce4);
+}
+
+main .section.light-gray {
+  background-color: var(--hershey-system-color-surface-subtle, #f6f6f6);
+}
+
+main .section.light-blue > div,
+main .section.light-gray > div {
   max-width: var(--hershey-system-layout-container-story-article, 960px);
 }
 
@@ -377,15 +386,23 @@ main .section.centered {
   font-weight: var(--hershey-system-typography-heading-font-weight, 900);
 }
 
+.hershey-story main > .section > .default-content-wrapper,
 .hershey-story main > .section > .columns-wrapper {
   max-width: var(--hershey-system-layout-container-story-article, 960px);
 }
 
+.hershey-story main > .section > .default-content-wrapper + .columns-wrapper,
 .hershey-story main > .section > .columns-wrapper + .columns-wrapper {
   margin-top: var(--hershey-system-spacing-gap-x-large, 48px);
 }
 
+/* activity sections sit further apart than the default section gap */
+.hershey-story main > .section:has(.columns.activity) {
+  margin-top: var(--hershey-system-spacing-section-large, 80px);
+}
+
 /* heading and slider spacing, measured from the live story page */
+main .section.centered h2,
 main .section.centered h3 {
   margin: var(--hershey-system-spacing-section-story-related-top, 124px) 0 var(--hershey-system-spacing-gap-story-related, 56px);
 }
@@ -403,7 +420,7 @@ main .section.centered h3 {
 }
 
 /* story recipe links read as underlined text links, not buttons */
-.hershey-story main .columns a.button:any-link {
+.hershey-story main .columns:not(.activity) a.button:any-link {
   display: inline;
   border: 0;
   border-bottom: var(--hershey-system-border-width-divider, 1px) solid currentcolor;
@@ -417,8 +434,8 @@ main .section.centered h3 {
   text-transform: uppercase;
 }
 
-.hershey-story main .columns a.button:any-link:hover,
-.hershey-story main .columns a.button:any-link:focus-visible {
+.hershey-story main .columns:not(.activity) a.button:any-link:hover,
+.hershey-story main .columns:not(.activity) a.button:any-link:focus-visible {
   border-bottom-color: transparent;
   background: transparent;
   color: var(--hershey-system-color-text-primary, #3f000b);
