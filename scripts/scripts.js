@@ -215,6 +215,20 @@ async function loadLazy(doc) {
  * without impacting the user experience.
  */
 function loadDelayed() {
+  // product pages: warm up PriceSpider and the where-to-buy page behind Shop Now
+  const shopNow = window.location.pathname.startsWith('/products/')
+    && document.querySelector('a[href*="/where-to-buy"]');
+  if (shopNow) {
+    [
+      ['prefetch', '//cdn.pricespider.com/1/lib/ps-widget.js'],
+      ['prerender', shopNow.getAttribute('href')],
+    ].forEach(([rel, href]) => {
+      const hint = document.createElement('link');
+      hint.rel = rel;
+      hint.href = href;
+      document.head.append(hint);
+    });
+  }
   import('./consent-check.js');
   // load anything that can be postponed to the latest here
 }
