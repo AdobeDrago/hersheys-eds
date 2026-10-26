@@ -439,14 +439,14 @@ header nav .nav-tools {
 .header.hershey-nav nav .nav-sections .nav-drop > button::after {
   position: static;
   flex: none;
-  transform: rotate(-135deg);
+  transform: rotate(135deg);
   width: var(--hershey-system-spacing-inset-small);
   height: var(--hershey-system-spacing-inset-small);
   transition: transform var(--nav-accordion-transition);
 }
 
 .header.hershey-nav nav .nav-sections .nav-drop > button[aria-expanded='true']::after {
-  transform: rotate(-45deg);
+  transform: rotate(315deg);
 }
 
 /* submenu: vertical open/close (mobile accordion) */
