@@ -273,7 +273,7 @@ footer .footer p {
 .footer.hershey-footer .footer-links a {
   display: block;
   position: relative;
-  z-index: 2;
+  z-index: 1;
   padding: var(--hershey-component-footer-legal-padding-block) 0 var(--hershey-component-footer-underline-offset);
   color: var(--hershey-component-footer-link);
   font-size: var(--hershey-component-footer-typography-link-font-size);
