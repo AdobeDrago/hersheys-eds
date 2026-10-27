@@ -13,7 +13,7 @@ footer .footer p {
   margin: 0;
 }
 
-@media (width >= 900px) {
+@media (width >= 992px) {
   footer .footer > div {
     padding: 40px 32px 24px;
   }
@@ -110,6 +110,12 @@ footer .footer p {
   line-height: var(--hershey-system-typography-body-line-height);
 }
 
+.footer.hershey-footer .newsletter-copy {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
 .footer.hershey-footer .newsletter-copy p {
   font-size: var(--hershey-component-footer-typography-copy-font-size);
 }
@@ -117,6 +123,7 @@ footer .footer p {
 .footer.hershey-footer .newsletter-signup {
   position: relative;
   z-index: 1;
+  margin-top: calc(var(--hershey-system-spacing-inset-snug) + var(--hershey-system-spacing-inset-hairline));
   text-align: center;
 }
 
@@ -199,7 +206,7 @@ footer .footer p {
 }
 
 .footer.hershey-footer .footer-brand {
-  padding: var(--hershey-component-footer-links-padding-top-mobile) 0 var(--hershey-system-spacing-inset-small);
+  padding: var(--hershey-component-footer-brand-padding-top) 0 var(--hershey-system-spacing-inset-small);
 }
 
 .footer.hershey-footer .footer-brand::after {
@@ -223,7 +230,7 @@ footer .footer p {
   pointer-events: none;
 }
 
-.footer.hershey-footer .footer-brand p {
+.footer.hershey-footer .footer-brand :where(.default-content-wrapper) > p {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -326,6 +333,17 @@ footer .footer p {
 }
 
 @media (width >= 768px) {
+  .footer.hershey-footer .footer-brand {
+    padding-top: var(--hershey-component-footer-links-padding-top-tablet);
+  }
+
+  .footer.hershey-footer a.social[style*='--social-icon']::before {
+    width: var(--hershey-component-footer-social-icon-size-tablet);
+    height: var(--hershey-component-footer-social-icon-size-tablet);
+  }
+}
+
+@media (width >= 992px) {
   .footer.hershey-footer > div {
     grid-template-columns: max(var(--hershey-component-footer-layout-padding-inline), calc((100% - var(--hershey-component-footer-layout-max-width)) / 2)) var(--hershey-component-footer-links-social-width) minmax(0, 1fr);
   }
@@ -364,6 +382,9 @@ footer .footer p {
   }
 
   .footer.hershey-footer .newsletter-copy {
+    width: auto;
+    max-width: none;
+    margin-inline: 0;
     padding-right: var(--hershey-component-footer-newsletter-copy-gap);
     padding-top: var(--hershey-component-footer-newsletter-copy-offset);
   }
@@ -374,6 +395,7 @@ footer .footer p {
 
   .footer.hershey-footer .newsletter-signup {
     align-self: end;
+    margin-top: 0;
     max-width: var(--hershey-component-footer-form-width);
     text-align: left;
   }
@@ -465,6 +487,11 @@ footer .footer p {
     margin-left: 0;
   }
 
+  .footer.hershey-footer a.social[style*='--social-icon']::before {
+    width: var(--hershey-component-footer-social-icon-size);
+    height: var(--hershey-component-footer-social-icon-size);
+  }
+
   .footer.hershey-footer .footer-brand ul {
     justify-content: flex-start;
     padding-top: var(--hershey-component-footer-social-offset);
@@ -473,7 +500,7 @@ footer .footer p {
 }
 
 /* wide desktop: illustration beside the sign-up form */
-@media (width >= 768px) {
+@media (width >= 992px) {
   .footer.hershey-footer .newsletter-art {
     display: block;
     position: absolute;

@@ -191,6 +191,7 @@
   --hershey-reference-border-width-4: 4px;
   --hershey-reference-border-width-5: 5px;
   --hershey-reference-border-width-8: 8px;
+  --hershey-reference-border-width-0-7: 0.7px;
   --hershey-reference-shadow-subtle: 0px 1px 1px 0px #0000001a;
   --hershey-reference-shadow-raised: 0px 6px 12px 0px #0002;
   --hershey-reference-shadow-tip: 0px 2px 8px 0px #0000002e;
@@ -436,6 +437,7 @@
   --hershey-system-border-width-menu-bar: var(--hershey-reference-border-width-4);
   --hershey-system-border-width-confirmation: var(--hershey-reference-border-width-8);
   --hershey-system-border-width-accent: var(--hershey-reference-border-width-3);
+  --hershey-system-border-width-menu-label-emphasis: var(--hershey-reference-border-width-0-7);
   --hershey-system-border-style-default: var(--hershey-reference-border-style-solid);
   --hershey-system-focus-width-default: var(--hershey-reference-border-width-2);
   --hershey-system-focus-width-prominent: var(--hershey-reference-border-width-3);
@@ -474,6 +476,7 @@
   --hershey-system-size-icon-chevron: var(--hershey-reference-size-width-7);
   --hershey-system-size-icon-navigation-hover: var(--hershey-reference-size-width-14);
   --hershey-system-size-icon-social: var(--hershey-reference-spacing-30);
+  --hershey-system-size-icon-social-tablet: var(--hershey-reference-spacing-24);
   --hershey-system-size-media-illustration: var(--hershey-reference-size-width-300);
   --hershey-system-size-media-brand-mark: var(--hershey-reference-size-width-200);
   --hershey-system-size-media-navigation-brand: var(--hershey-reference-size-width-128);
@@ -604,6 +607,10 @@
   --hershey-system-spacing-inset-links-block: var(--hershey-reference-spacing-27);
   --hershey-system-spacing-inset-copy-offset: var(--hershey-reference-spacing-40);
   --hershey-system-spacing-inset-divider: var(--hershey-reference-spacing-15);
+  --hershey-system-spacing-inset-links-top-tablet: var(--hershey-reference-spacing-18);
+  --hershey-system-spacing-inset-brand-top: var(--hershey-reference-spacing-50);
+  --hershey-system-spacing-inset-newsletter-bottom-compact: var(--hershey-reference-spacing-30);
+  --hershey-system-spacing-inset-header-edge: var(--hershey-reference-spacing-15);
   --hershey-system-spacing-control-block: var(--hershey-reference-spacing-12);
   --hershey-system-spacing-control-inline: var(--hershey-reference-spacing-18);
   --hershey-system-spacing-action-block: var(--hershey-reference-spacing-14);
@@ -717,6 +724,7 @@
   --hershey-component-header-layout-layer: var(--hershey-system-elevation-layer-navigation);
   --hershey-component-header-layout-padding-mobile: var(--hershey-system-spacing-inset-comfortable);
   --hershey-component-header-layout-padding-desktop: var(--hershey-system-spacing-inset-card);
+  --hershey-component-header-layout-padding-compact: var(--hershey-system-spacing-inset-header-edge);
   --hershey-component-header-layout-height-mobile: var(--hershey-system-size-navigation-height-mobile);
   --hershey-component-header-layout-gap-desktop: var(--hershey-system-spacing-gap-navigation-desktop);
   --hershey-component-header-layout-shadow: var(--hershey-system-elevation-shadow-navigation);
@@ -760,6 +768,7 @@
   --hershey-component-header-menu-chevron-offset: var(--hershey-system-spacing-inset-chevron-offset);
   --hershey-component-header-menu-chevron-offset-expanded: var(--hershey-system-spacing-inset-chevron-offset-expanded);
   --hershey-component-header-menu-hover-icon-offset: var(--hershey-system-spacing-inset-icon-offset);
+  --hershey-component-header-menu-label-emphasis: var(--hershey-system-border-width-menu-label-emphasis);
   --hershey-component-header-dropdown-width: var(--hershey-system-layout-container-dropdown);
   --hershey-component-header-motion-panel-duration: var(--hershey-system-motion-panel-duration);
   --hershey-component-header-motion-panel-easing: var(--hershey-system-motion-panel-easing);
@@ -850,6 +859,10 @@
   --hershey-component-footer-social-icon-size: var(--hershey-system-size-icon-social);
   --hershey-component-footer-divider-inset: var(--hershey-system-spacing-inset-divider);
   --hershey-component-footer-art-offset-top-desktop: var(--hershey-system-size-media-artwork-offset-desktop);
+  --hershey-component-footer-social-icon-size-tablet: var(--hershey-system-size-icon-social-tablet);
+  --hershey-component-footer-links-padding-top-tablet: var(--hershey-system-spacing-inset-links-top-tablet);
+  --hershey-component-footer-brand-padding-top: var(--hershey-system-spacing-inset-brand-top);
+  --hershey-component-footer-newsletter-padding-bottom-compact: var(--hershey-system-spacing-inset-newsletter-bottom-compact);
   --hershey-component-cards-slider-padding-block-end: var(--hershey-system-spacing-inset-default);
   --hershey-component-cards-slider-control-size: var(--hershey-system-size-control-round-action);
   --hershey-component-cards-slider-control-border-width: var(--hershey-system-border-width-control);
