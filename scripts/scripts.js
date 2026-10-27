@@ -166,7 +166,8 @@ async function loadEager(doc) {
   // product pages author `theme: hershey-primary`; flag them so the Hershey tokens load
   if (window.location.pathname.startsWith('/products/')) document.body.classList.add('hershey-product');
   if (document.body.classList.contains('hershey-home')
-    || document.body.classList.contains('hershey-product')) {
+    || document.body.classList.contains('hershey-product')
+    || document.body.classList.contains('hershey-recipe')) {
     await loadHersheyTheme();
     // brand themes (e.g. `theme: reese-primary`) override the product hero and card tokens
     const brandTheme = ['reese-primary', 'cadbury-primary', 'payday-primary', 'rolo-primary']
