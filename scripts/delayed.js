@@ -31,6 +31,8 @@ if (document.querySelector('[data-bv-show]')) {
 }
 loadOneTrust()
   .catch(() => {
+    // footer cookie links read this to fall back instead of waiting for a CMP that won't come
+    window.hlx.oneTrustFailed = true;
     // eslint-disable-next-line no-console
     console.warn('delayed: failed to load onetrust');
   })
