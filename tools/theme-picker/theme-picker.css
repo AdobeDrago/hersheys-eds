@@ -41,11 +41,6 @@ body {
   font-weight: 600;
 }
 
-.theme-picker-chip:disabled {
-  cursor: progress;
-  opacity: 0.6;
-}
-
 .theme-picker-current,
 .theme-picker-status {
   margin: 0;
