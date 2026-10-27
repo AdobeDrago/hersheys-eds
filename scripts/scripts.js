@@ -12,6 +12,7 @@ import {
   buildBlock,
 } from './aem.js';
 import loadHersheyTheme from './hershey-theme.js';
+import { BRAND_THEMES } from './brand-themes.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -169,7 +170,7 @@ async function loadEager(doc) {
     || document.body.classList.contains('hershey-product')) {
     await loadHersheyTheme();
     // brand themes (e.g. `theme: reese-primary`) override the product hero and card tokens
-    const brandTheme = ['reese-primary', 'cadbury-primary', 'payday-primary', 'rolo-primary']
+    const brandTheme = BRAND_THEMES.map(({ value }) => value)
       .find((name) => document.body.classList.contains(name));
     if (brandTheme) await loadCSS(`${window.hlx.codeBasePath}/design/themes/${brandTheme}.css`);
   }
