@@ -206,7 +206,7 @@ Test real DA content at `/`, `/nav` and `/footer` on
 <https://migrate-hersheyland-homepage--hersheys-eds--adobedrago.aem.page/>.
 Local testing uses that content with local code via `aem up --url` for the same
 origin. No authoring or cloud-content changes are required.
-Compare computed styles before/after at 375px, 768px and 1440px, and exercise
+Compare computed styles before/after at 375px, 992px and 1440px, and exercise
 keyboard tabs, sliders and responsive navigation.
 
 ### Migration from the previous dictionary
