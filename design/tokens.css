@@ -163,6 +163,7 @@
   --hershey-reference-typography-line-height-1-15: 1.15;
   --hershey-reference-typography-line-height-2-2: 2.2;
   --hershey-reference-typography-line-height-1-4: 1.4;
+  --hershey-reference-typography-line-height-1-6: 1.6;
   --hershey-reference-typography-leading-18: 18px;
   --hershey-reference-typography-leading-20: 20px;
   --hershey-reference-typography-leading-27: 27px;
@@ -283,6 +284,7 @@
   --hershey-reference-size-width-768: 768px;
   --hershey-reference-size-width-790: 790px;
   --hershey-reference-size-width-800: 800px;
+  --hershey-reference-size-width-820: 820px;
   --hershey-reference-size-width-900: 900px;
   --hershey-reference-size-width-909: 909px;
   --hershey-reference-size-width-950: 950px;
@@ -468,6 +470,7 @@
   --hershey-system-typography-story-heading-2-font-size-desktop: var(--hershey-reference-typography-size-36);
   --hershey-system-typography-story-heading-3-font-size-mobile: var(--hershey-reference-typography-size-24);
   --hershey-system-typography-story-heading-3-font-size-desktop: var(--hershey-reference-typography-size-28);
+  --hershey-system-typography-story-accordion-line-height: var(--hershey-reference-typography-line-height-1-6);
   --hershey-system-shape-radius-card: var(--hershey-reference-shape-radius-24);
   --hershey-system-shape-radius-tab: var(--hershey-reference-shape-radius-30);
   --hershey-system-shape-radius-popover: var(--hershey-reference-shape-radius-16);
@@ -534,6 +537,7 @@
   --hershey-system-layout-container-story-wide-text-inset-mobile: var(--hershey-reference-size-width-90);
   --hershey-system-layout-container-story-slider-controls: var(--hershey-reference-size-width-1180);
   --hershey-system-layout-container-story-slider-controls-wide: var(--hershey-reference-size-width-1240);
+  --hershey-system-layout-container-story-craft-accordion-max: var(--hershey-reference-size-width-820);
   --hershey-system-layout-clearance-popover: var(--hershey-reference-size-width-100);
   --hershey-system-layout-breakpoint-tablet: var(--hershey-reference-size-width-600);
   --hershey-system-layout-breakpoint-desktop: var(--hershey-reference-size-width-900);
@@ -708,6 +712,8 @@
   --hershey-system-spacing-inset-story-slider-control-mobile: var(--hershey-reference-spacing-30);
   --hershey-system-spacing-inset-story-slider-control-mobile-wide: var(--hershey-reference-spacing-20);
   --hershey-system-spacing-inset-story-slider-chevron-mobile: var(--hershey-reference-spacing-6);
+  --hershey-system-spacing-inset-story-craft-accordion-inset: var(--hershey-reference-spacing-20);
+  --hershey-system-spacing-inset-story-accordion-label: var(--hershey-reference-spacing-12);
   --hershey-system-spacing-control-block: var(--hershey-reference-spacing-12);
   --hershey-system-spacing-control-inline: var(--hershey-reference-spacing-18);
   --hershey-system-spacing-action-block: var(--hershey-reference-spacing-14);
@@ -1457,9 +1463,10 @@
   --hershey-component-accordion-label-font-family: var(--hershey-system-typography-body-font-family);
   --hershey-component-accordion-label-font-size: var(--hershey-system-typography-body-font-size);
   --hershey-component-accordion-label-font-weight: var(--hershey-system-typography-action-font-weight);
-  --hershey-component-accordion-label-padding-block: var(--hershey-system-spacing-inset-divider);
+  --hershey-component-accordion-label-padding-block: var(--hershey-system-spacing-inset-story-accordion-label);
   --hershey-component-accordion-label-padding-inline-end: var(--hershey-system-spacing-inset-card);
   --hershey-component-accordion-label-color-inactive: var(--hershey-system-color-text-inactive);
+  --hershey-component-accordion-label-line-height: var(--hershey-system-typography-story-accordion-line-height);
   --hershey-component-accordion-icon-color: var(--hershey-system-color-icon-navigation);
   --hershey-component-accordion-icon-width: var(--hershey-system-size-icon-accordion);
   --hershey-component-accordion-icon-thickness: var(--hershey-system-border-width-accent);

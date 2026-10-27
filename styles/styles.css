@@ -799,6 +799,11 @@ main .section.centered h3 {
   color: inherit;
 }
 
+/* the FAQ heading is centred above its accordion */
+.hershey-story main .section:has(> .accordion-wrapper) > .default-content-wrapper > h2 {
+  text-align: center;
+}
+
 .hershey-story.story-craft main .section.centered .default-content-wrapper > h2 {
   margin-top: var(--hershey-system-spacing-gap-story-craft-related-top, 91px);
 }
@@ -845,6 +850,22 @@ main .section.centered h3 {
 /* the note under each tip lines up with the tip's list on hersheyland.com */
 .hershey-story.story-craft main .section.warm-tan .default-content-wrapper > ul + p:not(.button-wrapper) {
   margin-left: var(--hershey-system-spacing-inset-story-wide-list, 40px);
+}
+
+/* the accordion follows the article column, and stops at 820px from 992px */
+.hershey-story.story-craft main > .section:not(.dark-brown) > .accordion-wrapper {
+  max-width: calc(100vw - var(--hershey-system-layout-container-story-craft-inset-mobile, 70px));
+  padding-inline: 0;
+}
+
+@media (width >= 992px) {
+  .hershey-story.story-craft main > .section:not(.dark-brown) > .accordion-wrapper {
+    max-width: min(var(--hershey-system-layout-container-story-craft-max, 950px), calc(83.333vw - var(--hershey-system-layout-container-story-craft-inset-desktop, 100px)));
+  }
+
+  .hershey-story.story-craft .accordion {
+    max-width: min(var(--hershey-system-layout-container-story-craft-accordion-max, 820px), calc(66.667vw - var(--hershey-system-spacing-inset-story-craft-accordion-inset, 20px)));
+  }
 }
 
 /* a heading after a paragraph, or after a columns row on desktop, keeps the extra space live has there */
