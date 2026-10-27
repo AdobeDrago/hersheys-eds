@@ -425,6 +425,11 @@ body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-
   background: var(--hershey-system-color-surface-seasonal-dark, #3c131c);
 }
 
+/* story pages ending on a light section: the ribbon sits on white, as on hersheyland.com */
+.hershey-story:not(:has(main > .section.dark-brown-large:nth-last-child(-n+2))) .footer.hershey-footer .newsletter {
+  background: var(--hershey-system-color-surface-default, #fff);
+}
+
 /* back-to-listing band: link sits at the left edge with a chevron, as on hersheyland.com */
 .hershey-story main > .section.dark-brown > .default-content-wrapper {
   max-width: none;
