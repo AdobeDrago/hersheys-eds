@@ -264,3 +264,12 @@
 .cards .cards-slider-dot[aria-current='true'] {
   background-image: url('/icons/kiss-indicator-active.svg');
 }
+
+/* white circle (orb) indicators on the dark-brown-large section, as on hersheyland.com */
+.dark-brown-large .cards .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-light.svg');
+}
+
+.dark-brown-large .cards .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-light.svg');
+}

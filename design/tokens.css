@@ -289,6 +289,7 @@
   --hershey-system-color-surface-plum: var(--hershey-reference-color-brand-plum);
   --hershey-system-color-surface-story-hero: var(--hershey-reference-color-brand-cornflower);
   --hershey-system-color-surface-story-intro: var(--hershey-reference-color-brand-periwinkle);
+  --hershey-system-color-surface-story-hero-navy: var(--hershey-reference-color-brand-navy);
   --hershey-system-color-action-primary-background-default: var(--hershey-reference-color-brand-blue);
   --hershey-system-color-action-primary-background-hover: var(--hershey-reference-color-brand-blue-deep);
   --hershey-system-color-action-primary-foreground: var(--hershey-reference-color-neutral-255);
@@ -829,6 +830,7 @@
   --hershey-component-columns-activity-list-item-gap: var(--hershey-system-spacing-inset-small);
   --hershey-component-columns-activity-list-marker-font-family: var(--hershey-system-typography-heading-font-family);
   --hershey-component-columns-activity-list-marker-font-weight: var(--hershey-system-typography-heading-font-weight);
+  --hershey-component-columns-pair-gap: var(--hershey-system-spacing-gap-x-large);
   --hershey-component-tabs-list-gap: var(--hershey-system-spacing-gap-small);
   --hershey-component-tabs-list-padding-block-end: var(--hershey-system-spacing-inset-default);
   --hershey-component-tabs-control-padding-block: var(--hershey-system-spacing-control-block);
@@ -1102,6 +1104,7 @@
   --hershey-component-hero-article-text-padding-inline-start-desktop: var(--hershey-system-spacing-inset-story-hero-inline);
   --hershey-component-hero-article-layout-min-height: var(--hershey-system-size-region-story-hero-minimum);
   --hershey-component-hero-article-plum-band-background: var(--hershey-system-color-surface-plum);
+  --hershey-component-hero-article-navy-band-background: var(--hershey-system-color-surface-story-hero-navy);
   --hershey-component-breadcrumb-trail-foreground: var(--hershey-system-color-text-primary);
   --hershey-component-breadcrumb-trail-base-font-family: var(--hershey-system-typography-body-font-family);
   --hershey-component-breadcrumb-trail-base-font-size: var(--hershey-system-typography-data-font-size);

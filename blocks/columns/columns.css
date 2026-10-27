@@ -114,3 +114,8 @@
     align-items: flex-start;
   }
 }
+
+/* pair variant (story pages): two images side by side */
+.columns.pair > div {
+  gap: var(--hershey-component-columns-pair-gap, 48px);
+}

@@ -396,6 +396,40 @@ main .section.centered {
   margin-top: var(--hershey-system-spacing-gap-x-large, 48px);
 }
 
+/* blue in-text links, for sections authored with blue links on hersheyland.com */
+main .section.blue-links {
+  --story-link-color: var(--hershey-system-color-action-primary-background-default, #007bbd);
+}
+
+/* tall dark-brown section (slider on a dark band) */
+main .section.dark-brown-large {
+  margin: 0;
+  padding: var(--hershey-system-spacing-section-default, 64px) 0;
+  background-color: var(--hershey-system-color-surface-seasonal-dark, #3c131c);
+  color: var(--hershey-system-color-text-inverse, #fff);
+}
+
+main .section.dark-brown-large h2,
+main .section.dark-brown-large h3 {
+  margin-top: 0;
+  color: inherit;
+}
+
+/* `template: story-narrow` pages read in a narrower column; images break out by the column padding */
+.hershey-story.story-narrow main > .section:not(.dark-brown) > .default-content-wrapper,
+.hershey-story.story-narrow main > .section:not(.dark-brown) > .columns-wrapper {
+  max-width: calc(var(--hershey-system-layout-container-intro, 800px) - 2 * var(--hershey-system-spacing-inset-comfortable, 24px));
+}
+
+.hershey-story.story-narrow main .default-content-wrapper p:has(> picture) {
+  margin-inline: calc(-1 * var(--hershey-system-spacing-inset-comfortable, 24px));
+}
+
+.hershey-story.story-narrow main .default-content-wrapper p > picture img {
+  width: 100%;
+  height: auto;
+}
+
 /* activity sections sit further apart than the default section gap */
 .hershey-story main > .section:has(.columns.activity) {
   margin-top: var(--hershey-system-spacing-section-large, 80px);
@@ -410,7 +444,7 @@ main .section.centered h3 {
 /* story text links: bold, brown and underlined; the underline goes on hover and focus, as on hersheyland.com */
 .hershey-story main .section:not(.dark-brown) :is(.default-content-wrapper, .columns) a:any-link:not(.button) {
   border-bottom: var(--hershey-system-border-width-divider, 1px) solid currentcolor;
-  color: var(--hershey-system-color-text-primary, #3f000b);
+  color: var(--story-link-color, var(--hershey-system-color-text-primary, #3f000b));
   font-weight: var(--hershey-system-typography-action-font-weight, 700);
   text-decoration: none;
 }
