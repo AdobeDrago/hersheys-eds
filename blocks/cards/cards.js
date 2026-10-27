@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
+import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
 
 let sliderId = 0;
 
@@ -33,7 +33,16 @@ function decorateSlider(block, list) {
   update();
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
+  if (block.classList.contains('product')) {
+    // the product variant has its own markup, so it loads its own script and styles
+    const [{ default: decorateProduct }] = await Promise.all([
+      import('./cards-product.js'),
+      loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-product.css`),
+    ]);
+    await decorateProduct(block);
+    return;
+  }
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {

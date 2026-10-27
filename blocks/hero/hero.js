@@ -1,4 +1,4 @@
-import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
+import { createOptimizedPicture, getMetadata, loadCSS } from '../../scripts/aem.js';
 
 /**
  * Recipe variant of the hero block (class `recipe`, authored as Hero (Recipe)).
@@ -244,7 +244,17 @@ function decorateRecipe(block) {
  * The recipe variant rebuilds the overview.
  * @param {Element} block The hero block element
  */
-export default function decorate(block) {
-  if (!block.classList.contains('recipe')) return;
-  decorateRecipe(block);
+export default async function decorate(block) {
+  if (block.classList.contains('recipe')) {
+    decorateRecipe(block);
+    return;
+  }
+  if (block.classList.contains('product')) {
+    // the product variant has its own markup, so it loads its own script and styles
+    const [{ default: decorateProduct }] = await Promise.all([
+      import('./hero-product.js'),
+      loadCSS(`${window.hlx.codeBasePath}/blocks/hero/hero-product.css`),
+    ]);
+    decorateProduct(block);
+  }
 }

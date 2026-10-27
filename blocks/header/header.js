@@ -3,7 +3,7 @@ import loadHersheyTheme from '../../scripts/hershey-theme.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
+const isDesktop = window.matchMedia('(min-width: 768px)');
 let navigationId = 0;
 
 /**
@@ -73,7 +73,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   // the desktop nav is always expanded, so aria-expanded only applies to the mobile menu
   if (isDesktop.matches) nav.removeAttribute('aria-expanded');
   else nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+  // submenus always start collapsed; on mobile they open one at a time
+  toggleAllNavSections(navSections, false);
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   button.setAttribute('aria-expanded', String(!expanded));
 
@@ -143,16 +144,29 @@ export default async function decorate(block) {
       navSection.prepend(button);
       button.addEventListener('click', () => {
         const expanded = button.getAttribute('aria-expanded') === 'true';
-        if (isDesktop.matches) {
-          button.focus();
-          toggleAllNavSections(navSections);
-        }
+        if (isDesktop.matches) button.focus();
+        // only one submenu is open at a time (accordion on mobile, dropdown on desktop)
+        toggleAllNavSections(navSections);
         button.setAttribute('aria-expanded', !expanded);
+      });
+      // desktop opens dropdowns on hover; mobile is click only
+      navSection.addEventListener('mouseenter', () => {
+        if (!isDesktop.matches) return;
+        toggleAllNavSections(navSections);
+        button.setAttribute('aria-expanded', true);
+      });
+      navSection.addEventListener('mouseleave', () => {
+        if (isDesktop.matches) button.setAttribute('aria-expanded', false);
       });
     });
   }
 
   if (block.classList.contains('hershey-nav')) {
+    const hoverIcon = navSections?.querySelector(':scope .default-content-wrapper > p > picture img');
+    if (hoverIcon) {
+      nav.style.setProperty('--nav-hover-icon', `url("${hoverIcon.src}")`);
+      hoverIcon.closest('p').remove();
+    }
     navSections?.querySelectorAll('li').forEach((item) => {
       const links = [...item.querySelectorAll(':scope > a, :scope > p > a')];
       const imageLink = links.find((link) => link.querySelector('picture'));
@@ -161,10 +175,19 @@ export default async function decorate(block) {
       if (imageLink && textLink) {
         textLink.prepend(imageLink.querySelector('picture'));
         imageLink.remove();
+      } else if (imageLink) {
+        // icon link followed by a plain text label: make the label part of the link
+        const label = imageLink.closest('p')?.nextElementSibling;
+        if (label?.tagName === 'P' && !label.querySelector('a')) {
+          imageLink.append(label.textContent.trim());
+          label.remove();
+        }
       }
     });
     const searchLink = nav.querySelector('.nav-tools a[href]');
     if (searchLink) {
+      const searchIcon = searchLink.parentElement.querySelector('img');
+      if (searchIcon) nav.style.setProperty('--search-icon', `url("${searchIcon.src}")`);
       const form = document.createElement('form');
       form.role = 'search';
       form.action = searchLink.href;
@@ -180,7 +203,13 @@ export default async function decorate(block) {
       submit.type = 'submit';
       submit.textContent = 'Search';
       form.append(input, submit);
+      // icon-only search entry shown in the mobile header bar
+      const mobileSearch = document.createElement('a');
+      mobileSearch.className = 'nav-search-link';
+      mobileSearch.href = searchLink.href;
+      mobileSearch.setAttribute('aria-label', input.placeholder);
       searchLink.parentElement.replaceWith(form);
+      form.after(mobileSearch);
     }
   }
 

@@ -13,7 +13,8 @@ let consentedLoaded = false;
  *
  * @returns {boolean} true if the user has consented
  */
-function hasConsent() {
+// eslint-disable-next-line import/prefer-default-export
+export function hasConsent() {
   const consent = new URLSearchParams(window.location.search).get('consent');
   if (consent !== null) {
     return ['accept', 'true', '1', 'yes'].includes(consent.toLowerCase());

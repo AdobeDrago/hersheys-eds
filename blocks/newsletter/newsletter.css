@@ -1,0 +1,451 @@
+@font-face {
+  font-family: hershey-tt;
+  src: url('../../fonts/subset-TTNormsPro-Normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-tt;
+  src: url('../../fonts/subset-TTNormsPro-Bd.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: hershey-gazpacho;
+  src: url('../../fonts/subset-Gazpacho-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+main div.section.newsletter-container {
+  display: flow-root;
+  margin: 0;
+  padding: 0;
+  background: center top / cover no-repeat;
+}
+
+main div.section.newsletter-container > .newsletter-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.newsletter {
+  font-family: var(--hershey-component-newsletter-typography-body-family, hershey-tt, sans-serif);
+  color: var(--hershey-component-newsletter-color-text-body, #333);
+}
+
+/* white card */
+.newsletter .newsletter-form-container {
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: var(--hershey-component-newsletter-spacing-page-block, 200px) auto;
+  padding: var(--hershey-component-newsletter-spacing-card-block, 60px) var(--hershey-component-newsletter-spacing-card-inline-mobile, 20px);
+  background-color: var(--hershey-component-newsletter-color-surface, #fff);
+}
+
+.newsletter .newsletter-register h1 {
+  margin: 0;
+  color: var(--hershey-component-newsletter-color-text, #3f000b);
+  font-family: var(--hershey-component-newsletter-typography-body-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-component-newsletter-typography-title-size, 32px);
+  font-weight: var(--hershey-component-newsletter-typography-title-weight, 700);
+  line-height: var(--hershey-component-newsletter-typography-line-height-base, 1.5);
+  text-align: center;
+}
+
+.newsletter .newsletter-intro {
+  margin: 0;
+  color: var(--hershey-component-newsletter-color-text-body, #333);
+  font-size: var(--hershey-component-newsletter-typography-lead-size, 17px);
+  line-height: var(--hershey-component-newsletter-typography-line-height-base, 1.5);
+  text-align: center;
+  padding-bottom: var(--hershey-component-newsletter-spacing-label-offset, 20px);
+}
+
+.newsletter .newsletter-thanks-body > p {
+  margin: 0 0 15px;
+  font-size: var(--hershey-component-newsletter-typography-body-size, 16px);
+  line-height: var(--hershey-component-newsletter-typography-line-height-compact, 1.25);
+}
+
+.newsletter .newsletter-social p {
+  margin: 0 0 15px;
+  font-size: var(--hershey-component-newsletter-typography-body-size, 16px);
+  line-height: var(--hershey-component-newsletter-typography-line-height-compact, 1.25);
+}
+
+.newsletter .newsletter-register > p:not(.newsletter-intro) {
+  margin: 0;
+  font-size: var(--hershey-component-newsletter-typography-input-size, 18px);
+  line-height: var(--hershey-component-newsletter-typography-line-height-note, 1.333);
+  text-align: center;
+}
+
+.newsletter .newsletter-register small {
+  color: var(--hershey-component-newsletter-color-text-note, #424242);
+  font-size: var(--hershey-component-newsletter-typography-label-size, 15px);
+  line-height: var(--hershey-component-newsletter-typography-line-height-base, 1.5);
+}
+
+.newsletter form {
+  display: block;
+  margin: 0;
+  padding: var(--hershey-component-newsletter-spacing-body-offset, 50px) 0 0;
+}
+
+.newsletter .newsletter-row {
+  display: block;
+}
+
+/* fields */
+.newsletter .newsletter-field {
+  position: relative;
+  margin: 0 0 var(--hershey-component-newsletter-spacing-field-margin, 24px);
+  padding: 0 var(--hershey-component-newsletter-spacing-field-gap, 25px) 0 0;
+}
+
+.newsletter .newsletter-field label {
+  display: block;
+  margin: 0 0 var(--hershey-component-newsletter-spacing-label-gap, 8px) var(--hershey-component-newsletter-spacing-label-offset, 20px);
+  color: var(--hershey-component-newsletter-color-text-body, #333);
+  font-size: var(--hershey-component-newsletter-typography-label-size, 15px);
+  font-weight: var(--hershey-component-newsletter-typography-label-weight, 700);
+  line-height: var(--hershey-component-newsletter-typography-line-height-base, 1.5);
+}
+
+.newsletter .newsletter-field input[type='text'],
+.newsletter .newsletter-field input[type='email'] {
+  display: block;
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--hershey-component-newsletter-spacing-input-block, 5px) var(--hershey-component-newsletter-spacing-input-inline, 43px);
+  border: var(--hershey-component-newsletter-border-field-width, 2px) var(--hershey-component-newsletter-border-style, solid) var(--hershey-component-newsletter-color-border, #cfcfcf);
+  border-radius: var(--hershey-component-newsletter-shape-field-radius, 6px);
+  background-color: var(--hershey-component-newsletter-color-surface, #fff);
+  color: var(--hershey-component-newsletter-color-text, #3f000b);
+  font-family: var(--hershey-component-newsletter-typography-body-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-component-newsletter-typography-input-size, 18px);
+  line-height: normal;
+}
+
+.newsletter .newsletter-field input::placeholder {
+  color: var(--hershey-component-newsletter-color-text, #3f000b);
+  opacity: 1;
+}
+
+.newsletter .has-error input[type='text'],
+.newsletter .has-error input[type='email'] {
+  border-color: var(--hershey-component-newsletter-color-error, #eb0029);
+}
+
+.newsletter .newsletter-field input[type='text']:focus,
+.newsletter .newsletter-field input[type='email']:focus {
+  border-color: var(--hershey-component-newsletter-color-border-focus, #3c131c);
+  outline: var(--hershey-component-newsletter-focus-width, 1px) var(--hershey-component-newsletter-border-style, solid) var(--hershey-component-newsletter-color-border-focus, #3c131c);
+}
+
+/* field icons: drawn on the wrapper, not the input, so autofill can't hide them */
+.newsletter .newsletter-input {
+  position: relative;
+}
+
+.newsletter .newsletter-input::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  width: 15px;
+  height: 17px;
+  transform: translateY(-50%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 15px 17px;
+  pointer-events: none;
+}
+
+.newsletter .newsletter-input-first-name::before,
+.newsletter .newsletter-input-last-name::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 17' fill='none' stroke='%23333' stroke-width='1.2'%3E%3Ccircle cx='7.5' cy='4.6' r='3.6'/%3E%3Cpath d='M1 16.2v-1.6c0-2.6 2-4.6 4.6-4.6h3.8c2.6 0 4.6 2 4.6 4.6v1.6z' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.newsletter .newsletter-input-email::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 17' fill='none' stroke='%23333' stroke-width='1.2'%3E%3Crect x='0.8' y='3.5' width='13.4' height='10' rx='1.5'/%3E%3Cpath d='M1 4.5l6.5 5 6.5-5' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.newsletter .newsletter-input-zip::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 17' fill='none' stroke='%23333' stroke-width='1.2'%3E%3Cpath d='M7.5 16.2S1.3 10.4 1.3 6.3a6.2 6.2 0 0 1 12.4 0c0 4.1-6.2 9.9-6.2 9.9z' stroke-linejoin='round'/%3E%3Ccircle cx='7.5' cy='6.3' r='2.2'/%3E%3C/svg%3E");
+}
+
+/* keep autofilled fields white instead of the browser tint */
+.newsletter .newsletter-field input:-webkit-autofill {
+  -webkit-text-fill-color: var(--hershey-component-newsletter-color-text, #3f000b);
+  box-shadow: 0 0 0 1000px var(--hershey-component-newsletter-color-surface, #fff) inset;
+}
+
+/* errors */
+.newsletter .newsletter-error {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: var(--hershey-component-newsletter-spacing-label-offset, 20px);
+  margin-top: 2px;
+  color: var(--hershey-component-newsletter-color-error, #eb0029);
+  font-size: var(--hershey-component-newsletter-typography-error-size, 13px);
+  line-height: var(--hershey-component-newsletter-typography-line-height-error, 1.15);
+}
+
+.newsletter .has-error .newsletter-error {
+  display: block;
+}
+
+/* divider + opt-in */
+.newsletter .newsletter-optin {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  column-gap: 7px;
+  margin: 10px 0 34px;
+  padding: 17px 0 0;
+  border-top: var(--hershey-component-newsletter-border-divider-width, 1px) var(--hershey-component-newsletter-border-style, solid) var(--hershey-component-newsletter-color-border, #cfcfcf);
+}
+
+.newsletter .newsletter-optin input[type='checkbox'] {
+  appearance: none;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  border: var(--hershey-component-newsletter-border-field-width, 2px) var(--hershey-component-newsletter-border-style, solid) var(--hershey-component-newsletter-color-border, #cfcfcf);
+  border-radius: var(--hershey-component-newsletter-shape-check-radius, 3px);
+  background-color: var(--hershey-component-newsletter-color-surface, #fff);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
+  cursor: pointer;
+}
+
+.newsletter .newsletter-optin input[type='checkbox']:checked {
+  border-color: var(--hershey-component-newsletter-color-border-focus, #3c131c);
+  background-color: var(--hershey-component-newsletter-color-border-focus, #3c131c);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='8' y='8' fill='%23fff' font-size='16' font-weight='700' text-anchor='middle' dominant-baseline='central'%3E%E2%9C%94%3C/text%3E%3C/svg%3E");
+  background-size: 16px 16px;
+}
+
+.newsletter .newsletter-optin input[type='checkbox']:focus-visible {
+  outline: var(--hershey-component-newsletter-focus-width, 1px) var(--hershey-component-newsletter-border-style, solid) var(--hershey-component-newsletter-color-border-focus, #3c131c);
+}
+
+.newsletter .newsletter-optin label {
+  margin: 0;
+  font-weight: var(--hershey-component-newsletter-typography-body-weight, 400);
+  color: var(--hershey-component-newsletter-color-text-body, #333);
+  font-size: var(--hershey-component-newsletter-typography-body-size, 16px);
+  line-height: var(--hershey-component-newsletter-typography-line-height-base, 1.5);
+}
+
+.newsletter .newsletter-social a {
+  display: inline-block;
+  height: 37.5px;
+  margin: 0 5px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  vertical-align: top;
+}
+
+.newsletter .newsletter-optin label a {
+  color: var(--hershey-component-newsletter-color-text, #3f000b);
+  font-weight: var(--hershey-component-newsletter-typography-label-weight, 700);
+  text-decoration: none;
+}
+
+.newsletter .newsletter-optin .newsletter-error {
+  position: static;
+  grid-column: 2;
+  margin-top: 4px;
+}
+
+/* submit */
+.newsletter button[type='submit'] {
+  display: block;
+  box-sizing: border-box;
+  width: min(var(--hershey-component-newsletter-size-submit-width, 300px), calc(100% - 50px));
+  margin: 15px auto 0;
+  padding: var(--hershey-component-newsletter-spacing-submit-block, 16px) var(--hershey-component-newsletter-spacing-submit-inline, 36px);
+  border: 0;
+  border-radius: var(--hershey-component-newsletter-shape-action-radius, 50px);
+  background-color: var(--hershey-component-newsletter-color-action-background, #007bbd);
+  color: var(--hershey-component-newsletter-color-action-foreground, #fff);
+  font-family: var(--hershey-component-newsletter-typography-body-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-component-newsletter-typography-submit-size, 21px);
+  line-height: var(--hershey-component-newsletter-typography-line-height-base, 1.5);
+  cursor: pointer;
+}
+
+/* thank-you state */
+.newsletter .newsletter-thanks:not([hidden]) {
+  box-sizing: border-box;
+  padding: 10px 10px 40px;
+  border: var(--hershey-component-newsletter-confirmation-border-width, 8px) var(--hershey-component-newsletter-border-style, solid) var(--hershey-component-newsletter-confirmation-color-border, #ffe9af);
+  border-radius: var(--hershey-component-newsletter-confirmation-shape-radius, 30px);
+  background-color: var(--hershey-component-newsletter-confirmation-color-surface, #fff1c9);
+  color: var(--hershey-component-newsletter-confirmation-color-text, #3c131c);
+  text-align: left;
+}
+
+.newsletter .newsletter-thanks-image {
+  display: block;
+  width: 70%;
+  max-width: var(--hershey-component-newsletter-size-image-max-width, 370px);
+  height: auto;
+  margin: 0 auto 15px;
+}
+
+.newsletter .newsletter-thanks-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.newsletter .newsletter-thanks-body {
+  padding: 0 var(--hershey-component-newsletter-spacing-label-offset, 20px);
+}
+
+.newsletter .newsletter-thanks h2 {
+  margin: 0 0 15px;
+  color: var(--hershey-component-newsletter-confirmation-color-text, #3c131c);
+  font-family: var(--hershey-component-newsletter-typography-heading-family, hershey-gazpacho, sans-serif);
+  font-size: var(--hershey-component-newsletter-typography-confirmation-title-mobile, 24px);
+  font-weight: var(--hershey-component-newsletter-typography-title-weight, 700);
+  line-height: var(--hershey-component-newsletter-typography-line-height-compact, 1.25);
+}
+
+.newsletter .newsletter-thanks .button {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--hershey-component-newsletter-size-action-max-width, 320px);
+  margin: 10px auto;
+  padding: var(--hershey-component-newsletter-spacing-submit-block, 16px);
+  border: 0;
+  border-radius: var(--hershey-component-newsletter-shape-action-radius, 50px);
+  background-color: var(--hershey-component-newsletter-confirmation-color-action-background, #006fae);
+  color: var(--hershey-component-newsletter-color-action-foreground, #fff);
+  font-family: var(--hershey-component-newsletter-typography-body-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-component-newsletter-typography-lead-size, 17px);
+  font-weight: var(--hershey-component-newsletter-typography-label-weight, 700);
+  line-height: var(--hershey-component-newsletter-typography-line-height-compact, 1.25);
+  text-align: center;
+  text-decoration: none;
+}
+
+.newsletter .newsletter-social {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.newsletter .newsletter-social-instagram {
+  width: 29px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 29 33'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='1' y1='0' x2='0' y2='1'%3E%3Cstop offset='.16' stop-color='%239638be'/%3E%3Cstop offset='.37' stop-color='%23db2c76'/%3E%3Cstop offset='.65' stop-color='%23f8772e'/%3E%3Cstop offset='.91' stop-color='%23fed87a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='2' y='5' width='25' height='25' rx='7' fill='none' stroke='url(%23g)' stroke-width='3'/%3E%3Ccircle cx='14.5' cy='17.5' r='5.5' fill='none' stroke='url(%23g)' stroke-width='3'/%3E%3Ccircle cx='21.8' cy='10.4' r='1.8' fill='url(%23g)'/%3E%3C/svg%3E");
+}
+
+.newsletter .newsletter-social-tiktok {
+  width: 29px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='3 2.2 18 20.6'%3E%3Cpath d='M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z'/%3E%3C/svg%3E");
+}
+
+.newsletter .newsletter-social-youtube {
+  width: 37px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 37 26'%3E%3Crect width='37' height='26' rx='7' fill='%23f00'/%3E%3Cpath d='M15 7.5v11l10-5.5z' fill='%23fff'/%3E%3C/svg%3E");
+}
+
+.newsletter .newsletter-social-facebook {
+  width: 33px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231877f2' d='M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z'/%3E%3C/svg%3E");
+}
+
+.newsletter .newsletter-social-pinterest {
+  width: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23e60023' d='M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z'/%3E%3C/svg%3E");
+}
+
+@media (width >= 600px) {
+  .newsletter .newsletter-form-container {
+    padding: var(--hershey-component-newsletter-spacing-card-block, 60px) var(--hershey-component-newsletter-spacing-card-inline-desktop, 80px);
+  }
+}
+
+@media (width >= 1200px) {
+  .newsletter .newsletter-form-container {
+    max-width: 80%;
+  }
+
+  .newsletter .newsletter-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (width >= 900px) {
+  .newsletter .newsletter-thanks:not([hidden]) {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+  }
+
+  .newsletter .newsletter-thanks-image {
+    box-sizing: border-box;
+    width: 40%;
+    max-width: none;
+    padding: 10px;
+    margin: 0;
+  }
+
+  .newsletter .newsletter-thanks-body {
+    box-sizing: border-box;
+    width: 60%;
+    padding: 0 var(--hershey-component-newsletter-spacing-label-offset, 20px) 0 0;
+  }
+
+  .newsletter .newsletter-thanks h2 {
+    margin: 0;
+    font-size: var(--hershey-component-newsletter-typography-title-size, 32px);
+    line-height: var(--hershey-component-newsletter-typography-line-height-compact, 1.25);
+  }
+
+  .newsletter .newsletter-thanks-body > p {
+    margin: 0;
+    font-size: var(--hershey-component-newsletter-typography-input-size, 18px);
+    line-height: var(--hershey-component-newsletter-typography-line-height-loose, 1.667);
+  }
+
+  .newsletter .newsletter-thanks-actions {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .newsletter .newsletter-thanks .button {
+    width: auto;
+    max-width: none;
+    margin: 10px var(--hershey-component-newsletter-spacing-label-offset, 20px) 10px 0;
+    padding: var(--hershey-component-newsletter-spacing-action-block, 21px) var(--hershey-component-newsletter-spacing-action-inline, 26px);
+  }
+
+  .newsletter .newsletter-social {
+    margin: 0;
+    text-align: left;
+  }
+
+  .newsletter .newsletter-social p {
+    margin: 0;
+    font-size: var(--hershey-component-newsletter-typography-caption-size, 12px);
+    line-height: var(--hershey-component-newsletter-typography-line-height-caption, 2.5);
+  }
+
+  .newsletter .newsletter-social a {
+    margin: 0 14px 0 0;
+  }
+}
