@@ -14,8 +14,8 @@ import { createOptimizedPicture, getMetadata, toClassName } from '../../scripts/
  * Product rating is rendered from the `bvid` page metadata (Bazaarvoice inline rating).
  *
  * Authored values win. Whatever is left empty (images, product name, size list, description)
- * is filled from the product master sheet row whose `path` matches the page, or whose `gtin`
- * matches the `bvid` metadata. Sizes are the sheet products sharing the row's `familyId`.
+ * is filled from the product master sheet row whose `14-Digit UPCs` matches the `bvid` metadata.
+ * Sizes are the sheet products sharing the row's `familyId`.
  * The back image comes from an optional `imageBack` sheet column. An empty button is Shop Now.
  */
 
@@ -58,14 +58,15 @@ function urlPath(value) {
 }
 
 /**
- * Reads a sheet row as a product. Short column names (path, gtin, name, title, ...) are used
- * as is; the Hershey product master columns (Product Page URL, 14-Digit UPCs, productName,
- * Image URL, ...) are mapped onto them. UPCs are padded to the 14-digit GTIN of `bvid`.
+ * Reads a sheet row as a product. Short column names (path, name, title, ...) are used
+ * as is; the Hershey product master columns (Product Page URL, productName, Image URL, ...)
+ * are mapped onto them. `gtin` is always the `14-Digit UPCs` column, padded to the 14 digits
+ * of `bvid`.
  * @param {Object} row
  * @returns {Object}
  */
 function toProduct(row) {
-  const upc = String(row.gtin || row['14-Digit UPCs'] || row.upc || '').trim();
+  const upc = String(row['14-Digit UPCs'] || '').trim();
   return {
     ...row,
     path: row.path || urlPath(row['Product Page URL']),
@@ -95,20 +96,14 @@ function fetchProducts() {
   return productsPromise;
 }
 
-function normalizePath(path) {
-  return (path || '').trim().toLowerCase().replace(/\.html$/, '').replace(/\/+$/, '');
-}
-
 /**
- * Finds the sheet row for the current page.
+ * Finds the sheet row whose `14-Digit UPCs` (padded to 14 digits) matches the `bvid` GTIN.
  * @returns {Promise<{ product: Object|undefined, products: Array<Object> }>}
  */
 async function findProduct() {
   const products = await fetchProducts();
-  const path = normalizePath(window.location.pathname);
   const gtin = (getMetadata('bvid') || getMetadata('bv-id')).trim();
-  const product = products.find((p) => normalizePath(p.path) === path)
-    || (gtin ? products.find((p) => (p.gtin || '').trim() === gtin) : undefined);
+  const product = gtin ? products.find((p) => (p.gtin || '').trim() === gtin) : undefined;
   return { product, products };
 }
 
