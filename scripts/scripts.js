@@ -12,6 +12,7 @@ import {
   buildBlock,
 } from './aem.js';
 import loadHersheyTheme from './hershey-theme.js';
+import { BRAND_THEMES } from './brand-themes.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -168,10 +169,11 @@ async function loadEager(doc) {
   // story pages share the product pages' brand tokens and fonts
   if (window.location.pathname.startsWith('/stories/')) document.body.classList.add('hershey-product', 'hershey-story');
   if (document.body.classList.contains('hershey-home')
-    || document.body.classList.contains('hershey-product')) {
+    || document.body.classList.contains('hershey-product')
+    || document.body.classList.contains('hershey-recipe')) {
     await loadHersheyTheme();
     // brand themes (e.g. `theme: reese-primary`) override the product hero and card tokens
-    const brandTheme = ['reese-primary', 'cadbury-primary', 'payday-primary', 'rolo-primary']
+    const brandTheme = BRAND_THEMES.map(({ value }) => value)
       .find((name) => document.body.classList.contains(name));
     if (brandTheme) await loadCSS(`${window.hlx.codeBasePath}/design/themes/${brandTheme}.css`);
   }

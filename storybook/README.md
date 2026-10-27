@@ -105,7 +105,8 @@ Static elements explicitly document that they have no actions.
 
 Cards, Columns and Tabs use production decorators and CSS. Cards include
 default, welcome, products, related, social, slider and text-only variants.
-Hero uses production CSS: its empty decorator does not make it unavailable.
+Hero uses production CSS and its decorator. The default treatment is unchanged
+authored content; the recipe variant runs the production overview decorator.
 Its stacking context is contained by the showcase.
 
 Header and Footer run production decorators. Only their `loadFragment`
@@ -138,7 +139,7 @@ per-element documentation hierarchy, token selection, keyboard tabs, reduced
 motion, loaded widget assets, live announcements and real placeholder loading.
 It also checks multiple header instances, widget error propagation and
 concurrent stylesheet loads, optional Columns images, real Fragment URL
-handling, and production Hero empty-image behavior.
+handling, production Hero empty-image behavior, and the Hero recipe variant.
 Rendered-font checks verify the actual regular, bold, black and italic faces.
 It uses installed Google Chrome by default. To use a provisioned Playwright
 browser or another installed channel:

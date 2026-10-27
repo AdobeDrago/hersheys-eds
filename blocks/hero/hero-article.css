@@ -17,6 +17,11 @@ main > .section:has(> .hero-wrapper > .hero.article) > .hero-wrapper {
   padding: 0;
 }
 
+/* purple colour modifier: `Hero (article, purple)` */
+main > .section:has(> .hero-wrapper > .hero.article.purple) {
+  background-color: var(--hershey-component-hero-article-purple-band-background, #724990);
+}
+
 /* lime colour modifier: `Hero (article, lime)`; dark text on the light band */
 main > .section:has(> .hero-wrapper > .hero.article.lime) {
   background-color: var(--hershey-component-hero-article-lime-band-background, #b7d34a);

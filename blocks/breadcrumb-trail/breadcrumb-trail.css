@@ -69,7 +69,7 @@ main > .section > .breadcrumb-trail-wrapper {
 }
 
 .breadcrumb-trail a.breadcrumb-trail-link:hover {
-  color: var(--hershey-component-breadcrumb-trail-link-color, #007bbd);
+  color: var(--hershey-component-breadcrumb-trail-foreground, #3f000b);
   text-decoration: none;
 }
 

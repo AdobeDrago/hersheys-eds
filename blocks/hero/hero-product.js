@@ -1,18 +1,137 @@
-import { createOptimizedPicture, getMetadata } from '../../scripts/aem.js';
+import { createOptimizedPicture, getMetadata, toClassName } from '../../scripts/aem.js';
 
 /**
  * Hero (product) variant, loaded by hero.js for `Hero (product)`.
  *
- * Content model: 1 row x 2 cells.
- *   Cell 1 (media): one or more product images. Several images become a gallery
- *     with previous/next controls and thumbnails.
- *   Cell 2 (details): h1 product name, "Choose a size:" label, a list of size
- *     links (current size first, unlinked or bold), description, CTA link.
+ * Content model, either:
+ *   Field table: one row per field, name | value. Fields: image-front, image-back, Title,
+ *     Description, size, button. Rows may be empty or left out.
+ *   2-cell layout: 1 row x 2 cells.
+ *     Cell 1 (media): one or more product images. Several images become a gallery
+ *       with previous/next controls and thumbnails.
+ *     Cell 2 (details): h1 product name, "Choose a size:" label, a list of size
+ *       links (current size first, unlinked or bold), description, CTA link.
  * Product rating is rendered from the `bvid` page metadata (Bazaarvoice inline rating).
+ *
+ * Authored values win. Whatever is left empty (images, product name, size list, description)
+ * is filled from the product master sheet row whose `14-Digit UPCs` matches the `bvid` metadata.
+ * Sizes are the sheet products sharing the row's `familyId`.
+ * The back image comes from an optional `imageBack` sheet column. An empty button is Shop Now.
  */
 
 const SIZE_LABEL = /choose\s+a\s+size/i;
 const WHERE_TO_BUY = '/where-to-buy';
+const PRODUCT_MASTER = '/products/product-master.json';
+const HEADING = ':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6';
+
+// field table row names (first cell, as a class name) and the field each one sets
+const FIELDS = {
+  'image-front': 'imageFront',
+  'front-image': 'imageFront',
+  image: 'imageFront',
+  'image-back': 'imageBack',
+  'back-image': 'imageBack',
+  title: 'title',
+  name: 'title',
+  description: 'description',
+  size: 'size',
+  sizes: 'size',
+  button: 'button',
+  cta: 'button',
+};
+// fields that fall back to the product master sheet (an empty button defaults to Shop Now)
+const SHEET_FIELDS = ['imageFront', 'imageBack', 'title', 'size', 'description'];
+
+let productsPromise;
+
+/**
+ * Pathname of a sheet URL value (full hersheyland.com URL or site path).
+ * @param {string} value
+ */
+function urlPath(value) {
+  if (!value) return '';
+  try {
+    return new URL(value, window.location.origin).pathname;
+  } catch {
+    return value;
+  }
+}
+
+/**
+ * Reads a sheet row as a product. Short column names (path, name, title, ...) are used
+ * as is; the Hershey product master columns (Product Page URL, productName, Image URL, ...)
+ * are mapped onto them. `gtin` is always the `14-Digit UPCs` column, padded to the 14 digits
+ * of `bvid`.
+ * @param {Object} row
+ * @returns {Object}
+ */
+function toProduct(row) {
+  const upc = String(row['14-Digit UPCs'] || '').trim();
+  return {
+    ...row,
+    path: row.path || urlPath(row['Product Page URL']),
+    gtin: /^\d+$/.test(upc) ? upc.padStart(14, '0') : upc,
+    name: row.name || row['Short Product Title'] || '',
+    title: row.title || row.productName || '',
+    image: row.image || row['Image URL'] || '',
+    description: row.description || row['On Page Description/product Details'] || '',
+    familyId: row.familyId || row['Product Family ID (lowercase and underscores for BV)'] || '',
+    brandActive: row.brandActive || row['Brand Active'] || '',
+    weight: row.weight || row['Weight (oz)'] || '',
+    count: row.count || row.Count || '',
+    countUnit: row.countUnit || row['Count Unit'] || '',
+  };
+}
+
+/**
+ * Loads the rows of the product master sheet (first sheet of a multi-sheet workbook).
+ * @returns {Promise<Array<Object>>}
+ */
+function fetchProducts() {
+  productsPromise = productsPromise || fetch(PRODUCT_MASTER)
+    .then((resp) => (resp.ok ? resp.json() : {}))
+    .then(({ data }) => (Array.isArray(data) ? data : data?.data || []))
+    .then((rows) => rows.map(toProduct))
+    .catch(() => []);
+  return productsPromise;
+}
+
+/**
+ * Finds the sheet row whose `14-Digit UPCs` (padded to 14 digits) matches the `bvid` GTIN.
+ * @returns {Promise<{ product: Object|undefined, products: Array<Object> }>}
+ */
+async function findProduct() {
+  const products = await fetchProducts();
+  const gtin = (getMetadata('bvid') || getMetadata('bv-id')).trim();
+  const product = gtin ? products.find((p) => (p.gtin || '').trim() === gtin) : undefined;
+  return { product, products };
+}
+
+/**
+ * Size label for a sheet row: the title after the product name ("9.3 oz, 6 pack"),
+ * else built from weight and count.
+ * @param {Object} product
+ */
+function sizeLabel(product) {
+  const { title = '', name = '' } = product;
+  if (name && title.startsWith(`${name}, `)) return title.slice(name.length + 2);
+  const parts = [];
+  if (product.weight) parts.push(`${product.weight} oz`);
+  if (product.count) parts.push(`${product.count} ${product.countUnit || ''}`.trim());
+  return parts.join(', ') || title;
+}
+
+/**
+ * The product followed by the active sheet products in its family.
+ * @param {Object} product
+ * @param {Array<Object>} products
+ */
+function familyOf(product, products) {
+  if (!product.familyId) return [product];
+  const others = products.filter((p) => p !== product && p.path
+    && p.familyId === product.familyId && p.brandActive !== 'Inactive');
+  return [product, ...others];
+}
 
 /**
  * Re-renders a picture as an optimized picture when the image is served from this origin.
@@ -291,15 +410,20 @@ function pointShopNow(link) {
 }
 
 /**
+ * Returns true when a paragraph is a single link and nothing else.
+ * @param {Element} p
+ */
+function isLinkParagraph(p) {
+  const links = p.querySelectorAll('a[href]');
+  return links.length === 1 && p.textContent.trim() === links[0].textContent.trim();
+}
+
+/**
  * Marks the trailing single-link paragraph as the call to action.
  * @param {Element} cell
  */
 function decorateCta(cell) {
-  const candidates = [...cell.querySelectorAll(':scope > p')].filter((p) => {
-    const links = p.querySelectorAll('a[href]');
-    return links.length === 1 && p.textContent.trim() === links[0].textContent.trim();
-  });
-  const cta = candidates.pop();
+  const cta = [...cell.querySelectorAll(':scope > p')].filter(isLinkParagraph).pop();
   if (!cta) return;
   cta.classList.add('hero-product-cta');
   const link = cta.querySelector('a');
@@ -316,16 +440,308 @@ function decorateDetails(cell) {
   addRating(cell);
 }
 
-export default function decorate(block) {
+/**
+ * Splits a row into its media cell and its details cell.
+ * @param {Element} row
+ */
+function splitCells(row) {
+  const cells = [...row.children];
+  const media = cells.find(isMediaCell);
+  const details = cells.find((cell) => cell !== media && cell.textContent.trim());
+  return { cells, media, details };
+}
+
+/**
+ * Returns true when a details paragraph is a description: not the size label or list,
+ * not a link-only paragraph (CTA) and not an image.
+ */
+function hasDescription(cell, label, list) {
+  return [...cell.querySelectorAll(':scope > p')].some((p) => p !== label && p !== list
+    && p.textContent.trim() && !isLinkParagraph(p) && !p.querySelector('picture, img'));
+}
+
+/**
+ * Lists the fields the author left empty.
+ * @param {Element|undefined} media
+ * @param {Element|undefined} details
+ * @returns {Set<string>}
+ */
+function findGaps(media, details) {
+  const gaps = new Set();
+  if (!media) gaps.add('image');
+  if (!details) return new Set([...gaps, 'name', 'sizes', 'description']);
+  if (![...details.querySelectorAll(HEADING)].some((h) => h.textContent.trim())) gaps.add('name');
+  const { label, list } = findSizes(details);
+  if (!list) gaps.add('sizes');
+  if (!hasDescription(details, label, list)) gaps.add('description');
+  return gaps;
+}
+
+/**
+ * Renders a sheet image URL as a picture, through the Dynamic Media renderer when available.
+ * @param {string} src
+ * @param {string} alt
+ */
+function buildPicture(src, alt) {
+  // eslint-disable-next-line no-underscore-dangle
+  const dmPicture = window.__dmRender__?.(src, alt);
+  if (dmPicture) return dmPicture;
+  const picture = document.createElement('picture');
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = alt;
+  picture.append(img);
+  return picture;
+}
+
+/**
+ * Size list for a sheet row: the current size (bold) followed by links to its family.
+ * @param {Object} product
+ * @param {Array<Object>} products
+ */
+function buildSizeList(product, products) {
+  const ul = document.createElement('ul');
+  familyOf(product, products).forEach((member, i) => {
+    const li = document.createElement('li');
+    const item = document.createElement(i === 0 ? 'strong' : 'a');
+    if (i > 0) item.href = member.path;
+    item.textContent = sizeLabel(member);
+    li.append(item);
+    ul.append(li);
+  });
+  return ul;
+}
+
+function sizeLabelParagraph() {
+  const label = document.createElement('p');
+  label.textContent = 'Choose a size:';
+  return label;
+}
+
+/**
+ * Adds the sheet values for the empty details fields, in content model order.
+ * @param {Element} cell
+ * @param {Set<string>} gaps
+ * @param {Object} product
+ * @param {Array<Object>} products
+ */
+function fillDetails(cell, gaps, product, products) {
+  const cta = [...cell.querySelectorAll(':scope > p')].filter(isLinkParagraph).pop();
+  const afterHeading = (el) => {
+    const heading = cell.querySelector(HEADING);
+    if (heading) heading.after(el);
+    else cell.prepend(el);
+  };
+
+  if (gaps.has('name') && product.name) {
+    const h1 = document.createElement('h1');
+    h1.textContent = product.name;
+    cell.prepend(h1);
+  }
+
+  if (gaps.has('sizes')) {
+    let { label } = findSizes(cell);
+    if (!label) {
+      label = sizeLabelParagraph();
+      afterHeading(label);
+    }
+    label.after(buildSizeList(product, products));
+  }
+
+  if (gaps.has('description') && product.description) {
+    const p = document.createElement('p');
+    p.textContent = product.description;
+    if (cta) cta.before(p);
+    else cell.append(p);
+  }
+}
+
+/**
+ * Fills the fields the author left empty from the product master sheet.
+ * The sheet is only requested when something is missing.
+ * @param {Element} row
+ */
+async function fillFromSheet(row) {
+  let { media, details } = splitCells(row);
+  const gaps = findGaps(media, details);
+  if (!gaps.size) return;
+  const { product, products } = await findProduct();
+  if (!product) return;
+
+  const isEmpty = (cell) => !cell.textContent.trim() && !cell.querySelector('picture, img');
+  const spareCell = () => [...row.children]
+    .find((cell) => cell !== media && cell !== details && isEmpty(cell));
+
+  if (gaps.has('image') && product.image) {
+    const alt = product.imageAlt || product.title || product.name || '';
+    media = spareCell();
+    if (!media) {
+      media = document.createElement('div');
+      row.prepend(media);
+    }
+    media.replaceChildren(buildPicture(product.image.trim(), alt));
+  }
+
+  if (!details) {
+    details = spareCell();
+    if (!details) {
+      details = document.createElement('div');
+      row.append(details);
+    }
+    details.replaceChildren();
+  }
+  fillDetails(details, gaps, product, products);
+}
+
+/**
+ * Reads the field table: one row per field, the name in the first cell and the value in the
+ * second. Returns null when the block uses the 2-cell layout instead.
+ * @param {Element} block
+ * @returns {Object<string, Element>|null} the authored (non-empty) value cell of each field
+ */
+function readFields(block) {
+  let isFieldTable = false;
+  const fields = {};
+  [...block.children].forEach((row) => {
+    const [keyCell, valueCell] = row.children;
+    const field = FIELDS[toClassName(keyCell?.textContent || '')];
+    if (!field) return;
+    isFieldTable = true;
+    if (valueCell && (valueCell.textContent.trim() || valueCell.querySelector('picture, img'))) {
+      fields[field] = valueCell;
+    }
+  });
+  return isFieldTable ? fields : null;
+}
+
+/**
+ * Authored image: a picture, an img, or an image URL (as a link or as text).
+ * @param {Element} cell
+ * @param {string} alt fallback alt text
+ */
+function fieldPicture(cell, alt) {
+  const picture = cell.querySelector('picture');
+  if (picture) return picture;
+  const img = cell.querySelector('img');
+  if (img) {
+    const wrapper = document.createElement('picture');
+    wrapper.append(img);
+    return wrapper;
+  }
+  const link = cell.querySelector('a[href]');
+  const url = (link ? link.href : cell.textContent).trim();
+  if (!/^https?:\/\//i.test(url)) return null;
+  const linkText = link?.textContent.trim();
+  return buildPicture(url, linkText && linkText !== url ? linkText : alt);
+}
+
+/**
+ * Authored sizes: a list is used as is; links become a list; plain text is the current size.
+ * @param {Element} cell
+ */
+function fieldSizes(cell) {
+  const list = cell.querySelector('ul, ol');
+  if (list) return list;
+  const ul = document.createElement('ul');
+  const links = [...cell.querySelectorAll('a[href]')];
+  const items = links.length ? links : [Object.assign(document.createElement('strong'), {
+    textContent: cell.textContent.trim(),
+  })];
+  items.forEach((item) => {
+    const li = document.createElement('li');
+    li.append(item);
+    ul.append(li);
+  });
+  return ul;
+}
+
+/**
+ * Authored rich text: paragraphs and lists are kept; bare text is wrapped in a paragraph.
+ * @param {Element} cell
+ */
+function fieldBlocks(cell) {
+  if (cell.querySelector(':scope > p, :scope > ul, :scope > ol')) return [...cell.children];
+  const p = document.createElement('p');
+  p.append(...cell.childNodes);
+  return [p];
+}
+
+/**
+ * Authored button: its link, or its text pointing to Where to Buy. Defaults to Shop Now.
+ * @param {Element|undefined} cell
+ */
+function fieldButton(cell) {
+  const p = document.createElement('p');
+  let link = cell?.querySelector('a[href]');
+  if (!link) {
+    link = document.createElement('a');
+    link.href = WHERE_TO_BUY;
+    link.textContent = cell?.textContent.trim() || 'Shop Now';
+  }
+  p.append(link);
+  return p;
+}
+
+/**
+ * Rebuilds a field table as the 2-cell layout. Authored fields win; empty or missing fields
+ * come from the product master sheet. The sheet is only requested when something is missing.
+ * @param {Element} block
+ * @param {Object<string, Element>} fields
+ */
+async function buildFromFields(block, fields) {
+  const needsSheet = SHEET_FIELDS.some((field) => !fields[field]);
+  const { product, products } = needsSheet ? await findProduct() : {};
+  const sheet = product || {};
+  const alt = sheet.imageAlt || sheet.title || sheet.name || '';
+
+  const media = document.createElement('div');
+  const front = fields.imageFront ? fieldPicture(fields.imageFront, alt)
+    : sheet.image && buildPicture(sheet.image.trim(), alt);
+  const back = fields.imageBack ? fieldPicture(fields.imageBack, alt)
+    : sheet.imageBack && buildPicture(sheet.imageBack.trim(), sheet.imageBackAlt || alt);
+  media.append(...[front, back].filter(Boolean));
+
+  const details = document.createElement('div');
+  const name = fields.title ? fields.title.textContent.trim() : sheet.name || sheet.title;
+  if (name) {
+    const h1 = document.createElement('h1');
+    h1.textContent = name;
+    details.append(h1);
+  }
+  const sizes = fields.size ? fieldSizes(fields.size)
+    : product && buildSizeList(product, products);
+  if (sizes) details.append(sizeLabelParagraph(), sizes);
+  if (fields.description) {
+    details.append(...fieldBlocks(fields.description));
+  } else if (sheet.description) {
+    const p = document.createElement('p');
+    p.textContent = sheet.description;
+    details.append(p);
+  }
+  details.append(fieldButton(fields.button));
+
+  const row = document.createElement('div');
+  row.append(media, details);
+  block.replaceChildren(row);
+}
+
+export default async function decorate(block) {
+  const fields = readFields(block);
+  if (fields) {
+    await buildFromFields(block, fields);
+  } else {
+    if (!block.children.length) block.append(document.createElement('div'));
+    // image links must be pictures before the sheet fallback looks for missing images
+    [...block.firstElementChild.children].forEach(pictureLinks);
+    // one product per page: the first row is the product overview
+    await fillFromSheet(block.firstElementChild);
+  }
   const rows = [...block.children];
-  if (!rows.length) return;
 
   rows.forEach((row) => {
     row.classList.add('hero-product-row');
-    const cells = [...row.children];
-    cells.forEach(pictureLinks);
-    const media = cells.find(isMediaCell);
-    const details = cells.find((cell) => cell !== media && cell.textContent.trim());
+    [...row.children].forEach(pictureLinks);
+    const { cells, media, details } = splitCells(row);
     if (media) buildGallery(media);
     if (details) decorateDetails(details);
     // drop empty cells so the layout does not reserve space for them

@@ -361,6 +361,13 @@ main .section.light-gray > div {
   max-width: var(--hershey-system-layout-container-story-article, 960px);
 }
 
+main .section.light-purple {
+  margin: 0;
+  padding: var(--hershey-system-spacing-section-large, 80px) 0;
+  background-color: var(--hershey-system-color-surface-story-intro-lilac, #e0baf1);
+  color: var(--hershey-system-color-text-primary, var(--text-color));
+}
+
 main .section.warm-tan {
   margin: 0;
   padding: var(--hershey-system-spacing-story-tan-top, 86px) 0 var(--hershey-system-spacing-story-tan-bottom, 74px);
@@ -445,39 +452,6 @@ body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-
   border: solid currentcolor;
   border-width: 0 0 var(--hershey-system-border-width-divider, 1px) var(--hershey-system-border-width-divider, 1px);
   transform: translateY(-1px) rotate(45deg);
-}
-
-/* `template: story-narrow` pages: text column is two-thirds of the viewport from 992px, images extend past it */
-.hershey-story.story-narrow main > .section:not(.dark-brown) > .default-content-wrapper,
-.hershey-story.story-narrow main > .section:not(.dark-brown) > .columns-wrapper {
-  max-width: calc(100vw - var(--hershey-system-layout-container-story-narrow-inset-mobile, 105px));
-}
-
-.hershey-story.story-narrow main .default-content-wrapper p:has(> picture) {
-  margin-inline: calc(-1 * var(--hershey-system-layout-container-story-image-bleed-mobile, 10px));
-}
-
-.hershey-story.story-narrow main .default-content-wrapper p > picture img {
-  width: 100%;
-  height: auto;
-}
-
-@media (width >= 992px) {
-  .hershey-story.story-narrow main > .section:not(.dark-brown) > .default-content-wrapper,
-  .hershey-story.story-narrow main > .section:not(.dark-brown) > .columns-wrapper {
-    max-width: calc(66.667vw - var(--hershey-system-layout-container-story-narrow-inset-desktop, 111px));
-  }
-
-  .hershey-story.story-narrow main .default-content-wrapper p:has(> picture) {
-    margin-inline: calc(-1 * var(--hershey-system-layout-container-story-image-bleed-desktop, 25px));
-  }
-}
-
-/* the intro paragraph straight after the hero is narrower than the article text */
-@media (width >= 992px) {
-  .hershey-story.story-narrow main > .hero-container + .section > .default-content-wrapper {
-    max-width: min(var(--hershey-system-layout-container-story-intro, 790px), calc(66.667vw - var(--hershey-system-layout-container-story-intro-inset-desktop, 60px)));
-  }
 }
 
 /* `template: story-article` pages: text, intro and image rows each scale with the viewport, as on hersheyland.com */
