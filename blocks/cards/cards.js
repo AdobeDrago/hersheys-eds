@@ -36,6 +36,10 @@ function decorateSlider(block, list) {
   const update = () => {
     buttons[0].disabled = list.scrollLeft <= 1;
     buttons[1].disabled = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
+    // nothing to scroll: every card is visible, so the arrows and page indicator are not needed
+    const fits = list.scrollWidth <= list.clientWidth + 1;
+    controls.hidden = fits;
+    dots.hidden = fits;
     if (!block.classList.contains('related')) return;
     // one kiss-shaped indicator per page of cards
     const { inset, gap, step } = measure();

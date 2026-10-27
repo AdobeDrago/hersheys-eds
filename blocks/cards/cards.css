@@ -47,6 +47,11 @@
   margin-top: var(--hershey-component-cards-layout-gap, 24px);
 }
 
+.cards .cards-slider-controls[hidden],
+.cards .cards-slider-dots[hidden] {
+  display: none;
+}
+
 .cards .cards-slider-controls button {
   width: var(--hershey-component-cards-slider-control-size, 48px);
   height: var(--hershey-component-cards-slider-control-size, 48px);
