@@ -115,11 +115,18 @@ function setBusy(list, busy) {
   });
 }
 
-function reloadEditor() {
+// the editor is cross-origin, so reload() is blocked; navigating top is allowed.
+// a fresh query string forces a full load, since a hash-only change would not.
+function reloadEditor({ org, repo, path }, ref) {
+  const params = new URLSearchParams();
+  if (ref) params.set('ref', ref);
+  params.set('themed', Date.now());
+  const url = `https://da.live/canvas?${params}#/${org}/${repo}${path}`;
   try {
-    window.top.location.reload();
+    window.top.location.href = url;
+    return true;
   } catch {
-    // the editor frame is cross-origin; the author reloads manually
+    return false;
   }
 }
 
@@ -129,11 +136,12 @@ function reloadEditor() {
   const status = document.querySelector('.theme-picker-status');
 
   const { context, token } = await DA_SDK;
-  const url = sourceUrl({
+  const site = {
     org: context.org,
     repo: context.repo,
     path: normalizePath(context.path),
-  });
+  };
+  const url = sourceUrl(site);
 
   let theme;
   try {
@@ -161,8 +169,9 @@ function reloadEditor() {
     current.textContent = value;
     markCurrent(list, theme);
     setBusy(list, false);
-    status.textContent = 'Saved. Reload the page, then preview to see the theme.';
-    reloadEditor();
+    status.textContent = reloadEditor(site, context.ref)
+      ? 'Saved. Reloading the editor…'
+      : 'Saved. Reload the page, then preview to see the theme.';
   });
 
   current.textContent = theme || 'not set';
