@@ -93,6 +93,7 @@
   --hershey-reference-spacing-100: 100px;
   --hershey-reference-spacing-103: 103px;
   --hershey-reference-spacing-106: 106px;
+  --hershey-reference-spacing-120: 120px;
   --hershey-reference-spacing-124: 124px;
   --hershey-reference-spacing-200: 200px;
   --hershey-reference-spacing-22-5: 22.5px;
@@ -627,6 +628,9 @@
   --hershey-system-spacing-form-submit-inline: var(--hershey-reference-spacing-36);
   --hershey-system-spacing-form-confirmation-action-block: var(--hershey-reference-spacing-21);
   --hershey-system-spacing-form-confirmation-action-inline: var(--hershey-reference-spacing-26);
+  --hershey-system-spacing-story-dark-top: var(--hershey-reference-spacing-120);
+  --hershey-system-spacing-story-dark-bottom: var(--hershey-reference-spacing-100);
+  --hershey-system-spacing-story-dark-heading-gap: var(--hershey-reference-spacing-25);
   --hershey-system-gap-data-stack: var(--hershey-reference-spacing-13);
   --hershey-system-gap-data-badge-row: var(--hershey-reference-spacing-23);
   --hershey-system-gap-data-badge-column-mobile: var(--hershey-reference-spacing-10);

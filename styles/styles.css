@@ -401,18 +401,21 @@ main .section.blue-links {
   --story-link-color: var(--hershey-system-color-action-primary-background-default, #007bbd);
 }
 
-/* tall dark-brown section (slider on a dark band) */
+/* tall dark-brown section (slider on a dark band); the band carries on behind the footer ribbon */
 main .section.dark-brown-large {
   margin: 0;
-  padding: var(--hershey-system-spacing-section-default, 64px) 0;
+  padding: var(--hershey-system-spacing-story-dark-top, 120px) 0 var(--hershey-system-spacing-story-dark-bottom, 100px);
   background-color: var(--hershey-system-color-surface-seasonal-dark, #3c131c);
   color: var(--hershey-system-color-text-inverse, #fff);
 }
 
-main .section.dark-brown-large h2,
-main .section.dark-brown-large h3 {
-  margin-top: 0;
-  color: inherit;
+/* the empty section left by the page metadata must not add a gap before the footer */
+.hershey-story main > .section:empty {
+  margin: 0;
+}
+
+body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-footer .newsletter {
+  background: var(--hershey-system-color-surface-seasonal-dark, #3c131c);
 }
 
 /* `template: story-narrow` pages: text column is two-thirds of the viewport from 992px, images extend past it */
@@ -469,6 +472,11 @@ main .section.centered h3 {
 
 .hershey-story main .section:not(.dark-brown) :is(.default-content-wrapper, .columns) a:any-link:not(.button):is(:hover, :focus-visible) {
   border-bottom-color: transparent;
+}
+
+.hershey-story main .section.dark-brown-large .default-content-wrapper > :is(h2, h3) {
+  margin: 0 0 var(--hershey-system-spacing-story-dark-heading-gap, 25px);
+  color: inherit;
 }
 
 /* story recipe links read as underlined text links, not buttons */
