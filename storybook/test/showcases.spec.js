@@ -184,7 +184,8 @@ test('header Autodocs does not duplicate global navigation IDs', async ({ page }
   await expect(page.locator('[data-block-status="loaded"]')).toHaveCount(2);
   await expect(page.locator('[data-showcase] nav')).toHaveCount(1);
   const menu = page.getByRole('button', { name: 'Chocolate', exact: true });
-  await menu.click();
+  await menu.focus();
+  await menu.press('Enter');
   await expect(menu).toHaveAttribute('aria-expanded', 'true');
   await menu.press('Escape');
   await expect(menu).toHaveAttribute('aria-expanded', 'false');

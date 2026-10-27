@@ -4,7 +4,7 @@
 
 The design source is **https://www.hersheyland.com/**, not the EDS migration.
 Extraction on 2026-10-07 inspected the original page's AEM clientlibs via CSSOM
-and computed styles at 375px, 768px and 1440px.
+and computed styles at 375px, 992px and 1440px.
 [source-observations.json](./source-observations.json) preserves the measured
 styles, selectors, conditions and originating clientlib URLs.
 [source-clientlib-foundations.json](./source-clientlib-foundations.json)
