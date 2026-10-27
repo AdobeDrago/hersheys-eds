@@ -31,6 +31,15 @@ main > .section:has(> .hero-wrapper > .hero.article.lime) {
   color: var(--hershey-component-hero-article-lime-color-foreground, #3f000b);
 }
 
+/* gold colour modifier: `Hero (article, gold)`; dark text on the light band */
+main > .section:has(> .hero-wrapper > .hero.article.gold) {
+  background-color: var(--hershey-component-hero-article-gold-band-background, #ffc627);
+}
+
+.hero.article.gold {
+  color: var(--hershey-component-hero-article-gold-color-foreground, #3f000b);
+}
+
 /* brown colour modifier: `Hero (article, brown)` */
 main > .section:has(> .hero-wrapper > .hero.article.brown) {
   background-color: var(--hershey-component-hero-article-brown-band-background, #3c131c);

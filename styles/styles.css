@@ -714,7 +714,7 @@ body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-
   height: var(--hershey-system-size-story-wide-icon, 30px);
 }
 
-.hershey-story.story-wide main .default-content-wrapper ul {
+.hershey-story:is(.story-wide, .story-craft) main .default-content-wrapper ul {
   margin: 0 0 1.5em;
   padding-left: var(--hershey-system-spacing-inset-story-wide-list, 40px);
   list-style: none;
@@ -731,13 +731,13 @@ body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-
   }
 }
 
-.hershey-story.story-wide main .default-content-wrapper li {
+.hershey-story:is(.story-wide, .story-craft) main .default-content-wrapper li {
   position: relative;
   margin-top: 9px;
   padding-left: 17px;
 }
 
-.hershey-story.story-wide main .default-content-wrapper li::before {
+.hershey-story:is(.story-wide, .story-craft) main .default-content-wrapper li::before {
   content: '';
   position: absolute;
   top: 0.65em;
@@ -748,12 +748,12 @@ body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-
   background-color: currentcolor;
 }
 
-.hershey-story.story-wide main .default-content-wrapper li > ul {
+.hershey-story:is(.story-wide, .story-craft) main .default-content-wrapper li > ul {
   margin: 0;
   padding-left: var(--hershey-system-spacing-inset-story-wide-list-nested, 50px);
 }
 
-.hershey-story.story-wide main .default-content-wrapper li > ul > li:first-child {
+.hershey-story:is(.story-wide, .story-craft) main .default-content-wrapper li > ul > li:first-child {
   margin-top: 0;
 }
 /* stylelint-enable no-descending-specificity */
@@ -807,6 +807,46 @@ main .section.centered h3 {
   margin-top: var(--hershey-system-spacing-gap-story-craft-first, 40px);
 }
 
+/* tinted bands on craft pages: same padding as the lilac intro; rows of text and image keep a 50px gap */
+.hershey-story.story-craft main .section.warm-tan {
+  display: flow-root;
+  margin-block: var(--hershey-system-spacing-gap-story-craft-band-mobile, 35px);
+  padding: var(--hershey-system-spacing-story-lilac-top-mobile, 35px) 0 0;
+}
+
+.hershey-story.story-craft main > .hero-container + .section.warm-tan {
+  margin-top: 0;
+}
+
+/* stacked rows read text first, then the image, with room between them */
+.hershey-story.story-craft main .columns:not(.craft) > div {
+  gap: var(--hershey-system-spacing-gap-story-craft-stack, 40px);
+}
+
+.hershey-story.story-craft main .columns:not(.craft) > div > .columns-img-col {
+  order: 2;
+}
+
+@media (width >= 992px) {
+  .hershey-story.story-craft main .section.warm-tan {
+    margin-block: var(--hershey-system-spacing-gap-story-craft-band, 70px);
+    padding: var(--hershey-system-spacing-story-lilac-top, 70px) 0 var(--hershey-system-spacing-story-lilac-bottom, 50px);
+  }
+
+  .hershey-story.story-craft main .columns:not(.craft) > div {
+    gap: var(--hershey-system-spacing-gap-story-wide, 50px);
+  }
+
+  .hershey-story.story-craft main .columns-wrapper:has(> .columns:not(.craft)) {
+    padding-block: var(--hershey-system-spacing-gap-story-craft-row, 12px);
+  }
+}
+
+/* the note under each tip lines up with the tip's list on hersheyland.com */
+.hershey-story.story-craft main .section.warm-tan .default-content-wrapper > ul + p:not(.button-wrapper) {
+  margin-left: var(--hershey-system-spacing-inset-story-wide-list, 40px);
+}
+
 /* a heading after a paragraph, or after a columns row on desktop, keeps the extra space live has there */
 .hershey-story.story-craft main > .section:not(.dark-brown) .default-content-wrapper > p + h3 {
   padding-top: 20px;
@@ -838,4 +878,26 @@ main .section.centered h3 {
   border-bottom-color: transparent;
   background: transparent;
   color: var(--hershey-system-color-text-primary, #3f000b);
+}
+
+/* a call to action on its own line is a centred blue pill, as on hersheyland.com */
+.hershey-story main .section:not(.dark-brown) .default-content-wrapper > .button-wrapper {
+  text-align: center;
+}
+
+.hershey-story main .section:not(.dark-brown) .default-content-wrapper > .button-wrapper a.button:any-link {
+  border: 0;
+  border-radius: 35px;
+  padding: 10px 20px;
+  background-color: var(--hershey-system-color-action-primary-background-default, #007bbd);
+  color: var(--hershey-system-color-text-inverse, #fff);
+  font-weight: 700;
+  line-height: 28px;
+  text-decoration: none;
+}
+
+@media (width >= 992px) {
+  .hershey-story main .section:not(.dark-brown) .default-content-wrapper > .button-wrapper a.button:any-link {
+    padding-block: 17px;
+  }
 }
