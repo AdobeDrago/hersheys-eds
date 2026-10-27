@@ -80,12 +80,12 @@ footer .footer p {
 
 /* ribbon artwork is 1920 x 357.73; drawn at 200% of the section width on mobile */
 .footer.hershey-footer .newsletter::before {
-  top: 1%;
+  top: 3%;
   left: 54%;
   translate: -58% 0;
   width: 200cqw;
   aspect-ratio: 1920 / 357.73;
-  background: url('../../icons/footer-wave.svg') center / 100% 100% no-repeat;
+  background: url('../../icons/footer-wave.svg') center / 100% 91% no-repeat;
 }
 
 .footer.hershey-footer .newsletter::after {
@@ -337,17 +337,23 @@ footer .footer p {
     justify-content: center;
   }
 
+  /* ribbon keeps its 1920px design size, then grows with the viewport so it always spans the section */
   .footer.hershey-footer .newsletter {
-    padding-top: var(--hershey-component-footer-newsletter-padding-top-desktop);
+    --wave-width: max(var(--hershey-component-footer-wave-width), 100vw);
+    --wave-height: calc(var(--wave-width) * 357.73 / 1920);
+
+    padding-top: calc(var(--wave-height) - (var(--hershey-component-footer-wave-height) - var(--hershey-component-footer-newsletter-padding-top-desktop)));
     padding-bottom: var(--hershey-component-footer-newsletter-padding-bottom-desktop);
   }
 
   .footer.hershey-footer .newsletter::before {
-    width: var(--hershey-component-footer-wave-width);
+    left: 50%;
+    translate: -50% 0;
+    width: var(--wave-width);
   }
 
   .footer.hershey-footer .newsletter::after {
-    top: calc(var(--hershey-component-footer-wave-height) - 1px);
+    top: calc(var(--wave-height) - 1px);
   }
 
   .footer.hershey-footer .newsletter .default-content-wrapper {

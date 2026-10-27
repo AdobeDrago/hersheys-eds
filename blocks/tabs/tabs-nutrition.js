@@ -8,9 +8,10 @@ import { decorateIcons, getMetadata, toClassName } from '../../scripts/aem.js';
  *     (or "Label | value") become aligned rows; other paragraphs stay as text.
  *   Ingredients: plain paragraphs.
  *   Dietary Info: icon images (or :icon: tokens) each followed by a label.
- * Nutrition Facts comes from the page brand's tab of the nutrition sheet
- * (/products/nutrition.json?sheet=<brand>, row matched by `bvid` GTIN) when
- * there is one; otherwise the authored content is used.
+ * Authored content wins. An empty Nutrition Facts tab, or a block without one (even an empty
+ * block), is filled from the page brand's tab of the nutrition sheet
+ * (/products/nutrition.json?sheet=<brand>, row matched by `bvid` GTIN). The sheet is only
+ * requested then.
  */
 
 const CELL_SEPARATOR = /\s+\|\s+/;
@@ -48,9 +49,9 @@ function brandSheetName() {
  * @returns {Promise<Object|null>}
  */
 async function fetchNutritionRow() {
-  const gtin = getMetadata('bvid');
+  const gtin = getMetadata('bvid').padStart(14, '0');
   const sheet = brandSheetName();
-  if (!gtin || !sheet) return null;
+  if (!gtin.replace(/^0+$/, '') || !sheet) return null;
   try {
     const resp = await fetch(`${NUTRITION_SHEET}?sheet=${sheet}`);
     if (!resp.ok) return null;
@@ -287,9 +288,22 @@ function decoratePanelType(panel) {
 export default async function decorate(block) {
   blockCount += 1;
   const prefix = `tabs-nutrition-${blockCount}`;
-  const rows = [...block.children].filter((row) => row.children.length);
+  const isAuthored = (cells) => cells.some((cell) => cell.textContent.trim()
+    || cell.querySelector('picture, img'));
+  // rows left blank in the document (no label, no content) are not tabs
+  const rows = [...block.children].filter((row) => isAuthored([...row.children]));
+  const factsRow = rows.find((row) => toClassName(row.firstElementChild.textContent) === 'nutrition-facts');
+  const sheetRow = !factsRow || !isAuthored([...factsRow.children].slice(1))
+    ? await fetchNutritionRow() : null;
+  if (!factsRow && sheetRow) {
+    // no Nutrition Facts row authored: add the tab, filled from the sheet below
+    const row = document.createElement('div');
+    const label = document.createElement('div');
+    label.textContent = 'Nutrition Facts';
+    row.append(label, document.createElement('div'));
+    rows.unshift(row);
+  }
   if (!rows.length) return;
-  const sheetRow = await fetchNutritionRow();
 
   const tablist = document.createElement('div');
   tablist.className = 'tabs-nutrition-list';
@@ -312,7 +326,7 @@ export default async function decorate(block) {
     panel.setAttribute('role', 'tabpanel');
     panel.setAttribute('aria-labelledby', `${prefix}-tab-${id}`);
     panel.tabIndex = 0;
-    if (id === 'nutrition-facts' && sheetRow) {
+    if (id === 'nutrition-facts' && sheetRow && !isAuthored(contentCells)) {
       panel.append(...buildFacts(sheetRow));
       panel.dataset.source = 'sheet';
     } else {
