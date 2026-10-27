@@ -17,7 +17,7 @@ header nav {
   margin: auto;
   max-width: 1248px;
   height: var(--nav-height);
-  padding: 0 var(--hershey-component-header-layout-padding-mobile, 24px);
+  padding: 0 var(--hershey-component-header-layout-padding-compact, 15px);
   font-family: var(--body-font-family);
 }
 
@@ -30,7 +30,7 @@ header nav[aria-expanded='true'] {
   min-height: 100dvh;
 }
 
-@media (width >= 768px) {
+@media (width >= 992px) {
   header .nav-wrapper {
     position: relative;
   }
@@ -127,7 +127,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-@media (width >= 768px) {
+@media (width >= 992px) {
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
@@ -217,7 +217,7 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
   display: none;
 }
 
-@media (width >= 768px) {
+@media (width >= 992px) {
   header nav .nav-sections {
     display: block;
     visibility: visible;
@@ -538,8 +538,9 @@ header nav .nav-tools {
 }
 
 /* desktop: logo | inline nav | search pill; hover dropdowns */
-@media (width >= 768px) {
+@media (width >= 992px) {
   .header.hershey-nav .nav-wrapper {
+    position: fixed;
     overflow: clip visible;
     box-shadow: var(--hershey-component-header-layout-shadow);
   }
@@ -603,8 +604,11 @@ header nav .nav-tools {
     transition: none;
   }
 
-  .header.hershey-nav nav .nav-sections .nav-drop > button[aria-expanded='true'] {
-    font-weight: var(--hershey-component-header-brand-mark-font-weight);
+  .header.hershey-nav nav .nav-sections .nav-drop > button[aria-expanded='true'],
+  .header.hershey-nav nav .nav-sections .default-content-wrapper > ul > li > a:hover,
+  .header.hershey-nav nav .nav-sections .default-content-wrapper > ul > li > p > a:hover {
+    -webkit-text-stroke: var(--hershey-component-header-menu-label-emphasis) currentcolor;
+    text-decoration: none;
   }
 
   /* chevron: nudged up so it centres with the label; desktop keeps the quicker rotation */
@@ -675,6 +679,7 @@ header nav .nav-tools {
     grid-column: 1 / -1;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   .header.hershey-nav nav .nav-sections .nav-drop > ul > li:first-child a {
     justify-content: flex-start;
     text-decoration: underline;
