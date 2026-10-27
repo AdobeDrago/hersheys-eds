@@ -361,6 +361,13 @@ main .section.light-gray > div {
   max-width: var(--hershey-system-layout-container-story-article, 960px);
 }
 
+main .section.light-yellow {
+  margin: 0;
+  padding: var(--hershey-system-spacing-story-lilac-top-mobile, 35px) 0 13px;
+  background-color: var(--hershey-system-color-surface-story-light-yellow, #fff1c9);
+  color: var(--hershey-system-color-text-primary, var(--text-color));
+}
+
 main .section.light-purple {
   margin: 0;
   padding: var(--hershey-system-spacing-story-lilac-top-mobile, 35px) 0 0;
@@ -369,6 +376,10 @@ main .section.light-purple {
 }
 
 @media (width >= 992px) {
+  main .section.light-yellow {
+    padding: var(--hershey-system-spacing-story-lilac-top, 70px) 0 var(--hershey-system-spacing-story-lilac-bottom, 50px);
+  }
+
   main .section.light-purple {
     padding: var(--hershey-system-spacing-story-lilac-top, 70px) 0 var(--hershey-system-spacing-story-lilac-bottom, 50px);
   }
@@ -499,12 +510,12 @@ body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-
   height: auto;
 }
 
-.hershey-story.story-craft main > .section:not(.dark-brown, .dark-brown-large, .light-purple, .hero-container, .breadcrumb-trail-container, :empty) {
+.hershey-story.story-craft main > .section:not(.dark-brown, .dark-brown-large, .light-purple, .light-yellow, .hero-container, .breadcrumb-trail-container, :empty) {
   margin-block: var(--hershey-system-spacing-gap-story-craft-section-mobile, 27px);
 }
 
 @media (width >= 992px) {
-  .hershey-story.story-craft main > .section:not(.dark-brown, .dark-brown-large, .light-purple, .hero-container, .breadcrumb-trail-container, :empty) {
+  .hershey-story.story-craft main > .section:not(.dark-brown, .dark-brown-large, .light-purple, .light-yellow, .hero-container, .breadcrumb-trail-container, :empty) {
     margin-block: var(--hershey-system-spacing-gap-story-craft-section, 58px);
   }
 }
@@ -808,8 +819,27 @@ main .section.centered h3 {
   margin-top: var(--hershey-system-spacing-gap-story-craft-related-top, 91px);
 }
 
-.hershey-story.story-craft main > .section.light-purple + .section {
+.hershey-story.story-craft main > :is(.section.light-purple, .section.light-yellow) + .section {
   margin-top: var(--hershey-system-spacing-gap-story-craft-first, 40px);
+}
+
+/* recipe roundups (columns craft half): more room around the list than the how-to pages */
+.hershey-story.story-craft main > .section:has(> .columns-wrapper > .columns.half) {
+  padding-bottom: 66px;
+}
+
+.hershey-story.story-craft main > .section:has(> .columns-wrapper > .columns.half) + .section {
+  padding-bottom: 59px;
+}
+
+@media (width >= 992px) {
+  .hershey-story.story-craft main > .section:has(> .columns-wrapper > .columns.half) {
+    padding-block: 20px 50px;
+  }
+
+  .hershey-story.story-craft main > .section:has(> .columns-wrapper > .columns.half) + .section {
+    padding-bottom: 13px;
+  }
 }
 
 /* tinted bands on craft pages: same padding as the lilac intro; rows of text and image keep a 50px gap */

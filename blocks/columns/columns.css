@@ -1117,6 +1117,15 @@ main .columns.nutrition .columns-nutrition-aside a.button:focus-visible {
   object-fit: cover;
 }
 
+.columns-wrapper:has(> .columns.craft.half) {
+  padding-block: 0;
+}
+
+.columns.craft.half li {
+  margin-bottom: 8px;
+  padding-left: 17px;
+}
+
 @media (width >= 900px) {
   .columns.craft > div {
     align-items: flex-start;
@@ -1133,6 +1142,23 @@ main .columns.nutrition .columns-nutrition-aside a.button:focus-visible {
 
   .columns.craft h3 {
     margin-top: 0;
+  }
+
+  /* half: text and image share the row equally (recipe roundups) */
+  .columns.craft.half > div > .columns-img-col {
+    flex: 0 0 calc((100% - var(--hershey-component-columns-craft-gap, 50px)) / 2);
+  }
+
+  .columns-wrapper:has(> .columns.craft.half) {
+    padding-block: 10px 12px;
+  }
+
+  .columns.craft.half > div > :not(.columns-img-col) {
+    padding-bottom: 18px;
+  }
+
+  .columns.craft.half h2 {
+    line-height: 1.3;
   }
 }
 
