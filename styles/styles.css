@@ -448,6 +448,14 @@ main .section.dark-brown-large {
   color: var(--hershey-system-color-text-inverse, #fff);
 }
 
+/* plum variant of the tall band; the footer ribbon is plum already */
+main .section.plum-large {
+  margin: 0;
+  padding: var(--hershey-system-spacing-story-dark-top, 120px) 0 var(--hershey-system-spacing-story-dark-bottom, 100px);
+  background-color: var(--hershey-system-color-surface-plum, #5a357b);
+  color: var(--hershey-system-color-text-inverse, #fff);
+}
+
 /* the empty section left by the page metadata must not add a gap before the footer */
 .hershey-story main > .section:empty {
   margin: 0;
@@ -458,7 +466,7 @@ body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-
 }
 
 /* story pages ending on a light section: the ribbon sits on white, as on hersheyland.com */
-.hershey-story:not(:has(main > .section.dark-brown-large:nth-last-child(-n+2))) .footer.hershey-footer .newsletter {
+.hershey-story:not(:has(main > .section:is(.dark-brown-large, .plum-large):nth-last-child(-n+2))) .footer.hershey-footer .newsletter {
   background: var(--hershey-system-color-surface-default, #fff);
 }
 
@@ -620,11 +628,11 @@ body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-
 }
 
 /* craft pages space text by the paragraph's bottom margin, headings sit tight on their text */
-.hershey-story.story-craft main > .section:not(.dark-brown) :is(.default-content-wrapper, .columns > div > div) > :is(h2, h3) {
+.hershey-story:is(.story-craft, .story-wide) main > .section:not(.dark-brown) :is(.default-content-wrapper, .columns > div > div) > :is(h2, h3) {
   margin: 0 0 0.3em;
 }
 
-.hershey-story.story-craft main > .section:not(.dark-brown) :is(.default-content-wrapper, .columns > div > div) > p:not(:has(> picture)) {
+.hershey-story:is(.story-craft, .story-wide) main > .section:not(.dark-brown) :is(.default-content-wrapper, .columns > div > div) > p:not(:has(> picture)) {
   margin: 0 0 1.5em;
 }
 
@@ -638,6 +646,117 @@ body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-
     margin-top: var(--hershey-system-spacing-gap-x-large, 48px);
   }
 }
+
+/* story templates never share a page, so their relative order does not matter */
+/* stylelint-disable no-descending-specificity */
+
+/* `template: story-wide` pages: long article text, 950px column from 992px, images as wide as the text */
+.hershey-story.story-wide main > .section:not(.dark-brown) > .default-content-wrapper,
+.hershey-story.story-wide main > .section:not(.dark-brown) > .columns-wrapper {
+  max-width: calc(100vw - var(--hershey-system-layout-container-story-wide-text-inset-mobile, 90px));
+}
+
+.hershey-story.story-wide main .default-content-wrapper p > picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hershey-story.story-wide main .default-content-wrapper > p:has(> picture):not(:has(> strong)) {
+  margin-block: 1.5em;
+}
+
+@media (width >= 992px) {
+  .hershey-story.story-wide main > .section:not(.dark-brown) > .default-content-wrapper,
+  .hershey-story.story-wide main > .section:not(.dark-brown) > .columns-wrapper {
+    max-width: min(var(--hershey-system-layout-container-story-craft-max, 950px), calc(83.333vw - var(--hershey-system-layout-container-story-craft-inset-desktop, 100px)));
+  }
+
+  .hershey-story.story-wide main .default-content-wrapper > p:has(> picture):not(:has(> strong)) {
+    margin-block: 45px 40px;
+  }
+}
+
+.hershey-story.story-wide main > .hero-container + .section {
+  padding-top: var(--hershey-system-spacing-story-wide-intro-top, 30px);
+}
+
+.hershey-story.story-wide main .section.light-gray {
+  margin-block: var(--hershey-system-spacing-story-wide-gray-before-mobile, 61px) var(--hershey-system-spacing-story-wide-gray-after-mobile, 45px);
+  padding-block: var(--hershey-system-spacing-story-wide-gray-top-mobile, 20px) var(--hershey-system-spacing-story-wide-gray-bottom-mobile, 35px);
+}
+
+@media (width >= 992px) {
+  .hershey-story.story-wide main .section.light-gray {
+    margin-block: var(--hershey-system-spacing-story-wide-gray-before, 80px) var(--hershey-system-spacing-story-wide-gray-after, 90px);
+    padding-block: var(--hershey-system-spacing-story-wide-gray-top, 25px) var(--hershey-system-spacing-story-wide-gray-bottom, 48px);
+  }
+}
+
+.hershey-story.story-wide main .section.plum-large {
+  padding-top: var(--hershey-system-spacing-story-plum-top, 100px);
+}
+
+/* compost lists: a small icon beside the bold label, dot bullets, nested items pushed further in */
+.hershey-story.story-wide main .default-content-wrapper > p:has(> picture + strong) {
+  display: flex;
+  align-items: center;
+  gap: var(--hershey-system-spacing-gap-story-wide-icon, 10px);
+  margin: 45px 0 0.6em;
+}
+
+.hershey-story.story-wide main .default-content-wrapper > p > picture + strong {
+  display: block;
+}
+
+.hershey-story.story-wide main .default-content-wrapper p > picture:has(+ strong) img {
+  width: var(--hershey-system-size-story-wide-icon, 30px);
+  height: var(--hershey-system-size-story-wide-icon, 30px);
+}
+
+.hershey-story.story-wide main .default-content-wrapper ul {
+  margin: 0 0 1.5em;
+  padding-left: var(--hershey-system-spacing-inset-story-wide-list, 40px);
+  list-style: none;
+}
+
+/* the compost group is wider than the article text on hersheyland.com */
+.hershey-story.story-wide main .default-content-wrapper > :is(p:has(> picture + strong), ul, ul + p) {
+  margin-inline: calc(-1 * var(--hershey-system-spacing-inset-story-wide-embed-bleed-mobile, 10px));
+}
+
+@media (width >= 992px) {
+  .hershey-story.story-wide main .default-content-wrapper > :is(p:has(> picture + strong), ul, ul + p) {
+    margin-inline: calc(-1 * var(--hershey-system-spacing-inset-story-wide-embed-bleed, 5px));
+  }
+}
+
+.hershey-story.story-wide main .default-content-wrapper li {
+  position: relative;
+  margin-top: 9px;
+  padding-left: 17px;
+}
+
+.hershey-story.story-wide main .default-content-wrapper li::before {
+  content: '';
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: currentcolor;
+}
+
+.hershey-story.story-wide main .default-content-wrapper li > ul {
+  margin: 0;
+  padding-left: var(--hershey-system-spacing-inset-story-wide-list-nested, 50px);
+}
+
+.hershey-story.story-wide main .default-content-wrapper li > ul > li:first-child {
+  margin-top: 0;
+}
+/* stylelint-enable no-descending-specificity */
 
 /* story-article sections breathe more than the default section gap, and images sit apart from the next heading */
 .hershey-story.story-article main > .section:not(.dark-brown, .dark-brown-large, .hero-container, .breadcrumb-trail-container, :empty) {
@@ -675,7 +794,7 @@ main .section.centered h3 {
   border-bottom-color: transparent;
 }
 
-.hershey-story main .section.dark-brown-large .default-content-wrapper > :is(h2, h3) {
+.hershey-story main .section:is(.dark-brown-large, .plum-large) .default-content-wrapper > :is(h2, h3) {
   margin: 0 0 var(--hershey-system-spacing-story-dark-heading-gap, 25px);
   color: inherit;
 }
