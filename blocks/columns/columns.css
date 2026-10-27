@@ -1103,4 +1103,37 @@ main .columns.nutrition .columns-nutrition-aside a.button:focus-visible {
   }
 }
 
+/* craft variant (story pages): small square image beside text, top aligned */
+.columns-wrapper:has(> .columns.craft) {
+  padding-block: var(--hershey-component-columns-craft-margin-block, 15px) calc(var(--hershey-component-columns-craft-margin-block, 15px) + 3px);
+}
+
+.columns.craft > div {
+  gap: var(--hershey-component-columns-craft-gap-mobile, 40px);
+}
+
+.columns.craft > div > .columns-img-col img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+@media (width >= 900px) {
+  .columns.craft > div {
+    align-items: flex-start;
+    gap: var(--hershey-component-columns-craft-gap, 50px);
+  }
+
+  .columns.craft > div > .columns-img-col {
+    flex: 0 0 calc((100% - var(--hershey-component-columns-craft-gap, 50px)) * 0.312);
+  }
+
+  .columns.craft > div > :not(.columns-img-col) {
+    flex: 1;
+  }
+
+  .columns.craft h3 {
+    margin-top: 0;
+  }
+}
+
 /* stylelint-enable no-descending-specificity */

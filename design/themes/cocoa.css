@@ -157,6 +157,7 @@
   --hershey-reference-typography-size-21: 21px;
   --hershey-reference-typography-size-24: 24px;
   --hershey-reference-typography-size-27: 27px;
+  --hershey-reference-typography-size-28: 28px;
   --hershey-reference-typography-size-30: 30px;
   --hershey-reference-typography-size-32: 32px;
   --hershey-reference-typography-size-36: 36px;
@@ -248,6 +249,7 @@
   --hershey-reference-size-width-60: 60px;
   --hershey-reference-size-width-63: 63px;
   --hershey-reference-size-width-68: 68px;
+  --hershey-reference-size-width-70: 70px;
   --hershey-reference-size-width-72: 72px;
   --hershey-reference-size-width-80: 80px;
   --hershey-reference-size-width-85: 85px;
@@ -466,6 +468,10 @@
   --hershey-system-typography-leading-title: var(--hershey-reference-typography-leading-36);
   --hershey-system-typography-leading-display: var(--hershey-reference-typography-leading-42);
   --hershey-system-typography-tracking-recipe: var(--hershey-reference-typography-tracking-1);
+  --hershey-system-typography-story-heading-2-font-size-mobile: var(--hershey-reference-typography-size-28);
+  --hershey-system-typography-story-heading-2-font-size-desktop: var(--hershey-reference-typography-size-36);
+  --hershey-system-typography-story-heading-3-font-size-mobile: var(--hershey-reference-typography-size-24);
+  --hershey-system-typography-story-heading-3-font-size-desktop: var(--hershey-reference-typography-size-28);
   --hershey-system-shape-radius-card: var(--hershey-reference-shape-radius-24);
   --hershey-system-shape-radius-tab: var(--hershey-reference-shape-radius-30);
   --hershey-system-shape-radius-popover: var(--hershey-reference-shape-radius-16);
@@ -524,6 +530,10 @@
   --hershey-system-layout-container-recipe-intro: var(--hershey-reference-size-width-733);
   --hershey-system-layout-container-recipe: var(--hershey-reference-size-width-1190);
   --hershey-system-layout-container-recipe-summary: var(--hershey-reference-size-width-760);
+  --hershey-system-layout-container-story-craft-max: var(--hershey-reference-size-width-950);
+  --hershey-system-layout-container-story-craft-inset-desktop: var(--hershey-reference-size-width-100);
+  --hershey-system-layout-container-story-craft-image-inset: var(--hershey-reference-size-width-180);
+  --hershey-system-layout-container-story-craft-inset-mobile: var(--hershey-reference-size-width-70);
   --hershey-system-layout-clearance-popover: var(--hershey-reference-size-width-100);
   --hershey-system-layout-breakpoint-tablet: var(--hershey-reference-size-width-600);
   --hershey-system-layout-breakpoint-desktop: var(--hershey-reference-size-width-900);
@@ -688,6 +698,7 @@
   --hershey-system-spacing-inset-brand-top: var(--hershey-reference-spacing-50);
   --hershey-system-spacing-inset-newsletter-bottom-compact: var(--hershey-reference-spacing-30);
   --hershey-system-spacing-inset-header-edge: var(--hershey-reference-spacing-15);
+  --hershey-system-spacing-inset-story-hero-inline-mobile: var(--hershey-reference-spacing-10);
   --hershey-system-spacing-control-block: var(--hershey-reference-spacing-12);
   --hershey-system-spacing-control-inline: var(--hershey-reference-spacing-18);
   --hershey-system-spacing-action-block: var(--hershey-reference-spacing-14);
@@ -724,6 +735,13 @@
   --hershey-system-spacing-gap-recipe-time: var(--hershey-reference-spacing-45);
   --hershey-system-spacing-gap-recipe-step: var(--hershey-reference-spacing-29);
   --hershey-system-spacing-gap-recipe-step-desktop: var(--hershey-reference-spacing-39);
+  --hershey-system-spacing-gap-story-craft-image-before: var(--hershey-reference-spacing-39);
+  --hershey-system-spacing-gap-story-craft-image-after: var(--hershey-reference-spacing-39);
+  --hershey-system-spacing-gap-story-craft-section: var(--hershey-reference-spacing-58);
+  --hershey-system-spacing-gap-story-craft-related-top: var(--hershey-reference-spacing-91);
+  --hershey-system-spacing-gap-story-craft-first: var(--hershey-reference-spacing-40);
+  --hershey-system-spacing-gap-story-craft-stack: var(--hershey-reference-spacing-40);
+  --hershey-system-spacing-gap-story-craft-section-mobile: var(--hershey-reference-spacing-27);
   --hershey-system-spacing-data-inline-start-mobile: var(--hershey-reference-spacing-17);
   --hershey-system-spacing-data-inline-end-mobile: var(--hershey-reference-spacing-18);
   --hershey-system-spacing-data-inline-start-desktop: var(--hershey-reference-spacing-34);
@@ -796,6 +814,9 @@
   --hershey-system-spacing-story-tan-top: var(--hershey-reference-spacing-86);
   --hershey-system-spacing-story-tan-bottom: var(--hershey-reference-spacing-74);
   --hershey-system-spacing-story-guide-section: var(--hershey-reference-spacing-46);
+  --hershey-system-spacing-story-lilac-top-mobile: var(--hershey-reference-spacing-35);
+  --hershey-system-spacing-story-lilac-top: var(--hershey-reference-spacing-70);
+  --hershey-system-spacing-story-lilac-bottom: var(--hershey-reference-spacing-50);
   --hershey-system-gap-data-stack: var(--hershey-reference-spacing-13);
   --hershey-system-gap-data-badge-row: var(--hershey-reference-spacing-23);
   --hershey-system-gap-data-badge-column-mobile: var(--hershey-reference-spacing-10);
@@ -1017,6 +1038,9 @@
   --hershey-component-columns-activity-list-marker-font-weight: var(--hershey-system-typography-heading-font-weight);
   --hershey-component-columns-pair-gap: var(--hershey-system-spacing-gap-story-wide);
   --hershey-component-columns-closing-gap: var(--hershey-system-spacing-gap-story-wide);
+  --hershey-component-columns-craft-gap: var(--hershey-system-spacing-gap-story-wide);
+  --hershey-component-columns-craft-margin-block: var(--hershey-system-spacing-inset-divider);
+  --hershey-component-columns-craft-gap-mobile: var(--hershey-system-spacing-gap-story-craft-stack);
   --hershey-component-tabs-list-gap: var(--hershey-system-spacing-gap-small);
   --hershey-component-tabs-list-padding-block-end: var(--hershey-system-spacing-inset-default);
   --hershey-component-tabs-control-padding-block: var(--hershey-system-spacing-control-block);
@@ -1284,7 +1308,7 @@
   --hershey-component-hero-article-date-margin-top: var(--hershey-system-spacing-inset-default);
   --hershey-component-hero-article-text-padding-block-start-mobile: var(--hershey-system-spacing-inset-large);
   --hershey-component-hero-article-text-padding-block-end-mobile: var(--hershey-system-spacing-section-hero);
-  --hershey-component-hero-article-text-padding-inline-mobile: var(--hershey-system-spacing-inset-comfortable);
+  --hershey-component-hero-article-text-padding-inline-mobile: var(--hershey-system-spacing-inset-story-hero-inline-mobile);
   --hershey-component-hero-article-text-padding-block-desktop: var(--hershey-system-spacing-inset-x-large);
   --hershey-component-hero-article-text-padding-inline-end-desktop: var(--hershey-system-spacing-inset-story-hero-inline);
   --hershey-component-hero-article-text-padding-inline-start-desktop: var(--hershey-system-spacing-inset-story-hero-inline);

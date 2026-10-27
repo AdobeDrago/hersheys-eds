@@ -3,7 +3,7 @@
  * Blue band with the title on the left and the image filling the right half,
  * as on hersheyland.com story pages. Values come from component.hero.article.*
  * tokens; literal fallbacks keep the block identical outside the branded theme scope.
- * The 900px media query mirrors system.layout.breakpoint.desktop.
+ * The 992px media query matches the story page layout switch measured on hersheyland.com.
  */
 
 /* section: full-bleed band */
@@ -53,7 +53,7 @@ main > .section:has(> .hero-wrapper > .hero.article.plum) {
 
 .hero.article .hero-article-content {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 
 .hero.article .hero-article-media img {
@@ -64,6 +64,7 @@ main > .section:has(> .hero-wrapper > .hero.article.plum) {
 }
 
 .hero.article .hero-article-text {
+  text-align: center;
   padding:
     var(--hershey-component-hero-article-text-padding-block-start-mobile, 32px)
     var(--hershey-component-hero-article-text-padding-inline-mobile, 24px)
@@ -84,7 +85,7 @@ main > .section:has(> .hero-wrapper > .hero.article.plum) {
   font-size: var(--hershey-component-hero-article-date-font-size, 16px);
 }
 
-@media (width >= 900px) {
+@media (width >= 992px) {
   .hero.article .hero-article-content {
     flex-direction: row-reverse;
     min-height: var(--hershey-component-hero-article-layout-min-height, 356px);
@@ -98,6 +99,7 @@ main > .section:has(> .hero-wrapper > .hero.article.plum) {
 
   .hero.article .hero-article-text {
     align-self: center;
+    text-align: start;
     box-sizing: border-box;
     padding:
       var(--hershey-component-hero-article-text-padding-block-desktop, 48px)
