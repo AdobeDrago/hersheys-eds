@@ -17,6 +17,15 @@ main > .section:has(> .hero-wrapper > .hero.article) > .hero-wrapper {
   padding: 0;
 }
 
+/* lime colour modifier: `Hero (article, lime)`; dark text on the light band */
+main > .section:has(> .hero-wrapper > .hero.article.lime) {
+  background-color: var(--hershey-component-hero-article-lime-band-background, #b7d34a);
+}
+
+.hero.article.lime {
+  color: var(--hershey-component-hero-article-lime-color-foreground, #3f000b);
+}
+
 /* brown colour modifier: `Hero (article, brown)` */
 main > .section:has(> .hero-wrapper > .hero.article.brown) {
   background-color: var(--hershey-component-hero-article-brown-band-background, #3c131c);
