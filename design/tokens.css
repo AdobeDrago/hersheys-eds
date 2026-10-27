@@ -273,6 +273,7 @@
   --hershey-system-color-text-body: var(--hershey-reference-color-neutral-51);
   --hershey-system-color-text-note: var(--hershey-reference-color-neutral-66);
   --hershey-system-color-text-confirmation: var(--hershey-reference-color-brand-chocolate-night);
+  --hershey-system-color-text-inactive: var(--hershey-reference-color-neutral-153);
   --hershey-system-color-link-hover: var(--hershey-reference-color-brand-chocolate-deep);
   --hershey-system-color-link-default: var(--hershey-system-color-text-primary);
   --hershey-system-color-surface-default: var(--hershey-reference-color-neutral-255);
@@ -1199,7 +1200,6 @@
   --hershey-component-reviews-spacing-fallback-block: var(--hershey-system-spacing-inset-large);
   --hershey-component-reviews-spacing-fallback-inline: var(--hershey-system-spacing-inset-comfortable);
   --hershey-component-reviews-shape-fallback-radius: var(--hershey-system-shape-radius-panel);
-  --hershey-component-accordion-layout-max-width: var(--hershey-system-layout-container-intro);
   --hershey-component-accordion-border-color: var(--hershey-system-color-border-accordion);
   --hershey-component-accordion-border-width: var(--hershey-system-border-width-control);
   --hershey-component-accordion-label-color: var(--hershey-system-color-text-primary);
@@ -1208,6 +1208,7 @@
   --hershey-component-accordion-label-font-weight: var(--hershey-system-typography-action-font-weight);
   --hershey-component-accordion-label-padding-block: var(--hershey-system-spacing-inset-divider);
   --hershey-component-accordion-label-padding-inline-end: var(--hershey-system-spacing-inset-card);
+  --hershey-component-accordion-label-color-inactive: var(--hershey-system-color-text-inactive);
   --hershey-component-accordion-icon-color: var(--hershey-system-color-icon-navigation);
   --hershey-component-accordion-icon-width: var(--hershey-system-size-icon-accordion);
   --hershey-component-accordion-icon-thickness: var(--hershey-system-border-width-accent);
