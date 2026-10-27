@@ -17,6 +17,11 @@ main > .section:has(> .hero-wrapper > .hero.article) > .hero-wrapper {
   padding: 0;
 }
 
+/* brown colour modifier: `Hero (article, brown)` */
+main > .section:has(> .hero-wrapper > .hero.article.brown) {
+  background-color: var(--hershey-component-hero-article-brown-band-background, #3c131c);
+}
+
 /* navy colour modifier: `Hero (article, navy)` */
 main > .section:has(> .hero-wrapper > .hero.article.navy) {
   background-color: var(--hershey-component-hero-article-navy-band-background, #003594);

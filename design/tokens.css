@@ -198,11 +198,15 @@
   --hershey-reference-size-width-50: 50px;
   --hershey-reference-size-width-51: 51px;
   --hershey-reference-size-width-60: 60px;
+  --hershey-reference-size-width-63: 63px;
   --hershey-reference-size-width-68: 68px;
+  --hershey-reference-size-width-85: 85px;
   --hershey-reference-size-width-92: 92px;
   --hershey-reference-size-width-100: 100px;
+  --hershey-reference-size-width-102: 102px;
   --hershey-reference-size-width-105: 105px;
   --hershey-reference-size-width-111: 111px;
+  --hershey-reference-size-width-113: 113px;
   --hershey-reference-size-width-116: 116px;
   --hershey-reference-size-width-127: 127px;
   --hershey-reference-size-width-128: 128px;
@@ -230,8 +234,10 @@
   --hershey-reference-size-width-900: 900px;
   --hershey-reference-size-width-909: 909px;
   --hershey-reference-size-width-960: 960px;
+  --hershey-reference-size-width-1000: 1000px;
   --hershey-reference-size-width-1020: 1020px;
   --hershey-reference-size-width-1200: 1200px;
+  --hershey-reference-size-width-1210: 1210px;
   --hershey-reference-size-width-1260: 1260px;
   --hershey-reference-size-width-1600: 1600px;
   --hershey-reference-size-width-1920: 1920px;
@@ -295,6 +301,7 @@
   --hershey-system-color-surface-story-hero: var(--hershey-reference-color-brand-cornflower);
   --hershey-system-color-surface-story-intro: var(--hershey-reference-color-brand-periwinkle);
   --hershey-system-color-surface-story-hero-navy: var(--hershey-reference-color-brand-navy);
+  --hershey-system-color-surface-story-hero-brown: var(--hershey-reference-color-brand-chocolate-night);
   --hershey-system-color-action-primary-background-default: var(--hershey-reference-color-brand-blue);
   --hershey-system-color-action-primary-background-hover: var(--hershey-reference-color-brand-blue-deep);
   --hershey-system-color-action-primary-foreground: var(--hershey-reference-color-neutral-255);
@@ -366,6 +373,7 @@
   --hershey-system-typography-copy-font-size-desktop: var(--hershey-reference-typography-size-20);
   --hershey-system-typography-related-title-font-size: var(--hershey-reference-typography-size-19);
   --hershey-system-typography-related-title-line-height: var(--hershey-reference-typography-line-height-1-4);
+  --hershey-system-typography-story-intro-font-size: var(--hershey-reference-typography-size-20);
   --hershey-system-shape-radius-card: var(--hershey-reference-shape-radius-24);
   --hershey-system-shape-radius-tab: var(--hershey-reference-shape-radius-30);
   --hershey-system-shape-radius-popover: var(--hershey-reference-shape-radius-16);
@@ -409,6 +417,13 @@
   --hershey-system-layout-container-story-image-bleed-mobile: var(--hershey-reference-size-width-10);
   --hershey-system-layout-container-story-intro: var(--hershey-reference-size-width-790);
   --hershey-system-layout-container-story-intro-inset-desktop: var(--hershey-reference-size-width-60);
+  --hershey-system-layout-container-story-wide-max: var(--hershey-reference-size-width-1000);
+  --hershey-system-layout-container-story-wide-inset-desktop: var(--hershey-reference-size-width-102);
+  --hershey-system-layout-container-story-wide-intro-inset-desktop: var(--hershey-reference-size-width-63);
+  --hershey-system-layout-container-story-wide-intro-inset-mobile: var(--hershey-reference-size-width-85);
+  --hershey-system-layout-container-story-wide-pair-inset: var(--hershey-reference-size-width-153);
+  --hershey-system-layout-container-story-wide-closing-inset: var(--hershey-reference-size-width-113);
+  --hershey-system-layout-container-story-wide-feature-max: var(--hershey-reference-size-width-1210);
   --hershey-system-layout-clearance-popover: var(--hershey-reference-size-width-100);
   --hershey-system-layout-breakpoint-tablet: var(--hershey-reference-size-width-600);
   --hershey-system-layout-breakpoint-desktop: var(--hershey-reference-size-width-900);
@@ -536,6 +551,7 @@
   --hershey-system-spacing-inset-copy-offset: var(--hershey-reference-spacing-40);
   --hershey-system-spacing-inset-divider: var(--hershey-reference-spacing-15);
   --hershey-system-spacing-inset-story-hero-inline: var(--hershey-reference-spacing-103);
+  --hershey-system-spacing-inset-story-back-start: var(--hershey-reference-spacing-35);
   --hershey-system-spacing-control-block: var(--hershey-reference-spacing-12);
   --hershey-system-spacing-control-inline: var(--hershey-reference-spacing-18);
   --hershey-system-spacing-action-block: var(--hershey-reference-spacing-14);
@@ -562,6 +578,7 @@
   --hershey-system-spacing-gap-footer-stack: var(--hershey-reference-spacing-20);
   --hershey-system-spacing-gap-footer-legal: var(--hershey-reference-spacing-35);
   --hershey-system-spacing-gap-story-related: var(--hershey-reference-spacing-56);
+  --hershey-system-spacing-gap-story-wide: var(--hershey-reference-spacing-50);
   --hershey-system-spacing-data-inline-start-mobile: var(--hershey-reference-spacing-17);
   --hershey-system-spacing-data-inline-end-mobile: var(--hershey-reference-spacing-18);
   --hershey-system-spacing-data-inline-start-desktop: var(--hershey-reference-spacing-34);
@@ -844,7 +861,8 @@
   --hershey-component-columns-activity-list-item-gap: var(--hershey-system-spacing-inset-small);
   --hershey-component-columns-activity-list-marker-font-family: var(--hershey-system-typography-heading-font-family);
   --hershey-component-columns-activity-list-marker-font-weight: var(--hershey-system-typography-heading-font-weight);
-  --hershey-component-columns-pair-gap: var(--hershey-system-spacing-gap-x-large);
+  --hershey-component-columns-pair-gap: var(--hershey-system-spacing-gap-story-wide);
+  --hershey-component-columns-closing-gap: var(--hershey-system-spacing-gap-story-wide);
   --hershey-component-tabs-list-gap: var(--hershey-system-spacing-gap-small);
   --hershey-component-tabs-list-padding-block-end: var(--hershey-system-spacing-inset-default);
   --hershey-component-tabs-control-padding-block: var(--hershey-system-spacing-control-block);
@@ -1119,6 +1137,7 @@
   --hershey-component-hero-article-layout-min-height: var(--hershey-system-size-region-story-hero-minimum);
   --hershey-component-hero-article-plum-band-background: var(--hershey-system-color-surface-plum);
   --hershey-component-hero-article-navy-band-background: var(--hershey-system-color-surface-story-hero-navy);
+  --hershey-component-hero-article-brown-band-background: var(--hershey-system-color-surface-story-hero-brown);
   --hershey-component-breadcrumb-trail-foreground: var(--hershey-system-color-text-primary);
   --hershey-component-breadcrumb-trail-base-font-family: var(--hershey-system-typography-body-font-family);
   --hershey-component-breadcrumb-trail-base-font-size: var(--hershey-system-typography-data-font-size);

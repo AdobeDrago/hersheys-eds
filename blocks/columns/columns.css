@@ -119,3 +119,14 @@
 .columns.pair > div {
   gap: var(--hershey-component-columns-pair-gap, 48px);
 }
+
+/* closing variant (story pages): small image beside a wide text column */
+@media (width >= 900px) {
+  .columns.closing > div {
+    gap: var(--hershey-component-columns-closing-gap, 50px);
+  }
+
+  .columns.closing > div > .columns-img-col {
+    flex: 0 0 30%;
+  }
+}

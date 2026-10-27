@@ -418,6 +418,23 @@ body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-
   background: var(--hershey-system-color-surface-seasonal-dark, #3c131c);
 }
 
+/* back-to-listing band: link sits at the left edge with a chevron, as on hersheyland.com */
+.hershey-story main > .section.dark-brown > .default-content-wrapper {
+  max-width: none;
+  padding-inline: var(--hershey-system-spacing-inset-story-back-start, 35px);
+}
+
+.hershey-story main > .section.dark-brown a:any-link::before {
+  content: '';
+  display: inline-block;
+  width: var(--hershey-system-spacing-inset-tight, 6px);
+  height: var(--hershey-system-spacing-inset-tight, 6px);
+  margin-right: var(--hershey-system-spacing-control-block, 12px);
+  border: solid currentcolor;
+  border-width: 0 0 var(--hershey-system-border-width-divider, 1px) var(--hershey-system-border-width-divider, 1px);
+  transform: translateY(-1px) rotate(45deg);
+}
+
 /* `template: story-narrow` pages: text column is two-thirds of the viewport from 992px, images extend past it */
 .hershey-story.story-narrow main > .section:not(.dark-brown) > .default-content-wrapper,
 .hershey-story.story-narrow main > .section:not(.dark-brown) > .columns-wrapper {
@@ -449,6 +466,62 @@ body:has(main > .section.dark-brown-large:nth-last-child(-n+2)) .footer.hershey-
   .hershey-story.story-narrow main > .hero-container + .section > .default-content-wrapper {
     max-width: min(var(--hershey-system-layout-container-story-intro, 790px), calc(66.667vw - var(--hershey-system-layout-container-story-intro-inset-desktop, 60px)));
   }
+}
+
+/* `template: story-article` pages: text, intro and image rows each scale with the viewport, as on hersheyland.com */
+.hershey-story.story-article main > .section:not(.dark-brown) > .default-content-wrapper,
+.hershey-story.story-article main > .section:not(.dark-brown) > .columns-wrapper {
+  max-width: calc(100vw - var(--hershey-system-layout-container-story-narrow-inset-mobile, 105px));
+}
+
+.hershey-story.story-article main .default-content-wrapper p:has(> picture) {
+  margin-inline: calc(-1 * var(--hershey-system-layout-container-story-image-bleed-mobile, 10px));
+}
+
+.hershey-story.story-article main .default-content-wrapper p > picture img {
+  width: 100%;
+  height: auto;
+}
+
+.hershey-story.story-article main > .hero-container + .section > .default-content-wrapper {
+  max-width: calc(100vw - var(--hershey-system-layout-container-story-wide-intro-inset-mobile, 85px));
+  font-size: var(--hershey-system-typography-story-intro-font-size, 20px);
+}
+
+@media (width >= 992px) {
+  .hershey-story.story-article main > .section:not(.dark-brown) > .default-content-wrapper,
+  .hershey-story.story-article main > .section:not(.dark-brown) > .columns-wrapper {
+    max-width: min(var(--hershey-system-layout-container-story-wide-max, 1000px), calc(69.444vw - var(--hershey-system-layout-container-story-wide-inset-desktop, 102px)));
+  }
+
+  .hershey-story.story-article main .default-content-wrapper p:has(> picture) {
+    margin-inline: 0;
+  }
+
+  .hershey-story.story-article main > .hero-container + .section > .default-content-wrapper {
+    max-width: min(var(--hershey-system-layout-container-story-wide-max, 1000px), calc(83.333vw - var(--hershey-system-layout-container-story-wide-intro-inset-desktop, 63px)));
+  }
+
+  .hershey-story.story-article main > .section > .columns-wrapper:has(> .columns.pair) {
+    max-width: min(var(--hershey-system-layout-container-story-wide-feature-max, 1210px), calc(83.333vw - var(--hershey-system-layout-container-story-wide-pair-inset, 153px)));
+  }
+
+  .hershey-story.story-article main > .section > .columns-wrapper:has(> .columns.closing) {
+    max-width: min(var(--hershey-system-layout-container-story-wide-feature-max, 1210px), calc(83.333vw - var(--hershey-system-layout-container-story-wide-closing-inset, 113px)));
+  }
+}
+
+/* story-article sections breathe more than the default section gap, and images sit apart from the next heading */
+.hershey-story.story-article main > .section:not(.dark-brown, .dark-brown-large, .hero-container, .breadcrumb-trail-container, :empty) {
+  padding-block: var(--hershey-system-spacing-section-large, 80px);
+}
+
+.hershey-story.story-article main > .hero-container + .section {
+  padding-block: var(--hershey-system-spacing-gap-comfortable, 24px) 0;
+}
+
+.hershey-story.story-article main > .section > .columns-wrapper + .default-content-wrapper {
+  margin-top: var(--hershey-system-spacing-gap-x-large, 48px);
 }
 
 /* activity sections sit further apart than the default section gap */
