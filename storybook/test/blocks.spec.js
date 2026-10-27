@@ -24,7 +24,8 @@ test('multiple headers use instance-local IDs and Escape handlers', async ({ pag
   );
   expect(new Set(ids).size).toBe(ids.length);
   const menu = navs.nth(1).getByRole('button', { name: 'Chocolate', exact: true });
-  await menu.click();
+  await menu.focus();
+  await menu.press('Enter');
   await expect(menu).toHaveAttribute('aria-expanded', 'true');
   await menu.press('Escape');
   await expect(menu).toHaveAttribute('aria-expanded', 'false');

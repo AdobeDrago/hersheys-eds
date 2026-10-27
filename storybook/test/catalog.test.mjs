@@ -43,7 +43,7 @@ test('validation roles exclude author-only warning and undefined customer states
   const warning = byPath.get('reference.source.feedback.author-warning');
   assert.equal(warning.audience, 'author');
   assert.equal(warning.scope, 'evidence');
-  assert.equal(selectTokens(tokens, 'neutral').length, 7);
+  assert.equal(selectTokens(tokens, 'neutral').length, 14);
 });
 
 test('aliases use the shared compiler resolver and expose the semantic dependency chain', () => {
