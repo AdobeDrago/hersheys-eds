@@ -29,8 +29,7 @@ Shop Now. Code: `hero-product.js` / `hero-product.css`, loaded by `hero.js` for 
 ### Authoring (Document Authoring)
 
 Field table (recommended): one row per field, the field name in the first cell and the value
-in the second. Rows can be left empty or removed; their value then comes from the product
-master sheet.
+in the second. Rows can be left empty or removed; their value then comes from the pdp sheet.
 
 | Hero (product) | |
 | --- | --- |
@@ -43,35 +42,32 @@ master sheet.
 
 The older 2-cell layout (images | name, sizes, description, CTA) still works.
 
-### Product master fallback
+### Page metadata
 
-Authored values always win. Anything left empty is filled from the product master sheet
-(`/products/product-master.json`, first sheet), using the row whose `path` matches the page
-(or whose `gtin` matches the `bvid` metadata):
+| Metadata | Use |
+| --- | --- |
+| `bvid` | 14-digit GTIN: finds the product's sheet row; also the Bazaarvoice rating and Shop Now SKU |
+| `brand` | Tab of the pdp sheet to load, e.g. `cadbury`, `hersheys`, `reeses`, `rolo`, `payday` (matched case-insensitively, punctuation ignored: `HERSHEY'S` = `hersheys`) |
+
+### pdp sheet fallback
+
+Authored values always win. Anything left empty is filled from the pdp sheet
+(`/products/pdp.json`). Only the tab named by the `brand` metadata is loaded
+(`/products/pdp.json?sheet=<brand>`), and the row whose `14-Digit UPCs` (padded to 14 digits)
+matches the `bvid` metadata is used. Without a `brand` row or a matching row, only the authored
+values are shown.
 
 | Left empty | Filled from |
 | --- | --- |
-| image-front | `image` (alt: `imageAlt`, else `title`) |
-| image-back | `imageBack` (optional column; alt: `imageBackAlt`) |
-| Title | `name` |
-| size | Active products with the same `familyId`, the current one first. Labels are the `title` after the name, else `weight` oz and `count` `countUnit` |
-| Description | `description` |
+| image-front | `Image URL` (alt: `imageAlt`, else `productName`) |
+| image-back | `imageBack` (alt: `imageBackAlt`) |
+| Title | `Short Product Title`, else `productName` |
+| size | The current product first, then the products in the same tab with the same `Product Family ID (lowercase and underscores for BV)` whose `Notes` say `migrated`, so every size links to a page on this site. Links are the `Product Page URL` path without `.html` (an old `/content/hersheyland/en-us/home` prefix is removed). Labels are the `productName` after the `Short Product Title`, else `Weight (oz)` oz and `Count` `Count Unit` |
+| Description | `On Page Description/product Details` |
 | button | Not in the sheet: defaults to Shop Now, linking to `/where-to-buy` (field table only) |
 
-The sheet can use these short column names, or the Hershey product master columns, which are
-mapped onto them:
-
-| Short name | Product master column |
-| --- | --- |
-| `path` | `Product Page URL` (its path) |
-| `gtin` | `14-Digit UPCs` / `upc` (padded to 14 digits) |
-| `name` | `Short Product Title` |
-| `title` | `productName` |
-| `image` | `Image URL` |
-| `description` | `On Page Description/product Details` |
-| `familyId` | `Product Family ID (lowercase and underscores for BV)` |
-| `brandActive` | `Brand Active` |
-| `weight`, `count`, `countUnit` | `Weight (oz)`, `Count`, `Count Unit` |
+When a product page is migrated, set its row's `Notes` to `migrated` (in its brand tab) so the
+other sizes in its family link to it.
 
 The sheet is only requested when a field is missing.
 The sheet must be previewed/published for the fallback to work on the site.
