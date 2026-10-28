@@ -6,7 +6,7 @@ const ANALYTICS_GROUP = 'C0002';
  * Side-effect free, so vendor modules can import it without starting the
  * consent bootstrap in consent-check.js.
  *
- * The result can be overridden with a query parameter for testing:
+ * On localhost and *.aem.page previews only, a query parameter overrides it for testing:
  *   ?consent=accept   grant consent (loads consented.js)
  *   ?consent=decline  decline consent
  *
@@ -14,7 +14,10 @@ const ANALYTICS_GROUP = 'C0002';
  */
 // eslint-disable-next-line import/prefer-default-export
 export function hasConsent() {
-  const consent = new URLSearchParams(window.location.search).get('consent');
+  // never on the live site, where a shared link could grant consent for someone
+  const { hostname } = window.location;
+  const testHost = hostname === 'localhost' || hostname.endsWith('.aem.page');
+  const consent = testHost ? new URLSearchParams(window.location.search).get('consent') : null;
   if (consent !== null) {
     return ['accept', 'true', '1', 'yes'].includes(consent.toLowerCase());
   }

@@ -1,10 +1,9 @@
 import { whenActivated } from '../../scripts/scripts.js';
+import { hasConsent } from '../../scripts/consent-state.js';
 
-const SCRIPTS = [
-  '//cdn.pricespider.com/1/lib/ps-widget.js',
-  '//cdn.pricespider.com/1/2366/ps-utid.js',
-];
-const [widgetSrc] = SCRIPTS;
+const widgetSrc = '//cdn.pricespider.com/1/lib/ps-widget.js';
+// PriceSpider's tracking-id script sets ps-utid cookies; the widget renders without it
+const TRACKING_SRC = '//cdn.pricespider.com/1/2366/ps-utid.js';
 const FALLBACK_DELAY = 15000;
 const WATCH_LIMIT = 60000;
 
@@ -56,6 +55,44 @@ function watchFallback(widget, target, loader) {
   }, 1000);
 }
 
+function loadScript(src) {
+  const script = document.createElement('script');
+  script.src = src;
+  script.async = true;
+  document.head.append(script);
+  return script;
+}
+
+/**
+ * Loads the tracking-id script once the visitor allows Performance cookies,
+ * now or when they consent later (OneTrust usually loads after this widget).
+ */
+function loadTrackingWithConsent() {
+  if (hasConsent()) {
+    loadScript(TRACKING_SRC);
+    return;
+  }
+  const onUpdate = ({ detail }) => {
+    if (!detail || !detail.consented) return;
+    window.removeEventListener('consent.update', onUpdate);
+    loadScript(TRACKING_SRC);
+  };
+  window.addEventListener('consent.update', onUpdate);
+}
+
+/**
+ * Removes the tracking-id cookies when the visitor withdraws consent.
+ * ps-utid.js sets them once, from a `utid` URL parameter, with path=/ and domain=<hostname>.
+ */
+function clearTrackingOnWithdrawal() {
+  window.addEventListener('consent.update', ({ detail }) => {
+    if (!detail || detail.consented) return;
+    ['ps-utid', 'ps-utparam'].forEach((name) => {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${window.location.hostname}`;
+    });
+  });
+}
+
 /**
  * Where-to-buy widget. The SKU comes from the `ps-sku` query param (set by Shop Now)
  * and the PriceSpider config id from the authored widget link (`?config=`).
@@ -79,13 +116,8 @@ export default function decorate(widget) {
       document.head.append(link);
     });
 
-    const [loader] = SCRIPTS.map((src) => {
-      const script = document.createElement('script');
-      script.src = src;
-      script.async = true;
-      document.head.append(script);
-      return script;
-    });
-    watchFallback(widget, target, loader);
+    watchFallback(widget, target, loadScript(widgetSrc));
+    loadTrackingWithConsent();
+    clearTrackingOnWithdrawal();
   });
 }

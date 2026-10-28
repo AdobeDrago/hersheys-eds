@@ -22,11 +22,11 @@ Pages load in three phases (see `loadPage()` in `scripts/scripts.js`):
 |---|---|---|---|---|---|
 | **OneTrust** | Cookie banner, preference center, consent state | 3 s after the lazy phase | Delayed | None: it collects consent | No banner; consent stays declined, so Adobe Launch never loads. The footer cookie link goes to its original address. |
 | **Adobe Launch** | Analytics | After OneTrust reports Performance (C0002) consent, and only when the page sets `launch-url` metadata | Delayed, after consent | Performance (C0002) required | Console warning; nothing else depends on it. |
-| **Bazaarvoice** | Star rating next to the product title, reviews, Q&A | Pages with a `[data-bv-show]` container, 3 s after the lazy phase | Delayed | Renders for everyone; its tracking cookies follow consent | The reviews widget shows "couldn't be loaded" straight away if `bv.js` fails, or 8 s after it was requested if nothing renders. The star rating by the title stays empty. |
-| **Wayvia (PriceSpider)**: widget | Where to Buy retailers and prices | When the where-to-buy widget block loads, once the page is shown | Lazy | Loads for everyone (it is the page's purpose) | The widget shows "couldn't be loaded" if `ps-widget.js` fails, or if nothing renders within 15 s. |
+| **Bazaarvoice** | Star rating next to the product title, reviews, Q&A | Pages with a `[data-bv-show]` container, 3 s after the lazy phase | Delayed | Renders for everyone. Its tracking cookies (`BVBRANDID`, `BVBRANDSID`) are set only with Performance consent and are removed when consent is withdrawn | The reviews widget shows "couldn't be loaded" straight away if `bv.js` fails, or 8 s after it was requested if nothing renders. The star rating by the title stays empty. |
+| **Wayvia (PriceSpider)**: widget | Where to Buy retailers and prices | When the where-to-buy widget block loads, once the page is shown | Lazy | `ps-widget.js` loads for everyone (it is the page's purpose). The tracking-id script `ps-utid.js` loads only with Performance consent, including consent given later. When the URL has a `utid` parameter it sets `ps-utid` and `ps-utparam` cookies, which are removed when consent is withdrawn | The widget shows "couldn't be loaded" if `ps-widget.js` fails, or if nothing renders within 15 s. |
 | **Wayvia (PriceSpider)**: Shop Now warm-up | Faster Where to Buy after Shop Now | Product pages with a Shop Now link, once the page is shown | Delayed (start) | None: a prefetch and a prerender hint | Nothing; the click still navigates normally. |
 | **Algolia**: recipe search | Search results, filters, paging | Right away when the block is in the first section (as on `/recipes/all-recipes`, where the results are the main content); otherwise the first time it is on screen | Eager or lazy, depending on the section; the block never waits for the results | None: no cookies; `analytics=false` | "Unable to load recipes" if the request fails, or after 8 s without an answer. |
-| **Algolia**: related products | Related Products cards | When the block loads; the section waits for it | Lazy | None: no cookies; `analytics: false` | The authored cards stay. The request gives up after 2 s, so later sections and the footer are never held up longer. |
+| **Algolia**: related products | Related Products cards | When the block loads; the section waits for it | Lazy | None: no cookies; `analytics: false` | The authored cards stay. The request gives up after 4 s, so later sections and the footer are never held up longer. |
 
 Why each one sits where it does:
 
@@ -54,7 +54,8 @@ Why each one sits where it does:
 - **Footer link:** the "Cookie Preferences" link opens OneTrust's preference center. If
   OneTrust hasn't loaded yet, the click starts it.
 - **Testing override:** `?consent=accept` or `?consent=decline` overrides the consent
-  state when testing.
+  state, on localhost and `*.aem.page` previews only. It is ignored on the live site, so a
+  shared link can't grant consent for someone.
 
 ## Configuration
 
@@ -64,7 +65,7 @@ Why each one sits where it does:
 | `launch-url` | Page metadata | None: Adobe Launch is off. Hershey's own Launch libraries are refused. |
 | `bazaarvoice-url` | Page metadata | Hershey's `bv.js` deployment |
 | Delay before the delayed phase | `loadDelayed()` in `scripts/scripts.js` | 3000 ms |
-| Algolia related-products time limit | `RELATED_TIMEOUT` in `blocks/cards/cards-product.js` | 2000 ms |
+| Algolia related-products time limit | `RELATED_TIMEOUT` in `blocks/cards/cards-product.js` | 4000 ms |
 | Recipe search time limit | `SEARCH_TIMEOUT` in `blocks/search-recipes/search-recipes.js` | 8000 ms |
 | Reviews fallback | `FALLBACK_DELAY` in `widgets/bazaarvoice/reviews.js` | 8000 ms after `bv.js` is requested |
 | Where to Buy fallback | `FALLBACK_DELAY` in `widgets/pricespider/where-to-buy.js` | 15000 ms |
@@ -116,7 +117,23 @@ These belong to each vendor's own setup, not to the site:
   and the reviews fallback shows.
 - **Wayvia script 404.** `omni/script.js` returns 404 on Where to Buy. The widget still
   renders.
-- **Data that reaches Hershey's accounts.** Wayvia's event beacons
-  (`wtbevents.pricespider.com`) and Bazaarvoice's (`network-a.bazaarvoice.com`) report to
-  Hershey's accounts. OneTrust's test script records consent receipts in Hershey's test
-  environment.
+- **Data that reaches Hershey's accounts.** See the next section.
+
+## Data sent to Hershey's accounts
+
+This prototype must not send analytics to Hershey. Measured October 28, 2026 by blocking and
+counting every request to an analytics endpoint, with no consent choice, after Reject All and
+after Accept All:
+
+| Integration | Analytics sent to Hershey | Notes |
+|---|---|---|
+| Adobe Launch | None | Off unless `launch-url` is set; Hershey's libraries are refused |
+| Algolia | None | Searches send `analytics=false`; no Insights events |
+| OneTrust | None observed | Hershey's test script (stage.hersheyland.com), not production |
+| **Bazaarvoice** | **Yes: 13 beacons per product page view** to `network-a.bazaarvoice.com` | **Accepted exception** |
+| **Wayvia (PriceSpider)** | **Yes: 3 event beacons per Where to Buy view** to `wtbevents.pricespider.com` (account 2366) | **Accepted exception** |
+
+The two exceptions are kept so reviews and Where to Buy work on the prototype. Consent does
+not change them: both vendors send these beacons after Reject All too. Consent only controls
+Bazaarvoice's tracking cookies and PriceSpider's `ps-utid.js`. Every visit also uses Hershey's
+Algolia, Bazaarvoice and PriceSpider accounts to read search results, reviews and retailers.

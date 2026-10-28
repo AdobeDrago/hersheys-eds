@@ -51,8 +51,8 @@ OneTrust, using Hershey's stage.hersheyland.com test script unless the page sets
 `onetrust-id` metadata. `scripts/consented.js` loads Adobe Launch only after the
 visitor allows Performance cookies (C0002), and only from a `launch-url` metadata
 value: Hershey's own Launch libraries are refused, so no analytics reach their
-reports. Add `?consent=accept` or `?consent=decline` to a URL to override the
-consent state when testing. See [Third-party loading](./docs/third-party-loading.md)
+reports. On localhost and `*.aem.page` previews, add `?consent=accept` or
+`?consent=decline` to a URL to override the consent state when testing. See [Third-party loading](./docs/third-party-loading.md)
 for when each integration loads, its consent rules and its failure behavior.
 
 ## Design tokens

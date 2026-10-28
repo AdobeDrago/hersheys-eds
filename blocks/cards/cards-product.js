@@ -23,8 +23,10 @@ const ALGOLIA = {
 };
 const PRODUCTION = 'https://www.hersheyland.com';
 const MAX_RELATED = 4;
-// later sections and the footer wait for this block, so a slow Algolia keeps the authored cards
-const RELATED_TIMEOUT = 2000;
+// later sections and the footer wait for this block, so a slow Algolia keeps the authored cards.
+// A cold request (DNS, TLS, CORS preflight) took up to 1.3 s in testing; 4 s leaves room
+// for slow mobile.
+const RELATED_TIMEOUT = 4000;
 
 /**
  * @param {Element} cell

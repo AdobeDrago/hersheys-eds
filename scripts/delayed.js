@@ -9,7 +9,7 @@ import { getMetadata, loadScript } from './aem.js';
  *
  * Loaded by the blocks that need them, which never wait on them without a time limit:
  * - Algolia: blocks/search-recipes once the block is visible; cards (product, related)
- *   when the block loads, giving up after 2 s.
+ *   when the block loads, giving up after 4 s.
  * - Wayvia (PriceSpider): widgets/pricespider/where-to-buy.js.
  */
 
