@@ -28,8 +28,10 @@ Shop Now. Code: `hero-product.js` / `hero-product.css`, loaded by `hero.js` for 
 
 ### Authoring (Document Authoring)
 
-Field table (recommended): one row per field, the field name in the first cell and the value
-in the second. Rows can be left empty or removed; their value then comes from the pdp sheet.
+Field table: one row per field, the field name in the first cell and the value in the second.
+Rows can be left empty or removed; their value then comes from the pdp sheet. This is the only
+content model: rows that are not one of these fields are ignored, so a block without any field
+row is filled entirely from the sheet.
 
 | Hero (product) | |
 | --- | --- |
@@ -40,7 +42,16 @@ in the second. Rows can be left empty or removed; their value then comes from th
 | size | A list of size links (current size bold or unlinked), or the current size as text |
 | button | Link (e.g. Shop Now to `/where-to-buy`), or text for a Where to Buy link |
 
-The older 2-cell layout (images | name, sizes, description, CTA) still works.
+All values empty (everything from the sheet):
+
+| Hero (product) | |
+| --- | --- |
+| image-front | |
+| image-back | |
+| Title | |
+| Description | |
+| size | |
+| button | |
 
 ### Page metadata
 
@@ -64,7 +75,7 @@ values are shown.
 | Title | `Short Product Title`, else `productName` |
 | size | The current product first, then the products in the same tab with the same `Product Family ID (lowercase and underscores for BV)` whose `Notes` say `migrated`, so every size links to a page on this site. Links are the `Product Page URL` path without `.html` (an old `/content/hersheyland/en-us/home` prefix is removed). Labels are the `productName` after the `Short Product Title`, else `Weight (oz)` oz and `Count` `Count Unit` |
 | Description | `On Page Description/product Details` |
-| button | Not in the sheet: defaults to Shop Now, linking to `/where-to-buy` (field table only) |
+| button | Not in the sheet: defaults to Shop Now, linking to `/where-to-buy` |
 
 When a product page is migrated, set its row's `Notes` to `migrated` (in its brand tab) so the
 other sizes in its family link to it.

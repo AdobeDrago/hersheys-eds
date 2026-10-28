@@ -3,14 +3,10 @@ import { createOptimizedPicture, getMetadata, toClassName } from '../../scripts/
 /**
  * Hero (product) variant, loaded by hero.js for `Hero (product)`.
  *
- * Content model, either:
- *   Field table: one row per field, name | value. Fields: image-front, image-back, Title,
- *     Description, size, button. Rows may be empty or left out.
- *   2-cell layout: 1 row x 2 cells.
- *     Cell 1 (media): one or more product images. Several images become a gallery
- *       with previous/next controls and thumbnails.
- *     Cell 2 (details): h1 product name, "Choose a size:" label, a list of size
- *       links (current size first, unlinked or bold), description, CTA link.
+ * Content model: a field table, one row per field, name | value. Fields: image-front,
+ * image-back, Title, Description, size, button. Rows may be empty or left out; other rows
+ * are ignored. The images become a gallery (previous/next controls and thumbnails when
+ * there are two).
  * Product rating is rendered from the `bvid` page metadata (Bazaarvoice inline rating).
  *
  * Authored values win. Whatever is left empty (images, product name, size list, description)
@@ -24,7 +20,6 @@ import { createOptimizedPicture, getMetadata, toClassName } from '../../scripts/
 const SIZE_LABEL = /choose\s+a\s+size/i;
 const WHERE_TO_BUY = '/where-to-buy';
 const PDP_SHEET = '/products/pdp.json';
-const HEADING = ':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6';
 
 // field table row names (first cell, as a class name) and the field each one sets
 const FIELDS = {
@@ -200,37 +195,6 @@ function useAlphaRenditions(picture) {
   });
   const img = picture.querySelector('img');
   if (img && img.getAttribute('src')) img.setAttribute('src', alphaRendition(img.getAttribute('src')));
-}
-
-const IMAGE_LINK = /\/is\/image\/|\.(?:png|jpe?g|webp|avif|gif)(?:[?#]|$)/i;
-
-/**
- * Document Authoring delivers external product shots (Scene7) as links. Turns every
- * image link into a picture so the gallery can use it.
- * @param {Element} cell
- */
-function pictureLinks(cell) {
-  cell.querySelectorAll('a[href]').forEach((a) => {
-    if (!IMAGE_LINK.test(a.href)) return;
-    const picture = document.createElement('picture');
-    const img = document.createElement('img');
-    img.src = a.href;
-    img.alt = a.textContent.trim();
-    img.loading = 'lazy';
-    picture.append(img);
-    a.replaceWith(picture);
-  });
-}
-
-/**
- * Returns true when a cell contains only pictures (and empty wrappers).
- * @param {Element} cell
- */
-function isMediaCell(cell) {
-  if (!cell.querySelector('picture')) return false;
-  const clone = cell.cloneNode(true);
-  clone.querySelectorAll('picture').forEach((p) => p.remove());
-  return clone.textContent.trim() === '';
 }
 
 /**
@@ -458,43 +422,6 @@ function decorateDetails(cell) {
 }
 
 /**
- * Splits a row into its media cell and its details cell.
- * @param {Element} row
- */
-function splitCells(row) {
-  const cells = [...row.children];
-  const media = cells.find(isMediaCell);
-  const details = cells.find((cell) => cell !== media && cell.textContent.trim());
-  return { cells, media, details };
-}
-
-/**
- * Returns true when a details paragraph is a description: not the size label or list,
- * not a link-only paragraph (CTA) and not an image.
- */
-function hasDescription(cell, label, list) {
-  return [...cell.querySelectorAll(':scope > p')].some((p) => p !== label && p !== list
-    && p.textContent.trim() && !isLinkParagraph(p) && !p.querySelector('picture, img'));
-}
-
-/**
- * Lists the fields the author left empty.
- * @param {Element|undefined} media
- * @param {Element|undefined} details
- * @returns {Set<string>}
- */
-function findGaps(media, details) {
-  const gaps = new Set();
-  if (!media) gaps.add('image');
-  if (!details) return new Set([...gaps, 'name', 'sizes', 'description']);
-  if (![...details.querySelectorAll(HEADING)].some((h) => h.textContent.trim())) gaps.add('name');
-  const { label, list } = findSizes(details);
-  if (!list) gaps.add('sizes');
-  if (!hasDescription(details, label, list)) gaps.add('description');
-  return gaps;
-}
-
-/**
  * Renders a sheet image URL as a picture, through the Dynamic Media renderer when available.
  * @param {string} src
  * @param {string} alt
@@ -536,104 +463,23 @@ function sizeLabelParagraph() {
 }
 
 /**
- * Adds the sheet values for the empty details fields, in content model order.
- * @param {Element} cell
- * @param {Set<string>} gaps
- * @param {Object} product
- * @param {Array<Object>} products
- */
-function fillDetails(cell, gaps, product, products) {
-  const cta = [...cell.querySelectorAll(':scope > p')].filter(isLinkParagraph).pop();
-  const afterHeading = (el) => {
-    const heading = cell.querySelector(HEADING);
-    if (heading) heading.after(el);
-    else cell.prepend(el);
-  };
-
-  if (gaps.has('name') && product.name) {
-    const h1 = document.createElement('h1');
-    h1.textContent = product.name;
-    cell.prepend(h1);
-  }
-
-  if (gaps.has('sizes')) {
-    let { label } = findSizes(cell);
-    if (!label) {
-      label = sizeLabelParagraph();
-      afterHeading(label);
-    }
-    label.after(buildSizeList(product, products));
-  }
-
-  if (gaps.has('description') && product.description) {
-    const p = document.createElement('p');
-    p.textContent = product.description;
-    if (cta) cta.before(p);
-    else cell.append(p);
-  }
-}
-
-/**
- * Fills the fields the author left empty from the pdp sheet.
- * The sheet is only requested when something is missing.
- * @param {Element} row
- */
-async function fillFromSheet(row) {
-  let { media, details } = splitCells(row);
-  const gaps = findGaps(media, details);
-  if (!gaps.size) return;
-  const { product, products } = await findProduct();
-  if (!product) return;
-
-  const isEmpty = (cell) => !cell.textContent.trim() && !cell.querySelector('picture, img');
-  const spareCell = () => [...row.children]
-    .find((cell) => cell !== media && cell !== details && isEmpty(cell));
-
-  if (gaps.has('image') && product.image) {
-    const alt = product.imageAlt || product.title || product.name || '';
-    media = spareCell();
-    if (!media) {
-      media = document.createElement('div');
-      row.prepend(media);
-    }
-    // front image, then the back image when the sheet has one (several images = gallery)
-    const back = String(product.imageBack || '').trim();
-    media.replaceChildren(...[
-      buildPicture(product.image.trim(), alt),
-      back && buildPicture(back, product.imageBackAlt || alt),
-    ].filter(Boolean));
-  }
-
-  if (!details) {
-    details = spareCell();
-    if (!details) {
-      details = document.createElement('div');
-      row.append(details);
-    }
-    details.replaceChildren();
-  }
-  fillDetails(details, gaps, product, products);
-}
-
-/**
  * Reads the field table: one row per field, the name in the first cell and the value in the
- * second. Returns null when the block uses the 2-cell layout instead.
+ * second. Rows that are not fields are ignored, so a block without any field row is filled
+ * entirely from the sheet.
  * @param {Element} block
- * @returns {Object<string, Element>|null} the authored (non-empty) value cell of each field
+ * @returns {Object<string, Element>} the authored (non-empty) value cell of each field
  */
 function readFields(block) {
-  let isFieldTable = false;
   const fields = {};
   [...block.children].forEach((row) => {
     const [keyCell, valueCell] = row.children;
     const field = FIELDS[toClassName(keyCell?.textContent || '')];
     if (!field) return;
-    isFieldTable = true;
     if (valueCell && (valueCell.textContent.trim() || valueCell.querySelector('picture, img'))) {
       fields[field] = valueCell;
     }
   });
-  return isFieldTable ? fields : null;
+  return fields;
 }
 
 /**
@@ -705,10 +551,12 @@ function fieldButton(cell) {
 }
 
 /**
- * Rebuilds a field table as the 2-cell layout. Authored fields win; empty or missing fields
- * come from the pdp sheet. The sheet is only requested when something is missing.
+ * Builds the product overview (media | details) from the field table. Authored fields win;
+ * empty or missing fields come from the pdp sheet. The sheet is only requested when something
+ * is missing.
  * @param {Element} block
  * @param {Object<string, Element>} fields
+ * @returns {Promise<{ row: Element, media: Element, details: Element }>}
  */
 async function buildFromFields(block, fields) {
   const needsSheet = SHEET_FIELDS.some((field) => !fields[field]);
@@ -743,34 +591,16 @@ async function buildFromFields(block, fields) {
   details.append(fieldButton(fields.button));
 
   const row = document.createElement('div');
+  row.className = 'hero-product-row';
   row.append(media, details);
   block.replaceChildren(row);
+  return { row, media, details };
 }
 
 export default async function decorate(block) {
-  const fields = readFields(block);
-  if (fields) {
-    await buildFromFields(block, fields);
-  } else {
-    if (!block.children.length) block.append(document.createElement('div'));
-    // image links must be pictures before the sheet fallback looks for missing images
-    [...block.firstElementChild.children].forEach(pictureLinks);
-    // one product per page: the first row is the product overview
-    await fillFromSheet(block.firstElementChild);
-  }
-  const rows = [...block.children];
-
-  rows.forEach((row) => {
-    row.classList.add('hero-product-row');
-    [...row.children].forEach(pictureLinks);
-    const { cells, media, details } = splitCells(row);
-    if (media) buildGallery(media);
-    if (details) decorateDetails(details);
-    // drop empty cells so the layout does not reserve space for them
-    cells.forEach((cell) => {
-      if (cell !== media && cell !== details && !cell.children.length && !cell.textContent.trim()) {
-        cell.remove();
-      }
-    });
-  });
+  const { media, details } = await buildFromFields(block, readFields(block));
+  // no image: drop the media cell so the layout does not reserve space for it
+  if (media.querySelector('picture')) buildGallery(media);
+  else media.remove();
+  decorateDetails(details);
 }
