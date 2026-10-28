@@ -23,13 +23,49 @@ function decorateSlider(block, list) {
     controls.append(button);
     return button;
   });
+  const dots = document.createElement('div');
+  dots.className = 'cards-slider-dots';
+  // a page is the visible track width plus one gap; the track padding is not scrollable content
+  const measure = () => {
+    const style = getComputedStyle(list);
+    const inset = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+    const gap = parseFloat(style.columnGap) || 0;
+    const step = list.clientWidth - inset + gap;
+    return { inset, gap, step };
+  };
   const update = () => {
     buttons[0].disabled = list.scrollLeft <= 1;
     buttons[1].disabled = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
+    // nothing to scroll: every card is visible, so the arrows and page indicator are not needed
+    const fits = list.scrollWidth <= list.clientWidth + 1;
+    controls.hidden = fits;
+    dots.hidden = fits;
+    if (!block.classList.contains('related')) return;
+    // one kiss-shaped indicator per page of cards
+    const { inset, gap, step } = measure();
+    const pages = Math.max(1, Math.ceil((list.scrollWidth - inset + gap) / step - 0.01));
+    const atEnd = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
+    const current = atEnd ? pages - 1 : Math.min(pages - 1, Math.round(list.scrollLeft / step));
+    if (dots.children.length !== pages) {
+      dots.replaceChildren(...Array.from({ length: pages }, (_, page) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'cards-slider-dot';
+        dot.setAttribute('aria-label', `Go to page ${page + 1}`);
+        dot.setAttribute('aria-controls', list.id);
+        dot.addEventListener('click', () => list.scrollTo({
+          left: page * measure().step,
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+        }));
+        return dot;
+      }));
+    }
+    [...dots.children].forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
   };
   list.addEventListener('scroll', update, { passive: true });
   new ResizeObserver(update).observe(list);
   block.append(controls);
+  if (block.classList.contains('related')) block.append(dots);
   update();
 }
 

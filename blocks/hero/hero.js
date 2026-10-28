@@ -249,12 +249,12 @@ export default async function decorate(block) {
     decorateRecipe(block);
     return;
   }
-  if (block.classList.contains('product')) {
-    // the product variant has its own markup, so it loads its own script and styles
-    const [{ default: decorateProduct }] = await Promise.all([
-      import('./hero-product.js'),
-      loadCSS(`${window.hlx.codeBasePath}/blocks/hero/hero-product.css`),
-    ]);
-    decorateProduct(block);
-  }
+  // product and article have their own markup, so each loads its own script and styles
+  const variant = ['product', 'article'].find((name) => block.classList.contains(name));
+  if (!variant) return;
+  const [{ default: decorateVariant }] = await Promise.all([
+    import(`./hero-${variant}.js`),
+    loadCSS(`${window.hlx.codeBasePath}/blocks/hero/hero-${variant}.css`),
+  ]);
+  await decorateVariant(block);
 }
