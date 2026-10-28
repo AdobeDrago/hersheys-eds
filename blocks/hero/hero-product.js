@@ -10,16 +10,16 @@ import { createOptimizedPicture, getMetadata, toClassName } from '../../scripts/
  * Product rating is rendered from the `bvid` page metadata (Bazaarvoice inline rating).
  *
  * Authored values win. Whatever is left empty (images, product name, size list, description)
- * is filled from the pdp sheet: only the tab named by the `brand` metadata is loaded
- * (/products/pdp.json?sheet=<brand>), and the row whose `14-Digit UPCs` matches the `bvid`
- * metadata is used. Sizes are the products in that tab sharing the row's `familyId` whose
- * Notes say `migrated` (their pages exist on this site).
+ * is filled from the product master sheet: only the tab named by the `brand` metadata is
+ * loaded (/products/product-master.json?sheet=<brand>), and the row whose `14-Digit UPCs`
+ * matches the `bvid` metadata is used. Sizes are the products in that tab sharing the row's
+ * `familyId` whose Notes say `migrated` (their pages exist on this site).
  * The back image comes from an optional `imageBack` sheet column. An empty button is Shop Now.
  */
 
 const SIZE_LABEL = /choose\s+a\s+size/i;
 const WHERE_TO_BUY = '/where-to-buy';
-const PDP_SHEET = '/products/pdp.json';
+const PRODUCT_MASTER = '/products/product-master.json';
 
 // field table row names (first cell, as a class name) and the field each one sets
 const FIELDS = {
@@ -36,7 +36,7 @@ const FIELDS = {
   button: 'button',
   cta: 'button',
 };
-// fields that fall back to the pdp sheet (an empty button defaults to Shop Now)
+// fields that fall back to the product master sheet (an empty button defaults to Shop Now)
 const SHEET_FIELDS = ['imageFront', 'imageBack', 'title', 'size', 'description'];
 
 let productsPromise;
@@ -93,13 +93,14 @@ function toProduct(row) {
 }
 
 /**
- * Loads only the page brand's tab of the pdp sheet. Without a `brand` there is nothing to load.
+ * Loads only the page brand's tab of the product master sheet. Without a `brand` there is
+ * nothing to load.
  * @returns {Promise<Array<Object>>}
  */
 function fetchProducts() {
   const sheet = brandSheetName();
   if (!sheet) return Promise.resolve([]);
-  productsPromise = productsPromise || fetch(`${PDP_SHEET}?sheet=${sheet}`)
+  productsPromise = productsPromise || fetch(`${PRODUCT_MASTER}?sheet=${sheet}`)
     .then((resp) => (resp.ok ? resp.json() : {}))
     .then(({ data }) => (Array.isArray(data) ? data : data?.data || []))
     .then((rows) => rows.map(toProduct))
@@ -552,8 +553,8 @@ function fieldButton(cell) {
 
 /**
  * Builds the product overview (media | details) from the field table. Authored fields win;
- * empty or missing fields come from the pdp sheet. The sheet is only requested when something
- * is missing.
+ * empty or missing fields come from the product master sheet. The sheet is only requested when
+ * something is missing.
  * @param {Element} block
  * @param {Object<string, Element>} fields
  * @returns {Promise<{ row: Element, media: Element, details: Element }>}

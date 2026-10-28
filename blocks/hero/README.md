@@ -29,7 +29,7 @@ Shop Now. Code: `hero-product.js` / `hero-product.css`, loaded by `hero.js` for 
 ### Authoring (Document Authoring)
 
 Field table: one row per field, the field name in the first cell and the value in the second.
-Rows can be left empty or removed; their value then comes from the pdp sheet. This is the only
+Rows can be left empty or removed; their value then comes from the product master sheet. This is the only
 content model: rows that are not one of these fields are ignored, so a block without any field
 row is filled entirely from the sheet.
 
@@ -58,13 +58,13 @@ All values empty (everything from the sheet):
 | Metadata | Use |
 | --- | --- |
 | `bvid` | 14-digit GTIN: finds the product's sheet row; also the Bazaarvoice rating and Shop Now SKU |
-| `brand` | Tab of the pdp sheet to load, e.g. `cadbury`, `hersheys`, `reeses`, `rolo`, `payday` (matched case-insensitively, punctuation ignored: `HERSHEY'S` = `hersheys`) |
+| `brand` | Tab of the product master sheet to load, e.g. `cadbury`, `hersheys`, `reeses`, `rolo`, `payday` (matched case-insensitively, punctuation ignored: `HERSHEY'S` = `hersheys`) |
 
-### pdp sheet fallback
+### Product master sheet fallback
 
-Authored values always win. Anything left empty is filled from the pdp sheet
-(`/products/pdp.json`). Only the tab named by the `brand` metadata is loaded
-(`/products/pdp.json?sheet=<brand>`), and the row whose `14-Digit UPCs` (padded to 14 digits)
+Authored values always win. Anything left empty is filled from the product master sheet
+(`/products/product-master.json`). Only the tab named by the `brand` metadata is loaded
+(`/products/product-master.json?sheet=<brand>`), and the row whose `14-Digit UPCs` (padded to 14 digits)
 matches the `bvid` metadata is used. Without a `brand` row or a matching row, only the authored
 values are shown.
 
