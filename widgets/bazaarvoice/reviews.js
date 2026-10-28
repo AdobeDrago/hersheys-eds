@@ -1,6 +1,8 @@
 import { getMetadata } from '../../scripts/aem.js';
+import { whenActivated } from '../../scripts/scripts.js';
 
 const FALLBACK_DELAY = 8000;
+const FALLBACK_CEILING = 15000;
 const WATCH_LIMIT = 60000;
 const SECTIONS = ['reviews', 'questions'];
 
@@ -43,9 +45,42 @@ function buildFallback() {
 }
 
 /**
+ * Shows the fallback if Bazaarvoice hasn't rendered in time, and removes it once it does.
+ * @param {Element} widget
+ * @param {Element[]} sections
+ * @param {Element} fallback
+ */
+function watchFallback(widget, sections, fallback) {
+  const started = Date.now();
+  const timer = setInterval(() => {
+    const elapsed = Date.now() - started;
+    if (sections.some(isRendered)) {
+      fallback.remove();
+      clearInterval(timer);
+      return;
+    }
+    // bv.js loads in the delayed phase: time it from its request, with a ceiling
+    // in case the delayed chain never runs
+    const requestedAt = window.hlx && window.hlx.bvRequestedAt;
+    const failed = window.hlx && window.hlx.bvFailed;
+    const timedOut = failed || (requestedAt
+      ? Date.now() - requestedAt >= FALLBACK_DELAY
+      : elapsed >= FALLBACK_CEILING);
+    if (timedOut && !fallback.isConnected) {
+      widget.prepend(fallback);
+      // eslint-disable-next-line no-console
+      console.warn(window.BV
+        ? 'reviews widget: Bazaarvoice loaded but did not render reviews (check product id / domain allowlist)'
+        : 'reviews widget: Bazaarvoice script did not load (blocked or unreachable)');
+    }
+    if (elapsed >= WATCH_LIMIT) clearInterval(timer);
+  }, 1000);
+}
+
+/**
  * Bazaarvoice ratings & reviews and Q&A.
  * Prepares the `[data-bv-show]` containers; bv.js itself is loaded from
- * loadDelayed() in scripts/scripts.js (see scripts/bazaarvoice.js).
+ * scripts/delayed.js (see scripts/bazaarvoice.js).
  * Shows an always-visible fallback if Bazaarvoice doesn't render.
  * @param {Element} widget The widget element (data-product-id from the authored link)
  */
@@ -64,21 +99,6 @@ export default function decorate(widget) {
     section.dataset.bvProductId = productId;
   });
 
-  const started = Date.now();
-  const timer = setInterval(() => {
-    const elapsed = Date.now() - started;
-    if (sections.some(isRendered)) {
-      fallback.remove();
-      clearInterval(timer);
-      return;
-    }
-    if (elapsed >= FALLBACK_DELAY && !fallback.isConnected) {
-      widget.prepend(fallback);
-      // eslint-disable-next-line no-console
-      console.warn(window.BV
-        ? 'reviews widget: Bazaarvoice loaded but did not render reviews (check product id / domain allowlist)'
-        : 'reviews widget: Bazaarvoice script did not load (blocked or unreachable)');
-    }
-    if (elapsed >= WATCH_LIMIT) clearInterval(timer);
-  }, 1000);
+  // time from activation: a prerendered page doesn't request bv.js until it is shown
+  whenActivated().then(() => watchFallback(widget, sections, fallback));
 }

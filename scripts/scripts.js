@@ -14,6 +14,34 @@ import {
 import loadHersheyTheme from './hershey-theme.js';
 import { BRAND_THEMES } from './brand-themes.js';
 
+/**
+ * Resolves once the page is shown to the user. A speculatively prerendered
+ * page waits for activation so third-party scripts never run unseen.
+ * @returns {Promise<void>}
+ */
+export function whenActivated() {
+  if (!document.prerendering) return Promise.resolve();
+  return new Promise((resolve) => {
+    document.addEventListener('prerenderingchange', () => resolve(), { once: true });
+  });
+}
+
+/**
+ * Runs a callback the first time an element scrolls into view, so blocks
+ * call third-party APIs only once they're visible (never before first paint).
+ * A hidden element never intersects, so the callback never runs.
+ * @param {Element} el
+ * @param {Function} callback
+ */
+export function whenVisible(el, callback) {
+  const io = new IntersectionObserver((entries) => {
+    if (!entries.some((e) => e.isIntersecting)) return;
+    io.disconnect();
+    callback();
+  });
+  io.observe(el);
+}
+
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
     createHTML: (s) => s, // avoid stack overflow
@@ -213,30 +241,33 @@ async function loadLazy(doc) {
 }
 
 /**
+ * Product pages: warm up PriceSpider and the where-to-buy page behind Shop Now.
+ */
+function warmUpShopNow() {
+  const shopNow = window.location.pathname.startsWith('/products/')
+    && document.querySelector('a[href*="/where-to-buy"]');
+  if (!shopNow) return;
+  [
+    ['prefetch', '//cdn.pricespider.com/1/lib/ps-widget.js'],
+    ['prerender', shopNow.getAttribute('href')],
+  ].forEach(([rel, href]) => {
+    const hint = document.createElement('link');
+    hint.rel = rel;
+    hint.href = href;
+    document.head.append(hint);
+  });
+}
+
+/**
  * Loads everything that happens a lot later,
  * without impacting the user experience.
  */
 function loadDelayed() {
-  // product pages: warm up PriceSpider and the where-to-buy page behind Shop Now
-  const shopNow = window.location.pathname.startsWith('/products/')
-    && document.querySelector('a[href*="/where-to-buy"]');
-  if (shopNow) {
-    [
-      ['prefetch', '//cdn.pricespider.com/1/lib/ps-widget.js'],
-      ['prerender', shopNow.getAttribute('href')],
-    ].forEach(([rel, href]) => {
-      const hint = document.createElement('link');
-      hint.rel = rel;
-      hint.href = href;
-      document.head.append(hint);
-    });
-  }
-  import('./consent-check.js');
-  // ratings & reviews render for everyone; tracking cookies follow consent
-  if (document.querySelector('[data-bv-show]')) {
-    import('./bazaarvoice.js').then(({ default: loadBazaarvoice }) => loadBazaarvoice());
-  }
-  // load anything that can be postponed to the latest here
+  // third-party tags and consent load after first paint (not while prerendered)
+  whenActivated().then(() => {
+    warmUpShopNow();
+    window.setTimeout(() => import('./delayed.js'), 3000);
+  });
 }
 
 async function loadPage() {

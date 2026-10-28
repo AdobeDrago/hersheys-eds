@@ -2,6 +2,10 @@ import {
   resolveConfig,
   searchRecipes,
 } from '../../scripts/recipes-search.js';
+import { whenVisible } from '../../scripts/scripts.js';
+
+// a search that never answers shows the error instead of "Loading recipes…" forever
+const SEARCH_TIMEOUT = 8000;
 
 /**
  * Search (Recipes) block — Algolia-backed all-recipes listing.
@@ -260,7 +264,12 @@ async function runSearch(ui, state, block) {
   const gen = (state.fetchGen || 0) + 1;
   state.fetchGen = gen;
   if (state.controller) state.controller.abort();
-  state.controller = new AbortController();
+  const controller = new AbortController();
+  state.controller = controller;
+  // abort with a TimeoutError reason so it isn't mistaken for a superseded search
+  const timeout = setTimeout(() => {
+    controller.abort(new DOMException('Recipe search timed out', 'TimeoutError'));
+  }, SEARCH_TIMEOUT);
   state.loading = true;
   renderHits(ui, state);
   try {
@@ -279,6 +288,8 @@ async function runSearch(ui, state, block) {
     if (gen !== state.fetchGen) return;
     state.error = true;
     state.result = null;
+  } finally {
+    clearTimeout(timeout);
   }
   state.loading = false;
   renderFacets(ui, state);
@@ -366,5 +377,8 @@ export default function decorate(block) {
     searchSoon();
   });
 
-  searchSoon();
+  // in the first section the results are the page's main content (and its largest paint), so
+  // query now; the block never waits for the answer. Further down, wait until it's on screen.
+  if (block.closest('.section') === document.querySelector('main .section')) searchSoon();
+  else whenVisible(block, searchSoon);
 }
