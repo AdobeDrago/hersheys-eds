@@ -91,8 +91,8 @@ main > .section > .social-share-wrapper {
 }
 
 .social-share ul .social-share-icon {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
 }
 
 /* the icons grow once the tray is open */
@@ -106,12 +106,12 @@ main > .section > .social-share-wrapper {
   height: 37px;
 }
 
-.social-share .social-share-icon-share { --social-share-icon: url('/icons/share.svg'); }
-.social-share .social-share-icon-link { --social-share-icon: url('/icons/link.svg'); }
-.social-share .social-share-icon-facebook { --social-share-icon: url('/icons/facebook.svg'); }
-.social-share .social-share-icon-pinterest { --social-share-icon: url('/icons/pinterest.svg'); }
-.social-share .social-share-icon-envelope { --social-share-icon: url('/icons/envelope.svg'); }
-.social-share .social-share-icon-print { --social-share-icon: url('/icons/print.svg'); }
+.social-share .social-share-icon-share { --social-share-icon: var(--share-icon-share-nodes); }
+.social-share .social-share-icon-link { --social-share-icon: var(--share-icon-link); }
+.social-share .social-share-icon-facebook { --social-share-icon: var(--share-icon-facebook); }
+.social-share .social-share-icon-pinterest { --social-share-icon: var(--share-icon-pinterest); }
+.social-share .social-share-icon-envelope { --social-share-icon: var(--share-icon-envelope); }
+.social-share .social-share-icon-print { --social-share-icon: var(--share-icon-print); }
 
 .social-share button:focus-visible,
 .social-share a:focus-visible {
