@@ -3,7 +3,7 @@ import loadHersheyTheme from '../../scripts/hershey-theme.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 768px)');
+const isDesktop = window.matchMedia('(min-width: 992px)');
 let navigationId = 0;
 
 /**

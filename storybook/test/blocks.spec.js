@@ -24,7 +24,8 @@ test('multiple headers use instance-local IDs and Escape handlers', async ({ pag
   );
   expect(new Set(ids).size).toBe(ids.length);
   const menu = navs.nth(1).getByRole('button', { name: 'Chocolate', exact: true });
-  await menu.click();
+  await menu.focus();
+  await menu.press('Enter');
   await expect(menu).toHaveAttribute('aria-expanded', 'true');
   await menu.press('Escape');
   await expect(menu).toHaveAttribute('aria-expanded', 'false');
@@ -136,10 +137,31 @@ test('responsive Columns retains a mobile fallback when the desktop picture has 
 test('Hero uses production foreground and has a readable image-omitted state', async ({ page }) => {
   await open(page, 'blocks-hero--default');
   await expect(page.locator('.hero')).toHaveCSS('isolation', 'isolate');
+  await expect(page.locator('.hero-wrapper')).toHaveCSS('max-width', 'none');
   await expect(page.locator('.hero h1')).toHaveCSS('color', 'rgb(255, 255, 255)');
   await expect(page.locator('.hero p')).toHaveCSS('color', 'rgb(255, 255, 255)');
   await open(page, 'blocks-hero--without-image');
   await expect(page.locator('.hero h1')).toHaveCSS('color', 'rgb(63, 0, 11)');
+});
+
+test('Columns recipe variant builds ingredients, directions, and Bake Mode', async ({ page }) => {
+  await open(page, 'blocks-columns--recipe');
+  await expect(page.locator('.columns.recipe .columns-recipe-ingredient-list li')).toHaveCount(2);
+  await expect(page.locator('.columns-recipe-summary-heading')).toHaveText('Ingredients & Directions');
+  await expect(page.locator('.columns-recipe-times')).toContainText('Prep:');
+  await expect(page.locator('.columns-recipe-bake-switch input')).toHaveAttribute('role', 'switch');
+  await expect(page.locator('.columns-recipe-tip summary')).toHaveText('Tip');
+  await expect(page.locator('.columns-recipe-section')).toHaveCSS('background-color', 'rgb(246, 246, 246)');
+});
+
+test('Hero recipe variant keeps section measure and builds the overview', async ({ page }) => {
+  await open(page, 'blocks-hero--recipe');
+  await expect(page.locator('.hero.recipe .hero-recipe-title')).toHaveText("Reese's Oreo Cup Brownies");
+  await expect(page.locator('.hero-recipe-skill-value')).toHaveText('Beginner');
+  await expect(page.locator('.hero.recipe nav')).toHaveAttribute('aria-label', 'Share this recipe');
+  await expect(page.locator('.hero.recipe')).toHaveCSS('min-height', '0px');
+  await expect(page.locator('.hero.recipe picture')).not.toHaveCSS('position', 'absolute');
+  await expect(page.locator('.hero-wrapper')).not.toHaveCSS('max-width', 'none');
 });
 
 test('real Fragment decorator accepts an absolute authored branch URL', async ({ page }) => {

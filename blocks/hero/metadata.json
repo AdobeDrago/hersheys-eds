@@ -1,0 +1,45 @@
+{
+  "blockName": "hero",
+  "canonicalModel": "standalone",
+  "variants": [
+    {
+      "variantName": "default",
+      "authoredName": "Hero",
+      "visualCharacteristics": {
+        "colorScheme": "image",
+        "density": "medium",
+        "purpose": "page-hero",
+        "imagePattern": "background",
+        "structure": "optional background image + heading + supporting copy"
+      },
+      "contentPattern": "CSS-only. Authored rows and cells render as written. A picture is the full-bleed background. Without a picture, text uses the normal foreground.",
+      "options": []
+    },
+    {
+      "variantName": "recipe",
+      "authoredName": "Hero (Recipe)",
+      "baseBlock": "hero",
+      "canonicalModel": "standalone",
+      "visualCharacteristics": {
+        "colorScheme": "light",
+        "density": "medium",
+        "purpose": "recipe-overview",
+        "imagePattern": "large",
+        "structure": "category pill + heading + rating + skill level + share bar + image"
+      },
+      "contentPattern": "1 column x 2 rows. Row 1: hero image. Row 2: paragraph with category link (pill); H1 title; paragraph 'Skill Level: Beginner'. Rating and share bar are injected by decoration (bvId metadata = 990).",
+      "usage": {
+        "pagesUsing": [
+          "https://www.hersheyland.com/recipes/reeses-oreo-cup-brownies.html"
+        ],
+        "reuseCount": 1,
+        "lastUsed": "2026-10-15"
+      },
+      "options": []
+    }
+  ],
+  "memberVariantIds": [
+    "default",
+    "recipe"
+  ]
+}
