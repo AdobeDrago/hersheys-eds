@@ -596,7 +596,12 @@ async function fillFromSheet(row) {
       media = document.createElement('div');
       row.prepend(media);
     }
-    media.replaceChildren(buildPicture(product.image.trim(), alt));
+    // front image, then the back image when the sheet has one (several images = gallery)
+    const back = String(product.imageBack || '').trim();
+    media.replaceChildren(...[
+      buildPicture(product.image.trim(), alt),
+      back && buildPicture(back, product.imageBackAlt || alt),
+    ].filter(Boolean));
   }
 
   if (!details) {
