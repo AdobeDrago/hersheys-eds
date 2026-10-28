@@ -42,7 +42,12 @@ export default function loadBazaarvoice() {
     // the reviews widget times its fallback from this request
     window.hlx.bvRequestedAt = Date.now();
     // `bazaarvoice-url` metadata overrides the deployment
-    loadScript(getMetadata('bazaarvoice-url') || BV_SCRIPT, { async: '' });
+    loadScript(getMetadata('bazaarvoice-url') || BV_SCRIPT, { async: '' }).catch(() => {
+      // the reviews widget shows its fallback now instead of waiting out the delay
+      window.hlx.bvFailed = true;
+      // eslint-disable-next-line no-console
+      console.warn('bazaarvoice: failed to load bv.js');
+    });
   }
   return bvReady;
 }

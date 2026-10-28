@@ -62,9 +62,10 @@ function watchFallback(widget, sections, fallback) {
     // bv.js loads in the delayed phase: time it from its request, with a ceiling
     // in case the delayed chain never runs
     const requestedAt = window.hlx && window.hlx.bvRequestedAt;
-    const timedOut = requestedAt
+    const failed = window.hlx && window.hlx.bvFailed;
+    const timedOut = failed || (requestedAt
       ? Date.now() - requestedAt >= FALLBACK_DELAY
-      : elapsed >= FALLBACK_CEILING;
+      : elapsed >= FALLBACK_CEILING);
     if (timedOut && !fallback.isConnected) {
       widget.prepend(fallback);
       // eslint-disable-next-line no-console

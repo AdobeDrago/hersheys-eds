@@ -5,10 +5,61 @@ const SCRIPTS = [
   '//cdn.pricespider.com/1/2366/ps-utid.js',
 ];
 const [widgetSrc] = SCRIPTS;
+const FALLBACK_DELAY = 15000;
+const WATCH_LIMIT = 60000;
+
+/**
+ * PriceSpider renders retailer links into a shadow root. The root and its styles can exist
+ * while the widget stays empty (e.g. on a domain PriceSpider doesn't serve), so look for links.
+ * @param {Element} target The `.ps-widget` element
+ * @returns {boolean}
+ */
+function isRendered(target) {
+  return Boolean(target.shadowRoot && target.shadowRoot.querySelector('a, button'));
+}
+
+function buildFallback() {
+  const fallback = document.createElement('div');
+  fallback.className = 'where-to-buy-fallback';
+  const message = document.createElement('p');
+  message.textContent = 'Where to Buy couldn\'t be loaded right now. Please refresh the page or try again later.';
+  fallback.append(message);
+  return fallback;
+}
+
+/**
+ * Shows the fallback if PriceSpider fails to load or hasn't rendered in time,
+ * and removes it once the widget renders.
+ * @param {Element} widget
+ * @param {Element} target
+ * @param {HTMLScriptElement} loader The ps-widget.js script element
+ */
+function watchFallback(widget, target, loader) {
+  const fallback = buildFallback();
+  const show = () => {
+    if (fallback.isConnected || isRendered(target)) return;
+    widget.prepend(fallback);
+    // eslint-disable-next-line no-console
+    console.warn('where-to-buy widget: PriceSpider did not render (blocked, unreachable or domain not allowed)');
+  };
+  loader.addEventListener('error', show);
+  const started = Date.now();
+  const timer = setInterval(() => {
+    const elapsed = Date.now() - started;
+    if (isRendered(target)) {
+      fallback.remove();
+      clearInterval(timer);
+      return;
+    }
+    if (elapsed >= FALLBACK_DELAY) show();
+    if (elapsed >= WATCH_LIMIT) clearInterval(timer);
+  }, 1000);
+}
 
 /**
  * Where-to-buy widget. The SKU comes from the `ps-sku` query param (set by Shop Now)
  * and the PriceSpider config id from the authored widget link (`?config=`).
+ * Shows a fallback message if PriceSpider doesn't render.
  * @param {Element} widget The widget block element
  */
 export default function decorate(widget) {
@@ -28,11 +79,13 @@ export default function decorate(widget) {
       document.head.append(link);
     });
 
-    SCRIPTS.forEach((src) => {
+    const [loader] = SCRIPTS.map((src) => {
       const script = document.createElement('script');
       script.src = src;
       script.async = true;
       document.head.append(script);
+      return script;
     });
+    watchFallback(widget, target, loader);
   });
 }

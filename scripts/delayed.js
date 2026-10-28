@@ -7,8 +7,10 @@ import { getMetadata, loadScript } from './aem.js';
  * - OneTrust: cookie banner, then consent-check.js reads the visitor's choice.
  * - Adobe Launch: consented.js, only after Performance (C0002) consent.
  *
- * Loaded in the lazy phase by the blocks that need them, never before first paint:
- * - Algolia: blocks/search-recipes and cards (product, related), once the block is visible.
+ * Loaded by the blocks that need them, which never wait on them without a time limit:
+ * - Algolia: blocks/search-recipes once the block is visible; cards (product, related)
+ *   when the block loads, giving up after 2 s.
+ * - Wayvia (PriceSpider): widgets/pricespider/where-to-buy.js.
  */
 
 // Hershey's OneTrust test domain script (stage.hersheyland.com); it handles consent only

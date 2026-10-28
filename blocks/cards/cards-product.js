@@ -23,6 +23,8 @@ const ALGOLIA = {
 };
 const PRODUCTION = 'https://www.hersheyland.com';
 const MAX_RELATED = 4;
+// later sections and the footer wait for this block, so a slow Algolia keeps the authored cards
+const RELATED_TIMEOUT = 2000;
 
 /**
  * @param {Element} cell
@@ -75,6 +77,9 @@ function buildCard({
 async function fetchRelated() {
   const { pathname } = window.location;
   const objectID = `${PRODUCTION}${pathname.endsWith('.html') ? pathname : `${pathname}.html`}`;
+  // AbortSignal.timeout isn't in Safari 15
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), RELATED_TIMEOUT);
   const resp = await fetch(`https://${ALGOLIA.appId}-dsn.algolia.net/1/indexes/*/recommendations`, {
     method: 'POST',
     headers: {
@@ -93,7 +98,8 @@ async function fetchRelated() {
         fallbackParameters: { facetFilters: ['metaTags.templateType:product-detail'], analytics: false },
       }],
     }),
-  });
+    signal: controller.signal,
+  }).finally(() => clearTimeout(timeout));
   if (!resp.ok) throw new Error(`Algolia request failed with HTTP ${resp.status}`);
   const { results } = await resp.json();
   return (results?.[0]?.hits || []).filter((hit) => hit.hero?.image && hit.hero?.h1);

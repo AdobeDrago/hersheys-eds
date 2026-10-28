@@ -5,3 +5,14 @@
 .where-to-buy .ps-widget {
   width: 100%;
 }
+
+.where-to-buy .where-to-buy-fallback {
+  padding: 32px 24px;
+  border-radius: 8px;
+  background-color: var(--light-color);
+  text-align: center;
+}
+
+.where-to-buy .where-to-buy-fallback p {
+  margin: 0;
+}

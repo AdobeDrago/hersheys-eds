@@ -43,7 +43,7 @@ parameter. Submenu images are the original source icons.
 Footer section styles are `newsletter`, `footer-brand`, `footer-links` and
 `footer-legal`. Newsletter signup continues on Hersheyland; this site does not
 collect email addresses. Social links are text-labelled instead of loading
-Font Awesome. Cookie preferences link to Hersheyland.
+Font Awesome. The cookie preferences link opens OneTrust's preference center.
 
 Third-party tags load after first paint, in `scripts/delayed.js` (3 seconds
 after the page loads, and only once a prerendered page is shown). That loads
@@ -52,7 +52,8 @@ OneTrust, using Hershey's stage.hersheyland.com test script unless the page sets
 visitor allows Performance cookies (C0002), and only from a `launch-url` metadata
 value: Hershey's own Launch libraries are refused, so no analytics reach their
 reports. Add `?consent=accept` or `?consent=decline` to a URL to override the
-consent state when testing.
+consent state when testing. See [Third-party loading](./docs/third-party-loading.md)
+for when each integration loads, its consent rules and its failure behavior.
 
 ## Design tokens
 
