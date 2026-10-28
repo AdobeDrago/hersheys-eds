@@ -1011,7 +1011,12 @@ main .section.centered h3 {
 }
 
 .hershey-story.story-plain main > .section.story-title > .default-content-wrapper > p:has(> picture) {
-  margin: 105px 0 0;
+  margin: 0;
+}
+
+.hershey-story.story-plain main > .section.story-title > .social-share-wrapper {
+  max-width: 100%;
+  padding-inline: 0;
 }
 
 .hershey-story.story-plain main > .section.story-title picture img {
@@ -1024,7 +1029,7 @@ main .section.centered h3 {
 @media (width >= 992px) {
   /* columns scale with the viewport up to their widest, as on hersheyland.com */
   .hershey-story.story-plain main > .section:not(.dark-brown) > .default-content-wrapper {
-    max-width: min(860px, calc(66.4vw - 97px));
+    max-width: calc(66.4vw - 97px);
   }
 
   .hershey-story.story-plain main > .section.story-title > .default-content-wrapper {
@@ -1032,7 +1037,7 @@ main .section.centered h3 {
   }
 
   .hershey-story.story-plain main > .section.story-closing > .default-content-wrapper {
-    max-width: min(793px, calc(66.8vw - 168px));
+    max-width: calc(66.8vw - 168px);
   }
 
   .hershey-story.story-plain main > .section.story-title > .default-content-wrapper > h1 {
@@ -1040,7 +1045,7 @@ main .section.centered h3 {
   }
 
   .hershey-story.story-plain main > .section.story-title > .default-content-wrapper > p:has(> picture) {
-    margin-top: 120px;
+    margin-top: 0;
   }
 
   .hershey-story.story-plain main > .section.story-title + .section {

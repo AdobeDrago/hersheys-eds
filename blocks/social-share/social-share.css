@@ -1,0 +1,119 @@
+/* centred share pill under the story title: blue when closed, white with a blue tray when open */
+main > .section > .social-share-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+  margin: 5px 0 10px;
+  padding: 0;
+}
+
+.social-share .social-share-nav {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 56px;
+  padding: 5px 12px;
+  border: 3px solid #007bbd;
+  border-radius: 70px;
+  background: #007bbd;
+  color: #fff;
+}
+
+.social-share.open .social-share-nav {
+  height: 70px;
+  padding: 7px 27px;
+  background: #fff;
+  color: #007bbd;
+}
+
+.social-share button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.social-share .social-share-divider {
+  width: 1px;
+  height: 28px;
+  margin: 0 18px;
+  background: currentcolor;
+}
+
+.social-share ul {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 18px 0 0;
+  padding: 0 18px;
+  list-style: none;
+  border-radius: 50px;
+  background: #007bbd;
+  color: #fff;
+  height: 50px;
+}
+
+.social-share ul[hidden] {
+  display: none;
+}
+
+.social-share li {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.social-share ul a,
+.social-share ul button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  color: #fff;
+}
+
+.social-share .social-share-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: currentcolor;
+  mask: var(--social-share-icon) center / contain no-repeat;
+}
+
+.social-share ul .social-share-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.social-share .social-share-icon-share { --social-share-icon: url('/icons/share.svg'); }
+.social-share .social-share-icon-link { --social-share-icon: url('/icons/link.svg'); }
+.social-share .social-share-icon-facebook { --social-share-icon: url('/icons/facebook.svg'); }
+.social-share .social-share-icon-pinterest { --social-share-icon: url('/icons/pinterest.svg'); }
+.social-share .social-share-icon-envelope { --social-share-icon: url('/icons/envelope.svg'); }
+.social-share .social-share-icon-print { --social-share-icon: url('/icons/print.svg'); }
+
+.social-share button:focus-visible,
+.social-share a:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
+.social-share .social-share-copy.copied {
+  opacity: 0.6;
+}
+
+@media (width >= 992px) {
+  main > .section > .social-share-wrapper {
+    margin-top: 20px;
+  }
+}
