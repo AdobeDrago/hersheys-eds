@@ -9,7 +9,7 @@ import { decorateIcons, getMetadata, toClassName } from '../../scripts/aem.js';
  *   Ingredients: plain paragraphs.
  *   Dietary Info: icon images (or :icon: tokens) each followed by a label.
  * Authored content wins. An empty Nutrition Facts tab, or a block without one (even an empty
- * block), is filled from the page brand's tab of the nutrition sheet
+ * block), is filled from the tab of the nutrition sheet named by the `brand` metadata
  * (/products/nutrition.json?sheet=<brand>, row matched by `bvid` GTIN). The sheet is only
  * requested then.
  */
@@ -34,14 +34,12 @@ const FACTS = [
 let blockCount = 0;
 
 /**
- * Sheet tab for the page's brand, from the last breadcrumb item
- * (HERSHEY'S -> hersheys, ROLO® -> rolo).
+ * Sheet tab for the page's brand, from the `brand` page metadata
+ * (cadbury, or HERSHEY'S -> hersheys, ROLO® -> rolo).
  * @returns {string}
  */
 function brandSheetName() {
-  const items = document.querySelectorAll('main .breadcrumb-trail li');
-  const brand = items.length ? items[items.length - 1].textContent : '';
-  return brand.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '');
+  return getMetadata('brand').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '');
 }
 
 /**

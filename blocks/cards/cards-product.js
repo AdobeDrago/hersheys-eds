@@ -10,10 +10,10 @@ const BVID_LINE = /^bvid\s*:/i;
  *   A `bvid: <gtin>` paragraph is tolerated (rating data) and not shown.
  * The whole card links to the product page.
  *
- * `related` variant (`Cards (product, related)`): the rows are fetched from Algolia
- * instead of authored. It asks for the products related to this page's production
- * counterpart on www.hersheyland.com and links the cards to their production pages.
- * Authored rows stay in place if the request fails.
+ * `related` variant (`Cards (product, related)`): authored rows take precedence. Only when
+ * no card is authored (no row with both an image and a heading) are the rows fetched from
+ * Algolia: the products related to this page's production counterpart on
+ * www.hersheyland.com, linking to their production pages.
  */
 
 const ALGOLIA = {
@@ -144,6 +144,7 @@ export default function decorate(block) {
     }));
   });
   block.replaceChildren(list);
-  if (block.classList.contains('related')) return decorateRelated(block);
+  // related: authored cards win; Algolia only fills a block without any
+  if (block.classList.contains('related') && !list.children.length) return decorateRelated(block);
   return undefined;
 }
