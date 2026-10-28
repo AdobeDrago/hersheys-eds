@@ -14,14 +14,16 @@ import { createOptimizedPicture, getMetadata, toClassName } from '../../scripts/
  * Product rating is rendered from the `bvid` page metadata (Bazaarvoice inline rating).
  *
  * Authored values win. Whatever is left empty (images, product name, size list, description)
- * is filled from the product master sheet row whose `14-Digit UPCs` matches the `bvid` metadata.
- * Sizes are the sheet products sharing the row's `familyId`.
+ * is filled from the pdp sheet: only the tab named by the `brand` metadata is loaded
+ * (/products/pdp.json?sheet=<brand>), and the row whose `14-Digit UPCs` matches the `bvid`
+ * metadata is used. Sizes are the products in that tab sharing the row's `familyId` whose
+ * Notes say `migrated` (their pages exist on this site).
  * The back image comes from an optional `imageBack` sheet column. An empty button is Shop Now.
  */
 
 const SIZE_LABEL = /choose\s+a\s+size/i;
 const WHERE_TO_BUY = '/where-to-buy';
-const PRODUCT_MASTER = '/products/product-master.json';
+const PDP_SHEET = '/products/pdp.json';
 const HEADING = ':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6';
 
 // field table row names (first cell, as a class name) and the field each one sets
@@ -39,22 +41,34 @@ const FIELDS = {
   button: 'button',
   cta: 'button',
 };
-// fields that fall back to the product master sheet (an empty button defaults to Shop Now)
+// fields that fall back to the pdp sheet (an empty button defaults to Shop Now)
 const SHEET_FIELDS = ['imageFront', 'imageBack', 'title', 'size', 'description'];
 
 let productsPromise;
 
 /**
- * Pathname of a sheet URL value (full hersheyland.com URL or site path).
+ * Site path of a sheet URL value (full hersheyland.com URL or site path), without the old
+ * AEM content root or `.html` (pages are served without it).
  * @param {string} value
  */
 function urlPath(value) {
   if (!value) return '';
+  let path = value;
   try {
-    return new URL(value, window.location.origin).pathname;
+    path = new URL(value, window.location.origin).pathname;
   } catch {
-    return value;
+    // not a URL: use as is
   }
+  return path.replace(/^\/content\/hersheyland\/en-us\/home(?=\/)/, '').replace(/\.html$/, '');
+}
+
+/**
+ * Sheet tab for the page's brand, from the `brand` page metadata
+ * (cadbury, or HERSHEY'S -> hersheys, ROLO® -> rolo).
+ * @returns {string}
+ */
+function brandSheetName() {
+  return getMetadata('brand').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '');
 }
 
 /**
@@ -76,7 +90,7 @@ function toProduct(row) {
     image: row.image || row['Image URL'] || '',
     description: row.description || row['On Page Description/product Details'] || '',
     familyId: row.familyId || row['Product Family ID (lowercase and underscores for BV)'] || '',
-    brandActive: row.brandActive || row['Brand Active'] || '',
+    notes: row.notes || row.Notes || '',
     weight: row.weight || row['Weight (oz)'] || '',
     count: row.count || row.Count || '',
     countUnit: row.countUnit || row['Count Unit'] || '',
@@ -84,11 +98,13 @@ function toProduct(row) {
 }
 
 /**
- * Loads the rows of the product master sheet (first sheet of a multi-sheet workbook).
+ * Loads only the page brand's tab of the pdp sheet. Without a `brand` there is nothing to load.
  * @returns {Promise<Array<Object>>}
  */
 function fetchProducts() {
-  productsPromise = productsPromise || fetch(PRODUCT_MASTER)
+  const sheet = brandSheetName();
+  if (!sheet) return Promise.resolve([]);
+  productsPromise = productsPromise || fetch(`${PDP_SHEET}?sheet=${sheet}`)
     .then((resp) => (resp.ok ? resp.json() : {}))
     .then(({ data }) => (Array.isArray(data) ? data : data?.data || []))
     .then((rows) => rows.map(toProduct))
@@ -122,14 +138,15 @@ function sizeLabel(product) {
 }
 
 /**
- * The product followed by the active sheet products in its family.
+ * The product followed by the sheet products in its family that are migrated, so every
+ * size links to a page on this site.
  * @param {Object} product
  * @param {Array<Object>} products
  */
 function familyOf(product, products) {
   if (!product.familyId) return [product];
   const others = products.filter((p) => p !== product && p.path
-    && p.familyId === product.familyId && p.brandActive !== 'Inactive');
+    && p.familyId === product.familyId && String(p.notes).trim().toLowerCase() === 'migrated');
   return [product, ...others];
 }
 
@@ -557,7 +574,7 @@ function fillDetails(cell, gaps, product, products) {
 }
 
 /**
- * Fills the fields the author left empty from the product master sheet.
+ * Fills the fields the author left empty from the pdp sheet.
  * The sheet is only requested when something is missing.
  * @param {Element} row
  */
@@ -684,7 +701,7 @@ function fieldButton(cell) {
 
 /**
  * Rebuilds a field table as the 2-cell layout. Authored fields win; empty or missing fields
- * come from the product master sheet. The sheet is only requested when something is missing.
+ * come from the pdp sheet. The sheet is only requested when something is missing.
  * @param {Element} block
  * @param {Object<string, Element>} fields
  */
