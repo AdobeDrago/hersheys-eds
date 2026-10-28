@@ -22,7 +22,7 @@ main > .section > .social-share-wrapper {
 
 .social-share.open .social-share-nav {
   height: 70px;
-  padding: 7px 27px;
+  padding: 7px 24px;
   background: #fff;
   color: #007bbd;
 }
@@ -46,13 +46,13 @@ main > .section > .social-share-wrapper {
   width: 1px;
   height: 28px;
   margin: 0 18px;
-  background: currentcolor;
+  background: #d4d4d4;
 }
 
 .social-share ul {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin: 0 18px 0 0;
   padding: 0 18px;
   list-style: none;
@@ -84,15 +84,26 @@ main > .section > .social-share-wrapper {
 
 .social-share .social-share-icon {
   display: block;
-  width: 28px;
-  height: 28px;
+  width: 23px;
+  height: 23px;
   background-color: currentcolor;
   mask: var(--social-share-icon) center / contain no-repeat;
 }
 
 .social-share ul .social-share-icon {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
+}
+
+/* the icons grow once the tray is open */
+.social-share.open .social-share-share .social-share-icon {
+  width: 31px;
+  height: 31px;
+}
+
+.social-share.open .social-share-copy .social-share-icon {
+  width: 37px;
+  height: 37px;
 }
 
 .social-share .social-share-icon-share { --social-share-icon: url('/icons/share.svg'); }
