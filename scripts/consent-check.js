@@ -1,27 +1,6 @@
-let consentedLoaded = false;
+import { hasConsent } from './consent-state.js';
 
-/**
- * Dummy consent implementation.
- *
- * By default consent is declined, so consented scripts (analytics, martech, etc.)
- * are not loaded. This stands in for a real CMP (OneTrust, etc.) and can be
- * swapped out later.
- *
- * The default can be overridden with a query parameter for testing:
- *   ?consent=accept   grant consent (loads consented.js)
- *   ?consent=decline  decline consent (default behavior)
- *
- * @returns {boolean} true if the user has consented
- */
-// eslint-disable-next-line import/prefer-default-export
-export function hasConsent() {
-  const consent = new URLSearchParams(window.location.search).get('consent');
-  if (consent !== null) {
-    return ['accept', 'true', '1', 'yes'].includes(consent.toLowerCase());
-  }
-  // default: decline
-  return false;
-}
+let consentedLoaded = false;
 
 /**
  * Loads consented scripts once consent is available.
@@ -38,10 +17,23 @@ function loadConsented() {
  */
 function onConsentUpdate() {
   const consented = hasConsent();
+  // Launch can't be unloaded: on withdrawal, reload so the next view runs without it.
+  // Keyed on the request, not window._satellite, which only exists once the download finishes.
+  if (!consented && window.hlx?.launchRequested) {
+    window.location.reload();
+    return;
+  }
   window.dispatchEvent(new CustomEvent('consent.update', { detail: { consented } }));
   if (consented) {
     loadConsented();
   }
 }
+
+// OneTrust calls OptanonWrapper on load and whenever preferences change
+const previousWrapper = window.OptanonWrapper;
+window.OptanonWrapper = () => {
+  if (typeof previousWrapper === 'function') previousWrapper();
+  onConsentUpdate();
+};
 
 onConsentUpdate();

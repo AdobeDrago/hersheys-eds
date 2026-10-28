@@ -106,6 +106,45 @@ function decorateBrand(section) {
 }
 
 /**
+ * Opens OneTrust's preference center, starting OneTrust first if it hasn't loaded yet
+ * (it loads in the delayed phase). Resolves false if it never becomes ready.
+ * @returns {Promise<boolean>}
+ */
+async function openPreferenceCenter() {
+  const ready = () => typeof window.OnetrustActiveGroups === 'string'
+    && typeof window.OneTrust?.ToggleInfoDisplay === 'function';
+  if (!ready()) {
+    // delayed.js is imported once, so this just brings the delayed phase forward
+    import('../../scripts/delayed.js');
+    for (let i = 0; i < 80 && !ready() && !window.hlx.oneTrustFailed; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise((resolve) => { setTimeout(resolve, 100); });
+    }
+  }
+  if (!ready()) return false;
+  window.OneTrust.ToggleInfoDisplay();
+  return true;
+}
+
+/**
+ * Cookie preference links open the consent manager's preference center.
+ * Imported footers keep the absolute source URL (e.g. https://www.hersheyland.com/#),
+ * so a link ending in "#" counts when it is a bare "#" or its text mentions cookies.
+ * If OneTrust can't load, the link goes to its original target.
+ * @param {Element} footer
+ */
+function decorateConsentLinks(footer) {
+  footer.addEventListener('click', async (e) => {
+    if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const link = e.target.closest('a[href]');
+    const href = link?.getAttribute('href') || '';
+    if (!href.endsWith('#') || !(href === '#' || /cookie/i.test(link.textContent))) return;
+    e.preventDefault();
+    if (!(await openPreferenceCenter())) window.location.href = link.href;
+  });
+}
+
+/**
  * loads and decorates the footer
  * @param {Element} block The footer block element
  */
@@ -132,5 +171,6 @@ export default async function decorate(block) {
     if (brand) decorateBrand(brand);
   }
 
+  decorateConsentLinks(footer);
   block.append(footer);
 }

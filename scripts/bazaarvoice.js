@@ -1,5 +1,5 @@
-import { loadScript } from './aem.js';
-import { hasConsent } from './consent-check.js';
+import { getMetadata, loadScript } from './aem.js';
+import { hasConsent } from './consent-state.js';
 
 const BV_SCRIPT = 'https://apps.bazaarvoice.com/deployments/hersheys/2021_new_site/production/en_US/bv.js';
 
@@ -39,7 +39,15 @@ export default function loadBazaarvoice() {
         resolve(BV);
       };
     });
-    loadScript(BV_SCRIPT, { async: '' });
+    // the reviews widget times its fallback from this request
+    window.hlx.bvRequestedAt = Date.now();
+    // `bazaarvoice-url` metadata overrides the deployment
+    loadScript(getMetadata('bazaarvoice-url') || BV_SCRIPT, { async: '' }).catch(() => {
+      // the reviews widget shows its fallback now instead of waiting out the delay
+      window.hlx.bvFailed = true;
+      // eslint-disable-next-line no-console
+      console.warn('bazaarvoice: failed to load bv.js');
+    });
   }
   return bvReady;
 }
