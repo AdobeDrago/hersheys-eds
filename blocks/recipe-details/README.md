@@ -36,6 +36,8 @@ The block uses one row with two cells:
 1. `Nutrition Facts` heading, servings and serving-size paragraphs, a calories paragraph, a nutrient list, and a footnote paragraph.
 2. `Additional questions?` heading and a contact link. The link is rendered as a button.
 
+Authored nutrition takes priority: when the label cell has any content besides its heading (servings, serving size, calories or a nutrient list), only that content is shown. When the cell has just the `Nutrition Facts` heading (or is left out), the block uses the `/recipes/nutrition` sheet row whose `recipe-path` matches the page (e.g. `recipes/hersheys-best-brownies`). Its columns are `servingsPerContainer`, `servingSize`, `calories`, and one amount column plus a `DV` column per nutrient (`totalFat` / `totalFatDV`, `saturatedFat`, `transFat`, `cholesterol`, `sodium`, `totalCarbohydrates`, `dietaryFiber`, `totalSugars`, `addedSugars`, `protein`, `vitaminD`, `calcium`, `iron`, `potassium`). Empty cells are left off the label, and the standard % Daily Value footnote is added.
+
 Decoration marks the section with `recipe-details-nutrition-section`.
 
 ## Universal Editor fields
