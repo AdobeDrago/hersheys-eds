@@ -97,3 +97,58 @@ main > .section > .breadcrumb-trail-wrapper {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/*
+ * back variant (Breadcrumb Trail (back)): hersheyland.com .back-to-product, a maroon bar with
+ * a chevron and one white link. Used on pages without the Hershey theme (where-to-buy), so the
+ * font is declared here, the same files as styles/hershey-home.css.
+ */
+@font-face {
+  font-family: hershey-tt;
+  src: url('../../fonts/subset-TTNormsPro-Normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+.breadcrumb-trail.back nav {
+  padding: 10px;
+  border-bottom: 0;
+  background-color: #3f000b;
+  color: #fff;
+  font-size: 17px;
+  line-height: 25.5px;
+}
+
+.breadcrumb-trail.back .breadcrumb-trail-back-icon {
+  display: inline-block;
+  width: 7.5px;
+  height: 12px;
+  margin-right: 10px;
+  vertical-align: -2px;
+}
+
+.breadcrumb-trail.back a.breadcrumb-trail-back-link:any-link {
+  border-bottom: 1px solid currentcolor;
+  color: #fff;
+  font-family: hershey-tt, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 15px;
+  text-decoration: none;
+}
+
+/* the underline (bottom border) disappears on hover, as on hersheyland.com */
+.breadcrumb-trail.back a.breadcrumb-trail-back-link:hover {
+  border-bottom-color: transparent;
+}
+
+@media (width >= 768px) {
+  .breadcrumb-trail.back nav {
+    padding: 15px;
+  }
+
+  .breadcrumb-trail.back a.breadcrumb-trail-back-link:any-link {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
