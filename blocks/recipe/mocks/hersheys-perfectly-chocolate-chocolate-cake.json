@@ -1,0 +1,79 @@
+{
+  "slug": "hersheys-perfectly-chocolate-chocolate-cake",
+  "title": "HERSHEY'S \"Perfectly Chocolate\" Chocolate Cake",
+  "description": "The words “perfect” and “chocolate cake” basically have the same meaning, right? With our HERSHEY’S homemade chocolate cake recipe this seems to be true. Baking from scratch is easier than you think when you mix HERSHEY’S Cocoa with a few other simple ingredients.",
+  "image": {
+    "src": "/content/dam/hersheyland/en-us/recipes/recipe-images/2-hersheys-perfectly-chocolate-chocolate-cake-recipe-hero.jpg",
+    "alt": "serving dish topped with a slice of hersheys perfectly chocolate cake"
+  },
+  "category": {
+    "name": "Cakes",
+    "url": "/recipes/cakes"
+  },
+  "skillLevel": "Beginner",
+  "yield": "1 cake",
+  "prepTime": 15,
+  "cookTime": 30,
+  "totalTime": 45,
+  "ingredients": [
+    "2 cups sugar",
+    "1 3/4 cups all-purpose flour",
+    "3/4 cup HERSHEY'S Cocoa",
+    "1 1/2 tsps baking powder",
+    "1 1/2 tsps baking soda",
+    "1 tsp salt",
+    "2 eggs",
+    "1 cup milk",
+    "1/2 cup vegetable oil",
+    "2 tsps vanilla extract",
+    "1 cup boiling water"
+  ],
+  "directions": [
+    "Heat oven to 350°F. Grease and flour two 9-inch round baking pans.",
+    "Stir together 2 cups of sugar, 1 3/4 cups of flour, 3/4 cup of HERSHEY’S Cocoa, 1 1/2 tsps baking powder, 1 1/2 tsps baking soda and 1 tsp salt in large bowl.",
+    "Add 2 eggs, 1 cup of milk, 1/2 cup of vegetable oil and 2 tsps vanilla; beat on medium speed of mixer 2 minutes.",
+    "Stir in 1 cup of boiling water (batter will be thin).",
+    "Pour batter into prepared pans.",
+    "Bake 30 to 35 minutes or until wooden pick inserted in center comes out clean.",
+    "Cool 10 minutes; remove from pans to wire racks. Cool completely.",
+    "Frost with Perfectly Chocolate Frosting."
+  ],
+  "nutrition": {
+    "servings": "12",
+    "servingSize": "1 slice (148g)",
+    "calories": "530",
+    "nutrients": [
+      {
+        "name": "Total Fat",
+        "amount": "19g",
+        "dailyValue": "24%",
+        "nutrients": [
+          { "name": "Saturated Fat", "amount": "7g", "dailyValue": "35%" },
+          { "name": "Trans Fat", "amount": "0g" }
+        ]
+      },
+      { "name": "Cholesterol", "amount": "60mg", "dailyValue": "20%" },
+      { "name": "Sodium", "amount": "500mg", "dailyValue": "22%" },
+      {
+        "name": "Total Carbohydrates",
+        "amount": "85g",
+        "dailyValue": "31%",
+        "nutrients": [
+          { "name": "Dietary Fiber", "amount": "0g", "dailyValue": "0%" },
+          {
+            "name": "Total Sugars",
+            "amount": "64g",
+            "nutrients": [
+              { "name": "Includes 63g Added Sugar", "dailyValue": "126%" }
+            ]
+          }
+        ]
+      },
+      { "name": "Protein", "amount": "6g" },
+      { "name": "Vitamin D", "amount": "0mcg", "dailyValue": "0%" },
+      { "name": "Calcium", "amount": "75mg", "dailyValue": "6%" },
+      { "name": "Iron", "amount": "4mg", "dailyValue": "20%" },
+      { "name": "Potassium", "amount": "63mg", "dailyValue": "2%" }
+    ]
+  }
+}

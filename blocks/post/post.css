@@ -1,0 +1,42 @@
+.post {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  border: 1px solid var(--light-color);
+  border-radius: 8px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.post .post-meta {
+  margin: 0 0 8px;
+  font-size: var(--body-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dark-color);
+}
+
+.post .post-title {
+  margin: 0 0 16px;
+  font-size: var(--heading-font-size-m);
+  text-transform: capitalize;
+}
+
+.post .post-body p {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+}
+
+.post .post-body p::first-letter {
+  text-transform: uppercase;
+}
+
+.post .post-loading,
+.post .post-error {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+}
+
+.post .post-error {
+  color: #b00020;
+}

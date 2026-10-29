@@ -1,0 +1,14 @@
+/* the recipe sections are rendered by breadcrumb-trail, hero (recipe) and columns (recipe, nutrition) */
+.recipe .recipe-loading,
+.recipe .recipe-error {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+}
+
+.recipe .recipe-loading {
+  min-height: 60vh;
+}
+
+.recipe .recipe-error {
+  color: #b00020;
+}

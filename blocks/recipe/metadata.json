@@ -1,0 +1,24 @@
+{
+  "variantName": "recipe",
+  "baseBlock": "recipe",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "recipe-detail",
+    "imagePattern": "hero-image",
+    "structure": "title + description + facts + image, then ingredients + directions"
+  },
+  "contentPattern": "Empty block (self-initializing). Slug comes from the last URL path segment, or from the single authored cell. Data comes from mocked JSON until the recipe proxy exists, not authored cells.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.hersheyland.com/recipes/hersheys-perfectly-chocolate-chocolate-cake.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-28"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "recipe"
+  ]
+}

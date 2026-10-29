@@ -13,6 +13,7 @@ helix-importer-ui
 .DS_Store
 *.bak
 .idea
+blocks/post/post-credentials.js
 
 # Ensure these files are tracked
 !CLAUDE.md
