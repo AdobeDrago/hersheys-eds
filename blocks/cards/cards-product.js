@@ -1,3 +1,5 @@
+import fetchRelated from '../../scripts/algolia-recommend.js';
+
 const IMAGE_LINK = /\/is\/image\/|\.(?:png|jpe?g|webp|avif|gif)(?:[?#]|$)/i;
 const BVID_LINE = /^bvid\s*:/i;
 
@@ -16,17 +18,7 @@ const BVID_LINE = /^bvid\s*:/i;
  * www.hersheyland.com, linking to their production pages.
  */
 
-const ALGOLIA = {
-  appId: 'DQJUL6CPHC',
-  apiKey: 'a6b8675cb5520e40ee6756581786eccd', // search-only key, public on hersheyland.com
-  indexName: 'crawler_www.hersheyland.com',
-};
-const PRODUCTION = 'https://www.hersheyland.com';
 const MAX_RELATED = 4;
-// later sections and the footer wait for this block, so a slow Algolia keeps the authored cards.
-// A cold request (DNS, TLS, CORS preflight) took up to 1.3 s in testing; 4 s leaves room
-// for slow mobile.
-const RELATED_TIMEOUT = 4000;
 
 /**
  * @param {Element} cell
@@ -76,40 +68,10 @@ function buildCard({
   return item;
 }
 
-async function fetchRelated() {
-  const { pathname } = window.location;
-  const objectID = `${PRODUCTION}${pathname.endsWith('.html') ? pathname : `${pathname}.html`}`;
-  // AbortSignal.timeout isn't in Safari 15
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), RELATED_TIMEOUT);
-  const resp = await fetch(`https://${ALGOLIA.appId}-dsn.algolia.net/1/indexes/*/recommendations`, {
-    method: 'POST',
-    headers: {
-      'X-Algolia-Application-Id': ALGOLIA.appId,
-      'X-Algolia-API-Key': ALGOLIA.apiKey,
-    },
-    body: JSON.stringify({
-      requests: [{
-        indexName: ALGOLIA.indexName,
-        model: 'related-products',
-        objectID,
-        threshold: 0,
-        maxRecommendations: MAX_RELATED,
-        // Hershey's Algolia app: keep this prototype's requests out of their analytics
-        queryParameters: { analytics: false },
-        fallbackParameters: { facetFilters: ['metaTags.templateType:product-detail'], analytics: false },
-      }],
-    }),
-    signal: controller.signal,
-  }).finally(() => clearTimeout(timeout));
-  if (!resp.ok) throw new Error(`Algolia request failed with HTTP ${resp.status}`);
-  const { results } = await resp.json();
-  return (results?.[0]?.hits || []).filter((hit) => hit.hero?.image && hit.hero?.h1);
-}
-
 async function decorateRelated(block) {
   try {
-    const hits = await fetchRelated();
+    const hits = (await fetchRelated({ templateType: 'product-detail', max: MAX_RELATED }))
+      .filter((hit) => hit.hero?.image && hit.hero?.h1);
     if (!hits.length) return;
     const list = document.createElement('ul');
     hits.forEach((hit) => list.append(buildCard({

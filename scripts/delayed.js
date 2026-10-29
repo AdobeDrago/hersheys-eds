@@ -8,8 +8,8 @@ import { getMetadata, loadScript } from './aem.js';
  * - Adobe Launch: consented.js, only after Performance (C0002) consent.
  *
  * Loaded by the blocks that need them, which never wait on them without a time limit:
- * - Algolia: blocks/search-recipes once the block is visible; cards (product, related)
- *   when the block loads, giving up after 4 s.
+ * - Algolia: blocks/search-recipes once the block is visible; cards (product, related) and
+ *   cards (slider, related, recipes) when the block loads, giving up after 4 s.
  * - Wayvia (PriceSpider): widgets/pricespider/where-to-buy.js.
  */
 
@@ -27,6 +27,8 @@ async function loadOneTrust() {
   });
 }
 
+// blocks that add rating containers after this point load Bazaarvoice themselves
+window.hlx.delayedLoaded = true;
 // ratings & reviews render for everyone; tracking cookies follow consent
 if (document.querySelector('[data-bv-show]')) {
   import('./bazaarvoice.js').then(({ default: loadBazaarvoice }) => loadBazaarvoice());

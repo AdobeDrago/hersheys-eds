@@ -162,6 +162,15 @@ test('Recipe Details nutrition variant builds the Nutrition Facts label and cont
   await expect(page.locator('.recipe-details-nutrition-aside a.button')).toHaveText('Contact Customer Service');
 });
 
+test('Cards related recipes fill an empty block from Algolia Recommend with rating containers', async ({ page }) => {
+  await open(page, 'blocks-cards--related-recipes');
+  const cards = page.locator('.cards.recipes > ul > li');
+  await expect(cards).toHaveCount(4);
+  await expect(cards.first().locator('h3 a')).toHaveAttribute('href', 'https://www.hersheyland.com/recipes/recipe-1.html');
+  await expect(page.locator('.cards.recipes [data-bv-show="inline_rating"]')).toHaveCount(3);
+  await expect(page.locator('.cards.recipes .cards-slider-controls')).toBeAttached();
+});
+
 test('Newsletter Signup builds the recipe email capture and confirms a valid submit', async ({ page }) => {
   await page.route('https://l.hersheys.com/u/register.php*', (route) => route.fulfill({ status: 200, body: '' }));
   await open(page, 'blocks-newsletter-signup--default');

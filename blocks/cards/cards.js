@@ -108,6 +108,16 @@ export default async function decorate(block) {
     });
   }
   ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  // recipes: authored cards win; Algolia only fills a block without any
+  if (block.classList.contains('recipes')) {
+    // the recipes styles cover authored cards too; Algolia only fills a block without any
+    const authored = [...ul.children].some((li) => li.textContent.trim() || li.querySelector('img'));
+    const [module] = await Promise.all([
+      authored ? null : import('./cards-recipes.js'),
+      loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-recipes.css`),
+    ]);
+    if (module) ul.replaceChildren(...await module.default(block));
+  }
   block.replaceChildren(ul);
   if (block.classList.contains('slider')) decorateSlider(block, ul);
 }
