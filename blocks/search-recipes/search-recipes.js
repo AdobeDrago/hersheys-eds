@@ -107,7 +107,11 @@ function buildShell(block, config) {
   const submit = el('button', 'search-recipes-submit');
   submit.type = 'submit';
   submit.setAttribute('aria-label', 'Search');
-  form.append(label, input, submit);
+  const reset = el('button', 'search-recipes-reset');
+  reset.type = 'button';
+  reset.hidden = true;
+  reset.setAttribute('aria-label', 'Clear search');
+  form.append(label, input, reset, submit);
   banner.append(title, form);
 
   const layout = el('div', 'search-recipes-layout');
@@ -172,7 +176,7 @@ function buildShell(block, config) {
   block.replaceChildren(root);
 
   return {
-    form, input, clear, panel, facetsMount, facetsCount, stats, sort, sortList, status, hits, more, config,
+    form, input, reset, clear, panel, facetsMount, facetsCount, stats, sort, sortList, status, hits, more, config,
     progress, progressText, progressFill,
   };
 }
@@ -389,7 +393,17 @@ export default function decorate(block) {
     searchSoon();
   });
 
+  ui.reset.addEventListener('click', () => {
+    ui.input.value = '';
+    ui.reset.hidden = true;
+    state.query = '';
+    state.page = 0;
+    ui.input.focus();
+    searchSoon();
+  });
+
   ui.input.addEventListener('input', () => {
+    ui.reset.hidden = !ui.input.value;
     state.query = ui.input.value.trim();
     state.page = 0;
     searchSoon(300);
