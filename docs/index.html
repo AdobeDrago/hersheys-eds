@@ -669,6 +669,14 @@
       </a>
     </div>
 
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a class="sidebar-link" href="#next-steps">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm8-3.25a.75.75 0 01.75.75v2.69l1.78 1.78a.75.75 0 11-1.06 1.06l-2-2A.75.75 0 017.25 8.5v-3a.75.75 0 01.75-.75z"/></svg>
+        Next steps
+      </a>
+    </div>
+
   </nav>
 
   <!-- MAIN CONTENT -->
@@ -690,6 +698,7 @@
       </div>
 
       <section class="doc-section">
+        <p>This pilot migrates the Hersheyland homepage, shared navigation, and product, recipe and story pages to <strong>Edge Delivery Services</strong> as authorable blocks, keeping consent-gated third-party integrations (OneTrust, Bazaarvoice, PriceSpider, Algolia) off the critical path. All five journeys below are <strong>in progress</strong>.</p>
         <h3>Purpose</h3>
         <ul class="req-list">
           <li>Authorable migration of the Hersheyland homepage using original source images and licensed fonts (from the repository README), extended to shared navigation, product, recipe and story pages.</li>
@@ -716,11 +725,11 @@
         <table class="spec-table">
           <thead><tr><th>Journey</th><th>Validates</th><th>Status</th><th>Preview</th></tr></thead>
           <tbody>
-            <tr><td>1 · Homepage</td><td>Homepage and its themed sections</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/</a></td></tr>
-            <tr><td>2 · Header &amp; footer</td><td>Shared navigation and footer</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/nav" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/nav</a></td></tr>
-            <tr><td>3 · Product pages</td><td>Product detail pages under <code class="code-inline">/products/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><code class="code-inline">/products/…</code></td></tr>
-            <tr><td>4 · Recipe pages</td><td>Recipe pages and recipe search</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/recipes/all-recipes" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/recipes/all-recipes</a></td></tr>
-            <tr><td>5 · Stories</td><td>Editorial story pages under <code class="code-inline">/stories/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><code class="code-inline">/stories/…</code></td></tr>
+            <tr><td><a href="#j1-progress" style="color:var(--brand-blue);">1 · Homepage</a></td><td>Homepage and its themed sections</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/</a></td></tr>
+            <tr><td><a href="#j2-progress" style="color:var(--brand-blue);">2 · Header &amp; footer</a></td><td>Shared navigation and footer</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/nav" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/nav</a></td></tr>
+            <tr><td><a href="#j3-progress" style="color:var(--brand-blue);">3 · Product pages</a></td><td>Product detail pages under <code class="code-inline">/products/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><code class="code-inline">/products/…</code></td></tr>
+            <tr><td><a href="#j4-progress" style="color:var(--brand-blue);">4 · Recipe pages</a></td><td>Recipe pages and recipe search</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/recipes/all-recipes" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/recipes/all-recipes</a></td></tr>
+            <tr><td><a href="#j5-progress" style="color:var(--brand-blue);">5 · Stories</a></td><td>Editorial story pages under <code class="code-inline">/stories/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><code class="code-inline">/stories/…</code></td></tr>
           </tbody>
         </table>
         <p style="margin-top:8px;">Status values were supplied by the team; paths other than the homepage, <code class="code-inline">/nav</code> and <code class="code-inline">/recipes/all-recipes</code> are path prefixes, not specific pages.</p>
@@ -747,13 +756,16 @@
           Key references
         </h2>
         <div class="section-rule"></div>
+        <h3>Live page — production (migration source)</h3>
         <div class="url-grid">
-          <a class="url-card" href="https://da.live/#/adobedrago/hersheys-eds" target="_blank" rel="noopener">
-            <span class="url-card-label"><span class="dot dot-navy"></span>Author</span>
-            <span class="url-card-title">DA.live</span>
-            <span class="url-card-url">https://da.live/#/adobedrago/hersheys-eds</span>
-            <span class="url-card-desc">Content source for pages, <code class="code-inline">nav</code> and <code class="code-inline">footer</code>.</span>
+          <a class="url-card" href="https://www.hersheyland.com" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-orange"></span>Reference</span>
+            <span class="url-card-title">hersheyland.com</span>
+            <span class="url-card-desc">Production site and migration source · homepage, products, recipes and stories.</span>
           </a>
+        </div>
+        <h3>EDS — AdobeDrago preview and live</h3>
+        <div class="url-grid">
           <a class="url-card" href="https://main--hersheys-eds--AdobeDrago.aem.page/" target="_blank" rel="noopener">
             <span class="url-card-label"><span class="dot dot-blue"></span>Preview</span>
             <span class="url-card-title">https://main--hersheys-eds--AdobeDrago.aem.page/</span>
@@ -763,15 +775,19 @@
             <span class="url-card-label"><span class="dot dot-green"></span>Live</span>
             <span class="url-card-title">https://main--hersheys-eds--AdobeDrago.aem.live/</span>
           </a>
+        </div>
+        <h3>Authoring, code and docs</h3>
+        <div class="url-grid">
+          <a class="url-card" href="https://da.live/#/adobedrago/hersheys-eds" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-navy"></span>Author</span>
+            <span class="url-card-title">DA.live</span>
+            <span class="url-card-url">https://da.live/#/adobedrago/hersheys-eds</span>
+            <span class="url-card-desc">Content source for pages, <code class="code-inline">nav</code> and <code class="code-inline">footer</code>.</span>
+          </a>
           <a class="url-card" href="https://github.com/AdobeDrago/hersheys-eds" target="_blank" rel="noopener">
             <span class="url-card-label"><span class="dot dot-navy"></span>Code</span>
             <span class="url-card-title">AdobeDrago/hersheys-eds</span>
             <span class="url-card-url">https://github.com/AdobeDrago/hersheys-eds</span>
-          </a>
-          <a class="url-card" href="https://www.hersheyland.com" target="_blank" rel="noopener">
-            <span class="url-card-label"><span class="dot dot-orange"></span>Reference</span>
-            <span class="url-card-title">hersheyland.com</span>
-            <span class="url-card-desc">The live site being migrated.</span>
           </a>
           <a class="url-card" href="third-party-loading.md">
             <span class="url-card-label"><span class="dot dot-blue"></span>Doc</span>
@@ -797,6 +813,7 @@
               <div class="code-block">git clone https://github.com/AdobeDrago/hersheys-eds.git
 cd hersheys-eds
 npm i</div>
+              <p>Installs ESLint, Stylelint and other dev dependencies from <code class="code-inline">package.json</code>; there is no build step.</p>
             </div>
           </li>
           <li class="step">
@@ -805,7 +822,10 @@ npm i</div>
               <div class="step-title">Run the AEM CLI</div>
               <div class="code-block">npm install -g @adobe/aem-cli
 aem up</div>
-              <p>Starts the local dev server at <code class="code-inline">http://localhost:3000</code>: local code against previewed content. Without a global install, use <code class="code-inline">npx -y @adobe/aem-cli up</code>.</p>
+              <p>Starts the local dev server at <code class="code-inline">http://localhost:3000</code>: local code against previewed content. Content comes from Document Authoring (<a href="https://da.live/#/adobedrago/hersheys-eds" target="_blank" rel="noopener" style="color:var(--brand-blue);">da.live/#/adobedrago/hersheys-eds</a>).</p>
+              <div class="notice tip" style="margin-top:12px;">
+                <span><strong>Alternate.</strong> Without a global install: <code class="code-inline">npx -y @adobe/aem-cli up</code>.</span>
+              </div>
             </div>
           </li>
           <li class="step">
@@ -844,15 +864,11 @@ npm run storybook</div>
           Linting &amp; CI
         </h2>
         <div class="section-rule"></div>
-        <div class="code-block">npm run lint          <span class="cmt"># lint:js + lint:css</span>
-npm run lint:fix      <span class="cmt"># autofix both</span>
-npm run test:tokens   <span class="cmt"># design token tests (not in CI)</span></div>
-        <p><code class="code-inline">lint:js</code> runs ESLint (airbnb-base, <code class="code-inline">import/extensions</code> requires <code class="code-inline">.js</code>) over the repo plus the design and Storybook scripts; <code class="code-inline">lint:css</code> runs Stylelint over blocks, styles, design and Storybook CSS.</p>
-        <p>CI (<code class="code-inline">.github/workflows/main.yaml</code>) runs on every push: checkout, Node 24, <code class="code-inline">npm ci</code>, <code class="code-inline">npm run lint</code>. It does <strong>not</strong> build, deploy or run tests.</p>
-        <div class="notice info">
-          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
-          <span>The workflow step is labelled “Use Node.js 20” but sets <code class="code-inline">node-version: 24</code>; the version that runs is 24.</span>
-        </div>
+        <div class="code-block">npm run lint          <span class="cmt"># runs lint:js + lint:css</span>
+npm run lint:js       <span class="cmt"># ESLint (airbnb-base)</span>
+npm run lint:css      <span class="cmt"># Stylelint (blocks, styles, design and Storybook CSS)</span>
+npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span></div>
+        <p style="margin-top:12px;"><code class="code-inline">.github/workflows/main.yaml</code> runs <code class="code-inline">npm run lint</code> on every push — it does not run a build, deploy, or test step. The design token tests (<code class="code-inline">npm run test:tokens</code>) and Storybook suites (<code class="code-inline">storybook:test</code>, <code class="code-inline">storybook:test:browser</code>) exist but are run manually.</p>
       </section>
 
       <section class="doc-section" id="deploying">
@@ -931,6 +947,7 @@ npm run test:tokens   <span class="cmt"># design token tests (not in CI)</span><
           EDS blocks
         </h2>
         <div class="section-rule"></div>
+        <p>Blocks under <code class="code-inline">blocks/</code> with a decorate entrypoint, in alphabetical order. Variants (such as cards product/slider, hero recipe/article/product, tabs nutrition) are resolved inside their base block.</p>
         <table class="spec-table">
           <thead><tr><th>Block</th><th>Purpose</th></tr></thead>
           <tbody>
@@ -964,6 +981,8 @@ npm run test:tokens   <span class="cmt"># design token tests (not in CI)</span><
         <table class="spec-table">
           <thead><tr><th>Module</th><th>Exports / purpose</th></tr></thead>
           <tbody>
+            <tr><td><code class="code-inline">aem.js</code></td><td>Core EDS library (vendored): block and section decoration, <code class="code-inline">loadBlock</code>, header/footer, pictures, icons, <code class="code-inline">loadScript</code>, <code class="code-inline">loadCSS</code>. Never modify; extend via blocks and <code class="code-inline">scripts.js</code>.</td></tr>
+            <tr><td><code class="code-inline">scripts.js</code></td><td>Page entry: auto-blocks, button decoration, theme loading, eager/lazy/delayed sequence. Exports <code class="code-inline">decorateMain</code>, <code class="code-inline">whenActivated</code>, <code class="code-inline">whenVisible</code>. See Page decoration.</td></tr>
             <tr><td><code class="code-inline">brand-themes.js</code></td><td><code class="code-inline">DEFAULT_THEME</code>, <code class="code-inline">BRAND_THEMES</code>. Product page themes set by <code class="code-inline">theme</code> metadata; also imported by <code class="code-inline">tools/theme-picker</code>, so it has no imports.</td></tr>
             <tr><td><code class="code-inline">hershey-theme.js</code></td><td>Default export loads <code class="code-inline">design/tokens.css</code> and <code class="code-inline">styles/hershey-home.css</code>. Imported by <code class="code-inline">scripts.js</code>, <code class="code-inline">header.js</code>, <code class="code-inline">footer.js</code>.</td></tr>
             <tr><td><code class="code-inline">consent-state.js</code></td><td><code class="code-inline">hasConsent()</code>: reads OneTrust Performance (C0002) consent, otherwise declines. On localhost and <code class="code-inline">*.aem.page</code>, <code class="code-inline">?consent=accept</code> or <code class="code-inline">?consent=decline</code> overrides. Imported by Bazaarvoice, Launch and PriceSpider code.</td></tr>
@@ -998,8 +1017,10 @@ npm run test:tokens   <span class="cmt"># design token tests (not in CI)</span><
             <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm8-3.25a.75.75 0 01.75.75v2.69l1.78 1.78a.75.75 0 11-1.06 1.06l-2-2A.75.75 0 017.25 8.5v-3a.75.75 0 01.75-.75z"/></svg>
           </span>
           Lighthouse comparison — Live vs EDS
+          <span class="status-badge sb-warn">Pending</span>
         </h2>
         <div class="section-rule"></div>
+        <p>Chrome Lighthouse audits of production <code class="code-inline">www.hersheyland.com</code> versus the EDS preview <code class="code-inline">main--hersheys-eds--adobedrago.aem.page</code> are not yet captured.</p>
         <div class="notice todo">
           <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
           <span><strong>Placeholder</strong> — Lighthouse/PageSpeed results comparing live <a href="https://www.hersheyland.com" target="_blank" rel="noopener">hersheyland.com</a> with EDS were not provided. Save screenshots in <code class="code-inline">docs/images/</code> and add a <code class="code-inline">lh-compare</code> block (see the component library) for each audited page.</span>
@@ -1199,6 +1220,46 @@ npm run test:tokens   <span class="cmt"># design token tests (not in CI)</span><
             <div class="check-body">
               <div class="check-title">Social Share</div>
               <div class="check-note">Share and copy-link controls</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="next-steps">
+        <h2>
+          <span class="section-icon icon-orange">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm8-3.25a.75.75 0 01.75.75v2.69l1.78 1.78a.75.75 0 11-1.06 1.06l-2-2A.75.75 0 017.25 8.5v-3a.75.75 0 01.75-.75z"/></svg>
+          </span>
+          Next steps
+        </h2>
+        <div class="section-rule"></div>
+        <ul class="checklist">
+          <li class="check-item">
+            <span class="check-mark cm-todo"></span>
+            <div class="check-body">
+              <div class="check-title">Fill the placeholders</div>
+              <div class="check-note">Add the business purpose to the Overview and Lighthouse scores and screenshots (under <code class="code-inline">docs/images/</code>) to the comparison section.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-todo"></span>
+            <div class="check-body">
+              <div class="check-title">Confirm journey status and previews</div>
+              <div class="check-note">Replace the path prefixes for product and story journeys with specific preview pages, and confirm each status.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-todo"></span>
+            <div class="check-body">
+              <div class="check-title">Move third parties off prototype settings</div>
+              <div class="check-note">OneTrust uses a test domain script unless <code class="code-inline">onetrust-id</code> metadata is set, and Hershey Adobe Launch libraries are refused in <code class="code-inline">scripts/consented.js</code>. Switch when production access is available.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-todo"></span>
+            <div class="check-body">
+              <div class="check-title">Tidy served files</div>
+              <div class="check-note">Decide whether <code class="code-inline">docs/index.html</code> should be public (add <code class="code-inline">docs/*</code> to <code class="code-inline">.hlxignore</code> if not) and remove <code class="code-inline">scripts/scripts.js.bak</code>.</div>
             </div>
           </li>
         </ul>
