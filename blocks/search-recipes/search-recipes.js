@@ -19,6 +19,12 @@ const SEARCH_TIMEOUT = 8000;
 
 const LISTING_VARIANTS = ['activities'];
 
+const SORTS = [
+  ['newest', 'Newest'],
+  ['rating', 'Rating (Highest-Lowest)'],
+  ['alpha', 'A-Z'],
+];
+
 /**
  * Reads optional authoring config from the first table rows.
  * @param {HTMLElement} block
@@ -124,21 +130,28 @@ function buildShell(block, config) {
 
   const main = el('div', 'search-recipes-main');
   const sortWrap = el('div', 'search-recipes-sortby');
-  const sortLabel = el('label', 'search-recipes-sort-label', 'Sort By');
-  const sort = el('select', 'search-recipes-sort');
+  const sortLabel = el('span', 'search-recipes-sort-label', 'Sort By');
+  sortLabel.id = 'search-recipes-sort-label';
+  const sortBox = el('div', 'search-recipes-sortbox');
+  const sort = el('button', 'search-recipes-sort');
+  sort.type = 'button';
+  sort.setAttribute('aria-haspopup', 'listbox');
+  sort.setAttribute('aria-expanded', 'false');
+  sort.setAttribute('aria-labelledby', `${sortLabel.id} search-recipes-sort`);
   sort.id = 'search-recipes-sort';
-  sortLabel.htmlFor = sort.id;
-  [
-    ['newest', 'Newest'],
-    ['rating', 'Rating (Highest-Lowest)'],
-    ['alpha', 'A-Z'],
-  ].forEach(([value, text]) => {
-    const opt = document.createElement('option');
-    opt.value = value;
-    opt.textContent = text;
-    sort.append(opt);
+  const sortList = el('ul', 'search-recipes-sort-list');
+  sortList.setAttribute('role', 'listbox');
+  sortList.setAttribute('aria-labelledby', sortLabel.id);
+  sortList.hidden = true;
+  SORTS.forEach(([value, text]) => {
+    const opt = el('li', 'search-recipes-sort-option', text);
+    opt.setAttribute('role', 'option');
+    opt.dataset.value = value;
+    opt.tabIndex = -1;
+    sortList.append(opt);
   });
-  sortWrap.append(sortLabel, sort);
+  sortBox.append(sort, sortList);
+  sortWrap.append(sortLabel, sortBox);
 
   const status = el('p', 'search-recipes-status');
   status.hidden = true;
@@ -159,7 +172,7 @@ function buildShell(block, config) {
   block.replaceChildren(root);
 
   return {
-    form, input, clear, panel, facetsMount, facetsCount, stats, sort, status, hits, more, config,
+    form, input, clear, panel, facetsMount, facetsCount, stats, sort, sortList, status, hits, more, config,
     progress, progressText, progressFill,
   };
 }
@@ -382,10 +395,51 @@ export default function decorate(block) {
     searchSoon(300);
   });
 
-  ui.sort.addEventListener('change', () => {
-    state.indexKey = ui.sort.value;
+  const setSort = (value) => {
+    const [, text] = SORTS.find(([key]) => key === value);
+    ui.sort.textContent = text;
+    ui.sortList.querySelectorAll('li').forEach((opt) => {
+      opt.setAttribute('aria-selected', String(opt.dataset.value === value));
+    });
+  };
+  const toggleSort = (open) => {
+    ui.sortList.hidden = !open;
+    ui.sort.setAttribute('aria-expanded', String(open));
+  };
+  setSort(state.indexKey);
+  ui.sort.addEventListener('click', () => toggleSort(ui.sortList.hidden));
+  ui.sortList.addEventListener('click', (e) => {
+    const opt = e.target.closest('li');
+    if (!opt) return;
+    state.indexKey = opt.dataset.value;
     state.page = 0;
+    setSort(state.indexKey);
+    toggleSort(false);
+    ui.sort.focus();
     searchSoon();
+  });
+  ui.sortList.addEventListener('keydown', (e) => {
+    const opts = [...ui.sortList.children];
+    const at = opts.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') opts[Math.min(at + 1, opts.length - 1)].focus();
+    else if (e.key === 'ArrowUp') opts[Math.max(at - 1, 0)].focus();
+    else if (e.key === 'Enter' || e.key === ' ') document.activeElement.click();
+    else return;
+    e.preventDefault();
+  });
+  ui.sort.addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowDown') return;
+    e.preventDefault();
+    toggleSort(true);
+    ui.sortList.firstElementChild.focus();
+  });
+  block.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' || ui.sortList.hidden) return;
+    toggleSort(false);
+    ui.sort.focus();
+  });
+  document.addEventListener('click', (e) => {
+    if (!ui.sortList.hidden && !e.target.closest('.search-recipes-sortbox')) toggleSort(false);
   });
 
   ui.clear.addEventListener('click', () => {

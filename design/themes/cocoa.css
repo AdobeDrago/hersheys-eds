@@ -430,6 +430,8 @@
   --hershey-system-color-border-listing-field: var(--hershey-reference-color-brand-mist);
   --hershey-system-color-border-listing-facets: var(--hershey-reference-color-alpha-chocolate-15);
   --hershey-system-color-border-listing-sort: var(--hershey-reference-color-alpha-chocolate-25);
+  --hershey-system-color-border-listing-focus: var(--hershey-reference-color-neutral-0);
+  --hershey-system-color-border-listing-sort-open: var(--hershey-reference-color-brand-blue-action);
   --hershey-system-color-icon-primary: var(--hershey-system-color-text-primary);
   --hershey-system-color-icon-home: var(--hershey-reference-color-brand-navy);
   --hershey-system-color-icon-navigation: var(--hershey-reference-color-brand-navy);
@@ -1307,6 +1309,7 @@
   --hershey-component-search-recipes-banner-search-height: var(--hershey-system-size-listing-search-height);
   --hershey-component-search-recipes-banner-search-height-mobile: var(--hershey-system-size-listing-search-height-mobile);
   --hershey-component-search-recipes-banner-search-color-border: var(--hershey-system-color-border-listing-field);
+  --hershey-component-search-recipes-banner-search-color-focus: var(--hershey-system-color-border-listing-focus);
   --hershey-component-search-recipes-banner-search-radius: var(--hershey-system-shape-radius-action);
   --hershey-component-search-recipes-banner-search-font-size: var(--hershey-system-typography-listing-input-font-size);
   --hershey-component-search-recipes-banner-search-font-size-mobile: var(--hershey-system-typography-listing-input-font-size-mobile);
@@ -1320,7 +1323,10 @@
   --hershey-component-search-recipes-sort-height: var(--hershey-system-size-listing-sort-height);
   --hershey-component-search-recipes-sort-radius: var(--hershey-system-shape-radius-listing-sort);
   --hershey-component-search-recipes-sort-color-border: var(--hershey-system-color-border-listing-sort);
+  --hershey-component-search-recipes-sort-color-border-open: var(--hershey-system-color-border-listing-sort-open);
   --hershey-component-search-recipes-sort-border-width: var(--hershey-system-border-width-control);
+  --hershey-component-search-recipes-sort-shadow: var(--hershey-system-elevation-shadow-card);
+  --hershey-component-search-recipes-sort-font-size: var(--hershey-system-typography-listing-input-font-size);
   --hershey-component-search-recipes-more-color-surface: var(--hershey-system-color-surface-listing-action);
   --hershey-component-search-recipes-more-color-text: var(--hershey-system-color-text-inverse);
   --hershey-component-search-recipes-more-height: var(--hershey-system-size-listing-more-height);
