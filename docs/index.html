@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hersheyland — EDS Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Brand — swap these four for the project's own brand if it has one;
+       otherwise leave the Adobe Drago default navy/blue below. */
+    --brand-navy: #003b71;
+    --brand-blue: #0074ad;
+    --brand-blue-hover: #005a87;
+    --brand-text: #0d1c3d;
+    --brand-grey-text: #677083;
+    --brand-pale-blue: #f0f7fa;
+    --accent: var(--brand-blue);
+
+    --gray-50: #ffffff;
+    --gray-75: #fafafa;
+    --gray-100: #f5f5f5;
+    --gray-200: #eaeaea;
+    --gray-300: #e1e1e1;
+    --gray-400: #cacaca;
+    --gray-500: #b3b3b3;
+    --gray-600: #8e8e8e;
+    --gray-700: #6e6e6e;
+    --gray-800: #4b4b4b;
+    --gray-900: #2c2c2c;
+
+    --font: 'Source Sans 3', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono: 'Source Code Pro', 'Fira Mono', 'Courier New', monospace;
+    --sidebar-width: 248px;
+    --content-max: 860px;
+    --header-h: 56px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--gray-900);
+    background: var(--gray-50);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ── TOP NAV ── */
+  .topnav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--header-h);
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 16px;
+    z-index: 100;
+    box-shadow: 0 1px 0 var(--gray-200);
+  }
+  .topnav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--brand-navy);
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .topnav-logo .mark {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--brand-blue);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .topnav-divider { width: 1px; height: 20px; background: var(--gray-300); }
+  .topnav-title {
+    color: var(--gray-800);
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  .topnav-badge {
+    margin-left: auto;
+    background: var(--brand-pale-blue);
+    color: var(--brand-blue);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* ── LAYOUT ── */
+  .layout { display: flex; margin-top: var(--header-h); min-height: calc(100vh - var(--header-h)); }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    position: sticky;
+    top: var(--header-h);
+    height: calc(100vh - var(--header-h));
+    overflow-y: auto;
+    border-right: 1px solid var(--gray-200);
+    background: var(--gray-75);
+    padding: 24px 0 40px;
+  }
+  .sidebar-section { margin-bottom: 8px; }
+  .sidebar-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-600);
+    padding: 8px 20px 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 20px;
+    font-size: 13px;
+    color: var(--gray-800);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: background 0.1s, color 0.1s, border-color 0.1s;
+  }
+  .sidebar-link:hover { background: var(--gray-200); color: var(--gray-900); }
+  .sidebar-link.active {
+    background: var(--brand-pale-blue);
+    color: var(--brand-blue);
+    border-left-color: var(--brand-blue);
+    font-weight: 700;
+  }
+  .sidebar-link .icon { width: 16px; height: 16px; opacity: 0.6; flex-shrink: 0; }
+  .sidebar-link.active .icon { opacity: 1; }
+
+  /* ── MAIN ── */
+  .main { flex: 1; min-width: 0; padding: 48px 56px 80px; }
+  .main-inner { max-width: var(--content-max); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    scroll-margin-top: var(--header-h);
+    margin-bottom: 48px;
+  }
+  .page-hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brand-blue);
+    margin-bottom: 8px;
+  }
+  .page-hero h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--brand-navy);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .page-hero-sub { font-size: 16px; color: var(--gray-700); max-width: 640px; line-height: 1.5; }
+
+  /* ── SECTIONS ── */
+  .doc-section { margin-bottom: 56px; scroll-margin-top: calc(var(--header-h) + 24px); }
+  .doc-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--brand-navy);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  .section-rule { height: 1px; background: var(--gray-200); margin: 12px 0 24px; }
+  .doc-section h3 { font-size: 14px; font-weight: 700; color: var(--gray-900); margin: 24px 0 8px; }
+  .doc-section p { font-size: 14px; color: var(--gray-800); margin-bottom: 12px; line-height: 1.65; }
+
+  /* ── SECTION ICON BADGE ── */
+  .section-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .icon-blue   { background: #e9f1fc; color: var(--brand-blue); }
+  .icon-navy   { background: #e6eef7; color: var(--brand-navy); }
+  .icon-green  { background: #eaf6f1; color: #268e6c; }
+  .icon-purple { background: #f3edfb; color: #7240ab; }
+  .icon-seafoam{ background: #e6f4f4; color: #16878c; }
+  .icon-orange { background: #fff4e5; color: #da7b11; }
+
+  /* ── URL CARDS ── */
+  .url-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .url-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .url-card:hover { border-color: var(--brand-blue); box-shadow: 0 0 0 1px var(--brand-blue); }
+  .url-card-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .url-card-label .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .dot-blue   { background: var(--brand-blue); }
+  .dot-navy   { background: var(--brand-navy); }
+  .dot-green  { background: #268e6c; }
+  .dot-orange { background: #da7b11; }
+  .url-card-title { font-size: 13px; font-weight: 700; color: var(--gray-900); }
+  .url-card-url { font-size: 12px; font-family: var(--mono); color: var(--brand-blue); word-break: break-all; }
+  .url-card-desc { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+
+  /* ── STEPS ── */
+  .steps { counter-reset: step; list-style: none; display: flex; flex-direction: column; gap: 0; position: relative; }
+  .steps::before {
+    content: '';
+    position: absolute;
+    left: 15px; top: 30px; bottom: 30px;
+    width: 1px;
+    background: var(--gray-300);
+  }
+  .step { display: flex; gap: 16px; padding-bottom: 24px; position: relative; }
+  .step:last-child { padding-bottom: 0; }
+  .step-num {
+    counter-increment: step;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--brand-blue);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .step-num::after { content: counter(step); }
+  .step-body { padding-top: 5px; flex: 1; }
+  .step-title { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+  .step-body p { font-size: 13px; color: var(--gray-700); margin-bottom: 8px; }
+
+  /* ── CODE BLOCKS ── */
+  .code-block {
+    background: var(--gray-900);
+    color: #d4d4d4;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 8px 0 4px;
+    white-space: pre;
+  }
+  .code-block .cmt  { color: #6a9955; }
+  .code-block .str  { color: #ce9178; }
+  .code-block .kw   { color: #569cd6; }
+  .code-block .var  { color: #9cdcfe; }
+  .code-inline {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-300);
+    color: var(--gray-900);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  /* ── NOTICES ── */
+  .notice {
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 13px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+  .notice-icon { flex-shrink: 0; margin-top: 1px; }
+  .notice.info     { background: #e9f1fc; color: #0d51b5; border-left: 3px solid var(--brand-blue); }
+  .notice.tip      { background: #eaf6f1; color: #1a6b50; border-left: 3px solid #268e6c; }
+  .notice.warning  { background: #fff4e5; color: #8a4b08; border-left: 3px solid #da7b11; }
+  /* .todo is NOT part of the original DRiV template — added by this skill
+     to flag skipped/placeholder content distinctly from a normal warning. */
+  .notice.todo {
+    background: repeating-linear-gradient(45deg, #fff8ec, #fff8ec 10px, #fdf1d8 10px, #fdf1d8 20px);
+    color: #8a4b08;
+    border: 1px dashed #da7b11;
+    border-left: 3px dashed #da7b11;
+  }
+  .notice.todo strong { text-transform: uppercase; letter-spacing: 0.04em; font-size: 11px; }
+
+  /* ── SPEC TABLE ── */
+  .spec-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+  .spec-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--gray-600);
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--gray-200);
+    background: var(--gray-75);
+  }
+  .spec-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-200); color: var(--gray-800); vertical-align: top; }
+  .spec-table tr:last-child td { border-bottom: none; }
+  .spec-table td:first-child { font-weight: 700; color: var(--gray-900); }
+  .spec-table.blocks-matrix td:first-child {
+    font-weight: 700;
+    color: var(--gray-900);
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .spec-table.blocks-matrix td:nth-child(2),
+  .spec-table.blocks-matrix td:nth-child(3) {
+    text-align: center;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .spec-table.blocks-matrix .mark-yes { color: #268e6c; }
+  .spec-table.blocks-matrix .mark-no { color: #c0392b; }
+  .spec-table.blocks-matrix td:last-child {
+    font-weight: 400;
+    color: var(--gray-800);
+    font-family: inherit;
+    font-size: 13px;
+  }
+
+  /* ── PROJECT SWITCHER (only needed when the doc covers >1 project) ── */
+  .sidebar-project {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray-800);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: background 0.1s, color 0.1s, border-color 0.1s;
+  }
+  .sidebar-project:hover { background: var(--gray-200); color: var(--gray-900); }
+  .sidebar-project.active {
+    background: var(--brand-pale-blue);
+    color: var(--brand-blue);
+    border-left-color: var(--brand-blue);
+  }
+  .project-divider {
+    scroll-margin-top: calc(var(--header-h) + 24px);
+    margin: 56px 0 32px;
+    padding: 20px 0 0;
+    border-top: 2px solid var(--gray-200);
+  }
+  .project-divider:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+  .project-divider-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--brand-blue);
+    margin-bottom: 6px;
+  }
+  .project-divider h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--brand-navy);
+    margin-bottom: 8px;
+  }
+  .project-divider p {
+    font-size: 14px;
+    color: var(--gray-700);
+    max-width: 640px;
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  /* ── STATUS BADGE / SIDEBAR PILL ── */
+  .nav-status {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 1px 6px;
+    border-radius: 8px;
+    text-transform: uppercase;
+  }
+  .ns-gap      { background: #fff4e5; color: #8a4b08; }
+  .ns-progress { background: #fff4e5; color: #8a4b08; }
+  .ns-planned  { background: var(--gray-200); color: var(--gray-600); }
+  .ns-done     { background: #eaf6f1; color: #1a6b50; }
+
+  .status-badge {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+  }
+  .sb-warn     { background: #fff4e5; color: #8a4b08; }
+  .sb-progress { background: #fff4e5; color: #8a4b08; }
+  .sb-planned  { background: var(--gray-100); color: var(--gray-600); }
+  .sb-ok,
+  .sb-done     { background: #eaf6f1; color: #1a6b50; }
+
+  .req-list { margin: 8px 0 0 18px; font-size: 13px; color: var(--gray-700); }
+  .req-list li { margin-bottom: 4px; }
+
+  /* ── PROGRESS CHECKLIST ── */
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 4px 0; }
+  .check-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    background: var(--gray-50);
+  }
+  .check-mark {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .check-mark svg { width: 12px; height: 12px; }
+  .cm-done    { background: #eaf6f1; color: #268e6c; }
+  .cm-partial { background: #fff4e5; color: #da7b11; }
+  .cm-todo    { background: var(--gray-100); color: var(--gray-500); }
+  .check-body { flex: 1; }
+  .check-title { font-weight: 700; font-size: 13px; color: var(--gray-900); }
+  .check-note  { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+  /* ── LIGHTHOUSE COMPARISON ── */
+  .lh-compare { display: flex; flex-direction: column; gap: 24px; margin: 16px 0; }
+  .lh-compare-page {
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    background: var(--gray-50);
+    overflow: hidden;
+  }
+  .lh-compare-page-title {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gray-200);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-900);
+  }
+  .lh-compare-page-title span {
+    font-size: 12px;
+    font-weight: 400;
+    font-family: var(--mono);
+    color: var(--gray-600);
+    margin-left: 8px;
+  }
+  .lh-compare-cols {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+  }
+  .lh-compare-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .lh-compare-side + .lh-compare-side {
+    border-top: 1px solid var(--gray-200);
+  }
+  .lh-compare-side-header {
+    padding: 10px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--gray-200);
+    background: #fff;
+  }
+  .lh-compare-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #000;
+  }
+  .lh-scores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-left: auto;
+  }
+  .lh-score {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+  .lh-score-good { background: #eaf6f1; color: #1a6b50; }
+  .lh-score-ok   { background: #fff4e5; color: #8a4b08; }
+  .lh-score-bad  { background: #fdecea; color: #a1281c; }
+  .lh-compare-side img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    border-top: 1px solid var(--gray-200);
+    margin-top: 40px;
+    padding-top: 20px;
+    font-size: 12px;
+    color: var(--gray-500);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 24px 20px 60px; }
+    .page-hero h1 { font-size: 24px; }
+    .url-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a class="topnav-logo" href="#site-intro">
+    <span class="mark">HL</span>
+    Hersheyland
+  </a>
+  <div class="topnav-divider"></div>
+  <span class="topnav-title">Hersheyland — AEM → EDS Migration</span>
+  <span class="topnav-badge">Docs</span>
+</nav>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <nav class="sidebar" aria-label="Page navigation">
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Getting Started</div>
+      <a class="sidebar-link" href="#overview">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h5v5H2zm7 0h5v5H9zM2 9h5v5H2zm7 0h5v5H9z"/></svg>
+        Overview
+      </a>
+      <a class="sidebar-link" href="#references">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"/></svg>
+        Key references
+      </a>
+      <a class="sidebar-link" href="#setup">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+        Install &amp; run
+      </a>
+      <a class="sidebar-link" href="#linting">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0114.25 14H1.75A1.75 1.75 0 010 12.25v-8.5zm1.75-.25a.25.25 0 00-.25.25v.5h13v-.5a.25.25 0 00-.25-.25H1.75zM1.5 5.5v6.75c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.5h-13z"/></svg>
+        Linting &amp; CI
+      </a>
+      <a class="sidebar-link" href="#deploying">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 15.4V13a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2.4a5.5 5.5 0 002-1.1V9.5A5.5 5.5 0 003 9.5v4.8a5.5 5.5 0 003.5 1.1z"/></svg>
+        Deploying
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Architecture</div>
+      <a class="sidebar-link" href="#block-routing">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3.5A1.5 1.5 0 012.5 2h2A1.5 1.5 0 016 3.5v2A1.5 1.5 0 014.5 7h-2A1.5 1.5 0 011 5.5v-2zm5.5 0A1.5 1.5 0 018 2h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 7H8A1.5 1.5 0 016.5 5.5v-2zm-5.5 5A1.5 1.5 0 012.5 7h2A1.5 1.5 0 016 8.5v2A1.5 1.5 0 014.5 12h-2A1.5 1.5 0 011 10.5v-2zm5.5 0A1.5 1.5 0 018 7h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 12H8A1.5 1.5 0 016.5 10.5v-2z"/></svg>
+        Block-loading routing
+      </a>
+      <a class="sidebar-link" href="#page-decoration">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
+        Page decoration
+      </a>
+      <a class="sidebar-link" href="#eds-blocks">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 1A1.5 1.5 0 001 2.5v11A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-11A1.5 1.5 0 0013.5 1h-11zm8.4 1.3l-.1 1.6a.2.2 0 00.32.17l.55-.42.47.36a.2.2 0 00.32-.17l-.13-2.03h.8v11.4H4.4V2.3h6.5z"/></svg>
+        EDS blocks
+      </a>
+      <a class="sidebar-link" href="#supporting-modules">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2h-7zM5 5.5A.5.5 0 015.5 5h5a.5.5 0 010 1h-5A.5.5 0 015 5.5zm0 2.5a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5A.5.5 0 015 8zm.5 2a.5.5 0 000 1h3a.5.5 0 000-1h-3z"/></svg>
+        Supporting modules
+      </a>
+      <a class="sidebar-link" href="#lighthouse-compare">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm8-3.25a.75.75 0 01.75.75v2.69l1.78 1.78a.75.75 0 11-1.06 1.06l-2-2A.75.75 0 017.25 8.5v-3a.75.75 0 01.75-.75z"/></svg>
+        Lighthouse comparison
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Journeys</div>
+      <a class="sidebar-link" href="#j1-progress">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+        1 · Homepage
+      </a>
+      <a class="sidebar-link" href="#j2-progress">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+        2 · Header &amp; footer
+      </a>
+      <a class="sidebar-link" href="#j3-progress">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+        3 · Product pages
+      </a>
+      <a class="sidebar-link" href="#j4-progress">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+        4 · Recipe pages
+      </a>
+      <a class="sidebar-link" href="#j5-progress">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+        5 · Stories
+      </a>
+    </div>
+
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <div class="main-inner">
+
+      <!-- SITE INTRO -->
+      <div class="page-hero" id="site-intro">
+        <div class="page-hero-eyebrow">Hersheyland · EDS</div>
+        <h1>EDS Migration Docs</h1>
+        <p class="page-hero-sub">Architecture, blocks and delivery notes for the Hersheyland Edge Delivery Services site: homepage, shared navigation, product, recipe and story pages.</p>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="page-hero" id="overview">
+        <div class="page-hero-eyebrow">Hersheyland · Pilot</div>
+        <h1>Hersheyland EDS Pilot</h1>
+        <p class="page-hero-sub">Authorable migration of Hersheyland pages onto Edge Delivery Services, using original source images and licensed Gazpacho and TT Norms Pro fonts.</p>
+      </div>
+
+      <section class="doc-section">
+        <h3>Purpose</h3>
+        <ul class="req-list">
+          <li>Authorable migration of the Hersheyland homepage using original source images and licensed fonts (from the repository README), extended to shared navigation, product, recipe and story pages.</li>
+        </ul>
+        <div class="notice todo">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><strong>Placeholder</strong> — the business goal behind this migration (e.g. replacing the current platform, a performance target, or a pilot for a wider rollout) was not provided. Add it here.</span>
+        </div>
+
+        <h3>Core engineering requirements</h3>
+        <ul class="req-list">
+          <li>Use the EDS block-based development model only (<code class="code-inline">scripts/aem.js</code> + <code class="code-inline">scripts/scripts.js</code>); there is no build step and <code class="code-inline">package.json</code> holds devDependencies only.</li>
+          <li>Author all content in DA (org <code class="code-inline">adobedrago</code>, site <code class="code-inline">hersheys-eds</code>); navigation and footer are separate documents (<code class="code-inline">/nav</code>, <code class="code-inline">/footer</code>).</li>
+          <li>Load third-party tags only after first paint and never block a section on a vendor without a time limit (<code class="code-inline">scripts/delayed.js</code>, <code class="code-inline">docs/third-party-loading.md</code>).</li>
+          <li>Gate Adobe Launch and tracking cookies on OneTrust Performance consent (group <code class="code-inline">C0002</code> in <code class="code-inline">scripts/consent-state.js</code>).</li>
+          <li>Run under a Content-Security-Policy with Trusted Types (<code class="code-inline">head.html</code>, default policy in <code class="code-inline">scripts/scripts.js</code>).</li>
+          <li>Keep design values in a DTCG token catalog (<code class="code-inline">design/tokens.json</code>) that generates <code class="code-inline">design/tokens.css</code>; run <code class="code-inline">node design/generate-tokens.mjs</code> after changes.</li>
+          <li>Select page themes with <code class="code-inline">Template</code> and <code class="code-inline">theme</code> metadata; brand themes are listed in <code class="code-inline">scripts/brand-themes.js</code> with one stylesheet each in <code class="code-inline">design/themes/</code>.</li>
+          <li>Decorate blocks defensively: authors add and omit cells, so each block reads what is present and skips the rest.</li>
+          <li>Keep Storybook (<code class="code-inline">storybook/</code>) and design generators out of EDS delivery via <code class="code-inline">.hlxignore</code>.</li>
+        </ul>
+
+        <h3>Journeys</h3>
+        <table class="spec-table">
+          <thead><tr><th>Journey</th><th>Validates</th><th>Status</th><th>Preview</th></tr></thead>
+          <tbody>
+            <tr><td>1 · Homepage</td><td>Homepage and its themed sections</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/</a></td></tr>
+            <tr><td>2 · Header &amp; footer</td><td>Shared navigation and footer</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/nav" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/nav</a></td></tr>
+            <tr><td>3 · Product pages</td><td>Product detail pages under <code class="code-inline">/products/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><code class="code-inline">/products/…</code></td></tr>
+            <tr><td>4 · Recipe pages</td><td>Recipe pages and recipe search</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/recipes/all-recipes" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/recipes/all-recipes</a></td></tr>
+            <tr><td>5 · Stories</td><td>Editorial story pages under <code class="code-inline">/stories/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><code class="code-inline">/stories/…</code></td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;">Status values were supplied by the team; paths other than the homepage, <code class="code-inline">/nav</code> and <code class="code-inline">/recipes/all-recipes</code> are path prefixes, not specific pages.</p>
+
+        <h3>Repository</h3>
+        <table class="spec-table">
+          <tbody>
+            <tr><td>Effort</td><td>Hersheyland → EDS migration pilot</td></tr>
+            <tr><td>GitHub repo</td><td><code class="code-inline">AdobeDrago/hersheys-eds</code> · branch <code class="code-inline">main</code></td></tr>
+            <tr><td>Base</td><td><code class="code-inline">adobe/aem-boilerplate</code> (package <code class="code-inline">@adobe/aem-boilerplate</code> v1.3.0)</td></tr>
+            <tr><td>Dev model</td><td>EDS block-based only (<code class="code-inline">scripts/aem.js</code> + <code class="code-inline">scripts/scripts.js</code>)</td></tr>
+            <tr><td>Backend services</td><td>None in this repo (no workers or proxy). Third-party services: Algolia (recipe search, related products), Bazaarvoice (ratings and reviews), PriceSpider/Wayvia (where to buy), OneTrust (consent), Adobe Launch (analytics, off unless configured).</td></tr>
+            <tr><td>Reference site</td><td><a href="https://www.hersheyland.com" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://www.hersheyland.com</a></td></tr>
+            <tr><td>Testing</td><td>CI runs lint only. <code class="code-inline">npm run test:tokens</code> and the Storybook suites (<code class="code-inline">storybook:test</code>, <code class="code-inline">storybook:test:browser</code>) exist but are not run in CI.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-section" id="references">
+        <h2>
+          <span class="section-icon icon-blue">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"/></svg>
+          </span>
+          Key references
+        </h2>
+        <div class="section-rule"></div>
+        <div class="url-grid">
+          <a class="url-card" href="https://da.live/#/adobedrago/hersheys-eds" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-navy"></span>Author</span>
+            <span class="url-card-title">DA.live</span>
+            <span class="url-card-url">https://da.live/#/adobedrago/hersheys-eds</span>
+            <span class="url-card-desc">Content source for pages, <code class="code-inline">nav</code> and <code class="code-inline">footer</code>.</span>
+          </a>
+          <a class="url-card" href="https://main--hersheys-eds--AdobeDrago.aem.page/" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-blue"></span>Preview</span>
+            <span class="url-card-title">https://main--hersheys-eds--AdobeDrago.aem.page/</span>
+            <span class="url-card-desc">Branch previews follow <code class="code-inline">https://{branch}--hersheys-eds--AdobeDrago.aem.page/</code>.</span>
+          </a>
+          <a class="url-card" href="https://main--hersheys-eds--AdobeDrago.aem.live/" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-green"></span>Live</span>
+            <span class="url-card-title">https://main--hersheys-eds--AdobeDrago.aem.live/</span>
+          </a>
+          <a class="url-card" href="https://github.com/AdobeDrago/hersheys-eds" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-navy"></span>Code</span>
+            <span class="url-card-title">AdobeDrago/hersheys-eds</span>
+            <span class="url-card-url">https://github.com/AdobeDrago/hersheys-eds</span>
+          </a>
+          <a class="url-card" href="https://www.hersheyland.com" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-orange"></span>Reference</span>
+            <span class="url-card-title">hersheyland.com</span>
+            <span class="url-card-desc">The live site being migrated.</span>
+          </a>
+          <a class="url-card" href="third-party-loading.md">
+            <span class="url-card-label"><span class="dot dot-blue"></span>Doc</span>
+            <span class="url-card-title">Third-party loading</span>
+            <span class="url-card-desc">When each integration loads, its consent rules and failure behavior (<code class="code-inline">docs/third-party-loading.md</code>).</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="doc-section" id="setup">
+        <h2>
+          <span class="section-icon icon-blue">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+          </span>
+          Install &amp; run
+        </h2>
+        <div class="section-rule"></div>
+        <ol class="steps">
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Clone and install</div>
+              <div class="code-block">git clone https://github.com/AdobeDrago/hersheys-eds.git
+cd hersheys-eds
+npm i</div>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Run the AEM CLI</div>
+              <div class="code-block">npm install -g @adobe/aem-cli
+aem up</div>
+              <p>Starts the local dev server at <code class="code-inline">http://localhost:3000</code>: local code against previewed content. Without a global install, use <code class="code-inline">npx -y @adobe/aem-cli up</code>.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Inspect real markup before changing a block</div>
+              <div class="code-block">curl localhost:3000/&lt;path&gt;.plain.html</div>
+              <p>Markup comes from the backend; check it first. Remember that <code class="code-inline">buildAutoBlocks</code> rewrites content before a block runs.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Regenerate design tokens (after editing the catalog)</div>
+              <div class="code-block">node design/generate-tokens.mjs
+node design/generate-tokens.mjs --check</div>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Storybook (optional, isolated dependencies)</div>
+              <div class="code-block">npm --prefix storybook ci
+npm run storybook</div>
+              <p>Opens at <code class="code-inline">http://localhost:6006</code>. <code class="code-inline">npm run storybook:build</code> produces a static build; Storybook is excluded from EDS delivery.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="doc-section" id="linting">
+        <h2>
+          <span class="section-icon icon-navy">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0114.25 14H1.75A1.75 1.75 0 010 12.25v-8.5zm1.75-.25a.25.25 0 00-.25.25v.5h13v-.5a.25.25 0 00-.25-.25H1.75zM1.5 5.5v6.75c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.5h-13z"/></svg>
+          </span>
+          Linting &amp; CI
+        </h2>
+        <div class="section-rule"></div>
+        <div class="code-block">npm run lint          <span class="cmt"># lint:js + lint:css</span>
+npm run lint:fix      <span class="cmt"># autofix both</span>
+npm run test:tokens   <span class="cmt"># design token tests (not in CI)</span></div>
+        <p><code class="code-inline">lint:js</code> runs ESLint (airbnb-base, <code class="code-inline">import/extensions</code> requires <code class="code-inline">.js</code>) over the repo plus the design and Storybook scripts; <code class="code-inline">lint:css</code> runs Stylelint over blocks, styles, design and Storybook CSS.</p>
+        <p>CI (<code class="code-inline">.github/workflows/main.yaml</code>) runs on every push: checkout, Node 24, <code class="code-inline">npm ci</code>, <code class="code-inline">npm run lint</code>. It does <strong>not</strong> build, deploy or run tests.</p>
+        <div class="notice info">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span>The workflow step is labelled “Use Node.js 20” but sets <code class="code-inline">node-version: 24</code>; the version that runs is 24.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="deploying">
+        <h2>
+          <span class="section-icon icon-navy">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 15.4V13a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2.4a5.5 5.5 0 002-1.1V9.5A5.5 5.5 0 003 9.5v4.8a5.5 5.5 0 003.5 1.1z"/></svg>
+          </span>
+          Deploying
+        </h2>
+        <div class="section-rule"></div>
+        <p>There is no deploy script. Code and content ship separately:</p>
+        <ul class="req-list">
+          <li>Merging to <code class="code-inline">main</code> ships code (AEM Code Sync).</li>
+          <li>Content publishes separately from DA: preview first, then publish. Merging code does not publish content.</li>
+          <li>A pull request needs a <code class="code-inline">{branch}--hersheys-eds--AdobeDrago.aem.page/{path}</code> preview link.</li>
+          <li>All committed files are served; <code class="code-inline">.hlxignore</code> excludes dotfiles, Markdown, tests, design generators and Storybook.</li>
+        </ul>
+        <div class="notice warning">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><code class="code-inline">docs/index.html</code> is not excluded by <code class="code-inline">.hlxignore</code>, so it is served at <code class="code-inline">/docs/index.html</code> once merged. Add <code class="code-inline">docs/*</code> to <code class="code-inline">.hlxignore</code> if the documentation should stay internal.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="block-routing">
+        <h2>
+          <span class="section-icon icon-navy">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3.5A1.5 1.5 0 012.5 2h2A1.5 1.5 0 016 3.5v2A1.5 1.5 0 014.5 7h-2A1.5 1.5 0 011 5.5v-2zm5.5 0A1.5 1.5 0 018 2h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 7H8A1.5 1.5 0 016.5 5.5v-2zm-5.5 5A1.5 1.5 0 012.5 7h2A1.5 1.5 0 016 8.5v2A1.5 1.5 0 014.5 12h-2A1.5 1.5 0 011 10.5v-2zm5.5 0A1.5 1.5 0 018 7h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 12H8A1.5 1.5 0 016.5 10.5v-2z"/></svg>
+          </span>
+          Block-loading routing
+        </h2>
+        <div class="section-rule"></div>
+        <p>No custom block routing. <code class="code-inline">scripts/aem.js</code> is the vendored boilerplate file and block resolution is stock: a block named <code class="code-inline">x</code> loads <code class="code-inline">blocks/x/x.js</code> and <code class="code-inline">blocks/x/x.css</code>. Compared with current <code class="code-inline">adobe/aem-boilerplate</code> it only lacks a newer RUM error-locator addition for unhandled rejections; there are no local edits (never edit it).</p>
+        <p>Variants are resolved inside the base block, not by the loader:</p>
+        <table class="spec-table">
+          <thead><tr><th>Base block</th><th>Variant handling</th></tr></thead>
+          <tbody>
+            <tr><td><code class="code-inline">cards</code></td><td><code class="code-inline">cards.js</code> imports <code class="code-inline">cards-product.js</code> and <code class="code-inline">cards-product.css</code> when the block has the <code class="code-inline">product</code> class; <code class="code-inline">slider</code> and <code class="code-inline">related</code> are handled in <code class="code-inline">cards.js</code>.</td></tr>
+            <tr><td><code class="code-inline">hero</code></td><td><code class="code-inline">hero.js</code> is the recipe variant and loads <code class="code-inline">hero-article.js</code> (article) or <code class="code-inline">hero-product.js</code> (product) by class.</td></tr>
+            <tr><td><code class="code-inline">tabs</code></td><td><code class="code-inline">tabs.js</code> imports <code class="code-inline">tabs-nutrition.js</code> and <code class="code-inline">tabs-nutrition.css</code> for the <code class="code-inline">nutrition</code> class.</td></tr>
+            <tr><td><code class="code-inline">widget</code></td><td>Built from <code class="code-inline">/widgets/…</code> links (see page decoration); <code class="code-inline">widget.js</code> loads the matching folder under <code class="code-inline">widgets/</code>.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-section" id="page-decoration">
+        <h2>
+          <span class="section-icon icon-purple">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
+          </span>
+          Page decoration (<code class="code-inline">scripts/scripts.js</code>)
+        </h2>
+        <div class="section-rule"></div>
+        <table class="spec-table">
+          <thead><tr><th>Behavior</th><th>What triggers it</th></tr></thead>
+          <tbody>
+            <tr><td><code class="code-inline">whenActivated()</code></td><td>Exported helper. Resolves immediately, or on <code class="code-inline">prerenderingchange</code> for a speculatively prerendered page, so third parties never run unseen.</td></tr>
+            <tr><td><code class="code-inline">whenVisible(el, cb)</code></td><td>Exported helper. Runs the callback the first time the element intersects the viewport.</td></tr>
+            <tr><td>Trusted Types default policy</td><td>Browsers that support <code class="code-inline">trustedTypes</code>. Strips <code class="code-inline">srcdoc</code> from iframes and removes scripts from contextual fragments and <code class="code-inline">document.write</code> input.</td></tr>
+            <tr><td><code class="code-inline">buildAutoBlocks</code></td><td>Links to <code class="code-inline">/fragments/</code> are replaced by fragment content; links to <code class="code-inline">/widgets/</code> become <code class="code-inline">widget</code> blocks (paragraph replaced when the link is its only content).</td></tr>
+            <tr><td><code class="code-inline">decorateButtons</code></td><td>A link alone in a paragraph with authored bold, italic or both becomes <code class="code-inline">button primary</code>, <code class="code-inline">secondary</code> or <code class="code-inline">accent</code>. Image links and links whose text is a URL are skipped.</td></tr>
+            <tr><td>Theme loading (eager)</td><td>Body class <code class="code-inline">hershey-home</code>, <code class="code-inline">hershey-product</code> or <code class="code-inline">hershey-recipe</code> loads <code class="code-inline">design/tokens.css</code> + <code class="code-inline">styles/hershey-home.css</code>; a body class matching an entry of <code class="code-inline">BRAND_THEMES</code> then loads <code class="code-inline">design/themes/&lt;name&gt;.css</code>.</td></tr>
+            <tr><td>Path classes</td><td><code class="code-inline">/products/</code> adds <code class="code-inline">hershey-product</code>; <code class="code-inline">/stories/</code> adds <code class="code-inline">hershey-product</code> and <code class="code-inline">hershey-story</code>.</td></tr>
+            <tr><td><code class="code-inline">loadFonts</code></td><td>Loads <code class="code-inline">styles/fonts.css</code> eagerly on viewports of 900px or wider or when <code class="code-inline">fonts-loaded</code> is in session storage; otherwise in the lazy phase.</td></tr>
+            <tr><td><code class="code-inline">warmUpShopNow</code></td><td><code class="code-inline">/products/</code> pages with a <code class="code-inline">/where-to-buy</code> link: adds a prefetch for the PriceSpider widget script and a prerender hint for the link, once the page is shown.</td></tr>
+            <tr><td><code class="code-inline">loadDelayed</code></td><td>After activation, imports <code class="code-inline">scripts/delayed.js</code> 3 seconds later (OneTrust, then consent check, Bazaarvoice on pages with <code class="code-inline">[data-bv-show]</code>).</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;">Stock behavior still applies: <code class="code-inline">decorateTemplateAndTheme</code> turns <code class="code-inline">Template</code> and <code class="code-inline">theme</code> metadata into body classes, and the loader runs eager, lazy then delayed phases (<code class="code-inline">loadPage()</code>).</p>
+      </section>
+
+      <section class="doc-section" id="eds-blocks">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 1A1.5 1.5 0 001 2.5v11A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-11A1.5 1.5 0 0013.5 1h-11zm8.4 1.3l-.1 1.6a.2.2 0 00.32.17l.55-.42.47.36a.2.2 0 00.32-.17l-.13-2.03h.8v11.4H4.4V2.3h6.5z"/></svg>
+          </span>
+          EDS blocks
+        </h2>
+        <div class="section-rule"></div>
+        <table class="spec-table">
+          <thead><tr><th>Block</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>accordion</td><td>Questions that expand to answers; each row is a native <code class="code-inline">details</code>/<code class="code-inline">summary</code>.</td></tr>
+            <tr><td>banner</td><td>Full-width band with heading, text and one call to action; <code class="code-inline">halloween</code> variant adds the seasonal pattern.</td></tr>
+            <tr><td>breadcrumb-trail</td><td>Breadcrumb links with a home icon and chevron separators; trailing unlinked item is the current page.</td></tr>
+            <tr><td>cards</td><td>Card lists. Variants: <code class="code-inline">welcome-cards</code>, <code class="code-inline">social</code>, <code class="code-inline">slider</code> (native scroll with arrow controls), <code class="code-inline">related</code> (slider with dots, Algolia fallback), <code class="code-inline">product</code> (authored product cards with Bazaarvoice id).</td></tr>
+            <tr><td>columns</td><td>Side-by-side content. Named layouts <code class="code-inline">homepage-hero</code> and <code class="code-inline">feature</code>; <code class="code-inline">recipe</code> builds ingredients, tools, directions and Bake Mode; <code class="code-inline">nutrition</code> builds the Nutrition Facts label and contact box.</td></tr>
+            <tr><td>footer</td><td>Loads <code class="code-inline">/footer</code>; brand watermark from the authored logo, link sections, OneTrust cookie-preferences link with a fallback when the CMP failed to load.</td></tr>
+            <tr><td>fragment</td><td>Loads another page’s content into this one; the only block imported across blocks (<code class="code-inline">loadFragment</code>).</td></tr>
+            <tr><td>header</td><td>Loads <code class="code-inline">/nav</code>; logo, nested category menu, search form; closes on Escape; desktop at 992px.</td></tr>
+            <tr><td>hero</td><td>Recipe hero (default, <code class="code-inline">Hero (Recipe)</code>), <code class="code-inline">article</code> (story image, title, date) and <code class="code-inline">product</code> (field-table model, image gallery, product-master sheet fallback, Bazaarvoice rating).</td></tr>
+            <tr><td>newsletter</td><td>Signup form with authored labels and client-side email/ZIP validation; shows an authored thank-you card on submit. No network request in the block.</td></tr>
+            <tr><td>search-recipes</td><td>Algolia-backed all-recipes listing: search, facets, sort, result grid, paging; 8 s timeout to an error state.</td></tr>
+            <tr><td>social-share</td><td>Share tray (Facebook, Pinterest, Email) and copy-link button using shared Font Awesome Free icon styles.</td></tr>
+            <tr><td>tabs</td><td>Tabbed content (recipe collections, with arrow/Home/End keys); <code class="code-inline">nutrition</code> variant for Nutrition Facts, Ingredients and Dietary Info, choosing the sheet tab from <code class="code-inline">brand</code> metadata.</td></tr>
+            <tr><td>widget</td><td>Loads a widget from <code class="code-inline">widgets/&lt;path&gt;/&lt;name&gt;.html</code> into the page; created by auto-blocking from <code class="code-inline">/widgets/</code> links.</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;">Several blocks have an authoring README (<code class="code-inline">blocks/hero/README.md</code>, <code class="code-inline">blocks/columns/README.md</code>, <code class="code-inline">blocks/breadcrumb-trail/README.md</code>, <code class="code-inline">blocks/search-recipes/README.md</code>) and a <code class="code-inline">metadata.json</code> describing variants.</p>
+      </section>
+
+      <section class="doc-section" id="supporting-modules">
+        <h2>
+          <span class="section-icon icon-orange">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2h-7zM5 5.5A.5.5 0 015.5 5h5a.5.5 0 010 1h-5A.5.5 0 015 5.5zm0 2.5a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5A.5.5 0 015 8zm.5 2a.5.5 0 000 1h3a.5.5 0 000-1h-3z"/></svg>
+          </span>
+          Supporting modules (<code class="code-inline">scripts/</code>)
+        </h2>
+        <div class="section-rule"></div>
+        <table class="spec-table">
+          <thead><tr><th>Module</th><th>Exports / purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code class="code-inline">brand-themes.js</code></td><td><code class="code-inline">DEFAULT_THEME</code>, <code class="code-inline">BRAND_THEMES</code>. Product page themes set by <code class="code-inline">theme</code> metadata; also imported by <code class="code-inline">tools/theme-picker</code>, so it has no imports.</td></tr>
+            <tr><td><code class="code-inline">hershey-theme.js</code></td><td>Default export loads <code class="code-inline">design/tokens.css</code> and <code class="code-inline">styles/hershey-home.css</code>. Imported by <code class="code-inline">scripts.js</code>, <code class="code-inline">header.js</code>, <code class="code-inline">footer.js</code>.</td></tr>
+            <tr><td><code class="code-inline">consent-state.js</code></td><td><code class="code-inline">hasConsent()</code>: reads OneTrust Performance (C0002) consent, otherwise declines. On localhost and <code class="code-inline">*.aem.page</code>, <code class="code-inline">?consent=accept</code> or <code class="code-inline">?consent=decline</code> overrides. Imported by Bazaarvoice, Launch and PriceSpider code.</td></tr>
+            <tr><td><code class="code-inline">consent-check.js</code></td><td>No exports. Waits for consent and imports <code class="code-inline">consented.js</code> once. Imported by <code class="code-inline">delayed.js</code>.</td></tr>
+            <tr><td><code class="code-inline">consented.js</code></td><td>Loads Adobe Launch only after consent and only from <code class="code-inline">launch-url</code> metadata; Hershey’s own Launch libraries are refused. Imported by <code class="code-inline">consent-check.js</code>.</td></tr>
+            <tr><td><code class="code-inline">bazaarvoice.js</code></td><td>Default export <code class="code-inline">loadBazaarvoice()</code>: loads <code class="code-inline">bv.js</code>, syncs tracking cookies to consent. Imported by <code class="code-inline">delayed.js</code> on pages with <code class="code-inline">[data-bv-show]</code>.</td></tr>
+            <tr><td><code class="code-inline">recipes-search.js</code></td><td><code class="code-inline">DEFAULT_CONFIG</code>, <code class="code-inline">resolveConfig</code>, <code class="code-inline">absoluteUrl</code>, <code class="code-inline">mapHit</code>, <code class="code-inline">orderFacetValues</code>, <code class="code-inline">groupFacetFilters</code>, <code class="code-inline">searchRecipes</code>. Algolia client (search-only key, optional proxy <code class="code-inline">endpoint</code>). Imported by <code class="code-inline">search-recipes.js</code>.</td></tr>
+            <tr><td><code class="code-inline">delayed.js</code></td><td>Delayed phase: loads OneTrust (test domain script unless <code class="code-inline">onetrust-id</code> metadata is set), then <code class="code-inline">consent-check.js</code>; Bazaarvoice when needed.</td></tr>
+          </tbody>
+        </table>
+        <h3 style="margin-top:20px;">Widgets, tools and design assets</h3>
+        <table class="spec-table">
+          <thead><tr><th>Path</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code class="code-inline">widgets/bazaarvoice/</code></td><td>Reviews and Q&amp;A widget; shows “couldn’t be loaded” if the script fails or nothing renders within 8–15 s.</td></tr>
+            <tr><td><code class="code-inline">widgets/pricespider/</code></td><td>Where-to-buy widget (PriceSpider/Wayvia); tracking-id script only with consent; 15 s fallback message.</td></tr>
+            <tr><td><code class="code-inline">tools/theme-picker/</code></td><td>DA.live Themes panel for choosing a product page <code class="code-inline">theme</code> value; runs outside the site.</td></tr>
+            <tr><td><code class="code-inline">tools/branch-switcher/</code></td><td>DA.live tool for switching the canvas to a code branch of AdobeDrago/hersheys-eds.</td></tr>
+            <tr><td><code class="code-inline">design/</code></td><td>DTCG token catalog, source measurements, brand theme stylesheets and the token generator (excluded from delivery where listed in .hlxignore).</td></tr>
+            <tr><td><code class="code-inline">storybook/</code></td><td>Isolated Storybook: Foundations, Default Content, Blocks and Widgets specimens, with catalog and browser tests.</td></tr>
+          </tbody>
+        </table>
+        <div class="notice warning">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><code class="code-inline">scripts/scripts.js.bak</code> is a leftover backup of an older <code class="code-inline">scripts.js</code> and is served as a static file. Consider deleting it.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="lighthouse-compare">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm8-3.25a.75.75 0 01.75.75v2.69l1.78 1.78a.75.75 0 11-1.06 1.06l-2-2A.75.75 0 017.25 8.5v-3a.75.75 0 01.75-.75z"/></svg>
+          </span>
+          Lighthouse comparison — Live vs EDS
+        </h2>
+        <div class="section-rule"></div>
+        <div class="notice todo">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><strong>Placeholder</strong> — Lighthouse/PageSpeed results comparing live <a href="https://www.hersheyland.com" target="_blank" rel="noopener">hersheyland.com</a> with EDS were not provided. Save screenshots in <code class="code-inline">docs/images/</code> and add a <code class="code-inline">lh-compare</code> block (see the component library) for each audited page.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="j1-progress">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+          </span>
+          Journey 1 · Homepage <span class="status-badge sb-progress">In progress</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>Authored homepage: hero, welcome cards, product and related sliders, feature columns, recipe tabs and social cards, all under the <code class="code-inline">hershey-home</code> template.</p>
+        <ul class="checklist">
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Columns (homepage-hero, feature)</div>
+              <div class="check-note">Hero and feature bands with desktop/mobile images</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Cards (welcome-cards, slider, social)</div>
+              <div class="check-note">Category cards, native-scroll sliders and the eight-post social snapshot</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Tabs (recipes)</div>
+              <div class="check-note">Recipe collections with Left/Right, Home and End keys</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Banner</div>
+              <div class="check-note">Full-width heading, text and call to action, with a <code class="code-inline">halloween</code> variant</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="j2-progress">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+          </span>
+          Journey 2 · Header &amp; footer <span class="status-badge sb-progress">In progress</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>Navigation and footer are authored once in DA (<code class="code-inline">/nav</code>, <code class="code-inline">/footer</code>) and loaded by the header and footer blocks.</p>
+        <ul class="checklist">
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Header</div>
+              <div class="check-note">Linked logo, nested category list, search link turned into a GET form; closes on Escape; desktop breakpoint at 992px</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Footer</div>
+              <div class="check-note">Brand watermark from the authored logo, link columns, cookie-preferences link wired to OneTrust</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Newsletter</div>
+              <div class="check-note">Authored form fields with client-side validation and a thank-you card; the block itself sends no network request</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="j3-progress">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+          </span>
+          Journey 3 · Product pages <span class="status-badge sb-progress">In progress</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>Product pages load the Hershey tokens and, with a <code class="code-inline">theme</code> metadata value, a brand theme. Hero and nutrition data can come from the product master sheet; ratings, reviews and Where to Buy come from third parties.</p>
+        <ul class="checklist">
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Hero (product)</div>
+              <div class="check-note">Field-table content model; image gallery; reads the brand tab of <code class="code-inline">/products/product-master.json</code> for missing fields</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Tabs (nutrition) + Columns (nutrition)</div>
+              <div class="check-note">Nutrition Facts, ingredients, dietary info and contact box</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Cards (product, related)</div>
+              <div class="check-note">Authored cards take precedence; Algolia only when none are authored (4 s limit)</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Bazaarvoice + Where to Buy widgets</div>
+              <div class="check-note">Ratings, reviews and Q&amp;A; PriceSpider (Wayvia) retailer list</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Brand themes</div>
+              <div class="check-note">Reese's, Cadbury, Payday, Rolo and others via <code class="code-inline">scripts/brand-themes.js</code></div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="j4-progress">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+          </span>
+          Journey 4 · Recipe pages <span class="status-badge sb-progress">In progress</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>Recipe pages use the <code class="code-inline">hershey-recipe</code> template; the all-recipes page is an Algolia-backed listing.</p>
+        <ul class="checklist">
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Hero (recipe)</div>
+              <div class="check-note">Image, category pill, title and skill level</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Columns (recipe)</div>
+              <div class="check-note">Ingredients, tools, directions and Bake Mode</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Search (Recipes)</div>
+              <div class="check-note">Search box, facets, sort, result grid and paging; 8 s timeout to an error message</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Breadcrumb Trail + Social Share</div>
+              <div class="check-note">Home-icon breadcrumbs; share and copy-link controls</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="j5-progress">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+          </span>
+          Journey 5 · Stories <span class="status-badge sb-progress">In progress</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>Story pages share the product pages' brand tokens and fonts (<code class="code-inline">hershey-product</code> + <code class="code-inline">hershey-story</code> body classes) and use the <code class="code-inline">story-plain</code> template styles.</p>
+        <ul class="checklist">
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Hero (article)</div>
+              <div class="check-note">Story image, h1 and published date</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Columns, Accordion, Banner</div>
+              <div class="check-note">Layout and content blocks reused on stories</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Social Share</div>
+              <div class="check-note">Share and copy-link controls</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <div class="doc-footer">
+        <span>Hersheyland — AEM → Edge Delivery Services · docs/</span>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+(() => {
+  const links = document.querySelectorAll('.sidebar-link[href^="#"], .sidebar-project[href^="#"]');
+  const sections = new Map();
+  links.forEach((link) => {
+    const target = document.getElementById(link.getAttribute('href').slice(1));
+    if (target) sections.set(target, link);
+  });
+
+  const setActive = (link) => {
+    links.forEach((l) => l.classList.toggle('active', l === link));
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries.filter((entry) => entry.isIntersecting);
+    if (!visible.length) return;
+    visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    setActive(sections.get(visible[0].target));
+  }, { rootMargin: '-64px 0px -70% 0px', threshold: 0 });
+
+  sections.forEach((_, target) => observer.observe(target));
+})();
+</script>
+</body>
+</html>
