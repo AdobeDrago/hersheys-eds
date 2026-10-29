@@ -260,6 +260,11 @@ main > .section:has(> .hero-wrapper > .hero.product)::after {
   margin-top: var(--hershey-component-hero-product-sizes-following-margin-block-start-mobile, 20px);
 }
 
+/* single size: no "Choose a size:" label, so the size keeps a gap below the gallery (mobile), as on live */
+.hero.product .hero-product-details > :not(.hero-product-size-label) + .hero-product-sizes {
+  margin-top: var(--hershey-component-hero-product-single-size-margin-block-start-mobile, 45px);
+}
+
 .hero.product .hero-product-details > p:not(.hero-product-size-label, .hero-product-cta) {
   margin-bottom: var(--hershey-component-hero-product-text-margin-block-end, 27px);
 }
@@ -436,6 +441,10 @@ main .hero.product .hero-product-cta a.button:focus-visible {
   .hero.product .hero-product-details > .hero-product-size-label {
     margin-top: 0;
     margin-bottom: var(--hershey-component-hero-product-size-label-margin-block-end-desktop, 12px);
+  }
+
+  .hero.product .hero-product-details > :not(.hero-product-size-label) + .hero-product-sizes {
+    margin-top: 0;
   }
 
   .hero.product .hero-product-sizes ul {

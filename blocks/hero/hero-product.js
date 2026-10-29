@@ -626,7 +626,9 @@ async function buildFromFields(block, fields) {
   }
   const sizes = fields.size ? fieldSizes(fields.size)
     : product && buildSizeList(product, products);
-  if (sizes) details.append(sizeLabelParagraph(), sizes);
+  // "Choose a size:" only when there is a choice; a single size is shown on its own, as on live
+  if (sizes && sizes.querySelectorAll('li').length > 1) details.append(sizeLabelParagraph());
+  if (sizes) details.append(sizes);
   if (fields.description) {
     details.append(...fieldBlocks(fields.description));
   } else if (sheet.description) {
