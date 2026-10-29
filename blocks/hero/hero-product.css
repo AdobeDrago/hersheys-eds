@@ -264,6 +264,14 @@ main > .section:has(> .hero-wrapper > .hero.product)::after {
   margin-bottom: var(--hershey-component-hero-product-text-margin-block-end, 27px);
 }
 
+/* links in the description: cream with a 1px bottom border, as on hersheyland.com */
+.hero.product .hero-product-details > p:not(.hero-product-size-label, .hero-product-cta) a:any-link,
+.hero.product .hero-product-details > p:not(.hero-product-size-label, .hero-product-cta) a:hover {
+  border-bottom: 1px solid currentcolor;
+  color: var(--hershey-component-hero-product-text-link-foreground, #feebd0);
+  text-decoration: none;
+}
+
 /* Shop Now */
 .hero.product .hero-product-details > .hero-product-cta {
   margin-bottom: var(--hershey-component-hero-product-cta-margin-block-end-mobile, 43px);
