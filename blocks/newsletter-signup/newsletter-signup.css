@@ -1,0 +1,283 @@
+/* Newsletter Signup: two-column email capture from hersheyland.com recipe pages
+   (.hl-nl, "Love Desserts? Stay Inspired!"). Stacks below 820px. */
+
+main > .section.newsletter-signup-container {
+  margin: 0;
+  background-color: var(--hershey-component-newsletter-color-surface, #fff);
+}
+
+main > .section.newsletter-signup-container > .newsletter-signup-wrapper {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.newsletter-signup.block {
+  box-sizing: border-box;
+  padding: 40px 20px;
+  color: var(--hershey-component-newsletter-color-text, #3f000b);
+  font-family: var(--hershey-component-newsletter-typography-body-family, hershey-tt, sans-serif);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.newsletter-signup-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.newsletter-signup-copy h2 {
+  margin: 0 0 20px;
+  color: inherit;
+  font-family: var(--hershey-component-newsletter-typography-heading-family, hershey-gazpacho, sans-serif);
+  font-size: 30px;
+  font-weight: var(--hershey-system-typography-heading-font-weight, 900);
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+
+.newsletter-signup-copy p {
+  margin: 0 0 20px;
+  color: inherit;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.newsletter-signup-copy .newsletter-signup-note {
+  margin-bottom: 0;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.newsletter-signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.newsletter-signup-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.newsletter-signup-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+}
+
+.newsletter-signup-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.newsletter-signup-input {
+  position: relative;
+}
+
+.newsletter-signup-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  display: flex;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.newsletter-signup-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+}
+
+.newsletter-signup-input input {
+  width: 100%;
+  min-height: 50px;
+  padding: 13px 14px 13px 42px;
+  border: 1.5px solid var(--hershey-component-newsletter-color-border, #cfcfcf);
+  border-radius: 8px;
+  background: var(--hershey-component-newsletter-color-surface, #fff);
+  color: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  appearance: none;
+}
+
+.newsletter-signup-input input::placeholder {
+  color: #7b7b7b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.newsletter-signup-input input:focus {
+  border-color: var(--hershey-component-newsletter-color-text, #3f000b);
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(60 19 28 / 8%);
+}
+
+.newsletter-signup-error {
+  display: none;
+  margin-top: 11px;
+  color: var(--hershey-component-newsletter-color-error, #db1616);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.newsletter-signup-field.has-error .newsletter-signup-error {
+  display: block;
+}
+
+.newsletter-signup-check {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.newsletter-signup-form .newsletter-signup-check input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  border: 1.5px solid #7c7c7c;
+  border-radius: 4px;
+  background: var(--hershey-component-newsletter-color-surface, #fff);
+  appearance: none;
+  cursor: pointer;
+}
+
+.newsletter-signup-form .newsletter-signup-check input:checked {
+  border-color: var(--hershey-component-newsletter-color-action-background, #007bbd);
+  background-color: var(--hershey-component-newsletter-color-action-background, #007bbd);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2' d='M4 10.5 8 14.5 16 6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+}
+
+.newsletter-signup-form .newsletter-signup-check input:focus-visible {
+  outline: 2px solid var(--hershey-component-newsletter-color-text, #3f000b);
+  outline-offset: 2px;
+}
+
+.newsletter-signup-field.has-error .newsletter-signup-check input,
+.newsletter-signup-field.has-error .newsletter-signup-input input {
+  border-color: var(--hershey-component-newsletter-color-error, #db1616);
+}
+
+.newsletter-signup-optin {
+  color: inherit;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+.newsletter-signup-optin a:any-link {
+  color: inherit;
+  font-weight: 700;
+  font-style: italic;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.newsletter-signup-optin a:hover {
+  text-decoration: none;
+}
+
+.newsletter-signup-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 54px;
+  padding: 16px 44px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--hershey-component-newsletter-color-action-background, #007bbd);
+  color: var(--hershey-component-newsletter-color-action-foreground, #fff);
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.newsletter-signup-submit:hover,
+.newsletter-signup-submit:focus-visible {
+  background: var(--hershey-system-color-action-primary-background-hover-light, #268fc7);
+}
+
+.newsletter-signup-submit:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.newsletter-signup-success {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.newsletter-signup-success h3 {
+  margin: 0 0 16px;
+  color: inherit;
+  font-family: var(--hershey-component-newsletter-typography-heading-family, hershey-gazpacho, sans-serif);
+  font-size: 38px;
+  font-weight: var(--hershey-system-typography-heading-font-weight, 900);
+  line-height: 1.2;
+}
+
+.newsletter-signup-success p {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (width >= 820px) {
+  .newsletter-signup.block {
+    padding: 60px 40px;
+  }
+
+  .newsletter-signup-layout {
+    flex-direction: row;
+    gap: 80px;
+    align-items: flex-start;
+  }
+
+  .newsletter-signup-copy {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .newsletter-signup-copy h2 {
+    font-size: 40px;
+  }
+
+  .newsletter-signup-form-wrap {
+    flex: 0 0 420px;
+    width: 420px;
+  }
+
+  .newsletter-signup-submit {
+    width: auto;
+    min-width: 200px;
+  }
+}
+
+@media print {
+  .newsletter-signup.block {
+    display: none;
+  }
+}

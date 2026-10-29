@@ -162,6 +162,23 @@ test('Recipe Details nutrition variant builds the Nutrition Facts label and cont
   await expect(page.locator('.recipe-details-nutrition-aside a.button')).toHaveText('Contact Customer Service');
 });
 
+test('Newsletter Signup builds the recipe email capture and confirms a valid submit', async ({ page }) => {
+  await page.route('https://l.hersheys.com/u/register.php*', (route) => route.fulfill({ status: 200, body: '' }));
+  await open(page, 'blocks-newsletter-signup--default');
+  await expect(page.locator('.newsletter-signup-copy h2')).toHaveText('Love Desserts? Stay Inspired!');
+  await expect(page.locator('.newsletter-signup-note')).toContainText('EU/EEA');
+  const email = page.locator('.newsletter-signup-input input');
+  await expect(email).toHaveAttribute('placeholder', 'youremail@yourdomain.com');
+  await page.locator('.newsletter-signup-submit').click();
+  await expect(page.locator('.newsletter-signup-field.has-error')).toHaveCount(2);
+  await email.fill('baker@example.com');
+  await page.locator('.newsletter-signup-check input').check();
+  await page.locator('.newsletter-signup-submit').click();
+  await expect(page.locator('.newsletter-signup-success')).toBeVisible();
+  await expect(page.locator('.newsletter-signup-success h3')).toHaveText('You have successfully subscribed!');
+  await expect(page.locator('.newsletter-signup-layout')).toBeHidden();
+});
+
 test('Hero recipe variant keeps section measure and builds the overview', async ({ page }) => {
   await open(page, 'blocks-hero--recipe');
   await expect(page.locator('.hero.recipe .hero-recipe-title')).toHaveText("Reese's Oreo Cup Brownies");
