@@ -23,6 +23,8 @@ The block uses one row with two cells:
 1. `Ingredients` heading followed by an unordered list.
 2. `You'll Need` heading and unordered list, followed by a `Directions` heading and ordered list. Step images belong inside their corresponding list items. An optional final paragraph beginning with `Tip:` becomes the Tip disclosure on the last step.
 
+Authored ingredients take priority: when the ingredients cell has any content besides its heading (a list, or one paragraph per ingredient), only that content is shown. When the cell has just the heading (or is left empty), the block uses the `/recipes/ingredients` sheet row whose `pagepath` matches the page.
+
 Decoration adds Bake Mode and marks the section with `columns-recipe-section`. On supported browsers, its switch uses the Screen Wake Lock API to keep the display awake while the recipe is being followed. The wrapper and section remain `columns-wrapper` and `columns-container`.
 
 ## Nutrition (`nutrition`)

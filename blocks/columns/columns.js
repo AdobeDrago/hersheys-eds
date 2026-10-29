@@ -68,10 +68,11 @@ function decorateColumns(block) {
  * Decoration: the method cell is split into heading-led panels; the tools panel becomes
  * a collapsible disclosure with a grid list; each direction step gets a "done" checkbox.
  * The cell holding an ordered list is treated as the method cell, regardless of order.
- * Ingredients: when the /recipes/ingredients sheet has a row whose `pagepath` matches the
- * current page, its non-empty `ingredientN` columns replace the authored ingredient list
- * (cells may hold links and basic inline HTML; the authored list stays as the fallback
- * when there is no row or the fetch fails).
+ * Ingredients: authored ingredients (a list or paragraphs) always win and are the only values
+ * shown. Only when the ingredients cell holds nothing but a heading (or is missing) is the
+ * /recipes/ingredients sheet fetched; the row whose
+ * `pagepath` matches the current page supplies its non-empty `ingredientN` columns
+ * (cells may hold links and basic inline HTML).
  */
 
 const INGREDIENTS_SHEET = '/recipes/ingredients.json';
@@ -332,11 +333,40 @@ function renderIngredients(cell, items) {
 }
 
 /**
+ * Authored ingredient lines: everything in the cell except headings.
+ * @param {Element} [cell]
+ * @returns {Element[]}
+ */
+function authoredIngredients(cell) {
+  if (!cell) return [];
+  return [...cell.children].filter((el) => !el.matches(HEADING)
+    && (el.textContent.trim() || el.querySelector('picture')));
+}
+
+/**
+ * Turns ingredient paragraphs into list items so they share the list styling.
+ * @param {Element} cell
+ */
+function listParagraphs(cell) {
+  const paragraphs = [...cell.querySelectorAll(':scope > p')].filter((p) => p.textContent.trim());
+  if (!paragraphs.length || cell.querySelector(':scope > ul, :scope > ol')) return;
+  const list = document.createElement('ul');
+  paragraphs.forEach((p) => {
+    const li = document.createElement('li');
+    li.append(...p.childNodes);
+    list.append(li);
+    p.remove();
+  });
+  cell.append(list);
+}
+
+/**
  * Decorates the ingredients cell.
  * @param {Element} cell
  */
 function decorateIngredients(cell) {
   cell.classList.add('columns-recipe-ingredients');
+  listParagraphs(cell);
   cell.querySelectorAll(':scope > ul, :scope > ol').forEach((list) => {
     list.classList.add('columns-recipe-ingredient-list');
     [...list.children].forEach((item) => {
@@ -507,28 +537,35 @@ async function decorateRecipe(block) {
   const id = blockCount;
 
   decorateSummary(block, id);
-  const sheetItems = await fetchIngredients();
 
-  [...block.children].forEach((row) => {
+  await Promise.all([...block.children].map(async (row) => {
     row.classList.add('columns-recipe-row');
-    const cells = [...row.children];
 
     // drop empty cells so the layout does not reserve space for them
-    cells.filter((cell) => !cell.children.length && !cell.textContent.trim())
+    [...row.children]
+      .filter((cell) => !cell.children.length && !cell.textContent.trim())
       .forEach((cell) => cell.remove());
     const filled = [...row.children];
 
     let method = filled.find((cell) => cell.querySelector(':scope > ol'));
     if (!method && filled.length > 1) [, method] = filled;
-    const ingredients = filled.find((cell) => cell !== method);
+    let ingredients = filled.find((cell) => cell !== method);
 
-    if (ingredients) {
-      if (sheetItems.length) renderIngredients(ingredients, sheetItems);
-      decorateIngredients(ingredients);
+    if (!authoredIngredients(ingredients).length) {
+      const sheetItems = await fetchIngredients();
+      if (sheetItems.length) {
+        if (!ingredients) {
+          ingredients = document.createElement('div');
+          row.prepend(ingredients);
+        }
+        renderIngredients(ingredients, sheetItems);
+      }
     }
+
+    if (ingredients) decorateIngredients(ingredients);
     if (method) decorateMethod(method, id);
-    row.classList.toggle('columns-recipe-single', filled.length < 2);
-  });
+    row.classList.toggle('columns-recipe-single', row.children.length < 2);
+  }));
 }
 
 /**
