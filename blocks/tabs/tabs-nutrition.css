@@ -399,6 +399,12 @@
   text-decoration: none;
 }
 
+/* the underline (bottom border) disappears on hover; transparent so the text does not shift */
+.section.tabs-container:has(.tabs.nutrition) .default-content-wrapper a:hover {
+  border-bottom-color: transparent;
+  text-decoration: none;
+}
+
 /* mobile, as on hersheyland.com: the white card spans the full width and the intro is inset */
 @media (width < 768px) {
   .section.tabs-container:has(.tabs.nutrition) > div {
