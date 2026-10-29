@@ -3,10 +3,13 @@ import { createOptimizedPicture, getMetadata, toClassName } from '../../scripts/
 /**
  * Hero (product) variant, loaded by hero.js for `Hero (product)`.
  *
- * Content model: a field table, one row per field, name | value. Fields: image-front,
+ * Content model: a field table, one row per field, name | value. Fields: label, image-front,
  * image-back, Title, Description, size, button. Rows may be empty or left out; other rows
  * are ignored. The images become a gallery (previous/next controls and thumbnails when
  * there are two).
+ * The label is a pill above the title: the authored text, else from the sheet's `Occasion`
+ * (Limited Edition -> Limited Edition; Halloween, Easter, Holiday, Valentine's -> Seasonal;
+ * any other occasion -> no label).
  * Product rating is rendered from the `bvid` page metadata (Bazaarvoice inline rating).
  *
  * Authored values win. Whatever is left empty (images, product name, size list, description)
@@ -23,6 +26,9 @@ const PRODUCT_MASTER = '/products/product-master.json';
 
 // field table row names (first cell, as a class name) and the field each one sets
 const FIELDS = {
+  label: 'label',
+  badge: 'label',
+  tag: 'label',
   'image-front': 'imageFront',
   'front-image': 'imageFront',
   image: 'imageFront',
@@ -37,7 +43,9 @@ const FIELDS = {
   cta: 'button',
 };
 // fields that fall back to the product master sheet (an empty button defaults to Shop Now)
-const SHEET_FIELDS = ['imageFront', 'imageBack', 'title', 'size', 'description'];
+const SHEET_FIELDS = ['label', 'imageFront', 'imageBack', 'title', 'size', 'description'];
+// sheet `Occasion` values (lowercase, letters only) that show the Seasonal label
+const SEASONAL_OCCASIONS = ['halloween', 'easter', 'holiday', 'valentines'];
 
 let productsPromise;
 
@@ -86,6 +94,7 @@ function toProduct(row) {
     description: row.description || row['On Page Description/product Details'] || '',
     familyId: row.familyId || row['Product Family ID (lowercase and underscores for BV)'] || '',
     notes: row.notes || row.Notes || '',
+    occasion: row.occasion || row.Occasion || '',
     weight: row.weight || row['Weight (oz)'] || '',
     count: row.count || row.Count || '',
     countUnit: row.countUnit || row['Count Unit'] || '',
@@ -552,6 +561,40 @@ function fieldButton(cell) {
 }
 
 /**
+ * Label for a sheet row from its `Occasion`: Limited Edition, Seasonal for the seasonal
+ * occasions, nothing for Everyday and any other occasion.
+ * @param {Object} product
+ * @returns {string}
+ */
+function sheetLabel(product) {
+  const occasion = String(product.occasion || '').toLowerCase().replace(/[^a-z]/g, '');
+  if (occasion === 'limitededition') return 'Limited Edition';
+  return SEASONAL_OCCASIONS.includes(occasion) ? 'Seasonal' : '';
+}
+
+/**
+ * Label pill shown above the title. Seasonal and Limited Edition get their icon; any other
+ * authored text is shown without one.
+ * @param {string} text
+ */
+function buildLabel(text) {
+  const label = document.createElement('div');
+  label.className = 'hero-product-label';
+  let type = '';
+  if (/limited\s*edition/i.test(text)) type = 'limited-edition';
+  else if (/seasonal/i.test(text)) type = 'seasonal';
+  if (type) {
+    label.classList.add(`hero-product-label-${type}`);
+    const icon = document.createElement('span');
+    icon.className = 'hero-product-label-icon';
+    icon.setAttribute('aria-hidden', 'true');
+    label.append(icon);
+  }
+  label.append(text);
+  return label;
+}
+
+/**
  * Builds the product overview (media | details) from the field table. Authored fields win;
  * empty or missing fields come from the product master sheet. The sheet is only requested when
  * something is missing.
@@ -573,6 +616,8 @@ async function buildFromFields(block, fields) {
   media.append(...[front, back].filter(Boolean));
 
   const details = document.createElement('div');
+  const label = fields.label ? fields.label.textContent.trim() : sheetLabel(sheet);
+  if (label) details.append(buildLabel(label));
   const name = fields.title ? fields.title.textContent.trim() : sheet.name || sheet.title;
   if (name) {
     const h1 = document.createElement('h1');
@@ -581,7 +626,9 @@ async function buildFromFields(block, fields) {
   }
   const sizes = fields.size ? fieldSizes(fields.size)
     : product && buildSizeList(product, products);
-  if (sizes) details.append(sizeLabelParagraph(), sizes);
+  // "Choose a size:" only when there is a choice; a single size is shown on its own, as on live
+  if (sizes && sizes.querySelectorAll('li').length > 1) details.append(sizeLabelParagraph());
+  if (sizes) details.append(sizes);
   if (fields.description) {
     details.append(...fieldBlocks(fields.description));
   } else if (sheet.description) {

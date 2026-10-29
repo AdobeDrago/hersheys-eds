@@ -260,8 +260,73 @@ main > .section:has(> .hero-wrapper > .hero.product)::after {
   margin-top: var(--hershey-component-hero-product-sizes-following-margin-block-start-mobile, 20px);
 }
 
+/* single size: no "Choose a size:" label, so the size keeps a gap below the gallery (mobile), as on live */
+.hero.product .hero-product-details > :not(.hero-product-size-label) + .hero-product-sizes {
+  margin-top: 45px;
+}
+
 .hero.product .hero-product-details > p:not(.hero-product-size-label, .hero-product-cta) {
   margin-bottom: var(--hershey-component-hero-product-text-margin-block-end, 27px);
+}
+
+/* links in the description: cream with a 1px bottom border, as on hersheyland.com;
+   the border fades out on hover (transparent, so the text does not shift) */
+.hero.product .hero-product-details > p:not(.hero-product-size-label, .hero-product-cta) a:any-link {
+  border-bottom: 1px solid currentcolor;
+  color: #feebd0;
+  text-decoration: none;
+}
+
+.hero.product .hero-product-details > p:not(.hero-product-size-label, .hero-product-cta) a:any-link:hover {
+  border-bottom-color: transparent;
+  text-decoration: none;
+}
+
+/* label above the title (Seasonal / Limited Edition / authored text), as on hersheyland.com */
+.hero.product .hero-product-details > .hero-product-label {
+  display: inline-flex;
+  order: -3;
+  align-items: center;
+  align-self: center;
+  box-sizing: border-box;
+  min-height: 40px;
+
+  /* as on hersheyland.com: the pill starts 10px above where the title would, the title follows 10px below */
+  margin-top: calc(var(--hershey-component-hero-product-title-padding-block-start-mobile, 55px) - 10px);
+  padding: 8px 15px;
+  border: 2px solid currentcolor;
+  border-radius: 20px;
+  color: var(--hershey-component-hero-product-band-foreground, #fff);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.hero.product .hero-product-label-icon {
+  flex: none;
+  height: 20px;
+  background-color: currentcolor;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+.hero.product .hero-product-label-seasonal .hero-product-label-icon {
+  width: 26px;
+  mask-image: url('../../icons/snowflake.svg');
+}
+
+.hero.product .hero-product-label-limited-edition .hero-product-label-icon {
+  width: 20px;
+  margin-right: 3px;
+  mask-image: url('../../icons/limited-edition.svg');
+}
+
+/* the label takes the space above the title */
+.hero.product .hero-product-label + h1 {
+  padding-top: 10px;
 }
 
 /* Shop Now */
@@ -354,6 +419,17 @@ main .hero.product .hero-product-cta a.button:focus-visible {
     text-align: left;
   }
 
+  .hero.product .hero-product-details > .hero-product-label {
+    align-self: flex-start;
+
+    /* desktop: the pill starts 20px above where the title would, the title follows 20px below */
+    margin-top: calc(var(--hershey-component-hero-product-title-padding-block-start-desktop, 30px) - 20px);
+  }
+
+  .hero.product .hero-product-details > .hero-product-label + h1 {
+    padding-top: 20px;
+  }
+
   .hero.product .hero-product-rating {
     align-self: flex-start;
   }
@@ -361,6 +437,10 @@ main .hero.product .hero-product-cta a.button:focus-visible {
   .hero.product .hero-product-details > .hero-product-size-label {
     margin-top: 0;
     margin-bottom: var(--hershey-component-hero-product-size-label-margin-block-end-desktop, 12px);
+  }
+
+  .hero.product .hero-product-details > :not(.hero-product-size-label) + .hero-product-sizes {
+    margin-top: 0;
   }
 
   .hero.product .hero-product-sizes ul {
