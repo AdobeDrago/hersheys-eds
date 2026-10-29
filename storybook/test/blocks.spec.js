@@ -144,14 +144,22 @@ test('Hero uses production foreground and has a readable image-omitted state', a
   await expect(page.locator('.hero h1')).toHaveCSS('color', 'rgb(63, 0, 11)');
 });
 
-test('Columns recipe variant builds ingredients, directions, and Bake Mode', async ({ page }) => {
-  await open(page, 'blocks-columns--recipe');
-  await expect(page.locator('.columns.recipe .columns-recipe-ingredient-list li')).toHaveCount(2);
-  await expect(page.locator('.columns-recipe-summary-heading')).toHaveText('Ingredients & Directions');
-  await expect(page.locator('.columns-recipe-times')).toContainText('Prep:');
-  await expect(page.locator('.columns-recipe-bake-switch input')).toHaveAttribute('role', 'switch');
-  await expect(page.locator('.columns-recipe-tip summary')).toHaveText('Tip');
-  await expect(page.locator('.columns-recipe-section')).toHaveCSS('background-color', 'rgb(246, 246, 246)');
+test('Recipe Details ingredients variant builds ingredients, directions, and Bake Mode', async ({ page }) => {
+  await open(page, 'blocks-recipe-details--ingredients');
+  await expect(page.locator('.recipe-details.ingredients .recipe-details-ingredients-ingredient-list li')).toHaveCount(2);
+  await expect(page.locator('.recipe-details-ingredients-summary-heading')).toHaveText('Ingredients & Directions');
+  await expect(page.locator('.recipe-details-ingredients-times')).toContainText('Prep:');
+  await expect(page.locator('.recipe-details-ingredients-bake-switch input')).toHaveAttribute('role', 'switch');
+  await expect(page.locator('.recipe-details-ingredients-tip summary')).toHaveText('Tip');
+  await expect(page.locator('.recipe-details-ingredients-section')).toHaveCSS('background-color', 'rgb(246, 246, 246)');
+});
+
+test('Recipe Details nutrition variant builds the Nutrition Facts label and contact button', async ({ page }) => {
+  await open(page, 'blocks-recipe-details--nutrition');
+  await expect(page.locator('.recipe-details.nutrition .recipe-details-nutrition-title')).toHaveText('Nutrition Facts');
+  await expect(page.locator('.recipe-details-nutrition-facts .recipe-details-nutrition-row')).toHaveCount(8);
+  await expect(page.locator('.recipe-details-nutrition-calories .recipe-details-nutrition-value')).toHaveText('170');
+  await expect(page.locator('.recipe-details-nutrition-aside a.button')).toHaveText('Contact Customer Service');
 });
 
 test('Hero recipe variant keeps section measure and builds the overview', async ({ page }) => {

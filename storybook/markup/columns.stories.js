@@ -1,7 +1,7 @@
 import decorateColumns from '@adobe/aem-boilerplate/blocks/columns/columns.js';
 import '@adobe/aem-boilerplate/blocks/columns/columns.css';
 import {
-  contentArgTypes, createPage, element, link, picture, section, showcase, trackInteractions,
+  contentArgTypes, createPage, element, link, picture, section, showcase,
 } from './story-helpers.js';
 
 export default {
@@ -9,7 +9,7 @@ export default {
   args: { heading: 'A favorite for every moment', copy: 'A little sweetness brings us together.', showImage: true },
   argTypes: contentArgTypes,
   parameters: {
-    docs: { description: { component: 'Production Columns decorator and CSS. Two authored cells stack on mobile. Columns (Recipe) builds the ingredients, tools, directions, summary, and Bake Mode. Columns (Nutrition) builds the Nutrition Facts label and contact box. Controls edit copy and the optional image; links and the Bake Mode switch log in Actions. Check reading order and image alternatives with Accessibility and keyboard navigation.' } },
+    docs: { description: { component: 'Production Columns decorator and CSS. Two authored cells stack on mobile. Controls edit copy and the optional image; links log in Actions. Check reading order and image alternatives with Accessibility and keyboard navigation.' } },
   },
   render: ({ heading, copy, showImage }) => {
     const root = createPage('Blocks', 'Columns');
@@ -31,86 +31,6 @@ export default {
     return root;
   },
 };
-function renderRecipe() {
-  const root = createPage('Blocks', 'Columns');
-  const main = showcase(root);
-  const container = element('div', 'section columns-container columns-recipe-section');
-  const summary = element('div', 'default-content-wrapper');
-  summary.append(
-    element('h2', '', 'Ingredients & Directions'),
-    element('p', '', 'Yields: 48 cookies'),
-    element('p', '', 'Prep: 20 Min. | Bake: 11 Min. | Total: 31 Min.'),
-  );
-  const columns = element('div', 'columns recipe block');
-  const row = element('div');
-  const ingredients = element('div');
-  const ingredientList = element('ul');
-  ["4 HERSHEY'S Milk Chocolate Candy Bars", '24 marshmallows'].forEach((text) => {
-    ingredientList.append(element('li', '', text));
-  });
-  ingredients.append(element('h3', '', 'Ingredients'), ingredientList);
-  const method = element('div');
-  const tools = element('ul');
-  ['Oven', 'Mixer'].forEach((text) => tools.append(element('li', '', text)));
-  const step = element('li');
-  step.append(element('p', '', 'Heat oven to 350°F.'));
-  const steps = element('ol');
-  steps.append(step);
-  method.append(
-    element('h3', '', "You'll Need"),
-    tools,
-    element('h3', '', 'Directions'),
-    steps,
-    element('p', '', 'Tip: Serve warm.'),
-  );
-  row.append(ingredients, method);
-  columns.append(row);
-  const wrapper = element('div', 'columns-wrapper');
-  wrapper.append(columns);
-  container.append(summary, wrapper);
-  main.append(container);
-  trackInteractions(container);
-  decorateColumns(columns);
-  return root;
-}
-
-function renderNutrition() {
-  const root = createPage('Blocks', 'Columns');
-  const main = showcase(root);
-  const columns = element('div', 'columns nutrition block');
-  const row = element('div');
-  const label = element('div');
-  const nutrients = element('ul');
-  [
-    'Total Fat 14g 18%',
-    'Saturated Fat 8g 40%',
-    'Cholesterol 15mg 5%',
-    'Sodium 160mg 7%',
-    'Total Carbohydrate 39g 14%',
-    'Protein 3g',
-    'Vitamin D 0mcg 0%',
-    'Calcium 40mg 4%',
-  ].forEach((text) => nutrients.append(element('li', '', text)));
-  label.append(
-    element('h3', '', 'Nutrition Facts'),
-    element('p', '', 'Servings Per Container 12'),
-    element('p', '', 'Serving size 2 cookies (35g)'),
-    element('p', '', 'Calories 170'),
-    nutrients,
-    element('p', '', '*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet.'),
-  );
-  const aside = element('div');
-  const cta = element('p');
-  cta.append(link('Contact Customer Service'));
-  aside.append(element('h3', '', 'Additional questions?'), cta);
-  row.append(label, aside);
-  columns.append(row);
-  section(main, columns);
-  decorateColumns(columns);
-  return root;
-}
 
 export const Feature = {};
 export const TextOnly = { args: { showImage: false } };
-export const Recipe = { render: renderRecipe };
-export const Nutrition = { render: renderNutrition };
