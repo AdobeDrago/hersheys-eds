@@ -262,7 +262,7 @@ main > .section:has(> .hero-wrapper > .hero.product)::after {
 
 /* single size: no "Choose a size:" label, so the size keeps a gap below the gallery (mobile), as on live */
 .hero.product .hero-product-details > :not(.hero-product-size-label) + .hero-product-sizes {
-  margin-top: var(--hershey-component-hero-product-single-size-margin-block-start-mobile, 45px);
+  margin-top: 45px;
 }
 
 .hero.product .hero-product-details > p:not(.hero-product-size-label, .hero-product-cta) {
@@ -273,7 +273,7 @@ main > .section:has(> .hero-wrapper > .hero.product)::after {
    the border fades out on hover (transparent, so the text does not shift) */
 .hero.product .hero-product-details > p:not(.hero-product-size-label, .hero-product-cta) a:any-link {
   border-bottom: 1px solid currentcolor;
-  color: var(--hershey-component-hero-product-text-link-foreground, #feebd0);
+  color: #feebd0;
   text-decoration: none;
 }
 
@@ -293,17 +293,17 @@ main > .section:has(> .hero-wrapper > .hero.product)::after {
   align-items: center;
   align-self: center;
   box-sizing: border-box;
-  min-height: var(--hershey-component-hero-product-label-min-height, 40px);
+  min-height: 40px;
 
   /* as on hersheyland.com: the pill starts 10px above where the title would, the title follows 10px below */
   margin-top: calc(var(--hershey-component-hero-product-title-padding-block-start-mobile, 55px) - 10px);
-  padding: var(--hershey-component-hero-product-label-padding-block, 8px) var(--hershey-component-hero-product-label-padding-inline, 15px);
-  border: var(--hershey-component-hero-product-label-border-width, 2px) solid currentcolor;
-  border-radius: var(--hershey-component-hero-product-label-border-radius, 20px);
-  color: var(--hershey-component-hero-product-label-foreground, #fff);
-  font-size: var(--hershey-component-hero-product-label-font-size, 14px);
+  padding: 8px 15px;
+  border: 2px solid currentcolor;
+  border-radius: 20px;
+  color: var(--hershey-component-hero-product-band-foreground, #fff);
+  font-size: 14px;
   font-weight: 700;
-  line-height: var(--hershey-component-hero-product-label-line-height, 14px);
+  line-height: 14px;
   letter-spacing: 0.2px;
   text-transform: uppercase;
 }
@@ -330,7 +330,7 @@ main > .section:has(> .hero-wrapper > .hero.product)::after {
 
 /* the label takes the space above the title */
 .hero.product .hero-product-label + h1 {
-  padding-top: var(--hershey-component-hero-product-label-gap-mobile, 10px);
+  padding-top: 10px;
 }
 
 /* Shop Now */
@@ -431,7 +431,7 @@ main .hero.product .hero-product-cta a.button:focus-visible {
   }
 
   .hero.product .hero-product-details > .hero-product-label + h1 {
-    padding-top: var(--hershey-component-hero-product-label-gap-desktop, 20px);
+    padding-top: 20px;
   }
 
   .hero.product .hero-product-rating {
