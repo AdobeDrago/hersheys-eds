@@ -399,6 +399,21 @@
   text-decoration: none;
 }
 
+/* mobile, as on hersheyland.com: the white card spans the full width and the intro is inset */
+@media (width < 768px) {
+  .section.tabs-container:has(.tabs.nutrition) > div {
+    margin: 0 -25px;
+  }
+
+  .section.tabs-container:has(.tabs.nutrition) h2 {
+    font-size: 28px;
+  }
+
+  .section.tabs-container:has(.tabs.nutrition) .default-content-wrapper p {
+    padding: 0 20px;
+  }
+}
+
 @media (width >= 768px) {
   .section.tabs-container:has(.tabs.nutrition) > div {
     padding: 0 70px;
