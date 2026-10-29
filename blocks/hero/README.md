@@ -35,6 +35,7 @@ row is filled entirely from the sheet.
 
 | Hero (product) | |
 | --- | --- |
+| label | Text for the pill above the title, e.g. `Seasonal` or `Limited Edition` (those two get their icon; any other text is shown without one) |
 | image-front | Scene7 image (link or URL) |
 | image-back | Scene7 image (link or URL) |
 | Title | Product name, shown as the page heading |
@@ -46,6 +47,7 @@ All values empty (everything from the sheet):
 
 | Hero (product) | |
 | --- | --- |
+| label | |
 | image-front | |
 | image-back | |
 | Title | |
@@ -70,6 +72,7 @@ values are shown.
 
 | Left empty | Filled from |
 | --- | --- |
+| label | `Occasion`: `Limited Edition` shows **Limited Edition**; `Halloween`, `Easter`, `Holiday`, `Valentine's` show **Seasonal**; `Everyday` and any other occasion show no label |
 | image-front | `Image URL` (alt: `imageAlt`, else `productName`) |
 | image-back | `imageBack` (alt: `imageBackAlt`) |
 | Title | `Short Product Title`, else `productName` |
