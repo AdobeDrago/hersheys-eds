@@ -144,14 +144,48 @@ test('Hero uses production foreground and has a readable image-omitted state', a
   await expect(page.locator('.hero h1')).toHaveCSS('color', 'rgb(63, 0, 11)');
 });
 
-test('Columns recipe variant builds ingredients, directions, and Bake Mode', async ({ page }) => {
-  await open(page, 'blocks-columns--recipe');
-  await expect(page.locator('.columns.recipe .columns-recipe-ingredient-list li')).toHaveCount(2);
-  await expect(page.locator('.columns-recipe-summary-heading')).toHaveText('Ingredients & Directions');
-  await expect(page.locator('.columns-recipe-times')).toContainText('Prep:');
-  await expect(page.locator('.columns-recipe-bake-switch input')).toHaveAttribute('role', 'switch');
-  await expect(page.locator('.columns-recipe-tip summary')).toHaveText('Tip');
-  await expect(page.locator('.columns-recipe-section')).toHaveCSS('background-color', 'rgb(246, 246, 246)');
+test('Recipe Details ingredients variant builds ingredients, directions, and Bake Mode', async ({ page }) => {
+  await open(page, 'blocks-recipe-details--ingredients');
+  await expect(page.locator('.recipe-details.ingredients .recipe-details-ingredients-ingredient-list li')).toHaveCount(2);
+  await expect(page.locator('.recipe-details-ingredients-summary-heading')).toHaveText('Ingredients & Directions');
+  await expect(page.locator('.recipe-details-ingredients-times')).toContainText('Prep:');
+  await expect(page.locator('.recipe-details-ingredients-bake-switch input')).toHaveAttribute('role', 'switch');
+  await expect(page.locator('.recipe-details-ingredients-tip summary')).toHaveText('Tip');
+  await expect(page.locator('.recipe-details-ingredients-section')).toHaveCSS('background-color', 'rgb(246, 246, 246)');
+});
+
+test('Recipe Details nutrition variant builds the Nutrition Facts label and contact button', async ({ page }) => {
+  await open(page, 'blocks-recipe-details--nutrition');
+  await expect(page.locator('.recipe-details.nutrition .recipe-details-nutrition-title')).toHaveText('Nutrition Facts');
+  await expect(page.locator('.recipe-details-nutrition-facts .recipe-details-nutrition-row')).toHaveCount(8);
+  await expect(page.locator('.recipe-details-nutrition-calories .recipe-details-nutrition-value')).toHaveText('170');
+  await expect(page.locator('.recipe-details-nutrition-aside a.button')).toHaveText('Contact Customer Service');
+});
+
+test('Cards related recipes fill an empty block from Algolia Recommend with rating containers', async ({ page }) => {
+  await open(page, 'blocks-cards--related-recipes');
+  const cards = page.locator('.cards.recipes > ul > li');
+  await expect(cards).toHaveCount(4);
+  await expect(cards.first().locator('h3 a')).toHaveAttribute('href', 'https://www.hersheyland.com/recipes/recipe-1.html');
+  await expect(page.locator('.cards.recipes [data-bv-show="inline_rating"]')).toHaveCount(3);
+  await expect(page.locator('.cards.recipes .cards-slider-controls')).toBeAttached();
+});
+
+test('Newsletter Signup builds the recipe email capture and confirms a valid submit', async ({ page }) => {
+  await page.route('https://l.hersheys.com/u/register.php*', (route) => route.fulfill({ status: 200, body: '' }));
+  await open(page, 'blocks-newsletter-signup--default');
+  await expect(page.locator('.newsletter-signup-copy h2')).toHaveText('Love Desserts? Stay Inspired!');
+  await expect(page.locator('.newsletter-signup-note')).toContainText('EU/EEA');
+  const email = page.locator('.newsletter-signup-input input');
+  await expect(email).toHaveAttribute('placeholder', 'youremail@yourdomain.com');
+  await page.locator('.newsletter-signup-submit').click();
+  await expect(page.locator('.newsletter-signup-field.has-error')).toHaveCount(2);
+  await email.fill('baker@example.com');
+  await page.locator('.newsletter-signup-check input').check();
+  await page.locator('.newsletter-signup-submit').click();
+  await expect(page.locator('.newsletter-signup-success')).toBeVisible();
+  await expect(page.locator('.newsletter-signup-success h3')).toHaveText('You have successfully subscribed!');
+  await expect(page.locator('.newsletter-signup-layout')).toBeHidden();
 });
 
 test('Hero recipe variant keeps section measure and builds the overview', async ({ page }) => {

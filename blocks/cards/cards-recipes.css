@@ -1,0 +1,152 @@
+/*
+ * related recipes ("You Might Also Enjoy...") on recipe pages; builds on .cards.slider.related.
+ * Measurements come from hersheyland.com's algolia-recommend clientlib (.recipe-craft-recommend).
+ */
+
+/* the section's heading and "View All Recipes" button, authored as default content around the block */
+.section:has(.cards.recipes) > .default-content-wrapper {
+  text-align: center;
+}
+
+.section:has(.cards.recipes) > .default-content-wrapper h2 {
+  max-width: 240px;
+  margin: 0 auto 19px;
+  color: var(--hershey-system-color-text-primary, #3f000b);
+  font-family: var(--hershey-system-typography-heading-font-family, var(--heading-font-family));
+  font-size: 24px;
+  font-weight: var(--hershey-system-typography-heading-font-weight, 900);
+  line-height: 1.05;
+}
+
+.section:has(.cards.recipes) > .default-content-wrapper p.button-wrapper {
+  margin: 24px 0 16px;
+}
+
+.section:has(.cards.recipes) > .default-content-wrapper a.button:any-link {
+  justify-content: center;
+  min-width: 80vw;
+  min-height: 44px;
+  border: 0;
+  border-radius: 35px;
+  padding: 10px 0;
+  background: var(--hershey-system-color-action-primary-background-default, #007bbd);
+  color: var(--hershey-system-color-action-primary-foreground, #fff);
+  font-family: var(--hershey-system-typography-body-font-family, var(--body-font-family));
+  font-size: 16px;
+  font-weight: var(--hershey-system-typography-action-font-weight, 700);
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* recipe pages use a lighter hover blue than the site's primary action */
+.section:has(.cards.recipes) > .default-content-wrapper a.button:any-link:hover,
+.section:has(.cards.recipes) > .default-content-wrapper a.button:any-link:focus-visible {
+  background: #179ce4;
+  color: var(--hershey-system-color-action-primary-foreground, #fff);
+  text-decoration: none;
+}
+
+@media (width >= 768px) {
+  .section:has(.cards.recipes) > .default-content-wrapper h2 {
+    max-width: none;
+    margin-bottom: 40px;
+    font-size: var(--hershey-system-typography-heading-2-font-size-desktop, 36px);
+    line-height: 1.1;
+  }
+
+  .section:has(.cards.recipes) > .default-content-wrapper p.button-wrapper {
+    margin-top: 35px;
+  }
+
+  .section:has(.cards.recipes) > .default-content-wrapper a.button:any-link {
+    min-width: 50vw;
+    min-height: 60px;
+    padding: 18px 0;
+  }
+}
+
+@media (width >= 900px) {
+  .cards.slider.related.recipes {
+    max-width: 1120px;
+  }
+}
+
+@media (width >= 992px) {
+  .section:has(.cards.recipes) > .default-content-wrapper a.button:any-link {
+    min-width: 346px;
+  }
+}
+
+.cards.slider.related.recipes > ul > li {
+  border-radius: 8px;
+}
+
+/* the cards stay put on hover on recipe pages; only the title underlines */
+.cards.slider.related.recipes > ul > li:hover,
+.cards.slider.related.recipes > ul > li:focus-within {
+  transform: none;
+}
+
+.cards.slider.related.recipes > ul > li img {
+  aspect-ratio: 100 / 69;
+  object-fit: cover;
+}
+
+.cards.slider.related.recipes .cards-card-body {
+  margin: 0;
+  padding: 10px;
+}
+
+.cards.slider.related.recipes h3 {
+  display: -webkit-box;
+  margin-bottom: 4px;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* reserve the Bazaarvoice inline rating's line so the cards don't jump when it renders */
+.cards.recipes .cards-recipes-rating {
+  min-height: 1.5em;
+  margin-top: 3px;
+  text-align: left;
+}
+
+/* arrows only, as on hersheyland.com: no page indicators */
+.cards.recipes .cards-slider-dots {
+  display: none;
+}
+
+/* below 768px the arrows sit centred under the cards */
+@media (width < 768px) {
+  .cards.slider.related.recipes .cards-slider-controls {
+    justify-content: center;
+    gap: 24px;
+    margin-top: 19px;
+  }
+}
+
+@media (width >= 768px) {
+  .cards.slider.related.recipes > ul > li {
+    border-radius: 6px;
+  }
+
+  .cards.slider.related.recipes > ul > li img {
+    aspect-ratio: 100 / 58;
+  }
+
+  .cards.slider.related.recipes .cards-card-body {
+    min-height: 60px;
+    padding: 16px;
+  }
+
+  .cards.slider.related.recipes h3 {
+    font-size: 17px;
+  }
+
+  .cards.recipes .cards-recipes-rating {
+    margin-top: 4px;
+  }
+}

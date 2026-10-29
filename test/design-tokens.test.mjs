@@ -247,7 +247,9 @@ test('all block/theme Hershey variables are declared in the generated catalog', 
   const css = readFileSync(new URL('../design/tokens.css', import.meta.url), 'utf8');
   const declared = new Set([...css.matchAll(/(--hershey-[\w-]+):/g)].map((match) => match[1]));
   const paths = [
-    'styles/hershey-home.css', 'blocks/cards/cards.css', 'blocks/columns/columns.css',
+    'styles/hershey-home.css', 'blocks/cards/cards.css', 'blocks/cards/cards-recipes.css', 'blocks/columns/columns.css',
+    'blocks/recipe-details/recipe-details-ingredients.css', 'blocks/recipe-details/recipe-details-nutrition.css',
+    'blocks/newsletter-signup/newsletter-signup.css',
     'blocks/tabs/tabs.css', 'blocks/tabs/tabs-nutrition.css', 'blocks/hero/hero-product.css', 'blocks/breadcrumb-trail/breadcrumb-trail.css', 'blocks/header/header.css', 'blocks/footer/footer.css', 'blocks/accordion/accordion.css', 'blocks/hero/hero.css', 'blocks/hero/hero-article.css', 'blocks/banner/banner.css', 'styles/styles.css',
   ];
   paths.forEach((path) => {

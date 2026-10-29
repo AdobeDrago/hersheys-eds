@@ -27,6 +27,7 @@ Pages load in three phases (see `loadPage()` in `scripts/scripts.js`):
 | **Wayvia (PriceSpider)**: Shop Now warm-up | Faster Where to Buy after Shop Now | Product pages with a Shop Now link, once the page is shown | Delayed (start) | None: a prefetch and a prerender hint | Nothing; the click still navigates normally. |
 | **Algolia**: recipe search | Search results, filters, paging | Right away when the block is in the first section (as on `/recipes/all-recipes`, where the results are the main content); otherwise the first time it is on screen | Eager or lazy, depending on the section; the block never waits for the results | None: no cookies; `analytics=false` | "Unable to load recipes" if the request fails, or after 8 s without an answer. |
 | **Algolia**: related products | Related Products cards | When the block loads; the section waits for it | Lazy | None: no cookies; `analytics: false` | The authored cards stay. The request gives up after 4 s, so later sections and the footer are never held up longer. |
+| **Algolia**: related recipes | "You Might Also Enjoy..." cards on recipe pages (`Cards (slider, related, recipes)`) | When an empty block loads; the section waits for it. Authored cards skip the request | Lazy | None: no cookies; `analytics: false` | The section (heading, cards, button) is hidden. The request gives up after 4 s. Card star ratings come from Bazaarvoice in the delayed phase, or straight after the cards if they arrive later. |
 
 Why each one sits where it does:
 

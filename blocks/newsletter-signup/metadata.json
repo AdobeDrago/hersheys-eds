@@ -1,0 +1,29 @@
+{
+  "blockName": "newsletter-signup",
+  "canonicalModel": "standalone",
+  "variants": [
+    {
+      "variantName": "default",
+      "authoredName": "Newsletter Signup",
+      "visualCharacteristics": {
+        "colorScheme": "light",
+        "density": "medium",
+        "purpose": "email-signup",
+        "imagePattern": "noimg",
+        "structure": "heading and note beside an email field, consent checkbox and button"
+      },
+      "contentPattern": "1 cell. Heading, introduction paragraph, a paragraph beginning with 'Please note', and a consent paragraph whose Privacy Policy text is a link. The email field, Sign Me Up button and confirmation are built by the block.",
+      "usage": {
+        "pagesUsing": [
+          "https://www.hersheyland.com/recipes/hersheys-best-brownies.html"
+        ],
+        "reuseCount": 1,
+        "lastUsed": "2026-10-29"
+      },
+      "options": []
+    }
+  ],
+  "memberVariantIds": [
+    "default"
+  ]
+}

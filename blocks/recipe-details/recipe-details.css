@@ -1,0 +1,4 @@
+/* Shared base; variant styles live in recipe-details-ingredients.css and recipe-details-nutrition.css. */
+.recipe-details img {
+  width: 100%;
+}
