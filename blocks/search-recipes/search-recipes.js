@@ -8,12 +8,16 @@ import { whenVisible } from '../../scripts/scripts.js';
 const SEARCH_TIMEOUT = 8000;
 
 /**
- * Search (Recipes) block — Algolia-backed all-recipes listing.
+ * Search (Recipes) block — Algolia-backed listing (all-recipes, activities).
  *
- * Authoring: empty block (or optional config rows via readBlockConfig keys:
- *   hits-per-page, endpoint, asset-origin).
- * Renders search box, facet filters, sort, result grid, pagination.
+ * Variants pick the listing: no variant = recipes, `activities` = crafts.
+ * Authoring: optional config rows (key | value): title, placeholder, background (picture),
+ *   hits-per-page, endpoint, asset-origin.
+ * Renders the search banner, results count, sort, collapsible filters, result grid and
+ * a "Show More" button.
  */
+
+const LISTING_VARIANTS = ['activities'];
 
 /**
  * Reads optional authoring config from the first table rows.
@@ -24,14 +28,19 @@ function readAuthorConfig(block) {
   const rows = [...block.querySelectorAll(':scope > div')];
   if (!rows.length) return {};
   const map = {};
+  const labels = {};
+  const overrides = {};
   rows.forEach((row) => {
     const cells = [...row.children];
     if (cells.length < 2) return;
     const key = cells[0].textContent.trim().toLowerCase().replace(/\s+/g, '-');
     const value = cells[1].textContent.trim();
+    if (key === 'background') overrides.background = cells[1].querySelector('picture');
     if (key && value) map[key] = value;
   });
-  const overrides = {};
+  if (map.title) labels.title = map.title;
+  if (map.placeholder) labels.placeholder = map.placeholder;
+  if (Object.keys(labels).length) overrides.labels = labels;
   if (map.endpoint) {
     try {
       const u = new URL(map.endpoint);
@@ -73,46 +82,54 @@ function el(tag, className, text) {
  * @param {object} config
  */
 function buildShell(block, config) {
+  const { labels } = config;
   const root = el('div', 'search-recipes-root');
 
-  const header = el('div', 'search-recipes-header');
-  const title = el('h2', 'search-recipes-title', 'Search for a Recipe');
+  const banner = el('div', 'search-recipes-banner');
+  if (config.background) banner.append(config.background);
+  const title = el('h1', 'search-recipes-title', labels.title);
   const form = el('form', 'search-recipes-form');
   form.setAttribute('role', 'search');
-  const label = el('label', 'search-recipes-label', 'Search recipes');
+  const label = el('label', 'sr-only', `Search ${labels.noun.toLowerCase()}`);
   label.htmlFor = 'search-recipes-query';
-  label.classList.add('sr-only');
   const input = el('input', 'search-recipes-query');
   input.type = 'search';
   input.id = 'search-recipes-query';
   input.name = 'q';
-  input.placeholder = 'Enter recipe name, ingredients, category, etc.';
+  input.placeholder = labels.placeholder;
   input.autocomplete = 'off';
-  const submit = el('button', 'search-recipes-submit button primary', 'Search');
+  const submit = el('button', 'search-recipes-submit');
   submit.type = 'submit';
+  submit.setAttribute('aria-label', 'Search');
   form.append(label, input, submit);
-  header.append(title, form);
+  banner.append(title, form);
 
   const layout = el('div', 'search-recipes-layout');
   const aside = el('aside', 'search-recipes-facets');
-  aside.setAttribute('aria-label', 'Filter recipes');
-  const facetsTitle = el('h3', 'search-recipes-facets-title', 'Filter by');
-  const facetsMount = el('div', 'search-recipes-facets-list');
-  const clear = el('button', 'search-recipes-clear button', 'Clear filters');
-  clear.type = 'button';
-  aside.append(facetsTitle, facetsMount, clear);
-
-  const main = el('div', 'search-recipes-main');
-  const toolbar = el('div', 'search-recipes-toolbar');
+  aside.setAttribute('aria-label', `Filter ${labels.noun.toLowerCase()}`);
   const stats = el('p', 'search-recipes-stats');
   stats.setAttribute('aria-live', 'polite');
   stats.tabIndex = -1;
-  const sortLabel = el('label', 'search-recipes-sort-label', 'Sort by');
+  const panel = el('details', 'search-recipes-panel');
+  const panelHead = el('summary', 'search-recipes-panel-head');
+  const facetsTitle = el('span', 'search-recipes-facets-title', 'Filter By');
+  const facetsCount = el('span', 'search-recipes-facets-count');
+  panelHead.append(facetsTitle, facetsCount);
+  const facetsMount = el('div', 'search-recipes-facets-list');
+  const clear = el('button', 'search-recipes-clear', 'Clear all filters');
+  clear.type = 'button';
+  clear.hidden = true;
+  panel.append(panelHead, facetsMount, clear);
+  aside.append(stats, panel);
+
+  const main = el('div', 'search-recipes-main');
+  const sortWrap = el('div', 'search-recipes-sortby');
+  const sortLabel = el('label', 'search-recipes-sort-label', 'Sort By');
   const sort = el('select', 'search-recipes-sort');
   sort.id = 'search-recipes-sort';
   sortLabel.htmlFor = sort.id;
   [
-    ['newest', 'Most Recent'],
+    ['newest', 'Newest'],
     ['rating', 'Rating (Highest-Lowest)'],
     ['alpha', 'A-Z'],
   ].forEach(([value, text]) => {
@@ -121,23 +138,24 @@ function buildShell(block, config) {
     opt.textContent = text;
     sort.append(opt);
   });
-  toolbar.append(stats, sortLabel, sort);
+  sortWrap.append(sortLabel, sort);
 
   const status = el('p', 'search-recipes-status');
   status.hidden = true;
   status.setAttribute('role', 'alert');
 
   const hits = el('ul', 'search-recipes-hits');
-  const pager = el('nav', 'search-recipes-pagination');
-  pager.setAttribute('aria-label', 'Recipe results pages');
+  const more = el('button', 'search-recipes-more', `Show More ${labels.noun}`);
+  more.type = 'button';
+  more.hidden = true;
 
-  main.append(toolbar, status, hits, pager);
+  main.append(sortWrap, status, hits, more);
   layout.append(aside, main);
-  root.append(header, layout);
+  root.append(banner, layout);
   block.replaceChildren(root);
 
   return {
-    form, input, clear, facetsMount, stats, sort, status, hits, pager, config,
+    form, input, clear, panel, facetsMount, facetsCount, stats, sort, status, hits, more, config,
   };
 }
 
@@ -151,9 +169,12 @@ function renderFacets(ui, state) {
   config.facetAttributes.forEach((attr) => {
     const values = state.result?.facets?.[attr] || [];
     if (!values.length) return;
-    const group = el('fieldset', 'search-recipes-facet');
-    const legend = el('legend', 'search-recipes-facet-legend', config.facetLabels[attr] || attr);
-    group.append(legend);
+    const group = el('details', 'search-recipes-facet');
+    const selected = values.some(({ value }) => (state.facetFilters || []).includes(`${attr}:${value}`));
+    group.open = selected || state.openGroups.has(attr);
+    group.dataset.attribute = attr;
+    group.append(el('summary', 'search-recipes-facet-legend', config.facetLabels[attr] || attr));
+    const list = el('div', 'search-recipes-facet-values');
     values.forEach(({ value, count }, idx) => {
       const id = `facet-${attr.replace(/[^a-zA-Z0-9_-]/g, '-')}-${idx}`;
       const row = el('div', 'search-recipes-facet-row');
@@ -167,10 +188,43 @@ function renderFacets(ui, state) {
       lab.htmlFor = id;
       lab.textContent = attr === 'hero.rating' ? `${value}+ stars (${count})` : `${value} (${count})`;
       row.append(checkbox, lab);
-      group.append(row);
+      list.append(row);
     });
+    group.append(list);
     facetsMount.append(group);
   });
+  const chosen = (state.facetFilters || []).length;
+  ui.facetsCount.textContent = state.result ? `${state.result.nbHits} results` : '';
+  ui.clear.hidden = !chosen;
+}
+
+/**
+ * @param {object} hit
+ * @returns {HTMLLIElement}
+ */
+function buildCard(hit) {
+  const li = el('li', 'search-recipes-card');
+  const link = document.createElement('a');
+  link.className = 'search-recipes-card-link';
+  link.href = hit.href || '#';
+
+  const media = el('div', 'search-recipes-card-image');
+  if (hit.imageUrl) {
+    const img = document.createElement('img');
+    img.src = hit.imageUrl;
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    media.append(img);
+  }
+  const body = el('div', 'search-recipes-card-body');
+  body.append(el('h3', 'search-recipes-card-title', hit.title));
+  if (hit.rating) {
+    body.append(el('p', 'search-recipes-card-rating', `Rating: ${hit.rating}`));
+  }
+  link.append(media, body);
+  li.append(link);
+  return li;
 }
 
 /**
@@ -179,80 +233,39 @@ function renderFacets(ui, state) {
  */
 function renderHits(ui, state) {
   const {
-    hits, stats, pager, status,
+    hits, stats, more, status,
   } = ui;
   const { result } = state;
-  hits.replaceChildren();
-  pager.replaceChildren();
   hits.setAttribute('aria-busy', state.loading ? 'true' : 'false');
 
   if (state.error) {
     status.hidden = false;
-    status.textContent = 'Unable to load recipes. Please try again.';
+    status.textContent = `Unable to load ${ui.config.labels.noun.toLowerCase()}. Please try again.`;
     stats.textContent = '';
+    more.hidden = true;
     return;
   }
   status.hidden = true;
   status.textContent = '';
 
-  if (state.loading && !result) {
-    stats.textContent = 'Loading recipes…';
-    return;
-  }
-
   if (!result) {
-    stats.textContent = 'Loading recipes…';
+    stats.textContent = 'Loading…';
+    more.hidden = true;
     return;
   }
 
-  if (state.loading) {
-    stats.textContent = 'Loading…';
-  } else {
-    const from = result.nbHits ? result.page * result.hitsPerPage + 1 : 0;
-    const to = Math.min((result.page + 1) * result.hitsPerPage, result.nbHits);
-    const q = state.query ? ` for “${state.query}”` : '';
-    stats.textContent = result.nbHits
-      ? `Showing ${from}–${to} of ${result.nbHits} recipes${q}`
-      : `No recipes found${q}`;
+  const q = state.query ? ` for “${state.query}”` : '';
+  stats.replaceChildren('Showing ');
+  stats.append(el('strong', '', `${result.nbHits} results`), q);
+
+  // load more appends to the grid; any other search starts the grid over
+  if (state.rendered !== result) {
+    if (result.page === 0) hits.replaceChildren();
+    result.hits.forEach((hit) => hits.append(buildCard(hit)));
+    state.rendered = result;
   }
-
-  result.hits.forEach((hit) => {
-    const li = el('li', 'search-recipes-card');
-    const link = document.createElement('a');
-    link.className = 'search-recipes-card-link';
-    link.href = hit.href || '#';
-
-    const media = el('div', 'search-recipes-card-image');
-    if (hit.imageUrl) {
-      const img = document.createElement('img');
-      img.src = hit.imageUrl;
-      img.alt = '';
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      media.append(img);
-    }
-    const body = el('div', 'search-recipes-card-body');
-    const h = el('h3', 'search-recipes-card-title', hit.title);
-    body.append(h);
-    if (hit.rating != null) {
-      body.append(el('p', 'search-recipes-card-rating', `Rating: ${hit.rating}`));
-    }
-    link.append(media, body);
-    li.append(link);
-    hits.append(li);
-  });
-
-  if (result.nbPages <= 1) return;
-  const prev = el('button', 'search-recipes-page button', 'Previous');
-  prev.type = 'button';
-  prev.disabled = result.page <= 0 || state.loading;
-  prev.dataset.page = String(result.page - 1);
-  const next = el('button', 'search-recipes-page button', 'Next');
-  next.type = 'button';
-  next.disabled = result.page >= result.nbPages - 1 || state.loading;
-  next.dataset.page = String(result.page + 1);
-  const indicator = el('span', 'search-recipes-page-indicator', `Page ${result.page + 1} of ${result.nbPages}`);
-  pager.append(prev, indicator, next);
+  more.hidden = result.page >= result.nbPages - 1;
+  more.disabled = state.loading;
 }
 
 /**
@@ -268,7 +281,7 @@ async function runSearch(ui, state, block) {
   state.controller = controller;
   // abort with a TimeoutError reason so it isn't mistaken for a superseded search
   const timeout = setTimeout(() => {
-    controller.abort(new DOMException('Recipe search timed out', 'TimeoutError'));
+    controller.abort(new DOMException('Search timed out', 'TimeoutError'));
   }, SEARCH_TIMEOUT);
   state.loading = true;
   renderHits(ui, state);
@@ -295,7 +308,6 @@ async function runSearch(ui, state, block) {
   renderFacets(ui, state);
   renderHits(ui, state);
   if (state.scrollAfterLoad && block) {
-    block.scrollIntoView({ behavior: 'smooth', block: 'start' });
     ui.stats.focus({ preventScroll: true });
     state.scrollAfterLoad = false;
   }
@@ -313,13 +325,16 @@ function collectFacetFilters(facetsMount) {
 
 export default function decorate(block) {
   const author = readAuthorConfig(block);
-  const config = resolveConfig(author);
+  const type = LISTING_VARIANTS.find((name) => block.classList.contains(name));
+  const config = resolveConfig({ ...author, type });
   const ui = buildShell(block, config);
   const state = {
     query: '',
     page: 0,
     indexKey: 'newest',
     facetFilters: [],
+    openGroups: new Set(),
+    rendered: null,
     result: null,
     error: false,
     loading: false,
@@ -327,6 +342,15 @@ export default function decorate(block) {
     controller: null,
     scrollAfterLoad: false,
   };
+
+  // the filter box is always open on desktop; on mobile "Filter by" folds it away
+  const desktop = window.matchMedia('(width >= 992px)');
+  const syncPanel = () => { ui.panel.open = desktop.matches; };
+  syncPanel();
+  desktop.addEventListener('change', syncPanel);
+  ui.panel.querySelector('summary').addEventListener('click', (e) => {
+    if (desktop.matches) e.preventDefault();
+  });
 
   let debounceTimer = 0;
   const searchSoon = (delay = 0) => {
@@ -356,11 +380,15 @@ export default function decorate(block) {
   ui.clear.addEventListener('click', () => {
     state.facetFilters = [];
     state.page = 0;
-    ui.facetsMount.querySelectorAll('input[type="checkbox"]').forEach((box) => {
-      box.checked = false;
-    });
     searchSoon();
   });
+
+  ui.facetsMount.addEventListener('toggle', (e) => {
+    const { attribute } = e.target.dataset;
+    if (!attribute) return;
+    if (e.target.open) state.openGroups.add(attribute);
+    else state.openGroups.delete(attribute);
+  }, true);
 
   ui.facetsMount.addEventListener('change', (e) => {
     if (!(e.target instanceof HTMLInputElement) || e.target.type !== 'checkbox') return;
@@ -369,11 +397,9 @@ export default function decorate(block) {
     searchSoon();
   });
 
-  ui.pager.addEventListener('click', (e) => {
-    const btn = e.target.closest('button[data-page]');
-    if (!btn || btn.disabled) return;
-    state.page = Number(btn.dataset.page);
-    state.scrollAfterLoad = true;
+  ui.more.addEventListener('click', () => {
+    if (state.loading) return;
+    state.page = (state.result?.page ?? state.page) + 1;
     searchSoon();
   });
 

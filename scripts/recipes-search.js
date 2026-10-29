@@ -1,5 +1,5 @@
 /**
- * Recipes search client for Hersheyland Algolia (all-recipes).
+ * Listing search client for Hersheyland Algolia (all-recipes, activities).
  *
  * Default: browser → Algolia Search API (public search-only key).
  * Optional: set `endpoint` to a Worker/proxy URL; the same request shape is POSTed
@@ -52,20 +52,52 @@ export const DEFAULT_CONFIG = {
   },
   hitsPerPage: 20,
   maxValuesPerFacet: 100,
+  /** Wording the block shows; the stories and products listings reuse the same keys. */
+  labels: {
+    placeholder: 'Enter recipe name, ingredients, category, etc.',
+    title: 'Find a Recipe',
+    noun: 'Recipes',
+  },
 };
 
 /**
- * Shallow-merges overrides with defaults.
- * Only `indices` is deep-merged; `facetAttributes`, `facetLabels`, and
+ * Per-listing overrides, chosen by the block's variant class (`search-recipes activities`).
+ * Anything not listed here comes from DEFAULT_CONFIG.
+ */
+export const LISTING_TYPES = {
+  activities: {
+    baseFilter: 'metaTags.templateType: craft-detail',
+    facetAttributes: ['metaTags.category', 'metaTags.Seasons & Occasions', 'metaTags.skillLevel'],
+    facetLabels: {
+      'metaTags.category': 'Category',
+      'metaTags.Seasons & Occasions': 'Seasons & Occasions',
+      'metaTags.skillLevel': 'Skill Level',
+    },
+    facetValueOrder: { 'metaTags.skillLevel': ['Beginner', 'Intermediate', 'Advanced', 'Expert'] },
+    labels: {
+      placeholder: 'Type a keyword or search by occasion...',
+      title: 'Find an Activity',
+      noun: 'Crafts',
+    },
+  },
+};
+
+/**
+ * Shallow-merges overrides with defaults. `type` picks a LISTING_TYPES entry first.
+ * Only `indices` and `labels` are deep-merged; `facetAttributes`, `facetLabels`, and
  * `facetValueOrder` are replaced entirely if provided.
- * @param {Partial<typeof DEFAULT_CONFIG>} [overrides]
+ * @param {Partial<typeof DEFAULT_CONFIG> & { type?: string }} [overrides]
  * @returns {typeof DEFAULT_CONFIG}
  */
 export function resolveConfig(overrides = {}) {
+  const { type, ...own } = overrides;
+  const listing = LISTING_TYPES[type] || {};
   return {
     ...DEFAULT_CONFIG,
-    ...overrides,
-    indices: { ...DEFAULT_CONFIG.indices, ...overrides.indices },
+    ...listing,
+    ...own,
+    indices: { ...DEFAULT_CONFIG.indices, ...listing.indices, ...own.indices },
+    labels: { ...DEFAULT_CONFIG.labels, ...listing.labels, ...own.labels },
   };
 }
 
