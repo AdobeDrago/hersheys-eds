@@ -145,17 +145,22 @@ function buildShell(block, config) {
   status.setAttribute('role', 'alert');
 
   const hits = el('ul', 'search-recipes-hits');
+  const progress = el('div', 'search-recipes-progress');
+  const progressText = el('div', 'search-recipes-progress-text');
+  const progressFill = el('span', 'search-recipes-progress-fill');
+  progress.append(progressText, progressFill);
   const more = el('button', 'search-recipes-more', `Show More ${labels.noun}`);
   more.type = 'button';
   more.hidden = true;
 
-  main.append(sortWrap, status, hits, more);
+  main.append(sortWrap, status, hits, progress, more);
   layout.append(aside, main);
   root.append(banner, layout);
   block.replaceChildren(root);
 
   return {
     form, input, clear, panel, facetsMount, facetsCount, stats, sort, status, hits, more, config,
+    progress, progressText, progressFill,
   };
 }
 
@@ -243,6 +248,7 @@ function renderHits(ui, state) {
     status.textContent = `Unable to load ${ui.config.labels.noun.toLowerCase()}. Please try again.`;
     stats.textContent = '';
     more.hidden = true;
+    ui.progress.hidden = true;
     return;
   }
   status.hidden = true;
@@ -251,6 +257,7 @@ function renderHits(ui, state) {
   if (!result) {
     stats.textContent = 'Loading…';
     more.hidden = true;
+    ui.progress.hidden = true;
     return;
   }
 
@@ -264,6 +271,10 @@ function renderHits(ui, state) {
     result.hits.forEach((hit) => hits.append(buildCard(hit)));
     state.rendered = result;
   }
+  const seen = result.page * result.hitsPerPage + result.hits.length;
+  ui.progressText.textContent = `You've seen ${seen} of ${result.nbHits} ${ui.config.labels.noun.toLowerCase()}`;
+  ui.progressFill.style.width = `${(seen / result.nbHits) * 100}%`;
+  ui.progress.hidden = !result.nbHits;
   more.hidden = result.page >= result.nbPages - 1;
   more.disabled = state.loading;
 }
