@@ -20,6 +20,15 @@
   font-display: swap;
 }
 
+/* true bold italic (e.g. links in italic text), as on hersheyland.com, instead of a slanted bold */
+@font-face {
+  font-family: hershey-tt;
+  src: url('../fonts/subset-TTNormsPro-BdIt.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @font-face {
   font-family: hershey-tt;
   src: url('../fonts/subset-TTNormsPro-Blk.woff2') format('woff2');
