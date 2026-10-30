@@ -169,7 +169,8 @@ export function absoluteUrl(path, assetOrigin) {
  */
 export function mapHit(hit, config) {
   const path = hit?.url?.path || hit?.url?.href || '';
-  const imagePath = hit?.hero?.image || '';
+  // some product images come back as http:// (Scene7); the page is https, so upgrade them
+  const imagePath = (hit?.hero?.image || '').replace(/^http:\/\//i, 'https://');
   return {
     objectID: hit.objectID || '',
     title: hit?.hero?.h1 || hit.title || '',
