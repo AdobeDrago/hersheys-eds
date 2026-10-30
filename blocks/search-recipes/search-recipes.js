@@ -18,7 +18,7 @@ const SEARCH_TIMEOUT = 8000;
  * a "Show More" button.
  */
 
-const LISTING_VARIANTS = ['activities', 'products'];
+const LISTING_VARIANTS = ['recipes', 'activities', 'products'];
 
 /**
  * Reads optional authoring config from the first table rows.

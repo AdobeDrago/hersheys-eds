@@ -443,6 +443,7 @@
 
 .search-recipes .search-recipes-card-rating {
   margin: 0;
+  line-height: 1;
   font-size: var(--hershey-component-search-recipes-caption-font-size, var(--body-font-size-xs));
 }
 
@@ -593,6 +594,11 @@
   .search-recipes .search-recipes-card-title {
     font-size: var(--hershey-component-search-recipes-card-title-font-size, 18px);
   }
+}
+
+/* recipes: purple band */
+.search-recipes.recipes .search-recipes-banner {
+  background-color: var(--hershey-component-search-recipes-banner-color-surface-recipes, var(--dark-color));
 }
 
 /* products: flat cards with a square image tile, narrower results container */

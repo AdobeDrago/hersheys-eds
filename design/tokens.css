@@ -1316,6 +1316,7 @@
   --hershey-component-search-recipes-banner-color-surface: var(--hershey-system-color-surface-listing-band);
   --hershey-component-search-recipes-banner-color-text: var(--hershey-system-color-text-inverse);
   --hershey-component-search-recipes-banner-color-surface-products: var(--hershey-system-color-surface-listing-band-products);
+  --hershey-component-search-recipes-banner-color-surface-recipes: var(--hershey-system-color-surface-plum);
   --hershey-component-search-recipes-banner-padding-top-mobile: var(--hershey-system-spacing-listing-band-top-mobile);
   --hershey-component-search-recipes-banner-padding-top: var(--hershey-system-spacing-listing-band-top);
   --hershey-component-search-recipes-banner-padding-bottom-mobile: var(--hershey-system-spacing-listing-band-bottom-mobile);

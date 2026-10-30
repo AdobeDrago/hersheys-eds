@@ -48,20 +48,20 @@ export const DEFAULT_CONFIG = {
       'from 121 - 180 min',
       'over 180 min',
     ],
-    'hero.rating': ['4', '3', '2', '1'],
+    'hero.rating': ['5', '4', '3', '2', '1'],
   },
   /** Facets whose values are limited to `facetValueOrder` (anything else is hidden). */
   facetStrict: ['hero.rating', 'metaTags.Time to Complete', 'metaTags.skillLevel'],
   /** Facets listed by result count (highest first) instead of A-Z. */
   facetByCount: [],
   /** Sort choices as [indexKey, label]; the first one is the default. */
-  sorts: [['newest', 'Newest'], ['rating', 'Rating (Highest-Lowest)'], ['alpha', 'A-Z']],
+  sorts: [['newest', 'Most Recent'], ['rating', 'Rating (Highest-Lowest)'], ['alpha', 'A-Z']],
   hitsPerPage: 20,
   maxValuesPerFacet: 100,
   /** Wording the block shows; the stories and products listings reuse the same keys. */
   labels: {
     placeholder: 'Enter recipe name, ingredients, category, etc.',
-    title: 'Find a Recipe',
+    title: 'Search for a Recipe',
     noun: 'Recipes',
   },
 };
@@ -80,6 +80,7 @@ export const LISTING_TYPES = {
       'metaTags.skillLevel': 'Skill Level',
     },
     facetValueOrder: { 'metaTags.skillLevel': ['Beginner', 'Intermediate', 'Advanced', 'Expert'] },
+    sorts: [['newest', 'Newest'], ['rating', 'Rating (Highest-Lowest)'], ['alpha', 'A-Z']],
     labels: {
       placeholder: 'Type a keyword or search by occasion...',
       title: 'Find an Activity',
