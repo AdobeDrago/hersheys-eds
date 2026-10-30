@@ -17,47 +17,50 @@ main > .section:has(> .hero-wrapper > .hero.article) > .hero-wrapper {
   padding: 0;
 }
 
-/* purple colour modifier: `Hero (article, purple)` */
-main > .section:has(> .hero-wrapper > .hero.article.purple) {
-  background-color: var(--hershey-component-hero-article-purple-band-background, #724990);
-}
-
-/* lime colour modifier: `Hero (article, lime)`; dark text on the light band */
-main > .section:has(> .hero-wrapper > .hero.article.lime) {
-  background-color: var(--hershey-component-hero-article-lime-band-background, #b7d34a);
-}
-
-.hero.article.lime {
-  color: var(--hershey-component-hero-article-lime-color-foreground, #3f000b);
-}
-
-/* gold colour modifier: `Hero (article, gold)`; dark text on the light band */
-main > .section:has(> .hero-wrapper > .hero.article.gold) {
-  background-color: var(--hershey-component-hero-article-gold-band-background, #ffc627);
-}
-
-.hero.article.gold {
-  color: var(--hershey-component-hero-article-gold-color-foreground, #3f000b);
-}
-
-/* brown colour modifier: `Hero (article, brown)` */
-main > .section:has(> .hero-wrapper > .hero.article.brown) {
-  background-color: var(--hershey-component-hero-article-brown-band-background, #3c131c);
-}
-
-/* navy colour modifier: `Hero (article, navy)` */
-main > .section:has(> .hero-wrapper > .hero.article.navy) {
-  background-color: var(--hershey-component-hero-article-navy-band-background, #003594);
-}
-
-/* plum colour modifier: `Hero (article, plum)` */
-main > .section:has(> .hero-wrapper > .hero.article.plum) {
-  background-color: var(--hershey-component-hero-article-plum-band-background, #5a357b);
-}
-
 .hero.article {
   color: var(--hershey-component-hero-article-color-foreground, #fff);
   font-family: var(--hershey-component-hero-article-base-font-family, hershey-tt, sans-serif);
+}
+
+/*
+ * colour: set with section metadata (`Style` = blue, purple, lime, gold, brown, navy or plum) on the
+ * section holding `Hero (article)`; the default is the blue band above.
+ */
+main > .section.blue:has(> .hero-wrapper > .hero.article) {
+  background-color: var(--hershey-component-hero-article-band-background, #4068af);
+}
+
+main > .section.purple:has(> .hero-wrapper > .hero.article) {
+  background-color: var(--hershey-component-hero-article-purple-band-background, #724990);
+}
+
+main > .section.lime:has(> .hero-wrapper > .hero.article) {
+  background-color: var(--hershey-component-hero-article-lime-band-background, #b7d34a);
+}
+
+main > .section.gold:has(> .hero-wrapper > .hero.article) {
+  background-color: var(--hershey-component-hero-article-gold-band-background, #ffc627);
+}
+
+main > .section.brown:has(> .hero-wrapper > .hero.article) {
+  background-color: var(--hershey-component-hero-article-brown-band-background, #3c131c);
+}
+
+main > .section.navy:has(> .hero-wrapper > .hero.article) {
+  background-color: var(--hershey-component-hero-article-navy-band-background, #003594);
+}
+
+main > .section.plum:has(> .hero-wrapper > .hero.article) {
+  background-color: var(--hershey-component-hero-article-plum-band-background, #5a357b);
+}
+
+/* dark text on the light bands */
+main > .section.lime .hero.article {
+  color: var(--hershey-component-hero-article-lime-color-foreground, #3f000b);
+}
+
+main > .section.gold .hero.article {
+  color: var(--hershey-component-hero-article-gold-color-foreground, #3f000b);
 }
 
 .hero.article .hero-article-content {
