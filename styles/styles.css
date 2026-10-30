@@ -400,6 +400,22 @@ main .section.warm-tan {
   color: var(--hershey-system-color-text-primary, var(--text-color));
 }
 
+main .section.cool-tan {
+  margin: 0;
+  background-color: #e2d6c5;
+  color: var(--hershey-system-color-text-primary, var(--text-color));
+}
+
+/* the section colour wins over the product cards' default grey band */
+main .section.cool-tan.cards-container:has(.cards.product) {
+  background-color: #e2d6c5;
+}
+
+/* brand pages: the shop band centres its heading and call to action around the product cards */
+main .section.cool-tan > .default-content-wrapper {
+  text-align: center;
+}
+
 main .section.centered {
   text-align: center;
 }
@@ -818,8 +834,9 @@ main .section.centered h3 {
   color: inherit;
 }
 
-/* the FAQ heading is centred above its accordion */
-.hershey-story main .section:has(> .accordion-wrapper) > .default-content-wrapper > h2 {
+/* the FAQ heading is centred above its accordion (story and brand pages) */
+.hershey-story main .section:has(> .accordion-wrapper) > .default-content-wrapper > h2,
+.hershey-home main .section:has(> .accordion-wrapper) > .default-content-wrapper > h2 {
   text-align: center;
 }
 

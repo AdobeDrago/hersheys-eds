@@ -9,6 +9,11 @@ main > .section:has(> .breadcrumb-trail-wrapper) {
   margin-bottom: 0;
 }
 
+/* homepage-template pages (e.g. brand pages) pad every section; the trail stays a thin strip */
+.hershey-home main > .section:has(> .breadcrumb-trail-wrapper) {
+  padding: 0;
+}
+
 main > .section > .breadcrumb-trail-wrapper {
   max-width: none;
   padding: 0;

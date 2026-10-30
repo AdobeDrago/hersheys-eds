@@ -1,0 +1,151 @@
+/*
+ * Hero (brand) variant, loaded by hero.js for `Hero (brand)`.
+ * Brand landing pages: warm-tan panel with the brand logo, title and intro on the left,
+ * the brand photo filling the right half; stacked (photo first, centred text) on mobile.
+ * Values measured on hersheyland.com/brands/hersheys/symphony.html; the 992px query
+ * matches that page's layout switch.
+ */
+
+/* section: full-bleed, no page padding */
+main > .section:has(> .hero-wrapper > .hero.brand) {
+  margin: 0;
+  padding: 0;
+}
+
+main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hero.brand {
+  background-color: var(--hershey-system-color-surface-story-warm-tan, #feebd0);
+  color: #3f000b;
+  font-family: hershey-tt, sans-serif;
+}
+
+.hero.brand .hero-brand-content {
+  display: flex;
+  flex-direction: column;
+  container-type: inline-size;
+}
+
+.hero.brand .hero-brand-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.hero.brand .hero-brand-media picture {
+  position: absolute;
+  inset: 0;
+}
+
+.hero.brand .hero-brand-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 50%;
+}
+
+.hero.brand .hero-brand-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20px 10px 10px;
+  text-align: center;
+}
+
+.hero.brand .hero-brand-logo {
+  width: 300px;
+  max-width: 100%;
+  height: 85px;
+  margin: 20px 0 17.5px;
+}
+
+.hero.brand .hero-brand-logo picture,
+.hero.brand .hero-brand-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero.brand .hero-brand-logo img {
+  object-fit: contain;
+  object-position: 50% 100%;
+}
+
+.hero.brand h1 {
+  margin: 0 0 12px;
+  color: inherit;
+  font-family: hershey-gazpacho, serif;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.hero.brand p {
+  max-width: 697px;
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+@media (width >= 768px) {
+  .hero.brand .hero-brand-logo {
+    height: 120px;
+    margin-top: 0;
+  }
+}
+
+@media (width >= 992px) {
+  .hero.brand .hero-brand-content {
+    flex-direction: row-reverse;
+  }
+
+  .hero.brand .hero-brand-media,
+  .hero.brand .hero-brand-text {
+    flex: 0 0 50%;
+    min-width: 0;
+  }
+
+  .hero.brand .hero-brand-media {
+    aspect-ratio: auto;
+  }
+
+  /* the photo keeps its 16:9 height; a longer intro makes the band taller */
+  .hero.brand .hero-brand-text {
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(50cqi * 9 / 16);
+    padding: 25px;
+    text-align: start;
+  }
+
+  .hero.brand .hero-brand-logo {
+    width: 50%;
+    height: 120px;
+  }
+
+  .hero.brand .hero-brand-logo img {
+    object-position: 0 50%;
+  }
+
+  .hero.brand h1 {
+    font-size: 48px;
+  }
+
+  .hero.brand p {
+    max-width: none;
+    margin-bottom: 32px;
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+
+@media (width >= 1200px) {
+  .hero.brand .hero-brand-text {
+    padding-inline: 8%;
+  }
+}

@@ -189,3 +189,109 @@
     line-height: 1.3;
   }
 }
+
+/* callout variant (brand pages): wide image beside centred text with a pill button and a text link */
+.columns.callout > div {
+  gap: 35px;
+}
+
+.columns.callout > div > :not(.columns-img-col) {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: 50px;
+  padding: 0 30px;
+  text-align: center;
+}
+
+.columns.callout > div > :not(.columns-img-col) > * {
+  flex: 0 0 100%;
+}
+
+.columns.callout h2 {
+  margin: 0 0 20px;
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+/* stylelint-disable-next-line no-descending-specificity -- different blocks, never the same element */
+.columns.callout p {
+  margin: 0 0 11px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.columns.callout p.button-wrapper {
+  margin: 10px 0;
+}
+
+.columns.callout a.button.primary {
+  width: 100%;
+  border: 0;
+  border-radius: 25px;
+  padding: 13px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+/* secondary call to action is an underlined text link */
+.columns.callout a.button.secondary {
+  border: 0;
+  border-bottom: 1px solid currentcolor;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--hershey-system-color-action-primary-background-default, #007bbd);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.columns.callout a.button.secondary:hover {
+  border-bottom-color: transparent;
+  background: transparent;
+}
+
+@media (width >= 900px) {
+  .columns.callout > div {
+    gap: 30px;
+  }
+
+  .columns.callout > div > .columns-img-col {
+    flex: 0 0 58%;
+  }
+
+  .columns.callout > div > :not(.columns-img-col) {
+    padding: 0;
+  }
+
+  .columns.callout > div > :not(.columns-img-col) > .button-wrapper {
+    flex: 0 1 auto;
+  }
+
+  .columns.callout h2 {
+    margin-bottom: 25px;
+    font-size: 36px;
+  }
+
+  .columns.callout p {
+    margin-bottom: 14px;
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  .columns.callout a.button.primary {
+    width: auto;
+    border-radius: 44px;
+    padding: 18.5px 37px;
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .columns.callout a.button.secondary {
+    font-size: 18px;
+    line-height: 27px;
+  }
+}

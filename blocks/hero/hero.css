@@ -3,29 +3,29 @@
   padding: 0;
 }
 
-.hero:not(.product, .article) {
+.hero:not(.product, .article, .brand) {
   position: relative;
   isolation: isolate;
 }
 
-.hero:not(.product, .article, .recipe) {
+.hero:not(.product, .article, .brand, .recipe) {
   padding: var(--hershey-component-hero-layout-padding-block, 40px) var(--hershey-component-hero-layout-padding-inline-mobile, 24px);
   min-height: var(--hershey-component-hero-layout-min-height, 300px);
   color: var(--hershey-component-hero-color-foreground, var(--background-color));
 }
 
-.hero:not(.product, .article, .recipe, :has(picture)) {
+.hero:not(.product, .article, .brand, .recipe, :has(picture)) {
   color: var(--text-color);
 }
 
-.hero:not(.product, .article, .recipe) h1 {
+.hero:not(.product, .article, .brand, .recipe) h1 {
   max-width: var(--hershey-component-hero-heading-max-width, 1200px);
   margin-left: auto;
   margin-right: auto;
   color: inherit;
 }
 
-.hero:not(.product, .article, .recipe) picture {
+.hero:not(.product, .article, .brand, .recipe) picture {
   position: absolute;
   z-index: -1;
   inset: 0;
@@ -33,14 +33,14 @@
   box-sizing: border-box;
 }
 
-.hero:not(.product, .article, .recipe) img {
+.hero:not(.product, .article, .brand, .recipe) img {
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
 @media (width >= 900px) {
-  .hero:not(.product, .article, .recipe) {
+  .hero:not(.product, .article, .brand, .recipe) {
     padding: var(--hershey-component-hero-layout-padding-block, 40px) var(--hershey-component-hero-layout-padding-inline-desktop, 32px);
   }
 }
