@@ -615,6 +615,7 @@
   aspect-ratio: 1;
   border-radius: var(--hershey-component-search-recipes-card-tile-radius, 4px);
   background: var(--hershey-component-search-recipes-card-tile-color-surface, var(--light-color));
+  transition: background-color 0.3s;
 }
 
 .search-recipes.products .search-recipes-card-image img {
@@ -675,6 +676,12 @@
 .search-recipes .search-recipes-card-link:focus-visible {
   outline: var(--hershey-component-search-recipes-focus-width, 2px) solid var(--hershey-component-search-recipes-color-focus, var(--link-color));
   outline-offset: var(--hershey-component-search-recipes-focus-offset, 3px);
+}
+
+/* products: the image tile turns pink under the pointer */
+.search-recipes.products .search-recipes-card-link:hover .search-recipes-card-image,
+.search-recipes.products .search-recipes-card-link:focus-visible .search-recipes-card-image {
+  background: var(--hershey-component-search-recipes-card-tile-color-surface-hover, var(--light-color));
 }
 
 /* hover: activities cards pop and underline; product cards stay flat */

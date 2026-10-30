@@ -28,6 +28,7 @@
   --hershey-reference-color-brand-maroon: #270107;
   --hershey-reference-color-brand-mist: #c4c8d8;
   --hershey-reference-color-brand-slate: #3a4570;
+  --hershey-reference-color-brand-blush: #e4cace;
   --hershey-reference-color-neutral-0: #000;
   --hershey-reference-color-neutral-51: #333;
   --hershey-reference-color-neutral-66: #424242;
@@ -400,6 +401,7 @@
   --hershey-system-color-surface-listing-action: var(--hershey-reference-color-brand-blue);
   --hershey-system-color-surface-listing-band-products: var(--hershey-reference-color-brand-navy);
   --hershey-system-color-surface-listing-tile: var(--hershey-reference-color-neutral-243);
+  --hershey-system-color-surface-listing-tile-hover: var(--hershey-reference-color-brand-blush);
   --hershey-system-color-action-primary-background-default: var(--hershey-reference-color-brand-blue);
   --hershey-system-color-action-primary-background-hover: var(--hershey-reference-color-brand-blue-deep);
   --hershey-system-color-action-primary-background-hover-light: var(--hershey-reference-color-brand-blue-light);
@@ -1292,6 +1294,7 @@
   --hershey-component-search-recipes-card-gutter-mobile: var(--hershey-system-spacing-listing-card-gutter-mobile);
   --hershey-component-search-recipes-card-shadow: var(--hershey-system-elevation-shadow-listing-card);
   --hershey-component-search-recipes-card-tile-color-surface: var(--hershey-system-color-surface-listing-tile);
+  --hershey-component-search-recipes-card-tile-color-surface-hover: var(--hershey-system-color-surface-listing-tile-hover);
   --hershey-component-search-recipes-card-tile-radius: var(--hershey-system-shape-radius-listing-tile);
   --hershey-component-search-recipes-card-desc-font-size: var(--hershey-system-typography-caption-font-size);
   --hershey-component-search-recipes-card-desc-font-size-mobile: var(--hershey-system-typography-small-font-size);
