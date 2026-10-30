@@ -89,3 +89,13 @@ The sheet must be previewed/published for the fallback to work on the site.
 ## Universal Editor fields
 
 N/A (Document Authoring project)
+
+## Hero (article) colour
+
+Author the block as plain `Hero (article)`. Set the band colour with a Section Metadata block on the same section:
+
+| Section Metadata | |
+| --- | --- |
+| Style | navy |
+
+Styles: `blue` (same as the default), `purple`, `lime`, `gold`, `brown`, `navy`, `plum`. Without a style the band is the default blue. Old names like `Hero (article, navy)` no longer colour the band.
