@@ -25,6 +25,8 @@ function decorateSlider(block, list) {
   });
   const dots = document.createElement('div');
   dots.className = 'cards-slider-dots';
+  // related and product sliders show one page indicator per page of cards
+  const paged = ['related', 'product'].some((name) => block.classList.contains(name));
   // a page is the visible track width plus one gap; the track padding is not scrollable content
   const measure = () => {
     const style = getComputedStyle(list);
@@ -40,7 +42,7 @@ function decorateSlider(block, list) {
     const fits = list.scrollWidth <= list.clientWidth + 1;
     controls.hidden = fits;
     dots.hidden = fits;
-    if (!block.classList.contains('related')) return;
+    if (!paged) return;
     // one kiss-shaped indicator per page of cards
     const { inset, gap, step } = measure();
     const pages = Math.max(1, Math.ceil((list.scrollWidth - inset + gap) / step - 0.01));
@@ -65,7 +67,7 @@ function decorateSlider(block, list) {
   list.addEventListener('scroll', update, { passive: true });
   new ResizeObserver(update).observe(list);
   block.append(controls);
-  if (block.classList.contains('related')) block.append(dots);
+  if (paged) block.append(dots);
   update();
 }
 
@@ -77,6 +79,9 @@ export default async function decorate(block) {
       loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-product.css`),
     ]);
     await decorateProduct(block);
+    // `Cards (product, slider)`: the product cards scroll like the other sliders
+    const list = block.querySelector(':scope > ul');
+    if (block.classList.contains('slider') && list) decorateSlider(block, list);
     return;
   }
   /* change to ul, li */

@@ -190,108 +190,317 @@
   }
 }
 
-/* callout variant (brand pages): wide image beside centred text with a pill button and a text link */
+/* stylelint-disable no-descending-specificity -- the brand variants style their own elements only */
+
+/*
+ * Brand page variants (fact, callout). Values come from component.columns.fact.* and
+ * component.columns.callout.* tokens (brand themes override the colours); literal fallbacks
+ * are measured on hersheyland.com/brands/hersheys/symphony.html. The 992px query matches
+ * that page's layout switch.
+ */
+
+/* fact variant: "Did You Know?" quick fact, a 16:9 illustration beside a heading and copy */
+main > .section:has(> .columns-wrapper > .columns.fact) {
+  padding:
+    var(--hershey-component-columns-fact-section-padding-block-start-mobile, 35px)
+    0
+    var(--hershey-component-columns-fact-section-padding-block-end-mobile, 45px);
+}
+
+/* the first fact after the hero sits further down on mobile, as on hersheyland.com */
+@media (width < 992px) {
+  main > .hero-container + .section:has(> .columns-wrapper > .columns.fact) {
+    padding-top: var(--hershey-component-columns-fact-section-padding-block-start-lead-mobile, 70px);
+  }
+}
+
+main > .section > .columns-wrapper:has(> .columns.fact) {
+  max-width: none;
+  padding: 0;
+}
+
+.columns.fact {
+  color: var(--hershey-component-columns-fact-color-foreground, #3f000b);
+}
+
+/* both brand variants stack until 992px (the default columns switch to a row at 900px) */
+.columns.fact > div,
 .columns.callout > div {
-  gap: 35px;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.columns.fact > div > div,
+.columns.callout > div > div {
+  flex: none;
+}
+
+.columns.fact > div {
+  gap: var(--hershey-component-columns-fact-gap-mobile, 15px);
+}
+
+/* keep the authored order (image first or text first) at every width */
+.columns.fact > div > div,
+.columns.fact > div > .columns-img-col {
+  order: 0;
+}
+
+.columns.fact > div > .columns-img-col {
+  padding: 0 var(--hershey-component-columns-fact-image-inset-mobile, 35px);
+}
+
+.columns.fact > div > .columns-img-col img {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: contain;
+}
+
+.columns.fact > div > :not(.columns-img-col) {
+  padding: 0 var(--hershey-component-columns-fact-text-inset-mobile, 45px);
+  text-align: center;
+}
+
+.columns.fact h3 {
+  margin: 0 0 0.3em;
+  color: inherit;
+  font-family: var(--hershey-component-columns-fact-title-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-columns-fact-title-font-size-mobile, 24px);
+  font-weight: var(--hershey-component-columns-fact-title-font-weight, 900);
+  line-height: var(--hershey-component-columns-fact-title-line-height, 1.3);
+}
+
+.columns.fact p {
+  margin: 0 0 1.5em;
+  font-size: var(--hershey-component-columns-fact-copy-font-size, 17px);
+  font-weight: var(--hershey-component-columns-fact-copy-font-weight, 500);
+  line-height: var(--hershey-component-columns-fact-copy-line-height, 1.5);
+}
+
+/* callout variant: wide image beside centred text with a pill button and a text link */
+main > .section:has(> .columns-wrapper > .columns.callout) {
+  padding:
+    var(--hershey-component-columns-callout-section-padding-block-start, 90px)
+    var(--hershey-component-columns-callout-section-padding-inline-mobile, 20px)
+    var(--hershey-component-columns-callout-section-padding-block-end-mobile, 45px);
+}
+
+main > .section > .columns-wrapper:has(> .columns.callout) {
+  max-width: var(--hershey-component-columns-callout-layout-max-width, 1260px);
+  padding: 0;
+}
+
+.columns.callout > div {
+  gap: 0;
+}
+
+.columns.callout > div > .columns-img-col img {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: contain;
 }
 
 .columns.callout > div > :not(.columns-img-col) {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-  justify-content: center;
-  column-gap: 50px;
-  padding: 0 30px;
+  place-content: center;
+  box-sizing: border-box;
+  padding:
+    var(--hershey-component-columns-callout-copy-offset, 25px)
+    var(--hershey-component-columns-callout-copy-padding-inline, 10px)
+    0;
   text-align: center;
 }
 
 .columns.callout > div > :not(.columns-img-col) > * {
-  flex: 0 0 100%;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: calc(100% - 2 * var(--hershey-component-columns-callout-text-padding-inline, 20px));
 }
 
 .columns.callout h2 {
-  margin: 0 0 20px;
-  font-size: 28px;
-  line-height: 1.3;
+  margin:
+    var(--hershey-component-columns-callout-title-padding-block, 10px)
+    var(--hershey-component-columns-callout-text-padding-inline, 20px);
+  font-family: var(--hershey-component-columns-callout-title-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-columns-callout-title-font-size-mobile, 28px);
+  font-weight: var(--hershey-component-columns-callout-title-font-weight, 900);
+  line-height: var(--hershey-component-columns-callout-title-line-height, 1.3);
 }
 
-/* stylelint-disable-next-line no-descending-specificity -- different blocks, never the same element */
 .columns.callout p {
-  margin: 0 0 11px;
-  font-size: 16px;
-  line-height: 24px;
+  margin:
+    var(--hershey-component-columns-callout-title-padding-block, 10px)
+    var(--hershey-component-columns-callout-text-padding-inline, 20px)
+    0.7em;
+  font-size: var(--hershey-component-columns-callout-copy-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-columns-callout-copy-font-weight, 500);
+  line-height: var(--hershey-component-columns-callout-copy-line-height, 1.5);
 }
 
 .columns.callout p.button-wrapper {
-  margin: 10px 0;
+  width: 100%;
+  margin: 0;
+  padding: 0 var(--hershey-component-columns-callout-copy-padding-inline, 10px);
+}
+
+.columns.callout p.button-wrapper:has(> .primary) {
+  margin-top: var(--hershey-component-columns-callout-title-padding-block, 10px);
+}
+
+.columns.callout p.button-wrapper:has(> .secondary) {
+  margin: var(--hershey-component-columns-callout-actions-gap-mobile, 20px) 0 0;
+}
+
+.columns.callout p.button-wrapper:last-child {
+  margin-bottom: var(--hershey-component-columns-callout-actions-margin-block-end, 20px);
 }
 
 .columns.callout a.button.primary {
+  display: block;
   width: 100%;
+  max-width: var(--hershey-component-columns-callout-cta-max-width-mobile, 413px);
+  margin: 0 auto;
   border: 0;
-  border-radius: 25px;
-  padding: 13px;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 16px;
+  border-radius: var(--hershey-component-columns-callout-cta-border-radius-mobile, 25px);
+  padding: var(--hershey-component-columns-callout-cta-padding-mobile, 13px);
+  background-color: var(--hershey-component-columns-callout-cta-background, #007bbd);
+  color: var(--hershey-component-columns-callout-cta-foreground, #fff);
+  font-size: var(--hershey-component-columns-callout-cta-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-columns-callout-cta-font-weight, 700);
+  line-height: var(--hershey-component-columns-callout-cta-line-height, 1);
+  white-space: normal;
+  transition: background-color 0.3s ease-in-out;
 }
 
-/* secondary call to action is an underlined text link */
-.columns.callout a.button.secondary {
+.columns.callout a.button.primary:hover,
+.columns.callout a.button.primary:focus-visible {
   border: 0;
-  border-bottom: 1px solid currentcolor;
+  background-color: var(--hershey-component-columns-callout-cta-background-hover, #268fc7);
+  color: var(--hershey-component-columns-callout-cta-foreground, #fff);
+}
+
+/* secondary call to action is an underlined text link; the underline goes on hover */
+.columns.callout a.button.secondary {
+  display: inline;
+  border: 0;
+  border-bottom: var(--hershey-component-columns-callout-link-border-width, 1px) solid currentcolor;
   border-radius: 0;
   padding: 0;
   background: transparent;
-  color: var(--hershey-system-color-action-primary-background-default, #007bbd);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
+  color: var(--hershey-component-columns-callout-link-color, #007bbd);
+  font-size: var(--hershey-component-columns-callout-link-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-columns-callout-cta-font-weight, 700);
+  line-height: var(--hershey-component-columns-callout-copy-line-height, 1.5);
+  white-space: normal;
 }
 
-.columns.callout a.button.secondary:hover {
+.columns.callout a.button.secondary:hover,
+.columns.callout a.button.secondary:focus-visible {
   border-bottom-color: transparent;
   background: transparent;
+  color: var(--hershey-component-columns-callout-link-color-hover, #3f000b);
 }
 
-@media (width >= 900px) {
+@media (width >= 992px) {
+  main > .section:has(> .columns-wrapper > .columns.fact) {
+    padding: var(--hershey-component-columns-fact-section-padding-block-desktop, 50px) 0;
+  }
+
+  /* ten of twelve page columns, as on hersheyland.com */
+  .columns.fact {
+    width: calc(100% * 10 / 12 - 2 * var(--hershey-component-columns-fact-column-padding-inline, 25px));
+    margin: 0 auto;
+  }
+
+  .columns.fact > div {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .columns.fact > div > div {
+    box-sizing: border-box;
+  }
+
+  .columns.fact > div > .columns-img-col {
+    flex: 0 0 calc(100% / 3);
+    padding: 0 var(--hershey-component-columns-fact-column-padding-inline, 25px);
+  }
+
+  .columns.fact > div > :not(.columns-img-col) {
+    flex: 0 0 calc(100% * 2 / 3);
+    padding:
+      var(--hershey-component-columns-fact-text-padding-block-start, 50px)
+      calc(2 * var(--hershey-component-columns-fact-column-padding-inline, 25px))
+      0;
+    text-align: left;
+  }
+
+  .columns.fact h3 {
+    font-size: var(--hershey-component-columns-fact-title-font-size-desktop, 28px);
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.callout) {
+    padding:
+      var(--hershey-component-columns-callout-section-padding-block-start, 90px)
+      0
+      var(--hershey-component-columns-callout-section-padding-block-end, 140px);
+  }
+
   .columns.callout > div {
-    gap: 30px;
+    flex-direction: row;
+    align-items: stretch;
   }
 
   .columns.callout > div > .columns-img-col {
-    flex: 0 0 58%;
+    flex: 0 0 calc(100% * 7 / 12);
   }
 
   .columns.callout > div > :not(.columns-img-col) {
-    padding: 0;
-  }
-
-  .columns.callout > div > :not(.columns-img-col) > .button-wrapper {
-    flex: 0 1 auto;
+    flex: 0 0 calc(100% * 5 / 12);
   }
 
   .columns.callout h2 {
-    margin-bottom: 25px;
-    font-size: 36px;
+    margin-bottom: calc(var(--hershey-component-columns-callout-title-padding-block, 10px) + var(--hershey-component-columns-callout-title-margin-block-end, 5px));
+    font-size: var(--hershey-component-columns-callout-title-font-size-compact, 22px);
   }
 
   .columns.callout p {
-    margin-bottom: 14px;
-    font-size: 20px;
-    line-height: 30px;
+    font-size: var(--hershey-component-columns-callout-copy-font-size-compact, 13px);
+  }
+
+  /* the two calls to action share a row, half each */
+  .columns.callout > div > :not(.columns-img-col) > .button-wrapper,
+  .columns.callout p.button-wrapper:has(> .secondary) {
+    flex: 0 0 50%;
+    width: 50%;
+    margin-top: var(--hershey-component-columns-callout-title-padding-block, 10px);
+  }
+
+  .columns.callout p.button-wrapper:has(> .primary) {
+    margin-bottom: var(--hershey-component-columns-callout-actions-margin-block-end, 20px);
   }
 
   .columns.callout a.button.primary {
-    width: auto;
-    border-radius: 44px;
-    padding: 18.5px 37px;
-    font-size: 18px;
-    line-height: 18px;
+    max-width: none;
+    border-radius: var(--hershey-component-columns-callout-cta-border-radius, 44px);
+    padding: var(--hershey-component-columns-callout-cta-padding, 18.5px);
+    font-size: var(--hershey-component-columns-callout-cta-font-size, 18px);
   }
 
   .columns.callout a.button.secondary {
-    font-size: 18px;
-    line-height: 27px;
+    font-size: var(--hershey-component-columns-callout-link-font-size, 18px);
   }
 }
+
+@media (width >= 1200px) {
+  .columns.callout h2 {
+    font-size: var(--hershey-component-columns-callout-title-font-size-desktop, 36px);
+  }
+
+  .columns.callout p {
+    font-size: var(--hershey-component-columns-callout-copy-font-size-desktop, 20px);
+  }
+}
+/* stylelint-enable no-descending-specificity */

@@ -211,6 +211,28 @@
   font-size: var(--hershey-system-typography-card-title-font-size);
 }
 
+/* brand pages: a decorative wave between two bands, authored as an image in a `divider`
+   section; it fills the band like the live background (cover), as on hersheyland.com */
+.hershey-home main > .section.divider {
+  padding: 0;
+}
+
+.hershey-home main > .section.divider > .default-content-wrapper {
+  max-width: none;
+}
+
+.hershey-home main > .section.divider p {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home main > .section.divider img {
+  display: block;
+  width: 100%;
+  height: var(--hershey-system-size-region-brand-divider-mobile, 90px);
+  object-fit: cover;
+}
+
 @media (width >= 992px) {
   .hershey-home main h1 {
     font-size: var(--hershey-system-typography-heading-1-font-size-desktop);
@@ -242,6 +264,10 @@
 
   .hershey-home main > .chocolate {
     padding-top: 0;
+  }
+
+  .hershey-home main > .section.divider img {
+    height: var(--hershey-system-size-region-brand-divider-desktop, 140px);
   }
 
   .hershey-home .chocolate > .default-content-wrapper {

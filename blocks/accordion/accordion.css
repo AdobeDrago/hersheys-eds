@@ -78,3 +78,88 @@
 .accordion .accordion-item-body > :last-child {
   margin-bottom: 0;
 }
+
+/*
+ * Brand pages (Hershey template): the FAQ heading and accordion sit in a two-thirds column
+ * and the questions keep their colour while one is open, as on hersheyland.com brand pages.
+ * Values come from component.accordion.brand.* tokens; brand themes recolour the accordion
+ * through the component.accordion.* colour tokens.
+ */
+.hershey-home main > .section:has(> .accordion-wrapper) {
+  padding:
+    var(--hershey-component-accordion-brand-section-padding-block-start-mobile, 45px)
+    0
+    var(--hershey-component-accordion-brand-section-padding-block-end-mobile, 45px);
+}
+
+.hershey-home main > .section:has(> .accordion-wrapper) > .default-content-wrapper {
+  padding-right: var(--hershey-component-accordion-brand-inset, 10px);
+}
+
+.hershey-home main > .section:has(> .accordion-wrapper) > .default-content-wrapper > h2 {
+  margin: 0 0 var(--hershey-component-accordion-brand-heading-margin-block-end, 28px);
+  font-size: var(--hershey-component-accordion-brand-heading-font-size-mobile, 28px);
+  line-height: var(--hershey-component-accordion-brand-heading-line-height, 1.5);
+  text-align: center;
+}
+
+.hershey-home .accordion {
+  --hershey-component-accordion-label-padding-block: var(--hershey-component-accordion-brand-label-padding-block, 15px);
+  --hershey-component-accordion-label-padding-inline-end: var(--hershey-component-accordion-brand-label-padding-inline-end, 23px);
+  --hershey-component-accordion-label-font-size: var(--hershey-component-accordion-brand-label-font-size-mobile, 20px);
+  --hershey-component-accordion-label-line-height: var(--hershey-component-accordion-brand-label-line-height, 1.3);
+  --hershey-component-accordion-label-color-inactive: var(--hershey-component-accordion-label-color, #3f000b);
+  --hershey-component-accordion-body-padding-block-end: 0;
+
+  margin: 0 var(--hershey-component-accordion-brand-inset-end, 20px) 0 var(--hershey-component-accordion-brand-inset, 10px);
+}
+
+.hershey-home .accordion .accordion-item-body {
+  color: var(--hershey-component-accordion-brand-answer-color, #3f000b);
+  font-size: var(--hershey-component-accordion-brand-answer-font-size, 17px);
+  font-weight: var(--hershey-component-accordion-brand-answer-font-weight, 500);
+  line-height: var(--hershey-component-accordion-brand-answer-line-height, 1.5);
+}
+
+.hershey-home .accordion .accordion-item-body p,
+.hershey-home .accordion .accordion-item-body > :last-child {
+  margin: 0 0 1.5em;
+}
+
+.hershey-home .accordion .accordion-item-body a:any-link {
+  border-bottom: var(--hershey-component-accordion-brand-link-border-width, 1px) solid currentcolor;
+  color: var(--hershey-component-accordion-brand-link-color, #3f000b);
+  font-weight: var(--hershey-component-accordion-label-font-weight, 700);
+  text-decoration: none;
+}
+
+.hershey-home .accordion .accordion-item-body a:any-link:hover {
+  border-bottom-color: transparent;
+}
+
+@media (width >= 992px) {
+  .hershey-home main > .section:has(> .accordion-wrapper) {
+    padding:
+      var(--hershey-component-accordion-brand-section-padding-block-start, 110px)
+      0
+      var(--hershey-component-accordion-brand-section-padding-block-end, 140px);
+  }
+
+  /* two thirds of the page, at most 840px for the heading and 820px for the questions */
+  .hershey-home main > .section:has(> .accordion-wrapper) > .default-content-wrapper {
+    max-width: min(var(--hershey-component-accordion-brand-heading-max-width, 840px), 100vw * 2 / 3);
+    padding: 0;
+  }
+
+  .hershey-home main > .section:has(> .accordion-wrapper) > .default-content-wrapper > h2 {
+    font-size: var(--hershey-component-accordion-brand-heading-font-size-desktop, 36px);
+  }
+
+  .hershey-home .accordion {
+    --hershey-component-accordion-label-font-size: var(--hershey-component-accordion-brand-label-font-size-desktop, 18px);
+
+    max-width: min(var(--hershey-component-accordion-brand-max-width, 820px), 100vw * 2 / 3 - 2 * var(--hershey-component-accordion-brand-inset, 10px));
+    margin: 0 auto;
+  }
+}
+

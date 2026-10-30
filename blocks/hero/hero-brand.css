@@ -2,8 +2,9 @@
  * Hero (brand) variant, loaded by hero.js for `Hero (brand)`.
  * Brand landing pages: warm-tan panel with the brand logo, title and intro on the left,
  * the brand photo filling the right half; stacked (photo first, centred text) on mobile.
- * Values measured on hersheyland.com/brands/hersheys/symphony.html; the 992px query
- * matches that page's layout switch.
+ * Values come from component.hero.brand.* tokens (brand themes override them); literal
+ * fallbacks are the values measured on hersheyland.com/brands/hersheys/symphony.html.
+ * The 992px query matches that page's layout switch.
  */
 
 /* section: full-bleed, no page padding */
@@ -18,9 +19,9 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
 }
 
 .hero.brand {
-  background-color: var(--hershey-system-color-surface-story-warm-tan, #feebd0);
-  color: #3f000b;
-  font-family: hershey-tt, sans-serif;
+  background-color: var(--hershey-component-hero-brand-band-background, #feebd0);
+  color: var(--hershey-component-hero-brand-color-foreground, #3f000b);
+  font-family: var(--hershey-component-hero-brand-base-font-family, hershey-tt, sans-serif);
 }
 
 .hero.brand .hero-brand-content {
@@ -52,15 +53,21 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  padding: 20px 10px 10px;
+  padding:
+    var(--hershey-component-hero-brand-panel-padding-block-start-mobile, 20px)
+    var(--hershey-component-hero-brand-panel-padding-inline-mobile, 10px)
+    var(--hershey-component-hero-brand-panel-padding-block-end-mobile, 10px);
   text-align: center;
 }
 
 .hero.brand .hero-brand-logo {
-  width: 300px;
+  width: var(--hershey-component-hero-brand-logo-width-mobile, 300px);
   max-width: 100%;
-  height: 85px;
-  margin: 20px 0 17.5px;
+  height: var(--hershey-component-hero-brand-logo-height-mobile, 85px);
+  margin:
+    var(--hershey-component-hero-brand-logo-margin-block-start-mobile, 20px)
+    0
+    var(--hershey-component-hero-brand-logo-margin-block-end-mobile, 20px);
 }
 
 .hero.brand .hero-brand-logo picture,
@@ -75,27 +82,34 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
   object-position: 50% 100%;
 }
 
+/* title and intro span the text column; the intro measure is centred on mobile */
+.hero.brand h1,
+.hero.brand p {
+  align-self: stretch;
+}
+
 .hero.brand h1 {
-  margin: 0 0 12px;
+  margin: 0 0 var(--hershey-component-hero-brand-title-margin-block-end, 12px);
   color: inherit;
-  font-family: hershey-gazpacho, serif;
-  font-size: 36px;
-  font-weight: 900;
-  line-height: 1.2;
+  font-family: var(--hershey-component-hero-brand-title-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-hero-brand-title-font-size-mobile, 36px);
+  font-weight: var(--hershey-component-hero-brand-title-font-weight, 900);
+  line-height: var(--hershey-component-hero-brand-title-line-height, 1.2);
 }
 
 .hero.brand p {
-  max-width: 697px;
-  margin: 0 0 12px;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
+  max-width: var(--hershey-component-hero-brand-intro-max-width-mobile, 697px);
+  margin: 0 auto var(--hershey-component-hero-brand-intro-margin-block-end-mobile, 12px);
+  font-size: var(--hershey-component-hero-brand-intro-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-hero-brand-intro-font-weight, 500);
+  line-height: var(--hershey-component-hero-brand-intro-line-height, 1.5);
 }
 
 @media (width >= 768px) {
   .hero.brand .hero-brand-logo {
-    height: 120px;
+    height: var(--hershey-component-hero-brand-logo-height, 120px);
     margin-top: 0;
+    margin-bottom: var(--hershey-component-hero-brand-logo-margin-block-end, 17.5px);
   }
 }
 
@@ -119,13 +133,12 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
     justify-content: center;
     align-items: flex-start;
     min-height: calc(50cqi * 9 / 16);
-    padding: 25px;
+    padding: var(--hershey-component-hero-brand-panel-padding-desktop, 25px);
     text-align: start;
   }
 
   .hero.brand .hero-brand-logo {
     width: 50%;
-    height: 120px;
   }
 
   .hero.brand .hero-brand-logo img {
@@ -133,17 +146,17 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
   }
 
   .hero.brand h1 {
-    font-size: 48px;
+    font-size: var(--hershey-component-hero-brand-title-font-size-desktop, 48px);
   }
 
   .hero.brand p {
     max-width: none;
-    margin-bottom: 32px;
-    font-size: 20px;
-    line-height: 30px;
+    margin-bottom: var(--hershey-component-hero-brand-intro-margin-block-end-desktop, 32px);
+    font-size: var(--hershey-component-hero-brand-intro-font-size-desktop, 20px);
   }
 }
 
+/* the text column is 8% from the edge on wide screens, as on hersheyland.com */
 @media (width >= 1200px) {
   .hero.brand .hero-brand-text {
     padding-inline: 8%;

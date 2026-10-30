@@ -1,0 +1,14 @@
+/*
+ * SYMPHONY brand theme (`theme: symphony-primary` page metadata).
+ * Overrides only the brand page tokens that differ from the default Hershey look: the navy
+ * FAQ rules and the dark chocolate quick fact and FAQ copy. Values measured on
+ * hersheyland.com/brands/hersheys/symphony.html (2026-10-30). Hand-authored, not generated
+ * from tokens.json.
+ */
+.hershey-home.symphony-primary {
+  --hershey-component-accordion-border-color: #002f87;
+  --hershey-component-accordion-icon-color: #3c131c;
+  --hershey-component-accordion-label-color: #3c131c;
+  --hershey-component-accordion-brand-answer-color: #3c131c;
+  --hershey-component-columns-fact-color-foreground: #3c131c;
+}
