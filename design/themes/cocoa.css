@@ -366,6 +366,7 @@
   --hershey-reference-size-height-357: 357px;
   --hershey-reference-size-height-370: 370px;
   --hershey-reference-size-height-398: 398px;
+  --hershey-reference-size-height-405: 405px;
   --hershey-reference-opacity-35: 0.35;
   --hershey-reference-opacity-50: 0.5;
   --hershey-reference-opacity-60: 0.6;
@@ -702,6 +703,7 @@
   --hershey-system-size-listing-button-mobile: var(--hershey-reference-spacing-30);
   --hershey-system-size-listing-progress-height: var(--hershey-reference-spacing-4);
   --hershey-system-size-listing-reset: var(--hershey-reference-size-width-20);
+  --hershey-system-size-listing-hero-height: var(--hershey-reference-size-height-405);
   --hershey-system-state-disabled-opacity: var(--hershey-reference-opacity-35);
   --hershey-system-state-control-disabled-opacity: var(--hershey-reference-opacity-50);
   --hershey-system-state-complete-opacity: var(--hershey-reference-opacity-60);
@@ -923,6 +925,8 @@
   --hershey-system-spacing-listing-page-inset-mobile: var(--hershey-reference-spacing-10);
   --hershey-system-spacing-listing-product-card-bottom: var(--hershey-reference-spacing-35);
   --hershey-system-spacing-listing-product-desc-top: var(--hershey-reference-spacing-14);
+  --hershey-system-spacing-listing-hero-top: var(--hershey-reference-spacing-77);
+  --hershey-system-spacing-listing-hero-block-mobile: var(--hershey-reference-spacing-20);
   --hershey-system-gap-data-stack: var(--hershey-reference-spacing-13);
   --hershey-system-gap-data-badge-row: var(--hershey-reference-spacing-23);
   --hershey-system-gap-data-badge-column-mobile: var(--hershey-reference-spacing-10);
@@ -1502,6 +1506,12 @@
   --hershey-component-hero-article-purple-band-background: var(--hershey-system-color-surface-story-hero-violet);
   --hershey-component-hero-article-gold-band-background: var(--hershey-system-color-surface-story-hero-gold);
   --hershey-component-hero-article-gold-color-foreground: var(--hershey-system-color-text-primary);
+  --hershey-component-hero-article-listing-layout-height: var(--hershey-system-size-listing-hero-height);
+  --hershey-component-hero-article-listing-text-padding-block-start: var(--hershey-system-spacing-listing-hero-top);
+  --hershey-component-hero-article-listing-text-padding-block-mobile: var(--hershey-system-spacing-listing-hero-block-mobile);
+  --hershey-component-hero-article-listing-text-font-size-desktop: var(--hershey-system-typography-story-intro-font-size);
+  --hershey-component-hero-article-listing-text-font-size-mobile: var(--hershey-system-typography-body-compact-font-size);
+  --hershey-component-hero-article-listing-text-line-height: var(--hershey-system-typography-body-line-height);
   --hershey-component-breadcrumb-trail-color-text: var(--hershey-system-color-text-primary);
   --hershey-component-breadcrumb-trail-color-link: var(--hershey-system-color-link-accent);
   --hershey-component-breadcrumb-trail-color-home-icon: var(--hershey-system-color-icon-home);

@@ -121,3 +121,45 @@ main > .section:has(> .hero-wrapper > .hero.article.plum) {
     font-size: var(--hershey-component-hero-article-title-font-size-desktop, 48px);
   }
 }
+
+/* listing modifier: `Hero (article, plum, listing)` is the stories listing banner,
+   with left-aligned text over a 16:9 image (side by side from 992px) */
+.hero.article.listing .hero-article-media {
+  aspect-ratio: 16 / 9;
+}
+
+.hero.article.listing .hero-article-text {
+  text-align: start;
+  padding:
+    var(--hershey-component-hero-article-listing-text-padding-block-mobile, 20px)
+    var(--hershey-component-hero-article-text-padding-inline-mobile, 10px);
+}
+
+.hero.article.listing h1 {
+  margin-bottom: 12px;
+}
+
+.hero.article.listing .hero-article-text p {
+  margin: 0;
+  font-size: var(--hershey-component-hero-article-listing-text-font-size-mobile, 16px);
+  line-height: var(--hershey-component-hero-article-listing-text-line-height, 1.5);
+}
+
+@media (width >= 992px) {
+  .hero.article.listing .hero-article-content {
+    height: var(--hershey-component-hero-article-listing-layout-height, 405px);
+  }
+
+  .hero.article.listing .hero-article-media {
+    aspect-ratio: auto;
+  }
+
+  .hero.article.listing .hero-article-text {
+    align-self: flex-start;
+    padding: var(--hershey-component-hero-article-listing-text-padding-block-start, 77px) 8% 0;
+  }
+
+  .hero.article.listing .hero-article-text p {
+    font-size: var(--hershey-component-hero-article-listing-text-font-size-desktop, 20px);
+  }
+}

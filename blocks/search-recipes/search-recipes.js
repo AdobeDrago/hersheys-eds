@@ -18,7 +18,7 @@ const SEARCH_TIMEOUT = 8000;
  * a "Show More" button.
  */
 
-const LISTING_VARIANTS = ['recipes', 'activities', 'products'];
+const LISTING_VARIANTS = ['recipes', 'activities', 'products', 'stories'];
 
 /**
  * Reads optional authoring config from the first table rows.
@@ -167,7 +167,8 @@ function buildShell(block, config) {
 
   main.append(sortWrap, status, hits, progress, more);
   layout.append(aside, main);
-  root.append(banner, layout);
+  if (config.banner !== false) root.append(banner);
+  root.append(layout);
   block.replaceChildren(root);
 
   return {
@@ -361,6 +362,20 @@ function collectFacetFilters(facetsMount) {
     .map((box) => `${box.dataset.attribute}:${box.value}`);
 }
 
+/**
+ * Reads `?category=…` style parameters (see config.facetParams) into facet filters.
+ * Algolia facet values are sentence case ("Baking tips"); the links say "Baking Tips".
+ * @param {object} config
+ * @returns {string[]}
+ */
+function facetsFromUrl(config) {
+  const params = new URLSearchParams(window.location.search);
+  return Object.entries(config.facetParams || {}).flatMap(([param, attr]) => params.getAll(param)
+    .map((raw) => raw.trim())
+    .filter(Boolean)
+    .map((raw) => `${attr}:${raw.charAt(0).toUpperCase()}${raw.slice(1).toLowerCase()}`));
+}
+
 export default function decorate(block) {
   const author = readAuthorConfig(block);
   const type = LISTING_VARIANTS.find((name) => block.classList.contains(name));
@@ -370,7 +385,7 @@ export default function decorate(block) {
     query: '',
     page: 0,
     indexKey: config.sorts[0][0],
-    facetFilters: [],
+    facetFilters: facetsFromUrl(config),
     openGroups: new Set(),
     rendered: null,
     result: null,

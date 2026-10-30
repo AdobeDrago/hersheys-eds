@@ -87,6 +87,24 @@ export const LISTING_TYPES = {
       noun: 'Crafts',
     },
   },
+  stories: {
+    baseFilter: 'metaTags.templateType: article-blog',
+    // the page's own hero carries the heading, so the block draws no search banner
+    banner: false,
+    indices: {
+      featured: 'crawler_www.hersheyland.com_sorted_by_featured',
+      alpha: 'crawler_www.hersheyland.com',
+    },
+    sorts: [['newest', 'Most Recent'], ['featured', 'Featured'], ['alpha', 'A-Z']],
+    facetAttributes: ['metaTags.season', 'metaTags.category'],
+    facetLabels: { 'metaTags.season': 'Season', 'metaTags.category': 'Category' },
+    facetValueOrder: {},
+    facetStrict: [],
+    facetByCount: ['metaTags.season', 'metaTags.category'],
+    /** `?category=Baking Tips` (the story breadcrumbs) preselects a facet. */
+    facetParams: { category: 'metaTags.category', season: 'metaTags.season' },
+    labels: { placeholder: '', title: 'Stories', noun: 'Stories' },
+  },
   products: {
     baseFilter: 'metaTags.templateType: product-detail',
     indices: {

@@ -1,5 +1,9 @@
 /* Search (Recipes): Algolia-backed listing (recipes, activities) with banner, filters, sort, show more. */
 
+main > .section.search-recipes-container {
+  margin-top: 0;
+}
+
 .search-recipes-container .search-recipes-wrapper {
   max-width: unset;
   padding: 0;

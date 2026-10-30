@@ -195,7 +195,7 @@ async function loadEager(doc) {
   // product pages author `theme: hershey-primary`; flag them so the Hershey tokens load
   if (window.location.pathname.startsWith('/products/')) document.body.classList.add('hershey-product');
   // listing pages (activities, all-recipes) share the product pages' brand tokens and fonts
-  if (/^\/(activities|all-recipes|products)(\/|$)/.test(window.location.pathname)) document.body.classList.add('hershey-product');
+  if (/^\/(activities|all-recipes|products|stories)(\/|$)/.test(window.location.pathname)) document.body.classList.add('hershey-product');
   // story pages share the product pages' brand tokens and fonts
   if (window.location.pathname.startsWith('/stories/')) document.body.classList.add('hershey-product', 'hershey-story');
   if (document.body.classList.contains('hershey-home')
