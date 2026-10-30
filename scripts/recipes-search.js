@@ -1,5 +1,5 @@
 /**
- * Recipes search client for Hersheyland Algolia (all-recipes).
+ * Listing search client for Hersheyland Algolia (all-recipes, activities).
  *
  * Default: browser → Algolia Search API (public search-only key).
  * Optional: set `endpoint` to a Worker/proxy URL; the same request shape is POSTed
@@ -48,24 +48,121 @@ export const DEFAULT_CONFIG = {
       'from 121 - 180 min',
       'over 180 min',
     ],
-    'hero.rating': ['4', '3', '2', '1'],
+    'hero.rating': ['5', '4', '3', '2', '1'],
   },
+  /** Facets whose values are limited to `facetValueOrder` (anything else is hidden). */
+  facetStrict: ['hero.rating', 'metaTags.Time to Complete', 'metaTags.skillLevel'],
+  /** Facets listed by result count (highest first) instead of A-Z. */
+  facetByCount: [],
+  /** Sort choices as [indexKey, label]; the first one is the default. */
+  sorts: [['newest', 'Most Recent'], ['rating', 'Rating (Highest-Lowest)'], ['alpha', 'A-Z']],
   hitsPerPage: 20,
   maxValuesPerFacet: 100,
+  /** Wording the block shows; the stories and products listings reuse the same keys. */
+  labels: {
+    placeholder: 'Enter recipe name, ingredients, category, etc.',
+    title: 'Search for a Recipe',
+    noun: 'Recipes',
+  },
 };
 
 /**
- * Shallow-merges overrides with defaults.
- * Only `indices` is deep-merged; `facetAttributes`, `facetLabels`, and
+ * Per-listing overrides, chosen by the block's variant class (`search-recipes activities`).
+ * Anything not listed here comes from DEFAULT_CONFIG.
+ */
+export const LISTING_TYPES = {
+  activities: {
+    baseFilter: 'metaTags.templateType: craft-detail',
+    facetAttributes: ['metaTags.category', 'metaTags.Seasons & Occasions', 'metaTags.skillLevel'],
+    facetLabels: {
+      'metaTags.category': 'Category',
+      'metaTags.Seasons & Occasions': 'Seasons & Occasions',
+      'metaTags.skillLevel': 'Skill Level',
+    },
+    facetValueOrder: { 'metaTags.skillLevel': ['Beginner', 'Intermediate', 'Advanced', 'Expert'] },
+    sorts: [['newest', 'Newest'], ['rating', 'Rating (Highest-Lowest)'], ['alpha', 'A-Z']],
+    labels: {
+      placeholder: 'Type a keyword or search by occasion...',
+      title: 'Find an Activity',
+      noun: 'Crafts',
+    },
+  },
+  stories: {
+    baseFilter: 'metaTags.templateType: article-blog',
+    // the page's own hero carries the heading, so the block draws no search banner
+    banner: false,
+    indices: {
+      featured: 'crawler_www.hersheyland.com_sorted_by_featured',
+      alpha: 'crawler_www.hersheyland.com',
+    },
+    sorts: [['newest', 'Most Recent'], ['featured', 'Featured'], ['alpha', 'A-Z']],
+    facetAttributes: ['metaTags.season', 'metaTags.category'],
+    facetLabels: { 'metaTags.season': 'Season', 'metaTags.category': 'Category' },
+    facetValueOrder: {},
+    facetStrict: [],
+    facetByCount: ['metaTags.season', 'metaTags.category'],
+    /** `?category=Baking Tips` (the story breadcrumbs) preselects a facet. */
+    facetParams: { category: 'metaTags.category', season: 'metaTags.season' },
+    labels: { placeholder: '', title: 'Stories', noun: 'Stories' },
+  },
+  products: {
+    baseFilter: 'metaTags.templateType: product-detail',
+    indices: {
+      relevance: 'crawler_www.hersheyland.com',
+      rating: 'crawler_www.hersheyland.com_sorted_by_rating_new',
+      newest: 'crawler_www.hersheyland.com_sorted_by_date_newest',
+      alpha: 'crawler_www.hersheyland.com_alpha_new',
+    },
+    sorts: [
+      ['relevance', 'Relevance'],
+      ['rating', 'Rating (Highest-Lowest)'],
+      ['newest', 'Newest'],
+      ['alpha', 'A-Z'],
+    ],
+    facetAttributes: [
+      'metaTags.brand',
+      'metaTags.category',
+      'metaTags.dietaryNeeds',
+      'metaTags.Holidays & Celebrations',
+      'hero.rating',
+    ],
+    facetLabels: {
+      'metaTags.brand': 'Brand',
+      'metaTags.category': 'Category',
+      'metaTags.dietaryNeeds': 'Dietary Needs',
+      'metaTags.Holidays & Celebrations': 'Holidays & Celebrations',
+      'hero.rating': 'Rating',
+    },
+    facetValueOrder: {
+      'metaTags.Holidays & Celebrations': ['Holiday', 'Easter', 'Halloween', 'Valentine\'s day'],
+      'hero.rating': ['5', '4', '3', '2', '1'],
+    },
+    facetStrict: ['metaTags.Holidays & Celebrations', 'hero.rating'],
+    facetByCount: ['metaTags.category', 'metaTags.dietaryNeeds'],
+    labels: {
+      placeholder: 'Enter a product name, keyword or description...',
+      title: 'Search for a Product',
+      noun: 'Products',
+    },
+  },
+};
+
+/**
+ * Shallow-merges overrides with defaults. `type` picks a LISTING_TYPES entry first.
+ * Only `indices` and `labels` are deep-merged; `facetAttributes`, `facetLabels`, and
  * `facetValueOrder` are replaced entirely if provided.
- * @param {Partial<typeof DEFAULT_CONFIG>} [overrides]
+ * @param {Partial<typeof DEFAULT_CONFIG> & { type?: string }} [overrides]
  * @returns {typeof DEFAULT_CONFIG}
  */
 export function resolveConfig(overrides = {}) {
+  const { type, ...own } = overrides;
+  const listing = LISTING_TYPES[type] || {};
   return {
     ...DEFAULT_CONFIG,
-    ...overrides,
-    indices: { ...DEFAULT_CONFIG.indices, ...overrides.indices },
+    ...listing,
+    ...own,
+    indices: { ...DEFAULT_CONFIG.indices, ...listing.indices, ...own.indices },
+    labels: { ...DEFAULT_CONFIG.labels, ...listing.labels, ...own.labels },
   };
 }
 
@@ -91,10 +188,14 @@ export function absoluteUrl(path, assetOrigin) {
  */
 export function mapHit(hit, config) {
   const path = hit?.url?.path || hit?.url?.href || '';
-  const imagePath = hit?.hero?.image || '';
+  // some product images come back as http:// (Scene7); the page is https, so upgrade them
+  const imagePath = (hit?.hero?.image || '').replace(/^http:\/\//i, 'https://');
   return {
     objectID: hit.objectID || '',
-    title: hit.title || hit?.hero?.h1 || '',
+    title: hit?.hero?.h1 || hit.title || '',
+    portion: hit?.hero?.portion || '',
+    bvid: hit?.metaTags?.bvID || '',
+    imageAlt: hit?.metaTags?.primaryImageAltText || '',
     description: hit?.hero?.description || '',
     href: absoluteUrl(path, config.assetOrigin),
     imageUrl: absoluteUrl(imagePath, config.assetOrigin),
@@ -114,15 +215,14 @@ export function orderFacetValues(attribute, values, config) {
   const entries = Object.entries(values || {}).map(([value, count]) => ({ value, count }));
   const preferred = config.facetValueOrder[attribute];
   if (!preferred) {
+    if (config.facetByCount.includes(attribute)) return entries.sort((a, b) => b.count - a.count);
     return entries.sort((a, b) => a.value.localeCompare(b.value));
   }
   const rank = new Map(preferred.map((v, i) => [v, i]));
   // hide values not in preferred list when order is used
   // (matches Algolia sortRemainingBy: hidden for rating/time)
   const known = entries.filter((e) => rank.has(e.value));
-  if (attribute === 'hero.rating'
-    || attribute === 'metaTags.Time to Complete'
-    || attribute === 'metaTags.skillLevel') {
+  if (config.facetStrict.includes(attribute)) {
     return known.sort((a, b) => rank.get(a.value) - rank.get(b.value));
   }
   const rest = entries
