@@ -3,6 +3,7 @@ import {
   searchRecipes,
 } from '../../scripts/recipes-search.js';
 import { whenVisible } from '../../scripts/scripts.js';
+import loadBazaarvoice from '../../scripts/bazaarvoice.js';
 
 // a search that never answers shows the error instead of "Loading recipes…" forever
 const SEARCH_TIMEOUT = 8000;
@@ -17,13 +18,7 @@ const SEARCH_TIMEOUT = 8000;
  * a "Show More" button.
  */
 
-const LISTING_VARIANTS = ['activities'];
-
-const SORTS = [
-  ['newest', 'Newest'],
-  ['rating', 'Rating (Highest-Lowest)'],
-  ['alpha', 'A-Z'],
-];
+const LISTING_VARIANTS = ['activities', 'products'];
 
 /**
  * Reads optional authoring config from the first table rows.
@@ -147,7 +142,7 @@ function buildShell(block, config) {
   sortList.setAttribute('role', 'listbox');
   sortList.setAttribute('aria-labelledby', sortLabel.id);
   sortList.hidden = true;
-  SORTS.forEach(([value, text]) => {
+  config.sorts.forEach(([value, text]) => {
     const opt = el('li', 'search-recipes-sort-option', text);
     opt.setAttribute('role', 'option');
     opt.dataset.value = value;
@@ -208,7 +203,14 @@ function renderFacets(ui, state) {
       checkbox.checked = (state.facetFilters || []).includes(`${attr}:${value}`);
       const lab = document.createElement('label');
       lab.htmlFor = id;
-      lab.textContent = attr === 'hero.rating' ? `${value}+ stars (${count})` : `${value} (${count})`;
+      if (attr === 'hero.rating') {
+        const stars = el('span', 'search-recipes-facet-stars', '★'.repeat(Number(value)) + '☆'.repeat(5 - Number(value)));
+        stars.setAttribute('role', 'img');
+        stars.setAttribute('aria-label', `${value} stars`);
+        lab.append(stars, ` (${count})`);
+      } else {
+        lab.textContent = `${value} (${count})`;
+      }
       row.append(checkbox, lab);
       list.append(row);
     });
@@ -234,14 +236,21 @@ function buildCard(hit) {
   if (hit.imageUrl) {
     const img = document.createElement('img');
     img.src = hit.imageUrl;
-    img.alt = '';
+    img.alt = hit.imageAlt;
     img.loading = 'lazy';
     img.decoding = 'async';
     media.append(img);
   }
   const body = el('div', 'search-recipes-card-body');
   body.append(el('h3', 'search-recipes-card-title', hit.title));
-  if (hit.rating) {
+  if (hit.portion) body.append(el('p', 'search-recipes-card-desc', hit.portion));
+  if (hit.bvid) {
+    // Bazaarvoice fills the stars and review count in once bv.js has scanned the new card
+    const rating = el('div', 'search-recipes-card-rating');
+    rating.dataset.bvShow = 'inline_rating';
+    rating.dataset.bvProductId = hit.bvid;
+    body.append(rating);
+  } else if (hit.rating) {
     body.append(el('p', 'search-recipes-card-rating', `Rating: ${hit.rating}`));
   }
   link.append(media, body);
@@ -287,6 +296,7 @@ function renderHits(ui, state) {
     if (result.page === 0) hits.replaceChildren();
     result.hits.forEach((hit) => hits.append(buildCard(hit)));
     state.rendered = result;
+    if (result.hits.some((hit) => hit.bvid)) loadBazaarvoice();
   }
   const seen = result.page * result.hitsPerPage + result.hits.length;
   ui.progressText.textContent = `You've seen ${seen} of ${result.nbHits} ${ui.config.labels.noun.toLowerCase()}`;
@@ -359,7 +369,7 @@ export default function decorate(block) {
   const state = {
     query: '',
     page: 0,
-    indexKey: 'newest',
+    indexKey: config.sorts[0][0],
     facetFilters: [],
     openGroups: new Set(),
     rendered: null,
@@ -410,7 +420,7 @@ export default function decorate(block) {
   });
 
   const setSort = (value) => {
-    const [, text] = SORTS.find(([key]) => key === value);
+    const [, text] = config.sorts.find(([key]) => key === value);
     ui.sort.textContent = text;
     ui.sortList.querySelectorAll('li').forEach((opt) => {
       opt.setAttribute('aria-selected', String(opt.dataset.value === value));

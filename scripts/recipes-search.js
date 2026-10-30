@@ -50,6 +50,12 @@ export const DEFAULT_CONFIG = {
     ],
     'hero.rating': ['4', '3', '2', '1'],
   },
+  /** Facets whose values are limited to `facetValueOrder` (anything else is hidden). */
+  facetStrict: ['hero.rating', 'metaTags.Time to Complete', 'metaTags.skillLevel'],
+  /** Facets listed by result count (highest first) instead of A-Z. */
+  facetByCount: [],
+  /** Sort choices as [indexKey, label]; the first one is the default. */
+  sorts: [['newest', 'Newest'], ['rating', 'Rating (Highest-Lowest)'], ['alpha', 'A-Z']],
   hitsPerPage: 20,
   maxValuesPerFacet: 100,
   /** Wording the block shows; the stories and products listings reuse the same keys. */
@@ -78,6 +84,46 @@ export const LISTING_TYPES = {
       placeholder: 'Type a keyword or search by occasion...',
       title: 'Find an Activity',
       noun: 'Crafts',
+    },
+  },
+  products: {
+    baseFilter: 'metaTags.templateType: product-detail',
+    indices: {
+      relevance: 'crawler_www.hersheyland.com',
+      rating: 'crawler_www.hersheyland.com_sorted_by_rating_new',
+      newest: 'crawler_www.hersheyland.com_sorted_by_date_newest',
+      alpha: 'crawler_www.hersheyland.com_alpha_new',
+    },
+    sorts: [
+      ['relevance', 'Relevance'],
+      ['rating', 'Rating (Highest-Lowest)'],
+      ['newest', 'Newest'],
+      ['alpha', 'A-Z'],
+    ],
+    facetAttributes: [
+      'metaTags.brand',
+      'metaTags.category',
+      'metaTags.dietaryNeeds',
+      'metaTags.Holidays & Celebrations',
+      'hero.rating',
+    ],
+    facetLabels: {
+      'metaTags.brand': 'Brand',
+      'metaTags.category': 'Category',
+      'metaTags.dietaryNeeds': 'Dietary Needs',
+      'metaTags.Holidays & Celebrations': 'Holidays & Celebrations',
+      'hero.rating': 'Rating',
+    },
+    facetValueOrder: {
+      'metaTags.Holidays & Celebrations': ['Holiday', 'Easter', 'Halloween', 'Valentine\'s day'],
+      'hero.rating': ['5', '4', '3', '2', '1'],
+    },
+    facetStrict: ['metaTags.Holidays & Celebrations', 'hero.rating'],
+    facetByCount: ['metaTags.category', 'metaTags.dietaryNeeds'],
+    labels: {
+      placeholder: 'Enter a product name, keyword or description...',
+      title: 'Search for a Product',
+      noun: 'Products',
     },
   },
 };
@@ -126,7 +172,10 @@ export function mapHit(hit, config) {
   const imagePath = hit?.hero?.image || '';
   return {
     objectID: hit.objectID || '',
-    title: hit.title || hit?.hero?.h1 || '',
+    title: hit?.hero?.h1 || hit.title || '',
+    portion: hit?.hero?.portion || '',
+    bvid: hit?.metaTags?.bvID || '',
+    imageAlt: hit?.metaTags?.primaryImageAltText || '',
     description: hit?.hero?.description || '',
     href: absoluteUrl(path, config.assetOrigin),
     imageUrl: absoluteUrl(imagePath, config.assetOrigin),
@@ -146,15 +195,14 @@ export function orderFacetValues(attribute, values, config) {
   const entries = Object.entries(values || {}).map(([value, count]) => ({ value, count }));
   const preferred = config.facetValueOrder[attribute];
   if (!preferred) {
+    if (config.facetByCount.includes(attribute)) return entries.sort((a, b) => b.count - a.count);
     return entries.sort((a, b) => a.value.localeCompare(b.value));
   }
   const rank = new Map(preferred.map((v, i) => [v, i]));
   // hide values not in preferred list when order is used
   // (matches Algolia sortRemainingBy: hidden for rating/time)
   const known = entries.filter((e) => rank.has(e.value));
-  if (attribute === 'hero.rating'
-    || attribute === 'metaTags.Time to Complete'
-    || attribute === 'metaTags.skillLevel') {
+  if (config.facetStrict.includes(attribute)) {
     return known.sort((a, b) => rank.get(a.value) - rank.get(b.value));
   }
   const rest = entries
