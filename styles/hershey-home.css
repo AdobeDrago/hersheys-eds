@@ -547,6 +547,58 @@
 }
 /* stylelint-enable no-descending-specificity */
 
+/* stylelint-disable no-descending-specificity -- these section styles target their own sections only */
+
+/* taller dividers: `divider-tall` (e.g. the YORK mint leaves) and `divider-deep` (the YORK
+   pattie silhouettes) */
+.hershey-home main > .section.divider.divider-deep img {
+  height: var(--hershey-system-size-region-brand-divider-deep-mobile, 140px);
+}
+
+/* campaign pages: a silver band with a top-to-bottom gradient (e.g. YORK Snowflakes on /york);
+   a picture on its own at the band's end is its wave artwork, edge to edge */
+.hershey-home main > .section.silver-gradient {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+    var(--hershey-system-color-surface-campaign-silver-end, #a5a9ab) 0%,
+    var(--hershey-system-color-surface-campaign-silver-mid, #dddfe0) 30%,
+    var(--hershey-system-color-surface-campaign-silver-mid, #dddfe0) 50%,
+    var(--hershey-system-color-surface-campaign-silver-end, #a5a9ab) 100%
+  );
+}
+
+.hershey-home main > .section.silver-gradient:has(> .columns-wrapper > .columns.callout) {
+  padding: 0;
+}
+
+.hershey-home main > .section.silver-gradient > .columns-wrapper:has(> .columns.callout) {
+  padding:
+    var(--hershey-system-spacing-brand-campaign-band-silver-lead-mobile, 70px)
+    var(--hershey-system-spacing-brand-campaign-band-silver-inline-end-mobile, 35px)
+    var(--hershey-system-spacing-brand-campaign-band-silver-end-mobile, 45px)
+    var(--hershey-system-spacing-brand-campaign-band-silver-inline-start-mobile, 26px);
+}
+
+.hershey-home main > .section.silver-gradient > .default-content-wrapper:last-child {
+  max-width: none;
+  padding: 0;
+}
+
+.hershey-home main > .section.silver-gradient > .default-content-wrapper:last-child > p:has(> picture:only-child) {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home main > .section.silver-gradient > .default-content-wrapper:last-child img {
+  display: block;
+  width: 100%;
+  height: var(--hershey-system-size-region-brand-divider-mobile, 90px);
+  object-fit: cover;
+  object-position: left center;
+}
+/* stylelint-enable no-descending-specificity */
+
 /* the empty section the page metadata leaves behind would add a strip under the brands band */
 .hershey-home main > .section:has(> .cards-wrapper > .cards.slider.brands) ~ .section:empty {
   display: none;
@@ -607,6 +659,23 @@
 
   .hershey-home main > .section.divider img {
     height: var(--hershey-system-size-region-brand-divider-desktop, 140px);
+  }
+
+  .hershey-home main > .section.divider.divider-tall img {
+    height: var(--hershey-system-size-region-brand-divider-tall, 290px);
+  }
+
+  .hershey-home main > .section.divider.divider-deep img {
+    height: var(--hershey-system-size-region-brand-divider-deep, 270px);
+  }
+
+  .hershey-home main > .section.silver-gradient > .default-content-wrapper:last-child img {
+    height: var(--hershey-system-size-region-brand-wave, 160px);
+    object-position: center;
+  }
+
+  .hershey-home main > .section.silver-gradient > .columns-wrapper:has(> .columns.callout) {
+    padding: 0 0 var(--hershey-system-spacing-brand-campaign-band-silver-end, 90px);
   }
 
   /* the footer keeps its ribbon at the 1920px design width where hersheyland.com scales it down,

@@ -290,9 +290,10 @@ main > .section > .columns-wrapper:has(> .columns.fact) {
 /* callout variant: wide image beside centred text with a pill button and a text link */
 main > .section:has(> .columns-wrapper > .columns.callout) {
   padding:
-    var(--hershey-component-columns-callout-section-padding-block-start, 90px)
-    var(--hershey-component-columns-callout-section-padding-inline-mobile, 20px)
-    var(--hershey-component-columns-callout-section-padding-block-end-mobile, 45px);
+    var(--hershey-component-columns-callout-section-padding-block-start-mobile, 90px)
+    var(--hershey-component-columns-callout-section-padding-inline-end-mobile, 20px)
+    var(--hershey-component-columns-callout-section-padding-block-end-mobile, 45px)
+    var(--hershey-component-columns-callout-section-padding-inline-mobile, 20px);
 }
 
 main > .section > .columns-wrapper:has(> .columns.callout) {
@@ -434,7 +435,10 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
 
 @media (width >= 992px) {
   main > .section:has(> .columns-wrapper > .columns.fact) {
-    padding: var(--hershey-component-columns-fact-section-padding-block-desktop, 50px) 0;
+    padding:
+      var(--hershey-component-columns-fact-section-padding-block-desktop, 50px)
+      0
+      var(--hershey-component-columns-fact-section-padding-block-end-desktop, 50px);
   }
 
   /* ten of twelve page columns, as on hersheyland.com */
@@ -1288,14 +1292,100 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
     margin-bottom: calc(var(--hershey-component-columns-callout-framed-copy-margin-block-end, 24px) + var(--hershey-component-columns-callout-actions-margin-block-end, 20px));
   }
 
-  .columns.callout.framed p.button-wrapper:only-of-type {
+  .columns.callout.framed > div > div:not(:has(.button-wrapper ~ .button-wrapper)) p.button-wrapper {
     flex-basis: 100%;
     text-align: center;
   }
 
-  .columns.callout.framed p.button-wrapper:only-of-type a.button.primary {
+  .columns.callout.framed > div > div:not(:has(.button-wrapper ~ .button-wrapper)) a.button.primary {
     display: inline-block;
     width: auto;
+  }
+}
+
+/*
+ * a callout with a single button keeps the button's own width (e.g. the recipe callout on /york);
+ * framed callouts on campaign bands keep a full-width button below 992px
+ */
+.columns.callout:not(.framed) > div > div:not(:has(.button-wrapper ~ .button-wrapper)) p.button-wrapper {
+  text-align: center;
+}
+
+.columns.callout:not(.framed) > div > div:not(:has(.button-wrapper ~ .button-wrapper)) a.button.primary {
+  display: inline-block;
+  width: auto;
+}
+
+/*
+ * square option (`Columns (callout, square)`): a square photo beside the copy, half each from
+ * 992px, e.g. YORK Snowflakes on /york. Values from component.columns.callout.square-* tokens.
+ */
+.columns.callout.square > div > .columns-img-col img {
+  aspect-ratio: 1;
+}
+
+.columns.callout.square > div > :not(.columns-img-col) {
+  padding: var(--hershey-component-columns-callout-square-copy-padding, 10px);
+}
+
+.columns.callout.square h2 {
+  margin:
+    var(--hershey-component-columns-callout-square-title-margin-block-start-mobile, 30px)
+    var(--hershey-component-columns-callout-text-padding-inline, 20px)
+    var(--hershey-component-columns-callout-square-title-margin-block-end, 20px);
+}
+
+.columns.callout.square h2 + p {
+  margin:
+    0
+    var(--hershey-component-columns-callout-text-padding-inline, 20px)
+    var(--hershey-component-columns-callout-square-copy-margin-block-end-mobile, 22px);
+}
+
+.columns.callout.square p.button-wrapper,
+.columns.callout.square p.button-wrapper:has(> .primary) {
+  margin: 0 0 var(--hershey-component-columns-callout-square-actions-margin-block-end-mobile, 10px);
+}
+
+/*
+ * fact options: `half` puts the copy and photo side by side at half each (e.g. "1.5 billion" on
+ * /york); `inset` keeps a small illustration inset in its third (e.g. the Pennsylvania outline).
+ */
+@media (width >= 992px) {
+  .columns.callout.square > div > .columns-img-col {
+    flex: 0 0 50%;
+  }
+
+  .columns.callout.square > div > :not(.columns-img-col) {
+    flex: 0 0 50%;
+    box-sizing: border-box;
+    align-content: center;
+  }
+
+  .columns.callout.square h2 {
+    margin-top: 0;
+  }
+
+  .columns.callout.square h2 + p {
+    margin-bottom: var(--hershey-component-columns-callout-square-copy-margin-block-end, 24px);
+  }
+
+  .columns.callout.square p.button-wrapper,
+  .columns.callout.square p.button-wrapper:has(> .primary) {
+    margin-bottom: 0;
+  }
+
+  .columns.fact.half > div > .columns-img-col,
+  .columns.fact.half > div > :not(.columns-img-col) {
+    flex-basis: 50%;
+  }
+
+  .columns.fact.half > div > :not(.columns-img-col) {
+    padding-inline: var(--hershey-component-columns-fact-column-padding-inline, 25px);
+  }
+
+  .columns.fact.inset > div > .columns-img-col {
+    padding-inline: calc(var(--hershey-component-columns-fact-column-padding-inline, 25px) + var(--hershey-component-columns-fact-inset-padding-inline, 70px));
   }
 }
 /* stylelint-enable no-descending-specificity */

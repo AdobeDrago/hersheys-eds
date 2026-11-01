@@ -410,7 +410,21 @@ main .section.cool-tan {
 main .section.brand-color {
   margin: 0;
   background-color: var(--hershey-system-color-surface-brand-band, #feebd0);
+  color: var(--hershey-system-color-text-brand-band, var(--hershey-system-color-text-primary, var(--text-color)));
+}
+
+/* brand pages with two brand colours: the second band (brand themes set it, e.g. YORK mint) */
+main .section.brand-color-alt {
+  margin: 0;
+  background-color: var(--hershey-system-color-surface-brand-band-alt, #feebd0);
   color: var(--hershey-system-color-text-primary, var(--text-color));
+}
+
+/* a dark chocolate band with white copy (e.g. the brands band on /york) */
+main .section.dark-chocolate {
+  margin: 0;
+  background-color: var(--hershey-system-color-surface-dark-chocolate, #270107);
+  color: var(--hershey-system-color-text-inverse, #fff);
 }
 
 /* the section colour wins over the product cards' default grey band */

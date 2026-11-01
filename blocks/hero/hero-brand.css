@@ -182,7 +182,10 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
 }
 
 .hero.brand.square .hero-brand-logo {
-  margin: 0;
+  margin:
+    var(--hershey-component-hero-brand-square-logo-margin-block-start-mobile, 0)
+    0
+    var(--hershey-component-hero-brand-square-logo-margin-block-end-mobile, 0);
 }
 
 /* the intro spans the panel at every width */
@@ -192,6 +195,7 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
 
 @media (width >= 768px) {
   .hero.brand.square .hero-brand-logo {
+    margin-top: 0;
     margin-bottom: var(--hershey-component-hero-brand-square-logo-margin-block-end-tablet, 10px);
   }
 }
@@ -208,12 +212,54 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
   }
 
   .hero.brand.square .hero-brand-logo {
-    margin-bottom: 0;
+    margin-bottom: var(--hershey-component-hero-brand-square-logo-margin-block-end-desktop, 0);
   }
 }
 
 @media (width >= 1200px) {
   .hero.brand.square .hero-brand-text {
     padding-inline: 8%;
+  }
+}
+
+/*
+ * call to action under the intro (e.g. "Shop YORK" on /york): a pill half the text column wide,
+ * centred below 992px; from 992px it sits at the start, less a gutter. Colours from
+ * component.hero.brand.cta-* tokens (brand themes set them).
+ */
+.hero.brand p.button-wrapper {
+  align-self: stretch;
+  margin: 0;
+}
+
+.hero.brand a.button:any-link {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 50%;
+  margin: 0;
+  border: 0;
+  border-radius: var(--hershey-component-hero-brand-cta-border-radius, 50px);
+  padding: var(--hershey-component-hero-brand-cta-padding-mobile, 13px);
+  background-color: var(--hershey-component-hero-brand-cta-background, #007bbd);
+  color: var(--hershey-component-hero-brand-cta-foreground, #fff);
+  font-size: var(--hershey-component-hero-brand-cta-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-hero-brand-cta-font-weight, 700);
+  line-height: 1;
+  text-align: center;
+  white-space: normal;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.hero.brand a.button:hover,
+.hero.brand a.button:focus-visible {
+  background-color: var(--hershey-component-hero-brand-cta-background-hover, #268fc7);
+  color: var(--hershey-component-hero-brand-cta-foreground, #fff);
+}
+
+@media (width >= 992px) {
+  .hero.brand a.button:any-link {
+    width: calc(50% - 2 * var(--hershey-component-hero-brand-cta-gutter, 12.5px));
+    padding: var(--hershey-component-hero-brand-cta-padding, 18.5px);
+    font-size: var(--hershey-component-hero-brand-cta-font-size, 18px);
   }
 }
