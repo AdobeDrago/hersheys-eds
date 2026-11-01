@@ -753,6 +753,7 @@
   --hershey-system-motion-emphasis-duration: var(--hershey-reference-motion-duration-300);
   --hershey-system-motion-emphasis-easing: var(--hershey-reference-motion-easing-ease-in-out);
   --hershey-system-motion-control-duration: var(--hershey-reference-motion-duration-200);
+  --hershey-system-motion-brand-zoom-easing: var(--hershey-reference-motion-easing-ease-in-out);
   --hershey-system-spacing-inset-compact: var(--hershey-reference-spacing-4);
   --hershey-system-spacing-inset-tight: var(--hershey-reference-spacing-6);
   --hershey-system-spacing-inset-small: var(--hershey-reference-spacing-8);
@@ -1424,6 +1425,8 @@
   --hershey-component-columns-callout-link-border-width: var(--hershey-system-border-width-divider);
   --hershey-component-columns-callout-link-font-size: var(--hershey-system-typography-body-font-size);
   --hershey-component-columns-callout-link-font-size-mobile: var(--hershey-system-typography-body-compact-font-size);
+  --hershey-component-columns-callout-image-zoom-duration: var(--hershey-system-motion-interaction-duration);
+  --hershey-component-columns-callout-image-zoom-easing: var(--hershey-system-motion-brand-zoom-easing);
   --hershey-component-tabs-list-gap: var(--hershey-system-spacing-gap-small);
   --hershey-component-tabs-list-padding-block-end: var(--hershey-system-spacing-inset-default);
   --hershey-component-tabs-control-padding-block: var(--hershey-system-spacing-control-block);

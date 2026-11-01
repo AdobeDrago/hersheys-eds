@@ -293,10 +293,29 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
   gap: 0;
 }
 
+.columns.callout > div > .columns-img-col picture {
+  display: block;
+  overflow: hidden;
+}
+
 .columns.callout > div > .columns-img-col img {
   aspect-ratio: 16 / 9;
   height: auto;
   object-fit: contain;
+}
+
+/* the image zooms in while either call to action is hovered or focused, as on hersheyland.com */
+@media (prefers-reduced-motion: no-preference) {
+  .columns.callout > div > .columns-img-col img {
+    transition:
+      transform
+      var(--hershey-component-columns-callout-image-zoom-duration, 250ms)
+      var(--hershey-component-columns-callout-image-zoom-easing, ease-in-out);
+  }
+}
+
+.columns.callout:has(a.button:hover, a.button:focus) > div > .columns-img-col img {
+  transform: scale(1.1);
 }
 
 .columns.callout > div > :not(.columns-img-col) {
