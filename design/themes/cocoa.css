@@ -1526,6 +1526,8 @@
   --hershey-component-cards-brands-control-icon-width: var(--hershey-system-size-product-slider-icon-width);
   --hershey-component-cards-brands-control-icon-height: var(--hershey-system-size-product-slider-icon-height);
   --hershey-component-cards-brands-band-padding-inline-start-mobile: var(--hershey-system-spacing-brand-brands-band-padding-inline-start-mobile);
+  --hershey-component-cards-brands-image-zoom-duration: var(--hershey-system-motion-interaction-hover-duration);
+  --hershey-component-cards-brands-image-zoom-easing: var(--hershey-system-motion-brand-zoom-easing);
   --hershey-component-cards-spotlight-body-padding: var(--hershey-system-spacing-inset-snug);
   --hershey-component-cards-spotlight-body-padding-block-end: var(--hershey-system-spacing-inset-default);
   --hershey-component-cards-spotlight-card-background: var(--hershey-system-color-surface-default);

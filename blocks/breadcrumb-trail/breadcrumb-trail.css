@@ -19,6 +19,11 @@ main > .section > .breadcrumb-trail-wrapper {
   padding: 0;
 }
 
+/* homepage-template pages cap section content at the page width; the trail still spans it */
+.hershey-home main > .section > .breadcrumb-trail-wrapper {
+  max-width: none;
+}
+
 .breadcrumb-trail {
   color: var(--hershey-component-breadcrumb-trail-foreground, #3f000b);
   font-family: var(--hershey-component-breadcrumb-trail-base-font-family, hershey-tt, sans-serif);
@@ -31,6 +36,13 @@ main > .section > .breadcrumb-trail-wrapper {
 .breadcrumb-trail nav {
   border-bottom: var(--hershey-component-breadcrumb-trail-divider-width, 1px) var(--hershey-component-breadcrumb-trail-divider-style, solid) var(--hershey-component-breadcrumb-trail-divider-color, #cfcfcf);
   padding: var(--hershey-component-breadcrumb-trail-nav-padding, 10px);
+}
+
+/* brand pages: the grey divider only shows from 992px, as on hersheyland.com */
+@media (width < 992px) {
+  .hershey-home .breadcrumb-trail nav {
+    border-bottom: 0;
+  }
 }
 
 .breadcrumb-trail .breadcrumb-trail-list {

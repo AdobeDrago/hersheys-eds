@@ -420,11 +420,30 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
   background: transparent;
 }
 
+/* the tile frame clips the photo, which zooms in while the tile is hovered or focused */
+.cards.slider.brands .cards-card-image {
+  overflow: hidden;
+  border-radius: var(--hershey-component-cards-brands-image-border-radius, 8px);
+}
+
 .cards.slider.brands > ul > li img {
   display: block;
   aspect-ratio: 1;
   border-radius: var(--hershey-component-cards-brands-image-border-radius, 8px);
   object-fit: cover;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cards.slider.brands > ul > li img {
+    transition:
+      transform
+      var(--hershey-component-cards-brands-image-zoom-duration, 300ms)
+      var(--hershey-component-cards-brands-image-zoom-easing, ease-in-out);
+  }
+}
+
+.cards.slider.brands > ul > li:is(:hover, :focus-within) img {
+  transform: scale(1.2);
 }
 
 .cards.slider.brands .cards-card-body {
