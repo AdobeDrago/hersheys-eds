@@ -315,3 +315,297 @@
 .dark-brown-large .cards .cards-slider-dot[aria-current='true'] {
   background-image: url('/icons/orb-indicator-active-light.svg');
 }
+
+/* stylelint-disable no-descending-specificity -- the brands variant styles its own elements only */
+
+/*
+ * brands variant (`Cards (slider, brands)`): the "Get a Taste of Our Brands" band on brand pages.
+ * The section's eyebrow, heading and button sit beside a slider of square brand tiles from 992px;
+ * below that they stack and the button moves under the slider. Values come from
+ * component.cards.brands.* tokens; literal fallbacks are measured on
+ * hersheyland.com/brands/hersheys/symphony.html (#related-brands-module).
+ */
+main > .section:has(> .cards-wrapper > .cards.slider.brands) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding:
+    var(--hershey-component-cards-brands-band-padding-block-start-mobile, 63px)
+    0
+    var(--hershey-component-cards-brands-band-padding-block-end-mobile, 234px);
+  text-align: center;
+}
+
+main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper {
+  display: contents;
+}
+
+main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 var(--hershey-component-cards-brands-heading-padding-inline-mobile, 15px);
+}
+
+/* auto margins would shrink the grid item to its (container-sized) content */
+main > .section > .cards-wrapper:has(> .cards.slider.brands) {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* eyebrow: the paragraph before the heading */
+main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > p:has(+ h2) {
+  margin-bottom: var(--hershey-component-cards-brands-eyebrow-margin-block-end-mobile, 14px);
+  color: var(--hershey-component-cards-brands-color-foreground, #3f000b);
+  font-size: var(--hershey-component-cards-brands-eyebrow-font-size, 14px);
+  font-weight: var(--hershey-component-cards-brands-eyebrow-font-weight, 700);
+  line-height: var(--hershey-component-cards-brands-eyebrow-line-height, 18px);
+  text-transform: uppercase;
+}
+
+main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > h2 {
+  margin-bottom: var(--hershey-component-cards-brands-heading-margin-block-end-mobile, 28px);
+  color: var(--hershey-component-cards-brands-color-foreground, #3f000b);
+  font-family: var(--hershey-component-cards-brands-heading-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-cards-brands-heading-font-size-mobile, 28px);
+  font-weight: var(--hershey-component-cards-brands-heading-font-weight, 900);
+  line-height: var(--hershey-component-cards-brands-heading-line-height, 1.3);
+}
+
+/* the button follows the slider until 992px */
+main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > p.button-wrapper {
+  order: 1;
+  margin-top: var(--hershey-component-cards-brands-cta-margin-block-start-mobile, 31px);
+}
+
+main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: var(--hershey-component-cards-brands-cta-border-radius-mobile, 25px);
+  padding: var(--hershey-component-cards-brands-cta-padding-block-mobile, 11px) 0;
+  background-color: var(--hershey-component-cards-brands-cta-background, #007bbd);
+  color: var(--hershey-component-cards-brands-cta-foreground, #fff);
+  font-size: var(--hershey-component-cards-brands-cta-font-size-mobile, 20px);
+  font-weight: var(--hershey-component-cards-brands-cta-font-weight, 700);
+  line-height: var(--hershey-component-cards-brands-cta-line-height-mobile, 22px);
+  transition: background-color 0.3s ease-in-out;
+}
+
+main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:hover,
+main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:focus-visible {
+  border: 0;
+  background-color: var(--hershey-component-cards-brands-cta-background-hover, #268fc7);
+}
+
+.cards.slider.brands {
+  --cards-brands-inset: var(--hershey-component-cards-brands-track-inset-mobile, 11px);
+  --cards-brands-gap: var(--hershey-component-cards-brands-gap-mobile, 21px);
+  --cards-brands-card: calc(100cqi - var(--hershey-component-cards-brands-card-offset-mobile, 110px));
+
+  container-type: inline-size;
+  text-align: left;
+}
+
+.cards.slider.brands > ul {
+  grid-auto-columns: var(--cards-brands-card);
+  gap: var(--cards-brands-gap);
+  padding: 0 0 0 var(--cards-brands-inset);
+  scroll-padding-inline-start: var(--cards-brands-inset);
+  scrollbar-width: none;
+}
+
+.cards.slider.brands > ul > li {
+  border: 0;
+  background: transparent;
+}
+
+.cards.slider.brands > ul > li img {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: var(--hershey-component-cards-brands-image-border-radius, 8px);
+  object-fit: cover;
+}
+
+.cards.slider.brands .cards-card-body {
+  margin:
+    var(--hershey-component-cards-brands-name-margin-block-start, 24px)
+    0
+    var(--hershey-component-cards-brands-name-margin-block-end, 24px);
+}
+
+.cards.slider.brands h3 {
+  margin: 0;
+  color: var(--hershey-component-cards-brands-color-foreground, #3f000b);
+  font-family: var(--hershey-component-cards-brands-name-font-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-component-cards-brands-name-font-size-mobile, 20px);
+  font-weight: var(--hershey-component-cards-brands-name-font-weight, 700);
+  line-height: var(--hershey-component-cards-brands-name-line-height, 1.5);
+}
+
+.cards.slider.brands h3 a:any-link {
+  border-bottom: var(--hershey-component-cards-brands-name-border-width, 1px) solid currentcolor;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* arrows: white circles with a navy chevron, grey when there is nothing more to scroll */
+.cards.slider.brands .cards-slider-controls {
+  justify-content: space-between;
+  gap: 0;
+  margin: var(--hershey-component-cards-brands-control-margin-block-start-mobile, 28px) 0 0;
+  padding: 0 var(--hershey-component-cards-brands-control-inset-mobile, 16px);
+}
+
+.cards.slider.brands .cards-slider-controls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--hershey-component-cards-brands-control-size-mobile, 32px);
+  height: var(--hershey-component-cards-brands-control-size-mobile, 32px);
+  border: 0;
+  border-radius: 50%;
+  background: var(--hershey-component-cards-brands-control-background, #fff);
+  box-shadow: var(--hershey-component-cards-brands-control-shadow, 0 0 8.1px 0.9px rgb(1 1 1 / 20%));
+  color: var(--hershey-component-cards-brands-control-color, #003594);
+  font-size: 0;
+}
+
+.cards.slider.brands .cards-slider-controls button:disabled {
+  color: var(--hershey-component-cards-brands-control-color-disabled, #999);
+  opacity: 1;
+}
+
+.cards.slider.brands .cards-slider-controls button::before {
+  content: '';
+  width: var(--hershey-component-cards-brands-control-icon-width, 10px);
+  height: var(--hershey-component-cards-brands-control-icon-height, 16px);
+  background-color: currentcolor;
+  mask: url('../../icons/chevron-right.svg') center / contain no-repeat;
+}
+
+.cards.slider.brands .cards-slider-controls button:first-child::before {
+  transform: scaleX(-1);
+}
+
+@media (width >= 768px) {
+  main > .section:has(> .cards-wrapper > .cards.slider.brands) {
+    padding-top: var(--hershey-component-cards-brands-band-padding-block-start-tablet, 87px);
+    padding-bottom: var(--hershey-component-cards-brands-band-padding-block-end-tablet, 308px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > p:has(+ h2) {
+    margin-bottom: var(--hershey-component-cards-brands-eyebrow-margin-block-end-tablet, 4px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > h2 {
+    margin-bottom: var(--hershey-component-cards-brands-heading-margin-block-end-tablet, 16px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > p.button-wrapper {
+    margin-top: var(--hershey-component-cards-brands-cta-margin-block-start-tablet, 30px);
+  }
+
+  /* three tiles in the track from 768px */
+  .cards.slider.brands {
+    --cards-brands-inset: var(--hershey-component-cards-brands-track-inset-tablet, 101px);
+    --cards-brands-gap: var(--hershey-component-cards-brands-gap-tablet, 20px);
+    --cards-brands-card: calc((100cqi - var(--hershey-component-cards-brands-track-edge-tablet, 100px)) / 3 - var(--hershey-component-cards-brands-card-offset-tablet, 25px));
+  }
+
+  .cards.slider.brands .cards-slider-controls {
+    justify-content: center;
+    gap: var(--hershey-component-cards-brands-control-gap-tablet, 246px);
+    margin-top: var(--hershey-component-cards-brands-control-margin-block-start-tablet, 29px);
+    padding: 0;
+  }
+}
+
+@media (width >= 992px) {
+  main > .section:has(> .cards-wrapper > .cards.slider.brands) {
+    grid-template-columns: calc(100% * 5 / 12) minmax(0, 1fr);
+    grid-template-rows: 1fr auto auto auto 1fr;
+    padding:
+      var(--hershey-component-cards-brands-band-padding-block-start, 98px)
+      0
+      var(--hershey-component-cards-brands-band-padding-block-end, 244px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > * {
+    grid-column: 1;
+    padding:
+      0
+      var(--hershey-component-cards-brands-heading-padding-inline-end, 15px)
+      0
+      var(--hershey-component-cards-brands-heading-padding-inline-start, 96px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > p:has(+ h2) {
+    grid-row: 2;
+    margin-bottom: var(--hershey-component-cards-brands-eyebrow-margin-block-end, 20px);
+    letter-spacing: var(--hershey-component-cards-brands-eyebrow-letter-spacing, 1px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > h2 {
+    grid-row: 3;
+    margin-bottom: var(--hershey-component-cards-brands-heading-margin-block-end-tablet, 16px);
+    font-size: var(--hershey-component-cards-brands-heading-font-size-desktop, 36px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > p.button-wrapper {
+    grid-row: 4;
+    order: 0;
+    margin-top: 0;
+  }
+
+  main > .section > .cards-wrapper:has(> .cards.slider.brands) {
+    grid-area: 1 / 2 / -1 / 3;
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link {
+    display: inline-block;
+    width: auto;
+    min-width: var(--hershey-component-cards-brands-cta-min-width, 220px);
+    border-radius: var(--hershey-component-cards-brands-cta-border-radius, 30px);
+    padding:
+      var(--hershey-component-cards-brands-cta-padding-block, 15px)
+      var(--hershey-component-cards-brands-cta-padding-inline, 40px);
+    font-size: var(--hershey-component-cards-brands-cta-font-size, 18px);
+    line-height: var(--hershey-component-cards-brands-cta-line-height, 27px);
+  }
+
+  /* the tile width follows the slider column, as on hersheyland.com */
+  .cards.slider.brands {
+    --cards-brands-inset: var(--hershey-component-cards-brands-track-inset, 81px);
+    --cards-brands-gap: var(--hershey-component-cards-brands-gap, 24px);
+    --cards-brands-card: calc(28.67cqi - var(--hershey-component-cards-brands-card-offset, 48.2px));
+  }
+
+  .cards.slider.brands > ul {
+    margin-right: var(--hershey-component-cards-brands-track-end, 16px);
+  }
+
+  .cards.slider.brands h3 {
+    font-size: var(--hershey-component-cards-brands-name-font-size-desktop, 18px);
+  }
+
+  /* arrows sit under the tiles, a little right of the column centre */
+  .cards.slider.brands .cards-slider-controls {
+    gap: calc(var(--cards-brands-card) * 1.157);
+    margin-top: var(--hershey-component-cards-brands-control-margin-block-start, 19px);
+
+    /* start padding of twice the shift moves the centred arrows right without widening the row */
+    padding-left: calc(2 * var(--hershey-component-cards-brands-control-shift, 28px));
+  }
+
+  .cards.slider.brands .cards-slider-controls button {
+    width: var(--hershey-component-cards-brands-control-size, 56px);
+    height: var(--hershey-component-cards-brands-control-size, 56px);
+  }
+}
+
+@media (width >= 1400px) {
+  main > .section:has(> .cards-wrapper > .cards.slider.brands) {
+    padding-bottom: var(--hershey-component-cards-brands-band-padding-block-end-wide, 344px);
+  }
+}
+/* stylelint-enable no-descending-specificity */
