@@ -139,6 +139,7 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
 
   .hero.brand .hero-brand-logo {
     width: 50%;
+    margin-bottom: var(--hershey-component-hero-brand-logo-margin-block-end-desktop, 17.5px);
   }
 
   .hero.brand .hero-brand-logo img {

@@ -255,6 +255,12 @@
   height: auto;
 }
 
+/* brand pages: a `rule` section opens with a thick line in the brand's accent colour (brand
+   themes set it), e.g. the red rule above "What's in a Name?" on /brands/hersheys/mrgoodbar */
+.hershey-home main > .section.rule {
+  border-top: var(--hershey-system-border-width-brand-rule, 8px) solid var(--hershey-system-color-border-brand-rule, #3f000b);
+}
+
 /* brand pages: a `decorated` section shows its first paragraph's picture behind the content,
    covering the band like the live background image (e.g. the FAQ on /brands/hersheys/cookies-n-creme) */
 .hershey-home main > .section.decorated {

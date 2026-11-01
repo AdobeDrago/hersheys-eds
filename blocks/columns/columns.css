@@ -214,6 +214,10 @@ main > .section:has(> .columns-wrapper > .columns.fact) {
   }
 }
 
+main > .section.rule:has(> .columns-wrapper > .columns.fact) {
+  padding-top: var(--hershey-component-columns-fact-rule-section-padding-block-start-mobile, 35px);
+}
+
 main > .section > .columns-wrapper:has(> .columns.fact) {
   max-width: none;
   padding: 0;
@@ -246,17 +250,24 @@ main > .section > .columns-wrapper:has(> .columns.fact) {
 }
 
 .columns.fact > div > .columns-img-col {
-  padding: 0 var(--hershey-component-columns-fact-image-inset-mobile, 35px);
+  padding:
+    0
+    var(--hershey-component-columns-fact-image-inset-end-mobile, 35px)
+    0
+    var(--hershey-component-columns-fact-image-inset-mobile, 35px);
 }
 
 .columns.fact > div > .columns-img-col img {
-  aspect-ratio: 16 / 9;
   height: auto;
   object-fit: contain;
 }
 
 .columns.fact > div > :not(.columns-img-col) {
-  padding: 0 var(--hershey-component-columns-fact-text-inset-mobile, 45px);
+  padding:
+    0
+    var(--hershey-component-columns-fact-text-inset-end-mobile, 45px)
+    0
+    var(--hershey-component-columns-fact-text-inset-mobile, 45px);
   text-align: center;
 }
 
@@ -456,6 +467,15 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
     text-align: left;
   }
 
+  main > .section.rule:has(> .columns-wrapper > .columns.fact) {
+    padding-top: var(--hershey-component-columns-fact-rule-section-padding-block-start, 50px);
+    padding-bottom: var(--hershey-component-columns-fact-rule-section-padding-block-end, 50px);
+  }
+
+  .section.rule .columns.fact > div > :not(.columns-img-col) {
+    padding-top: var(--hershey-component-columns-fact-rule-text-padding-block-start, 50px);
+  }
+
   .columns.fact h3 {
     font-size: var(--hershey-component-columns-fact-title-font-size-desktop, 28px);
   }
@@ -530,10 +550,6 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
  */
 main > .section:has(> .columns-wrapper > .columns.fact.wide) {
   padding-top: var(--hershey-component-columns-fact-wide-section-padding-block-start-mobile, 115px);
-}
-
-.columns.fact.wide > div > .columns-img-col img {
-  aspect-ratio: auto;
 }
 
 .columns.fact.wide > div > :not(.columns-img-col) {

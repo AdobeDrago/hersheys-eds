@@ -25,8 +25,8 @@ function decorateSlider(block, list) {
   });
   const dots = document.createElement('div');
   dots.className = 'cards-slider-dots';
-  // related and product sliders show one page indicator per page of cards
-  const paged = ['related', 'product'].some((name) => block.classList.contains(name));
+  // related, product and stories sliders show one page indicator per page of cards
+  const paged = ['related', 'product', 'stories'].some((name) => block.classList.contains(name));
   // a page is the visible track width plus one gap; the track padding is not scrollable content
   const measure = () => {
     const style = getComputedStyle(list);

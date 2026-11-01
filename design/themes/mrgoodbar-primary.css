@@ -1,0 +1,39 @@
+/*
+ * HERSHEY'S MR. GOODBAR brand theme (`theme: mrgoodbar-primary` page metadata).
+ * Overrides only the brand page tokens that differ from the default Hershey look: the MR.
+ * GOODBAR yellow bands, the light yellow product band, the red rule and FAQ lines, the dark
+ * chocolate quick fact and FAQ copy, and this page's spacing. Values measured on
+ * hersheyland.com/brands/hersheys/mrgoodbar.html (2026-11-01). Hand-authored, not generated
+ * from tokens.json.
+ */
+.hershey-home.mrgoodbar-primary {
+  --hershey-system-color-surface-brand-band: #ffc627;
+  --hershey-system-color-border-brand-rule: #c01615;
+  --hershey-component-hero-brand-band-background: #ffc627;
+  --hershey-component-cards-product-band-background: #ffe293;
+  --hershey-component-columns-fact-color-foreground: #3c131c;
+  --hershey-component-accordion-border-color: #c01615;
+  --hershey-component-accordion-icon-color: #3c131c;
+  --hershey-component-accordion-label-color: #3c131c;
+  --hershey-component-accordion-brand-answer-color: #3c131c;
+
+  /* this page's spacing: logo gap, quick fact insets and offsets, FAQ top */
+  --hershey-component-hero-brand-logo-margin-block-end-mobile: 40px;
+  --hershey-component-hero-brand-logo-margin-block-end: 10px;
+  --hershey-component-hero-brand-logo-margin-block-end-desktop: 0;
+  --hershey-component-columns-fact-image-inset-mobile: 41px;
+  --hershey-component-columns-fact-image-inset-end-mobile: 50px;
+  --hershey-component-columns-fact-text-inset-mobile: 51px;
+  --hershey-component-columns-fact-text-inset-end-mobile: 60px;
+  --hershey-component-columns-fact-text-padding-block-start: 70px;
+  --hershey-component-columns-fact-rule-section-padding-block-start-mobile: 70px;
+  --hershey-component-columns-fact-rule-section-padding-block-start: 120px;
+  --hershey-component-columns-fact-rule-section-padding-block-end: 100px;
+  --hershey-component-columns-fact-rule-text-padding-block-start: 20px;
+  --hershey-component-accordion-brand-section-padding-block-start-mobile: 30px;
+  --hershey-component-accordion-brand-section-padding-inline-start-mobile: 10px;
+
+  /* the star ratings on hersheyland.com take a shorter row here than on SYMPHONY */
+  --hershey-component-cards-product-slider-body-min-height: 137px;
+  --hershey-component-cards-product-slider-body-min-height-mobile: 103px;
+}

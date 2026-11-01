@@ -13,4 +13,5 @@ export const BRAND_THEMES = [
   // brand landing page themes (Hershey template pages, e.g. /brands/hersheys/symphony)
   { label: 'Symphony', value: 'symphony-primary' },
   { label: "Cookies 'N' Creme", value: 'cookies-n-creme-primary' },
+  { label: 'Mr. Goodbar', value: 'mrgoodbar-primary' },
 ];

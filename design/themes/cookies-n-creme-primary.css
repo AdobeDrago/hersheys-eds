@@ -26,7 +26,7 @@
   /* the brands band sits lower and keeps more space under the tiles than on SYMPHONY */
   --hershey-component-cards-brands-band-padding-block-start: 118px;
   --hershey-component-cards-brands-band-padding-block-end: 276px;
-  --hershey-component-cards-brands-band-padding-block-end-wide: 307px;
+  --hershey-component-cards-brands-band-padding-block-end-wide: 275px;
   --hershey-component-cards-brands-band-padding-block-end-tablet: 208px;
   --hershey-component-cards-brands-band-padding-block-end-mobile: 184px;
 }
