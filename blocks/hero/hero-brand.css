@@ -162,3 +162,57 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
     padding-inline: 8%;
   }
 }
+
+/*
+ * square option (`Hero (brand, square)`): hersheyland.com's large-square-image hero, e.g.
+ * /brands/hersheys/cookies-n-creme. A square photo on top below 992px; from 992px the photo half
+ * keeps a fixed height and the text is centred in the other half. Values from
+ * component.hero.brand.square-* tokens.
+ */
+.hero.brand.square .hero-brand-media {
+  aspect-ratio: 1;
+}
+
+.hero.brand.square .hero-brand-text {
+  padding:
+    var(--hershey-component-hero-brand-square-panel-padding-mobile, 15px)
+    var(--hershey-component-hero-brand-square-panel-padding-mobile, 15px)
+    var(--hershey-component-hero-brand-square-panel-padding-block-end-mobile, 25px);
+}
+
+.hero.brand.square .hero-brand-logo {
+  margin: 0;
+}
+
+/* the intro spans the panel at every width */
+.hero.brand.square p {
+  max-width: none;
+}
+
+@media (width >= 768px) {
+  .hero.brand.square .hero-brand-logo {
+    margin-bottom: var(--hershey-component-hero-brand-square-logo-margin-block-end-tablet, 10px);
+  }
+}
+
+@media (width >= 992px) {
+  .hero.brand.square .hero-brand-media {
+    aspect-ratio: auto;
+    height: var(--hershey-component-hero-brand-square-media-height, 740px);
+  }
+
+  .hero.brand.square .hero-brand-text {
+    min-height: 0;
+    padding: 0 var(--hershey-component-hero-brand-square-panel-padding-inline-desktop, 60px);
+  }
+
+  .hero.brand.square .hero-brand-logo {
+    margin-bottom: 0;
+  }
+}
+
+@media (width >= 1200px) {
+  .hero.brand.square .hero-brand-text {
+    padding-inline: 8%;
+  }
+}

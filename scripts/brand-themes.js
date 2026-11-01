@@ -10,6 +10,7 @@ export const BRAND_THEMES = [
   { label: 'Cadbury', value: 'cadbury-primary' },
   { label: 'Payday', value: 'payday-primary' },
   { label: 'Rolo', value: 'rolo-primary' },
-  // brand landing page theme (Hershey template pages, e.g. /brands/hersheys/symphony)
+  // brand landing page themes (Hershey template pages, e.g. /brands/hersheys/symphony)
   { label: 'Symphony', value: 'symphony-primary' },
+  { label: "Cookies 'N' Creme", value: 'cookies-n-creme-primary' },
 ];

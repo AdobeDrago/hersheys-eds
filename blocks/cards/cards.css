@@ -608,4 +608,262 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
     padding-bottom: var(--hershey-component-cards-brands-band-padding-block-end-wide, 344px);
   }
 }
+
+/*
+ * spotlight variant (`Cards (spotlight)`): hersheyland.com's recipe feature set on brand pages,
+ * e.g. /brands/hersheys/cookies-n-creme. The first card is a large spotlight beside a column of
+ * smaller cards (image left, title right) from 992px; all stack below. The section's intro and
+ * the button after the block are default content. Values from component.cards.spotlight.* tokens.
+ */
+main > .section:has(> .cards-wrapper > .cards.spotlight) {
+  padding:
+    var(--hershey-component-cards-spotlight-section-padding-block-start, 90px)
+    var(--hershey-component-cards-spotlight-section-padding-inline-end-mobile, 35px)
+    var(--hershey-component-cards-spotlight-section-padding-block-end-mobile, 45px)
+    var(--hershey-component-cards-spotlight-section-padding-inline-start-mobile, 26px);
+}
+
+main > .section:has(> .cards-wrapper > .cards.spotlight) > div {
+  max-width: none;
+  padding: 0;
+}
+
+main > .section:has(> .cards-wrapper > .cards.spotlight) > .default-content-wrapper:first-child {
+  text-align: center;
+}
+
+main > .section:has(> .cards-wrapper > .cards.spotlight) > .default-content-wrapper:first-child h2 {
+  margin: 0 0 0.3em;
+  font-size: var(--hershey-component-cards-spotlight-heading-font-size-mobile, 28px);
+  line-height: var(--hershey-component-cards-spotlight-heading-line-height, 1.3);
+}
+
+main > .section:has(> .cards-wrapper > .cards.spotlight) > .default-content-wrapper:first-child p {
+  margin: 0 0 1.5em;
+  font-size: var(--hershey-component-cards-spotlight-copy-font-size, 17px);
+  line-height: var(--hershey-component-cards-spotlight-copy-line-height, 1.5);
+}
+
+.cards.spotlight {
+  padding-top: var(--hershey-component-cards-spotlight-track-padding-block-start-mobile, 95px);
+}
+
+.cards.spotlight > ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hershey-component-cards-spotlight-layout-gap-mobile, 10px);
+}
+
+.cards.spotlight > ul > li {
+  position: relative;
+  display: flex;
+  border: 0;
+  border-radius: var(--hershey-component-cards-spotlight-card-border-radius, 8px);
+  overflow: hidden;
+  background: var(--hershey-component-cards-spotlight-card-background, #fff);
+  box-shadow: var(--hershey-component-cards-spotlight-card-shadow, 0 0 12px 0 rgb(39 1 7 / 8%));
+}
+
+.cards.spotlight > ul > li:first-child {
+  flex-direction: column;
+}
+
+.cards.spotlight .cards-card-image {
+  flex: 0 0 50%;
+  overflow: hidden;
+}
+
+.cards.spotlight > ul > li:first-child .cards-card-image {
+  flex: 1 0 auto;
+}
+
+.cards.spotlight .cards-card-image :is(a, picture) {
+  display: block;
+  height: 100%;
+}
+
+/* the photos sit slightly zoomed in their frames, as on hersheyland.com */
+.cards.spotlight > ul > li img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transform: scale(1.05);
+}
+
+.cards.spotlight .cards-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  margin: 0;
+  padding:
+    var(--hershey-component-cards-spotlight-body-padding, 10px)
+    var(--hershey-component-cards-spotlight-body-padding, 10px)
+    var(--hershey-component-cards-spotlight-body-padding-block-end, 16px);
+}
+
+.cards.spotlight h3 {
+  margin: 0;
+  color: var(--hershey-component-cards-spotlight-title-color, #3f000b);
+  font-family: var(--hershey-component-cards-spotlight-title-font-family, var(--body-font-family));
+  font-size: var(--hershey-component-cards-spotlight-title-font-size-mobile, 20px);
+  font-weight: var(--hershey-component-cards-spotlight-title-font-weight, 700);
+  line-height: var(--hershey-component-cards-spotlight-title-line-height, 1.5);
+}
+
+/* the smaller cards' titles stop after two lines, as on hersheyland.com */
+.cards.spotlight > ul > li:not(:first-child) h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* the whole card is the link */
+.cards.spotlight h3 a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards.spotlight h3 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cards.spotlight > ul > li {
+    transition: transform var(--hershey-component-cards-spotlight-card-hover-duration, 300ms) var(--hershey-component-cards-spotlight-card-hover-easing, ease-out);
+  }
+}
+
+.cards.spotlight > ul > li:hover,
+.cards.spotlight > ul > li:focus-within {
+  transform: scale(1.05);
+}
+
+.cards.spotlight > ul > li:hover h3 a,
+.cards.spotlight > ul > li:focus-within h3 a {
+  text-decoration: underline;
+}
+
+/* the "Discover ..." button after the cards */
+main > .section:has(> .cards-wrapper > .cards.spotlight) > .cards-wrapper + .default-content-wrapper {
+  margin-top: var(--hershey-component-cards-spotlight-cta-margin-block-start-mobile, 10px);
+  text-align: center;
+}
+
+main > .section:has(> .cards-wrapper > .cards.spotlight) > .cards-wrapper + .default-content-wrapper p {
+  margin: 0;
+}
+
+main > .section:has(> .cards-wrapper > .cards.spotlight) > .cards-wrapper + .default-content-wrapper a.button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: var(--hershey-component-cards-spotlight-cta-border-radius-mobile, 21px);
+  padding: var(--hershey-component-cards-spotlight-cta-padding-mobile, 13px);
+  background-color: var(--hershey-component-cards-spotlight-cta-background, #007bbd);
+  color: var(--hershey-component-cards-spotlight-cta-foreground, #fff);
+  font-size: var(--hershey-component-cards-spotlight-cta-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-cards-spotlight-cta-font-weight, 700);
+  line-height: 1;
+  white-space: normal;
+  transition: background-color 0.3s ease-in-out;
+}
+
+main > .section:has(> .cards-wrapper > .cards.spotlight) > .cards-wrapper + .default-content-wrapper a.button:hover,
+main > .section:has(> .cards-wrapper > .cards.spotlight) > .cards-wrapper + .default-content-wrapper a.button:focus-visible {
+  background-color: var(--hershey-component-cards-spotlight-cta-background-hover, #268fc7);
+  color: var(--hershey-component-cards-spotlight-cta-foreground, #fff);
+}
+
+@media (width >= 992px) {
+  main > .section:has(> .cards-wrapper > .cards.spotlight) {
+    padding:
+      var(--hershey-component-cards-spotlight-section-padding-block-start, 90px)
+      var(--hershey-component-cards-spotlight-section-padding-inline, 70px)
+      var(--hershey-component-cards-spotlight-section-padding-block-end, 50px);
+  }
+
+  /* intro: eight of twelve columns of the at most 1260px container */
+  main > .section:has(> .cards-wrapper > .cards.spotlight) > .default-content-wrapper:first-child {
+    width: calc(min(var(--hershey-component-cards-spotlight-layout-max-width, 1260px), 100% + 2 * var(--hershey-component-cards-spotlight-section-padding-inline, 70px)) * 2 / 3 - 2 * var(--hershey-component-cards-spotlight-heading-gutter, 25px));
+    margin: 0 auto;
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.spotlight) > .default-content-wrapper:first-child h2 {
+    font-size: var(--hershey-component-cards-spotlight-heading-font-size, 36px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.spotlight) > .cards-wrapper,
+  main > .section:has(> .cards-wrapper > .cards.spotlight) > .cards-wrapper + .default-content-wrapper {
+    max-width: calc(var(--hershey-component-cards-spotlight-layout-max-width, 1260px) - 2 * var(--hershey-component-cards-spotlight-section-padding-inline, 70px));
+    margin-inline: auto;
+  }
+
+  .cards.spotlight {
+    padding-top: var(--hershey-component-cards-spotlight-track-padding-block-start, 60px);
+  }
+
+  /* the spotlight fills the first column; the other cards stack in the second */
+  .cards.spotlight > ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-flow: column;
+    gap: var(--hershey-component-cards-spotlight-layout-row-gap, 15px) var(--hershey-component-cards-spotlight-layout-column-gap, 25px);
+  }
+
+  .cards.spotlight > ul > li:first-child {
+    grid-row: 1 / span 3;
+    margin: 0 var(--hershey-component-cards-spotlight-spotlight-margin-inline, 25px);
+  }
+
+  .cards.spotlight > ul > li:not(:first-child) {
+    grid-column: 2;
+    margin-right: var(--hershey-component-cards-spotlight-card-margin-inline-end, 30px);
+  }
+
+  .cards.spotlight > ul > li:not(:first-child) .cards-card-image {
+    flex-basis: 40.75%;
+  }
+
+  /* the spotlight photo takes the height the title leaves */
+  .cards.spotlight > ul > li:first-child .cards-card-image {
+    flex: 1 1 0;
+    min-height: 0;
+  }
+
+  .cards.spotlight > ul > li:first-child img {
+    aspect-ratio: auto;
+  }
+
+  .cards.spotlight > ul > li:first-child .cards-card-body {
+    flex: 0 0 auto;
+    padding:
+      var(--hershey-component-cards-spotlight-body-padding, 10px)
+      var(--hershey-component-cards-spotlight-spotlight-body-padding-inline, 15px)
+      var(--hershey-component-cards-spotlight-body-padding-block-end, 16px);
+  }
+
+  .cards.spotlight h3 {
+    font-size: var(--hershey-component-cards-spotlight-title-font-size, 18px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.spotlight) > .cards-wrapper + .default-content-wrapper {
+    margin-top: var(--hershey-component-cards-spotlight-cta-margin-block-start, 40px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.spotlight) > .cards-wrapper + .default-content-wrapper a.button {
+    display: inline-block;
+    width: var(--hershey-component-cards-spotlight-cta-width, 380px);
+    border-radius: var(--hershey-component-cards-spotlight-cta-border-radius, 27.5px);
+    padding: var(--hershey-component-cards-spotlight-cta-padding, 18.5px);
+    font-size: var(--hershey-component-cards-spotlight-cta-font-size, 18px);
+  }
+}
 /* stylelint-enable no-descending-specificity */

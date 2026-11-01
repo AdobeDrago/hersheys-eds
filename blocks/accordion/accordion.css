@@ -88,8 +88,9 @@
 .hershey-home main > .section:has(> .accordion-wrapper) {
   padding:
     var(--hershey-component-accordion-brand-section-padding-block-start-mobile, 45px)
-    0
-    var(--hershey-component-accordion-brand-section-padding-block-end-mobile, 45px);
+    var(--hershey-component-accordion-brand-section-padding-inline-end-mobile, 0)
+    var(--hershey-component-accordion-brand-section-padding-block-end-mobile, 45px)
+    0;
 }
 
 .hershey-home main > .section:has(> .accordion-wrapper) > .default-content-wrapper {

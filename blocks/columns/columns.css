@@ -293,7 +293,7 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
   gap: 0;
 }
 
-.columns.callout > div > .columns-img-col picture {
+.columns:is(.callout, .article) > div > .columns-img-col picture {
   display: block;
   overflow: hidden;
 }
@@ -306,7 +306,7 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
 
 /* the image zooms in while either call to action is hovered or focused, as on hersheyland.com */
 @media (prefers-reduced-motion: no-preference) {
-  .columns.callout > div > .columns-img-col img {
+  .columns:is(.callout, .article) > div > .columns-img-col img {
     transition:
       transform
       var(--hershey-component-columns-callout-image-zoom-duration, 250ms)
@@ -314,7 +314,7 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
   }
 }
 
-.columns.callout:has(a.button:hover, a.button:focus) > div > .columns-img-col img {
+.columns:is(.callout, .article):has(a.button:hover, a.button:focus) > div > .columns-img-col img {
   transform: scale(1.1);
 }
 
@@ -520,6 +520,258 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
 
   .columns.callout p {
     font-size: var(--hershey-component-columns-callout-copy-font-size-desktop, 20px);
+  }
+}
+
+/*
+ * fact `wide` option (`Columns (fact, wide)`): the quick fact on a twelve-column container, as on
+ * hersheyland.com/brands/hersheys/cookies-n-creme. The image keeps its own proportions; text
+ * stays left-aligned on mobile. Values from component.columns.fact.wide-* tokens.
+ */
+main > .section:has(> .columns-wrapper > .columns.fact.wide) {
+  padding-top: var(--hershey-component-columns-fact-wide-section-padding-block-start-mobile, 115px);
+}
+
+.columns.fact.wide > div > .columns-img-col img {
+  aspect-ratio: auto;
+}
+
+.columns.fact.wide > div > :not(.columns-img-col) {
+  text-align: left;
+}
+
+/*
+ * article variant (`Columns (article)`): hersheyland.com's article-style call-out card, e.g. the
+ * S'mores feature on /brands/hersheys/cookies-n-creme. An eyebrow, heading, copy, pill button and
+ * text link beside a framed photo; stacked and centred below 992px. Values from
+ * component.columns.article.* tokens.
+ */
+main > .section:has(> .columns-wrapper > .columns.article) {
+  padding:
+    var(--hershey-component-columns-article-section-padding-block-start-mobile, 45px)
+    var(--hershey-component-columns-article-section-padding-inline-mobile, 10px)
+    0;
+}
+
+main > .section > .columns-wrapper:has(> .columns.article) {
+  max-width: var(--hershey-component-columns-article-layout-max-width, 1260px);
+  padding: 0;
+}
+
+.columns.article > div {
+  gap: 0;
+}
+
+.columns.article > div > .columns-img-col {
+  padding: 0 var(--hershey-component-columns-article-image-inset-mobile, 30px);
+}
+
+.columns.article > div > .columns-img-col img {
+  aspect-ratio: 592 / 377;
+  height: auto;
+  border-radius: var(--hershey-component-columns-article-image-border-radius, 8px);
+  object-fit: cover;
+}
+
+.columns.article > div > .columns-img-col picture {
+  border-radius: var(--hershey-component-columns-article-image-border-radius, 8px);
+}
+
+.columns.article > div > :not(.columns-img-col) {
+  display: flex;
+  flex-flow: row wrap;
+  place-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding:
+    var(--hershey-component-columns-article-copy-offset-mobile, 27px)
+    var(--hershey-component-columns-article-image-inset-mobile, 30px)
+    var(--hershey-component-columns-article-copy-padding-block-end-mobile, 40px);
+  text-align: center;
+}
+
+.columns.article > div > :not(.columns-img-col) > * {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+}
+
+/* eyebrow: the paragraph before the heading */
+.columns.article p:has(+ :is(h2, h3)) {
+  margin: 0 0 var(--hershey-component-columns-article-eyebrow-margin-block-end-mobile, 15px);
+  font-size: var(--hershey-component-columns-article-eyebrow-font-size-mobile, 10px);
+  font-weight: var(--hershey-component-columns-article-eyebrow-font-weight, 500);
+  line-height: var(--hershey-component-columns-article-eyebrow-line-height, 1.5);
+  text-transform: uppercase;
+}
+
+.columns.article :is(h2, h3) {
+  margin: 0 0 var(--hershey-component-columns-article-title-margin-block-end-mobile, 8px);
+  font-family: var(--hershey-component-columns-article-title-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-columns-article-title-font-size-mobile, 24px);
+  font-weight: var(--hershey-component-columns-article-title-font-weight, 900);
+  line-height: var(--hershey-component-columns-article-title-line-height, 1.5);
+}
+
+.columns.article p {
+  margin: 0 0 1.5em;
+  font-size: var(--hershey-component-columns-article-copy-font-size, 17px);
+  font-weight: var(--hershey-component-columns-article-copy-font-weight, 500);
+  line-height: var(--hershey-component-columns-article-copy-line-height, 1.5);
+}
+
+.columns.article p.button-wrapper {
+  margin: 0;
+}
+
+.columns.article p.button-wrapper:has(> .secondary) {
+  margin-top: var(--hershey-component-columns-article-actions-gap-mobile, 20px);
+}
+
+.columns.article a.button.primary {
+  display: block;
+  width: 100%;
+  max-width: var(--hershey-component-columns-article-cta-max-width-mobile, 413px);
+  margin: 0 auto;
+  border: 0;
+  border-radius: var(--hershey-component-columns-article-cta-border-radius-mobile, 25px);
+  padding: var(--hershey-component-columns-article-cta-padding-mobile, 13px);
+  background-color: var(--hershey-component-columns-article-cta-background, #007bbd);
+  color: var(--hershey-component-columns-article-cta-foreground, #fff);
+  font-size: var(--hershey-component-columns-article-cta-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-columns-article-cta-font-weight, 700);
+  line-height: var(--hershey-component-columns-article-cta-line-height, 1);
+  white-space: normal;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.columns.article a.button.primary:hover,
+.columns.article a.button.primary:focus-visible {
+  border: 0;
+  background-color: var(--hershey-component-columns-article-cta-background-hover, #268fc7);
+  color: var(--hershey-component-columns-article-cta-foreground, #fff);
+}
+
+/* secondary call to action: an underlined text link in the copy colour; the underline goes on hover */
+.columns.article a.button.secondary {
+  display: inline;
+  border: 0;
+  border-bottom: var(--hershey-component-columns-article-link-border-width, 1px) solid currentcolor;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--hershey-component-columns-article-link-color, #3f000b);
+  font-size: var(--hershey-component-columns-article-link-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-columns-article-cta-font-weight, 700);
+  line-height: var(--hershey-component-columns-article-copy-line-height, 1.5);
+  white-space: normal;
+}
+
+.columns.article a.button.secondary:hover,
+.columns.article a.button.secondary:focus-visible {
+  border-bottom-color: transparent;
+  background: transparent;
+  color: var(--hershey-component-columns-article-link-color, #3f000b);
+}
+
+@media (width >= 992px) {
+  main > .section:has(> .columns-wrapper > .columns.fact.wide) {
+    padding-top: var(--hershey-component-columns-fact-section-padding-block-desktop, 50px);
+    padding-bottom: var(--hershey-component-columns-fact-wide-section-padding-block-end, 100px);
+  }
+
+  /* twelve columns, at most 1260px, 25px from the page edges */
+  .columns.fact.wide {
+    width: min(var(--hershey-component-columns-fact-wide-max-width, 1260px), 100% - 2 * var(--hershey-component-columns-fact-column-padding-inline, 25px));
+  }
+
+  .columns.fact.wide > div > .columns-img-col {
+    padding:
+      var(--hershey-component-columns-fact-text-padding-block-start, 50px)
+      var(--hershey-component-columns-fact-wide-image-padding-inline-end, 45px)
+      0
+      var(--hershey-component-columns-fact-wide-image-padding-inline-start, 95px);
+  }
+
+  .columns.fact.wide > div > :not(.columns-img-col) {
+    padding-top: var(--hershey-component-columns-fact-wide-text-padding-block-start, 100px);
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.article) {
+    padding:
+      var(--hershey-component-columns-article-section-padding-block-start, 50px)
+      0
+      0;
+  }
+
+  .columns.article > div {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .columns.article > div > .columns-img-col {
+    flex: 0 0 47%;
+    margin: var(--hershey-component-columns-article-image-margin-block, 45px) 0;
+    padding: 0;
+  }
+
+  .columns.article > div > :not(.columns-img-col) {
+    flex: 1;
+    justify-content: flex-start;
+    padding:
+      var(--hershey-component-columns-article-copy-padding-block-start, 45px)
+      var(--hershey-component-columns-article-copy-padding-inline-end, 80px)
+      var(--hershey-component-columns-article-copy-padding-block-end, 55px)
+      var(--hershey-component-columns-article-copy-padding-inline-start, 70px);
+    text-align: left;
+  }
+
+  /* the eyebrow keeps the copy's line box, as on hersheyland.com */
+  .columns.article p:has(+ :is(h2, h3)) {
+    margin-bottom: var(--hershey-component-columns-article-eyebrow-margin-block-end, 10px);
+    font-size: var(--hershey-component-columns-article-eyebrow-font-size, 12px);
+    line-height: var(--hershey-component-columns-article-eyebrow-line-height-desktop, 25.5px);
+  }
+
+  .columns.article :is(h2, h3) {
+    margin-bottom: var(--hershey-component-columns-article-title-margin-block-end, 20px);
+    font-size: var(--hershey-component-columns-article-title-font-size, 28px);
+  }
+
+  /* the two calls to action share a row, half each */
+  .columns.article p.button-wrapper,
+  .columns.article p.button-wrapper:has(> .secondary) {
+    flex: 0 0 50%;
+    margin-top: var(--hershey-component-columns-article-actions-margin-block-start, 25px);
+    text-align: center;
+  }
+
+  .columns.article p.button-wrapper:has(> .primary) {
+    padding-right: var(--hershey-component-columns-article-actions-gap, 10px);
+  }
+
+  .columns.article p.button-wrapper:has(> .secondary) {
+    padding-left: var(--hershey-component-columns-article-actions-gap, 10px);
+  }
+
+  .columns.article a.button.primary {
+    max-width: none;
+    border-radius: var(--hershey-component-columns-article-cta-border-radius, 44px);
+    padding: var(--hershey-component-columns-article-cta-padding, 18.5px);
+    font-size: var(--hershey-component-columns-article-cta-font-size, 18px);
+  }
+
+  .columns.article a.button.secondary {
+    font-size: var(--hershey-component-columns-article-link-font-size, 18px);
+  }
+}
+
+@media (width >= 1200px) {
+  .columns.article p:has(+ :is(h2, h3)) {
+    margin-bottom: var(--hershey-component-columns-article-eyebrow-margin-block-end-wide, 30px);
+  }
+
+  .columns.article :is(h2, h3) {
+    margin-bottom: var(--hershey-component-columns-article-title-margin-block-end-wide, 30px);
   }
 }
 /* stylelint-enable no-descending-specificity */

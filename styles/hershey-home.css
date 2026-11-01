@@ -233,6 +233,51 @@
   object-fit: cover;
 }
 
+/* brand pages: full-width artwork between two bands (e.g. a milk splash), authored as an image in
+   an `artwork` section; unlike `divider` it keeps the artwork's own proportions */
+.hershey-home main > .section.artwork {
+  padding: 0;
+}
+
+.hershey-home main > .section.artwork > .default-content-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hershey-home main > .section.artwork p {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home main > .section.artwork img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* brand pages: a `decorated` section shows its first paragraph's picture behind the content,
+   covering the band like the live background image (e.g. the FAQ on /brands/hersheys/cookies-n-creme) */
+.hershey-home main > .section.decorated {
+  position: relative;
+  isolation: isolate;
+}
+
+.hershey-home main > .section.decorated > .default-content-wrapper:first-child > p:first-child:has(> picture:only-child) {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home main > .section.decorated > .default-content-wrapper:first-child > p:first-child > picture:only-child,
+.hershey-home main > .section.decorated > .default-content-wrapper:first-child > p:first-child > picture:only-child img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* the empty section the page metadata leaves behind would add a strip under the brands band */
 .hershey-home main > .section:has(> .cards-wrapper > .cards.slider.brands) ~ .section:empty {
   display: none;

@@ -406,6 +406,13 @@ main .section.cool-tan {
   color: var(--hershey-system-color-text-primary, var(--text-color));
 }
 
+/* brand pages: a band in the brand's own colour (brand themes set it, e.g. HERSHEY'S blue) */
+main .section.brand-color {
+  margin: 0;
+  background-color: var(--hershey-system-color-surface-brand-band, #feebd0);
+  color: var(--hershey-system-color-text-primary, var(--text-color));
+}
+
 /* the section colour wins over the product cards' default grey band */
 main .section.cool-tan.cards-container:has(.cards.product) {
   background-color: var(--hershey-system-color-surface-cool-tan, #e2d6c5);

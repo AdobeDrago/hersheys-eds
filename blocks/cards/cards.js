@@ -95,7 +95,7 @@ export default async function decorate(block) {
     });
     ul.append(li);
   });
-  const linkedImages = ['slider', 'welcome-cards', 'social'].some((variant) => block.classList.contains(variant));
+  const linkedImages = ['slider', 'welcome-cards', 'social', 'spotlight'].some((variant) => block.classList.contains(variant));
   if (linkedImages) {
     ul.querySelectorAll('li').forEach((card) => {
       const picture = card.querySelector('.cards-card-image picture');
