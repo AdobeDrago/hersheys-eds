@@ -1,19 +1,20 @@
-// Product page themes, set with `theme` page metadata. Shared by scripts.js and
+// Product and brand page themes, set with `theme` page metadata. Shared by scripts.js and
 // the DA Themes panel (tools/theme-picker). No imports: the panel runs outside the site.
 
 // base Hershey look, loaded for every /products/ page; has no file in design/themes
 export const DEFAULT_THEME = { label: "Hershey's", value: 'hershey-primary' };
 
-// each value needs a matching design/themes/<value>.css
+// product page themes each have a design/themes/<value>.css; brand page themes (`file: 'brands'`)
+// all live in design/themes/brands.css
 export const BRAND_THEMES = [
   { label: "Reese's", value: 'reese-primary' },
   { label: 'Cadbury', value: 'cadbury-primary' },
   { label: 'Payday', value: 'payday-primary' },
   { label: 'Rolo', value: 'rolo-primary' },
   // brand landing page themes (Hershey template pages, e.g. /brands/hersheys/symphony)
-  { label: 'Symphony', value: 'symphony-primary' },
-  { label: "Cookies 'N' Creme", value: 'cookies-n-creme-primary' },
-  { label: 'Mr. Goodbar', value: 'mrgoodbar-primary' },
-  { label: 'Creme Bars', value: 'creme-bars-primary' },
-  { label: 'YORK', value: 'york-primary' },
+  { label: 'Symphony', value: 'symphony-primary', file: 'brands' },
+  { label: "Cookies 'N' Creme", value: 'cookies-n-creme-primary', file: 'brands' },
+  { label: 'Mr. Goodbar', value: 'mrgoodbar-primary', file: 'brands' },
+  { label: 'Creme Bars', value: 'creme-bars-primary', file: 'brands' },
+  { label: 'YORK', value: 'york-primary', file: 'brands' },
 ];

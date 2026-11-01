@@ -201,9 +201,8 @@ async function loadEager(doc) {
     || document.body.classList.contains('hershey-recipe')) {
     await loadHersheyTheme();
     // brand themes (e.g. `theme: reese-primary`) override the product hero and card tokens
-    const brandTheme = BRAND_THEMES.map(({ value }) => value)
-      .find((name) => document.body.classList.contains(name));
-    if (brandTheme) await loadCSS(`${window.hlx.codeBasePath}/design/themes/${brandTheme}.css`);
+    const brandTheme = BRAND_THEMES.find(({ value }) => document.body.classList.contains(value));
+    if (brandTheme) await loadCSS(`${window.hlx.codeBasePath}/design/themes/${brandTheme.file || brandTheme.value}.css`);
   }
   const main = doc.querySelector('main');
   if (main) {
