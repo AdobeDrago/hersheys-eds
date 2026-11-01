@@ -468,6 +468,11 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
   text-decoration: none;
 }
 
+/* the name loses its underline while the tile is hovered or focused, as on hersheyland.com */
+.cards.slider.brands > ul > li:is(:hover, :focus-within) h3 a:any-link {
+  border-bottom-color: transparent;
+}
+
 /* arrows: white circles with a navy chevron, grey when there is nothing more to scroll */
 .cards.slider.brands .cards-slider-controls {
   justify-content: space-between;
