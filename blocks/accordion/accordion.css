@@ -109,7 +109,9 @@
   --hershey-component-accordion-label-padding-inline-end: var(--hershey-component-accordion-brand-label-padding-inline-end, 23px);
   --hershey-component-accordion-label-font-size: var(--hershey-component-accordion-brand-label-font-size-mobile, 20px);
   --hershey-component-accordion-label-line-height: var(--hershey-component-accordion-brand-label-line-height, 1.3);
-  --hershey-component-accordion-label-color-inactive: var(--hershey-component-accordion-label-color, #3f000b);
+
+  /* the other questions grey out while one is open; brand themes may keep them in the label colour */
+  --hershey-component-accordion-label-color-inactive: var(--hershey-component-accordion-brand-label-color-inactive, #999);
   --hershey-component-accordion-body-padding-block-end: 0;
 
   margin: 0 var(--hershey-component-accordion-brand-inset-end, 20px) 0 var(--hershey-component-accordion-brand-inset, 10px);

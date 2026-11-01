@@ -2402,6 +2402,7 @@
   --hershey-component-accordion-brand-inset-end: var(--hershey-system-spacing-inset-card);
   --hershey-component-accordion-brand-section-padding-inline-end-mobile: var(--hershey-system-spacing-brand-faq-section-padding-inline-end-mobile);
   --hershey-component-accordion-brand-section-padding-inline-start-mobile: var(--hershey-system-spacing-brand-faq-section-padding-inline-start-mobile);
+  --hershey-component-accordion-brand-label-color-inactive: var(--hershey-system-color-text-inactive);
   --hershey-component-hero-recipe-category-background: var(--hershey-system-color-surface-corporate);
   --hershey-component-hero-recipe-category-foreground: var(--hershey-system-color-text-inverse);
   --hershey-component-hero-recipe-category-font-family: var(--hershey-system-typography-body-font-family);
