@@ -233,16 +233,28 @@
   object-fit: cover;
 }
 
-/* brand pages closed by the brands band: the footer ribbon area overlaps the band's bottom space
-   (the purple starts where the band ends), as on hersheyland.com. The ribbon area is
-   37.3% of the newsletter's content width below 992px and --wave-height from 992px (footer.css). */
-.hershey-home main:has(> .section:last-child > .cards-wrapper > .cards.slider.brands) + footer .footer.hershey-footer .newsletter {
+/* the empty section the page metadata leaves behind would add a strip under the brands band */
+.hershey-home main > .section:has(> .cards-wrapper > .cards.slider.brands) ~ .section:empty {
+  display: none;
+}
+
+/* brand pages closed by the brands band (only the empty metadata section may follow it): the footer
+   ribbon area overlaps the band's bottom space (the purple starts where the band ends), as on
+   hersheyland.com. The ribbon area is 37.3% of the newsletter's content width below 992px and
+   --wave-height from 992px (footer.css). */
+.hershey-home main:is(
+  :has(> .section:last-child > .cards-wrapper > .cards.slider.brands),
+  :has(> .section:nth-last-child(2) > .cards-wrapper > .cards.slider.brands):has(> .section:last-child:empty)
+) + footer .footer.hershey-footer .newsletter {
   margin-top: calc(1px - 0.373 * (100cqw - 2 * var(--hershey-component-footer-layout-padding-inline)));
   background: transparent;
   pointer-events: none;
 }
 
-.hershey-home main:has(> .section:last-child > .cards-wrapper > .cards.slider.brands) + footer .footer.hershey-footer .newsletter > * {
+.hershey-home main:is(
+  :has(> .section:last-child > .cards-wrapper > .cards.slider.brands),
+  :has(> .section:nth-last-child(2) > .cards-wrapper > .cards.slider.brands):has(> .section:last-child:empty)
+) + footer .footer.hershey-footer .newsletter > * {
   pointer-events: auto;
 }
 
@@ -285,7 +297,10 @@
 
   /* the footer keeps its ribbon at the 1920px design width where hersheyland.com scales it down,
      so the overlap is reduced to keep the ribbon's middle where it is on the live page */
-  .hershey-home main:has(> .section:last-child > .cards-wrapper > .cards.slider.brands) + footer .footer.hershey-footer .newsletter {
+  .hershey-home main:is(
+    :has(> .section:last-child > .cards-wrapper > .cards.slider.brands),
+    :has(> .section:nth-last-child(2) > .cards-wrapper > .cards.slider.brands):has(> .section:last-child:empty)
+  ) + footer .footer.hershey-footer .newsletter {
     margin-top: calc(1px - var(--wave-height) + var(--hershey-system-spacing-brand-footer-ribbon-offset, 140px));
   }
 
