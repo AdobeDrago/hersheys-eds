@@ -14,4 +14,5 @@ export const BRAND_THEMES = [
   { label: 'Symphony', value: 'symphony-primary' },
   { label: "Cookies 'N' Creme", value: 'cookies-n-creme-primary' },
   { label: 'Mr. Goodbar', value: 'mrgoodbar-primary' },
+  { label: 'Creme Bars', value: 'creme-bars-primary' },
 ];

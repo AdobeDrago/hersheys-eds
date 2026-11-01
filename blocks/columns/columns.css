@@ -790,4 +790,512 @@ main > .section > .columns-wrapper:has(> .columns.article) {
     margin-bottom: var(--hershey-component-columns-article-title-margin-block-end-wide, 30px);
   }
 }
+
+/*
+ * video variant (`Columns (video)`): a YouTube poster with a play button beside a white story box
+ * that overlaps it, e.g. "PINKY UP. Flavor On." on /brands/hersheys/creme-bars; columns.js plays
+ * the video in place. The band heading is default content. Values from
+ * component.columns.video.* tokens.
+ */
+main > .section:has(> .columns-wrapper > .columns.video) {
+  padding:
+    var(--hershey-component-columns-video-section-padding-block-start-mobile, 25px)
+    0
+    var(--hershey-component-columns-video-section-padding-block-end-mobile, 25px);
+}
+
+main > .section:has(> .columns-wrapper > .columns.video) > div {
+  max-width: none;
+  padding: 0;
+}
+
+main > .section:has(> .columns-wrapper > .columns.video) > .default-content-wrapper h2 {
+  margin:
+    var(--hershey-component-columns-video-heading-margin-block-start-mobile, 20px)
+    var(--hershey-component-columns-video-heading-inset-mobile, 41px)
+    var(--hershey-component-columns-video-heading-margin-block-end-mobile, 12px);
+  font-size: var(--hershey-component-columns-video-heading-font-size-mobile, 28px);
+  line-height: var(--hershey-component-columns-video-heading-line-height, 1.35);
+  text-align: center;
+}
+
+.columns.video {
+  padding: 0 var(--hershey-component-columns-video-inset-end-mobile, 25px) 0 var(--hershey-component-columns-video-inset-start-mobile, 16px);
+}
+
+.columns.video > div {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.columns.video > div > div:first-child {
+  position: relative;
+}
+
+.columns.video > div > div:first-child p {
+  margin: 0;
+  line-height: 0;
+}
+
+.columns.video > div > div:first-child img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--hershey-component-columns-video-poster-border-radius, 8px);
+  object-fit: cover;
+}
+
+/* the YouTube link becomes the play button over the poster */
+.columns.video .columns-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--hershey-component-columns-video-play-size-mobile, 40px);
+  height: var(--hershey-component-columns-video-play-size-mobile, 40px);
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  background: url('/icons/video-play.svg') center / contain no-repeat;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.columns.video iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--hershey-component-columns-video-poster-border-radius, 8px);
+}
+
+.columns.video > div > div:last-child {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  margin:
+    calc(-1 * var(--hershey-component-columns-video-story-overlap-mobile, 20px))
+    var(--hershey-component-columns-video-story-inset-mobile, 15px)
+    var(--hershey-component-columns-video-story-margin-block-end-mobile, 20px);
+  border-radius: var(--hershey-component-columns-video-story-border-radius, 8px);
+  padding: var(--hershey-component-columns-video-story-padding-block-mobile, 30px) var(--hershey-component-columns-video-story-padding-inline, 25px);
+  background: var(--hershey-component-columns-video-story-background, #fff);
+  box-shadow: var(--hershey-component-columns-video-story-shadow, 0 0 12px 0 rgb(39 1 7 / 8%));
+  text-align: center;
+}
+
+.columns.video h3 {
+  margin: 0 0 var(--hershey-component-columns-video-title-margin-block-end-mobile, 10px);
+  font-family: var(--hershey-component-columns-video-title-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-columns-video-title-font-size-mobile, 20px);
+  font-weight: var(--hershey-component-columns-video-title-font-weight, 900);
+  line-height: var(--hershey-component-columns-video-title-line-height, 1.35);
+}
+
+.columns.video > div > div:last-child p {
+  margin: 0;
+  padding: 0 var(--hershey-component-columns-video-copy-inset, 5px);
+  font-size: var(--hershey-component-columns-video-copy-font-size, 17px);
+  line-height: var(--hershey-component-columns-video-copy-line-height, 1.5);
+}
+
+/*
+ * quotes variant (`Columns (quotes)`): customer quotes in large italic type with a highlighted
+ * phrase (bold text), e.g. "What People Are Saying" on /brands/hersheys/creme-bars. The first row
+ * holds one quote, later rows sit side by side from 992px; highlights alternate purple and
+ * caramel. Values from component.columns.quotes.* tokens.
+ */
+main > .section:has(> .columns-wrapper > .columns.quotes) {
+  padding:
+    0
+    var(--hershey-component-columns-quotes-section-padding-inline-mobile, 10px)
+    var(--hershey-component-columns-quotes-section-padding-block-end-mobile, 45px);
+}
+
+main > .section:has(> .columns-wrapper > .columns.quotes) > div {
+  max-width: none;
+  padding: 0;
+}
+
+main > .section:has(> .columns-wrapper > .columns.quotes) > .default-content-wrapper h2 {
+  margin: 0 0 0.3em;
+  font-size: var(--hershey-component-columns-quotes-heading-font-size-mobile, 28px);
+  line-height: var(--hershey-component-columns-quotes-heading-line-height, 1.3);
+  text-align: center;
+}
+
+.columns.quotes > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.columns.quotes > div > div {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--hershey-component-columns-quotes-max-width, 500px);
+  margin: var(--hershey-component-columns-quotes-margin-mobile, 20px) auto;
+  padding: 0 var(--hershey-component-columns-quotes-inset-mobile, 35px);
+  font-family: var(--hershey-component-columns-quotes-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-columns-quotes-font-size-mobile, 28px);
+  font-weight: var(--hershey-component-columns-quotes-font-weight, 900);
+  line-height: var(--hershey-component-columns-quotes-line-height, 1.5);
+  text-align: center;
+}
+
+.columns.quotes > div:first-child > div {
+  padding-inline: var(--hershey-component-columns-quotes-lead-inset-mobile, 10px);
+}
+
+.columns.quotes > div > div + div {
+  margin-top: var(--hershey-component-columns-quotes-gap-mobile, 35px);
+}
+
+.columns.quotes p {
+  margin: 0;
+}
+
+.columns.quotes strong {
+  color: var(--hershey-component-columns-quotes-highlight-color, #86339a);
+  font-weight: inherit;
+}
+
+.columns.quotes > div:nth-child(even) > div:nth-child(odd) strong {
+  color: var(--hershey-component-columns-quotes-highlight-color-alt, #bc540d);
+}
+
+/*
+ * blog variant (`Columns (blog)`): a grey story box with stacked photos beside an eyebrow,
+ * heading and story, e.g. "How HERSHEY'S Creme Bars Got Their Start" on
+ * /brands/hersheys/creme-bars. Values from component.columns.blog.* tokens.
+ */
+main > .section > .columns-wrapper:has(> .columns.blog) {
+  max-width: none;
+  padding: 0 var(--hershey-component-columns-blog-inset-end-mobile, 25px) 0 var(--hershey-component-columns-blog-inset-start-mobile, 16px);
+}
+
+.columns.blog {
+  border: var(--hershey-component-columns-blog-border-width, 2px) solid var(--hershey-component-columns-blog-border-color, #3f000b);
+  border-radius: var(--hershey-component-columns-blog-border-radius, 8px);
+  padding:
+    var(--hershey-component-columns-blog-padding-block-start-mobile, 35px)
+    var(--hershey-component-columns-blog-padding-inline-mobile, 25px)
+    var(--hershey-component-columns-blog-padding-block-end-mobile, 10px);
+  background: var(--hershey-component-columns-blog-background, #f6f6f6);
+  text-align: left;
+}
+
+.columns.blog > div {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--hershey-component-columns-blog-gap-mobile, 40px);
+}
+
+.columns.blog > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hershey-component-columns-blog-image-gap-mobile, 14px);
+}
+
+.columns.blog > div > div:first-child p {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+  margin: 0;
+}
+
+.columns.blog > div > div:first-child img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.columns.blog p:has(+ h2) {
+  margin: 0 0 var(--hershey-component-columns-blog-eyebrow-margin-block-end, 10px);
+  font-size: var(--hershey-component-columns-blog-eyebrow-font-size, 12px);
+  font-weight: var(--hershey-component-columns-blog-eyebrow-font-weight, 700);
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.columns.blog h2 {
+  margin: 0 0 var(--hershey-component-columns-blog-heading-margin-block-end, 8px);
+  font-size: var(--hershey-component-columns-blog-heading-font-size-mobile, 28px);
+  line-height: 1.5;
+}
+
+.columns.blog h2 ~ p {
+  margin: 0 0 1.5em;
+  font-size: var(--hershey-component-columns-blog-copy-font-size, 17px);
+  line-height: 1.5;
+}
+
+@media (width >= 768px) {
+  /* quotes keep 500px; the space under each is the live heading margin */
+  .columns.quotes > div > div,
+  .columns.quotes > div:first-child > div {
+    margin-bottom: var(--hershey-component-columns-quotes-margin-block-end-tablet, 8px);
+    padding-inline: 0;
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.video) > .default-content-wrapper h2 {
+    margin-inline: var(--hershey-component-columns-video-heading-inset-tablet, 41px) var(--hershey-component-columns-video-heading-inset-end-tablet, 50px);
+  }
+
+  .columns.video > div > div:last-child {
+    margin:
+      var(--hershey-component-columns-video-story-gap-tablet, 50px)
+      var(--hershey-component-columns-video-story-inset-mobile, 15px)
+      var(--hershey-component-columns-video-story-gap-tablet, 50px);
+  }
+
+  .columns.video h3 {
+    font-size: var(--hershey-component-columns-video-title-font-size-tablet, 24px);
+  }
+}
+
+@media (width >= 992px) {
+  main > .section:has(> .columns-wrapper > .columns.video) {
+    padding:
+      var(--hershey-component-columns-video-section-padding-block-start, 20px)
+      0
+      var(--hershey-component-columns-video-section-padding-block-end, 50px);
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.video) > div {
+    max-width: var(--hershey-component-campaign-layout-max-width, 1260px);
+    margin-inline: auto;
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.video) > .default-content-wrapper h2 {
+    margin:
+      var(--hershey-component-columns-video-heading-margin-block-start, 40px)
+      var(--hershey-component-columns-video-heading-inset, 50px)
+      var(--hershey-component-columns-video-heading-margin-block-end, 30px);
+    font-size: var(--hershey-component-columns-video-heading-font-size, 36px);
+  }
+
+  .columns.video {
+    padding: 0 var(--hershey-component-columns-video-inset, 25px);
+  }
+
+  /* the story box overlaps the poster's right edge and is 100px shorter, vertically centred */
+  .columns.video > div {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .columns.video > div > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .columns.video > div > div:last-child {
+    flex: 0 0 calc(100% / 3 + var(--hershey-component-columns-video-story-width-offset-compact, 2px));
+    margin:
+      var(--hershey-component-columns-video-story-margin-block, 50px)
+      0
+      var(--hershey-component-columns-video-story-margin-block, 50px)
+      calc(-1 * var(--hershey-component-columns-video-story-overlap-compact, 35px));
+    padding: 0 var(--hershey-component-columns-video-story-padding-inline, 25px);
+  }
+
+  .columns.video h3 {
+    font-size: var(--hershey-component-columns-video-title-font-size, 28px);
+  }
+
+  .columns.video .columns-video-play {
+    width: var(--hershey-component-columns-video-play-size, 50px);
+    height: var(--hershey-component-columns-video-play-size, 50px);
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.quotes) {
+    padding:
+      var(--hershey-component-columns-quotes-section-padding-block-start, 70px)
+      0
+      var(--hershey-component-columns-quotes-section-padding-block-end, 78px);
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.quotes) > .default-content-wrapper {
+    width: calc(min(var(--hershey-component-campaign-layout-max-width, 1260px), 100%) * 8 / 12 - 2 * var(--hershey-component-campaign-column-gutter, 50px));
+    margin-inline: auto;
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.quotes) > .default-content-wrapper h2 {
+    font-size: var(--hershey-component-columns-quotes-heading-font-size, 36px);
+  }
+
+  main > .section > .columns-wrapper:has(> .columns.quotes) {
+    max-width: var(--hershey-component-campaign-layout-max-width, 1260px);
+    margin-inline: auto;
+  }
+
+  .columns.quotes > div > div {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--hershey-component-columns-quotes-font-size, 36px);
+  }
+
+  .columns.quotes > div:first-child > div {
+    width: calc((min(var(--hershey-component-campaign-layout-max-width, 1260px), 100%) - 50px) * 8 / 12 * 8 / 12 - 60px);
+    margin: var(--hershey-component-columns-quotes-lead-margin-block-start, 50px) auto 0;
+    padding: 0;
+  }
+
+  .columns.quotes > div + div {
+    flex-direction: row;
+    margin: var(--hershey-component-columns-quotes-row-gap, 48px) var(--hershey-component-columns-quotes-row-inset, 55px) 0;
+    gap: var(--hershey-component-columns-quotes-column-gap, 120px);
+  }
+
+  .columns.quotes > div + div > div {
+    flex: 1 1 0;
+  }
+
+  .columns.quotes > div > div + div {
+    margin-top: 0;
+  }
+
+  main > .section > .columns-wrapper:has(> .columns.blog) {
+    width: calc(min(var(--hershey-component-campaign-layout-max-width, 1260px), 100%) * 10 / 12 - var(--hershey-component-cards-shop-width-offset, 50px));
+    max-width: none;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .columns.blog {
+    padding:
+      var(--hershey-component-columns-blog-padding-block, 50px)
+      var(--hershey-component-columns-blog-padding-inline, 75px);
+  }
+
+  .columns.blog > div {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--hershey-component-columns-blog-gap, 50px);
+  }
+
+  .columns.blog > div > div {
+    flex: 1 1 0;
+  }
+
+  .columns.blog > div > div:first-child {
+    gap: var(--hershey-component-columns-blog-image-gap, 19px);
+  }
+
+  .columns.blog h2 {
+    font-size: var(--hershey-component-columns-blog-heading-font-size, 36px);
+  }
+}
+
+@media (width >= 1200px) {
+  .columns.video > div > div:last-child {
+    flex-basis: 30%;
+    margin-left: calc(-1 * var(--hershey-component-columns-video-story-overlap, 55px));
+  }
+}
+
+/*
+ * framed option (`Columns (callout, framed)`): callouts on a campaign colour band, e.g. the
+ * Salted Caramel Creme and Affogato bands on /brands/hersheys/creme-bars. The photo sits in a
+ * white frame and keeps the 16:9 height of the whole column; an optional eyebrow sits above the
+ * heading; a single button keeps its own width from 992px. Values from
+ * component.columns.callout.framed-* tokens.
+ */
+.columns.callout.framed > div > .columns-img-col {
+  container-type: inline-size;
+}
+
+.columns.callout.framed > div > .columns-img-col picture {
+  box-sizing: border-box;
+  border: var(--hershey-component-columns-callout-framed-border-width, 6px) solid var(--hershey-component-columns-callout-framed-border-color, #fff);
+  border-radius: var(--hershey-component-columns-callout-framed-border-radius, 8px);
+}
+
+.columns.callout.framed > div > .columns-img-col img {
+  height: calc(100cqi * 9 / 16);
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+
+.columns.callout.framed p:has(+ h2) {
+  margin:
+    var(--hershey-component-columns-callout-framed-eyebrow-margin-block-start-mobile, 15px)
+    0
+    var(--hershey-component-columns-callout-framed-eyebrow-margin-block-end-mobile, 5px);
+  padding: var(--hershey-component-columns-callout-framed-eyebrow-padding, 10px);
+  font-size: var(--hershey-component-columns-callout-framed-eyebrow-font-size-mobile, 14px);
+  font-weight: var(--hershey-component-columns-callout-framed-eyebrow-font-weight, 700);
+  line-height: 1.5;
+}
+
+.columns.callout.framed > div > :not(.columns-img-col) {
+  padding-top: 0;
+}
+
+.columns.callout.framed h2 {
+  margin: 0 var(--hershey-component-columns-callout-text-padding-inline, 20px) 0;
+}
+
+.columns.callout.framed h2:first-child {
+  margin-top: var(--hershey-component-columns-callout-copy-offset, 25px);
+}
+
+.columns.callout.framed h2 + p {
+  margin:
+    var(--hershey-component-columns-callout-title-padding-block, 10px)
+    var(--hershey-component-columns-callout-text-padding-inline, 20px)
+    var(--hershey-component-columns-callout-framed-copy-margin-block-end-mobile, 21px);
+}
+
+/* without a button the empty button row still keeps its space */
+.columns.callout.framed h2 + p:last-child {
+  margin-bottom: calc(var(--hershey-component-columns-callout-framed-copy-margin-block-end-mobile, 21px) + var(--hershey-component-columns-callout-actions-margin-block-end, 20px));
+}
+
+.columns.callout.framed p.button-wrapper,
+.columns.callout.framed p.button-wrapper:has(> .primary) {
+  margin: 0 0 var(--hershey-component-columns-callout-actions-margin-block-end, 20px);
+  padding: 0 var(--hershey-component-columns-callout-copy-padding-inline, 10px);
+}
+
+/* white copy on the purple band */
+.purple-gradient .columns.callout.framed :is(h2, p:not(.button-wrapper)) {
+  color: var(--hershey-component-columns-callout-framed-foreground-inverse, #fff);
+}
+
+@media (width >= 992px) {
+  .columns.callout.framed p:has(+ h2) {
+    margin: 0;
+    font-size: var(--hershey-component-columns-callout-framed-eyebrow-font-size, 16px);
+  }
+
+  .columns.callout.framed h2 {
+    margin-bottom: var(--hershey-component-columns-callout-framed-title-margin-block-end, 5px);
+  }
+
+  .columns.callout.framed h2 + p {
+    margin-bottom: var(--hershey-component-columns-callout-framed-copy-margin-block-end, 24px);
+  }
+
+  .columns.callout.framed h2 + p:last-child {
+    margin-bottom: calc(var(--hershey-component-columns-callout-framed-copy-margin-block-end, 24px) + var(--hershey-component-columns-callout-actions-margin-block-end, 20px));
+  }
+
+  .columns.callout.framed p.button-wrapper:only-of-type {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .columns.callout.framed p.button-wrapper:only-of-type a.button.primary {
+    display: inline-block;
+    width: auto;
+  }
+}
 /* stylelint-enable no-descending-specificity */
