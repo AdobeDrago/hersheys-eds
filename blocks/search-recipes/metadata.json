@@ -7,17 +7,20 @@
     "density": "medium",
     "purpose": "recipe-search",
     "imagePattern": "card-grid",
-    "structure": "search + facets + sort + hit cards + pagination"
+    "structure": "banner + search + facets + sort + hit cards + show more"
   },
   "contentPattern": "Empty block (self-initializing). Optional config rows: hits-per-page | N; endpoint | proxy URL; asset-origin | https://www.hersheyland.com. Data comes from Algolia (or a future Worker proxy), not authored cells.",
   "usage": {
     "pagesUsing": [
-      "https://www.hersheyland.com/all-recipes"
+      "https://www.hersheyland.com/all-recipes",
+      "https://www.hersheyland.com/activities"
     ],
-    "reuseCount": 1,
+    "reuseCount": 2,
     "lastUsed": "2026-10-15"
   },
-  "options": [],
+  "options": [
+    "activities"
+  ],
   "memberVariantIds": [
     "search-recipes"
   ]
