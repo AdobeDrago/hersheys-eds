@@ -29,4 +29,6 @@ export const BRAND_THEMES = [
   { label: 'SKOR', value: 'skor-primary', file: 'brands' },
   { label: 'SKINNYPOP', value: 'skinnypop-primary', file: 'brands' },
   { label: 'MILK DUDS', value: 'milk-duds-primary', file: 'brands' },
+  { label: "DOT'S HOMESTYLE PRETZELS", value: 'dots-pretzels-primary', file: 'brands' },
+  { label: 'ZERO', value: 'zero-primary', file: 'brands' },
 ];

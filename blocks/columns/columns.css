@@ -1448,16 +1448,18 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
       calc((100% * 10 / 12 - 2 * var(--hershey-component-columns-fact-column-padding-inline, 25px)) / 12 + var(--hershey-component-columns-fact-column-padding-inline, 25px));
   }
 
-  /* a twelve-column box (`Columns (fact, wide, boxed)`): its columns carry the gutters */
-  .columns.fact.wide.boxed {
+  /* a twelve-column or half-and-half box (`Columns (fact, wide, boxed)`, `Columns (fact, half, boxed)`):
+     its columns carry the gutters */
+  .columns.fact.wide.boxed,
+  .columns.fact.half.boxed {
     padding-inline: 0;
   }
 
-  .columns.fact.boxed > div > .columns-img-col {
+  .columns.fact.boxed:not(.half) > div > .columns-img-col {
     flex-basis: 25%;
   }
 
-  .columns.fact.boxed > div > :not(.columns-img-col) {
+  .columns.fact.boxed:not(.half) > div > :not(.columns-img-col) {
     flex-basis: 75%;
   }
 }
