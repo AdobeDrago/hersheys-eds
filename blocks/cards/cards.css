@@ -1754,4 +1754,286 @@ main > .section:has(> .cards-wrapper > .cards.grid) > .cards-wrapper + .default-
     margin-top: var(--hershey-component-cards-grid-cta-margin-block-start-wide, 60px);
   }
 }
+
+/*
+ * content variant (`Cards (slider, content)`): a slider of recipe or story cards on brand pages,
+ * e.g. "WHOPPERS Dessert Ideas" on /whoppers and "More Ways to Enjoy SKINNYPOP Popcorn" on
+ * /skinnypop. White cards with a wide photo and a title; one card and a peek below 768px, two from
+ * 768px, three from 992px. The section's heading and button are default content around the block.
+ * Values from component.cards.content.* tokens (brand themes override the track and gaps).
+ */
+main > .section:has(> .cards-wrapper > .cards.slider.content) {
+  padding:
+    var(--hershey-component-cards-content-section-padding-block-start-mobile, 50px)
+    0
+    var(--hershey-component-cards-content-section-padding-block-end-mobile, 35px);
+}
+
+main > .section:has(> .cards-wrapper > .cards.slider.content) > div {
+  max-width: none;
+  padding: 0;
+}
+
+main > .section:has(> .cards-wrapper > .cards.slider.content) > .default-content-wrapper:first-child :is(h2, h3) {
+  margin: 0 var(--hershey-component-cards-content-heading-inset-mobile, 16px) var(--hershey-component-cards-content-heading-margin-block-end-mobile, 10px);
+  font-family: var(--hershey-component-cards-content-heading-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-cards-content-heading-font-size-mobile, 28px);
+  font-weight: var(--hershey-component-cards-content-heading-font-weight, 900);
+  line-height: var(--hershey-component-cards-content-heading-line-height, 1.5);
+  text-align: center;
+}
+
+.cards.slider.content {
+  --cards-content-start: var(--hershey-component-cards-content-track-inset-mobile, 33px);
+  --cards-content-end: var(--hershey-component-cards-content-track-inset-end-mobile, 41px);
+  --cards-content-gap: var(--hershey-component-cards-content-gap-mobile, 24px);
+  --cards-content-visible: 1;
+  --cards-content-card: calc((100cqi - var(--cards-content-start) - var(--cards-content-end) - (var(--cards-content-visible) - 1) * var(--cards-content-gap)) / var(--cards-content-visible));
+
+  position: relative;
+  container-type: inline-size;
+}
+
+.cards.slider.content > ul {
+  grid-template-columns: none;
+  grid-auto-columns: var(--cards-content-card);
+  grid-auto-flow: column;
+  gap: var(--cards-content-gap);
+  margin: 0;
+  padding:
+    var(--hershey-component-cards-content-track-padding-block, 10px)
+    var(--cards-content-end)
+    var(--hershey-component-cards-content-track-padding-block, 10px)
+    var(--cards-content-start);
+  overflow-x: auto;
+  scroll-padding-inline-start: var(--cards-content-start);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.cards.slider.content > ul > li {
+  position: relative;
+  border: 0;
+  border-radius: var(--hershey-component-cards-content-card-border-radius, 8px);
+  overflow: hidden;
+  background: var(--hershey-component-cards-content-card-background, #fff);
+  box-shadow: var(--hershey-component-cards-content-card-shadow, 0 0 12px 0 rgb(39 1 7 / 8%));
+  scroll-snap-align: start;
+}
+
+.cards.slider.content .cards-card-image {
+  overflow: hidden;
+}
+
+.cards.slider.content .cards-card-image :is(a, picture) {
+  display: block;
+}
+
+.cards.slider.content > ul > li img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 40 / 21;
+  object-fit: cover;
+}
+
+.cards.slider.content .cards-card-body {
+  margin: 0;
+  padding:
+    var(--hershey-component-cards-content-body-padding-block-start, 15px)
+    var(--hershey-component-cards-content-body-padding-inline, 10px)
+    var(--hershey-component-cards-content-body-padding-block-end, 20px);
+}
+
+.cards.slider.content h3 {
+  margin: 0;
+  color: var(--hershey-component-cards-content-title-color, #3f000b);
+  font-family: var(--hershey-component-cards-content-title-font-family, hershey-tt, sans-serif);
+  font-size: var(--hershey-component-cards-content-title-font-size-mobile, 20px);
+  font-weight: var(--hershey-component-cards-content-title-font-weight, 700);
+  line-height: var(--hershey-component-cards-content-title-line-height, 1.5);
+}
+
+/* the whole card is the link */
+.cards.slider.content h3 a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards.slider.content h3 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.cards.slider.content > ul > li:is(:hover, :focus-within) h3 a {
+  text-decoration: underline;
+}
+
+/* arrows: white circles with a blue chevron, under the cards beside the page indicators below 768px */
+.cards.slider.content .cards-slider-controls {
+  position: absolute;
+  right: var(--hershey-component-cards-content-control-inset-mobile, 36px);
+  bottom: calc(-1 * var(--hershey-component-cards-content-control-offset-mobile, 8px));
+  left: var(--hershey-component-cards-content-control-inset-mobile, 36px);
+  justify-content: space-between;
+  margin: 0;
+  pointer-events: none;
+}
+
+.cards.slider.content .cards-slider-controls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--hershey-component-cards-content-control-size-mobile, 32px);
+  height: var(--hershey-component-cards-content-control-size-mobile, 32px);
+  border: 0;
+  border-radius: 50%;
+  background: var(--hershey-component-cards-content-control-background, #fff);
+  box-shadow: var(--hershey-component-cards-content-card-shadow, 0 0 12px 0 rgb(39 1 7 / 8%));
+  color: var(--hershey-component-cards-content-control-color, #007bbd);
+  font-size: 0;
+  pointer-events: auto;
+}
+
+.cards.slider.content .cards-slider-controls button::before {
+  content: '';
+  width: var(--hershey-component-cards-content-control-icon-width, 10px);
+  height: var(--hershey-component-cards-content-control-icon-height, 16px);
+  background-color: currentcolor;
+  mask: url('../../icons/chevron-right.svg') center / contain no-repeat;
+}
+
+.cards.slider.content .cards-slider-controls button:first-child::before {
+  transform: scaleX(-1);
+}
+
+.cards.slider.content .cards-slider-dots {
+  gap: var(--hershey-component-cards-content-indicator-gap, 6px);
+  margin-top: var(--hershey-component-cards-content-indicator-margin-top, 30px);
+}
+
+.cards.slider.content .cards-slider-dot {
+  width: var(--hershey-component-cards-content-indicator-size-mobile, 16px);
+  height: var(--hershey-component-cards-content-indicator-size-mobile, 16px);
+}
+
+/* the button after the slider */
+main > .section:has(> .cards-wrapper > .cards.slider.content) > .cards-wrapper + .default-content-wrapper {
+  margin-top: var(--hershey-component-cards-content-cta-margin-block-start-mobile, 30px);
+  padding: 0 var(--hershey-component-cards-content-cta-inset-mobile, 36px);
+  text-align: center;
+}
+
+main > .section:has(> .cards-wrapper > .cards.slider.content) > .cards-wrapper + .default-content-wrapper p {
+  margin: 0;
+}
+
+main > .section:has(> .cards-wrapper > .cards.slider.content) > .cards-wrapper + .default-content-wrapper a.button:any-link {
+  display: inline-block;
+  min-width: var(--hershey-component-cards-content-cta-min-width, 309px);
+  margin: 0;
+  border: var(--hershey-component-cards-content-cta-border-width, 0) solid var(--hershey-component-cards-content-cta-border-color, #fff);
+  border-radius: var(--hershey-component-cards-content-cta-border-radius, 35px);
+  padding:
+    var(--hershey-component-cards-content-cta-padding-block-mobile, 10px)
+    var(--hershey-component-cards-content-cta-padding-inline, 20px);
+  background-color: var(--hershey-component-cards-content-cta-background, #007bbd);
+  color: var(--hershey-component-cards-content-cta-foreground, #fff);
+  font-size: var(--hershey-component-cards-content-cta-font-size, 18px);
+  font-weight: var(--hershey-component-cards-content-cta-font-weight, 700);
+  line-height: var(--hershey-component-cards-content-cta-line-height, 1.5);
+  white-space: normal;
+  transition: background-color 0.3s ease-in-out;
+}
+
+main > .section:has(> .cards-wrapper > .cards.slider.content) > .cards-wrapper + .default-content-wrapper a.button:hover,
+main > .section:has(> .cards-wrapper > .cards.slider.content) > .cards-wrapper + .default-content-wrapper a.button:focus-visible {
+  background-color: var(--hershey-component-cards-content-cta-background-hover, #268fc7);
+  color: var(--hershey-component-cards-content-cta-foreground, #fff);
+}
+
+@media (width >= 768px) {
+  .cards.slider.content {
+    --cards-content-start: var(--hershey-component-cards-content-track-inset-tablet, 121px);
+    --cards-content-end: var(--hershey-component-cards-content-track-inset-end-tablet, 133px);
+    --cards-content-gap: var(--hershey-component-cards-content-gap-tablet, 24px);
+    --cards-content-visible: 2;
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.content) {
+    padding-top: var(--hershey-component-cards-content-section-padding-block-start-tablet, 60px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.content) > .default-content-wrapper:first-child :is(h2, h3) {
+    margin-inline: var(--hershey-component-cards-content-heading-inset-tablet, 26px);
+    margin-bottom: var(--hershey-component-cards-content-heading-margin-block-end-tablet, 20px);
+  }
+
+  /* arrows beside the track, level with the cards */
+  .cards.slider.content .cards-slider-controls {
+    inset:
+      var(--hershey-component-cards-content-control-offset-tablet, 81px)
+      var(--hershey-component-cards-content-control-inset-end-tablet, 45px)
+      auto
+      var(--hershey-component-cards-content-control-inset-tablet, 36px);
+  }
+
+  .cards.slider.content .cards-slider-controls button {
+    width: var(--hershey-component-cards-content-control-size, 56px);
+    height: var(--hershey-component-cards-content-control-size, 56px);
+  }
+
+  .cards.slider.content .cards-slider-dot {
+    width: var(--hershey-component-cards-content-indicator-size, 25px);
+    height: var(--hershey-component-cards-content-indicator-size, 25px);
+  }
+}
+
+@media (width >= 992px) {
+  main > .section:has(> .cards-wrapper > .cards.slider.content) {
+    padding:
+      var(--hershey-component-cards-content-section-padding-block-start, 50px)
+      0
+      var(--hershey-component-cards-content-section-padding-block-end, 90px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.content) > .default-content-wrapper:first-child :is(h2, h3) {
+    margin: 0 auto var(--hershey-component-cards-content-heading-margin-block-end, 25px);
+    font-size: var(--hershey-component-cards-content-heading-font-size, 36px);
+  }
+
+  .cards.slider.content {
+    --cards-content-start: var(--hershey-component-cards-content-track-inset, 105px);
+    --cards-content-end: var(--hershey-component-cards-content-track-inset-end, 105px);
+    --cards-content-gap: var(--hershey-component-cards-content-gap, 35px);
+    --cards-content-visible: 3;
+  }
+
+  .cards.slider.content h3 {
+    font-size: var(--hershey-component-cards-content-title-font-size, 18px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.content) > .cards-wrapper + .default-content-wrapper {
+    margin-top: var(--hershey-component-cards-content-cta-margin-block-start, 58px);
+  }
+
+  main > .section:has(> .cards-wrapper > .cards.slider.content) > .cards-wrapper + .default-content-wrapper a.button:any-link {
+    padding-block: var(--hershey-component-cards-content-cta-padding-block, 17px);
+  }
+}
+
+@media (width >= 1200px) {
+  .cards.slider.content {
+    --cards-content-start: var(--hershey-component-cards-content-track-inset-wide, 116px);
+    --cards-content-end: var(--hershey-component-cards-content-track-inset-end-wide, 116px);
+  }
+}
+
+@media (width >= 1400px) {
+  .cards.slider.content {
+    --cards-content-start: var(--hershey-component-cards-content-track-inset-xwide, 195px);
+    --cards-content-end: var(--hershey-component-cards-content-track-inset-end-xwide, 217px);
+    --cards-content-gap: var(--hershey-component-cards-content-gap-xwide, 55px);
+  }
+}
 /* stylelint-enable no-descending-specificity */

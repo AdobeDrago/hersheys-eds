@@ -914,6 +914,7 @@ main > .section:has(> .columns-wrapper > .columns.video) > .default-content-wrap
   padding: var(--hershey-component-columns-video-story-padding-block-mobile, 30px) var(--hershey-component-columns-video-story-padding-inline, 25px);
   background: var(--hershey-component-columns-video-story-background, #fff);
   box-shadow: var(--hershey-component-columns-video-story-shadow, 0 0 12px 0 rgb(39 1 7 / 8%));
+  color: var(--hershey-component-columns-video-story-foreground, #3f000b);
   text-align: center;
 }
 
@@ -1412,6 +1413,52 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
 
   .columns.fact.inset > div > .columns-img-col {
     padding-inline: calc(var(--hershey-component-columns-fact-column-padding-inline, 25px) + var(--hershey-component-columns-fact-inset-padding-inline, 70px));
+  }
+}
+
+/*
+ * fact `boxed` option (`Columns (fact, boxed)`): the quick fact sits in a box of its own colour
+ * within its band, e.g. the dark brown boxes on /whoppers; the copy takes three quarters of the box
+ * and the illustration the rest from 992px. Values from component.columns.fact.box-* tokens
+ * (brand themes set the colour).
+ */
+.columns.fact.boxed {
+  margin:
+    0
+    var(--hershey-component-columns-fact-box-margin-inline-end-mobile, 25px)
+    0
+    var(--hershey-component-columns-fact-box-margin-inline-start-mobile, 16px);
+  padding:
+    var(--hershey-component-columns-fact-box-padding-block-start-mobile, 35px)
+    0
+    var(--hershey-component-columns-fact-box-padding-block-end-mobile, 36px);
+  background-color: var(--hershey-component-columns-fact-box-background, #3c131c);
+}
+
+.columns.fact.boxed > div > :not(.columns-img-col) {
+  text-align: start;
+}
+
+@media (width >= 992px) {
+  .columns.fact.boxed {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding:
+      var(--hershey-component-columns-fact-box-padding-block, 50px)
+      calc((100% * 10 / 12 - 2 * var(--hershey-component-columns-fact-column-padding-inline, 25px)) / 12 + var(--hershey-component-columns-fact-column-padding-inline, 25px));
+  }
+
+  /* a twelve-column box (`Columns (fact, wide, boxed)`): its columns carry the gutters */
+  .columns.fact.wide.boxed {
+    padding-inline: 0;
+  }
+
+  .columns.fact.boxed > div > .columns-img-col {
+    flex-basis: 25%;
+  }
+
+  .columns.fact.boxed > div > :not(.columns-img-col) {
+    flex-basis: 75%;
   }
 }
 /* stylelint-enable no-descending-specificity */

@@ -23,4 +23,10 @@ export const BRAND_THEMES = [
   { label: 'BREATH SAVERS', value: 'breath-savers-primary', file: 'brands' },
   { label: 'GOOD & PLENTY', value: 'good-and-plenty-primary', file: 'brands' },
   { label: 'HEATH', value: 'heath-primary', file: 'brands' },
+  { label: 'WHATCHAMACALLIT', value: 'whatchamacallit-primary', file: 'brands' },
+  { label: 'WHOPPERS', value: 'whoppers-primary', file: 'brands' },
+  { label: 'ZAGNUT', value: 'zagnut-primary', file: 'brands' },
+  { label: 'SKOR', value: 'skor-primary', file: 'brands' },
+  { label: 'SKINNYPOP', value: 'skinnypop-primary', file: 'brands' },
+  { label: 'MILK DUDS', value: 'milk-duds-primary', file: 'brands' },
 ];
