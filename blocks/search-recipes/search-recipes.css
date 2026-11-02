@@ -606,6 +606,10 @@ main > .section.search-recipes-container {
 }
 
 /* products: flat cards with a square image tile, narrower results container */
+.search-recipes.products .search-recipes-title {
+  color: var(--hershey-system-color-text-primary);
+}
+
 .search-recipes.products .search-recipes-card {
   padding-bottom: 0;
 }
