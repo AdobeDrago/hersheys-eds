@@ -255,6 +255,33 @@
   height: auto;
 }
 
+/* brand pages: artwork between the two brand colour bands sits on a hard split of both colours,
+   the first above (`brand-split`, e.g. the candy shapes on /good-and-plenty) or the second above
+   (`brand-split-reverse`); brand themes set both colours */
+.hershey-home main > .section.brand-split,
+.hershey-home main > .section.brand-split-reverse {
+  margin: 0;
+  padding: var(--hershey-system-spacing-brand-split-padding-block-mobile, 10px) 0;
+  background: linear-gradient(
+    var(--hershey-system-color-surface-brand-band, #feebd0) 49%,
+    var(--hershey-system-color-surface-brand-band-alt, #feebd0) 49%
+  );
+}
+
+.hershey-home main > .section.brand-split-reverse {
+  background: linear-gradient(
+    var(--hershey-system-color-surface-brand-band-alt, #feebd0) 51%,
+    var(--hershey-system-color-surface-brand-band, #feebd0) 51%
+  );
+}
+
+@media (width >= 992px) {
+  .hershey-home main > .section.brand-split,
+  .hershey-home main > .section.brand-split-reverse {
+    padding: var(--hershey-system-spacing-brand-split-padding-block, 20px) 0;
+  }
+}
+
 /* brand pages: a `rule` section opens with a thick line in the brand's accent colour (brand
    themes set it), e.g. the red rule above "What's in a Name?" on /brands/hersheys/mrgoodbar */
 .hershey-home main > .section.rule {
@@ -553,6 +580,10 @@
    pattie silhouettes) */
 .hershey-home main > .section.divider.divider-deep img {
   height: var(--hershey-system-size-region-brand-divider-deep-mobile, 140px);
+}
+
+.hershey-home main > .section.divider.divider-tall img {
+  height: var(--hershey-system-size-region-brand-divider-tall-mobile, var(--hershey-system-size-region-brand-divider-mobile, 90px));
 }
 
 /* campaign pages: a silver band with a top-to-bottom gradient (e.g. YORK Snowflakes on /york);

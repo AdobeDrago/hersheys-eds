@@ -223,6 +223,24 @@ main > .section > .columns-wrapper:has(> .columns.fact) {
   padding: 0;
 }
 
+/* a quick fact with more content after it in the same band (e.g. the products under the first
+   fact on /barkthins) keeps a gap below it */
+main > .section > .columns-wrapper:has(> .columns.fact):not(:last-child) {
+  margin-bottom: var(--hershey-component-columns-fact-margin-block-end-mobile, 0);
+}
+
+@media (width >= 768px) {
+  main > .section > .columns-wrapper:has(> .columns.fact):not(:last-child) {
+    margin-bottom: var(--hershey-component-columns-fact-margin-block-end-tablet, 0);
+  }
+}
+
+@media (width >= 992px) {
+  main > .section > .columns-wrapper:has(> .columns.fact):not(:last-child) {
+    margin-bottom: var(--hershey-component-columns-fact-margin-block-end, 0);
+  }
+}
+
 .columns.fact {
   color: var(--hershey-component-columns-fact-color-foreground, #3f000b);
 }
@@ -441,9 +459,10 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
       var(--hershey-component-columns-fact-section-padding-block-end-desktop, 50px);
   }
 
-  /* ten of twelve page columns, as on hersheyland.com */
+  /* ten of twelve page columns, as on hersheyland.com; brand themes may inset the columns further
+     (e.g. the quick facts on /barkthins) */
   .columns.fact {
-    width: calc(100% * 10 / 12 - 2 * var(--hershey-component-columns-fact-column-padding-inline, 25px));
+    width: calc(100% * 10 / 12 - 2 * var(--hershey-component-columns-fact-column-padding-inline, 25px) - 2 * var(--hershey-component-columns-fact-container-inset, 0px));
     margin: 0 auto;
   }
 
@@ -457,16 +476,21 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
     box-sizing: border-box;
   }
 
+  /* brand themes may move a small illustration in from the column edges (e.g. the sign on /5th-avenue) */
   .columns.fact > div > .columns-img-col {
     flex: 0 0 calc(100% / 3);
-    padding: 0 var(--hershey-component-columns-fact-column-padding-inline, 25px);
+    padding:
+      var(--hershey-component-columns-fact-image-padding-block-start, 0)
+      var(--hershey-component-columns-fact-image-padding-inline-end, var(--hershey-component-columns-fact-column-padding-inline, 25px))
+      var(--hershey-component-columns-fact-image-padding-block-end, 0)
+      var(--hershey-component-columns-fact-image-padding-inline-start, var(--hershey-component-columns-fact-column-padding-inline, 25px));
   }
 
   .columns.fact > div > :not(.columns-img-col) {
     flex: 0 0 calc(100% * 2 / 3);
     padding:
       var(--hershey-component-columns-fact-text-padding-block-start, 50px)
-      calc(2 * var(--hershey-component-columns-fact-column-padding-inline, 25px))
+      var(--hershey-component-columns-fact-text-padding-inline, calc(2 * var(--hershey-component-columns-fact-column-padding-inline, 25px)))
       0;
     text-align: left;
   }
@@ -1308,6 +1332,8 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
  * framed callouts on campaign bands keep a full-width button below 992px
  */
 .columns.callout:not(.framed) > div > div:not(:has(.button-wrapper ~ .button-wrapper)) p.button-wrapper {
+  flex-basis: 100%;
+  width: 100%;
   text-align: center;
 }
 
@@ -1381,7 +1407,7 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
   }
 
   .columns.fact.half > div > :not(.columns-img-col) {
-    padding-inline: var(--hershey-component-columns-fact-column-padding-inline, 25px);
+    padding-inline: var(--hershey-component-columns-fact-half-text-padding-inline, 25px);
   }
 
   .columns.fact.inset > div > .columns-img-col {

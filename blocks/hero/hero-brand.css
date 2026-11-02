@@ -108,7 +108,7 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
 @media (width >= 768px) {
   .hero.brand .hero-brand-logo {
     height: var(--hershey-component-hero-brand-logo-height, 120px);
-    margin-top: 0;
+    margin-top: var(--hershey-component-hero-brand-logo-margin-block-start-tablet, 0);
     margin-bottom: var(--hershey-component-hero-brand-logo-margin-block-end, 17.5px);
   }
 }
@@ -139,6 +139,8 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
 
   .hero.brand .hero-brand-logo {
     width: 50%;
+    min-width: var(--hershey-component-hero-brand-logo-min-width, 0);
+    margin-top: var(--hershey-component-hero-brand-logo-margin-block-start-desktop, 0);
     margin-bottom: var(--hershey-component-hero-brand-logo-margin-block-end-desktop, 17.5px);
   }
 
@@ -223,8 +225,9 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
 }
 
 /*
- * call to action under the intro (e.g. "Shop YORK" on /york): a pill half the text column wide,
- * centred below 992px; from 992px it sits at the start, less a gutter. Colours from
+ * call to action under the intro (e.g. "Shop YORK" on /york): a pill at least half the text column
+ * wide, centred below 992px; from 992px it sits at the start, at least half the column less a
+ * gutter. A longer label widens it (e.g. "Shop BREATH SAVERS"). Colours from
  * component.hero.brand.cta-* tokens (brand themes set them).
  */
 .hero.brand p.button-wrapper {
@@ -235,7 +238,7 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
 .hero.brand a.button:any-link {
   display: inline-block;
   box-sizing: border-box;
-  width: 50%;
+  min-width: 50%;
   margin: 0;
   border: 0;
   border-radius: var(--hershey-component-hero-brand-cta-border-radius, 50px);
@@ -258,7 +261,7 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
 
 @media (width >= 992px) {
   .hero.brand a.button:any-link {
-    width: calc(50% - 2 * var(--hershey-component-hero-brand-cta-gutter, 12.5px));
+    min-width: calc(50% - 2 * var(--hershey-component-hero-brand-cta-gutter, 12.5px));
     padding: var(--hershey-component-hero-brand-cta-padding, 18.5px);
     font-size: var(--hershey-component-hero-brand-cta-font-size, 18px);
   }

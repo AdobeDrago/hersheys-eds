@@ -408,7 +408,7 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
 }
 
 .cards.slider.brands > ul {
-  grid-auto-columns: var(--cards-brands-card);
+  grid-auto-columns: auto;
   gap: var(--cards-brands-gap);
   padding: 0 0 0 var(--cards-brands-inset);
   scroll-padding-inline-start: var(--cards-brands-inset);
@@ -416,12 +416,16 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
 }
 
 .cards.slider.brands > ul > li {
+  width: var(--cards-brands-card);
   border: 0;
   background: transparent;
 }
 
-/* the tile frame clips the photo, which zooms in while the tile is hovered or focused */
+/* the tile frame clips the photo, which zooms in while the tile is hovered or focused; the photo
+   follows the tile's width rather than setting it, and grows a little at most for a long name */
 .cards.slider.brands .cards-card-image {
+  contain: inline-size;
+  max-width: calc(var(--cards-brands-card) + var(--hershey-component-cards-brands-card-grow-max, 27px));
   overflow: hidden;
   border-radius: var(--hershey-component-cards-brands-image-border-radius, 8px);
 }
@@ -466,6 +470,10 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
   border-bottom: var(--hershey-component-cards-brands-name-border-width, 1px) solid currentcolor;
   color: inherit;
   text-decoration: none;
+
+  /* a long name (e.g. WHATCHAMACALLIT) runs past the tile instead of breaking mid-word, as on
+     hersheyland.com */
+  overflow-wrap: normal;
 }
 
 /* the name loses its underline while the tile is hovered or focused, as on hersheyland.com */
@@ -609,6 +617,12 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
     margin-right: var(--hershey-component-cards-brands-track-end, 16px);
   }
 
+  /* a tile widens for a name longer than the tile (e.g. WHATCHAMACALLIT), as on hersheyland.com;
+     below 992px the name runs past the tile */
+  .cards.slider.brands > ul > li {
+    min-width: min-content;
+  }
+
   .cards.slider.brands h3 {
     font-size: var(--hershey-component-cards-brands-name-font-size-desktop, 18px);
   }
@@ -642,7 +656,7 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
  */
 main > .section:has(> .cards-wrapper > .cards.spotlight) {
   padding:
-    var(--hershey-component-cards-spotlight-section-padding-block-start, 90px)
+    var(--hershey-component-cards-spotlight-section-padding-block-start-mobile, var(--hershey-component-cards-spotlight-section-padding-block-start, 90px))
     var(--hershey-component-cards-spotlight-section-padding-inline-end-mobile, 35px)
     var(--hershey-component-cards-spotlight-section-padding-block-end-mobile, 45px)
     var(--hershey-component-cards-spotlight-section-padding-inline-start-mobile, 26px);
@@ -745,6 +759,37 @@ main > .section:has(> .cards-wrapper > .cards.spotlight) > .default-content-wrap
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+/* tag over the photo, e.g. QUICK AND EASY on /brookside: the paragraph before the title */
+.cards.spotlight .cards-card-body p:has(+ h3) {
+  position: absolute;
+  top: var(--hershey-component-cards-spotlight-tag-inset, 10px);
+  left: var(--hershey-component-cards-spotlight-tag-inset, 10px);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--hershey-component-cards-spotlight-tag-gap, 5px);
+  margin: 0;
+  border-radius: var(--hershey-component-cards-spotlight-tag-border-radius, 20px);
+  padding: var(--hershey-component-cards-spotlight-tag-padding-block, 5px) var(--hershey-component-cards-spotlight-tag-padding-inline, 10px);
+  background: var(--hershey-component-cards-spotlight-tag-background, #fff);
+  box-shadow: var(--hershey-component-cards-spotlight-card-shadow, 0 0 12px 0 rgb(39 1 7 / 8%));
+  color: var(--hershey-component-cards-spotlight-title-color, #3f000b);
+  font-size: var(--hershey-component-cards-spotlight-tag-font-size, 12px);
+  font-weight: var(--hershey-component-cards-spotlight-tag-font-weight, 700);
+  line-height: 1;
+  letter-spacing: var(--hershey-component-cards-spotlight-tag-letter-spacing, 0.5px);
+  text-transform: uppercase;
+}
+
+.cards.spotlight .cards-card-body p:has(+ h3)::before {
+  content: '';
+  flex: none;
+  width: var(--hershey-component-cards-spotlight-tag-icon-size-mobile, 12px);
+  height: var(--hershey-component-cards-spotlight-tag-icon-size-mobile, 12px);
+  background-color: currentcolor;
+  mask: url('../../icons/clock.svg') center / contain no-repeat;
 }
 
 /* the whole card is the link */
@@ -865,6 +910,11 @@ main > .section:has(> .cards-wrapper > .cards.spotlight) > .cards-wrapper + .def
 
   .cards.spotlight > ul > li:first-child img {
     aspect-ratio: auto;
+  }
+
+  .cards.spotlight .cards-card-body p:has(+ h3)::before {
+    width: var(--hershey-component-cards-spotlight-tag-icon-size, 14px);
+    height: var(--hershey-component-cards-spotlight-tag-icon-size, 14px);
   }
 
   .cards.spotlight > ul > li:first-child .cards-card-body {
@@ -1469,7 +1519,7 @@ main > .section > .cards-wrapper:has(> .cards.shop) {
  * grid variant (`Cards (grid)`): a recipe feature list, e.g. "Chocolate + Mint YORK Recipes" on
  * /york. White cards with a slightly zoomed photo and a title of up to two lines; an optional tag
  * (the paragraph before the title) sits over the photo with a clock icon. Two columns below 992px
- * (16:9 photos), three from 992px (photos keep their ratio); the cards grow a little on hover.
+ * and three from 992px, with 16:9 photos; the cards grow a little on hover.
  * Values from component.cards.grid.* tokens.
  */
 main > .section:has(> .cards-wrapper > .cards.grid) {
@@ -1670,11 +1720,6 @@ main > .section:has(> .cards-wrapper > .cards.grid) > .cards-wrapper + .default-
 
   .cards.grid > ul > li {
     margin: 0 var(--hershey-component-cards-grid-card-margin-inline, 25px);
-  }
-
-  .cards.grid > ul > li img {
-    aspect-ratio: auto;
-    height: auto;
   }
 
   .cards.grid h3 {

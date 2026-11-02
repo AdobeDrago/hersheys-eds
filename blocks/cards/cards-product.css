@@ -133,7 +133,7 @@
 }
 
 .section.cards-container:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
-  border: 0;
+  border: var(--hershey-component-cards-product-slider-cta-border-width, 0) solid var(--hershey-component-cards-product-slider-cta-border-color, #fff);
   border-radius: var(--hershey-component-cards-product-slider-cta-border-radius, 35px);
   padding:
     var(--hershey-component-cards-product-slider-cta-padding-block-mobile, 10px)
@@ -148,7 +148,7 @@
 
 .section.cards-container:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button:hover,
 .section.cards-container:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button:focus-visible {
-  border: 0;
+  border: var(--hershey-component-cards-product-slider-cta-border-width, 0) solid var(--hershey-component-cards-product-slider-cta-border-color, #fff);
   background-color: var(--hershey-component-cards-product-slider-cta-background-hover, #268fc7);
 }
 
@@ -179,24 +179,31 @@
   scroll-snap-align: start;
 }
 
-/* the card sits straight on the band colour */
+/* the card sits straight on the band colour unless a brand theme gives the photo a colour of its
+   own (e.g. red tiles on /5th-avenue) */
 /* stylelint-disable-next-line no-descending-specificity -- overrides the hover rule above for the slider only */
 .cards.product.slider .cards-product-image,
 .cards.product.slider .cards-product-card:hover .cards-product-image,
 .cards.product.slider .cards-product-card:focus-visible .cards-product-image {
-  background-color: transparent;
+  background-color: var(--hershey-component-cards-product-slider-image-background, transparent);
 }
 
-/* brand themes may set the card copy colour for a coloured band (e.g. white on YORK blue) */
+/* brand themes may set the card copy colour for a coloured band (e.g. white on YORK blue) and a card
+   colour (e.g. white cards on the /5th-avenue yellow band) */
 .cards.product.slider .cards-product-card {
+  border-radius: var(--hershey-system-shape-radius-panel, 8px);
+  background-color: var(--hershey-component-cards-product-slider-card-background, transparent);
   color: var(--hershey-component-cards-product-slider-foreground, #3f000b);
 }
 
+/* brand themes may keep a row free under the size for star ratings instead of a minimum height
+   (e.g. the baking products on /heath) */
 .cards.product.slider .cards-product-body {
   min-height: var(--hershey-component-cards-product-slider-body-min-height-mobile, 114px);
   padding:
     var(--hershey-component-cards-product-slider-body-padding-block-mobile, 15px)
-    var(--hershey-component-cards-product-slider-body-padding-inline-mobile, 10px);
+    var(--hershey-component-cards-product-slider-body-padding-inline-mobile, 10px)
+    calc(var(--hershey-component-cards-product-slider-body-padding-block-mobile, 15px) + var(--hershey-component-cards-product-slider-rating-row-height, 0px));
   background-color: transparent;
 }
 
@@ -350,7 +357,8 @@
     min-height: var(--hershey-component-cards-product-slider-body-min-height, 151px);
     padding:
       var(--hershey-component-cards-product-slider-body-padding-block, 24px)
-      var(--hershey-component-cards-product-slider-body-padding-inline, 21px);
+      var(--hershey-component-cards-product-slider-body-padding-inline, 21px)
+      calc(var(--hershey-component-cards-product-slider-body-padding-block, 24px) + var(--hershey-component-cards-product-slider-rating-row-height, 0px));
   }
 
   .cards.product.slider .cards-product-body h3 {

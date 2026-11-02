@@ -17,4 +17,10 @@ export const BRAND_THEMES = [
   { label: 'Mr. Goodbar', value: 'mrgoodbar-primary', file: 'brands' },
   { label: 'Creme Bars', value: 'creme-bars-primary', file: 'brands' },
   { label: 'YORK', value: 'york-primary', file: 'brands' },
+  { label: 'BROOKSIDE', value: 'brookside-primary', file: 'brands' },
+  { label: 'barkTHINS', value: 'barkthins-primary', file: 'brands' },
+  { label: '5TH AVENUE', value: 'fifth-avenue-primary', file: 'brands' },
+  { label: 'BREATH SAVERS', value: 'breath-savers-primary', file: 'brands' },
+  { label: 'GOOD & PLENTY', value: 'good-and-plenty-primary', file: 'brands' },
+  { label: 'HEATH', value: 'heath-primary', file: 'brands' },
 ];
