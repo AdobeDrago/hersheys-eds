@@ -1,0 +1,481 @@
+/*
+ * Brand page section styles (dividers, gradients, bands), loaded by scripts.js for brand page themes
+ * (`file: 'brands'` in scripts/brand-themes.js) on top of hershey-home.css. Kept out of
+ * hershey-home.css so the home page and other Hershey template pages do not download them.
+ */
+
+/* brand pages: a decorative wave between two bands, authored as an image in a `divider`
+   section; it fills the band like the live background (cover), as on hersheyland.com */
+.hershey-home main > .section.divider {
+  padding: 0;
+}
+
+.hershey-home main > .section.divider > .default-content-wrapper {
+  max-width: none;
+}
+
+.hershey-home main > .section.divider p {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home main > .section.divider img {
+  display: block;
+  width: 100%;
+  height: var(--hershey-system-size-region-brand-divider-mobile, 90px);
+  object-fit: cover;
+}
+
+/* brand pages: full-width artwork between two bands (e.g. a milk splash), authored as an image in
+   an `artwork` section; unlike `divider` it keeps the artwork's own proportions */
+.hershey-home main > .section.artwork {
+  padding: 0;
+}
+
+.hershey-home main > .section.artwork > .default-content-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hershey-home main > .section.artwork p {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home main > .section.artwork img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* brand pages: artwork between the two brand colour bands sits on a hard split of both colours,
+   the first above (`brand-split`, e.g. the candy shapes on /good-and-plenty) or the second above
+   (`brand-split-reverse`); brand themes set both colours */
+.hershey-home main > .section.brand-split,
+.hershey-home main > .section.brand-split-reverse {
+  margin: 0;
+  padding: var(--hershey-system-spacing-brand-split-padding-block-mobile, 10px) 0;
+  background: linear-gradient(
+    var(--hershey-system-color-surface-brand-band, #feebd0) 49%,
+    var(--hershey-system-color-surface-brand-band-alt, #feebd0) 49%
+  );
+}
+
+.hershey-home main > .section.brand-split-reverse {
+  background: linear-gradient(
+    var(--hershey-system-color-surface-brand-band-alt, #feebd0) 51%,
+    var(--hershey-system-color-surface-brand-band, #feebd0) 51%
+  );
+}
+
+@media (width >= 992px) {
+  .hershey-home main > .section.brand-split,
+  .hershey-home main > .section.brand-split-reverse {
+    padding: var(--hershey-system-spacing-brand-split-padding-block, 20px) 0;
+  }
+}
+
+/* brand pages: a `rule` section opens with a thick line in the brand's accent colour (brand
+   themes set it), e.g. the red rule above "What's in a Name?" on /brands/hersheys/mrgoodbar */
+.hershey-home main > .section.rule {
+  border-top: var(--hershey-system-border-width-brand-rule, 8px) solid var(--hershey-system-color-border-brand-rule, #3f000b);
+}
+
+/* brand pages: a `decorated` section shows its first paragraph's picture behind the content,
+   covering the band like the live background image (e.g. the FAQ on /brands/hersheys/cookies-n-creme) */
+.hershey-home main > .section.decorated {
+  position: relative;
+  isolation: isolate;
+}
+
+.hershey-home main > .section.decorated > .default-content-wrapper:first-child > p:first-child:has(> picture:only-child) {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home main > .section.decorated > .default-content-wrapper:first-child > p:first-child > picture:only-child,
+.hershey-home main > .section.decorated > .default-content-wrapper:first-child > p:first-child > picture:only-child img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* stylelint-disable no-descending-specificity -- campaign section styles target their own sections only */
+
+/* campaign pages: colour bands with a top-to-bottom gradient that holds several blocks (e.g. the
+   Salted Caramel Creme and Affogato bands on /brands/hersheys/creme-bars); stops from
+   system.color.surface.campaign-* tokens */
+.hershey-home main > .section:is(.caramel-gradient, .purple-gradient) {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hershey-home main > .section.caramel-gradient {
+  background: linear-gradient(
+    to bottom,
+    var(--hershey-system-color-surface-campaign-caramel-start, #c56528) 0%,
+    var(--hershey-system-color-surface-campaign-caramel-early, #de742a) 30%,
+    var(--hershey-system-color-surface-campaign-caramel-late, #f37f28) 60%,
+    var(--hershey-system-color-surface-campaign-caramel-end, #ed7d29) 100%
+  );
+}
+
+.hershey-home main > .section.purple-gradient {
+  background: linear-gradient(
+    to bottom,
+    var(--hershey-system-color-surface-campaign-purple-start, #5a2b73) 0%,
+    var(--hershey-system-color-surface-campaign-purple-early, #6a2f82) 30%,
+    var(--hershey-system-color-surface-campaign-purple-late, #7a3894) 60%,
+    var(--hershey-system-color-surface-campaign-purple-end, #682a73) 100%
+  );
+}
+
+/* a band's wave artwork (a picture on its own) spans the band edge to edge */
+.hershey-home main > .section:is(.caramel-gradient, .purple-gradient) > .default-content-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hershey-home main > .section:is(.caramel-gradient, .purple-gradient) > .default-content-wrapper > p:has(> picture:only-child) {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home main > .section:is(.caramel-gradient, .purple-gradient) > .default-content-wrapper > p > picture:only-child img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* blocks on the gradient bands keep the band's own spacing (outranks the callout band padding) */
+.hershey-home main > .section:is(.caramel-gradient, .purple-gradient):has(> .columns-wrapper > .columns) {
+  padding: 0;
+}
+
+.hershey-home main > .section:is(.caramel-gradient, .purple-gradient) > .columns-wrapper:has(> .columns.callout) {
+  padding-inline: var(--hershey-component-columns-callout-section-padding-inline-mobile, 20px);
+}
+
+.hershey-home main > .section:is(.caramel-gradient, .purple-gradient) > .columns-wrapper + .columns-wrapper {
+  margin-top: var(--hershey-component-campaign-band-callout-gap-mobile, 50px);
+}
+
+.hershey-home main > .section.caramel-gradient > .default-content-wrapper:first-child + .columns-wrapper {
+  margin-top: var(--hershey-component-campaign-band-caramel-lead-mobile, 69px);
+}
+
+/* the lead callout under the wave keeps a second empty button row on phones, as on hersheyland.com */
+.hershey-home main > .section.caramel-gradient > .default-content-wrapper:first-child + .columns-wrapper .columns.callout.framed h2 + p:last-child {
+  padding-bottom: var(--hershey-component-columns-callout-actions-margin-block-end, 20px);
+}
+
+.hershey-home main > .section.caramel-gradient > .cards-wrapper + .columns-wrapper {
+  margin-top: var(--hershey-component-campaign-band-caramel-shop-gap-mobile, 80px);
+}
+
+.hershey-home main > .section.caramel-gradient > .columns-wrapper:last-child {
+  margin-bottom: var(--hershey-component-campaign-band-caramel-end-mobile, 25px);
+}
+
+.hershey-home main > .section.purple-gradient > .columns-wrapper:first-child {
+  margin-top: var(--hershey-component-campaign-band-purple-lead-mobile, 45px);
+}
+
+.hershey-home main > .section.purple-gradient > .columns-wrapper + .cards-wrapper {
+  margin-top: var(--hershey-component-campaign-band-purple-shop-margin-mobile, 49px);
+}
+
+.hershey-home main > .section.purple-gradient > .cards-wrapper + .columns-wrapper {
+  margin-top: var(--hershey-component-campaign-band-purple-shop-gap-mobile, 60px);
+}
+
+.hershey-home main > .section.purple-gradient > .columns-wrapper + .default-content-wrapper:last-child {
+  margin-top: var(--hershey-component-campaign-band-purple-end-mobile, 50px);
+}
+
+@media (width >= 992px) {
+  .hershey-home main > .section:is(.caramel-gradient, .purple-gradient) > .columns-wrapper:has(> .columns.callout) {
+    padding-inline: 0;
+  }
+
+  .hershey-home main > .section:is(.caramel-gradient, .purple-gradient) > .columns-wrapper + .columns-wrapper {
+    margin-top: var(--hershey-component-campaign-band-callout-gap, 110px);
+  }
+
+  .hershey-home main > .section.caramel-gradient > .default-content-wrapper:first-child + .columns-wrapper,
+  .hershey-home main > .section.caramel-gradient > .cards-wrapper + .columns-wrapper {
+    margin-top: var(--hershey-component-campaign-band-caramel-lead, 109px);
+  }
+
+  .hershey-home main > .section.caramel-gradient > .columns-wrapper:last-child {
+    margin-bottom: var(--hershey-component-campaign-band-caramel-end, 180px);
+  }
+
+  .hershey-home main > .section.caramel-gradient > .default-content-wrapper:first-child + .columns-wrapper .columns.callout.framed h2 + p:last-child {
+    padding-bottom: 0;
+  }
+
+  .hershey-home main > .section.purple-gradient > .columns-wrapper:first-child {
+    margin-top: var(--hershey-component-campaign-band-purple-lead, 180px);
+  }
+
+  .hershey-home main > .section.purple-gradient > .columns-wrapper + .cards-wrapper {
+    margin-top: var(--hershey-component-campaign-band-purple-shop-margin, 120px);
+  }
+
+  .hershey-home main > .section.purple-gradient > .cards-wrapper + .columns-wrapper {
+    margin-top: var(--hershey-component-campaign-band-callout-gap, 110px);
+  }
+
+  .hershey-home main > .section.purple-gradient > .columns-wrapper + .default-content-wrapper:last-child {
+    margin-top: var(--hershey-component-campaign-band-purple-end, 141px);
+  }
+}
+
+/* an artwork section with two pictures shows the first from 768px and the second below */
+.hershey-home main > .section.artwork > .default-content-wrapper > p:first-child:has(+ p > picture) {
+  display: none;
+}
+
+/* campaign pages: a `campaign-text` section is a centred heading and introduction on ten of
+   twelve columns */
+.hershey-home main > .section.campaign-text {
+  padding:
+    var(--hershey-component-campaign-text-section-padding-block-start-mobile, 35px)
+    var(--hershey-component-campaign-text-section-padding-inline-end-mobile, 35px)
+    var(--hershey-component-campaign-text-section-padding-block-end-mobile, 35px)
+    var(--hershey-component-campaign-text-section-padding-inline-start-mobile, 26px);
+}
+
+.hershey-home main > .section.campaign-text > .default-content-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hershey-home main > .section.campaign-text > .default-content-wrapper > h2 {
+  margin: 0 0 0.3em;
+  font-size: var(--hershey-component-campaign-heading-font-size-mobile, 28px);
+  line-height: var(--hershey-component-campaign-heading-line-height, 1.3);
+}
+
+.hershey-home main > .section.campaign-text > .default-content-wrapper > p {
+  margin: 0 0 1.5em;
+  font-size: var(--hershey-component-campaign-copy-font-size, 17px);
+  line-height: var(--hershey-component-campaign-copy-line-height, 1.5);
+}
+
+/* the innovation band: a story box and a button under the introduction */
+.hershey-home main > .section.campaign-text:has(> .columns-wrapper > .columns.blog) {
+  padding-right: 0;
+  padding-bottom: var(--hershey-component-campaign-text-section-padding-block-end-blog-mobile, 25px);
+  padding-left: 0;
+}
+
+.hershey-home main > .section.campaign-text:has(> .columns-wrapper > .columns.blog) > .default-content-wrapper:first-child {
+  padding:
+    0
+    var(--hershey-component-campaign-text-section-padding-inline-end-mobile, 35px)
+    var(--hershey-component-campaign-text-blog-gap-mobile, 10px)
+    var(--hershey-component-campaign-text-section-padding-inline-start-mobile, 26px);
+}
+
+.hershey-home main > .section.campaign-text > .columns-wrapper + .default-content-wrapper {
+  margin-top: var(--hershey-component-campaign-text-cta-margin-block-start-mobile, 25px);
+}
+
+.hershey-home main > .section.campaign-text > .columns-wrapper + .default-content-wrapper p {
+  margin: 0;
+  text-align: center;
+}
+
+.hershey-home main > .section.campaign-text > .columns-wrapper + .default-content-wrapper a.button {
+  margin: 0;
+  border: 0;
+  border-radius: var(--hershey-component-campaign-cta-border-radius, 35px);
+  padding: var(--hershey-component-campaign-cta-padding-block-mobile, 10px) var(--hershey-component-campaign-cta-padding-inline, 20px);
+  background-color: var(--hershey-component-campaign-cta-background, #007bbd);
+  color: var(--hershey-component-campaign-cta-foreground, #fff);
+  font-size: var(--hershey-component-campaign-cta-font-size, 17px);
+  font-weight: var(--hershey-component-campaign-cta-font-weight, 700);
+  line-height: var(--hershey-component-campaign-cta-line-height, 1.5);
+}
+
+.hershey-home main > .section.campaign-text > .columns-wrapper + .default-content-wrapper a.button:hover,
+.hershey-home main > .section.campaign-text > .columns-wrapper + .default-content-wrapper a.button:focus-visible {
+  background-color: var(--hershey-component-campaign-cta-background-hover, #268fc7);
+}
+
+@media (width >= 768px) {
+  .hershey-home main > .section.artwork > .default-content-wrapper > p:first-child:has(+ p > picture) {
+    display: block;
+  }
+
+  .hershey-home main > .section.artwork > .default-content-wrapper > p:first-child + p:has(> picture) {
+    display: none;
+  }
+}
+
+@media (width < 768px) {
+  /* the waves overhang the band edges a little on phones, as on hersheyland.com */
+  .hershey-home main > .section:is(.caramel-gradient, .purple-gradient) > .default-content-wrapper > p > picture:only-child img {
+    width: 110%;
+    max-width: none;
+    margin-left: -5%;
+  }
+}
+
+@media (width >= 992px) {
+  .hershey-home main > .section.campaign-text {
+    padding:
+      var(--hershey-component-campaign-text-section-padding-block-start, 140px)
+      0
+      var(--hershey-component-campaign-text-section-padding-block-end, 50px);
+  }
+
+  .hershey-home main > .section.campaign-text > .default-content-wrapper:first-child {
+    width: calc(min(var(--hershey-component-campaign-layout-max-width, 1260px), 100%) * 10 / 12 - 2 * var(--hershey-component-campaign-column-gutter, 50px));
+    margin-inline: auto;
+  }
+
+  .hershey-home main > .section.campaign-text > .default-content-wrapper > h2 {
+    font-size: var(--hershey-component-campaign-heading-font-size, 36px);
+  }
+
+  .hershey-home main > .section.campaign-text:has(> .columns-wrapper > .columns.blog) {
+    padding:
+      var(--hershey-component-campaign-text-section-padding-block-start-blog, 100px)
+      0
+      0;
+  }
+
+  .hershey-home main > .section.campaign-text:has(> .columns-wrapper > .columns.blog) > .default-content-wrapper:first-child {
+    padding: 0 0 var(--hershey-component-campaign-text-blog-gap, 20px);
+  }
+
+  .hershey-home main > .section.campaign-text > .columns-wrapper + .default-content-wrapper {
+    margin-top: var(--hershey-component-campaign-text-cta-margin-block-start, 50px);
+  }
+
+  .hershey-home main > .section.campaign-text > .columns-wrapper + .default-content-wrapper a.button {
+    padding-block: var(--hershey-component-campaign-cta-padding-block, 17px);
+  }
+}
+/* stylelint-enable no-descending-specificity */
+
+/* stylelint-disable no-descending-specificity -- these section styles target their own sections only */
+
+/* taller dividers: `divider-tall` (e.g. the YORK mint leaves) and `divider-deep` (the YORK
+   pattie silhouettes) */
+.hershey-home main > .section.divider.divider-deep img {
+  height: var(--hershey-system-size-region-brand-divider-deep-mobile, 140px);
+}
+
+.hershey-home main > .section.divider.divider-tall img {
+  height: var(--hershey-system-size-region-brand-divider-tall-mobile, var(--hershey-system-size-region-brand-divider-mobile, 90px));
+}
+
+/* campaign pages: a silver band with a top-to-bottom gradient (e.g. YORK Snowflakes on /york);
+   a picture on its own at the band's end is its wave artwork, edge to edge */
+.hershey-home main > .section.silver-gradient {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+    var(--hershey-system-color-surface-campaign-silver-end, #a5a9ab) 0%,
+    var(--hershey-system-color-surface-campaign-silver-mid, #dddfe0) 30%,
+    var(--hershey-system-color-surface-campaign-silver-mid, #dddfe0) 50%,
+    var(--hershey-system-color-surface-campaign-silver-end, #a5a9ab) 100%
+  );
+}
+
+.hershey-home main > .section.silver-gradient:has(> .columns-wrapper > .columns.callout) {
+  padding: 0;
+}
+
+.hershey-home main > .section.silver-gradient > .columns-wrapper:has(> .columns.callout) {
+  padding:
+    var(--hershey-system-spacing-brand-campaign-band-silver-lead-mobile, 70px)
+    var(--hershey-system-spacing-brand-campaign-band-silver-inline-end-mobile, 35px)
+    var(--hershey-system-spacing-brand-campaign-band-silver-end-mobile, 45px)
+    var(--hershey-system-spacing-brand-campaign-band-silver-inline-start-mobile, 26px);
+}
+
+.hershey-home main > .section.silver-gradient > .default-content-wrapper:last-child {
+  max-width: none;
+  padding: 0;
+}
+
+.hershey-home main > .section.silver-gradient > .default-content-wrapper:last-child > p:has(> picture:only-child) {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home main > .section.silver-gradient > .default-content-wrapper:last-child img {
+  display: block;
+  width: 100%;
+  height: var(--hershey-system-size-region-brand-divider-mobile, 90px);
+  object-fit: cover;
+  object-position: left center;
+}
+/* stylelint-enable no-descending-specificity */
+
+/* the empty section the page metadata leaves behind would add a strip under the brands band */
+.hershey-home main > .section:has(> .cards-wrapper > .cards.slider.brands) ~ .section:empty {
+  display: none;
+}
+
+/* brand pages closed by the brands band (only the empty metadata section may follow it): the footer
+   ribbon area overlaps the band's bottom space (the purple starts where the band ends), as on
+   hersheyland.com. The ribbon area is 37.3% of the newsletter's content width below 992px and
+   --wave-height from 992px (footer.css). */
+.hershey-home main:is(
+  :has(> .section:last-child > .cards-wrapper > .cards.slider.brands),
+  :has(> .section:nth-last-child(2) > .cards-wrapper > .cards.slider.brands):has(> .section:last-child:empty)
+) + footer .footer.hershey-footer .newsletter {
+  margin-top: calc(1px - 0.373 * (100cqw - 2 * var(--hershey-component-footer-layout-padding-inline)));
+  background: transparent;
+  pointer-events: none;
+}
+
+.hershey-home main:is(
+  :has(> .section:last-child > .cards-wrapper > .cards.slider.brands),
+  :has(> .section:nth-last-child(2) > .cards-wrapper > .cards.slider.brands):has(> .section:last-child:empty)
+) + footer .footer.hershey-footer .newsletter > * {
+  pointer-events: auto;
+}
+
+@media (width >= 992px) {
+  .hershey-home main > .section.divider img {
+    height: var(--hershey-system-size-region-brand-divider-desktop, 140px);
+  }
+
+  .hershey-home main > .section.divider.divider-tall img {
+    height: var(--hershey-system-size-region-brand-divider-tall, 290px);
+  }
+
+  .hershey-home main > .section.divider.divider-deep img {
+    height: var(--hershey-system-size-region-brand-divider-deep, 270px);
+  }
+
+  .hershey-home main > .section.silver-gradient > .default-content-wrapper:last-child img {
+    height: var(--hershey-system-size-region-brand-wave, 160px);
+    object-position: center;
+  }
+
+  .hershey-home main > .section.silver-gradient > .columns-wrapper:has(> .columns.callout) {
+    padding: 0 0 var(--hershey-system-spacing-brand-campaign-band-silver-end, 90px);
+  }
+
+  /* the footer keeps its ribbon at the 1920px design width where hersheyland.com scales it down,
+     so the overlap is reduced to keep the ribbon's middle where it is on the live page */
+  .hershey-home main:is(
+    :has(> .section:last-child > .cards-wrapper > .cards.slider.brands),
+    :has(> .section:nth-last-child(2) > .cards-wrapper > .cards.slider.brands):has(> .section:last-child:empty)
+  ) + footer .footer.hershey-footer .newsletter {
+    margin-top: calc(1px - var(--wave-height) + var(--hershey-system-spacing-brand-footer-ribbon-offset, 140px));
+  }
+}
