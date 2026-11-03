@@ -3,12 +3,13 @@ import { absoluteUrl } from '../../scripts/recipes-search.js';
 
 /**
  * Cards (recipes) variant, loaded by cards.js for an empty `Cards (slider, related, recipes)`:
- * "You Might Also Enjoy..." on recipe pages.
+ * "You Might Also Enjoy..." on recipe and activity pages.
  *
  * Authored rows take precedence and are decorated by cards.js like any slider card. Only when
- * no card is authored are the cards fetched from Algolia: the recipes related to this page's
- * production counterpart on www.hersheyland.com, linking to their production pages. Each card
- * gets a Bazaarvoice inline rating when the record has a `bvID`.
+ * no card is authored are the cards fetched from Algolia: the recipes (or, on /activities/
+ * pages, the activities) related to this page's production counterpart on www.hersheyland.com,
+ * linking to their production pages. Each card gets a Bazaarvoice inline rating when the record
+ * has a `bvID`.
  *
  * The block should sit in its own section with the heading and "View All Recipes" button:
  * when nothing can be shown, that section is hidden rather than leaving a heading without cards.
@@ -17,6 +18,15 @@ import { absoluteUrl } from '../../scripts/recipes-search.js';
 // hersheyland.com shows 3 per page and loops clones of them; 6 distinct recipes give the
 // desktop slider a second page without duplicate links
 const MAX_RELATED = 6;
+
+/**
+ * Algolia `metaTags.templateType` of the related records for a page.
+ * @param {string} pathname
+ * @returns {string}
+ */
+function templateType(pathname) {
+  return pathname.startsWith('/activities/') ? 'craft-detail' : 'recipe-detail';
+}
 
 /**
  * @param {object} hit Algolia record
@@ -70,7 +80,10 @@ function buildCard(hit) {
 export default async function decorateRecipes(block) {
   let cards = [];
   try {
-    const hits = await fetchRelated({ templateType: 'recipe-detail', max: MAX_RELATED });
+    const hits = await fetchRelated({
+      templateType: templateType(window.location.pathname),
+      max: MAX_RELATED,
+    });
     cards = hits.map(buildCard).filter(Boolean);
   } catch (error) {
     // eslint-disable-next-line no-console

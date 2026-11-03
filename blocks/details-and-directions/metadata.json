@@ -1,0 +1,34 @@
+{
+  "blockName": "details-and-directions",
+  "canonicalModel": "standalone",
+  "variants": [
+    {
+      "variantName": "activities",
+      "authoredName": "Details and Directions",
+      "sectionStyle": "activities",
+      "baseBlock": "details-and-directions",
+      "canonicalModel": "standalone",
+      "visualCharacteristics": {
+        "colorScheme": "light",
+        "density": "dense",
+        "purpose": "activity-method",
+        "imagePattern": "inline",
+        "structure": "supplies list + numbered steps + step images, Make Mode, lime craft panels"
+      },
+      "contentPattern": "1 row x 2 columns. Cell 1: H3 'You'll Need' + unordered list of supplies. Cell 2: H3 'Directions' + ordered list where each item holds step text followed by the step image. The section heading ('You'll Need & Step-by-Step Directions') and optional yield sit in default content before the block. Section Metadata Style: activities.",
+      "usage": {
+        "pagesUsing": [
+          "https://www.hersheyland.com/activities/reeses-trees.html",
+          "https://www.hersheyland.com/activities/halloween-candy-web.html",
+          "https://www.hersheyland.com/activities/pretzel-and-marshmallow-bones.html"
+        ],
+        "reuseCount": 3,
+        "lastUsed": "2026-11-03"
+      },
+      "options": []
+    }
+  ],
+  "memberVariantIds": [
+    "activities"
+  ]
+}

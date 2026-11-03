@@ -1,6 +1,6 @@
 # columns
 
-Columns block. Layout variants keep authored rows. Recipe ingredients and nutrition facts live in the [recipe-details](../recipe-details/README.md) block.
+Columns block. Layout variants keep authored rows. Recipe ingredients and nutrition facts live in the [recipe-details](../recipe-details/README.md) block; activity supplies and directions live in the [details-and-directions](../details-and-directions/README.md) block.
 
 ## Default
 

@@ -1,0 +1,719 @@
+/* Details and Directions (activity pages, Section Metadata Style `activities`): summary, Make Mode,
+   You'll Need supplies and directions in lime craft panels.
+   Values measured from hersheyland.com (.ingredients-and-directions .new-ingred-and-direct .hersheyland-us-craft). */
+
+.section.details-and-directions-section {
+  position: relative;
+  margin: 0;
+  padding: min(10.833vw, var(--hershey-component-details-and-directions-layout-wave-height, 156px)) 0 var(--hershey-component-details-and-directions-spacing-section, 70px);
+  overflow: hidden;
+  color: var(--hershey-component-details-and-directions-color-foreground, #3f000b);
+  background-color: var(--hershey-component-details-and-directions-color-background, #f6f6f6);
+  font-family: var(--hershey-component-details-and-directions-typography-body-font-family, sans-serif);
+  font-size: var(--hershey-component-details-and-directions-typography-body-font-size, 17px);
+  line-height: var(--hershey-component-details-and-directions-typography-body-line-height, 1.5);
+}
+
+/* lime wave (reference.color.brand.lime-bright); a data URI cannot read tokens */
+.details-and-directions-section::before {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: min(10.833vw, var(--hershey-component-details-and-directions-layout-wave-height, 156px));
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 156' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V125.5L1320.5 75L1092 41.5L720 75L351.5 115.5L0 75V0Z' fill='white'/%3E%3Cpath d='M1425.34 125.445C1509.7 176.476 1564.99 247.023 1595.86 324.907L-96.951 189.77C-131.852 134.748 -193.937 56.9091 -229.328 13.1212L-229.383 13.0534C-232.206 9.61001 -234.275 5.87415 -234.972 2.52764C-235.563 -0.303146 -235.266 -2.97351 -232.91 -6.00551C-232.223 -6.88108 -230.189 -8.5884 -226.289 -10.4204C-222.611 -12.1482 -218.26 -13.5226 -214.155 -14.3142C-213.021 -14.5329 -211.979 -14.6931 -211.037 -14.8062L-211.04 -14.7557L-203.231 -11.1733C-28.8131 68.8342 155.421 138.607 496.912 109.177C573.553 102.677 652.268 90.8514 731.04 79.0176C743.918 77.083 756.797 75.1482 769.669 73.2363C861.501 59.5969 953.122 47.0994 1042.56 43.7923C1208.94 37.6848 1334.4 70.4418 1425.34 125.445Z' fill='none' stroke='%23b7d34a' stroke-width='15'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  content: '';
+  pointer-events: none;
+}
+
+.section.details-and-directions-section > div {
+  position: relative;
+  z-index: 1;
+}
+
+.details-and-directions-section .default-content-wrapper,
+.details-and-directions-section .details-and-directions-wrapper {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-right: var(--hershey-component-details-and-directions-spacing-inset, 15px);
+  padding-left: var(--hershey-component-details-and-directions-spacing-inset, 15px);
+}
+
+/* Heading, yield summary and Make Mode. */
+.details-and-directions-section .details-and-directions-summary {
+  color: var(--hershey-component-details-and-directions-color-foreground, #3f000b);
+}
+
+.details-and-directions-section .details-and-directions-summary-main {
+  min-width: 0;
+}
+
+.details-and-directions-section .details-and-directions-summary-heading {
+  margin: 0;
+  padding: 0 0 var(--hershey-component-details-and-directions-spacing-inset, 15px);
+  color: inherit;
+  font-family: var(--hershey-component-details-and-directions-typography-heading-font-family, serif);
+  font-size: var(--hershey-component-details-and-directions-typography-summary-font-size, 30px);
+  font-weight: var(--hershey-component-details-and-directions-typography-heading-font-weight, 900);
+  line-height: var(--hershey-component-details-and-directions-typography-summary-line-height, 32px);
+}
+
+.details-and-directions-section .details-and-directions-yield {
+  margin: 0;
+  padding-bottom: var(--hershey-component-details-and-directions-spacing-inset, 15px);
+}
+
+.details-and-directions-section .details-and-directions-summary-item {
+  display: flex;
+  gap: var(--hershey-component-details-and-directions-spacing-tight, 4px);
+  min-width: 0;
+}
+
+.details-and-directions-section .details-and-directions-summary-item dt,
+.details-and-directions-section .details-and-directions-summary-item dd {
+  margin: 0;
+  font-size: var(--hershey-component-details-and-directions-typography-body-font-size, 17px);
+  line-height: var(--hershey-component-details-and-directions-typography-summary-item-line-height, 29px);
+}
+
+.details-and-directions-section .details-and-directions-summary-item dt {
+  font-weight: 700;
+}
+
+/* switch first, label beside it, between two thin rules */
+.details-and-directions-section .details-and-directions-mode {
+  --details-and-directions-mode-rule: var(--hershey-component-details-and-directions-rule-divider-width, 1px) solid var(--hershey-component-details-and-directions-rule-mode-color, #c3b0b2);
+
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: var(--hershey-component-details-and-directions-spacing-panel, 25px);
+  padding: var(--hershey-component-details-and-directions-spacing-panel, 25px) 0;
+  border-top: var(--details-and-directions-mode-rule);
+  border-bottom: var(--details-and-directions-mode-rule);
+}
+
+.details-and-directions-section .details-and-directions-mode-copy {
+  padding-left: var(--hershey-component-details-and-directions-spacing-stack, 10px);
+}
+
+.details-and-directions-section .details-and-directions-mode-copy p {
+  margin: 0;
+  padding: 0;
+  font-size: var(--hershey-component-details-and-directions-typography-mode-font-size, 13px);
+  font-weight: var(--hershey-component-details-and-directions-typography-mode-font-weight, 600);
+  line-height: var(--hershey-component-details-and-directions-typography-mode-line-height, 15px);
+}
+
+.details-and-directions-section .details-and-directions-mode-copy .details-and-directions-mode-heading {
+  margin-bottom: var(--hershey-component-details-and-directions-spacing-fine, 5px);
+  font-size: var(--hershey-component-details-and-directions-typography-mode-heading-font-size, 16px);
+  font-weight: 700;
+  line-height: var(--hershey-component-details-and-directions-typography-mode-heading-line-height, 16px);
+  text-transform: uppercase;
+}
+
+.details-and-directions-section .details-and-directions-mode-switch {
+  position: relative;
+  display: block;
+  flex: none;
+  width: var(--hershey-component-details-and-directions-mode-switch-width, 77px);
+  height: var(--hershey-component-details-and-directions-mode-switch-height, 37px);
+  cursor: pointer;
+}
+
+.details-and-directions-section .details-and-directions-mode-switch input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.details-and-directions-section .details-and-directions-mode-slider {
+  position: absolute;
+  inset: 0;
+  border: var(--hershey-component-details-and-directions-mode-track-border-width, 2px) solid var(--hershey-component-details-and-directions-mode-track-border-color, #007bbd);
+  border-radius: var(--hershey-component-details-and-directions-mode-track-radius, 999px);
+  background-color: var(--hershey-component-details-and-directions-mode-track-background, #fff);
+  transition: background-color var(--hershey-component-details-and-directions-mode-motion-duration, 0.2s) var(--hershey-component-details-and-directions-mode-motion-easing, ease);
+}
+
+.details-and-directions-section .details-and-directions-mode-slider::before {
+  position: absolute;
+  bottom: var(--hershey-component-details-and-directions-mode-thumb-inset, 2px);
+  left: var(--hershey-component-details-and-directions-mode-thumb-offset, 3px);
+  width: var(--hershey-component-details-and-directions-mode-thumb-size, 29px);
+  height: var(--hershey-component-details-and-directions-mode-thumb-size, 29px);
+  border-radius: 50%;
+  background-color: var(--hershey-component-details-and-directions-mode-thumb-background, #007bbd);
+  content: '';
+  transition: transform var(--hershey-component-details-and-directions-mode-motion-duration, 0.2s) var(--hershey-component-details-and-directions-mode-motion-easing, ease);
+}
+
+.details-and-directions-section .details-and-directions-mode-switch input:checked + .details-and-directions-mode-slider {
+  background-color: var(--hershey-component-details-and-directions-mode-track-active-background, #007bbd);
+}
+
+.details-and-directions-section .details-and-directions-mode-switch input:checked + .details-and-directions-mode-slider::before {
+  background-color: var(--hershey-component-details-and-directions-mode-thumb-active-background, #fff);
+  transform: translateX(var(--hershey-component-details-and-directions-mode-thumb-travel, 39px));
+}
+
+.details-and-directions-section .details-and-directions-mode-switch input:focus-visible + .details-and-directions-mode-slider {
+  outline: var(--hershey-component-details-and-directions-focus-width, 2px) solid var(--hershey-component-details-and-directions-focus-color, #007bbd);
+  outline-offset: var(--hershey-component-details-and-directions-focus-offset, 3px);
+}
+
+.details-and-directions-section .details-and-directions-mode-switch input:disabled + .details-and-directions-mode-slider {
+  cursor: not-allowed;
+  opacity: var(--hershey-component-details-and-directions-mode-disabled-opacity, 0.5);
+}
+
+.details-and-directions-section .details-and-directions-mode-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.details-and-directions {
+  --details-and-directions-panel-border: var(--hershey-component-details-and-directions-panel-border-color, #dbe9a5);
+  --details-and-directions-rule: var(--hershey-component-details-and-directions-rule-color, #9f8085);
+  --details-and-directions-radius: var(--hershey-component-details-and-directions-radius-mobile, 5px);
+
+  color: var(--hershey-component-details-and-directions-color-foreground, #3f000b);
+  font-family: var(--hershey-component-details-and-directions-typography-body-font-family, sans-serif);
+  font-size: var(--hershey-component-details-and-directions-typography-body-font-size, 17px);
+  line-height: var(--hershey-component-details-and-directions-typography-body-line-height, 1.5);
+}
+
+.details-and-directions .details-and-directions-row {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.details-and-directions .details-and-directions-row > div {
+  flex: none;
+  min-width: 0;
+  order: unset;
+}
+
+/* shared panel look: white card, pale lime craft border */
+.details-and-directions .details-and-directions-supply-list,
+.details-and-directions .details-and-directions-tools,
+.details-and-directions .details-and-directions-steps {
+  box-sizing: border-box;
+  border: var(--hershey-component-details-and-directions-panel-border-width, 3px) solid var(--details-and-directions-panel-border);
+  border-radius: var(--details-and-directions-radius);
+  background-color: var(--hershey-component-details-and-directions-panel-background, var(--background-color));
+}
+
+/* section headings: "You'll Need", "Directions" */
+.details-and-directions h3 {
+  margin: 0 0 var(--hershey-component-details-and-directions-spacing-inset, 15px);
+  color: inherit;
+  font-family: var(--hershey-component-details-and-directions-typography-heading-font-family, serif);
+  font-size: var(--hershey-component-details-and-directions-typography-heading-font-size, 21px);
+  font-weight: var(--hershey-component-details-and-directions-typography-heading-font-weight, 900);
+  line-height: var(--hershey-component-details-and-directions-typography-heading-line-height, 27px);
+}
+
+.details-and-directions .details-and-directions-directions > h3 {
+  margin: 0 0 var(--hershey-component-details-and-directions-spacing-stack, 10px);
+  font-size: var(--hershey-component-details-and-directions-typography-directions-font-size, 24px);
+  line-height: var(--hershey-component-details-and-directions-typography-directions-line-height, 36px);
+}
+
+.details-and-directions .details-and-directions-panel > :first-child {
+  margin-top: 0;
+}
+
+/* supplies */
+.details-and-directions .details-and-directions-row > .details-and-directions-supplies {
+  margin-bottom: var(--hershey-component-details-and-directions-spacing-panel, 25px);
+}
+
+.details-and-directions .details-and-directions-supply-list {
+  margin: 0;
+  padding: var(--hershey-component-details-and-directions-spacing-inset, 15px) 0 var(--hershey-component-details-and-directions-spacing-panel-end, 20px) var(--hershey-component-details-and-directions-spacing-panel, 25px);
+  list-style: none;
+}
+
+.details-and-directions .details-and-directions-supply-list li {
+  display: flex;
+  align-items: flex-start;
+  min-height: var(--hershey-component-details-and-directions-layout-row-min-height, 40px);
+  padding-right: var(--hershey-component-details-and-directions-spacing-panel, 25px);
+  font-size: var(--hershey-component-details-and-directions-typography-body-font-size, 17px);
+  line-height: var(--hershey-component-details-and-directions-typography-body-line-height, 1.5);
+}
+
+.details-and-directions .details-and-directions-supply-amount {
+  flex: none;
+}
+
+.details-and-directions .details-and-directions-supply-name {
+  width: 75%;
+  padding-left: var(--hershey-component-details-and-directions-spacing-tight, 4px);
+}
+
+.details-and-directions .details-and-directions-supply-list a:any-link {
+  border-bottom: var(--hershey-component-details-and-directions-link-border-width, 1px) solid currentcolor;
+  color: var(--hershey-component-details-and-directions-link-color, #007bbd);
+  font-size: var(--hershey-component-details-and-directions-typography-link-font-size, 18px);
+  font-weight: var(--hershey-component-details-and-directions-link-font-weight, 700);
+  line-height: var(--hershey-component-details-and-directions-typography-copy-line-height, 27px);
+  text-decoration: none;
+}
+
+.details-and-directions .details-and-directions-supply-list a:hover {
+  border-bottom-color: transparent;
+  color: var(--hershey-component-details-and-directions-link-hover-color, var(--text-color));
+  text-decoration: none;
+}
+
+/* method column */
+.details-and-directions .details-and-directions-method {
+  display: flex;
+  flex-direction: column;
+}
+
+/* tools disclosure ("You'll Need") */
+.details-and-directions .details-and-directions-tools {
+  margin: 0 0 var(--hershey-component-details-and-directions-spacing-panel, 25px);
+  padding: var(--hershey-component-details-and-directions-spacing-stack, 10px) var(--hershey-component-details-and-directions-spacing-panel, 25px) var(--hershey-component-details-and-directions-spacing-panel-end, 20px);
+}
+
+.details-and-directions .details-and-directions-tools-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--hershey-component-details-and-directions-spacing-stack, 10px);
+  margin-bottom: var(--hershey-component-details-and-directions-spacing-fine, 5px);
+  border-bottom: var(--hershey-component-details-and-directions-rule-width, 2px) solid var(--details-and-directions-rule);
+  cursor: pointer;
+  list-style: none;
+}
+
+.details-and-directions .details-and-directions-tools-summary::-webkit-details-marker {
+  display: none;
+}
+
+.details-and-directions .details-and-directions-tools-summary > h3 {
+  margin: 0 var(--hershey-component-details-and-directions-spacing-stack, 10px) var(--hershey-component-details-and-directions-spacing-fine, 5px) 0;
+  font-size: var(--hershey-component-details-and-directions-typography-heading-font-size, 21px);
+  line-height: var(--hershey-component-details-and-directions-typography-tools-heading-line-height, 32px);
+}
+
+/* chevron: up when open, down when closed */
+.details-and-directions .details-and-directions-tools-summary::after {
+  content: '';
+  flex: none;
+  width: var(--hershey-component-details-and-directions-chevron-size, 7px);
+  height: var(--hershey-component-details-and-directions-chevron-size, 7px);
+  margin: 0 var(--hershey-component-details-and-directions-spacing-tight, 4px) 0 0;
+  border-right: var(--hershey-component-details-and-directions-chevron-border-width, 2px) solid currentcolor;
+  border-bottom: var(--hershey-component-details-and-directions-chevron-border-width, 2px) solid currentcolor;
+  transform: translateY(1px) rotate(-135deg);
+}
+
+.details-and-directions .details-and-directions-tools:not([open]) .details-and-directions-tools-summary {
+  margin-bottom: 0;
+}
+
+.details-and-directions .details-and-directions-tools:not([open]) .details-and-directions-tools-summary::after {
+  transform: translateY(-3px) rotate(45deg);
+}
+
+.details-and-directions .details-and-directions-tools-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.details-and-directions .details-and-directions-tools-list li {
+  padding: var(--hershey-component-details-and-directions-spacing-fine, 5px) var(--hershey-component-details-and-directions-spacing-stack, 10px) 0 0;
+  font-size: var(--hershey-component-details-and-directions-typography-body-font-size, 17px);
+  line-height: var(--hershey-component-details-and-directions-typography-body-line-height, 1.5);
+  text-transform: capitalize;
+}
+
+/* directions */
+.details-and-directions .details-and-directions-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hershey-component-details-and-directions-spacing-panel-end, 20px);
+  margin: var(--hershey-component-details-and-directions-spacing-inset, 15px) 0 0;
+  padding: var(--hershey-component-details-and-directions-spacing-inset, 15px) var(--hershey-component-details-and-directions-spacing-panel, 25px);
+  list-style: none;
+  counter-reset: details-and-directions-step;
+}
+
+.details-and-directions .details-and-directions-step {
+  display: grid;
+  grid-template-columns: var(--hershey-component-details-and-directions-check-size, 31px) minmax(0, 1fr);
+  column-gap: var(--hershey-component-details-and-directions-spacing-step-gap, 29px);
+  align-items: start;
+  margin-top: 0;
+  counter-increment: details-and-directions-step;
+}
+
+.details-and-directions .details-and-directions-step:first-child {
+  margin-top: var(--hershey-component-details-and-directions-spacing-panel-end, 20px);
+}
+
+/* the checkbox hangs past one-line text, so the text alone sets the step height */
+.details-and-directions .details-and-directions-step-check {
+  box-sizing: border-box;
+  width: var(--hershey-component-details-and-directions-check-size, 31px);
+  height: var(--hershey-component-details-and-directions-check-size, 31px);
+  margin: 2px 0 calc(-2px - var(--hershey-component-details-and-directions-check-size, 31px));
+  border: var(--hershey-component-details-and-directions-check-border-width, 2px) solid var(--hershey-component-details-and-directions-check-border-color, var(--text-color));
+  border-radius: 0;
+  background-color: var(--hershey-component-details-and-directions-check-background, var(--background-color));
+  appearance: none;
+  cursor: pointer;
+}
+
+.details-and-directions .details-and-directions-step-check:checked {
+  background: var(--background-color) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%233f000b' d='M441 103c9 9 9 25 0 34L177 401c-9 9-25 9-34 0L7 265c-9-9-9-25 0-34s25-9 34 0l119 119L407 103c9-9 25-9 34 0z'/%3E%3C/svg%3E") center / 20px 20px no-repeat;
+}
+
+.details-and-directions .details-and-directions-step-check:focus-visible {
+  outline: var(--hershey-component-details-and-directions-focus-width, 2px) solid var(--hershey-component-details-and-directions-focus-color, #007bbd);
+  outline-offset: var(--hershey-component-details-and-directions-focus-offset-fine, 2px);
+}
+
+.details-and-directions .details-and-directions-step-text {
+  position: relative;
+  font-size: var(--hershey-component-details-and-directions-typography-body-font-size, 17px);
+  line-height: var(--hershey-component-details-and-directions-typography-body-line-height, 1.5);
+}
+
+/* hanging step number: "1." sits just left of the text column */
+.details-and-directions .details-and-directions-step-text::before {
+  content: counter(details-and-directions-step) '.';
+  position: absolute;
+  top: 1px;
+  right: calc(100% + var(--hershey-component-details-and-directions-spacing-hang, 6px));
+  font-size: var(--hershey-component-details-and-directions-typography-step-number-font-size, 18px);
+  line-height: var(--hershey-component-details-and-directions-typography-body-line-height, 1.5);
+}
+
+.details-and-directions .details-and-directions-step-text p {
+  margin: 0;
+}
+
+.details-and-directions .details-and-directions-step.is-done .details-and-directions-step-check,
+.details-and-directions .details-and-directions-step.is-done .details-and-directions-step-text {
+  opacity: var(--hershey-component-details-and-directions-step-done-opacity, 0.6);
+}
+
+.details-and-directions .details-and-directions-step.is-done .details-and-directions-step-text {
+  font-style: italic;
+}
+
+/* step photo: full step width, 16:9 crop */
+.details-and-directions .details-and-directions-step-media {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.details-and-directions .details-and-directions-step-media picture {
+  display: block;
+  width: 100%;
+  max-width: var(--hershey-component-details-and-directions-layout-media-max-width, 500px);
+  margin: var(--hershey-component-details-and-directions-spacing-inset, 15px) 0 var(--hershey-component-details-and-directions-spacing-panel, 25px);
+}
+
+.details-and-directions .details-and-directions-step-media picture + picture {
+  margin-top: 0;
+}
+
+.details-and-directions .details-and-directions-step-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* Tip disclosure attached to the final direction, matching the production tooltip. */
+.details-and-directions .details-and-directions-tip {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / -1;
+  width: 110px;
+  margin: var(--hershey-component-details-and-directions-spacing-inset, 15px) 0 0 47px;
+}
+
+.details-and-directions .details-and-directions-tip summary {
+  display: flex;
+  gap: var(--hershey-component-details-and-directions-spacing-small, 8px);
+  align-items: center;
+  min-height: var(--hershey-component-details-and-directions-tip-min-height, 26px);
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.details-and-directions .details-and-directions-tip summary::-webkit-details-marker {
+  display: none;
+}
+
+.details-and-directions .details-and-directions-tip summary::before {
+  display: grid;
+  place-items: center;
+  width: var(--hershey-component-details-and-directions-tip-icon-size, 18px);
+  height: var(--hershey-component-details-and-directions-tip-icon-size, 18px);
+  border: var(--hershey-component-details-and-directions-tip-icon-border-width, 2px) solid currentcolor;
+  border-radius: 50%;
+  content: 'i';
+  font-family: serif;
+  font-size: var(--hershey-component-details-and-directions-typography-tip-icon-font-size, 13px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.details-and-directions .details-and-directions-tip-content {
+  position: absolute;
+  top: calc(100% + var(--hershey-component-details-and-directions-spacing-stack, 10px));
+  left: -55px;
+  box-sizing: border-box;
+  width: var(--hershey-component-details-and-directions-tip-content-width, 240px);
+  padding: var(--hershey-component-details-and-directions-spacing-stack, 10px);
+  background-color: var(--hershey-component-details-and-directions-color-background, #f6f6f6);
+  box-shadow: var(--hershey-component-details-and-directions-tip-box-shadow, 0 2px 8px rgb(0 0 0 / 18%));
+  font-size: var(--hershey-component-details-and-directions-typography-body-font-size, 17px);
+  line-height: var(--hershey-component-details-and-directions-typography-tip-line-height, 20px);
+}
+
+.details-and-directions .details-and-directions-tip-content p {
+  margin: 0;
+}
+
+@media (width >= 600px) {
+  .details-and-directions .details-and-directions-tools-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .details-and-directions .details-and-directions-tools-list li {
+    padding-top: var(--hershey-component-details-and-directions-spacing-stack, 10px);
+  }
+}
+
+@media (width >= 768px) {
+  .details-and-directions-section .default-content-wrapper,
+  .details-and-directions-section .details-and-directions-wrapper {
+    padding-right: 4%;
+    padding-left: 4%;
+  }
+
+  .details-and-directions-section .details-and-directions-summary-heading {
+    padding: var(--hershey-component-details-and-directions-spacing-inset, 15px) 0;
+    font-size: var(--hershey-component-details-and-directions-typography-summary-font-size-tablet, 32px);
+    line-height: var(--hershey-component-details-and-directions-typography-summary-line-height-desktop, 42px);
+  }
+
+  .details-and-directions-section .details-and-directions-mode {
+    --details-and-directions-mode-rule: var(--hershey-component-details-and-directions-rule-divider-width, 1px) solid var(--hershey-component-details-and-directions-rule-mode-color-tablet, #3f000b);
+
+    padding-bottom: var(--hershey-component-details-and-directions-spacing-mode-end-tablet, 23px);
+  }
+
+  .details-and-directions-section .details-and-directions-mode-copy {
+    padding-left: var(--hershey-component-details-and-directions-spacing-inset, 15px);
+  }
+
+  .details-and-directions-section .details-and-directions-mode-copy .details-and-directions-mode-heading {
+    margin-bottom: var(--hershey-component-details-and-directions-spacing-hang, 6px);
+  }
+
+  .details-and-directions {
+    --details-and-directions-radius: var(--hershey-component-details-and-directions-radius-desktop, 8px);
+  }
+
+  .details-and-directions h3 {
+    line-height: var(--hershey-component-details-and-directions-typography-heading-line-height-desktop, 32px);
+  }
+
+  .details-and-directions .details-and-directions-row > .details-and-directions-supplies {
+    margin-bottom: var(--hershey-component-details-and-directions-spacing-band, 40px);
+  }
+
+  .details-and-directions .details-and-directions-directions > h3 {
+    margin: 0;
+    font-size: var(--hershey-component-details-and-directions-typography-heading-font-size-desktop, 27px);
+    line-height: var(--hershey-component-details-and-directions-typography-heading-line-height-desktop, 32px);
+  }
+
+  /* two columns, filled row by row */
+  .details-and-directions .details-and-directions-supply-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: var(--hershey-component-details-and-directions-spacing-fine, 5px) var(--hershey-component-details-and-directions-spacing-panel-end, 20px) var(--hershey-component-details-and-directions-spacing-panel-end, 20px);
+  }
+
+  .details-and-directions .details-and-directions-supply-list li {
+    min-height: 0;
+    margin-top: var(--hershey-component-details-and-directions-spacing-inset, 15px);
+    padding-right: var(--hershey-component-details-and-directions-spacing-list-end, 7px);
+    line-height: var(--hershey-component-details-and-directions-typography-list-line-height-tablet, 28px);
+  }
+
+  .details-and-directions .details-and-directions-steps {
+    gap: var(--hershey-component-details-and-directions-spacing-step-tablet, 38px);
+    padding: var(--hershey-component-details-and-directions-spacing-stack, 10px) var(--hershey-component-details-and-directions-spacing-panel, 25px) var(--hershey-component-details-and-directions-spacing-roomy, 30px);
+  }
+
+  .details-and-directions .details-and-directions-step {
+    column-gap: var(--hershey-component-details-and-directions-spacing-step-gap-desktop, 39px);
+  }
+
+  .details-and-directions .details-and-directions-step:first-child {
+    margin-top: var(--hershey-component-details-and-directions-spacing-step-start-tablet, 28px);
+  }
+
+  .details-and-directions .details-and-directions-step-text::before {
+    right: calc(100% + var(--hershey-component-details-and-directions-spacing-small, 8px));
+  }
+}
+
+@media (width >= 900px) {
+  .details-and-directions .details-and-directions-tools {
+    margin-bottom: var(--hershey-component-details-and-directions-spacing-band, 40px);
+    padding: var(--hershey-component-details-and-directions-spacing-panel-end, 20px) var(--hershey-component-details-and-directions-spacing-panel, 25px) var(--hershey-component-details-and-directions-spacing-inset, 15px);
+  }
+
+  .details-and-directions .details-and-directions-tools-list li {
+    line-height: var(--hershey-component-details-and-directions-typography-body-line-height, 1.5);
+    letter-spacing: var(--hershey-component-details-and-directions-typography-tracking, 1px);
+  }
+
+  .details-and-directions .details-and-directions-step-media {
+    padding: 0 var(--hershey-component-details-and-directions-spacing-media-inset, 50px);
+  }
+
+  /* source crops a 16:9 photo into a 500 x 297 frame */
+  .details-and-directions .details-and-directions-step-media img {
+    aspect-ratio: 500 / 297;
+  }
+}
+
+@media (width >= 1200px) {
+  .details-and-directions-section .default-content-wrapper,
+  .details-and-directions-section .details-and-directions-wrapper {
+    max-width: var(--hershey-component-details-and-directions-layout-max-width, 1190px);
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* heading left, Make Mode right, one rule under both */
+  .details-and-directions-section .details-and-directions-summary {
+    display: grid;
+    grid-template-columns: var(--hershey-component-details-and-directions-layout-summary-column, 760px) minmax(0, 1fr);
+    border-bottom: var(--hershey-component-details-and-directions-rule-divider-width, 1px) solid var(--hershey-component-details-and-directions-rule-mode-color-tablet, #3f000b);
+  }
+
+  .details-and-directions-section .details-and-directions-summary-heading {
+    padding: var(--hershey-component-details-and-directions-spacing-inset, 15px) 0 var(--hershey-component-details-and-directions-spacing-panel, 25px);
+    font-size: var(--hershey-component-details-and-directions-typography-summary-font-size-desktop, 36px);
+  }
+
+  .details-and-directions-section .details-and-directions-yield {
+    padding-bottom: var(--hershey-component-details-and-directions-spacing-panel, 25px);
+  }
+
+  .details-and-directions-section .details-and-directions-mode {
+    justify-self: end;
+    margin: 0;
+    padding: var(--hershey-component-details-and-directions-spacing-mode, 13px) 0 0;
+    border: 0;
+  }
+
+  .details-and-directions {
+    max-width: var(--hershey-component-details-and-directions-layout-max-width, 1190px);
+    margin: 0 auto;
+    padding-top: var(--hershey-component-details-and-directions-spacing-block, 35px);
+  }
+
+  .details-and-directions h3 {
+    margin: 0;
+    font-size: var(--hershey-component-details-and-directions-typography-heading-font-size-desktop, 27px);
+  }
+
+  .details-and-directions .details-and-directions-supplies > h3 {
+    margin-bottom: var(--hershey-component-details-and-directions-spacing-inset, 15px);
+  }
+
+  .details-and-directions .details-and-directions-supply-list {
+    display: block;
+    padding: var(--hershey-component-details-and-directions-spacing-inset, 15px) 0 var(--hershey-component-details-and-directions-spacing-roomy, 30px) var(--hershey-component-details-and-directions-spacing-roomy, 30px);
+  }
+
+  .details-and-directions .details-and-directions-supply-list li {
+    line-height: var(--hershey-component-details-and-directions-typography-body-line-height, 1.5);
+  }
+
+  .details-and-directions .details-and-directions-steps {
+    gap: var(--hershey-component-details-and-directions-spacing-roomy, 30px);
+  }
+
+  .details-and-directions .details-and-directions-step:first-child {
+    margin-top: var(--hershey-component-details-and-directions-spacing-panel-end, 20px);
+  }
+
+  .details-and-directions .details-and-directions-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  /* source grid: 1/3 supplies (36.6px inner gutter) | 2/3 method (38.3px inner gutter) */
+  .details-and-directions .details-and-directions-row > .details-and-directions-supplies {
+    box-sizing: border-box;
+    flex: 0 0 calc(100% / 3);
+    margin-bottom: 0;
+    padding-right: var(--hershey-component-details-and-directions-layout-supplies-gutter, 36.6px);
+  }
+
+  .details-and-directions .details-and-directions-row > .details-and-directions-method {
+    box-sizing: border-box;
+    flex: 1 1 0;
+    padding-left: var(--hershey-component-details-and-directions-layout-method-gutter, 38.3px);
+  }
+
+  .details-and-directions .details-and-directions-single > div {
+    flex: 1 1 100%;
+    padding: 0;
+  }
+}
+
+@media print {
+  .details-and-directions-section {
+    padding: 0;
+    background: var(--hershey-component-details-and-directions-panel-background, #fff);
+  }
+
+  .details-and-directions-section::before,
+  .details-and-directions-section .details-and-directions-mode {
+    display: none;
+  }
+
+  .details-and-directions .details-and-directions-step-check {
+    display: none;
+  }
+}

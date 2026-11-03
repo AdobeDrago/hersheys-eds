@@ -162,6 +162,17 @@ test('Recipe Details nutrition variant builds the Nutrition Facts label and cont
   await expect(page.locator('.recipe-details-nutrition-aside a.button')).toHaveText('Contact Customer Service');
 });
 
+test('Details and Directions builds supplies, directions, and Make Mode for activities', async ({ page }) => {
+  await open(page, 'blocks-details-and-directions--activities');
+  await expect(page.locator('.details-and-directions .details-and-directions-supply-list li')).toHaveCount(2);
+  await expect(page.locator('.details-and-directions-supply-amount')).toHaveText('2 tsp');
+  await expect(page.locator('.details-and-directions-summary-heading')).toHaveText("You'll Need & Step-by-Step Directions");
+  await expect(page.locator('.details-and-directions-mode-heading')).toHaveText('Make Mode:');
+  await expect(page.locator('.details-and-directions-mode-switch input')).toHaveAttribute('role', 'switch');
+  await expect(page.locator('.details-and-directions-tip summary')).toHaveText('Tip');
+  await expect(page.locator('.details-and-directions-steps')).toHaveCSS('border-top-color', 'rgb(219, 233, 165)');
+});
+
 test('Cards related recipes fill an empty block from Algolia Recommend with rating containers', async ({ page }) => {
   await open(page, 'blocks-cards--related-recipes');
   const cards = page.locator('.cards.recipes > ul > li');

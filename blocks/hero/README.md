@@ -19,6 +19,16 @@ Content model: 1 column x 2 rows (row order is not enforced).
 
 Decoration adds the Bazaarvoice rating from `bvid` (or `bv-id`) metadata and the share bar. This variant keeps the page section width and padding. The wrapper and section are `hero-wrapper` and `hero-container`.
 
+Activity pages (`/activities/...`) use the same block. Skill Level and `bvid` are optional. When the image row holds more than one image, they become a gallery with previous/next buttons centred at the bottom of the image; only the first image loads eagerly. On activity pages the share and print labels say "activity" instead of "recipe".
+
+The same overview can be authored as plain **Hero** with a Section Metadata block on the same section:
+
+| Section Metadata | |
+| --- | --- |
+| Style | carousel |
+
+The block then gets the `recipe` class and renders exactly like **Hero (Recipe)**. Put two or more images in the image row for the slider; with one image it shows a single image.
+
 ## Product (`product`)
 
 Authored as **Hero (product)**.
