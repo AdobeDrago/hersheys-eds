@@ -80,6 +80,11 @@ Authored values always win. Anything left empty is filled from the product maste
 matches the `bvid` metadata is used. Without a `brand` row or a matching row, only the authored
 values are shown.
 
+The sheet is only requested when the image(s), title, size or description is left empty. An empty
+`label` does not trigger it (most products have no label), so a page that authors all of those
+fields loads no sheet and renders faster; author `label` on such a page if it needs one
+(Limited Edition, Seasonal), because it is no longer filled from the sheet's `Occasion`.
+
 | Left empty | Filled from |
 | --- | --- |
 | label | `Occasion`: `Limited Edition` shows **Limited Edition**; `Halloween`, `Easter`, `Holiday`, `Valentine's` show **Seasonal**; `Everyday` and any other occasion show no label |

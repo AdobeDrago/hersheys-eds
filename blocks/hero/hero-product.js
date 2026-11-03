@@ -42,8 +42,10 @@ const FIELDS = {
   button: 'button',
   cta: 'button',
 };
-// fields that fall back to the product master sheet (an empty button defaults to Shop Now)
-const SHEET_FIELDS = ['label', 'imageFront', 'imageBack', 'title', 'size', 'description'];
+// fields that fall back to the product master sheet (an empty button defaults to Shop Now).
+// The label is not one of them: most products have none, so an empty label must not force the
+// sheet request. It is still read from the sheet whenever the sheet is loaded for another field.
+const SHEET_FIELDS = ['imageFront', 'imageBack', 'title', 'size', 'description'];
 // sheet `Occasion` values (lowercase, letters only) that show the Seasonal label
 const SEASONAL_OCCASIONS = ['halloween', 'easter', 'holiday', 'valentines'];
 
@@ -192,6 +194,19 @@ function alphaRendition(url) {
 }
 
 /**
+ * Thumbnail-sized Scene7 rendition (the thumbnails are about 64px, so 2x is plenty); other
+ * URLs are returned as they are.
+ * @param {string} url
+ * @returns {string}
+ */
+function thumbRendition(url) {
+  if (!url || !url.includes('/is/image/')) return url;
+  const [base, query = ''] = url.split('?');
+  const params = query.split('&').filter((p) => p && !/^(wid|hei)=/.test(p));
+  return `${base}?${[...params, 'hei=128'].join('&')}`;
+}
+
+/**
  * Applies alphaRendition to every source and the img of a picture.
  * @param {HTMLPictureElement} picture
  */
@@ -226,12 +241,13 @@ function buildGallery(cell) {
     slide.setAttribute('aria-label', `${i + 1} of ${pictures.length}`);
     const optimized = optimize(picture, i === 0, [{ media: '(min-width: 900px)', width: '1000' }, { width: '750' }]);
     useAlphaRenditions(optimized);
-    // the first slide is the visible, above-the-fold product image (LCP candidate);
-    // pictures from other origins (e.g. Scene7) bypass createOptimizedPicture and arrive lazy
-    const img = i === 0 && optimized.querySelector('img');
+    // the first slide is the visible, above-the-fold product image (LCP candidate); the others
+    // are display: none and must not compete with it for bandwidth. Pictures from other
+    // origins (e.g. Scene7) bypass createOptimizedPicture, so set the loading mode explicitly
+    const img = optimized.querySelector('img');
     if (img) {
-      img.loading = 'eager';
-      img.fetchPriority = 'high';
+      img.loading = i === 0 ? 'eager' : 'lazy';
+      if (i === 0) img.fetchPriority = 'high';
     }
     slide.append(optimized);
     stage.append(slide);
@@ -256,7 +272,7 @@ function buildGallery(cell) {
       const img = slide.querySelector('img');
       if (img) {
         const thumbImg = document.createElement('img');
-        thumbImg.src = img.currentSrc || img.src;
+        thumbImg.src = thumbRendition(img.currentSrc || img.src);
         thumbImg.alt = '';
         thumbImg.loading = 'lazy';
         btn.append(thumbImg);
