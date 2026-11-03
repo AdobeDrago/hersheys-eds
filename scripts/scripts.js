@@ -221,7 +221,20 @@ async function loadEager(doc) {
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
-    await loadSection(main.querySelector('.section'), waitForFirstImage);
+    // the hero is the LCP element but is often not the first section (the breadcrumb is), so
+    // load the sections up to it together; each is revealed only once the ones above it are,
+    // so the hero can never appear above a section that is still loading
+    const sections = [...main.querySelectorAll(':scope > .section')];
+    const hero = main.querySelector('.hero')?.closest('.section');
+    let above = Promise.resolve();
+    await Promise.all(sections.slice(0, sections.indexOf(hero) + 1 || 1).map((section) => {
+      const waitFor = above;
+      above = loadSection(section, async (loaded) => {
+        await waitFor;
+        if (loaded === sections[0] || loaded === hero) await waitForFirstImage(loaded);
+      });
+      return above;
+    }));
   }
 
   try {
