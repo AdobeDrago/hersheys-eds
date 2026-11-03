@@ -86,6 +86,24 @@ other sizes in its family link to it.
 The sheet is only requested when a field is missing.
 The sheet must be previewed/published for the fallback to work on the site.
 
+## Brand (`brand`)
+
+Authored as **Hero (brand)**. Block classes: `hero brand`.
+
+Brand landing pages (e.g. `/brands/hersheys/symphony`): warm-tan panel with the brand logo,
+title and intro on the left and the brand photo filling the right half; on mobile the photo
+sits on top and the text is centred. Code: `hero-brand.js` / `hero-brand.css`, loaded by
+`hero.js` for this variant. The section is full-bleed with no padding.
+
+Content model: 1 row x 2 cells, in any order.
+
+| Hero (brand) | |
+| --- | --- |
+| brand photo | logo image, H1 title, intro paragraph(s) |
+
+The logo is the picture in the same cell as the heading; any other picture is the photo.
+A missing logo or photo is left out.
+
 ## Universal Editor fields
 
 N/A (Document Authoring project)

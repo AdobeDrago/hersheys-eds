@@ -2,6 +2,13 @@ import { createOptimizedPicture, loadCSS } from '../../scripts/aem.js';
 
 let sliderId = 0;
 
+// variants only brand pages author; their styles live in cards-brand.css
+const BRAND_VARIANTS = ['brands', 'spotlight', 'stories', 'tiles', 'shop', 'grid', 'content'];
+
+function isBrandPage() {
+  return document.body.classList.contains('hershey-brand');
+}
+
 function decorateSlider(block, list) {
   sliderId += 1;
   list.id = `cards-slider-${sliderId}`;
@@ -25,6 +32,10 @@ function decorateSlider(block, list) {
   });
   const dots = document.createElement('div');
   dots.className = 'cards-slider-dots';
+  // related sliders, and the product, stories and content sliders on brand pages, show one
+  // page indicator per page of cards
+  const paged = block.classList.contains('related')
+    || (isBrandPage() && ['product', 'stories', 'content'].some((name) => block.classList.contains(name)));
   // a page is the visible track width plus one gap; the track padding is not scrollable content
   const measure = () => {
     const style = getComputedStyle(list);
@@ -40,7 +51,7 @@ function decorateSlider(block, list) {
     const fits = list.scrollWidth <= list.clientWidth + 1;
     controls.hidden = fits;
     dots.hidden = fits;
-    if (!block.classList.contains('related')) return;
+    if (!paged) return;
     // one kiss-shaped indicator per page of cards
     const { inset, gap, step } = measure();
     const pages = Math.max(1, Math.ceil((list.scrollWidth - inset + gap) / step - 0.01));
@@ -65,20 +76,34 @@ function decorateSlider(block, list) {
   list.addEventListener('scroll', update, { passive: true });
   new ResizeObserver(update).observe(list);
   block.append(controls);
-  if (block.classList.contains('related')) block.append(dots);
+  if (paged) block.append(dots);
   update();
 }
 
 export default async function decorate(block) {
+  // `Cards (brand, slider)` is the brand page product slider: same markup and styles as
+  // `Cards (product, slider)`, so it is handled as the product variant
+  if (block.classList.contains('brand') && block.classList.contains('slider')) {
+    block.classList.add('product');
+  }
   if (block.classList.contains('product')) {
     // the product variant has its own markup, so it loads its own script and styles
+    // `Cards (product, slider)` on brand pages: the product cards scroll like the other sliders
+    const slider = block.classList.contains('slider') && isBrandPage();
     const [{ default: decorateProduct }] = await Promise.all([
       import('./cards-product.js'),
       loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-product.css`),
+      slider ? loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-brand-slider.css`) : null,
     ]);
     await decorateProduct(block);
+    const list = block.querySelector(':scope > ul');
+    if (slider && list) decorateSlider(block, list);
     return;
   }
+  // brand page variants carry their own styles
+  const brandStyles = BRAND_VARIANTS.some((variant) => block.classList.contains(variant))
+    ? loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-brand.css`)
+    : null;
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
@@ -90,7 +115,7 @@ export default async function decorate(block) {
     });
     ul.append(li);
   });
-  const linkedImages = ['slider', 'welcome-cards', 'social'].some((variant) => block.classList.contains(variant));
+  const linkedImages = ['slider', 'welcome-cards', 'social', 'spotlight', 'grid'].some((variant) => block.classList.contains(variant));
   if (linkedImages) {
     ul.querySelectorAll('li').forEach((card) => {
       const picture = card.querySelector('.cards-card-image picture');
@@ -120,4 +145,5 @@ export default async function decorate(block) {
   }
   block.replaceChildren(ul);
   if (block.classList.contains('slider')) decorateSlider(block, ul);
+  await brandStyles;
 }

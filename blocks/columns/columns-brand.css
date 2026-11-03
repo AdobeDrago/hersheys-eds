@@ -1,0 +1,1274 @@
+/* stylelint-disable no-descending-specificity -- the brand variants style their own elements only */
+
+/*
+ * Brand page variants (fact, callout). Values come from component.columns.fact.* and
+ * component.columns.callout.* tokens (brand themes override the colours); literal fallbacks
+ * are measured on hersheyland.com/brands/hersheys/symphony.html. The 992px query matches
+ * that page's layout switch.
+ */
+
+/* fact variant: "Did You Know?" quick fact, a 16:9 illustration beside a heading and copy */
+main > .section:has(> .columns-wrapper > .columns.fact) {
+  padding:
+    var(--hershey-component-columns-fact-section-padding-block-start-mobile, 35px)
+    0
+    var(--hershey-component-columns-fact-section-padding-block-end-mobile, 45px);
+}
+
+/* the first fact after the hero sits further down on mobile, as on hersheyland.com */
+@media (width < 992px) {
+  main > .hero-container + .section:has(> .columns-wrapper > .columns.fact) {
+    padding-top: var(--hershey-component-columns-fact-section-padding-block-start-lead-mobile, 70px);
+  }
+}
+
+main > .section.rule:has(> .columns-wrapper > .columns.fact) {
+  padding-top: var(--hershey-component-columns-fact-rule-section-padding-block-start-mobile, 35px);
+}
+
+main > .section > .columns-wrapper:has(> .columns.fact) {
+  max-width: none;
+  padding: 0;
+}
+
+/* a quick fact with more content after it in the same band (e.g. the products under the first
+   fact on /barkthins) keeps a gap below it */
+main > .section > .columns-wrapper:has(> .columns.fact):not(:last-child) {
+  margin-bottom: var(--hershey-component-columns-fact-margin-block-end-mobile, 0);
+}
+
+@media (width >= 768px) {
+  main > .section > .columns-wrapper:has(> .columns.fact):not(:last-child) {
+    margin-bottom: var(--hershey-component-columns-fact-margin-block-end-tablet, 0);
+  }
+}
+
+@media (width >= 992px) {
+  main > .section > .columns-wrapper:has(> .columns.fact):not(:last-child) {
+    margin-bottom: var(--hershey-component-columns-fact-margin-block-end, 0);
+  }
+}
+
+.columns.fact {
+  color: var(--hershey-component-columns-fact-color-foreground, #3f000b);
+}
+
+/* both brand variants stack until 992px (the default columns switch to a row at 900px) */
+.columns.fact > div,
+.columns.callout > div {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.columns.fact > div > div,
+.columns.callout > div > div {
+  flex: none;
+}
+
+.columns.fact > div {
+  gap: var(--hershey-component-columns-fact-gap-mobile, 15px);
+}
+
+/* keep the authored order (image first or text first) at every width */
+.columns.fact > div > div,
+.columns.fact > div > .columns-img-col {
+  order: 0;
+}
+
+.columns.fact > div > .columns-img-col {
+  padding:
+    0
+    var(--hershey-component-columns-fact-image-inset-end-mobile, 35px)
+    0
+    var(--hershey-component-columns-fact-image-inset-mobile, 35px);
+}
+
+.columns.fact > div > .columns-img-col img {
+  height: auto;
+  object-fit: contain;
+}
+
+.columns.fact > div > :not(.columns-img-col) {
+  padding:
+    0
+    var(--hershey-component-columns-fact-text-inset-end-mobile, 45px)
+    0
+    var(--hershey-component-columns-fact-text-inset-mobile, 45px);
+  text-align: center;
+}
+
+.columns.fact h3 {
+  margin: 0 0 0.3em;
+  color: inherit;
+  font-family: var(--hershey-component-columns-fact-title-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-columns-fact-title-font-size-mobile, 24px);
+  font-weight: var(--hershey-component-columns-fact-title-font-weight, 900);
+  line-height: var(--hershey-component-columns-fact-title-line-height, 1.3);
+}
+
+.columns.fact p {
+  margin: 0 0 1.5em;
+  font-size: var(--hershey-component-columns-fact-copy-font-size, 17px);
+  font-weight: var(--hershey-component-columns-fact-copy-font-weight, 500);
+  line-height: var(--hershey-component-columns-fact-copy-line-height, 1.5);
+}
+
+/* callout variant: wide image beside centred text with a pill button and a text link */
+main > .section:has(> .columns-wrapper > .columns.callout) {
+  padding:
+    var(--hershey-component-columns-callout-section-padding-block-start-mobile, 90px)
+    var(--hershey-component-columns-callout-section-padding-inline-end-mobile, 20px)
+    var(--hershey-component-columns-callout-section-padding-block-end-mobile, 45px)
+    var(--hershey-component-columns-callout-section-padding-inline-mobile, 20px);
+}
+
+main > .section > .columns-wrapper:has(> .columns.callout) {
+  max-width: var(--hershey-component-columns-callout-layout-max-width, 1260px);
+  padding: 0;
+}
+
+.columns.callout > div {
+  gap: 0;
+}
+
+.columns:is(.callout, .article) > div > .columns-img-col picture {
+  display: block;
+  overflow: hidden;
+}
+
+.columns.callout > div > .columns-img-col img {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: contain;
+}
+
+/* the image zooms in while either call to action is hovered or focused, as on hersheyland.com */
+@media (prefers-reduced-motion: no-preference) {
+  .columns:is(.callout, .article) > div > .columns-img-col img {
+    transition:
+      transform
+      var(--hershey-component-columns-callout-image-zoom-duration, 250ms)
+      var(--hershey-component-columns-callout-image-zoom-easing, ease-in-out);
+  }
+}
+
+.columns:is(.callout, .article):has(a.button:hover, a.button:focus) > div > .columns-img-col img {
+  transform: scale(1.1);
+}
+
+.columns.callout > div > :not(.columns-img-col) {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  place-content: center;
+  box-sizing: border-box;
+  padding:
+    var(--hershey-component-columns-callout-copy-offset, 25px)
+    var(--hershey-component-columns-callout-copy-padding-inline, 10px)
+    0;
+  text-align: center;
+}
+
+.columns.callout > div > :not(.columns-img-col) > * {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: calc(100% - 2 * var(--hershey-component-columns-callout-text-padding-inline, 20px));
+}
+
+.columns.callout h2 {
+  margin:
+    var(--hershey-component-columns-callout-title-padding-block, 10px)
+    var(--hershey-component-columns-callout-text-padding-inline, 20px);
+  font-family: var(--hershey-component-columns-callout-title-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-columns-callout-title-font-size-mobile, 28px);
+  font-weight: var(--hershey-component-columns-callout-title-font-weight, 900);
+  line-height: var(--hershey-component-columns-callout-title-line-height, 1.3);
+}
+
+.columns.callout p {
+  margin:
+    var(--hershey-component-columns-callout-title-padding-block, 10px)
+    var(--hershey-component-columns-callout-text-padding-inline, 20px)
+    0.7em;
+  font-size: var(--hershey-component-columns-callout-copy-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-columns-callout-copy-font-weight, 500);
+  line-height: var(--hershey-component-columns-callout-copy-line-height, 1.5);
+}
+
+.columns.callout p.button-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0 var(--hershey-component-columns-callout-copy-padding-inline, 10px);
+}
+
+.columns.callout p.button-wrapper:has(> .primary) {
+  margin-top: var(--hershey-component-columns-callout-title-padding-block, 10px);
+}
+
+.columns.callout p.button-wrapper:has(> .secondary) {
+  margin: var(--hershey-component-columns-callout-actions-gap-mobile, 20px) 0 0;
+}
+
+.columns.callout p.button-wrapper:last-child {
+  margin-bottom: var(--hershey-component-columns-callout-actions-margin-block-end, 20px);
+}
+
+.columns.callout a.button.primary {
+  display: block;
+  width: 100%;
+  max-width: var(--hershey-component-columns-callout-cta-max-width-mobile, 413px);
+  margin: 0 auto;
+  border: 0;
+  border-radius: var(--hershey-component-columns-callout-cta-border-radius-mobile, 25px);
+  padding: var(--hershey-component-columns-callout-cta-padding-mobile, 13px);
+  background-color: var(--hershey-component-columns-callout-cta-background, #007bbd);
+  color: var(--hershey-component-columns-callout-cta-foreground, #fff);
+  font-size: var(--hershey-component-columns-callout-cta-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-columns-callout-cta-font-weight, 700);
+  line-height: var(--hershey-component-columns-callout-cta-line-height, 1);
+  white-space: normal;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.columns.callout a.button.primary:hover,
+.columns.callout a.button.primary:focus-visible {
+  border: 0;
+  background-color: var(--hershey-component-columns-callout-cta-background-hover, #268fc7);
+  color: var(--hershey-component-columns-callout-cta-foreground, #fff);
+}
+
+/* secondary call to action is an underlined text link; the underline goes on hover */
+.columns.callout a.button.secondary {
+  display: inline;
+  border: 0;
+  border-bottom: var(--hershey-component-columns-callout-link-border-width, 1px) solid currentcolor;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--hershey-component-columns-callout-link-color, #007bbd);
+  font-size: var(--hershey-component-columns-callout-link-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-columns-callout-cta-font-weight, 700);
+  line-height: var(--hershey-component-columns-callout-copy-line-height, 1.5);
+  white-space: normal;
+}
+
+.columns.callout a.button.secondary:hover,
+.columns.callout a.button.secondary:focus-visible {
+  border-bottom-color: transparent;
+  background: transparent;
+  color: var(--hershey-component-columns-callout-link-color-hover, #3f000b);
+}
+
+@media (width >= 992px) {
+  main > .section:has(> .columns-wrapper > .columns.fact) {
+    padding:
+      var(--hershey-component-columns-fact-section-padding-block-desktop, 50px)
+      0
+      var(--hershey-component-columns-fact-section-padding-block-end-desktop, 50px);
+  }
+
+  /* ten of twelve page columns, as on hersheyland.com; brand themes may inset the columns further
+     (e.g. the quick facts on /barkthins) */
+  .columns.fact {
+    width: calc(100% * 10 / 12 - 2 * var(--hershey-component-columns-fact-column-padding-inline, 25px) - 2 * var(--hershey-component-columns-fact-container-inset, 0px));
+    margin: 0 auto;
+  }
+
+  .columns.fact > div {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .columns.fact > div > div {
+    box-sizing: border-box;
+  }
+
+  /* brand themes may move a small illustration in from the column edges (e.g. the sign on /5th-avenue) */
+  .columns.fact > div > .columns-img-col {
+    flex: 0 0 calc(100% / 3);
+    padding:
+      var(--hershey-component-columns-fact-image-padding-block-start, 0)
+      var(--hershey-component-columns-fact-image-padding-inline-end, var(--hershey-component-columns-fact-column-padding-inline, 25px))
+      var(--hershey-component-columns-fact-image-padding-block-end, 0)
+      var(--hershey-component-columns-fact-image-padding-inline-start, var(--hershey-component-columns-fact-column-padding-inline, 25px));
+  }
+
+  .columns.fact > div > :not(.columns-img-col) {
+    flex: 0 0 calc(100% * 2 / 3);
+    padding:
+      var(--hershey-component-columns-fact-text-padding-block-start, 50px)
+      var(--hershey-component-columns-fact-text-padding-inline, calc(2 * var(--hershey-component-columns-fact-column-padding-inline, 25px)))
+      0;
+    text-align: left;
+  }
+
+  main > .section.rule:has(> .columns-wrapper > .columns.fact) {
+    padding-top: var(--hershey-component-columns-fact-rule-section-padding-block-start, 50px);
+    padding-bottom: var(--hershey-component-columns-fact-rule-section-padding-block-end, 50px);
+  }
+
+  .section.rule .columns.fact > div > :not(.columns-img-col) {
+    padding-top: var(--hershey-component-columns-fact-rule-text-padding-block-start, 50px);
+  }
+
+  .columns.fact h3 {
+    font-size: var(--hershey-component-columns-fact-title-font-size-desktop, 28px);
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.callout) {
+    padding:
+      var(--hershey-component-columns-callout-section-padding-block-start, 90px)
+      0
+      var(--hershey-component-columns-callout-section-padding-block-end, 140px);
+  }
+
+  .columns.callout > div {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .columns.callout > div > .columns-img-col {
+    flex: 0 0 calc(100% * 7 / 12);
+  }
+
+  .columns.callout > div > :not(.columns-img-col) {
+    flex: 0 0 calc(100% * 5 / 12);
+  }
+
+  .columns.callout h2 {
+    margin-bottom: calc(var(--hershey-component-columns-callout-title-padding-block, 10px) + var(--hershey-component-columns-callout-title-margin-block-end, 5px));
+    font-size: var(--hershey-component-columns-callout-title-font-size-compact, 22px);
+  }
+
+  .columns.callout p {
+    font-size: var(--hershey-component-columns-callout-copy-font-size-compact, 13px);
+  }
+
+  /* the two calls to action share a row, half each */
+  .columns.callout > div > :not(.columns-img-col) > .button-wrapper,
+  .columns.callout p.button-wrapper:has(> .secondary) {
+    flex: 0 0 50%;
+    width: 50%;
+    margin-top: var(--hershey-component-columns-callout-title-padding-block, 10px);
+  }
+
+  .columns.callout p.button-wrapper:has(> .primary) {
+    margin-bottom: var(--hershey-component-columns-callout-actions-margin-block-end, 20px);
+  }
+
+  .columns.callout a.button.primary {
+    max-width: none;
+    border-radius: var(--hershey-component-columns-callout-cta-border-radius, 44px);
+    padding: var(--hershey-component-columns-callout-cta-padding, 18.5px);
+    font-size: var(--hershey-component-columns-callout-cta-font-size, 18px);
+  }
+
+  .columns.callout a.button.secondary {
+    font-size: var(--hershey-component-columns-callout-link-font-size, 18px);
+  }
+}
+
+@media (width >= 1200px) {
+  .columns.callout h2 {
+    font-size: var(--hershey-component-columns-callout-title-font-size-desktop, 36px);
+  }
+
+  .columns.callout p {
+    font-size: var(--hershey-component-columns-callout-copy-font-size-desktop, 20px);
+  }
+}
+
+/*
+ * fact `wide` option (`Columns (fact, wide)`): the quick fact on a twelve-column container, as on
+ * hersheyland.com/brands/hersheys/cookies-n-creme. The image keeps its own proportions; text
+ * stays left-aligned on mobile. Values from component.columns.fact.wide-* tokens.
+ */
+main > .section:has(> .columns-wrapper > .columns.fact.wide) {
+  padding-top: var(--hershey-component-columns-fact-wide-section-padding-block-start-mobile, 115px);
+}
+
+.columns.fact.wide > div > :not(.columns-img-col) {
+  text-align: left;
+}
+
+/*
+ * article variant (`Columns (article)`): hersheyland.com's article-style call-out card, e.g. the
+ * S'mores feature on /brands/hersheys/cookies-n-creme. An eyebrow, heading, copy, pill button and
+ * text link beside a framed photo; stacked and centred below 992px. Values from
+ * component.columns.article.* tokens.
+ */
+main > .section:has(> .columns-wrapper > .columns.article) {
+  padding:
+    var(--hershey-component-columns-article-section-padding-block-start-mobile, 45px)
+    var(--hershey-component-columns-article-section-padding-inline-mobile, 10px)
+    0;
+}
+
+main > .section > .columns-wrapper:has(> .columns.article) {
+  max-width: var(--hershey-component-columns-article-layout-max-width, 1260px);
+  padding: 0;
+}
+
+.columns.article > div {
+  gap: 0;
+}
+
+.columns.article > div > .columns-img-col {
+  padding: 0 var(--hershey-component-columns-article-image-inset-mobile, 30px);
+}
+
+.columns.article > div > .columns-img-col img {
+  aspect-ratio: 592 / 377;
+  height: auto;
+  border-radius: var(--hershey-component-columns-article-image-border-radius, 8px);
+  object-fit: cover;
+}
+
+.columns.article > div > .columns-img-col picture {
+  border-radius: var(--hershey-component-columns-article-image-border-radius, 8px);
+}
+
+.columns.article > div > :not(.columns-img-col) {
+  display: flex;
+  flex-flow: row wrap;
+  place-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding:
+    var(--hershey-component-columns-article-copy-offset-mobile, 27px)
+    var(--hershey-component-columns-article-image-inset-mobile, 30px)
+    var(--hershey-component-columns-article-copy-padding-block-end-mobile, 40px);
+  text-align: center;
+}
+
+.columns.article > div > :not(.columns-img-col) > * {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+}
+
+/* eyebrow: the paragraph before the heading */
+.columns.article p:has(+ :is(h2, h3)) {
+  margin: 0 0 var(--hershey-component-columns-article-eyebrow-margin-block-end-mobile, 15px);
+  font-size: var(--hershey-component-columns-article-eyebrow-font-size-mobile, 10px);
+  font-weight: var(--hershey-component-columns-article-eyebrow-font-weight, 500);
+  line-height: var(--hershey-component-columns-article-eyebrow-line-height, 1.5);
+  text-transform: uppercase;
+}
+
+.columns.article :is(h2, h3) {
+  margin: 0 0 var(--hershey-component-columns-article-title-margin-block-end-mobile, 8px);
+  font-family: var(--hershey-component-columns-article-title-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-columns-article-title-font-size-mobile, 24px);
+  font-weight: var(--hershey-component-columns-article-title-font-weight, 900);
+  line-height: var(--hershey-component-columns-article-title-line-height, 1.5);
+}
+
+.columns.article p {
+  margin: 0 0 1.5em;
+  font-size: var(--hershey-component-columns-article-copy-font-size, 17px);
+  font-weight: var(--hershey-component-columns-article-copy-font-weight, 500);
+  line-height: var(--hershey-component-columns-article-copy-line-height, 1.5);
+}
+
+.columns.article p.button-wrapper {
+  margin: 0;
+}
+
+.columns.article p.button-wrapper:has(> .secondary) {
+  margin-top: var(--hershey-component-columns-article-actions-gap-mobile, 20px);
+}
+
+.columns.article a.button.primary {
+  display: block;
+  width: 100%;
+  max-width: var(--hershey-component-columns-article-cta-max-width-mobile, 413px);
+  margin: 0 auto;
+  border: 0;
+  border-radius: var(--hershey-component-columns-article-cta-border-radius-mobile, 25px);
+  padding: var(--hershey-component-columns-article-cta-padding-mobile, 13px);
+  background-color: var(--hershey-component-columns-article-cta-background, #007bbd);
+  color: var(--hershey-component-columns-article-cta-foreground, #fff);
+  font-size: var(--hershey-component-columns-article-cta-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-columns-article-cta-font-weight, 700);
+  line-height: var(--hershey-component-columns-article-cta-line-height, 1);
+  white-space: normal;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.columns.article a.button.primary:hover,
+.columns.article a.button.primary:focus-visible {
+  border: 0;
+  background-color: var(--hershey-component-columns-article-cta-background-hover, #268fc7);
+  color: var(--hershey-component-columns-article-cta-foreground, #fff);
+}
+
+/* secondary call to action: an underlined text link in the copy colour; the underline goes on hover */
+.columns.article a.button.secondary {
+  display: inline;
+  border: 0;
+  border-bottom: var(--hershey-component-columns-article-link-border-width, 1px) solid currentcolor;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--hershey-component-columns-article-link-color, #3f000b);
+  font-size: var(--hershey-component-columns-article-link-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-columns-article-cta-font-weight, 700);
+  line-height: var(--hershey-component-columns-article-copy-line-height, 1.5);
+  white-space: normal;
+}
+
+.columns.article a.button.secondary:hover,
+.columns.article a.button.secondary:focus-visible {
+  border-bottom-color: transparent;
+  background: transparent;
+  color: var(--hershey-component-columns-article-link-color, #3f000b);
+}
+
+@media (width >= 992px) {
+  main > .section:has(> .columns-wrapper > .columns.fact.wide) {
+    padding-top: var(--hershey-component-columns-fact-section-padding-block-desktop, 50px);
+    padding-bottom: var(--hershey-component-columns-fact-wide-section-padding-block-end, 100px);
+  }
+
+  /* twelve columns, at most 1260px, 25px from the page edges */
+  .columns.fact.wide {
+    width: min(var(--hershey-component-columns-fact-wide-max-width, 1260px), 100% - 2 * var(--hershey-component-columns-fact-column-padding-inline, 25px));
+  }
+
+  .columns.fact.wide > div > .columns-img-col {
+    padding:
+      var(--hershey-component-columns-fact-text-padding-block-start, 50px)
+      var(--hershey-component-columns-fact-wide-image-padding-inline-end, 45px)
+      0
+      var(--hershey-component-columns-fact-wide-image-padding-inline-start, 95px);
+  }
+
+  .columns.fact.wide > div > :not(.columns-img-col) {
+    padding-top: var(--hershey-component-columns-fact-wide-text-padding-block-start, 100px);
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.article) {
+    padding:
+      var(--hershey-component-columns-article-section-padding-block-start, 50px)
+      0
+      0;
+  }
+
+  .columns.article > div {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .columns.article > div > .columns-img-col {
+    flex: 0 0 47%;
+    margin: var(--hershey-component-columns-article-image-margin-block, 45px) 0;
+    padding: 0;
+  }
+
+  .columns.article > div > :not(.columns-img-col) {
+    flex: 1;
+    justify-content: flex-start;
+    padding:
+      var(--hershey-component-columns-article-copy-padding-block-start, 45px)
+      var(--hershey-component-columns-article-copy-padding-inline-end, 80px)
+      var(--hershey-component-columns-article-copy-padding-block-end, 55px)
+      var(--hershey-component-columns-article-copy-padding-inline-start, 70px);
+    text-align: left;
+  }
+
+  /* the eyebrow keeps the copy's line box, as on hersheyland.com */
+  .columns.article p:has(+ :is(h2, h3)) {
+    margin-bottom: var(--hershey-component-columns-article-eyebrow-margin-block-end, 10px);
+    font-size: var(--hershey-component-columns-article-eyebrow-font-size, 12px);
+    line-height: var(--hershey-component-columns-article-eyebrow-line-height-desktop, 25.5px);
+  }
+
+  .columns.article :is(h2, h3) {
+    margin-bottom: var(--hershey-component-columns-article-title-margin-block-end, 20px);
+    font-size: var(--hershey-component-columns-article-title-font-size, 28px);
+  }
+
+  /* the two calls to action share a row, half each */
+  .columns.article p.button-wrapper,
+  .columns.article p.button-wrapper:has(> .secondary) {
+    flex: 0 0 50%;
+    margin-top: var(--hershey-component-columns-article-actions-margin-block-start, 25px);
+    text-align: center;
+  }
+
+  .columns.article p.button-wrapper:has(> .primary) {
+    padding-right: var(--hershey-component-columns-article-actions-gap, 10px);
+  }
+
+  .columns.article p.button-wrapper:has(> .secondary) {
+    padding-left: var(--hershey-component-columns-article-actions-gap, 10px);
+  }
+
+  .columns.article a.button.primary {
+    max-width: none;
+    border-radius: var(--hershey-component-columns-article-cta-border-radius, 44px);
+    padding: var(--hershey-component-columns-article-cta-padding, 18.5px);
+    font-size: var(--hershey-component-columns-article-cta-font-size, 18px);
+  }
+
+  .columns.article a.button.secondary {
+    font-size: var(--hershey-component-columns-article-link-font-size, 18px);
+  }
+}
+
+@media (width >= 1200px) {
+  .columns.article p:has(+ :is(h2, h3)) {
+    margin-bottom: var(--hershey-component-columns-article-eyebrow-margin-block-end-wide, 30px);
+  }
+
+  .columns.article :is(h2, h3) {
+    margin-bottom: var(--hershey-component-columns-article-title-margin-block-end-wide, 30px);
+  }
+}
+
+/*
+ * video variant (`Columns (video)`): a YouTube poster with a play button beside a white story box
+ * that overlaps it, e.g. "PINKY UP. Flavor On." on /brands/hersheys/creme-bars; columns.js plays
+ * the video in place. The band heading is default content. Values from
+ * component.columns.video.* tokens.
+ */
+main > .section:has(> .columns-wrapper > .columns.video) {
+  padding:
+    var(--hershey-component-columns-video-section-padding-block-start-mobile, 25px)
+    0
+    var(--hershey-component-columns-video-section-padding-block-end-mobile, 25px);
+}
+
+main > .section:has(> .columns-wrapper > .columns.video) > div {
+  max-width: none;
+  padding: 0;
+}
+
+main > .section:has(> .columns-wrapper > .columns.video) > .default-content-wrapper h2 {
+  margin:
+    var(--hershey-component-columns-video-heading-margin-block-start-mobile, 20px)
+    var(--hershey-component-columns-video-heading-inset-mobile, 41px)
+    var(--hershey-component-columns-video-heading-margin-block-end-mobile, 12px);
+  font-size: var(--hershey-component-columns-video-heading-font-size-mobile, 28px);
+  line-height: var(--hershey-component-columns-video-heading-line-height, 1.35);
+  text-align: center;
+}
+
+.columns.video {
+  padding: 0 var(--hershey-component-columns-video-inset-end-mobile, 25px) 0 var(--hershey-component-columns-video-inset-start-mobile, 16px);
+}
+
+.columns.video > div {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.columns.video > div > div:first-child {
+  position: relative;
+}
+
+.columns.video > div > div:first-child p {
+  margin: 0;
+  line-height: 0;
+}
+
+.columns.video > div > div:first-child img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--hershey-component-columns-video-poster-border-radius, 8px);
+  object-fit: cover;
+}
+
+/* the YouTube link becomes the play button over the poster */
+.columns.video .columns-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--hershey-component-columns-video-play-size-mobile, 40px);
+  height: var(--hershey-component-columns-video-play-size-mobile, 40px);
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  background: url('/icons/video-play.svg') center / contain no-repeat;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.columns.video iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--hershey-component-columns-video-poster-border-radius, 8px);
+}
+
+.columns.video > div > div:last-child {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  margin:
+    calc(-1 * var(--hershey-component-columns-video-story-overlap-mobile, 20px))
+    var(--hershey-component-columns-video-story-inset-mobile, 15px)
+    var(--hershey-component-columns-video-story-margin-block-end-mobile, 20px);
+  border-radius: var(--hershey-component-columns-video-story-border-radius, 8px);
+  padding: var(--hershey-component-columns-video-story-padding-block-mobile, 30px) var(--hershey-component-columns-video-story-padding-inline, 25px);
+  background: var(--hershey-component-columns-video-story-background, #fff);
+  box-shadow: var(--hershey-component-columns-video-story-shadow, 0 0 12px 0 rgb(39 1 7 / 8%));
+  color: var(--hershey-component-columns-video-story-foreground, #3f000b);
+  text-align: center;
+}
+
+.columns.video h3 {
+  margin: 0 0 var(--hershey-component-columns-video-title-margin-block-end-mobile, 10px);
+  font-family: var(--hershey-component-columns-video-title-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-columns-video-title-font-size-mobile, 20px);
+  font-weight: var(--hershey-component-columns-video-title-font-weight, 900);
+  line-height: var(--hershey-component-columns-video-title-line-height, 1.35);
+}
+
+.columns.video > div > div:last-child p {
+  margin: 0;
+  padding: 0 var(--hershey-component-columns-video-copy-inset, 5px);
+  font-size: var(--hershey-component-columns-video-copy-font-size, 17px);
+  line-height: var(--hershey-component-columns-video-copy-line-height, 1.5);
+}
+
+/*
+ * quotes variant (`Columns (quotes)`): customer quotes in large italic type with a highlighted
+ * phrase (bold text), e.g. "What People Are Saying" on /brands/hersheys/creme-bars. The first row
+ * holds one quote, later rows sit side by side from 992px; highlights alternate purple and
+ * caramel. Values from component.columns.quotes.* tokens.
+ */
+main > .section:has(> .columns-wrapper > .columns.quotes) {
+  padding:
+    0
+    var(--hershey-component-columns-quotes-section-padding-inline-mobile, 10px)
+    var(--hershey-component-columns-quotes-section-padding-block-end-mobile, 45px);
+}
+
+main > .section:has(> .columns-wrapper > .columns.quotes) > div {
+  max-width: none;
+  padding: 0;
+}
+
+main > .section:has(> .columns-wrapper > .columns.quotes) > .default-content-wrapper h2 {
+  margin: 0 0 0.3em;
+  font-size: var(--hershey-component-columns-quotes-heading-font-size-mobile, 28px);
+  line-height: var(--hershey-component-columns-quotes-heading-line-height, 1.3);
+  text-align: center;
+}
+
+.columns.quotes > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.columns.quotes > div > div {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--hershey-component-columns-quotes-max-width, 500px);
+  margin: var(--hershey-component-columns-quotes-margin-mobile, 20px) auto;
+  padding: 0 var(--hershey-component-columns-quotes-inset-mobile, 35px);
+  font-family: var(--hershey-component-columns-quotes-font-family, hershey-gazpacho, serif);
+  font-size: var(--hershey-component-columns-quotes-font-size-mobile, 28px);
+  font-weight: var(--hershey-component-columns-quotes-font-weight, 900);
+  line-height: var(--hershey-component-columns-quotes-line-height, 1.5);
+  text-align: center;
+}
+
+.columns.quotes > div:first-child > div {
+  padding-inline: var(--hershey-component-columns-quotes-lead-inset-mobile, 10px);
+}
+
+.columns.quotes > div > div + div {
+  margin-top: var(--hershey-component-columns-quotes-gap-mobile, 35px);
+}
+
+.columns.quotes p {
+  margin: 0;
+}
+
+.columns.quotes strong {
+  color: var(--hershey-component-columns-quotes-highlight-color, #86339a);
+  font-weight: inherit;
+}
+
+.columns.quotes > div:nth-child(even) > div:nth-child(odd) strong {
+  color: var(--hershey-component-columns-quotes-highlight-color-alt, #bc540d);
+}
+
+/*
+ * blog variant (`Columns (blog)`): a grey story box with stacked photos beside an eyebrow,
+ * heading and story, e.g. "How HERSHEY'S Creme Bars Got Their Start" on
+ * /brands/hersheys/creme-bars. Values from component.columns.blog.* tokens.
+ */
+main > .section > .columns-wrapper:has(> .columns.blog) {
+  max-width: none;
+  padding: 0 var(--hershey-component-columns-blog-inset-end-mobile, 25px) 0 var(--hershey-component-columns-blog-inset-start-mobile, 16px);
+}
+
+.columns.blog {
+  border: var(--hershey-component-columns-blog-border-width, 2px) solid var(--hershey-component-columns-blog-border-color, #3f000b);
+  border-radius: var(--hershey-component-columns-blog-border-radius, 8px);
+  padding:
+    var(--hershey-component-columns-blog-padding-block-start-mobile, 35px)
+    var(--hershey-component-columns-blog-padding-inline-mobile, 25px)
+    var(--hershey-component-columns-blog-padding-block-end-mobile, 10px);
+  background: var(--hershey-component-columns-blog-background, #f6f6f6);
+  text-align: left;
+}
+
+.columns.blog > div {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--hershey-component-columns-blog-gap-mobile, 40px);
+}
+
+.columns.blog > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hershey-component-columns-blog-image-gap-mobile, 14px);
+}
+
+.columns.blog > div > div:first-child p {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+  margin: 0;
+}
+
+.columns.blog > div > div:first-child img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.columns.blog p:has(+ h2) {
+  margin: 0 0 var(--hershey-component-columns-blog-eyebrow-margin-block-end, 10px);
+  font-size: var(--hershey-component-columns-blog-eyebrow-font-size, 12px);
+  font-weight: var(--hershey-component-columns-blog-eyebrow-font-weight, 700);
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.columns.blog h2 {
+  margin: 0 0 var(--hershey-component-columns-blog-heading-margin-block-end, 8px);
+  font-size: var(--hershey-component-columns-blog-heading-font-size-mobile, 28px);
+  line-height: 1.5;
+}
+
+.columns.blog h2 ~ p {
+  margin: 0 0 1.5em;
+  font-size: var(--hershey-component-columns-blog-copy-font-size, 17px);
+  line-height: 1.5;
+}
+
+@media (width >= 768px) {
+  /* quotes keep 500px; the space under each is the live heading margin */
+  .columns.quotes > div > div,
+  .columns.quotes > div:first-child > div {
+    margin-bottom: var(--hershey-component-columns-quotes-margin-block-end-tablet, 8px);
+    padding-inline: 0;
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.video) > .default-content-wrapper h2 {
+    margin-inline: var(--hershey-component-columns-video-heading-inset-tablet, 41px) var(--hershey-component-columns-video-heading-inset-end-tablet, 50px);
+  }
+
+  .columns.video > div > div:last-child {
+    margin:
+      var(--hershey-component-columns-video-story-gap-tablet, 50px)
+      var(--hershey-component-columns-video-story-inset-mobile, 15px)
+      var(--hershey-component-columns-video-story-gap-tablet, 50px);
+  }
+
+  .columns.video h3 {
+    font-size: var(--hershey-component-columns-video-title-font-size-tablet, 24px);
+  }
+}
+
+@media (width >= 992px) {
+  main > .section:has(> .columns-wrapper > .columns.video) {
+    padding:
+      var(--hershey-component-columns-video-section-padding-block-start, 20px)
+      0
+      var(--hershey-component-columns-video-section-padding-block-end, 50px);
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.video) > div {
+    max-width: var(--hershey-component-campaign-layout-max-width, 1260px);
+    margin-inline: auto;
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.video) > .default-content-wrapper h2 {
+    margin:
+      var(--hershey-component-columns-video-heading-margin-block-start, 40px)
+      var(--hershey-component-columns-video-heading-inset, 50px)
+      var(--hershey-component-columns-video-heading-margin-block-end, 30px);
+    font-size: var(--hershey-component-columns-video-heading-font-size, 36px);
+  }
+
+  .columns.video {
+    padding: 0 var(--hershey-component-columns-video-inset, 25px);
+  }
+
+  /* the story box overlaps the poster's right edge and is 100px shorter, vertically centred */
+  .columns.video > div {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .columns.video > div > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .columns.video > div > div:last-child {
+    flex: 0 0 calc(100% / 3 + var(--hershey-component-columns-video-story-width-offset-compact, 2px));
+    margin:
+      var(--hershey-component-columns-video-story-margin-block, 50px)
+      0
+      var(--hershey-component-columns-video-story-margin-block, 50px)
+      calc(-1 * var(--hershey-component-columns-video-story-overlap-compact, 35px));
+    padding: 0 var(--hershey-component-columns-video-story-padding-inline, 25px);
+  }
+
+  .columns.video h3 {
+    font-size: var(--hershey-component-columns-video-title-font-size, 28px);
+  }
+
+  .columns.video .columns-video-play {
+    width: var(--hershey-component-columns-video-play-size, 50px);
+    height: var(--hershey-component-columns-video-play-size, 50px);
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.quotes) {
+    padding:
+      var(--hershey-component-columns-quotes-section-padding-block-start, 70px)
+      0
+      var(--hershey-component-columns-quotes-section-padding-block-end, 78px);
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.quotes) > .default-content-wrapper {
+    width: calc(min(var(--hershey-component-campaign-layout-max-width, 1260px), 100%) * 8 / 12 - 2 * var(--hershey-component-campaign-column-gutter, 50px));
+    margin-inline: auto;
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.quotes) > .default-content-wrapper h2 {
+    font-size: var(--hershey-component-columns-quotes-heading-font-size, 36px);
+  }
+
+  main > .section > .columns-wrapper:has(> .columns.quotes) {
+    max-width: var(--hershey-component-campaign-layout-max-width, 1260px);
+    margin-inline: auto;
+  }
+
+  .columns.quotes > div > div {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--hershey-component-columns-quotes-font-size, 36px);
+  }
+
+  .columns.quotes > div:first-child > div {
+    width: calc((min(var(--hershey-component-campaign-layout-max-width, 1260px), 100%) - 50px) * 8 / 12 * 8 / 12 - 60px);
+    margin: var(--hershey-component-columns-quotes-lead-margin-block-start, 50px) auto 0;
+    padding: 0;
+  }
+
+  .columns.quotes > div + div {
+    flex-direction: row;
+    margin: var(--hershey-component-columns-quotes-row-gap, 48px) var(--hershey-component-columns-quotes-row-inset, 55px) 0;
+    gap: var(--hershey-component-columns-quotes-column-gap, 120px);
+  }
+
+  .columns.quotes > div + div > div {
+    flex: 1 1 0;
+  }
+
+  .columns.quotes > div > div + div {
+    margin-top: 0;
+  }
+
+  main > .section > .columns-wrapper:has(> .columns.blog) {
+    width: calc(min(var(--hershey-component-campaign-layout-max-width, 1260px), 100%) * 10 / 12 - var(--hershey-component-cards-shop-width-offset, 50px));
+    max-width: none;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .columns.blog {
+    padding:
+      var(--hershey-component-columns-blog-padding-block, 50px)
+      var(--hershey-component-columns-blog-padding-inline, 75px);
+  }
+
+  .columns.blog > div {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--hershey-component-columns-blog-gap, 50px);
+  }
+
+  .columns.blog > div > div {
+    flex: 1 1 0;
+  }
+
+  .columns.blog > div > div:first-child {
+    gap: var(--hershey-component-columns-blog-image-gap, 19px);
+  }
+
+  .columns.blog h2 {
+    font-size: var(--hershey-component-columns-blog-heading-font-size, 36px);
+  }
+}
+
+@media (width >= 1200px) {
+  .columns.video > div > div:last-child {
+    flex-basis: 30%;
+    margin-left: calc(-1 * var(--hershey-component-columns-video-story-overlap, 55px));
+  }
+}
+
+/*
+ * framed option (`Columns (callout, framed)`): callouts on a campaign colour band, e.g. the
+ * Salted Caramel Creme and Affogato bands on /brands/hersheys/creme-bars. The photo sits in a
+ * white frame and keeps the 16:9 height of the whole column; an optional eyebrow sits above the
+ * heading; a single button keeps its own width from 992px. Values from
+ * component.columns.callout.framed-* tokens.
+ */
+.columns.callout.framed > div > .columns-img-col {
+  container-type: inline-size;
+}
+
+.columns.callout.framed > div > .columns-img-col picture {
+  box-sizing: border-box;
+  border: var(--hershey-component-columns-callout-framed-border-width, 6px) solid var(--hershey-component-columns-callout-framed-border-color, #fff);
+  border-radius: var(--hershey-component-columns-callout-framed-border-radius, 8px);
+}
+
+.columns.callout.framed > div > .columns-img-col img {
+  height: calc(100cqi * 9 / 16);
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+
+.columns.callout.framed p:has(+ h2) {
+  margin:
+    var(--hershey-component-columns-callout-framed-eyebrow-margin-block-start-mobile, 15px)
+    0
+    var(--hershey-component-columns-callout-framed-eyebrow-margin-block-end-mobile, 5px);
+  padding: var(--hershey-component-columns-callout-framed-eyebrow-padding, 10px);
+  font-size: var(--hershey-component-columns-callout-framed-eyebrow-font-size-mobile, 14px);
+  font-weight: var(--hershey-component-columns-callout-framed-eyebrow-font-weight, 700);
+  line-height: 1.5;
+}
+
+.columns.callout.framed > div > :not(.columns-img-col) {
+  padding-top: 0;
+}
+
+.columns.callout.framed h2 {
+  margin: 0 var(--hershey-component-columns-callout-text-padding-inline, 20px) 0;
+}
+
+.columns.callout.framed h2:first-child {
+  margin-top: var(--hershey-component-columns-callout-copy-offset, 25px);
+}
+
+.columns.callout.framed h2 + p {
+  margin:
+    var(--hershey-component-columns-callout-title-padding-block, 10px)
+    var(--hershey-component-columns-callout-text-padding-inline, 20px)
+    var(--hershey-component-columns-callout-framed-copy-margin-block-end-mobile, 21px);
+}
+
+/* without a button the empty button row still keeps its space */
+.columns.callout.framed h2 + p:last-child {
+  margin-bottom: calc(var(--hershey-component-columns-callout-framed-copy-margin-block-end-mobile, 21px) + var(--hershey-component-columns-callout-actions-margin-block-end, 20px));
+}
+
+.columns.callout.framed p.button-wrapper,
+.columns.callout.framed p.button-wrapper:has(> .primary) {
+  margin: 0 0 var(--hershey-component-columns-callout-actions-margin-block-end, 20px);
+  padding: 0 var(--hershey-component-columns-callout-copy-padding-inline, 10px);
+}
+
+/* white copy on the purple band */
+.purple-gradient .columns.callout.framed :is(h2, p:not(.button-wrapper)) {
+  color: var(--hershey-component-columns-callout-framed-foreground-inverse, #fff);
+}
+
+@media (width >= 992px) {
+  .columns.callout.framed p:has(+ h2) {
+    margin: 0;
+    font-size: var(--hershey-component-columns-callout-framed-eyebrow-font-size, 16px);
+  }
+
+  .columns.callout.framed h2 {
+    margin-bottom: var(--hershey-component-columns-callout-framed-title-margin-block-end, 5px);
+  }
+
+  .columns.callout.framed h2 + p {
+    margin-bottom: var(--hershey-component-columns-callout-framed-copy-margin-block-end, 24px);
+  }
+
+  .columns.callout.framed h2 + p:last-child {
+    margin-bottom: calc(var(--hershey-component-columns-callout-framed-copy-margin-block-end, 24px) + var(--hershey-component-columns-callout-actions-margin-block-end, 20px));
+  }
+
+  .columns.callout.framed > div > div:not(:has(.button-wrapper ~ .button-wrapper)) p.button-wrapper {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .columns.callout.framed > div > div:not(:has(.button-wrapper ~ .button-wrapper)) a.button.primary {
+    display: inline-block;
+    width: auto;
+  }
+}
+
+/*
+ * a callout with a single button keeps the button's own width (e.g. the recipe callout on /york);
+ * framed callouts on campaign bands keep a full-width button below 992px
+ */
+.columns.callout:not(.framed) > div > div:not(:has(.button-wrapper ~ .button-wrapper)) p.button-wrapper {
+  flex-basis: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.columns.callout:not(.framed) > div > div:not(:has(.button-wrapper ~ .button-wrapper)) a.button.primary {
+  display: inline-block;
+  width: auto;
+}
+
+/*
+ * square option (`Columns (callout, square)`): a square photo beside the copy, half each from
+ * 992px, e.g. YORK Snowflakes on /york. Values from component.columns.callout.square-* tokens.
+ */
+.columns.callout.square > div > .columns-img-col img {
+  aspect-ratio: 1;
+}
+
+.columns.callout.square > div > :not(.columns-img-col) {
+  padding: var(--hershey-component-columns-callout-square-copy-padding, 10px);
+}
+
+.columns.callout.square h2 {
+  margin:
+    var(--hershey-component-columns-callout-square-title-margin-block-start-mobile, 30px)
+    var(--hershey-component-columns-callout-text-padding-inline, 20px)
+    var(--hershey-component-columns-callout-square-title-margin-block-end, 20px);
+}
+
+.columns.callout.square h2 + p {
+  margin:
+    0
+    var(--hershey-component-columns-callout-text-padding-inline, 20px)
+    var(--hershey-component-columns-callout-square-copy-margin-block-end-mobile, 22px);
+}
+
+.columns.callout.square p.button-wrapper,
+.columns.callout.square p.button-wrapper:has(> .primary) {
+  margin: 0 0 var(--hershey-component-columns-callout-square-actions-margin-block-end-mobile, 10px);
+}
+
+/*
+ * fact options: `half` puts the copy and photo side by side at half each (e.g. "1.5 billion" on
+ * /york); `inset` keeps a small illustration inset in its third (e.g. the Pennsylvania outline).
+ */
+@media (width >= 992px) {
+  .columns.callout.square > div > .columns-img-col {
+    flex: 0 0 50%;
+  }
+
+  .columns.callout.square > div > :not(.columns-img-col) {
+    flex: 0 0 50%;
+    box-sizing: border-box;
+    align-content: center;
+  }
+
+  .columns.callout.square h2 {
+    margin-top: 0;
+  }
+
+  .columns.callout.square h2 + p {
+    margin-bottom: var(--hershey-component-columns-callout-square-copy-margin-block-end, 24px);
+  }
+
+  .columns.callout.square p.button-wrapper,
+  .columns.callout.square p.button-wrapper:has(> .primary) {
+    margin-bottom: 0;
+  }
+
+  .columns.fact.half > div > .columns-img-col,
+  .columns.fact.half > div > :not(.columns-img-col) {
+    flex-basis: 50%;
+  }
+
+  .columns.fact.half > div > :not(.columns-img-col) {
+    padding-inline: var(--hershey-component-columns-fact-half-text-padding-inline, 25px);
+  }
+
+  .columns.fact.inset > div > .columns-img-col {
+    padding-inline: calc(var(--hershey-component-columns-fact-column-padding-inline, 25px) + var(--hershey-component-columns-fact-inset-padding-inline, 70px));
+  }
+}
+
+/*
+ * fact `boxed` option (`Columns (fact, boxed)`): the quick fact sits in a box of its own colour
+ * within its band, e.g. the dark brown boxes on /whoppers; the copy takes three quarters of the box
+ * and the illustration the rest from 992px. Values from component.columns.fact.box-* tokens
+ * (brand themes set the colour).
+ */
+.columns.fact.boxed {
+  margin:
+    0
+    var(--hershey-component-columns-fact-box-margin-inline-end-mobile, 25px)
+    0
+    var(--hershey-component-columns-fact-box-margin-inline-start-mobile, 16px);
+  padding:
+    var(--hershey-component-columns-fact-box-padding-block-start-mobile, 35px)
+    0
+    var(--hershey-component-columns-fact-box-padding-block-end-mobile, 36px);
+  background-color: var(--hershey-component-columns-fact-box-background, #3c131c);
+}
+
+.columns.fact.boxed > div > :not(.columns-img-col) {
+  text-align: start;
+}
+
+@media (width >= 992px) {
+  .columns.fact.boxed {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding:
+      var(--hershey-component-columns-fact-box-padding-block, 50px)
+      calc((100% * 10 / 12 - 2 * var(--hershey-component-columns-fact-column-padding-inline, 25px)) / 12 + var(--hershey-component-columns-fact-column-padding-inline, 25px));
+  }
+
+  /* a twelve-column or half-and-half box (`Columns (fact, wide, boxed)`, `Columns (fact, half, boxed)`):
+     its columns carry the gutters */
+  .columns.fact.wide.boxed,
+  .columns.fact.half.boxed {
+    padding-inline: 0;
+  }
+
+  .columns.fact.boxed:not(.half) > div > .columns-img-col {
+    flex-basis: 25%;
+  }
+
+  .columns.fact.boxed:not(.half) > div > :not(.columns-img-col) {
+    flex-basis: 75%;
+  }
+}
+/* stylelint-enable no-descending-specificity */
