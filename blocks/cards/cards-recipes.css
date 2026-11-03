@@ -12,7 +12,7 @@
   max-width: 240px;
   margin: 0 auto 19px;
   color: var(--hershey-system-color-text-primary, #3f000b);
-  font-family: var(--hershey-system-typography-heading-font-family, var(--heading-font-family));
+  font-family: var(--hershey-system-typography-heading-font-family, hershey-gazpacho, serif);
   font-size: 24px;
   font-weight: var(--hershey-system-typography-heading-font-weight, 900);
   line-height: 1.05;

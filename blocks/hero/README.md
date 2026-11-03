@@ -17,7 +17,7 @@ Content model: 1 column x 2 rows (row order is not enforced).
 - Image row: the hero image.
 - Text row: category link paragraph (pill), H1 title, `Skill Level: ...` paragraph, optional further paragraphs.
 
-Decoration adds the Bazaarvoice rating from `bvid` (or `bv-id`) metadata and the share bar. This variant keeps the page section width and padding. The wrapper and section are `hero-wrapper` and `hero-container`.
+Decoration adds the Bazaarvoice rating from `bvid` (or `bv-id`) metadata and the share bar. The bar opens with Facebook, Pinterest, email, print and copy-link. Its share icon collapses it to a blue pill with just the share icon and copy-link, and expands it again. This variant keeps the page section width and padding. The wrapper and section are `hero-wrapper` and `hero-container`.
 
 Activity pages (`/activities/...`) use the same block. Skill Level and `bvid` are optional. When the image row holds more than one image, they become a gallery with previous/next buttons centred at the bottom of the image; only the first image loads eagerly. On activity pages the share and print labels say "activity" instead of "recipe".
 

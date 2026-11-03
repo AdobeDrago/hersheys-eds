@@ -8,7 +8,7 @@
   overflow: hidden;
   color: var(--hershey-component-recipe-details-ingredients-color-foreground, #3f000b);
   background-color: var(--hershey-component-recipe-details-ingredients-color-background, #f6f6f6);
-  font-family: var(--hershey-component-recipe-details-ingredients-typography-body-font-family, sans-serif);
+  font-family: var(--hershey-component-recipe-details-ingredients-typography-body-font-family, hershey-tt, sans-serif);
   font-size: var(--hershey-component-recipe-details-ingredients-typography-body-font-size, 17px);
   line-height: var(--hershey-component-recipe-details-ingredients-typography-body-line-height, 1.5);
 }
@@ -43,6 +43,7 @@
 /* Recipe heading, yield/time summary and Bake Mode. */
 .recipe-details-ingredients-section .recipe-details-ingredients-summary {
   color: var(--hershey-component-recipe-details-ingredients-color-foreground, #3f000b);
+  border-bottom: var(--hershey-component-recipe-details-ingredients-divider-width, 1px) solid currentcolor;
 }
 
 .recipe-details-ingredients-section .recipe-details-ingredients-summary-main {
@@ -53,7 +54,7 @@
   margin: 0;
   padding: 0 0 var(--hershey-component-recipe-details-ingredients-spacing-inset, 15px);
   color: inherit;
-  font-family: var(--hershey-component-recipe-details-ingredients-typography-heading-font-family, serif);
+  font-family: var(--hershey-component-recipe-details-ingredients-typography-heading-font-family, hershey-gazpacho, serif);
   font-size: var(--hershey-component-recipe-details-ingredients-typography-summary-font-size, 30px);
   font-weight: var(--hershey-component-recipe-details-ingredients-typography-heading-font-weight, 900);
   line-height: var(--hershey-component-recipe-details-ingredients-typography-summary-line-height, 32px);
@@ -96,32 +97,62 @@
   font-weight: 700;
 }
 
+/* Prep / Total / Bake: bold 18px label (capitalised) and lowercase value, as on the source */
+.recipe-details-ingredients-section .recipe-details-ingredients-times .recipe-details-ingredients-summary-item dt,
+.recipe-details-ingredients-section .recipe-details-ingredients-times .recipe-details-ingredients-summary-item dd {
+  font-size: var(--hershey-component-recipe-details-ingredients-typography-times-font-size, 18px);
+  font-weight: var(--hershey-component-recipe-details-ingredients-typography-times-font-weight, 600);
+}
+
+.recipe-details-ingredients-section .recipe-details-ingredients-times .recipe-details-ingredients-summary-item dt {
+  letter-spacing: var(--hershey-component-recipe-details-ingredients-typography-tracking, 1px);
+  text-transform: capitalize;
+}
+
+.recipe-details-ingredients-section .recipe-details-ingredients-times .recipe-details-ingredients-summary-item dd {
+  text-transform: lowercase;
+}
+
 .recipe-details-ingredients-section .recipe-details-ingredients-bake-mode {
+  --recipe-details-ingredients-switch-border: var(--hershey-component-recipe-details-ingredients-bake-mode-track-border-width, 2px);
+  --recipe-details-ingredients-switch-offset: var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-offset, 3px);
+
   display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--hershey-component-recipe-details-ingredients-bake-mode-switch-width, 72px);
-  column-gap: var(--hershey-component-recipe-details-ingredients-spacing-stack, 10px);
+  grid-template-columns: var(--hershey-component-recipe-details-ingredients-bake-mode-switch-width, 77px) minmax(0, 1fr);
+  column-gap: var(--hershey-component-recipe-details-ingredients-spacing-inset, 15px);
   align-items: center;
-  padding: var(--hershey-component-recipe-details-ingredients-spacing-panel, 25px) 0;
+  padding: var(--hershey-component-recipe-details-ingredients-spacing-panel, 25px) 0 var(--hershey-component-recipe-details-ingredients-spacing-inset, 15px);
+  border-top: var(--hershey-component-recipe-details-ingredients-divider-width, 1px) solid currentcolor;
+}
+
+.recipe-details-ingredients-section .recipe-details-ingredients-bake-copy {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .recipe-details-ingredients-section .recipe-details-ingredients-bake-copy p {
   margin: 0;
   padding: 0;
-  font-size: var(--hershey-component-recipe-details-ingredients-typography-bake-font-size, 15px);
-  line-height: var(--hershey-component-recipe-details-ingredients-typography-bake-line-height, 18px);
+  font-size: var(--hershey-component-recipe-details-ingredients-typography-bake-font-size, 13px);
+  font-weight: var(--hershey-component-recipe-details-ingredients-typography-bake-font-weight, 600);
+  line-height: var(--hershey-component-recipe-details-ingredients-typography-bake-line-height, 15px);
 }
 
 .recipe-details-ingredients-section .recipe-details-ingredients-bake-copy .recipe-details-ingredients-bake-heading {
-  margin-bottom: var(--hershey-component-recipe-details-ingredients-spacing-small, 8px);
-  font-size: var(--hershey-component-recipe-details-ingredients-typography-bake-heading-font-size, 19px);
+  margin-bottom: var(--hershey-component-recipe-details-ingredients-spacing-hang, 6px);
+  font-size: var(--hershey-component-recipe-details-ingredients-typography-bake-heading-font-size, 16px);
   font-weight: 700;
+  line-height: var(--hershey-component-recipe-details-ingredients-typography-bake-heading-line-height, 16px);
+  text-transform: uppercase;
 }
 
 .recipe-details-ingredients-section .recipe-details-ingredients-bake-switch {
   position: relative;
   display: block;
-  width: var(--hershey-component-recipe-details-ingredients-bake-mode-switch-width, 72px);
-  height: var(--hershey-component-recipe-details-ingredients-bake-mode-switch-height, 42px);
+  grid-column: 1;
+  grid-row: 1;
+  width: var(--hershey-component-recipe-details-ingredients-bake-mode-switch-width, 77px);
+  height: var(--hershey-component-recipe-details-ingredients-bake-mode-switch-height, 37px);
   cursor: pointer;
 }
 
@@ -132,24 +163,26 @@
   opacity: 0;
 }
 
+/* off: white track, blue outline, blue thumb; on: blue track, white thumb */
 .recipe-details-ingredients-section .recipe-details-ingredients-bake-slider {
   position: absolute;
   inset: 0;
+  border: var(--recipe-details-ingredients-switch-border) solid var(--hershey-component-recipe-details-ingredients-bake-mode-track-border-color, #007bbd);
   border-radius: var(--hershey-component-recipe-details-ingredients-bake-mode-track-radius, 999px);
-  background-color: var(--hershey-component-recipe-details-ingredients-bake-mode-track-background, #ccc);
-  transition: background-color var(--hershey-component-recipe-details-ingredients-bake-mode-motion-duration, 0.2s) var(--hershey-component-recipe-details-ingredients-bake-mode-motion-easing, ease);
+  background-color: var(--hershey-component-recipe-details-ingredients-bake-mode-track-background, #fff);
+  transition: background-color var(--hershey-component-recipe-details-ingredients-bake-mode-motion-duration, 0.4s) var(--hershey-component-recipe-details-ingredients-bake-mode-motion-easing, ease);
 }
 
 .recipe-details-ingredients-section .recipe-details-ingredients-bake-slider::before {
   position: absolute;
-  bottom: var(--hershey-component-recipe-details-ingredients-spacing-tight, 4px);
-  left: var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-offset, 6px);
-  width: var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-size, 34px);
-  height: var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-size, 34px);
+  bottom: calc((var(--hershey-component-recipe-details-ingredients-bake-mode-switch-height, 37px) - 2 * var(--recipe-details-ingredients-switch-border) - var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-size, 29px)) / 2);
+  left: var(--recipe-details-ingredients-switch-offset);
+  width: var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-size, 29px);
+  height: var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-size, 29px);
   border-radius: 50%;
-  background-color: var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-background, #fff);
+  background-color: var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-background, #007bbd);
   content: '';
-  transition: transform var(--hershey-component-recipe-details-ingredients-bake-mode-motion-duration, 0.2s) var(--hershey-component-recipe-details-ingredients-bake-mode-motion-easing, ease);
+  transition: transform var(--hershey-component-recipe-details-ingredients-bake-mode-motion-duration, 0.4s) var(--hershey-component-recipe-details-ingredients-bake-mode-motion-easing, ease);
 }
 
 .recipe-details-ingredients-section .recipe-details-ingredients-bake-switch input:checked + .recipe-details-ingredients-bake-slider {
@@ -157,7 +190,10 @@
 }
 
 .recipe-details-ingredients-section .recipe-details-ingredients-bake-switch input:checked + .recipe-details-ingredients-bake-slider::before {
-  transform: translateX(26px);
+  background-color: var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-active-background, #fff);
+
+  /* source travel (39px) leaves a gap on the right equal to the track border */
+  transform: translateX(calc(var(--hershey-component-recipe-details-ingredients-bake-mode-switch-width, 77px) - 3 * var(--recipe-details-ingredients-switch-border) - var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-size, 29px) - var(--recipe-details-ingredients-switch-offset)));
 }
 
 .recipe-details-ingredients-section .recipe-details-ingredients-bake-switch input:focus-visible + .recipe-details-ingredients-bake-slider {
@@ -187,7 +223,7 @@
   --recipe-details-ingredients-radius: var(--hershey-component-recipe-details-ingredients-radius-mobile, 5px);
 
   color: var(--hershey-component-recipe-details-ingredients-color-foreground, #3f000b);
-  font-family: var(--hershey-component-recipe-details-ingredients-typography-body-font-family, sans-serif);
+  font-family: var(--hershey-component-recipe-details-ingredients-typography-body-font-family, hershey-tt, sans-serif);
   font-size: var(--hershey-component-recipe-details-ingredients-typography-body-font-size, 17px);
   line-height: var(--hershey-component-recipe-details-ingredients-typography-body-line-height, 1.5);
 }
@@ -247,17 +283,20 @@
   align-items: flex-start;
   min-height: var(--hershey-component-recipe-details-ingredients-layout-row-min-height, 40px);
   padding-right: var(--hershey-component-recipe-details-ingredients-spacing-panel, 25px);
-  font-size: var(--hershey-component-recipe-details-ingredients-typography-body-font-size, 17px);
+  font-size: var(--hershey-component-recipe-details-ingredients-typography-ingredient-font-size, 18px);
   line-height: var(--hershey-component-recipe-details-ingredients-typography-body-line-height, 1.5);
 }
 
+/* amount and name sit in two columns, so a long name wraps with a hanging indent (source name column: 75%) */
 .recipe-details.ingredients .recipe-details-ingredients-ingredient-amount {
   flex: none;
+  font-weight: var(--hershey-component-recipe-details-ingredients-typography-ingredient-amount-font-weight, 400);
 }
 
 .recipe-details.ingredients .recipe-details-ingredients-ingredient-name {
   width: 75%;
   padding-left: var(--hershey-component-recipe-details-ingredients-spacing-tight, 4px);
+  font-weight: var(--hershey-component-recipe-details-ingredients-typography-ingredient-name-font-weight, 500);
 }
 
 .recipe-details.ingredients .recipe-details-ingredients-ingredient-list a:any-link {
@@ -509,6 +548,47 @@
   .recipe-details.ingredients .recipe-details-ingredients-tools-list li {
     padding-top: var(--hershey-component-recipe-details-ingredients-spacing-stack, 10px);
   }
+
+  /* tablet and small desktop: 4% side gutters, ingredients in two columns */
+  .recipe-details-ingredients-section .default-content-wrapper,
+  .recipe-details-ingredients-section .recipe-details-wrapper {
+    padding-right: 4%;
+    padding-left: 4%;
+  }
+
+  .recipe-details.ingredients .recipe-details-ingredients-ingredient-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    padding: var(--hershey-component-recipe-details-ingredients-spacing-fine, 5px) var(--hershey-component-recipe-details-ingredients-spacing-panel-end, 20px) var(--hershey-component-recipe-details-ingredients-spacing-panel-end, 20px);
+  }
+
+  .recipe-details.ingredients .recipe-details-ingredients-ingredient-list li {
+    font-size: var(--hershey-component-recipe-details-ingredients-typography-ingredient-font-size-tablet, 16px);
+    line-height: var(--hershey-component-recipe-details-ingredients-typography-ingredient-line-height-tablet, 18px);
+  }
+
+  .recipe-details-ingredients-section .recipe-details-ingredients-summary-heading {
+    font-size: var(--hershey-component-recipe-details-ingredients-typography-summary-font-size-tablet, 32px);
+    line-height: var(--hershey-component-recipe-details-ingredients-typography-summary-line-height-desktop, 42px);
+  }
+
+  /* Prep and Total sit side by side from tablet up, as on the source */
+  .recipe-details-ingredients-section .recipe-details-ingredients-times {
+    grid-template-columns: repeat(3, max-content);
+    column-gap: var(--hershey-component-recipe-details-ingredients-spacing-time-gap, 45px);
+  }
+
+  .recipe-details-ingredients-section .recipe-details-ingredients-summary-total {
+    grid-column: auto;
+  }
+
+  .recipe-details-ingredients-section .recipe-details-ingredients-yield .recipe-details-ingredients-summary-item dt,
+  .recipe-details-ingredients-section .recipe-details-ingredients-yield .recipe-details-ingredients-summary-item dd {
+    font-size: var(--hershey-component-recipe-details-ingredients-typography-yield-font-size, 21px);
+    font-weight: var(--hershey-component-recipe-details-ingredients-typography-yield-font-weight, 700);
+    line-height: var(--hershey-component-recipe-details-ingredients-typography-yield-line-height, 27px);
+  }
 }
 
 @media (width >= 900px) {
@@ -517,8 +597,6 @@
     max-width: var(--hershey-component-recipe-details-ingredients-layout-max-width, 1190px);
     margin-right: auto;
     margin-left: auto;
-    padding-right: 0;
-    padding-left: 0;
   }
 
   .recipe-details-ingredients-section .recipe-details-ingredients-summary {
@@ -529,7 +607,7 @@
 
   .recipe-details-ingredients-section .recipe-details-ingredients-summary-heading {
     padding: var(--hershey-component-recipe-details-ingredients-spacing-inset, 15px) 0 var(--hershey-component-recipe-details-ingredients-spacing-panel, 25px);
-    font-size: var(--hershey-component-recipe-details-ingredients-typography-summary-font-size-desktop, 36px);
+    font-size: var(--hershey-component-recipe-details-ingredients-typography-summary-font-size-tablet, 32px);
     line-height: var(--hershey-component-recipe-details-ingredients-typography-summary-line-height-desktop, 42px);
   }
 
@@ -547,26 +625,13 @@
     grid-column: auto;
   }
 
+  /* Bake Mode sits at the right end of the summary row, level with Prep / Total */
   .recipe-details-ingredients-section .recipe-details-ingredients-bake-mode {
-    grid-template-columns: minmax(0, 1fr) var(--hershey-component-recipe-details-ingredients-bake-mode-switch-width-desktop, 80px);
-    align-self: end;
+    grid-template-columns: var(--hershey-component-recipe-details-ingredients-bake-mode-switch-width-desktop, 77px) max-content;
+    place-self: end;
     margin-bottom: var(--hershey-component-recipe-details-ingredients-spacing-bake, 33px);
     padding: 0;
-  }
-
-  .recipe-details-ingredients-section .recipe-details-ingredients-bake-copy p {
-    font-size: var(--hershey-component-recipe-details-ingredients-typography-bake-font-size-desktop, 16px);
-  }
-
-  .recipe-details-ingredients-section .recipe-details-ingredients-bake-switch {
-    width: var(--hershey-component-recipe-details-ingredients-bake-mode-switch-width-desktop, 80px);
-    height: var(--hershey-component-recipe-details-ingredients-bake-mode-switch-height-desktop, 46px);
-  }
-
-  .recipe-details-ingredients-section .recipe-details-ingredients-bake-slider::before {
-    left: var(--hershey-component-recipe-details-ingredients-spacing-small, 8px);
-    width: var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-size-desktop, 38px);
-    height: var(--hershey-component-recipe-details-ingredients-bake-mode-thumb-size-desktop, 38px);
+    border-top: 0;
   }
 
   .recipe-details.ingredients {
@@ -586,14 +651,9 @@
     margin-bottom: var(--hershey-component-recipe-details-ingredients-spacing-inset, 15px);
   }
 
-  .recipe-details.ingredients .recipe-details-ingredients-ingredient-list {
-    padding: var(--hershey-component-recipe-details-ingredients-spacing-inset, 15px) 0 var(--hershey-component-recipe-details-ingredients-spacing-roomy, 30px) var(--hershey-component-recipe-details-ingredients-spacing-roomy, 30px);
-  }
-
   .recipe-details.ingredients .recipe-details-ingredients-ingredient-list li {
     min-height: 0;
     margin-top: var(--hershey-component-recipe-details-ingredients-spacing-inset, 15px);
-    line-height: var(--hershey-component-recipe-details-ingredients-typography-copy-line-height, 27px);
   }
 
   .recipe-details.ingredients .recipe-details-ingredients-tools {
@@ -629,6 +689,32 @@
 }
 
 @media (width >= 1200px) {
+  .recipe-details-ingredients-section .recipe-details-ingredients-summary-heading {
+    font-size: var(--hershey-component-recipe-details-ingredients-typography-summary-font-size-desktop, 36px);
+  }
+
+  .recipe-details-ingredients-section .recipe-details-ingredients-yield .recipe-details-ingredients-summary-item dt,
+  .recipe-details-ingredients-section .recipe-details-ingredients-yield .recipe-details-ingredients-summary-item dd {
+    font-size: var(--hershey-component-recipe-details-ingredients-typography-yield-font-size-desktop, 24px);
+  }
+
+  .recipe-details-ingredients-section .default-content-wrapper,
+  .recipe-details-ingredients-section .recipe-details-wrapper {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* the ingredients sit in a third-width column again: one column list */
+  .recipe-details.ingredients .recipe-details-ingredients-ingredient-list {
+    display: block;
+    padding: var(--hershey-component-recipe-details-ingredients-spacing-inset, 15px) 0 var(--hershey-component-recipe-details-ingredients-spacing-roomy, 30px) var(--hershey-component-recipe-details-ingredients-spacing-roomy, 30px);
+  }
+
+  .recipe-details.ingredients .recipe-details-ingredients-ingredient-list li {
+    font-size: var(--hershey-component-recipe-details-ingredients-typography-ingredient-font-size, 18px);
+    line-height: var(--hershey-component-recipe-details-ingredients-typography-copy-line-height, 27px);
+  }
+
   .recipe-details.ingredients {
     max-width: var(--hershey-component-recipe-details-ingredients-layout-max-width, 1190px);
     margin: 0 auto;

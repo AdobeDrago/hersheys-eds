@@ -197,17 +197,6 @@
   list-style: none;
 }
 
-/* decorative share glyph */
-.hero.recipe .hero-recipe-share ul::before {
-  content: '';
-  flex: none;
-  width: 23px;
-  height: 24px;
-  margin-right: 37px;
-  background-color: var(--hershey-component-hero-recipe-share-border-color, #007bbd);
-  mask: var(--share-icon-share-nodes) center / contain no-repeat;
-}
-
 /* divider between the share glyph and the social pill */
 .hero.recipe .hero-recipe-share ul::after {
   content: '';
@@ -225,13 +214,13 @@
   margin: 0;
 }
 
-.hero.recipe .hero-recipe-share li:not(.hero-recipe-share-copy) {
+.hero.recipe .hero-recipe-share li:not(.hero-recipe-share-copy, .hero-recipe-share-toggle) {
   height: 42px;
   padding: 0 5px;
   background-color: var(--hershey-component-hero-recipe-share-action-background, #007bbd);
 }
 
-.hero.recipe .hero-recipe-share li:first-child {
+.hero.recipe .hero-recipe-share li.hero-recipe-share-facebook {
   border-radius: 50px 0 0 50px;
   padding-left: 15px;
 }
@@ -293,6 +282,77 @@
 .hero.recipe .hero-recipe-share-copy button::before {
   width: 35px;
   height: 28px;
+}
+
+/* share glyph: toggles the social pill */
+.hero.recipe .hero-recipe-share li.hero-recipe-share-toggle {
+  --hero-recipe-icon: var(--share-icon-share-nodes-outline);
+
+  margin-right: 37px;
+  color: var(--hershey-component-hero-recipe-share-border-color, #007bbd);
+}
+
+.hero.recipe .hero-recipe-share li.hero-recipe-share-toggle button {
+  width: 23px;
+  height: 24px;
+  color: inherit;
+}
+
+.hero.recipe .hero-recipe-share li.hero-recipe-share-toggle button::before {
+  width: 23px;
+  height: 24px;
+}
+
+/* collapsed: solid blue pill with the share glyph, a divider and the copy-link button */
+.hero.recipe .hero-recipe-share.is-collapsed li:not(.hero-recipe-share-toggle, .hero-recipe-share-copy) {
+  display: none;
+}
+
+.hero.recipe .hero-recipe-share.is-collapsed ul {
+  border-color: var(--hershey-component-hero-recipe-share-border-color, #007bbd);
+  padding: var(--hershey-component-hero-recipe-share-collapsed-padding, 2px) var(--hershey-component-hero-recipe-share-collapsed-padding, 2px) var(--hershey-component-hero-recipe-share-collapsed-padding, 2px) var(--hershey-component-hero-recipe-share-collapsed-padding-start, 3px);
+  background-color: var(--hershey-component-hero-recipe-share-border-color, #007bbd);
+}
+
+.hero.recipe .hero-recipe-share.is-collapsed ul::after {
+  position: static;
+  order: 1;
+  height: var(--hershey-component-hero-recipe-share-collapsed-divider-height, 36px);
+  margin: 0 var(--hershey-component-hero-recipe-share-collapsed-divider-margin, 17px);
+  border-right-color: var(--background-color);
+  transform: none;
+}
+
+.hero.recipe .hero-recipe-share.is-collapsed li.hero-recipe-share-toggle,
+.hero.recipe .hero-recipe-share.is-collapsed li.hero-recipe-share-copy {
+  width: var(--hershey-component-hero-recipe-share-collapsed-item-size, 46px);
+  height: var(--hershey-component-hero-recipe-share-collapsed-item-size, 46px);
+  margin: 0;
+  justify-content: center;
+  color: var(--background-color);
+}
+
+.hero.recipe .hero-recipe-share.is-collapsed li.hero-recipe-share-copy {
+  order: 2;
+}
+
+.hero.recipe .hero-recipe-share.is-collapsed li.hero-recipe-share-toggle button {
+  width: var(--hershey-component-hero-recipe-share-collapsed-icon-size, 20px);
+  height: var(--hershey-component-hero-recipe-share-collapsed-icon-size, 20px);
+}
+
+.hero.recipe .hero-recipe-share.is-collapsed li.hero-recipe-share-toggle button::before {
+  width: var(--hershey-component-hero-recipe-share-collapsed-icon-size, 20px);
+  height: var(--hershey-component-hero-recipe-share-collapsed-icon-size, 20px);
+}
+
+.hero.recipe .hero-recipe-share.is-collapsed li.hero-recipe-share-copy button {
+  color: var(--background-color);
+}
+
+.hero.recipe .hero-recipe-share.is-collapsed li.hero-recipe-share-copy button::before {
+  width: var(--hershey-component-hero-recipe-share-collapsed-copy-icon-width, 25px);
+  height: var(--hershey-component-hero-recipe-share-collapsed-copy-icon-height, 20px);
 }
 
 /* 16:9 hero image, edge to edge on mobile */
@@ -471,17 +531,11 @@
     padding: 7px 27px;
   }
 
-  .hero.recipe .hero-recipe-share ul::before {
-    width: 26px;
-    height: 28px;
-    margin-right: 42px;
-  }
-
   .hero.recipe .hero-recipe-share ul::after {
     left: 74px;
   }
 
-  .hero.recipe .hero-recipe-share li:not(.hero-recipe-share-copy) {
+  .hero.recipe .hero-recipe-share li:not(.hero-recipe-share-copy, .hero-recipe-share-toggle) {
     height: 50px;
   }
 
@@ -504,6 +558,16 @@
   .hero.recipe .hero-recipe-share-copy button::before {
     width: 40px;
     height: 32px;
+  }
+
+  .hero.recipe .hero-recipe-share li.hero-recipe-share-toggle {
+    margin-right: 42px;
+  }
+
+  .hero.recipe .hero-recipe-share li.hero-recipe-share-toggle button,
+  .hero.recipe .hero-recipe-share li.hero-recipe-share-toggle button::before {
+    width: 26px;
+    height: 28px;
   }
 
   .hero.recipe .hero-recipe-media {
