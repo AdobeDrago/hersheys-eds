@@ -1,7 +1,8 @@
 import { createOptimizedPicture, getMetadata, loadCSS } from '../../scripts/aem.js';
 
 /**
- * Recipe variant of the hero block (class `recipe`, authored as Hero (Recipe)).
+ * Recipe variant of the hero block (class `recipe`, authored as Hero (Recipe), or as Hero
+ * in a section whose Section Metadata Style is `carousel`).
  *
  * Content model: 1 column x 2 rows (row order is not enforced).
  *   Image row: the hero image.
@@ -11,9 +12,22 @@ import { createOptimizedPicture, getMetadata, loadCSS } from '../../scripts/aem.
  *   - star rating from the `bvid` page metadata (Bazaarvoice inline rating; bv.js is
  *     loaded by loadDelayed() in scripts/scripts.js when a [data-bv-show] exists)
  *   - share bar (Facebook, Pinterest, Email, Print, Copy URL) built from the page URL
+ *   - image gallery with previous/next controls when more than one image is authored
+ *     (activity pages)
  */
 
 const SKILL_LEVEL = /skill\s*level/i;
+
+let galleryCount = 0;
+
+/**
+ * The kind of page the hero introduces, used in the share and print labels.
+ * @param {string} pathname
+ * @returns {string}
+ */
+function pageNoun(pathname) {
+  return pathname.startsWith('/activities/') ? 'activity' : 'recipe';
+}
 
 /**
  * Re-renders a picture as an optimized picture when the image is served from this origin.
@@ -95,10 +109,11 @@ function buildShareBar(title, imageUrl) {
   const pageUrl = window.location.href.split('#')[0];
   const url = encodeURIComponent(pageUrl);
   const text = encodeURIComponent(title || document.title);
+  const noun = pageNoun(window.location.pathname);
 
   const nav = document.createElement('nav');
   nav.className = 'hero-recipe-share';
-  nav.setAttribute('aria-label', 'Share this recipe');
+  nav.setAttribute('aria-label', `Share this ${noun}`);
   const ul = document.createElement('ul');
 
   ul.append(
@@ -107,7 +122,7 @@ function buildShareBar(title, imageUrl) {
     shareItem('email', 'Share by email', `mailto:?subject=${text}&body=${url}`),
   );
 
-  const print = shareItem('print', 'Print recipe');
+  const print = shareItem('print', `Print ${noun}`);
   print.querySelector('button').addEventListener('click', () => window.print());
 
   const copy = shareItem('copy', 'Copy link');
@@ -135,6 +150,68 @@ function buildShareBar(title, imageUrl) {
   ul.append(print, copy);
   nav.append(ul, status);
   return nav;
+}
+
+/**
+ * Scrolls a gallery track to a slide, honouring reduced motion.
+ * @param {HTMLElement} track
+ * @param {number} index
+ */
+function scrollToSlide(track, index) {
+  track.scrollTo({
+    left: index * track.clientWidth,
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+  });
+}
+
+/**
+ * Builds a swipeable image gallery with previous/next buttons.
+ * @param {HTMLPictureElement[]} pictures
+ * @returns {HTMLElement}
+ */
+function buildGallery(pictures) {
+  galleryCount += 1;
+  const gallery = document.createElement('div');
+  gallery.className = 'hero-recipe-gallery';
+  gallery.setAttribute('role', 'region');
+  gallery.setAttribute('aria-roledescription', 'carousel');
+  gallery.setAttribute('aria-label', 'Images');
+
+  const track = document.createElement('ul');
+  track.className = 'hero-recipe-gallery-track';
+  track.id = `hero-recipe-gallery-${galleryCount}`;
+  track.tabIndex = 0;
+  track.append(...pictures.map((picture, i) => {
+    const slide = document.createElement('li');
+    slide.className = 'hero-recipe-gallery-slide';
+    slide.setAttribute('role', 'group');
+    slide.setAttribute('aria-roledescription', 'slide');
+    slide.setAttribute('aria-label', `${i + 1} of ${pictures.length}`);
+    slide.append(picture);
+    return slide;
+  }));
+
+  const current = () => Math.round(track.scrollLeft / (track.clientWidth || 1));
+  const arrows = [-1, 1].map((direction) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `hero-recipe-gallery-${direction < 0 ? 'prev' : 'next'}`;
+    button.setAttribute('aria-label', direction < 0 ? 'Previous image' : 'Next image');
+    button.setAttribute('aria-controls', track.id);
+    button.addEventListener('click', () => scrollToSlide(track, current() + direction));
+    return button;
+  });
+
+  const update = () => {
+    const index = current();
+    arrows[0].disabled = index <= 0;
+    arrows[1].disabled = index >= pictures.length - 1;
+  };
+  track.addEventListener('scroll', update, { passive: true });
+  update();
+
+  gallery.append(track, arrows[0], arrows[1]);
+  return gallery;
 }
 
 function decorateRecipe(block) {
@@ -214,15 +291,22 @@ function decorateRecipe(block) {
     imageUrl = img ? new URL(img.getAttribute('src'), window.location.href).href : '';
     media = document.createElement('div');
     media.className = 'hero-recipe-media';
-    const optimized = optimize(picture);
-    // the hero image is the above-the-fold LCP candidate
-    const optimizedImg = optimized.querySelector('img');
-    if (optimizedImg) {
-      if (!optimizedImg.hasAttribute('alt')) optimizedImg.alt = '';
-      optimizedImg.loading = 'eager';
-      optimizedImg.fetchPriority = 'high';
-    }
-    media.append(optimized);
+    const optimized = pictures.map((p, i) => {
+      const result = optimize(p);
+      const resultImg = result.querySelector('img');
+      if (!resultImg) return result;
+      if (!resultImg.hasAttribute('alt')) resultImg.alt = '';
+      // the first hero image is the above-the-fold LCP candidate
+      if (i === 0) {
+        resultImg.loading = 'eager';
+        resultImg.fetchPriority = 'high';
+      } else {
+        resultImg.loading = 'lazy';
+      }
+      return result;
+    });
+    if (optimized.length > 1) media.append(buildGallery(optimized));
+    else media.append(optimized[0]);
   }
 
   content.append(buildShareBar(heading ? heading.textContent.trim() : '', imageUrl));
@@ -245,6 +329,8 @@ function decorateRecipe(block) {
  * @param {Element} block The hero block element
  */
 export default async function decorate(block) {
+  // section metadata `Style: carousel` renders a plain Hero as the recipe/activity overview
+  if (block.closest('.section.carousel')) block.classList.add('recipe');
   if (block.classList.contains('recipe')) {
     decorateRecipe(block);
     return;

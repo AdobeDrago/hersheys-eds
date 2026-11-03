@@ -314,6 +314,113 @@
   object-fit: cover;
 }
 
+/* several images (activity pages): one per view, swipe or use the arrows */
+.hero.recipe .hero-recipe-gallery {
+  --hero-recipe-gallery-arrow-size: 32px;
+  --hero-recipe-gallery-arrow-gap: 31px;
+  --hero-recipe-gallery-chevron-size: 7px;
+  --hero-recipe-gallery-chevron-stroke: 2px;
+
+  position: relative;
+}
+
+.hero.recipe .hero-recipe-gallery-track {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  list-style: none;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.hero.recipe .hero-recipe-gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.hero.recipe .hero-recipe-gallery-track:focus-visible {
+  outline: 2px solid var(--hershey-component-hero-recipe-share-border-color, #007bbd);
+  outline-offset: 2px;
+}
+
+.hero.recipe .hero-recipe-gallery-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+/* prev/next: white circles side by side, centred 10px above the bottom of the image (as on hersheyland.com) */
+.hero.recipe .hero-recipe-gallery-prev,
+.hero.recipe .hero-recipe-gallery-next {
+  position: absolute;
+  bottom: 10px;
+  display: grid;
+  place-items: center;
+  width: var(--hero-recipe-gallery-arrow-size);
+  height: var(--hero-recipe-gallery-arrow-size);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--hershey-component-hero-recipe-share-background, #fff);
+  color: var(--hershey-component-hero-recipe-share-border-color, #007bbd);
+  cursor: pointer;
+}
+
+.hero.recipe .hero-recipe-gallery-prev {
+  right: calc(50% + var(--hero-recipe-gallery-arrow-gap) / 2);
+}
+
+.hero.recipe .hero-recipe-gallery-next {
+  left: calc(50% + var(--hero-recipe-gallery-arrow-gap) / 2);
+}
+
+.hero.recipe .hero-recipe-gallery-prev:hover,
+.hero.recipe .hero-recipe-gallery-next:hover {
+  box-shadow: 0 0 12px rgb(39 1 7 / 8%);
+}
+
+.hero.recipe .hero-recipe-gallery-prev::before,
+.hero.recipe .hero-recipe-gallery-next::before {
+  content: '';
+  width: var(--hero-recipe-gallery-chevron-size);
+  height: var(--hero-recipe-gallery-chevron-size);
+  border-top: var(--hero-recipe-gallery-chevron-stroke) solid currentcolor;
+  border-right: var(--hero-recipe-gallery-chevron-stroke) solid currentcolor;
+  transform: translateX(-2px) rotate(45deg);
+}
+
+.hero.recipe .hero-recipe-gallery-prev::before {
+  transform: translateX(2px) rotate(-135deg);
+}
+
+.hero.recipe .hero-recipe-gallery-prev:disabled,
+.hero.recipe .hero-recipe-gallery-next:disabled {
+  cursor: default;
+}
+
+.hero.recipe .hero-recipe-gallery-prev:focus-visible,
+.hero.recipe .hero-recipe-gallery-next:focus-visible {
+  outline: 2px solid var(--hershey-component-hero-recipe-share-border-color, #007bbd);
+  outline-offset: 2px;
+}
+
+@media (width >= 768px) {
+  .hero.recipe .hero-recipe-gallery {
+    --hero-recipe-gallery-arrow-size: 56px;
+    --hero-recipe-gallery-arrow-gap: 51px;
+    --hero-recipe-gallery-chevron-size: 10px;
+    --hero-recipe-gallery-chevron-stroke: 3px;
+  }
+}
+
+@media print {
+  .hero.recipe .hero-recipe-gallery-slide:not(:first-child),
+  .hero.recipe .hero-recipe-gallery-prev,
+  .hero.recipe .hero-recipe-gallery-next {
+    display: none;
+  }
+}
+
 /* intro sits under the image: 16/24 TT Norms, chocolate, centered 8/12 measure */
 .hero.recipe .hero-recipe-description {
   box-sizing: border-box;
