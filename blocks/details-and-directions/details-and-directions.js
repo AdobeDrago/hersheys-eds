@@ -9,6 +9,8 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
  *   Directions cell: heading ("Directions") + ordered list; each step holds its text followed by
  *     an optional step image. An optional heading-led tools list before it becomes a disclosure.
  * The cell holding an ordered list is treated as the directions cell, regardless of order.
+ * When the first row has no authored supplies, they come from the `youllneed1..n` columns of
+ * the page's row in the supplies sheet (matched on `pagepath`).
  * Generated, not authored: the section summary (heading + Yields) and the Make Mode switch.
  */
 
@@ -18,8 +20,13 @@ const HEADING = 'h1, h2, h3, h4, h5, h6';
 const MODE_PARAGRAPH = /^\s*Make\s+Mode\s*:\s*(.*)$/i;
 const MODE_LABEL = 'Make Mode';
 const MODE_DESCRIPTION = 'Prevent your screen from going dark.';
+const SUPPLIES_SHEET = '/activities/youllneedsteps.json';
+const SUPPLIES_HEADING = 'You\'ll Need';
+const SUPPLY_COLUMN = /^youllneed(\d+)$/;
+const SITE_HOSTS = ['www.hersheyland.com', 'hersheyland.com'];
 
 let blockCount = 0;
+let suppliesSheet;
 
 /**
  * Re-renders a picture as an optimized picture when the image is served from this origin.
@@ -230,6 +237,131 @@ function decorateSupplies(cell) {
 }
 
 /**
+ * @param {Element} [cell]
+ * @returns {boolean} whether the cell holds authored supply items
+ */
+function hasSupplies(cell) {
+  if (!cell) return false;
+  return Boolean(cell.querySelector('li'))
+    || [...cell.querySelectorAll(':scope > p')].some((p) => p.textContent.trim());
+}
+
+/**
+ * Normalizes a page path so `/x/page.html`, `/x/page/` and full URLs compare equal.
+ * @param {string} path
+ * @returns {string}
+ */
+function pageKey(path) {
+  const { pathname } = new URL(path, window.location.origin);
+  return pathname.replace(/\.html$/, '').replace(/\/$/, '').toLowerCase();
+}
+
+/**
+ * Fetches the supplies sheet once per page; failures resolve to no rows.
+ * @returns {Promise<object[]>}
+ */
+function fetchSuppliesSheet() {
+  suppliesSheet ??= fetch(SUPPLIES_SHEET)
+    .then((resp) => (resp.ok ? resp.json() : {}))
+    .then((json) => (Array.isArray(json.data) ? json.data : []))
+    .catch(() => []);
+  return suppliesSheet;
+}
+
+/**
+ * Supply values for a page, in column order (`youllneed1`, `youllneed2`, ...), blanks dropped.
+ * @param {object[]} rows sheet rows
+ * @param {string} pathname
+ * @returns {string[]}
+ */
+function findSupplies(rows, pathname) {
+  const key = pageKey(pathname);
+  const row = rows.find((entry) => typeof entry?.pagepath === 'string'
+    && entry.pagepath.trim() && pageKey(entry.pagepath.trim()) === key);
+  if (!row) return [];
+  return Object.keys(row)
+    .map((column) => [Number(column.match(SUPPLY_COLUMN)?.[1]), row[column]])
+    .filter(([index, value]) => index && typeof value === 'string' && value.trim())
+    .sort(([a], [b]) => a - b)
+    .map(([, value]) => value.trim());
+}
+
+/**
+ * Site links become relative like authored ones (`/products/x`); only http(s) links survive.
+ * @param {string} href
+ * @returns {string|null}
+ */
+function supplyHref(href) {
+  let url;
+  try {
+    url = new URL(href, window.location.origin);
+  } catch {
+    return null;
+  }
+  if (!['http:', 'https:'].includes(url.protocol)) return null;
+  if (!SITE_HOSTS.includes(url.hostname)) return url.href;
+  return `${url.pathname.replace(/\.html$/, '')}${url.search}${url.hash}`;
+}
+
+/**
+ * Builds a list item from a sheet value. The value may contain `<a>` links; everything else is
+ * kept as text, so sheet markup never reaches the page as HTML.
+ * @param {string} value
+ * @returns {HTMLLIElement}
+ */
+function buildSupplyItem(value) {
+  const li = document.createElement('li');
+  const parsed = new DOMParser().parseFromString(value, 'text/html');
+  parsed.body.childNodes.forEach((node) => {
+    const href = node.nodeName === 'A' ? supplyHref(node.getAttribute('href') || '') : null;
+    if (!href) {
+      li.append(node.textContent);
+      return;
+    }
+    const link = document.createElement('a');
+    link.href = href;
+    link.textContent = node.textContent.trim();
+    li.append(link);
+  });
+  return li;
+}
+
+/**
+ * Fills a supplies cell (or a new one) from the sheet row for this page.
+ * @param {Element} [cell] authored supplies cell without items, e.g. only a heading
+ * @returns {Promise<Element|null>} the filled cell, or null when the sheet has nothing
+ */
+async function loadSupplies(cell) {
+  const values = findSupplies(await fetchSuppliesSheet(), window.location.pathname);
+  if (!values.length) return null;
+  const target = cell ?? document.createElement('div');
+  if (!target.querySelector(HEADING)) {
+    const heading = document.createElement('h3');
+    heading.textContent = SUPPLIES_HEADING;
+    target.prepend(heading);
+  }
+  const list = document.createElement('ul');
+  list.append(...values.map(buildSupplyItem));
+  target.append(list);
+  return target;
+}
+
+/**
+ * Drops empty cells and identifies the supplies and directions cells of a row.
+ * @param {Element} row
+ * @returns {{ supplies?: Element, method?: Element }}
+ */
+function splitRow(row) {
+  [...row.children]
+    .filter((cell) => !cell.children.length && !cell.textContent.trim())
+    .forEach((cell) => cell.remove());
+  const filled = [...row.children];
+  let method = filled.find((cell) => cell.querySelector(':scope > ol'));
+  if (!method && filled.length > 1) [, method] = filled;
+  return { supplies: filled.find((cell) => cell !== method), method };
+}
+
+/**
  * Creates one label/value item for the summary.
  * @param {string} label
  * @param {string} value
@@ -367,7 +499,7 @@ function decorateSummary(section, id) {
   summary.replaceChildren(main, buildMode(id, modeText));
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
   const section = block.closest('.section');
   if (!section?.classList.contains('activities')) {
     // eslint-disable-next-line no-console
@@ -379,18 +511,18 @@ export default function decorate(block) {
 
   decorateSummary(section, id);
 
+  // authored supplies win; only an unauthored first row waits for the sheet
+  if (!block.children.length) block.append(document.createElement('div'));
+  const [firstRow] = block.children;
+  const authored = splitRow(firstRow).supplies;
+  if (!hasSupplies(authored)) {
+    const loaded = await loadSupplies(authored);
+    if (loaded && !authored) firstRow.prepend(loaded);
+  }
+
   [...block.children].forEach((row) => {
     row.classList.add('details-and-directions-row');
-
-    // drop empty cells so the layout does not reserve space for them
-    [...row.children]
-      .filter((cell) => !cell.children.length && !cell.textContent.trim())
-      .forEach((cell) => cell.remove());
-    const filled = [...row.children];
-
-    let method = filled.find((cell) => cell.querySelector(':scope > ol'));
-    if (!method && filled.length > 1) [, method] = filled;
-    const supplies = filled.find((cell) => cell !== method);
+    const { supplies, method } = splitRow(row);
 
     if (supplies) decorateSupplies(supplies);
     if (method) decorateMethod(method, id);

@@ -29,6 +29,12 @@ The block uses one row with two cells:
 
 The cell holding the ordered list is treated as the directions cell, regardless of order.
 
+### Supplies from the sheet
+
+Authored supplies always win. When the first row has no supply items (the cell is missing, empty, or holds only a heading), the block reads `/activities/youllneedsteps.json` and uses the row whose `pagepath` matches the page (`/activities/x.html` matches `/activities/x`). Its non-empty `youllneed1` to `youllneed14` columns become the list, in column order. A missing heading defaults to `You'll Need`.
+
+Sheet values are plain text plus optional `<a href=...>` links; other markup is shown as text. Links to `www.hersheyland.com` become site-relative without `.html` (`/products/x`), like authored links. If the page has no sheet row, the block shows the directions only.
+
 ## Decoration
 
 - Marks the section with `details-and-directions-section`: grey band with a lime wave (`#b7d34a`).
