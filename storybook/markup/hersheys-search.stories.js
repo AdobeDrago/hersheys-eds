@@ -1,5 +1,5 @@
-import decorateSearchRecipes from '@adobe/aem-boilerplate/blocks/search-recipes/search-recipes.js';
-import '@adobe/aem-boilerplate/blocks/search-recipes/search-recipes.css';
+import decorateHersheysSearch from '@adobe/aem-boilerplate/blocks/hersheys-search/hersheys-search.js';
+import '@adobe/aem-boilerplate/blocks/hersheys-search/hersheys-search.css';
 import {
   createPage, element, section, showcase,
 } from './story-helpers.js';
@@ -51,11 +51,11 @@ function mockAlgolia(hitsPerPage, { empty = false, fail = false } = {}) {
 function renderSearch(mockOptions, hitsPerPage = 6) {
   const root = createPage('Blocks', 'Search (Recipes)', 'Search results are mocked; no request reaches Algolia.');
   const main = showcase(root);
-  const block = element('div', 'search-recipes block');
+  const block = element('div', 'hersheys-search block');
   // The block calls the global fetch; the mock stays installed so later searches stay offline.
   window.fetch = mockAlgolia(hitsPerPage, mockOptions);
-  decorateSearchRecipes(block);
-  section(main, block, 'search-recipes-container');
+  decorateHersheysSearch(block);
+  section(main, block, 'hersheys-search-container');
   return root;
 }
 

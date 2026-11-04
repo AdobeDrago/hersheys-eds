@@ -1,0 +1,272 @@
+/*
+ * Timeline (about/history): a decade band with two columns of cards. Values measured on
+ * hersheyland.com/about/history.html (#timeline-wrapper). Tan band #feebd0 with #3f000b text,
+ * dark band #3c131c with white text.
+ */
+main .section.timeline-light,
+main .section.timeline-dark {
+  --timeline-text: #3f000b;
+
+  margin: 0;
+  padding: 56px 0 0;
+  overflow-x: clip; /* sliding cards must not widen the page */
+  background: #feebd0;
+  color: var(--timeline-text);
+}
+
+/* curved edge at the bottom of each band, in the next band's colour */
+main .section.timeline-light::after,
+main .section.timeline-dark::after {
+  content: '';
+  display: block;
+  aspect-ratio: 1440 / 165;
+  margin-top: 16px;
+  background: url('/icons/tan-to-munsell-transition.svg') center / 110% 100% no-repeat;
+}
+
+main .section.timeline-dark::after {
+  background-image: url('/icons/munsell-to-tan-transition.svg');
+}
+
+main .section.timeline-dark {
+  --timeline-text: #fff;
+
+  background: #3c131c;
+}
+
+main .section.timeline-light .timeline-wrapper,
+main .section.timeline-dark .timeline-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.timeline {
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(0, 1fr);
+  scroll-margin-top: calc(var(--nav-height) + 56px);
+}
+
+.timeline .timeline-col {
+  min-width: 0;
+  padding: 0 25px; /* the two decade headings end up 50px apart, the kiss between them */
+}
+
+.timeline h2,
+.timeline h3 {
+  color: var(--timeline-text);
+  font-family: hershey-gazpacho, var(--heading-font-family), serif;
+  font-weight: 900;
+}
+
+.timeline .timeline-intro p,
+.timeline .timeline-intro a {
+  color: var(--timeline-text);
+}
+
+.timeline .timeline-intro a {
+  text-decoration: underline;
+}
+
+.timeline .timeline-intro h2 {
+  margin: 0 0 16px;
+  font-size: 36px;
+  line-height: 1.3;
+}
+
+/* the decade label sits on the left column, aligned toward the centre line */
+.timeline .timeline-col-left .timeline-intro:first-child h2:only-child {
+  text-align: left;
+}
+
+.timeline .timeline-intro p {
+  margin: 0 0 24px;
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.timeline .timeline-card {
+  margin: 0 13px 40px 23px;
+}
+
+.timeline .timeline-card > p {
+  margin: 0;
+}
+
+.timeline .timeline-card h3 {
+  margin: 0 0 12px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.timeline .timeline-card picture {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.timeline .timeline-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* the title and text sit in a white box under the picture, as on hersheyland.com */
+.timeline .timeline-card-body {
+  margin: 0 19px;
+  padding: 20px 25px;
+  border-radius: 0 0 10px 10px;
+  background: #fff;
+  box-shadow: 0 0 12px rgb(39 1 7 / 8%);
+  color: #3f000b;
+  font-family: var(--body-font-family);
+}
+
+.timeline .timeline-card-body h4 {
+  margin: 0 0 8px;
+  color: #3f000b;
+  font-family: hershey-gazpacho, var(--heading-font-family), serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 29px;
+}
+
+.timeline .timeline-card-body p {
+  margin: 0 0 12px;
+  color: #3f000b;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.28;
+}
+
+.timeline .timeline-card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.timeline .timeline-card-body a {
+  color: #3f000b;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* live: the first band starts 59px under the hero curve (and its text 50px further down) */
+main .section.timeline-nav-section + .section.timeline-light,
+main .section.timeline-nav-section + .section.timeline-dark {
+  padding-top: 109px;
+}
+
+@media (width >= 1500px) {
+  .timeline .timeline-col {
+    padding: 0 50px;
+  }
+
+  .timeline .timeline-card {
+    margin: 0 9px 40px 11px;
+  }
+}
+
+@media (width >= 900px) {
+  .timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .timeline .timeline-col-left .timeline-intro:first-child h2:only-child {
+    text-align: right;
+  }
+}
+
+/* centre line with the kiss riding it */
+main {
+  position: relative;
+}
+
+main > .timeline-spine {
+  position: absolute;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.timeline-spine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(50% - 4px);
+  width: 8px;
+  height: 100%;
+  background: rgb(255 255 255 / 40%);
+}
+
+.timeline-spine .timeline-kiss {
+  position: sticky;
+  top: 50vh;
+  display: block;
+  margin-top: 40px;
+  margin-left: calc(50% - 35px);
+  width: 70px;
+  height: 70px;
+}
+
+.timeline-spine .timeline-kiss path {
+  fill: #3c131c;
+  stroke: #b5b5b5;
+  stroke-width: 3;
+  transition: fill 0.5s ease-in-out;
+}
+
+.timeline-spine.timeline-spine-dark .timeline-kiss path {
+  fill: #feebd0;
+}
+
+@media (width < 900px) {
+  main .section.timeline-light .timeline-wrapper,
+  main .section.timeline-dark .timeline-wrapper {
+    padding-left: 72px;
+  }
+
+  .timeline-spine::before {
+    left: 31px;
+    width: 4px;
+  }
+
+  .timeline-spine .timeline-kiss {
+    margin-left: 8px;
+    width: 50px;
+    height: 40px;
+  }
+}
+
+/* slide-in: left column from the left, right column from the right (live: come-in .5s) */
+@keyframes timeline-come-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.timeline .timeline-card-pending > :not(h3) {
+  opacity: 0;
+  transform: translateY(200px);
+}
+
+.timeline .timeline-card-in > :not(h3) {
+  animation: timeline-come-in 0.5s ease forwards;
+}
+
+@media (width >= 992px) {
+  .timeline .timeline-col-left .timeline-card-pending > :not(h3) {
+    transform: translateX(-200px);
+  }
+
+  .timeline .timeline-col-right .timeline-card-pending > :not(h3) {
+    transform: translateX(200px);
+  }
+}

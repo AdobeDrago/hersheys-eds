@@ -1,0 +1,39 @@
+{
+  "blockName": "timeline",
+  "canonicalModel": "standalone",
+  "variants": [
+    {
+      "variantName": "default",
+      "authoredName": "Timeline",
+      "visualCharacteristics": {
+        "colorScheme": "light",
+        "density": "medium",
+        "purpose": "history-timeline",
+        "imagePattern": "inline",
+        "structure": "decade label + intro + two columns of year cards"
+      },
+      "contentPattern": "One row per item, two cells: column (left or right) and content. A cell with a picture is a card (h3 year, picture, h4 title, text); otherwise it is an intro (h2 and text).",
+      "usage": {
+        "pagesUsing": ["https://www.hersheyland.com/about/history.html"],
+        "reuseCount": 11
+      },
+      "options": []
+    },
+    {
+      "variantName": "dark",
+      "authoredName": "Timeline (dark)",
+      "baseBlock": "timeline",
+      "canonicalModel": "standalone",
+      "visualCharacteristics": {
+        "colorScheme": "dark",
+        "density": "medium",
+        "purpose": "history-timeline",
+        "imagePattern": "inline",
+        "structure": "same as default on a dark brown band"
+      },
+      "contentPattern": "Same as the default Timeline. The live page alternates light and dark decades.",
+      "options": []
+    }
+  ],
+  "memberVariantIds": ["default", "dark"]
+}

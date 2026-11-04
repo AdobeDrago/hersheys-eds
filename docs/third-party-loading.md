@@ -67,7 +67,7 @@ Why each one sits where it does:
 | `bazaarvoice-url` | Page metadata | Hershey's `bv.js` deployment |
 | Delay before the delayed phase | `loadDelayed()` in `scripts/scripts.js` | 3000 ms |
 | Algolia related-products time limit | `RELATED_TIMEOUT` in `blocks/cards/cards-product.js` | 4000 ms |
-| Recipe search time limit | `SEARCH_TIMEOUT` in `blocks/search-recipes/search-recipes.js` | 8000 ms |
+| Recipe search time limit | `SEARCH_TIMEOUT` in `blocks/hersheys-search/hersheys-search.js` | 8000 ms |
 | Reviews fallback | `FALLBACK_DELAY` in `widgets/bazaarvoice/reviews.js` | 8000 ms after `bv.js` is requested |
 | Where to Buy fallback | `FALLBACK_DELAY` in `widgets/pricespider/where-to-buy.js` | 15000 ms |
 
