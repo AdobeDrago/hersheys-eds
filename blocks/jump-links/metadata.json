@@ -1,0 +1,24 @@
+{
+  "variantName": "jump-links",
+  "baseBlock": "jump-links",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "in-page-navigation",
+    "imagePattern": "icon",
+    "structure": "grid of bordered icon tiles linking to page sections"
+  },
+  "contentPattern": "2 columns x N rows: icon | link to a #heading-id",
+  "usage": {
+    "pagesUsing": [
+      "https://www.hersheyland.com/about/faqs.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-11-04"
+  },
+  "options": [],
+  "memberVariantIds": [
+    "jump-links"
+  ]
+}

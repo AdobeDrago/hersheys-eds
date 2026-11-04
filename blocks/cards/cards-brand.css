@@ -330,6 +330,28 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
   }
 }
 
+/* the band's bottom space above holds the footer wave (or a divider wave on brand pages); off brand
+   pages a band with more content after it (e.g. "Question about our brands?" on /about/faqs) is
+   spaced like the bands around it */
+body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands):has(+ .section > *) {
+  padding-top: var(--hershey-component-cards-brands-mid-band-padding-block-start-mobile, 69px);
+  padding-bottom: var(--hershey-component-cards-brands-mid-band-padding-block-end-mobile, 74px);
+}
+
+@media (width >= 768px) {
+  body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands):has(+ .section > *) {
+    padding-top: var(--hershey-component-cards-brands-mid-band-padding-block-start-tablet, 83px);
+    padding-bottom: var(--hershey-component-cards-brands-mid-band-padding-block-end-tablet, 98px);
+  }
+}
+
+@media (width >= 992px) {
+  body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands):has(+ .section > *) {
+    padding-top: var(--hershey-component-cards-brands-mid-band-padding-block-start, 188px);
+    padding-bottom: var(--hershey-component-cards-brands-mid-band-padding-block-end, 164px);
+  }
+}
+
 /*
  * spotlight variant (`Cards (spotlight)`): hersheyland.com's recipe feature set on brand pages,
  * e.g. /brands/hersheys/cookies-n-creme. The first card is a large spotlight beside a column of

@@ -32,10 +32,9 @@ function decorateSlider(block, list) {
   });
   const dots = document.createElement('div');
   dots.className = 'cards-slider-dots';
-  // related sliders, and the product, stories and content sliders on brand pages, show one
-  // page indicator per page of cards
-  const paged = block.classList.contains('related')
-    || block.classList.contains('dots')
+  // related, callout and dots sliders, and the product, stories and content sliders on brand
+  // pages, show one page indicator per page of cards
+  const paged = ['related', 'callout', 'dots'].some((name) => block.classList.contains(name))
     || (isBrandPage() && ['product', 'stories', 'content'].some((name) => block.classList.contains(name)));
   // a page is the visible track width plus one gap; the track padding is not scrollable content
   const measure = () => {
@@ -87,6 +86,9 @@ export default async function decorate(block) {
   if (block.classList.contains('brand') && block.classList.contains('slider')) {
     block.classList.add('product');
   }
+  // `Cards (callout)` scrolls below 992px and lays out as a row of three from there
+  const callout = block.classList.contains('callout');
+  if (callout) block.classList.add('slider');
   if (block.classList.contains('product')) {
     // the product variant has its own markup, so it loads its own script and styles
     // `Cards (product, slider)` on brand pages: the product cards scroll like the other sliders
@@ -123,6 +125,7 @@ export default async function decorate(block) {
   const brandStyles = BRAND_VARIANTS.some((variant) => block.classList.contains(variant))
     ? loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-brand.css`)
     : null;
+  const calloutStyles = callout ? loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-callout.css`) : null;
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
@@ -164,5 +167,5 @@ export default async function decorate(block) {
   }
   block.replaceChildren(ul);
   if (block.classList.contains('slider')) decorateSlider(block, ul);
-  await brandStyles;
+  await Promise.all([brandStyles, calloutStyles]);
 }

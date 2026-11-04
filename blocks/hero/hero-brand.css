@@ -225,6 +225,21 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
 }
 
 /*
+ * overlap option (`Hero (brand, square, overlap)`): below 992px the title rises over the bottom of
+ * the photo, for photos that fade into the band colour (e.g. /about/faqs). Value from
+ * component.hero.brand.overlap-* tokens.
+ */
+@media (width < 992px) {
+  .hero.brand.overlap .hero-brand-text {
+    position: relative;
+  }
+
+  .hero.brand.overlap h1 {
+    margin-top: calc(-1 * var(--hershey-component-hero-brand-overlap-margin-block-start-mobile, 60px));
+  }
+}
+
+/*
  * call to action under the intro (e.g. "Shop YORK" on /york): a pill at least half the text column
  * wide, centred below 992px; from 992px it sits at the start, at least half the column less a
  * gutter. A longer label widens it (e.g. "Shop BREATH SAVERS"). Colours from

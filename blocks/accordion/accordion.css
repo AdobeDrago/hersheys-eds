@@ -80,12 +80,13 @@
 }
 
 /*
- * Brand pages (Hershey template): the FAQ heading and accordion sit in a two-thirds column
- * and the questions keep their colour while one is open, as on hersheyland.com brand pages.
- * Values come from component.accordion.brand.* tokens; brand themes recolour the accordion
- * through the component.accordion.* colour tokens.
+ * Brand pages (Hershey template), and any page through the `faq` section style: the FAQ
+ * heading and accordion sit in a two-thirds column and the questions keep their colour while
+ * one is open, as on hersheyland.com brand pages and /about/faqs. Values come from
+ * component.accordion.brand.* tokens; brand themes recolour the accordion through the
+ * component.accordion.* colour tokens.
  */
-.hershey-brand main > .section:has(> .accordion-wrapper) {
+:is(.hershey-brand main > .section:has(> .accordion-wrapper), main > .section.faq) {
   padding:
     var(--hershey-component-accordion-brand-section-padding-block-start-mobile, 45px)
     var(--hershey-component-accordion-brand-section-padding-inline-end-mobile, 0)
@@ -93,18 +94,18 @@
     var(--hershey-component-accordion-brand-section-padding-inline-start-mobile, 0);
 }
 
-.hershey-brand main > .section:has(> .accordion-wrapper) > .default-content-wrapper {
+:is(.hershey-brand main > .section:has(> .accordion-wrapper), main > .section.faq) > .default-content-wrapper {
   padding-right: var(--hershey-component-accordion-brand-inset, 10px);
 }
 
-.hershey-brand main > .section:has(> .accordion-wrapper) > .default-content-wrapper > h2 {
+:is(.hershey-brand main > .section:has(> .accordion-wrapper), main > .section.faq) > .default-content-wrapper > h2 {
   margin: 0 0 var(--hershey-component-accordion-brand-heading-margin-block-end, 28px);
   font-size: var(--hershey-component-accordion-brand-heading-font-size-mobile, 28px);
   line-height: var(--hershey-component-accordion-brand-heading-line-height, 1.5);
   text-align: center;
 }
 
-.hershey-brand .accordion {
+:is(.hershey-brand, main > .section.faq) .accordion {
   --hershey-component-accordion-label-padding-block: var(--hershey-component-accordion-brand-label-padding-block, 15px);
   --hershey-component-accordion-label-padding-inline-end: var(--hershey-component-accordion-brand-label-padding-inline-end, 23px);
   --hershey-component-accordion-label-font-size: var(--hershey-component-accordion-brand-label-font-size-mobile, 20px);
@@ -117,31 +118,31 @@
   margin: 0 var(--hershey-component-accordion-brand-inset-end, 20px) 0 var(--hershey-component-accordion-brand-inset, 10px);
 }
 
-.hershey-brand .accordion .accordion-item-body {
+:is(.hershey-brand, main > .section.faq) .accordion .accordion-item-body {
   color: var(--hershey-component-accordion-brand-answer-color, #3f000b);
   font-size: var(--hershey-component-accordion-brand-answer-font-size, 17px);
   font-weight: var(--hershey-component-accordion-brand-answer-font-weight, 500);
   line-height: var(--hershey-component-accordion-brand-answer-line-height, 1.5);
 }
 
-.hershey-brand .accordion .accordion-item-body p,
-.hershey-brand .accordion .accordion-item-body > :last-child {
+:is(.hershey-brand, main > .section.faq) .accordion .accordion-item-body p,
+:is(.hershey-brand, main > .section.faq) .accordion .accordion-item-body > :last-child {
   margin: 0 0 1.5em;
 }
 
-.hershey-brand .accordion .accordion-item-body a:any-link {
+:is(.hershey-brand, main > .section.faq) .accordion .accordion-item-body a:any-link {
   border-bottom: var(--hershey-component-accordion-brand-link-border-width, 1px) solid currentcolor;
   color: var(--hershey-component-accordion-brand-link-color, #3f000b);
   font-weight: var(--hershey-component-accordion-label-font-weight, 700);
   text-decoration: none;
 }
 
-.hershey-brand .accordion .accordion-item-body a:any-link:hover {
+:is(.hershey-brand, main > .section.faq) .accordion .accordion-item-body a:any-link:hover {
   border-bottom-color: transparent;
 }
 
 @media (width >= 992px) {
-  .hershey-brand main > .section:has(> .accordion-wrapper) {
+  :is(.hershey-brand main > .section:has(> .accordion-wrapper), main > .section.faq) {
     padding:
       var(--hershey-component-accordion-brand-section-padding-block-start, 110px)
       0
@@ -149,16 +150,16 @@
   }
 
   /* two thirds of the page, at most 840px for the heading and 820px for the questions */
-  .hershey-brand main > .section:has(> .accordion-wrapper) > .default-content-wrapper {
+  :is(.hershey-brand main > .section:has(> .accordion-wrapper), main > .section.faq) > .default-content-wrapper {
     max-width: min(var(--hershey-component-accordion-brand-heading-max-width, 840px), 100vw * 2 / 3);
     padding: 0;
   }
 
-  .hershey-brand main > .section:has(> .accordion-wrapper) > .default-content-wrapper > h2 {
+  :is(.hershey-brand main > .section:has(> .accordion-wrapper), main > .section.faq) > .default-content-wrapper > h2 {
     font-size: var(--hershey-component-accordion-brand-heading-font-size-desktop, 36px);
   }
 
-  .hershey-brand .accordion {
+  :is(.hershey-brand, main > .section.faq) .accordion {
     --hershey-component-accordion-label-font-size: var(--hershey-component-accordion-brand-label-font-size-desktop, 18px);
 
     max-width: min(var(--hershey-component-accordion-brand-max-width, 820px), 100vw * 2 / 3 - 2 * var(--hershey-component-accordion-brand-inset, 10px));
@@ -166,3 +167,110 @@
   }
 }
 
+
+/* `faq` section style (hersheyland.com/about/faqs): teal rules and a maroon plus/minus;
+   values come from component.accordion.faq.* tokens */
+main > .section.faq {
+  --hershey-component-accordion-brand-section-padding-block-end-mobile: var(--hershey-component-accordion-faq-section-padding-block-end-mobile, 70px);
+  --hershey-component-accordion-brand-section-padding-block-start: var(--hershey-component-accordion-faq-section-padding-block-start, 90px);
+  --hershey-component-accordion-brand-section-padding-block-end: var(--hershey-component-accordion-faq-section-padding-block-end, 110px);
+  --hershey-component-accordion-brand-label-color-inactive: var(--hershey-component-accordion-faq-label-color-inactive, #3f000b);
+  --hershey-component-accordion-border-color: var(--hershey-component-accordion-faq-border-color, #08a9a0);
+  --hershey-component-accordion-icon-color: var(--hershey-component-accordion-faq-icon-color, #3f000b);
+  --hershey-component-accordion-brand-section-padding-inline-start-mobile: var(--hershey-component-accordion-faq-section-padding-inline-mobile, 10px);
+  --hershey-component-accordion-brand-section-padding-inline-end-mobile: var(--hershey-component-accordion-faq-section-padding-inline-mobile, 10px);
+  --hershey-component-accordion-brand-inset-end: var(--hershey-component-accordion-faq-inset-end-mobile, 10px);
+}
+
+/* a note ("Trending questions are updated quarterly.") or a button under the questions */
+main > .section.faq > .accordion-wrapper + .default-content-wrapper {
+  box-sizing: border-box;
+  margin-top: var(--hershey-component-accordion-faq-note-margin-block-start-mobile, 25px);
+  padding-inline: var(--hershey-component-accordion-faq-note-padding-inline-mobile, 10px);
+  font-size: var(--hershey-component-accordion-faq-note-font-size, 17px);
+  font-weight: var(--hershey-component-accordion-faq-note-font-weight, 500);
+  line-height: var(--hershey-component-accordion-faq-line-height, 1.5);
+}
+
+main > .section.faq > .accordion-wrapper + .default-content-wrapper > p {
+  margin: 0;
+}
+
+main > .section.faq > .accordion-wrapper + .default-content-wrapper > p.button-wrapper {
+  padding-top: var(--hershey-component-accordion-faq-action-offset-block-start-mobile, 15px);
+  text-align: center;
+}
+
+main > .section.faq .button-wrapper a.button {
+  border: 0;
+  border-radius: var(--hershey-component-accordion-faq-action-border-radius, 35px);
+  padding: var(--hershey-component-accordion-faq-action-padding-block-mobile, 12px) var(--hershey-component-accordion-faq-action-padding-inline-mobile, 50px);
+  font-size: var(--hershey-component-accordion-faq-note-font-size, 17px);
+  line-height: var(--hershey-component-accordion-faq-line-height, 1.5);
+}
+
+/* a `faq` section with text only ("More FAQs About The Hershey Company"): centred copy in a tan
+   box, full width below 992px and inset from the page edges above */
+main > .section.faq:has(> .default-content-wrapper:only-child) {
+  --hershey-component-accordion-brand-section-padding-block-start-mobile: var(--hershey-component-accordion-faq-box-section-padding-block-mobile, 35px);
+  --hershey-component-accordion-brand-section-padding-block-end-mobile: var(--hershey-component-accordion-faq-box-section-padding-block-mobile, 35px);
+  --hershey-component-accordion-brand-section-padding-inline-start-mobile: 0;
+  --hershey-component-accordion-brand-section-padding-inline-end-mobile: 0;
+  --hershey-component-accordion-brand-section-padding-block-start: var(--hershey-component-accordion-faq-box-section-padding-block, 50px);
+  --hershey-component-accordion-brand-section-padding-block-end: var(--hershey-component-accordion-faq-box-section-padding-block, 50px);
+}
+
+main > .section.faq > .default-content-wrapper:only-child {
+  box-sizing: border-box;
+  border-radius: var(--hershey-component-accordion-faq-box-border-radius, 8px);
+  padding: var(--hershey-component-accordion-faq-box-padding-block-mobile, 35px) var(--hershey-component-accordion-faq-box-padding-inline-mobile, 10px);
+  background-color: var(--hershey-component-accordion-faq-box-background-color, #e2d6c5);
+  font-size: var(--hershey-component-accordion-faq-note-font-size, 17px);
+  font-weight: var(--hershey-component-accordion-faq-note-font-weight, 500);
+  line-height: var(--hershey-component-accordion-faq-line-height, 1.5);
+  text-align: center;
+}
+
+main > .section.faq > .default-content-wrapper:only-child > h2 {
+  margin-bottom: var(--hershey-component-accordion-faq-text-heading-margin-block-end, 8px);
+}
+
+main > .section.faq > .default-content-wrapper:only-child > p {
+  margin: 0 0 1.5em;
+}
+
+/* stylelint-disable-next-line no-descending-specificity -- question links live in .accordion, not here */
+main > .section.faq > .default-content-wrapper:only-child a:any-link {
+  border-bottom: var(--hershey-component-accordion-brand-link-border-width, 1px) solid currentcolor;
+  color: inherit;
+  font-weight: var(--hershey-component-accordion-label-font-weight, 700);
+  text-decoration: none;
+}
+
+main > .section.faq > .default-content-wrapper:only-child a:any-link:hover {
+  border-bottom-color: transparent;
+}
+
+@media (width >= 992px) {
+  main > .section.faq > .default-content-wrapper:only-child {
+    width: calc(100% - 2 * var(--hershey-component-accordion-faq-box-inset, 90px));
+    max-width: var(--hershey-component-accordion-faq-box-max-width, 1260px);
+    padding:
+      var(--hershey-component-accordion-faq-box-padding-block-start, 50px)
+      var(--hershey-component-accordion-faq-box-padding-inline, 50px)
+      var(--hershey-component-accordion-faq-box-padding-block-end, 20px);
+  }
+
+  main > .section.faq > .accordion-wrapper + .default-content-wrapper {
+    margin-top: var(--hershey-component-accordion-faq-note-margin-block-start, 20px);
+    padding-inline: var(--hershey-component-accordion-faq-note-padding-inline, 25px);
+  }
+
+  main > .section.faq > .accordion-wrapper + .default-content-wrapper > p.button-wrapper {
+    padding-top: var(--hershey-component-accordion-faq-action-offset-block-start, 30px);
+  }
+
+  main > .section.faq .button-wrapper a.button {
+    padding: var(--hershey-component-accordion-faq-action-padding-block, 18px) var(--hershey-component-accordion-faq-action-padding-inline, 40px);
+  }
+}

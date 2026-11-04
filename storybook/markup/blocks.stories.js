@@ -1,6 +1,7 @@
 import decorateCards from '@adobe/aem-boilerplate/blocks/cards/cards.js';
 import '@adobe/aem-boilerplate/blocks/cards/cards.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-recipes.css';
+import '@adobe/aem-boilerplate/blocks/cards/cards-callout.css';
 import {
   contentArgTypes, createPage, element, link, picture, section, showcase,
 } from './story-helpers.js';
@@ -45,7 +46,7 @@ export default {
       },
       description: 'Number of authored rows.',
     },
-    variant: { control: 'select', options: ['', 'welcome-cards', 'products', 'related', 'social', 'slider'], description: 'Production Cards block variant.' },
+    variant: { control: 'select', options: ['', 'welcome-cards', 'products', 'related', 'social', 'slider', 'callout'], description: 'Production Cards block variant.' },
   },
   parameters: {
     docs: { description: { component: 'Production Cards decorator and CSS with author-shaped image/text rows. Edit optional images, text and row count in Controls. Links log navigate; slider buttons log activate in Actions. Check image alternatives, focus and slider keyboard scrolling in Accessibility and by hand.' } },
@@ -57,6 +58,8 @@ export const Products = { args: { variant: 'products' } };
 export const Related = { args: { variant: 'related' } };
 export const Social = { args: { variant: 'social', count: 4 } };
 export const Slider = { args: { variant: 'slider', count: 5 } };
+/** `Cards (callout)`: a kiss-dot carousel below 992px, a row of three from 992px. */
+export const Callout = { args: { variant: 'callout' } };
 export const TextOnly = { args: { showImage: false } };
 
 const RECIPES = [

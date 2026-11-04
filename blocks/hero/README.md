@@ -114,6 +114,16 @@ Content model: 1 row x 2 cells, in any order.
 The logo is the picture in the same cell as the heading; any other picture is the photo.
 A missing logo or photo is left out.
 
+Options:
+
+- `square` (`Hero (brand, square)`): a square photo on top below 992px; from 992px the photo half is
+  740px tall and the text is centred in the other half (e.g. `/brands/hersheys/cookies-n-creme`).
+- `overlap` (`Hero (brand, square, overlap)`): below 992px the title rises 60px over the bottom of
+  the photo, for photos that fade into the panel colour (e.g. `/about/faqs`).
+
+The panel colour comes from the brand theme. In a section with Section Metadata `Style: cream`
+(e.g. `/about/faqs`) the panel is light cream (`#fef3e3`).
+
 ## Marquee (`marquee`)
 
 Authored as **Hero (marquee)**. Block classes: `hero marquee`.

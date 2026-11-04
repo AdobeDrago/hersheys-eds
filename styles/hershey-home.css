@@ -119,6 +119,14 @@
   outline-offset: var(--hershey-system-spacing-inset-compact);
 }
 
+/* `cream` section style: a light cream band, e.g. the hero and jump links on /about/faqs; a brand
+   hero in the band takes the same colour */
+.hershey-home main > .cream {
+  --hershey-component-hero-brand-band-background: var(--hershey-system-color-surface-cream-light);
+
+  background-color: var(--hershey-system-color-surface-cream-light);
+}
+
 .hershey-home main > .halloween {
   --text-color: var(--hershey-system-color-text-inverse);
   --link-color: var(--hershey-system-color-text-inverse);
@@ -246,5 +254,40 @@
 
   .hershey-home .chocolate > .default-content-wrapper {
     margin-inline: calc(-1 * var(--hershey-system-spacing-inset-large));
+  }
+}
+
+/* `artwork` section style: full-width artwork between two bands (e.g. a milk splash on brand pages,
+   the waves on /about/faqs), authored as an image on its own; it keeps the artwork's proportions */
+.hershey-home main > .section.artwork {
+  padding: 0;
+}
+
+.hershey-home main > .section.artwork > .default-content-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hershey-home main > .section.artwork p {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home main > .section.artwork img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* `artwork, wave`: a wave divider (e.g. on /about/faqs) is drawn half again as wide up to 768px and
+   cropped on the right, so it keeps its height on small screens */
+@media (width <= 768px) {
+  .hershey-home main > .section.artwork.wave {
+    overflow: hidden;
+  }
+
+  .hershey-home main > .section.artwork.wave img {
+    width: 150%;
+    max-width: none;
   }
 }
