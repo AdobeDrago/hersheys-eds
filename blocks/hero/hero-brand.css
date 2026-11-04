@@ -274,10 +274,55 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
   color: var(--hershey-component-hero-brand-cta-foreground, #fff);
 }
 
+/* a paragraph that is all italic is a small caption, e.g. the Pokémon copyright line on /kisses */
+.hero.brand .hero-brand-text p:has(> em:only-child) {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/*
+ * a secondary call to action (an italic link, e.g. "Shop KISSES" on /kisses): an underlined
+ * text link in the copy colour, below the pill; from 992px the two sit side by side at the same
+ * width, as on hersheyland.com/brands/kisses
+ */
+.hero.brand a.button.secondary:any-link {
+  display: block;
+  margin-top: 15px;
+  background-color: transparent;
+  color: var(--hershey-component-hero-brand-color-foreground, #3f000b);
+  text-decoration: underline;
+}
+
+.hero.brand a.button.secondary:hover,
+.hero.brand a.button.secondary:focus-visible {
+  background-color: transparent;
+  color: var(--hershey-component-hero-brand-color-foreground, #3f000b);
+  text-decoration: none;
+}
+
 @media (width >= 992px) {
   .hero.brand a.button:any-link {
     min-width: calc(50% - 2 * var(--hershey-component-hero-brand-cta-gutter, 12.5px));
     padding: var(--hershey-component-hero-brand-cta-padding, 18.5px);
     font-size: var(--hershey-component-hero-brand-cta-font-size, 18px);
+  }
+
+  .hero.brand .hero-brand-text:has(> p.button-wrapper > .secondary) {
+    flex-flow: row wrap;
+    align-content: center;
+  }
+
+  .hero.brand .hero-brand-text:has(> p.button-wrapper > .secondary) > * {
+    flex: 0 0 100%;
+  }
+
+  .hero.brand .hero-brand-text:has(> p.button-wrapper > .secondary) > p.button-wrapper {
+    flex: 0 0 calc(50% - 2 * var(--hershey-component-hero-brand-cta-gutter, 12.5px));
+  }
+
+  .hero.brand .hero-brand-text:has(> p.button-wrapper > .secondary) a.button:any-link {
+    display: block;
+    min-width: 0;
+    margin: 0;
   }
 }

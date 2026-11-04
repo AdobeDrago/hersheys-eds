@@ -4645,3 +4645,302 @@
 }
 
 /* stylelint-enable no-descending-specificity */
+
+/*
+ * HERSHEY'S KISSES additions to the shared HERSHEY'S / KISSES theme (`theme: kisses-primary`). Values measured
+ * on hersheyland.com/brands/kisses at 390 and 1280px (2026-11-04): the shorter hero, the
+ * "It's your happy place" and "Tastes like good memories" bands (Section Metadata styles
+ * `kisses-band-1` and `kisses-band-2`), the quick-fact quizzes on scattered KISSES, the flavor
+ * wheel and the two callout layouts.
+ */
+
+/* the rules below only meet the KISSES page, which never loads another brand theme */
+/* stylelint-disable no-descending-specificity */
+.hershey-home.kisses-primary {
+  --hershey-component-hero-brand-square-media-height: 740px;
+  --hershey-component-cards-grid-section-padding-block-start: 110px;
+  --hershey-component-cards-grid-section-padding-block-end: 92px;
+  --hershey-component-cards-product-slider-band-padding-block-start-mobile: 40px;
+  --hershey-component-cards-product-slider-band-padding-block-start-tablet: 40px;
+  --hershey-component-cards-product-slider-band-padding-block-end-mobile: 0;
+  --hershey-component-hero-brand-square-logo-margin-block-start-mobile: -100px;
+  --hershey-component-hero-brand-square-logo-margin-block-end-mobile: 20px;
+  --hershey-component-accordion-brand-section-padding-block-start-mobile: 100px;
+  --hershey-component-accordion-brand-section-padding-inline-start-mobile: 16px;
+  --hershey-component-accordion-brand-section-padding-inline-end-mobile: 15px;
+  --hershey-component-columns-callout-link-color: #fff;
+  --hershey-component-columns-callout-link-color-hover: #fff;
+  --hershey-component-cards-brands-color-foreground: #fff;
+  --hero-marquee-band-speed: 36;
+}
+
+/* the recipes stack in one column below 768px */
+@media (width < 768px) {
+  .hershey-home.kisses-primary main > .section:has(> .cards-wrapper > .cards.grid) {
+    padding: 0 25px 45px 16px;
+  }
+
+  .hershey-home.kisses-primary main > .section:has(> .cards-wrapper > .cards.grid) > .default-content-wrapper h2 {
+    margin-inline: 25px;
+  }
+
+  .hershey-home.kisses-primary .cards.grid > ul {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hershey-home.kisses-primary .cards.grid > ul > li {
+    margin: 8px 0;
+  }
+}
+
+/* the logo sits inside 30px of padding at the top of its box, as on hersheyland.com/brands/kisses */
+.hershey-home.kisses-primary .hero.brand .hero-brand-logo {
+  box-sizing: border-box;
+  padding: 30px 25px 0;
+}
+
+/* white kiss page indicators and copy on the brown bands */
+.hershey-home.kisses-primary main .cards.slider .cards-slider-dot {
+  background-image: url('/icons/kiss-indicator-inactive-light.svg');
+}
+
+.hershey-home.kisses-primary main .cards.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/kiss-indicator-active-light.svg');
+}
+
+/* the hero pill spans most of the column below 992px */
+@media (width < 992px) {
+  .hershey-home.kisses-primary .hero.brand a.button.primary:any-link {
+    min-width: 90%;
+  }
+}
+
+/* the square callouts (photo beside the copy): 20px above, 50px below from 992px */
+.hershey-home.kisses-primary main > .section:has(> .columns-wrapper > .columns.callout.square) {
+  --hershey-component-columns-callout-section-padding-block-start-mobile: 45px;
+  --hershey-component-columns-callout-section-padding-block-end-mobile: 10px;
+  --hershey-component-columns-callout-section-padding-block-start: 20px;
+  --hershey-component-columns-callout-section-padding-block-end: 50px;
+}
+
+/* the bulk bags callout after the products: 50px above, 70px below from 992px */
+.hershey-home.kisses-primary main > .section:has(> .cards-wrapper > .cards.product) + .section:has(> .columns-wrapper > .columns.callout.square) {
+  --hershey-component-columns-callout-section-padding-block-start: 50px;
+  --hershey-component-columns-callout-section-padding-block-end: 70px;
+}
+
+/* the wide callout ("Discover 12 Days of Blossoms"): the photo 180px down, nothing below */
+.hershey-home.kisses-primary main > .section:has(> .columns-wrapper > .columns.callout:not(.square)) {
+  --hershey-component-columns-callout-section-padding-block-start-mobile: 80px;
+  --hershey-component-columns-callout-section-padding-block-end-mobile: 83px;
+  --hershey-component-columns-callout-section-padding-inline-mobile: 10px;
+  --hershey-component-columns-callout-section-padding-inline-end-mobile: 10px;
+  --hershey-component-columns-callout-section-padding-block-start: 180px;
+  --hershey-component-columns-callout-section-padding-block-end: 0;
+}
+
+/* the lettering bands: three rows, the first scrolling right, pulled together */
+.hershey-home.kisses-primary main > div.section.hero-container:is(.kisses-band-1, .kisses-band-2) {
+  padding: 90px 0 70px;
+  background: #3f000b;
+}
+
+.hershey-home.kisses-primary main > div.section.hero-container.kisses-band-2 {
+  padding-bottom: 75px;
+}
+
+.hershey-home.kisses-primary main > div.section.hero-container:is(.kisses-band-1, .kisses-band-2) .hero.marquee.band {
+  --hero-marquee-band-row-height: 120px;
+  --hero-marquee-band-row-overlap: 25px;
+}
+
+.hershey-home.kisses-primary main > div.section.hero-container.kisses-band-2 .hero.marquee.band {
+  --hero-marquee-band-row-overlap: 20px;
+}
+
+/* the flavor wheel band */
+.hershey-home.kisses-primary main > .section:has(> .cards-wrapper > .cards.wheel) {
+  padding: 87px 10px 3px;
+}
+
+.hershey-home.kisses-primary main > .section > .cards-wrapper:has(> .cards.wheel) {
+  max-width: none;
+  padding: 0;
+}
+
+.hershey-home.kisses-primary .cards.wheel .cards-wheel-copy h2 {
+  font-size: 28px;
+}
+
+/* the quick facts: scattered KISSES behind the question, clusters fading in on a right answer */
+.hershey-home.kisses-primary .poll.quiz::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    url('/icons/kisses-quiz-mobile-top.webp') top center / auto clamp(130px, 36vw, 220px) no-repeat,
+    url('/icons/kisses-quiz-mobile-bottom.webp') bottom center / auto clamp(100px, 28vw, 170px) no-repeat;
+  transition: opacity 0.6s ease;
+}
+
+.hershey-home.kisses-primary .poll.quiz.correct::before {
+  opacity: 0;
+}
+
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span {
+  position: absolute;
+  aspect-ratio: 1;
+  background: url('/icons/kisses-quiz-cluster-1.webp') center / contain no-repeat;
+  opacity: 0;
+  transform: translateY(10px) scale(0.9);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:is(:nth-child(2), :nth-child(3), :nth-child(7)) {
+  background-image: url('/icons/kisses-quiz-cluster-2.webp');
+}
+
+.hershey-home.kisses-primary .poll.quiz.correct .poll-quiz-decor span {
+  opacity: 0.95;
+  transform: none;
+}
+
+/* mobile: three clusters across the top, two along the bottom */
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(1) {
+  top: 3%;
+  left: 2%;
+  width: clamp(95px, 30vw, 150px);
+}
+
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(2) {
+  top: 15%;
+  left: 36%;
+  width: clamp(55px, 18vw, 85px);
+  transition-delay: 0.1s;
+}
+
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(3) {
+  display: none;
+}
+
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(4) {
+  top: 2%;
+  right: 3%;
+  width: clamp(95px, 30vw, 150px);
+  transition-delay: 0.12s;
+}
+
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(5) {
+  bottom: 6%;
+  left: 4%;
+  width: clamp(95px, 30vw, 150px);
+  transition-delay: 0.22s;
+}
+
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(6) {
+  right: 6%;
+  bottom: 5%;
+  width: clamp(95px, 30vw, 150px);
+  transition-delay: 0.16s;
+}
+
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(7) {
+  display: none;
+}
+
+@media (width >= 700px) {
+  .hershey-home.kisses-primary .poll.quiz::before {
+    background: url('/icons/kisses-quiz-background.webp') center / auto 100% no-repeat;
+  }
+
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(n) {
+    inset: auto;
+    display: block;
+  }
+
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(1) {
+    top: 4%;
+    left: -2%;
+    width: clamp(115px, 17vw, 205px);
+  }
+
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(2) {
+    top: 5%;
+    right: 26%;
+    width: clamp(80px, 11vw, 135px);
+  }
+
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(3) {
+    top: 44%;
+    left: -1%;
+    width: clamp(52px, 7vw, 90px);
+    transition-delay: 0.18s;
+  }
+
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(4) {
+    top: 26%;
+    right: -5%;
+    width: clamp(120px, 18vw, 215px);
+  }
+
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(5) {
+    bottom: 4%;
+    left: 6%;
+    width: clamp(115px, 17vw, 205px);
+  }
+
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(6) {
+    right: -2%;
+    bottom: 4%;
+    width: clamp(120px, 18vw, 215px);
+  }
+
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(7) {
+    bottom: 8%;
+    left: 44%;
+    width: clamp(52px, 7vw, 88px);
+    transition-delay: 0.26s;
+  }
+}
+
+@media (width >= 901px) {
+  .hershey-home.kisses-primary {
+    --hero-marquee-band-speed: 48;
+  }
+
+  .hershey-home.kisses-primary main > div.section.hero-container.kisses-band-1 {
+    padding: 90px 0 50px;
+  }
+
+  .hershey-home.kisses-primary main > div.section.hero-container.kisses-band-2 {
+    padding: 180px 0 50px;
+  }
+
+  .hershey-home.kisses-primary main > div.section.hero-container:is(.kisses-band-1, .kisses-band-2) .hero.marquee.band {
+    --hero-marquee-band-row-height: 280px;
+    --hero-marquee-band-row-overlap: 40px;
+  }
+}
+
+@media (width >= 992px) {
+  .hershey-home.kisses-primary .hero.brand .hero-brand-logo {
+    padding-left: 0;
+  }
+
+  .hershey-home.kisses-primary main > .section:has(> .cards-wrapper > .cards.wheel) {
+    padding: 70px;
+  }
+
+  .hershey-home.kisses-primary .cards.wheel .cards-wheel-copy h2 {
+    font-size: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hershey-home.kisses-primary .poll.quiz::before,
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span {
+    transition: none;
+  }
+}
+
+/* stylelint-enable no-descending-specificity */

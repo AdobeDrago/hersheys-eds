@@ -1,0 +1,222 @@
+/*
+ * Cards (wheel): a spinning flavor wheel beside its copy and button, as "Which KISSES Will You
+ * Try Next?" on hersheyland.com/brands/kisses (values measured at 390 and 1280px). Page themes
+ * can set the colours with the --cards-wheel-* properties.
+ */
+.cards.wheel {
+  display: grid;
+  grid-template-areas:
+    'copy'
+    'stage'
+    'button';
+  justify-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
+  color: var(--cards-wheel-foreground, #fce9cb);
+  text-align: center;
+}
+
+.cards.wheel .cards-wheel-copy {
+  grid-area: copy;
+}
+
+.cards.wheel .cards-wheel-copy h2 {
+  width: 80%;
+  margin: 0 auto 14px;
+  color: var(--cards-wheel-heading-color, #fff);
+  line-height: 1.5;
+}
+
+.cards.wheel .cards-wheel-copy p {
+  margin: 0 0 26px;
+  color: var(--cards-wheel-copy-color, #f3e0c2);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.cards.wheel .cards-wheel-stage {
+  position: relative;
+  grid-area: stage;
+  width: min(350px, 82vw);
+  aspect-ratio: 1;
+  margin: 0 auto 30px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.cards.wheel .cards-wheel-rim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cards.wheel .cards-wheel-art-wrap {
+  display: contents;
+}
+
+/* the wedges overflow the stage; the stage clips them to the rim */
+.cards.wheel .cards-wheel-art {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: 125%;
+  height: 125%;
+  max-width: none;
+  transition: opacity 0.45s ease;
+  will-change: transform;
+}
+
+.cards.wheel .cards-wheel-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: 17%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+/* the result sits inside the rim once the wheel stops */
+.cards.wheel .cards-wheel-result {
+  position: absolute;
+  inset: 2%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 50%;
+  padding: 14% 16%;
+  visibility: hidden;
+  opacity: 0;
+  background: var(--cards-wheel-result-background, #fce9cb);
+  transition: opacity 0.45s ease;
+}
+
+.cards.wheel .cards-wheel-stage.show-result .cards-wheel-result {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cards.wheel .cards-wheel-stage.show-result .cards-wheel-art,
+.cards.wheel .cards-wheel-stage.show-result .cards-wheel-center {
+  opacity: 0;
+}
+
+.cards.wheel .cards-wheel-result-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  aspect-ratio: 1;
+  margin-bottom: 4px;
+}
+
+.cards.wheel .cards-wheel-result-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cards.wheel .cards-wheel-kicker {
+  margin: 4px 0;
+  color: var(--cards-wheel-result-foreground, #3f000b);
+  font-size: 0.75em;
+  font-weight: 800;
+}
+
+.cards.wheel .cards-wheel-result-name {
+  padding: 0 1.5rem;
+  border: 0;
+  color: var(--cards-wheel-result-foreground, #3f000b);
+  font-size: 1em;
+  line-height: 1.3;
+  text-decoration: underline;
+}
+
+.cards.wheel .cards-wheel-result-name:hover {
+  text-decoration: none;
+}
+
+.cards.wheel .cards-wheel-button {
+  grid-area: button;
+  width: 100%;
+  max-width: 280px;
+  border: 0;
+  border-radius: 999px;
+  padding: 16px 24px;
+  background: var(--cards-wheel-button-background, #fce9cb);
+  color: var(--cards-wheel-button-foreground, #3f000b);
+  font-family: hershey-tt, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+  transition: transform 0.12s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+.cards.wheel .cards-wheel-button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.cards.wheel .cards-wheel-button:hover:not(:disabled) {
+  background: var(--cards-wheel-button-background-hover, #fff);
+}
+
+.cards.wheel .cards-wheel-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* the wheel on the left, the copy and button stacked on the right */
+@media (width >= 700px) {
+  .cards.wheel {
+    grid-template:
+      'stage .' 1fr
+      'stage copy' auto
+      'stage button' auto
+      'stage .' 1fr / 1fr 1fr;
+    align-items: center;
+    column-gap: 40px;
+    padding: 56px 40px;
+  }
+
+  .cards.wheel .cards-wheel-stage {
+    width: 100%;
+    margin: 0;
+  }
+
+  .cards.wheel .cards-wheel-button {
+    width: auto;
+    padding-inline: 40px;
+  }
+
+  .cards.wheel .cards-wheel-kicker {
+    font-size: 1em;
+  }
+
+  .cards.wheel .cards-wheel-result-name {
+    padding: 0 2rem;
+    font-size: 1.2em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cards.wheel .cards-wheel-art,
+  .cards.wheel .cards-wheel-center,
+  .cards.wheel .cards-wheel-result,
+  .cards.wheel .cards-wheel-button {
+    transition: none;
+  }
+}

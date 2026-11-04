@@ -83,3 +83,149 @@
 .poll .poll-answer:hover:not([aria-pressed='true']) {
   background: #a00718;
 }
+
+/*
+ * Poll (quiz): a trivia question that swaps for its result in place. Layout measured on
+ * hersheyland.com/brands/kisses at 390 and 1280px; page themes set the colours and the
+ * decorative clusters (`.poll-quiz-decor span`).
+ */
+main > .section:has(> .poll-wrapper > .poll.quiz) {
+  padding: 0;
+}
+
+main > .section > .poll-wrapper:has(> .poll.quiz) {
+  max-width: none;
+  padding: 0;
+}
+
+.poll.quiz {
+  position: relative;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--poll-quiz-min-height, 738px);
+  border-radius: 0;
+  padding: var(--poll-quiz-padding-block-start-mobile, 156px) 24px var(--poll-quiz-padding-block-end-mobile, 125px);
+  overflow: hidden;
+  background: var(--poll-quiz-background, #3f000b);
+  color: var(--poll-quiz-foreground, #fff);
+  text-align: center;
+}
+
+.poll.quiz .poll-quiz-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.poll.quiz .poll-quiz-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* question and results share one cell so they cross-fade in place */
+.poll.quiz .poll-quiz-view {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.poll.quiz .poll-quiz-question,
+.poll.quiz.answered.correct .poll-quiz-correct,
+.poll.quiz.answered.incorrect .poll-quiz-incorrect {
+  visibility: visible;
+  opacity: 1;
+}
+
+.poll.quiz.answered .poll-quiz-question {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.poll.quiz p {
+  margin: 0;
+  color: inherit;
+  font-family: hershey-tt, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.poll.quiz .poll-quiz-eyebrow {
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.poll.quiz .poll-quiz-title {
+  margin: 0 0 14px;
+  color: inherit;
+  font-family: hershey-gazpacho, serif;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+.poll.quiz .poll-quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.poll.quiz .poll-quiz-option {
+  width: 90%;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 20px;
+  background: var(--poll-quiz-option-background, #fce9cb);
+  color: var(--poll-quiz-option-foreground, #3f000b);
+  font-family: hershey-tt, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.12s ease;
+}
+
+.poll.quiz .poll-quiz-option:focus-visible {
+  outline: 2px solid var(--poll-quiz-option-background, #fce9cb);
+  outline-offset: 3px;
+}
+
+.poll.quiz .poll-quiz-option:hover:not(:disabled) {
+  background: var(--poll-quiz-option-background-hover, #e7cda3);
+}
+
+.poll.quiz .poll-quiz-option:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.poll.quiz .poll-quiz-answer,
+.poll.quiz .poll-quiz-body {
+  margin-bottom: 10px;
+}
+
+.poll.quiz .poll-quiz-body {
+  margin-bottom: 16px;
+}
+
+@media (width >= 700px) {
+  .poll.quiz {
+    padding: 64px 24px;
+  }
+
+  .poll.quiz .poll-quiz-title {
+    font-size: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poll.quiz .poll-quiz-view,
+  .poll.quiz .poll-quiz-option {
+    transition: none;
+  }
+}

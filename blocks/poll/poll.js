@@ -22,6 +22,108 @@ function saveVote(key, index) {
   }
 }
 
+// fixed copy of the quiz results, as on hersheyland.com/brands/kisses
+const QUIZ_CORRECT = 'Correct!';
+const QUIZ_INCORRECT = 'Better luck next time!';
+const QUIZ_ANSWER = 'Correct Answer:';
+// decorative clusters page themes can dress (e.g. the KISSES that fade in on a right answer)
+const QUIZ_CLUSTERS = 7;
+
+/**
+ * Reads the quiz's key/value rows into a map of lower-case key to value cell.
+ * @param {Element} block The poll block
+ * @returns {Map<string, Element>}
+ */
+function readFields(block) {
+  const fields = new Map();
+  [...block.children].forEach((row) => {
+    const [keyCell, valueCell] = row.children;
+    const key = keyCell?.textContent.trim().toLowerCase();
+    if (key && valueCell) fields.set(key, valueCell);
+  });
+  return fields;
+}
+
+function paragraph(className, html) {
+  const p = document.createElement('p');
+  p.className = className;
+  p.innerHTML = html;
+  return p;
+}
+
+/**
+ * `Poll (quiz)`: a trivia question with answer buttons, as the "Did you know?" bands on
+ * /kisses. Choosing an answer swaps the question for "Correct!" or "Better luck next time!"
+ * (with the right answer), then the explanation and an optional note.
+ *
+ * Authored as key/value rows: `eyebrow`, `question`, `options` (a list; the correct answer in
+ * bold), `answer` (the explanation) and `note`. Nothing is stored or sent.
+ * @param {Element} block The poll block
+ */
+function decorateQuiz(block) {
+  const fields = readFields(block);
+  const text = (key) => fields.get(key)?.textContent.trim() || '';
+  const options = [...(fields.get('options')?.querySelectorAll('li') || [])].map((li) => ({
+    label: li.textContent.trim(),
+    correct: !!li.querySelector('strong, b'),
+  }));
+  const right = options.find((option) => option.correct);
+  const answer = fields.get('answer');
+  const answerHtml = answer?.querySelector('p') ? answer.querySelector('p').innerHTML : answer?.innerHTML || '';
+
+  const question = document.createElement('div');
+  question.className = 'poll-quiz-view poll-quiz-question';
+  if (text('eyebrow')) question.append(paragraph('poll-quiz-eyebrow', text('eyebrow')));
+  const title = document.createElement('h3');
+  title.className = 'poll-quiz-title';
+  title.textContent = text('question');
+  const list = document.createElement('div');
+  list.className = 'poll-quiz-options';
+  question.append(title, list);
+
+  const result = (correct) => {
+    const view = document.createElement('div');
+    view.className = `poll-quiz-view poll-quiz-result ${correct ? 'poll-quiz-correct' : 'poll-quiz-incorrect'}`;
+    view.setAttribute('aria-hidden', 'true');
+    const heading = document.createElement('h3');
+    heading.className = 'poll-quiz-title';
+    heading.textContent = correct ? QUIZ_CORRECT : QUIZ_INCORRECT;
+    view.append(heading);
+    if (!correct && right) view.append(paragraph('poll-quiz-answer', `<strong>${QUIZ_ANSWER} ${right.label}</strong>`));
+    view.append(paragraph('poll-quiz-body', answerHtml));
+    if (text('note')) view.append(paragraph('poll-quiz-note', `<em>${text('note')}</em>`));
+    return view;
+  };
+  const correctView = result(true);
+  const incorrectView = result(false);
+
+  const buttons = options.map((option) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'poll-quiz-option';
+    button.textContent = option.label;
+    button.addEventListener('click', () => {
+      buttons.forEach((b) => { b.disabled = true; });
+      block.classList.add('answered', option.correct ? 'correct' : 'incorrect');
+      question.setAttribute('aria-hidden', 'true');
+      (option.correct ? correctView : incorrectView).setAttribute('aria-hidden', 'false');
+    }, { once: true });
+    list.append(button);
+    return button;
+  });
+
+  const decor = document.createElement('div');
+  decor.className = 'poll-quiz-decor';
+  decor.setAttribute('aria-hidden', 'true');
+  for (let i = 0; i < QUIZ_CLUSTERS; i += 1) decor.append(document.createElement('span'));
+
+  const inner = document.createElement('div');
+  inner.className = 'poll-quiz-inner';
+  inner.setAttribute('aria-live', 'polite');
+  inner.append(question, correctView, incorrectView);
+  block.replaceChildren(decor, inner);
+}
+
 /**
  * `Poll`: one question with a set of answers and the running vote counts, as on /rolo.
  *
@@ -31,6 +133,10 @@ function saveVote(key, index) {
  * @param {Element} block The poll block
  */
 export default function decorate(block) {
+  if (block.classList.contains('quiz')) {
+    decorateQuiz(block);
+    return;
+  }
   const [questionRow, ...answerRows] = [...block.children];
   const question = questionRow?.textContent.trim() || '';
   const answers = answerRows.map((row) => ({
