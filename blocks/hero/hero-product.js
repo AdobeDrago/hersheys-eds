@@ -274,7 +274,8 @@ function buildGallery(cell) {
         const thumbImg = document.createElement('img');
         thumbImg.src = thumbRendition(img.currentSrc || img.src);
         thumbImg.alt = '';
-        thumbImg.loading = 'lazy';
+        thumbImg.loading = i <= 3 ? 'eager' : 'lazy';
+        if (i <= 3) thumbImg.fetchPriority = 'high';
         btn.append(thumbImg);
       }
       thumbs.append(btn);
