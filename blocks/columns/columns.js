@@ -1,7 +1,7 @@
 import { loadCSS } from '../../scripts/aem.js';
 
 // variants only brand pages author; their styles live in columns-brand.css
-const BRAND_VARIANTS = ['fact', 'callout', 'article', 'video', 'quotes', 'blog'];
+const BRAND_VARIANTS = ['fact', 'callout', 'article', 'video', 'quotes', 'blog', 'blobs'];
 
 /**
  * `Columns (video)`: the YouTube link beside the poster becomes a play button that swaps the

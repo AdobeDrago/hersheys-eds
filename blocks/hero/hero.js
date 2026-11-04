@@ -345,8 +345,8 @@ export default async function decorate(block) {
     decorateRecipe(block);
     return;
   }
-  // product, article and brand have their own markup, so each loads its own script and styles
-  const variant = ['product', 'article', 'brand'].find((name) => block.classList.contains(name));
+  // product, article, brand and marquee have their own markup, so each loads its own script/styles
+  const variant = ['product', 'article', 'brand', 'marquee'].find((name) => block.classList.contains(name));
   if (!variant) return;
   const [{ default: decorateVariant }] = await Promise.all([
     import(`./hero-${variant}.js`),

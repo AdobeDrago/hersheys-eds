@@ -1,0 +1,85 @@
+/*
+ * Poll: values measured on hersheyland.com/rolo at 1440px.
+ */
+.poll {
+  box-sizing: border-box;
+  width: min(640px, 100%);
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 24px 24px 34px;
+  background: #c0081c;
+  color: #fff;
+}
+
+.poll .poll-question {
+  margin: 0 0 20px;
+  color: #fff;
+  font-family: hershey-tt, sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.27;
+  text-align: center;
+}
+
+.poll .poll-answers {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.poll .poll-answer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 24px;
+  overflow: hidden;
+  background: #8b0614;
+  color: #fff;
+  font-family: hershey-tt, sans-serif;
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* the chosen answer shows its share as a bar and a ring */
+.poll .poll-answer[aria-pressed='true'] {
+  background: #55281e;
+  box-shadow: 0 0 0 2.5px #ffa448;
+}
+
+.poll .poll-bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: #8b0614;
+}
+
+.poll .poll-label,
+.poll .poll-percent {
+  position: relative;
+}
+
+.poll .poll-label {
+  font-weight: 500;
+}
+
+.poll .poll-votes {
+  margin-left: 6px;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.poll .poll-percent {
+  font-weight: 700;
+}
+
+.poll .poll-answer:hover:not([aria-pressed='true']) {
+  background: #a00718;
+}
