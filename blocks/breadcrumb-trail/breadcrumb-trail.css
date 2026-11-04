@@ -78,6 +78,11 @@ main > .section > .breadcrumb-trail-wrapper {
   vertical-align: baseline;
 }
 
+/* the current page is plain text in the base weight, not a link */
+.breadcrumb-trail span.breadcrumb-trail-link {
+  font-weight: var(--hershey-component-breadcrumb-trail-base-font-weight, 500);
+}
+
 .breadcrumb-trail a.breadcrumb-trail-link:any-link {
   color: var(--hershey-component-breadcrumb-trail-link-color, #007bbd);
   text-decoration: underline;

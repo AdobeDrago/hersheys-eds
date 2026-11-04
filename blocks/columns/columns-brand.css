@@ -1272,3 +1272,130 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
   }
 }
 /* stylelint-enable no-descending-specificity */
+
+/* stylelint-disable no-descending-specificity */
+
+/*
+ * blobs variant (`Columns (blobs)`): three cells on a band, e.g. "A Candy Bar Name With a Rich
+ * History" and "Did You Know?" on /payday. A heading on a hand-drawn blue blob, a photo, then
+ * copy on a second blob. The blob artwork is decoration in /icons, scaled past its cell like
+ * the source. Values measured on hersheyland.com/payday at 1440px.
+ */
+.columns.blobs > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.columns.blobs > div > div {
+  position: relative;
+  box-sizing: border-box;
+  width: min(370px, 100%);
+}
+
+.hershey-home main .section.columns-container .columns.blobs h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.65;
+}
+
+.hershey-home main .section.columns-container .columns.blobs p {
+  margin: 0;
+  color: #fff;
+}
+
+.columns.blobs picture,
+.columns.blobs img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* the blobs sit behind the heading and the copy */
+.columns.blobs > div > div:first-child,
+.columns.blobs > div > div:last-child {
+  padding: 40px 30px;
+  background: no-repeat center / 100% 100%;
+}
+
+.columns.blobs > div > div:first-child {
+  background-image: url('/icons/payday-left-bar.svg');
+}
+
+.columns.blobs > div > div:last-child {
+  background-image: url('/icons/payday-right-bar.svg');
+}
+
+@media (width >= 992px) {
+  .columns.blobs {
+    max-width: 1260px;
+    margin-inline: auto;
+  }
+
+  /* three 420px columns; the blob artwork starts at the column's text edge and runs past it */
+  .columns.blobs > div {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .columns.blobs > div > div {
+    flex: 0 0 420px;
+    width: 420px;
+    padding: 0 25px;
+  }
+
+  .columns.blobs > div > div:first-child,
+  .columns.blobs > div > div:last-child {
+    padding: 0 25px;
+    background: none;
+  }
+
+  .columns.blobs > div > div:first-child::before,
+  .columns.blobs > div > div:last-child::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 25px;
+    z-index: 0;
+    width: 444px;
+    background: no-repeat 0 0 / 100% 100%;
+  }
+
+  .columns.blobs > div > div:first-child::before {
+    height: 271px;
+    background-image: url('/icons/payday-left-bar.svg');
+  }
+
+  .columns.blobs > div > div:last-child::before {
+    height: 303px;
+    background-image: url('/icons/payday-right-bar.svg');
+  }
+
+  .hershey-home main .section.columns-container .columns.blobs h2 {
+    position: relative;
+    z-index: 1;
+    width: 335px;
+    margin: 51px 0 0 17px;
+  }
+
+  .hershey-home main .section.columns-container .columns.blobs > div > div:last-child p {
+    position: relative;
+    z-index: 1;
+    width: 350px;
+    margin: 50px 0 0 37px;
+  }
+
+  /* the drip artwork is cropped to the row height */
+  .columns.blobs > div > div:nth-child(2) img {
+    height: 377px;
+    object-fit: cover;
+    object-position: center top;
+  }
+}
+
+/* stylelint-enable no-descending-specificity */

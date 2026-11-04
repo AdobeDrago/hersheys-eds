@@ -35,6 +35,7 @@ function decorateSlider(block, list) {
   // related sliders, and the product, stories and content sliders on brand pages, show one
   // page indicator per page of cards
   const paged = block.classList.contains('related')
+    || block.classList.contains('dots')
     || (isBrandPage() && ['product', 'stories', 'content'].some((name) => block.classList.contains(name)));
   // a page is the visible track width plus one gap; the track padding is not scrollable content
   const measure = () => {
@@ -98,6 +99,24 @@ export default async function decorate(block) {
     await decorateProduct(block);
     const list = block.querySelector(':scope > ul');
     if (slider && list) decorateSlider(block, list);
+    return;
+  }
+  if (block.classList.contains('quotes')) {
+    // the quotes variant has its own markup, so it loads its own script and styles
+    const [{ default: decorateQuotes }] = await Promise.all([
+      import('./cards-quotes.js'),
+      loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-quotes.css`),
+    ]);
+    decorateQuotes(block);
+    return;
+  }
+  if (block.classList.contains('steps')) {
+    // the steps variant has its own markup, so it loads its own script and styles
+    const [{ default: decorateSteps }] = await Promise.all([
+      import('./cards-steps.js'),
+      loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-steps.css`),
+    ]);
+    decorateSteps(block);
     return;
   }
   // brand page variants carry their own styles

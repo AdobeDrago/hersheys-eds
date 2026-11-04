@@ -1,0 +1,159 @@
+/*
+ * Cards (quotes): values measured on hersheyland.com/brands/reeses/oreo-cup at 1440px.
+ */
+
+/* the band runs edge to edge: no section padding, no page-width cap */
+.hershey-home main > .section:has(> .cards-wrapper > .cards.quotes) {
+  padding: 90px 0 89px;
+}
+
+.hershey-home main > .section > .cards-wrapper:has(> .cards.quotes) {
+  max-width: none;
+  padding: 0;
+}
+
+.cards.quotes {
+  color: #fff;
+}
+
+.cards-quotes-top picture,
+.cards-quotes-top img,
+.cards-quotes-bottom picture,
+.cards-quotes-bottom img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cards-quotes-top > div,
+.cards-quotes-bottom > div {
+  display: block;
+}
+
+/* the blue band between the two scalloped edges */
+.cards-quotes-band {
+  position: relative;
+  height: 790px;
+  background: var(--hershey-component-quotes-slider-band-background, #0055b8);
+}
+
+.cards-quotes-viewport {
+  width: min(1000px, 100%);
+  height: 760px;
+  margin-inline: auto;
+  overflow: hidden;
+}
+
+.cards-quotes-track {
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: translateX(calc(var(--quotes-slider-index, 0) * (min(1000px, 100vw) + 25px) * -1));
+  transition: transform 0.5s ease;
+}
+
+.cards-quotes-slide {
+  flex: none;
+  box-sizing: border-box;
+  width: min(1000px, 100vw);
+  height: 760px;
+}
+
+.cards-quotes-slide.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 151px 100px 0;
+  text-align: center;
+}
+
+.cards-quotes-slide.image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards-quotes-slide.image img {
+  display: block;
+  width: 950px;
+  max-width: 100%;
+  height: auto;
+}
+
+.cards-quotes-slide p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.cards-quotes-slide p:first-child {
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.cards-quotes-slide p:nth-child(2) {
+  margin-top: 40px;
+  font-size: 80px;
+  line-height: 1.2;
+}
+
+.cards-quotes-slide p:nth-child(3) {
+  margin-top: 30px;
+  font-size: 60px;
+  line-height: 1.2;
+}
+
+.cards-quotes-dots {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.cards-quotes-dots button {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  padding: 0;
+  background: transparent;
+  font-size: 0;
+  cursor: pointer;
+}
+
+.cards-quotes-dots button[aria-current='true'] {
+  background: #fff;
+}
+
+@media (width < 900px) {
+  .cards-quotes-band {
+    height: 420px;
+  }
+
+  .cards-quotes-viewport,
+  .cards-quotes-slide {
+    height: 400px;
+  }
+
+  .cards-quotes-slide.text {
+    padding: 40px 24px 0;
+  }
+
+  .cards-quotes-slide p:first-child {
+    font-size: 16px;
+  }
+
+  .cards-quotes-slide p:nth-child(2) {
+    margin-top: 20px;
+    font-size: 32px;
+  }
+
+  .cards-quotes-slide p:nth-child(3) {
+    margin-top: 16px;
+    font-size: 24px;
+  }
+}

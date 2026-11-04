@@ -1,0 +1,168 @@
+/*
+ * Hero (marquee): values measured on hersheyland.com/brands/reeses/oreo-cup at 1440px.
+ */
+
+/* the band runs edge to edge: no section padding, no page-width cap */
+.hershey-home main > .section:has(> .hero-wrapper > .hero.marquee) {
+  padding: 0;
+}
+
+.hershey-home main > .section > .hero-wrapper:has(> .hero.marquee) {
+  max-width: none;
+  padding: 0;
+}
+
+.hero.marquee {
+  position: relative;
+  overflow: hidden;
+  padding-top: 150px;
+  background: var(--hershey-system-color-surface-brand-band, #ff5200);
+  color: var(--hershey-component-hero-brand-color-foreground, #3f000b);
+}
+
+/* the tilted band of scrolling text behind the hero content */
+.hero-marquee-ticker {
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 120vw;
+  height: 516px;
+  transform: rotate(10deg);
+  pointer-events: none;
+}
+
+.hero-marquee-track {
+  display: flex;
+  align-items: center;
+  height: 129px;
+  animation: hero-marquee-left 120s linear infinite;
+}
+
+.hero-marquee-track.reverse {
+  animation-name: hero-marquee-right;
+}
+
+.hero-marquee-track img {
+  flex: none;
+  width: 120vw;
+  height: auto;
+}
+
+@keyframes hero-marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-120vw); }
+}
+
+@keyframes hero-marquee-right {
+  from { transform: translateX(-120vw); }
+  to { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-marquee-track {
+    animation: none;
+  }
+}
+
+.hero-marquee-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  min-height: 720px;
+}
+
+.hero-marquee-content > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-marquee-copy {
+  padding: 40px 66px;
+}
+
+.hero-marquee-copy img {
+  display: block;
+  width: 350px;
+  max-width: 100%;
+  height: auto;
+}
+
+.hero-marquee-copy p {
+  max-width: 580px;
+  margin: 0;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.hero-marquee-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (width >= 900px) {
+  .hero-marquee-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/*
+ * Hero (marquee, band): rows of one wide strip scrolling sideways. Values measured on
+ * hersheyland.com/hersheys at 1440px: 185px rows, 24px a second, alternate rows in opposite
+ * directions, clipped to the height set by the page theme.
+ */
+.hero.marquee.band {
+  height: var(--hero-marquee-band-height, auto);
+  padding: 0;
+  background: transparent;
+}
+
+.hero.marquee.band .hero-marquee-strip-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.hero.marquee.band .hero-marquee-strip-row {
+  height: var(--hero-marquee-band-row-height, 185px);
+  overflow: hidden;
+}
+
+.hero.marquee.band .hero-marquee-strip-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  animation: hero-marquee-strip-left var(--hero-marquee-band-duration, 120s) linear infinite;
+}
+
+.hero.marquee.band .hero-marquee-strip-row.reverse .hero-marquee-strip-track {
+  animation-name: hero-marquee-strip-right;
+}
+
+.hero.marquee.band .hero-marquee-strip-track img {
+  display: block;
+  flex: none;
+  width: auto;
+  height: 100%;
+}
+
+@keyframes hero-marquee-strip-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes hero-marquee-strip-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero.marquee.band .hero-marquee-strip-track {
+    animation: none;
+  }
+}
