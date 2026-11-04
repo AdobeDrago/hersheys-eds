@@ -117,10 +117,10 @@ function createSwatches(colors = []) {
   return swatches;
 }
 
-function fillLabel(target, theme) {
+function fillLabel(target, theme, empty = 'Not set') {
   const text = document.createElement('span');
   text.className = 'theme-picker-name';
-  text.textContent = theme ? theme.label : 'Not set';
+  text.textContent = theme ? theme.label : empty;
   target.replaceChildren(createSwatches(theme?.colors), text);
 }
 
@@ -184,10 +184,10 @@ function createDropdown(onSelect) {
   });
 
   return {
-    setValue(value) {
+    setValue(value, empty) {
       const theme = THEMES.find((t) => t.value === value);
       // a value outside the list (typo, retired theme) is shown as-is so authors can spot it
-      fillLabel(trigger, theme || (value ? { label: `Unknown: ${value}` } : null));
+      fillLabel(trigger, theme || (value ? { label: `Unknown: ${value}` } : null), empty);
       options.forEach((option) => {
         option.setAttribute('aria-selected', option.dataset.value === value);
       });
@@ -198,21 +198,29 @@ function createDropdown(onSelect) {
   };
 }
 
+// DA_SDK only resolves when DA opens the panel in its iframe; elsewhere it never settles
+const SDK_TIMEOUT = 3000;
+
+function whenInDA() {
+  return Promise.race([
+    DA_SDK,
+    new Promise((resolve) => { setTimeout(() => resolve(null), SDK_TIMEOUT); }),
+  ]);
+}
+
 (async function init() {
   const current = document.querySelector('.theme-picker-current-value');
   const status = document.querySelector('.theme-picker-status');
 
-  const { context, token } = await DA_SDK;
-  const site = {
-    org: context.org,
-    repo: context.repo,
-    path: normalizePath(context.path),
-  };
-  const url = sourceUrl(site);
-
+  let site;
+  let url;
+  let token;
   let theme;
+  let ref;
+
+  // built before DA answers, so the list can be browsed outside DA too
   const dropdown = createDropdown(async (value) => {
-    if (value === theme) return;
+    if (!site || value === theme) return;
     dropdown.setBusy(true);
     status.textContent = 'Saving…';
     try {
@@ -229,10 +237,28 @@ function createDropdown(onSelect) {
     current.textContent = value;
     dropdown.setValue(theme);
     dropdown.setBusy(false);
-    status.textContent = reloadEditor(site, context.ref)
+    status.textContent = reloadEditor(site, ref)
       ? 'Saved. Reloading the editor…'
       : 'Saved. Reload the page, then preview to see the theme.';
   });
+
+  const sdk = await whenInDA();
+  if (!sdk) {
+    dropdown.setValue('', 'Select a theme');
+    current.textContent = 'unavailable';
+    status.textContent = 'Preview only. Open this from the Themes panel in DA to read or save the page theme.';
+    return;
+  }
+
+  const { context } = sdk;
+  ({ token } = sdk);
+  ref = context.ref;
+  site = {
+    org: context.org,
+    repo: context.repo,
+    path: normalizePath(context.path),
+  };
+  url = sourceUrl(site);
 
   try {
     theme = readTheme(await fetchDoc(url, token));
