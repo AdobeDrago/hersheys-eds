@@ -3,7 +3,11 @@ import DA_SDK from 'https://da.live/nx/utils/sdk.js';
 
 import { DEFAULT_THEME, BRAND_THEMES } from '../../scripts/brand-themes.js';
 
-const THEMES = [DEFAULT_THEME, ...BRAND_THEMES];
+const GROUPS = [
+  { label: 'Product pages', themes: [DEFAULT_THEME, ...BRAND_THEMES.filter((t) => !t.file)] },
+  { label: 'Brand pages', themes: BRAND_THEMES.filter((t) => t.file) },
+];
+const THEMES = GROUPS.flatMap((group) => group.themes);
 
 const THEME_KEY = 'theme';
 
@@ -20,88 +24,223 @@ function cellText(cell) {
   return (cell?.textContent || '').trim();
 }
 
-// read-only: the panel only shows the current theme, the author pastes the new one
-async function fetchTheme(url, token) {
-  const resp = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
-  if (!resp.ok) throw new Error(`DA responded ${resp.status}`);
-  const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
+function findThemeRow(metadata) {
+  return [...metadata.children]
+    .find((row) => cellText(row.children[0]).toLowerCase() === THEME_KEY);
+}
+
+function readTheme(doc) {
   const metadata = doc.querySelector('main .metadata');
-  const row = metadata && [...metadata.children]
-    .find((item) => cellText(item.children[0]).toLowerCase() === THEME_KEY);
+  const row = metadata && findThemeRow(metadata);
   return row ? cellText(row.children[1]) : '';
 }
 
-async function copyToClipboard(value) {
-  try {
-    await navigator.clipboard.writeText(value);
-    return true;
-  } catch {
-    // clipboard API can be blocked in the panel iframe; fall back to a selection copy
-    const input = document.createElement('textarea');
-    input.value = value;
-    document.body.append(input);
-    input.select();
-    const copied = document.execCommand('copy');
-    input.remove();
-    return copied;
+function createParagraph(doc, text) {
+  const p = doc.createElement('p');
+  p.textContent = text;
+  return p;
+}
+
+function createRow(doc, key, value) {
+  const row = doc.createElement('div');
+  [key, value].forEach((text) => {
+    const cell = doc.createElement('div');
+    cell.append(createParagraph(doc, text));
+    row.append(cell);
+  });
+  return row;
+}
+
+// updates the existing theme row; adds the row, or a metadata block, when missing
+function writeTheme(doc, value) {
+  const main = doc.querySelector('main');
+  let metadata = main.querySelector('.metadata');
+  if (!metadata) {
+    metadata = doc.createElement('div');
+    metadata.className = 'metadata';
+    let section = main.lastElementChild;
+    if (!section) {
+      section = doc.createElement('div');
+      main.append(section);
+    }
+    section.append(metadata);
+  }
+  const row = findThemeRow(metadata);
+  if (row) {
+    row.children[1].replaceChildren(createParagraph(doc, value));
+  } else {
+    metadata.append(createRow(doc, THEME_KEY, value));
   }
 }
 
-function renderChips(list, onSelect) {
-  list.replaceChildren(...THEMES.map(({ label, value, colors = [] }) => {
-    const li = document.createElement('li');
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'theme-picker-chip';
-    const swatches = document.createElement('span');
-    swatches.className = 'theme-picker-swatches';
-    swatches.setAttribute('aria-hidden', 'true');
-    swatches.append(...colors.map((color) => {
-      const dot = document.createElement('span');
-      dot.style.background = color;
-      return dot;
-    }));
-    const text = document.createElement('span');
-    text.textContent = label;
-    button.append(swatches, text);
-    button.title = `Copy ${value}`;
-    button.dataset.value = value;
-    button.addEventListener('click', () => onSelect(value));
-    li.append(button);
-    return li;
-  }));
+async function fetchDoc(url, token) {
+  const resp = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+  if (!resp.ok) throw new Error(`DA responded ${resp.status}`);
+  return new DOMParser().parseFromString(await resp.text(), 'text/html');
 }
 
-function markCurrent(list, theme) {
-  list.querySelectorAll('.theme-picker-chip').forEach((button) => {
-    const isCurrent = button.dataset.value === theme;
-    button.classList.toggle('is-current', isCurrent);
-    button.setAttribute('aria-pressed', isCurrent);
+async function saveDoc(url, token, doc) {
+  const body = new FormData();
+  body.append('data', new Blob([doc.body.outerHTML], { type: 'text/html' }));
+  const resp = await fetch(url, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${token}` },
+    body,
   });
+  if (!resp.ok) throw new Error(`DA responded ${resp.status}`);
+}
+
+// the editor is cross-origin, so reload() is blocked; navigating top is allowed.
+// a fresh query string forces a full load, since a hash-only change would not.
+function reloadEditor({ org, repo, path }, ref) {
+  const params = new URLSearchParams();
+  if (ref) params.set('ref', ref);
+  params.set('themed', Date.now());
+  const url = `https://da.live/canvas?${params}#/${org}/${repo}${path}`;
+  try {
+    window.top.location.href = url;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function createSwatches(colors = []) {
+  const swatches = document.createElement('span');
+  swatches.className = 'theme-picker-swatches';
+  swatches.setAttribute('aria-hidden', 'true');
+  swatches.append(...colors.map((color) => {
+    const dot = document.createElement('span');
+    dot.style.background = color;
+    return dot;
+  }));
+  return swatches;
+}
+
+function fillLabel(target, theme) {
+  const text = document.createElement('span');
+  text.className = 'theme-picker-name';
+  text.textContent = theme ? theme.label : 'Not set';
+  target.replaceChildren(createSwatches(theme?.colors), text);
+}
+
+function createDropdown(onSelect) {
+  const root = document.querySelector('.theme-picker-dropdown');
+  const trigger = root.querySelector('.theme-picker-trigger');
+  const menu = root.querySelector('.theme-picker-menu');
+  const options = [];
+
+  menu.replaceChildren(...GROUPS.flatMap((group) => {
+    const heading = document.createElement('li');
+    heading.className = 'theme-picker-group';
+    heading.setAttribute('role', 'presentation');
+    heading.textContent = group.label;
+    return [heading, ...group.themes.map((theme) => {
+      const li = document.createElement('li');
+      li.className = 'theme-picker-option';
+      li.setAttribute('role', 'option');
+      li.dataset.value = theme.value;
+      li.tabIndex = -1;
+      li.title = theme.value;
+      fillLabel(li, theme);
+      options.push(li);
+      return li;
+    })];
+  }));
+
+  const close = () => {
+    menu.hidden = true;
+    trigger.setAttribute('aria-expanded', 'false');
+  };
+  const open = () => {
+    menu.hidden = false;
+    trigger.setAttribute('aria-expanded', 'true');
+    (options.find((o) => o.getAttribute('aria-selected') === 'true') || options[0]).focus();
+  };
+
+  trigger.addEventListener('click', () => (menu.hidden ? open() : close()));
+  menu.addEventListener('click', (event) => {
+    const option = event.target.closest('.theme-picker-option');
+    if (!option) return;
+    close();
+    trigger.focus();
+    onSelect(option.dataset.value);
+  });
+  menu.addEventListener('keydown', (event) => {
+    const index = options.indexOf(document.activeElement);
+    if (event.key === 'ArrowDown') options[Math.min(index + 1, options.length - 1)].focus();
+    else if (event.key === 'ArrowUp') options[Math.max(index - 1, 0)].focus();
+    else if (event.key === 'Home') options[0].focus();
+    else if (event.key === 'End') options[options.length - 1].focus();
+    else if (event.key === 'Enter' || event.key === ' ') document.activeElement.click();
+    else if (event.key === 'Escape') {
+      close();
+      trigger.focus();
+    } else return;
+    event.preventDefault();
+  });
+  document.addEventListener('click', (event) => {
+    if (!root.contains(event.target)) close();
+  });
+
+  return {
+    setValue(value) {
+      const theme = THEMES.find((t) => t.value === value);
+      // a value outside the list (typo, retired theme) is shown as-is so authors can spot it
+      fillLabel(trigger, theme || (value ? { label: `Unknown: ${value}` } : null));
+      options.forEach((option) => {
+        option.setAttribute('aria-selected', option.dataset.value === value);
+      });
+    },
+    setBusy(busy) {
+      trigger.disabled = busy;
+    },
+  };
 }
 
 (async function init() {
-  const list = document.querySelector('.theme-picker-list');
   const current = document.querySelector('.theme-picker-current-value');
   const status = document.querySelector('.theme-picker-status');
 
-  renderChips(list, async (value) => {
-    status.textContent = await copyToClipboard(value)
-      ? `Copied ${value}. Paste it into Page → Page Metadata → theme.`
-      : `Could not copy. Type ${value} into the theme field.`;
-  });
-  status.textContent = 'Click a theme to copy its value.';
-
   const { context, token } = await DA_SDK;
+  const site = {
+    org: context.org,
+    repo: context.repo,
+    path: normalizePath(context.path),
+  };
+  const url = sourceUrl(site);
+
+  let theme;
+  const dropdown = createDropdown(async (value) => {
+    if (value === theme) return;
+    dropdown.setBusy(true);
+    status.textContent = 'Saving…';
+    try {
+      // re-read so edits made since the panel opened are kept
+      const doc = await fetchDoc(url, token);
+      writeTheme(doc, value);
+      await saveDoc(url, token, doc);
+    } catch (error) {
+      status.textContent = `Could not save: ${error.message}`;
+      dropdown.setBusy(false);
+      return;
+    }
+    theme = value;
+    current.textContent = value;
+    dropdown.setValue(theme);
+    dropdown.setBusy(false);
+    status.textContent = reloadEditor(site, context.ref)
+      ? 'Saved. Reloading the editor…'
+      : 'Saved. Reload the page, then preview to see the theme.';
+  });
+
   try {
-    const theme = await fetchTheme(sourceUrl({
-      org: context.org,
-      repo: context.repo,
-      path: normalizePath(context.path),
-    }), token);
-    current.textContent = theme || 'not set';
-    markCurrent(list, theme);
-  } catch {
-    current.textContent = 'unknown';
+    theme = readTheme(await fetchDoc(url, token));
+  } catch (error) {
+    status.textContent = `Could not read page: ${error.message}`;
+    dropdown.setBusy(true);
+    return;
   }
+  current.textContent = theme || 'not set';
+  dropdown.setValue(theme);
 }());

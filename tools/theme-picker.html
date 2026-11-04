@@ -10,7 +10,10 @@
   </head>
   <body>
     <main class="theme-picker">
-      <ul class="theme-picker-list"></ul>
+      <div class="theme-picker-dropdown">
+        <button type="button" class="theme-picker-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Theme">Loading…</button>
+        <ul class="theme-picker-menu" role="listbox" aria-label="Themes" hidden></ul>
+      </div>
       <p class="theme-picker-current">Current: <span class="theme-picker-current-value">…</span></p>
       <p class="theme-picker-status" role="status"></p>
     </main>

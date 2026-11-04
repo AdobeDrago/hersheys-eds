@@ -12,34 +12,91 @@ body {
   padding: 12px;
 }
 
-.theme-picker-list {
+.theme-picker-trigger {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.theme-picker-chip {
-  display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
-  border: 1px solid transparent;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #c9c9c9;
   border-radius: 6px;
-  background: #ececec;
+  background: #fff;
   color: inherit;
   font: inherit;
+  text-align: start;
   cursor: pointer;
 }
 
-.theme-picker-chip:hover {
-  background: #e1e1e1;
+.theme-picker-trigger::after {
+  content: '';
+  margin-inline-start: auto;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  transform: rotate(45deg) translateY(-2px);
 }
 
-.theme-picker-chip.is-current {
+.theme-picker-trigger:hover {
+  background: #f5f5f5;
+}
+
+.theme-picker-trigger:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.theme-picker-trigger[aria-expanded="true"] {
   border-color: #3b63fb;
+}
+
+/* in flow, not floating: the panel is an iframe and a popup would be clipped by it */
+.theme-picker-menu {
+  box-sizing: border-box;
+  max-height: 60vh;
+  margin: 4px 0 0;
+  padding: 4px;
+  overflow-y: auto;
+  border: 1px solid #c9c9c9;
+  border-radius: 6px;
+  list-style: none;
+}
+
+.theme-picker-menu[hidden] {
+  display: none;
+}
+
+.theme-picker-group {
+  padding: 8px 8px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6e6e6e;
+}
+
+.theme-picker-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.theme-picker-option:hover,
+.theme-picker-option:focus {
+  background: #ececec;
+  outline: none;
+}
+
+.theme-picker-option:focus-visible {
+  outline: 2px solid #3b63fb;
+  outline-offset: -2px;
+}
+
+.theme-picker-option[aria-selected="true"] {
   background: #e5f0fe;
   font-weight: 600;
 }
@@ -53,6 +110,7 @@ body {
 
 .theme-picker-swatches {
   display: inline-flex;
+  flex: none;
 }
 
 .theme-picker-swatches span {
