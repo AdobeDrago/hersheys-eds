@@ -415,6 +415,7 @@ main > .section.search-recipes-container {
 }
 
 .search-recipes .search-recipes-card-image {
+  position: relative;
   aspect-ratio: 16 / 9;
   background: var(--hershey-component-search-recipes-color-surface-subtle, var(--light-color));
 }
@@ -539,8 +540,27 @@ main > .section.search-recipes-container {
     padding: 30px 0 0;
   }
 
+  /* sidebar stays in view and scrolls on its own, as on hersheyland.com */
   .search-recipes .search-recipes-facets {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+    overflow: hidden auto;
+    height: calc(100vh - 120px);
     padding: 0 var(--hershey-component-search-recipes-facets-inset, 25px);
+  }
+
+  .search-recipes .search-recipes-facets::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .search-recipes .search-recipes-facets::-webkit-scrollbar-thumb {
+    border-radius: 11px;
+    background: #d9d9d9;
+  }
+
+  .search-recipes .search-recipes-facets::-webkit-scrollbar-track {
+    border-radius: 0;
   }
 
   .search-recipes .search-recipes-stats {
@@ -719,4 +739,106 @@ main > .section.search-recipes-container {
   .search-recipes .search-recipes-card-link:hover {
     transform: none;
   }
+}
+
+/* applied filters: removable chips above the Filter By panel (matches hersheyland.com) */
+.search-recipes .search-recipes-applied {
+  margin-bottom: 16px;
+}
+
+.search-recipes .search-recipes-applied-title {
+  margin: 0 0 8px;
+  font-weight: var(--hershey-component-search-recipes-label-font-weight, 700);
+}
+
+.search-recipes .search-recipes-chips {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.search-recipes .search-recipes-chip {
+  margin-top: 5px;
+}
+
+.search-recipes .search-recipes-chip-remove {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 12px 35px 12px 15px;
+  border: 3px solid #08a9a0;
+  border-radius: 30px;
+  background: #fff;
+  color: #3f000b;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.search-recipes .search-recipes-chip-remove::after {
+  content: '\00d7';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  translate: 0 -50%;
+  color: #006fae;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.search-recipes .search-recipes-chip-key {
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.search-recipes .search-recipes-chip-value {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.search-recipes .search-recipes-chip-value.is-brand {
+  text-transform: uppercase;
+}
+
+.search-recipes .search-recipes-applied .search-recipes-clear {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #007bbd;
+  color: #007bbd;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.025rem;
+  text-decoration: none;
+}
+
+/* product tag pill (Seasonal, Limited Edition) */
+.search-recipes .search-recipes-card-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 15px;
+  border-radius: 25px;
+  background: #fff;
+  box-shadow: 0 0 3.9px 0 rgb(0 0 0 / 8%);
+  color: #3f000b;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.search-recipes .search-recipes-card-tag-icon {
+  width: 1em;
+  height: 1em;
+  background: currentcolor;
+  mask: var(--tag-icon) center / contain no-repeat;
 }

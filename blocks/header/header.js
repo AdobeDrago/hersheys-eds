@@ -184,6 +184,15 @@ export default async function decorate(block) {
         }
       }
     });
+    // current section (e.g. /products/...) is marked so CSS can bold it and show the icon
+    const section = window.location.pathname.split('/')[1];
+    if (section) {
+      navSections?.querySelectorAll(':scope .default-content-wrapper > ul > li > a, :scope .default-content-wrapper > ul > li > p > a').forEach((link) => {
+        if (new URL(link.href).pathname.split('/')[1] === section) {
+          link.setAttribute('aria-current', 'page');
+        }
+      });
+    }
     const searchLink = nav.querySelector('.nav-tools a[href]');
     if (searchLink) {
       const searchIcon = searchLink.parentElement.querySelector('img');

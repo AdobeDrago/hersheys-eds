@@ -18,6 +18,9 @@ const SEARCH_TIMEOUT = 8000;
  * a "Show More" button.
  */
 
+// product tag label -> icon in /icons
+const TAG_ICONS = { seasonal: 'snowflake', 'limited edition': 'limited-edition' };
+
 const LISTING_VARIANTS = ['recipes', 'activities', 'products', 'stories'];
 
 /**
@@ -121,11 +124,15 @@ function buildShell(block, config) {
   const facetsCount = el('span', 'search-recipes-facets-count');
   panelHead.append(facetsTitle, facetsCount);
   const facetsMount = el('div', 'search-recipes-facets-list');
+  const applied = el('div', 'search-recipes-applied');
+  applied.hidden = true;
+  const appliedTitle = el('p', 'search-recipes-applied-title', 'Filtered Items:');
+  const chips = el('ul', 'search-recipes-chips');
   const clear = el('button', 'search-recipes-clear', 'Clear all filters');
   clear.type = 'button';
-  clear.hidden = true;
-  panel.append(panelHead, facetsMount, clear);
-  aside.append(stats, panel);
+  applied.append(appliedTitle, chips, clear);
+  panel.append(panelHead, facetsMount);
+  aside.append(stats, applied, panel);
 
   const main = el('div', 'search-recipes-main');
   const sortWrap = el('div', 'search-recipes-sortby');
@@ -176,9 +183,12 @@ function buildShell(block, config) {
     input,
     reset,
     clear,
+    applied,
+    chips,
     panel,
     facetsMount,
     facetsCount,
+    facetsTitle,
     stats,
     sort,
     sortList,
@@ -203,10 +213,10 @@ function renderFacets(ui, state) {
     const values = state.result?.facets?.[attr] || [];
     if (!values.length) return;
     const group = el('details', 'search-recipes-facet');
-    const selected = values.some(({ value }) => (state.facetFilters || []).includes(`${attr}:${value}`));
-    group.open = selected || state.openGroups.has(attr);
+    group.open = state.openGroups.has(attr);
     group.dataset.attribute = attr;
-    group.append(el('summary', 'search-recipes-facet-legend', config.facetLabels[attr] || attr));
+    const picked = (state.facetFilters || []).filter((f) => f.startsWith(`${attr}:`)).length;
+    group.append(el('summary', 'search-recipes-facet-legend', `${config.facetLabels[attr] || attr}${picked ? ` - ${picked}` : ''}`));
     const list = el('div', 'search-recipes-facet-values');
     values.forEach(({ value, count }, idx) => {
       const id = `facet-${attr.replace(/[^a-zA-Z0-9_-]/g, '-')}-${idx}`;
@@ -234,8 +244,23 @@ function renderFacets(ui, state) {
     facetsMount.append(group);
   });
   const chosen = (state.facetFilters || []).length;
+  ui.facetsTitle.textContent = chosen ? `Filter By (${chosen})` : 'Filter By';
   ui.facetsCount.textContent = state.result ? `${state.result.nbHits} results` : '';
-  ui.clear.hidden = !chosen;
+  ui.applied.hidden = !chosen;
+  ui.chips.replaceChildren(...(state.facetFilters || []).map((filter) => {
+    const attr = filter.slice(0, filter.indexOf(':'));
+    const value = filter.slice(attr.length + 1);
+    const li = el('li', 'search-recipes-chip');
+    const remove = el('button', 'search-recipes-chip-remove');
+    const key = el('span', 'search-recipes-chip-key', `${config.facetLabels[attr] || attr}: `);
+    const val = el('span', `search-recipes-chip-value${attr === 'metaTags.brand' ? ' is-brand' : ''}`, value);
+    remove.append(key, val);
+    remove.type = 'button';
+    remove.dataset.filter = filter;
+    remove.setAttribute('aria-label', `Remove filter ${config.facetLabels[attr] || attr}: ${value}`);
+    li.append(remove);
+    return li;
+  }));
 }
 
 /**
@@ -249,6 +274,18 @@ function buildCard(hit) {
   link.href = hit.href || '#';
 
   const media = el('div', 'search-recipes-card-image');
+  if (hit.label) {
+    const tag = el('span', 'search-recipes-card-tag');
+    const icon = TAG_ICONS[hit.label.toLowerCase()];
+    if (icon) {
+      const glyph = el('i', 'search-recipes-card-tag-icon');
+      glyph.style.setProperty('--tag-icon', `url("${window.hlx.codeBasePath}/icons/${icon}.svg")`);
+      glyph.setAttribute('aria-hidden', 'true');
+      tag.append(glyph);
+    }
+    tag.append(hit.label);
+    media.append(tag);
+  }
   if (hit.imageUrl) {
     const img = document.createElement('img');
     img.src = hit.imageUrl;
@@ -401,7 +438,8 @@ export default function decorate(block) {
     page: 0,
     indexKey: config.sorts[0][0],
     facetFilters: facetsFromUrl(config),
-    openGroups: new Set(),
+    // a group preselected from the URL starts open (the first one only)
+    openGroups: new Set(facetsFromUrl(config).slice(0, 1).map((f) => f.slice(0, f.indexOf(':')))),
     rendered: null,
     result: null,
     error: false,
@@ -502,11 +540,27 @@ export default function decorate(block) {
     searchSoon();
   });
 
+  ui.chips.addEventListener('click', (e) => {
+    const chip = e.target.closest('.search-recipes-chip-remove');
+    if (!chip) return;
+    state.facetFilters = state.facetFilters.filter((f) => f !== chip.dataset.filter);
+    state.page = 0;
+    searchSoon();
+  });
+
   ui.facetsMount.addEventListener('toggle', (e) => {
     const { attribute } = e.target.dataset;
     if (!attribute) return;
-    if (e.target.open) state.openGroups.add(attribute);
-    else state.openGroups.delete(attribute);
+    if (e.target.open) {
+      // one group open at a time, as on hersheyland.com
+      state.openGroups.clear();
+      state.openGroups.add(attribute);
+      ui.facetsMount.querySelectorAll('details.search-recipes-facet[open]').forEach((group) => {
+        if (group !== e.target) group.open = false;
+      });
+    } else {
+      state.openGroups.delete(attribute);
+    }
   }, true);
 
   ui.facetsMount.addEventListener('change', (e) => {
