@@ -1,0 +1,22 @@
+{
+  "blockName": "annotated-image",
+  "canonicalModel": "standalone",
+  "variants": [
+    {
+      "variantName": "default",
+      "authoredName": "Annotated Image",
+      "visualCharacteristics": {
+        "colorScheme": "light",
+        "density": "medium",
+        "purpose": "product-comparison",
+        "imagePattern": "inline",
+        "structure": "image rows with callout rows and optional content"
+      },
+      "contentPattern": "image rows start figures; callout rows add coded labeled lines; a content row adds a text column.",
+      "options": []
+    }
+  ],
+  "memberVariantIds": [
+    "default"
+  ]
+}

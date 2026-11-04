@@ -1,0 +1,120 @@
+/*
+ * Annotated image block. Callout dots, lines and labels are positioned in % of
+ * the image so they stay attached when it scales. The 900px media query mirrors
+ * system.layout.breakpoint.desktop.
+ */
+.annotated-image-container {
+  background-color: var(--hershey-component-annotated-image-background, #fef8ed);
+}
+
+.annotated-image-container .annotated-image-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.annotated-image {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hershey-system-spacing-gap-large, 32px);
+  max-width: 1228px;
+  margin: 0 auto;
+  padding: 64px var(--hershey-system-spacing-inset-comfortable, 24px) 48px;
+}
+
+.annotated-image .annotated-image-figures {
+  display: grid;
+  gap: 24px;
+}
+
+.annotated-image .annotated-image-figure {
+  position: relative;
+
+  /* room below the image for labels placed past 100% */
+  margin-bottom: 28%;
+}
+
+.annotated-image .annotated-image-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.annotated-image .annotated-image-callout {
+  --callout-color: var(--hershey-component-annotated-image-line, #0033a0);
+
+  position: absolute;
+  inset: 0;
+  color: var(--callout-color);
+  pointer-events: none;
+}
+
+.annotated-image .annotated-image-dot {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  width: 8px;
+  height: 8px;
+  box-sizing: border-box;
+  border: 2px solid currentcolor;
+  border-radius: 50%;
+  background: var(--hershey-system-color-background-default, #fff);
+  transform: translate(-50%, -50%);
+}
+
+.annotated-image .annotated-image-line {
+  position: absolute;
+  top: var(--line-top);
+  left: var(--x);
+  height: var(--line-height);
+  border-left: 2px solid currentcolor;
+  transform: translateX(-1px);
+}
+
+.annotated-image .annotated-image-label {
+  position: absolute;
+  top: var(--ly);
+  left: var(--x);
+  padding: 0 8px 2px;
+  border-bottom: 2px solid currentcolor;
+  font-family: var(--hershey-system-typography-heading-font-family, var(--heading-font-family));
+  font-size: clamp(12px, 3.2vw, 20px);
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  transform: translateY(-100%);
+}
+
+.annotated-image .annotated-image-callout.side-left .annotated-image-label {
+  right: calc(100% - var(--x));
+  left: auto;
+  text-align: right;
+}
+
+.annotated-image .annotated-image-content {
+  text-align: center;
+}
+
+@media (width >= 900px) {
+  .annotated-image {
+    flex-direction: row;
+    align-items: center;
+    gap: 48px;
+    padding-top: 96px;
+    padding-bottom: 72px;
+  }
+
+  .annotated-image .annotated-image-figures {
+    flex: 2;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 72px;
+  }
+
+  .annotated-image .annotated-image-content {
+    flex: 1;
+  }
+
+  .annotated-image .annotated-image-label {
+    font-size: clamp(11px, 1.05vw, 17px);
+  }
+}
