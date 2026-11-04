@@ -55,8 +55,8 @@
   flex-direction: column;
   align-items: center;
 
-  /* source sits 28px below the breadcrumb; sections are spaced 40px apart */
-  margin-top: -12px;
+  /* source sits 28px below the breadcrumb divider */
+  margin-top: 28px;
   text-align: center;
 }
 

@@ -884,6 +884,7 @@
   --hershey-system-size-control-slider-arrow: var(--hershey-reference-size-height-56);
   --hershey-system-size-control-slider-indicator: var(--hershey-reference-size-height-25);
   --hershey-system-size-control-recipe-row: var(--hershey-reference-spacing-40);
+  --hershey-system-size-control-recipe-row-tablet: var(--hershey-reference-spacing-28);
   --hershey-system-size-control-recipe-check: var(--hershey-reference-size-width-31);
   --hershey-system-size-control-switch-width: var(--hershey-reference-size-width-77);
   --hershey-system-size-control-switch-width-desktop: var(--hershey-reference-size-width-77);
@@ -1028,6 +1029,11 @@
   --hershey-system-spacing-inset-recipe-panel: var(--hershey-reference-spacing-25);
   --hershey-system-spacing-inset-recipe-roomy: var(--hershey-reference-spacing-30);
   --hershey-system-spacing-inset-recipe-block: var(--hershey-reference-spacing-35);
+  --hershey-system-spacing-inset-recipe-lead: var(--hershey-reference-spacing-26);
+  --hershey-system-spacing-inset-recipe-row-end: var(--hershey-reference-spacing-7);
+  --hershey-system-spacing-inset-recipe-bake-end: var(--hershey-reference-spacing-23);
+  --hershey-system-spacing-inset-recipe-step-lead: var(--hershey-reference-spacing-28);
+  --hershey-system-spacing-inset-recipe-check-overhang: var(--hershey-reference-spacing-7);
   --hershey-system-spacing-inset-recipe-bake: var(--hershey-reference-spacing-33);
   --hershey-system-spacing-inset-recipe-media: var(--hershey-reference-spacing-50);
   --hershey-system-spacing-inset-recipe-gutter-ingredients: var(--hershey-reference-spacing-36-6);
@@ -3029,6 +3035,11 @@
   --hershey-component-recipe-details-ingredients-spacing-panel-end: var(--hershey-system-spacing-inset-card);
   --hershey-component-recipe-details-ingredients-spacing-roomy: var(--hershey-system-spacing-inset-recipe-roomy);
   --hershey-component-recipe-details-ingredients-spacing-block: var(--hershey-system-spacing-inset-recipe-block);
+  --hershey-component-recipe-details-ingredients-spacing-lead: var(--hershey-system-spacing-inset-recipe-lead);
+  --hershey-component-recipe-details-ingredients-spacing-row-end: var(--hershey-system-spacing-inset-recipe-row-end);
+  --hershey-component-recipe-details-ingredients-spacing-bake-end: var(--hershey-system-spacing-inset-recipe-bake-end);
+  --hershey-component-recipe-details-ingredients-spacing-step-lead: var(--hershey-system-spacing-inset-recipe-step-lead);
+  --hershey-component-recipe-details-ingredients-spacing-check-overhang: var(--hershey-system-spacing-inset-recipe-check-overhang);
   --hershey-component-recipe-details-ingredients-spacing-stack: var(--hershey-system-spacing-inset-copy);
   --hershey-component-recipe-details-ingredients-spacing-small: var(--hershey-system-spacing-inset-small);
   --hershey-component-recipe-details-ingredients-spacing-tight: var(--hershey-system-spacing-inset-compact);
@@ -3049,6 +3060,7 @@
   --hershey-component-recipe-details-ingredients-layout-summary-min-height: var(--hershey-system-size-region-recipe-summary-minimum);
   --hershey-component-recipe-details-ingredients-layout-wave-height: var(--hershey-system-size-region-recipe-wave);
   --hershey-component-recipe-details-ingredients-layout-row-min-height: var(--hershey-system-size-control-recipe-row);
+  --hershey-component-recipe-details-ingredients-layout-row-min-height-tablet: var(--hershey-system-size-control-recipe-row-tablet);
   --hershey-component-recipe-details-ingredients-layout-media-max-width: var(--hershey-system-layout-item-recipe-media);
   --hershey-component-recipe-details-ingredients-layout-ingredients-gutter: var(--hershey-system-spacing-inset-recipe-gutter-ingredients);
   --hershey-component-recipe-details-ingredients-layout-method-gutter: var(--hershey-system-spacing-inset-recipe-gutter-method);
