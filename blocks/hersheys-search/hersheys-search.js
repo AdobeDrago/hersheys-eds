@@ -18,6 +18,9 @@ const SEARCH_TIMEOUT = 8000;
  * a "Show More" button.
  */
 
+// product tag label -> icon in /icons
+const TAG_ICONS = { seasonal: 'snowflake', 'limited edition': 'limited-edition' };
+
 const LISTING_VARIANTS = ['recipes', 'activities', 'products', 'stories'];
 
 /**
@@ -84,66 +87,70 @@ function el(tag, className, text) {
  */
 function buildShell(block, config) {
   const { labels } = config;
-  const root = el('div', 'search-recipes-root');
+  const root = el('div', 'hersheys-search-root');
 
-  const banner = el('div', 'search-recipes-banner');
+  const banner = el('div', 'hersheys-search-banner');
   if (config.background) banner.append(config.background);
-  const title = el('h1', 'search-recipes-title', labels.title);
-  const form = el('form', 'search-recipes-form');
+  const title = el('h1', 'hersheys-search-title', labels.title);
+  const form = el('form', 'hersheys-search-form');
   form.setAttribute('role', 'search');
   const label = el('label', 'sr-only', `Search ${labels.noun.toLowerCase()}`);
-  label.htmlFor = 'search-recipes-query';
-  const input = el('input', 'search-recipes-query');
+  label.htmlFor = 'hersheys-search-query';
+  const input = el('input', 'hersheys-search-query');
   input.type = 'search';
-  input.id = 'search-recipes-query';
+  input.id = 'hersheys-search-query';
   input.name = 'q';
   input.placeholder = labels.placeholder;
   input.autocomplete = 'off';
-  const submit = el('button', 'search-recipes-submit');
+  const submit = el('button', 'hersheys-search-submit');
   submit.type = 'submit';
   submit.setAttribute('aria-label', 'Search');
-  const reset = el('button', 'search-recipes-reset');
+  const reset = el('button', 'hersheys-search-reset');
   reset.type = 'button';
   reset.hidden = true;
   reset.setAttribute('aria-label', 'Clear search');
   form.append(label, input, reset, submit);
   banner.append(title, form);
 
-  const layout = el('div', 'search-recipes-layout');
-  const aside = el('aside', 'search-recipes-facets');
+  const layout = el('div', 'hersheys-search-layout');
+  const aside = el('aside', 'hersheys-search-facets');
   aside.setAttribute('aria-label', `Filter ${labels.noun.toLowerCase()}`);
-  const stats = el('p', 'search-recipes-stats');
+  const stats = el('p', 'hersheys-search-stats');
   stats.setAttribute('aria-live', 'polite');
   stats.tabIndex = -1;
-  const panel = el('details', 'search-recipes-panel');
-  const panelHead = el('summary', 'search-recipes-panel-head');
-  const facetsTitle = el('span', 'search-recipes-facets-title', 'Filter By');
-  const facetsCount = el('span', 'search-recipes-facets-count');
+  const panel = el('details', 'hersheys-search-panel');
+  const panelHead = el('summary', 'hersheys-search-panel-head');
+  const facetsTitle = el('span', 'hersheys-search-facets-title', 'Filter By');
+  const facetsCount = el('span', 'hersheys-search-facets-count');
   panelHead.append(facetsTitle, facetsCount);
-  const facetsMount = el('div', 'search-recipes-facets-list');
-  const clear = el('button', 'search-recipes-clear', 'Clear all filters');
+  const facetsMount = el('div', 'hersheys-search-facets-list');
+  const applied = el('div', 'hersheys-search-applied');
+  applied.hidden = true;
+  const appliedTitle = el('p', 'hersheys-search-applied-title', 'Filtered Items:');
+  const chips = el('ul', 'hersheys-search-chips');
+  const clear = el('button', 'hersheys-search-clear', 'Clear all filters');
   clear.type = 'button';
-  clear.hidden = true;
-  panel.append(panelHead, facetsMount, clear);
-  aside.append(stats, panel);
+  applied.append(appliedTitle, chips, clear);
+  panel.append(panelHead, facetsMount);
+  aside.append(stats, applied, panel);
 
-  const main = el('div', 'search-recipes-main');
-  const sortWrap = el('div', 'search-recipes-sortby');
-  const sortLabel = el('span', 'search-recipes-sort-label', 'Sort By');
-  sortLabel.id = 'search-recipes-sort-label';
-  const sortBox = el('div', 'search-recipes-sortbox');
-  const sort = el('button', 'search-recipes-sort');
+  const main = el('div', 'hersheys-search-main');
+  const sortWrap = el('div', 'hersheys-search-sortby');
+  const sortLabel = el('span', 'hersheys-search-sort-label', 'Sort By');
+  sortLabel.id = 'hersheys-search-sort-label';
+  const sortBox = el('div', 'hersheys-search-sortbox');
+  const sort = el('button', 'hersheys-search-sort');
   sort.type = 'button';
   sort.setAttribute('aria-haspopup', 'listbox');
   sort.setAttribute('aria-expanded', 'false');
-  sort.setAttribute('aria-labelledby', `${sortLabel.id} search-recipes-sort`);
-  sort.id = 'search-recipes-sort';
-  const sortList = el('ul', 'search-recipes-sort-list');
+  sort.setAttribute('aria-labelledby', `${sortLabel.id} hersheys-search-sort`);
+  sort.id = 'hersheys-search-sort';
+  const sortList = el('ul', 'hersheys-search-sort-list');
   sortList.setAttribute('role', 'listbox');
   sortList.setAttribute('aria-labelledby', sortLabel.id);
   sortList.hidden = true;
   config.sorts.forEach(([value, text]) => {
-    const opt = el('li', 'search-recipes-sort-option', text);
+    const opt = el('li', 'hersheys-search-sort-option', text);
     opt.setAttribute('role', 'option');
     opt.dataset.value = value;
     opt.tabIndex = -1;
@@ -152,16 +159,16 @@ function buildShell(block, config) {
   sortBox.append(sort, sortList);
   sortWrap.append(sortLabel, sortBox);
 
-  const status = el('p', 'search-recipes-status');
+  const status = el('p', 'hersheys-search-status');
   status.hidden = true;
   status.setAttribute('role', 'alert');
 
-  const hits = el('ul', 'search-recipes-hits');
-  const progress = el('div', 'search-recipes-progress');
-  const progressText = el('div', 'search-recipes-progress-text');
-  const progressFill = el('span', 'search-recipes-progress-fill');
+  const hits = el('ul', 'hersheys-search-hits');
+  const progress = el('div', 'hersheys-search-progress');
+  const progressText = el('div', 'hersheys-search-progress-text');
+  const progressFill = el('span', 'hersheys-search-progress-fill');
   progress.append(progressText, progressFill);
-  const more = el('button', 'search-recipes-more', `Show More ${labels.noun}`);
+  const more = el('button', 'hersheys-search-more', `Show More ${labels.noun}`);
   more.type = 'button';
   more.hidden = true;
 
@@ -176,9 +183,12 @@ function buildShell(block, config) {
     input,
     reset,
     clear,
+    applied,
+    chips,
     panel,
     facetsMount,
     facetsCount,
+    facetsTitle,
     stats,
     sort,
     sortList,
@@ -202,15 +212,15 @@ function renderFacets(ui, state) {
   config.facetAttributes.forEach((attr) => {
     const values = state.result?.facets?.[attr] || [];
     if (!values.length) return;
-    const group = el('details', 'search-recipes-facet');
-    const selected = values.some(({ value }) => (state.facetFilters || []).includes(`${attr}:${value}`));
-    group.open = selected || state.openGroups.has(attr);
+    const group = el('details', 'hersheys-search-facet');
+    group.open = state.openGroups.has(attr);
     group.dataset.attribute = attr;
-    group.append(el('summary', 'search-recipes-facet-legend', config.facetLabels[attr] || attr));
-    const list = el('div', 'search-recipes-facet-values');
+    const picked = (state.facetFilters || []).filter((f) => f.startsWith(`${attr}:`)).length;
+    group.append(el('summary', 'hersheys-search-facet-legend', `${config.facetLabels[attr] || attr}${picked ? ` - ${picked}` : ''}`));
+    const list = el('div', 'hersheys-search-facet-values');
     values.forEach(({ value, count }, idx) => {
       const id = `facet-${attr.replace(/[^a-zA-Z0-9_-]/g, '-')}-${idx}`;
-      const row = el('div', 'search-recipes-facet-row');
+      const row = el('div', 'hersheys-search-facet-row');
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.id = id;
@@ -220,7 +230,7 @@ function renderFacets(ui, state) {
       const lab = document.createElement('label');
       lab.htmlFor = id;
       if (attr === 'hero.rating') {
-        const stars = el('span', 'search-recipes-facet-stars', '★'.repeat(Number(value)) + '☆'.repeat(5 - Number(value)));
+        const stars = el('span', 'hersheys-search-facet-stars', '★'.repeat(Number(value)) + '☆'.repeat(5 - Number(value)));
         stars.setAttribute('role', 'img');
         stars.setAttribute('aria-label', `${value} stars`);
         lab.append(stars, ` (${count})`);
@@ -234,8 +244,23 @@ function renderFacets(ui, state) {
     facetsMount.append(group);
   });
   const chosen = (state.facetFilters || []).length;
+  ui.facetsTitle.textContent = chosen ? `Filter By (${chosen})` : 'Filter By';
   ui.facetsCount.textContent = state.result ? `${state.result.nbHits} results` : '';
-  ui.clear.hidden = !chosen;
+  ui.applied.hidden = !chosen;
+  ui.chips.replaceChildren(...(state.facetFilters || []).map((filter) => {
+    const attr = filter.slice(0, filter.indexOf(':'));
+    const value = filter.slice(attr.length + 1);
+    const li = el('li', 'hersheys-search-chip');
+    const remove = el('button', 'hersheys-search-chip-remove');
+    const key = el('span', 'hersheys-search-chip-key', `${config.facetLabels[attr] || attr}: `);
+    const val = el('span', `hersheys-search-chip-value${attr === 'metaTags.brand' ? ' is-brand' : ''}`, value);
+    remove.append(key, val);
+    remove.type = 'button';
+    remove.dataset.filter = filter;
+    remove.setAttribute('aria-label', `Remove filter ${config.facetLabels[attr] || attr}: ${value}`);
+    li.append(remove);
+    return li;
+  }));
 }
 
 /**
@@ -243,12 +268,24 @@ function renderFacets(ui, state) {
  * @returns {HTMLLIElement}
  */
 function buildCard(hit) {
-  const li = el('li', 'search-recipes-card');
+  const li = el('li', 'hersheys-search-card');
   const link = document.createElement('a');
-  link.className = 'search-recipes-card-link';
+  link.className = 'hersheys-search-card-link';
   link.href = hit.href || '#';
 
-  const media = el('div', 'search-recipes-card-image');
+  const media = el('div', 'hersheys-search-card-image');
+  if (hit.label) {
+    const tag = el('span', 'hersheys-search-card-tag');
+    const icon = TAG_ICONS[hit.label.toLowerCase()];
+    if (icon) {
+      const glyph = el('i', 'hersheys-search-card-tag-icon');
+      glyph.style.setProperty('--tag-icon', `url("${window.hlx.codeBasePath}/icons/${icon}.svg")`);
+      glyph.setAttribute('aria-hidden', 'true');
+      tag.append(glyph);
+    }
+    tag.append(hit.label);
+    media.append(tag);
+  }
   if (hit.imageUrl) {
     const img = document.createElement('img');
     img.src = hit.imageUrl;
@@ -257,17 +294,17 @@ function buildCard(hit) {
     img.decoding = 'async';
     media.append(img);
   }
-  const body = el('div', 'search-recipes-card-body');
-  body.append(el('h3', 'search-recipes-card-title', hit.title));
-  if (hit.portion) body.append(el('p', 'search-recipes-card-desc', hit.portion));
+  const body = el('div', 'hersheys-search-card-body');
+  body.append(el('h3', 'hersheys-search-card-title', hit.title));
+  if (hit.portion) body.append(el('p', 'hersheys-search-card-desc', hit.portion));
   if (hit.bvid) {
     // Bazaarvoice fills the stars and review count in once bv.js has scanned the new card
-    const rating = el('div', 'search-recipes-card-rating');
+    const rating = el('div', 'hersheys-search-card-rating');
     rating.dataset.bvShow = 'inline_rating';
     rating.dataset.bvProductId = hit.bvid;
     body.append(rating);
   } else if (hit.rating) {
-    body.append(el('p', 'search-recipes-card-rating', `Rating: ${hit.rating}`));
+    body.append(el('p', 'hersheys-search-card-rating', `Rating: ${hit.rating}`));
   }
   link.append(media, body);
   li.append(link);
@@ -401,7 +438,8 @@ export default function decorate(block) {
     page: 0,
     indexKey: config.sorts[0][0],
     facetFilters: facetsFromUrl(config),
-    openGroups: new Set(),
+    // a group preselected from the URL starts open (the first one only)
+    openGroups: new Set(facetsFromUrl(config).slice(0, 1).map((f) => f.slice(0, f.indexOf(':')))),
     rendered: null,
     result: null,
     error: false,
@@ -493,7 +531,7 @@ export default function decorate(block) {
     ui.sort.focus();
   });
   document.addEventListener('click', (e) => {
-    if (!ui.sortList.hidden && !e.target.closest('.search-recipes-sortbox')) toggleSort(false);
+    if (!ui.sortList.hidden && !e.target.closest('.hersheys-search-sortbox')) toggleSort(false);
   });
 
   ui.clear.addEventListener('click', () => {
@@ -502,11 +540,27 @@ export default function decorate(block) {
     searchSoon();
   });
 
+  ui.chips.addEventListener('click', (e) => {
+    const chip = e.target.closest('.hersheys-search-chip-remove');
+    if (!chip) return;
+    state.facetFilters = state.facetFilters.filter((f) => f !== chip.dataset.filter);
+    state.page = 0;
+    searchSoon();
+  });
+
   ui.facetsMount.addEventListener('toggle', (e) => {
     const { attribute } = e.target.dataset;
     if (!attribute) return;
-    if (e.target.open) state.openGroups.add(attribute);
-    else state.openGroups.delete(attribute);
+    if (e.target.open) {
+      // one group open at a time, as on hersheyland.com
+      state.openGroups.clear();
+      state.openGroups.add(attribute);
+      ui.facetsMount.querySelectorAll('details.hersheys-search-facet[open]').forEach((group) => {
+        if (group !== e.target) group.open = false;
+      });
+    } else {
+      state.openGroups.delete(attribute);
+    }
   }, true);
 
   ui.facetsMount.addEventListener('change', (e) => {

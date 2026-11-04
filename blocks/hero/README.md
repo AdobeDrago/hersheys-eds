@@ -124,6 +124,47 @@ Options:
 The panel colour comes from the brand theme. In a section with Section Metadata `Style: cream`
 (e.g. `/about/faqs`) the panel is light cream (`#fef3e3`).
 
+## Marquee (`marquee`)
+
+Authored as **Hero (marquee)**. Block classes: `hero marquee`.
+
+Brand hero for campaign pages (e.g. `/oreo-cup`): four rows of scrolling text on a band tilted 10
+degrees behind a logo, an intro paragraph and a product photo, on the brand band colour. Code:
+`hero-marquee.js` / `hero-marquee.css`, loaded by `hero.js` for this variant. The two ticker
+strips (`icons/hero-marquee-ticker-left.svg`, `icons/hero-marquee-ticker-right.svg`) are
+decoration, not authored content; the left one is over the 40KB limit for images authored on a
+page. The section is
+full-bleed with no padding.
+
+Content model: 1 row x 2 cells.
+
+| Hero (marquee) | |
+| --- | --- |
+| logo image, intro paragraph | product photo |
+
+The logo and photo should be transparent PNGs or WebPs. The copy is centred vertically beside
+the photo; on screens under 900px the two stack. The ticker stops for visitors who prefer
+reduced motion.
+
+### Text band (`band`)
+
+Authored as **Hero (marquee, band)**. Block classes: `hero marquee band`.
+
+A band of lettering instead of a hero, e.g. "Tastes like good memories" and "It's your happy place"
+on `/hersheys`: rows of one wide strip scrolling sideways at 24px a second, each row in the
+opposite direction to the one above. Code: the `band` branch of `hero-marquee.js` and the
+`.hero.marquee.band` rules in `hero-marquee.css`.
+
+Content model: 1 row x 1 cell holding the strip, either a picture or a link to an image file (use a
+link for a strip over the 40KB limit for images authored on a page, e.g. a file in `/icons`); its
+alt text or link text is the readable copy. Add `rows-N` to change the number of rows (default 4).
+The block is clipped to the height the page theme sets with `--hero-marquee-band-height`, so the
+last row can be cut off. The ticker stops for visitors who prefer reduced motion.
+
+| Hero (marquee, band) |
+| --- |
+| [Tastes like good memories](/icons/hersheys-tastes-like-good-memories.svg) |
+
 ## Universal Editor fields
 
 N/A (Document Authoring project)

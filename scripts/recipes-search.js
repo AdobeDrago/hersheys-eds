@@ -67,7 +67,7 @@ export const DEFAULT_CONFIG = {
 };
 
 /**
- * Per-listing overrides, chosen by the block's variant class (`search-recipes activities`).
+ * Per-listing overrides, chosen by the block's variant class (`hersheys-search activities`).
  * Anything not listed here comes from DEFAULT_CONFIG.
  */
 export const LISTING_TYPES = {
@@ -201,6 +201,7 @@ export function mapHit(hit, config) {
     imageUrl: absoluteUrl(imagePath, config.assetOrigin),
     rating: hit?.hero?.rating ?? hit?.hero?.starRating ?? null,
     ratingQuantity: hit?.hero?.ratingQuantity ?? null,
+    label: hit?.metaTags?.productLabel || '',
   };
 }
 
@@ -265,14 +266,14 @@ export function groupFacetFilters(facetFilters) {
  * @returns {string}
  */
 function buildParams({
-  query = '', page = 0, hitsPerPage, facetFilters = [],
+  query = '', page = 0, hitsPerPage, facetFilters = [], facets,
 }, config) {
   const params = new URLSearchParams();
   params.set('query', query);
   params.set('page', String(page));
   params.set('hitsPerPage', String(hitsPerPage ?? config.hitsPerPage));
   params.set('filters', config.baseFilter);
-  params.set('facets', JSON.stringify(config.facetAttributes));
+  params.set('facets', JSON.stringify(facets || config.facetAttributes));
   params.set('maxValuesPerFacet', String(config.maxValuesPerFacet));
   // Hershey's Algolia app: keep this prototype's searches out of their analytics
   params.set('analytics', 'false');
@@ -342,6 +343,25 @@ export async function searchRecipes(searchRequest, overrides, signal) {
   }
 
   const url = `https://${config.appId}-dsn.algolia.net/1/indexes/*/queries`;
+  // disjunctive faceting: an attribute with selections is counted again without its own
+  // filters, so its other values stay listed and can be added (OR) instead of narrowing
+  const selectedAttrs = [...new Set(groupFacetFilters(payload.facetFilters)
+    .map((group) => group[0].slice(0, group[0].indexOf(':'))))]
+    .filter((attr) => config.facetAttributes.includes(attr));
+  const requests = [{ indexName, params: buildParams(payload, config) }];
+  selectedAttrs.forEach((attr) => {
+    requests.push({
+      indexName,
+      params: buildParams({
+        ...payload,
+        page: 0,
+        hitsPerPage: 0,
+        facets: [attr],
+        facetFilters: groupFacetFilters(payload.facetFilters)
+          .filter((group) => !group[0].startsWith(`${attr}:`)),
+      }, config),
+    });
+  });
   const resp = await fetch(url, {
     method: 'POST',
     headers: {
@@ -349,16 +369,16 @@ export async function searchRecipes(searchRequest, overrides, signal) {
       'X-Algolia-Application-Id': config.appId,
       'X-Algolia-API-Key': config.apiKey,
     },
-    body: JSON.stringify({
-      requests: [{
-        indexName,
-        params: buildParams(payload, config),
-      }],
-    }),
+    body: JSON.stringify({ requests }),
     signal,
   });
   if (!resp.ok) throw new Error(`Algolia search failed (${resp.status})`);
   const data = await resp.json();
   const result = (data.results && data.results[0]) || {};
+  result.facets = { ...result.facets };
+  selectedAttrs.forEach((attr, i) => {
+    const extra = data.results?.[i + 1]?.facets?.[attr];
+    if (extra) result.facets[attr] = extra;
+  });
   return normalizeResult(result, config);
 }

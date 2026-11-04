@@ -783,3 +783,23 @@ header nav .nav-tools {
     transition: none;
   }
 }
+
+/* active section: bold label with the hover icon beside it, as on the original site */
+@media (width >= 992px) {
+  .header.hershey-nav nav .nav-sections a[aria-current='page'] {
+    position: relative;
+    font-weight: 700;
+  }
+
+  .header.hershey-nav nav .nav-sections a[aria-current='page']::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-right: var(--hershey-system-spacing-inset-compact);
+    width: var(--hershey-component-header-menu-hover-icon-size);
+    height: var(--hershey-component-header-menu-hover-icon-size);
+    background: var(--nav-hover-icon) center / contain no-repeat;
+    translate: 0 -50%;
+  }
+}

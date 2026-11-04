@@ -8,7 +8,7 @@ import { getMetadata, loadScript } from './aem.js';
  * - Adobe Launch: consented.js, only after Performance (C0002) consent.
  *
  * Loaded by the blocks that need them, which never wait on them without a time limit:
- * - Algolia: blocks/search-recipes once the block is visible; cards (product, related) and
+ * - Algolia: blocks/hersheys-search once the block is visible; cards (product, related) and
  *   cards (slider, related, recipes) when the block loads, giving up after 4 s.
  * - Wayvia (PriceSpider): widgets/pricespider/where-to-buy.js.
  */

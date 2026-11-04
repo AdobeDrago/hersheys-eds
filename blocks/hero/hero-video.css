@@ -1,0 +1,153 @@
+/*
+ * Hero (video): full-width looping video behind an eyebrow, h1 and intro, with a pause/play
+ * button. Values measured on hersheyland.com/about/history.html (.content-hero).
+ */
+.hero.video {
+  display: grid;
+  min-height: var(--hershey-component-hero-video-min-height, 560px);
+  max-height: 768px;
+  padding: 0;
+  place-items: center;
+  background: #3f000b;
+  color: #fff;
+  text-align: center;
+}
+
+/* curved white edge at the bottom of the hero */
+.hero.video::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  aspect-ratio: 1440 / 165;
+  background: url('/icons/hero-video-curve.svg') center bottom / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+.hero.video .hero-video-media {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero.video .hero-video-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 75%);
+}
+
+.hero.video .hero-video-media picture,
+.hero.video .hero-video-media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* live stretches the whole frame across the hero instead of cropping the sides */
+.hero.video .hero-video-media video {
+  object-fit: fill;
+}
+
+.hero.video .hero-video-toggle {
+  position: absolute;
+  z-index: 2;
+  top: 24px;
+  right: 15px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(200 200 200 / 85%);
+  color: #3f000b;
+  cursor: pointer;
+}
+
+.hero.video .hero-video-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 12px;
+  height: 14px;
+  background: currentcolor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.hero.video .hero-video-toggle[data-state='playing']::before {
+  background: linear-gradient(90deg, currentcolor 35%, transparent 35% 65%, currentcolor 65%);
+  clip-path: none;
+}
+
+.hero.video .hero-video-toggle:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.hero.video .hero-video-text {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 80px 16px 48px;
+  font-family: var(--body-font-family);
+}
+
+.hero.video .hero-video-eyebrow {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.hero.video h1 {
+  margin: 0;
+  color: #fff;
+  font-family: hershey-gazpacho, var(--heading-font-family), serif;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+.hero.video .hero-video-text p:not(.hero-video-eyebrow) {
+  margin: 12px 0 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+@media (width >= 900px) {
+  .hero.video {
+    width: 100%; /* the height cap must not shrink the width on wide screens */
+    aspect-ratio: 1280 / 621;
+    min-height: 0;
+  }
+
+  /* live: the text column is 40% of the hero (max-width: 40%) */
+  .hero.video .hero-video-text {
+    max-width: 40%;
+    padding: 0 10px;
+  }
+
+  .hero.video h1 {
+    font-size: 48px;
+    line-height: 72px;
+  }
+}
+
+/* the curve meets the next band, so the hero section keeps no gap above or below */
+main .section:has(> .hero-wrapper > .hero.video) {
+  margin: 0;
+  padding: 0;
+}
+
+/* past 1583px the height stops at 768px: live crops the video from the top instead of stretching it */
+@media (width > 1583px) {
+  .hero.video .hero-video-media video {
+    object-fit: cover;
+    object-position: center top;
+  }
+}
