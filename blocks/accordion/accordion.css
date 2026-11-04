@@ -209,8 +209,22 @@ main > .section.faq .button-wrapper a.button {
   line-height: var(--hershey-component-accordion-faq-line-height, 1.5);
 }
 
-/* a `faq` section with text only ("More FAQs About The Hershey Company"): centred copy */
+/* a `faq` section with text only ("More FAQs About The Hershey Company"): centred copy in a tan
+   box, full width below 992px and inset from the page edges above */
+main > .section.faq:has(> .default-content-wrapper:only-child) {
+  --hershey-component-accordion-brand-section-padding-block-start-mobile: var(--hershey-component-accordion-faq-box-section-padding-block-mobile, 35px);
+  --hershey-component-accordion-brand-section-padding-block-end-mobile: var(--hershey-component-accordion-faq-box-section-padding-block-mobile, 35px);
+  --hershey-component-accordion-brand-section-padding-inline-start-mobile: 0;
+  --hershey-component-accordion-brand-section-padding-inline-end-mobile: 0;
+  --hershey-component-accordion-brand-section-padding-block-start: var(--hershey-component-accordion-faq-box-section-padding-block, 50px);
+  --hershey-component-accordion-brand-section-padding-block-end: var(--hershey-component-accordion-faq-box-section-padding-block, 50px);
+}
+
 main > .section.faq > .default-content-wrapper:only-child {
+  box-sizing: border-box;
+  border-radius: var(--hershey-component-accordion-faq-box-border-radius, 8px);
+  padding: var(--hershey-component-accordion-faq-box-padding-block-mobile, 35px) var(--hershey-component-accordion-faq-box-padding-inline-mobile, 10px);
+  background-color: var(--hershey-component-accordion-faq-box-background-color, #e2d6c5);
   font-size: var(--hershey-component-accordion-faq-note-font-size, 17px);
   font-weight: var(--hershey-component-accordion-faq-note-font-weight, 500);
   line-height: var(--hershey-component-accordion-faq-line-height, 1.5);
@@ -238,8 +252,13 @@ main > .section.faq > .default-content-wrapper:only-child a:any-link:hover {
 }
 
 @media (width >= 992px) {
-  main > .section.faq:has(> .default-content-wrapper:only-child) {
-    padding-bottom: var(--hershey-component-accordion-faq-text-section-padding-block-end, 70px);
+  main > .section.faq > .default-content-wrapper:only-child {
+    width: calc(100% - 2 * var(--hershey-component-accordion-faq-box-inset, 90px));
+    max-width: var(--hershey-component-accordion-faq-box-max-width, 1260px);
+    padding:
+      var(--hershey-component-accordion-faq-box-padding-block-start, 50px)
+      var(--hershey-component-accordion-faq-box-padding-inline, 50px)
+      var(--hershey-component-accordion-faq-box-padding-block-end, 20px);
   }
 
   main > .section.faq > .accordion-wrapper + .default-content-wrapper {

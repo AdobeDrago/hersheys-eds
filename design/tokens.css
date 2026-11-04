@@ -3010,7 +3010,17 @@
   --hershey-component-accordion-faq-action-padding-inline: var(--hershey-system-spacing-inset-copy-offset);
   --hershey-component-accordion-faq-action-border-radius: var(--hershey-system-shape-radius-product-cta);
   --hershey-component-accordion-faq-text-heading-margin-block-end: var(--hershey-system-spacing-inset-small);
-  --hershey-component-accordion-faq-text-section-padding-block-end: var(--hershey-system-spacing-section-recipe);
+  --hershey-component-accordion-faq-box-background-color: var(--hershey-system-color-surface-cool-tan);
+  --hershey-component-accordion-faq-box-border-radius: var(--hershey-system-shape-radius-panel);
+  --hershey-component-accordion-faq-box-max-width: var(--hershey-system-layout-container-brand-callout);
+  --hershey-component-accordion-faq-box-inset: var(--hershey-system-spacing-brand-section);
+  --hershey-component-accordion-faq-box-padding-block-mobile: var(--hershey-system-spacing-inset-recipe-block);
+  --hershey-component-accordion-faq-box-padding-inline-mobile: var(--hershey-system-spacing-inset-snug);
+  --hershey-component-accordion-faq-box-padding-block-start: var(--hershey-system-spacing-inset-brand-top);
+  --hershey-component-accordion-faq-box-padding-inline: var(--hershey-system-spacing-inset-brand-top);
+  --hershey-component-accordion-faq-box-padding-block-end: var(--hershey-system-spacing-inset-card);
+  --hershey-component-accordion-faq-box-section-padding-block-mobile: var(--hershey-system-spacing-inset-recipe-block);
+  --hershey-component-accordion-faq-box-section-padding-block: var(--hershey-system-spacing-inset-brand-top);
   --hershey-component-hero-recipe-category-background: var(--hershey-system-color-surface-corporate);
   --hershey-component-hero-recipe-category-foreground: var(--hershey-system-color-text-inverse);
   --hershey-component-hero-recipe-category-font-family: var(--hershey-system-typography-body-font-family);
