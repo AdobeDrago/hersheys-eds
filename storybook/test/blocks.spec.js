@@ -173,6 +173,32 @@ test('Details and Directions builds supplies, directions, and Make Mode for acti
   await expect(page.locator('.details-and-directions-steps')).toHaveCSS('border-top-color', 'rgb(219, 233, 165)');
 });
 
+test('Jump Links builds one linked tile per authored row and drops rows without a link', async ({ page }) => {
+  await open(page, 'blocks-jump-links--missing-link');
+  const tiles = page.locator('.jump-links .jump-links-tile');
+  await expect(tiles).toHaveCount(2);
+  await expect(tiles.first()).toHaveAttribute('href', '#trending-topics');
+  await expect(tiles.first().locator('.jump-links-label')).toHaveText('Trending Questions');
+  await expect(tiles.first().locator('.jump-links-icon img')).toHaveAttribute('alt', '');
+});
+
+test('Accordion faq section style uses teal rules and keeps closed questions maroon', async ({ page }) => {
+  await open(page, 'blocks-accordion--faq');
+  await expect(page.locator('.faq h2')).toHaveCSS('text-align', 'center');
+  await expect(page.locator('.faq .accordion-item').first()).toHaveCSS('border-top-color', 'rgb(8, 169, 160)');
+  await expect(page.locator('.faq .accordion-item:not([open]) .accordion-item-label').first()).toHaveCSS('color', 'rgb(63, 0, 11)');
+});
+
+test('Cards callout scrolls as a slider with kiss dots and no arrows', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 800 });
+  await open(page, 'blocks-cards--callout');
+  await expect(page.locator('.cards.callout')).toHaveClass(/\bslider\b/);
+  await expect(page.locator('.cards.callout > ul > li')).toHaveCount(3);
+  await expect(page.locator('.cards.callout .cards-card-image > a')).toHaveCount(3);
+  await expect(page.locator('.cards.callout .cards-slider-controls')).toBeHidden();
+  await expect(page.locator('.cards.callout .cards-slider-dot')).toHaveCount(3);
+});
+
 test('Cards related recipes fill an empty block from Algolia Recommend with rating containers', async ({ page }) => {
   await open(page, 'blocks-cards--related-recipes');
   const cards = page.locator('.cards.recipes > ul > li');

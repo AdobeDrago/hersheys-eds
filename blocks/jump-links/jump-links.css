@@ -1,0 +1,132 @@
+/*
+ * Jump Links block: icon tiles that link to sections further down the page ("Jump to a Section"
+ * on hersheyland.com/about/faqs). One tile per row below 768px, two from 768px and three from
+ * 992px. Values come from component.jump-links.* tokens; literal fallbacks are measured on that page.
+ */
+
+/* the section's heading sits centred above the tiles; the band colour comes from the section
+   style (e.g. `cream`) */
+main > .section.jump-links-container {
+  padding:
+    var(--hershey-component-jump-links-spacing-band-padding-block-start-mobile, 35px)
+    var(--hershey-component-jump-links-spacing-band-padding-inline-mobile, 16px)
+    var(--hershey-component-jump-links-spacing-band-padding-block-end-mobile, 70px);
+  color: var(--hershey-component-jump-links-color-foreground, #3f000b);
+}
+
+main > .section.jump-links-container > div {
+  max-width: var(--hershey-component-jump-links-layout-max-width, 1260px);
+}
+
+main > .section.jump-links-container > .default-content-wrapper > h2 {
+  margin: 0 0 var(--hershey-component-jump-links-spacing-heading-margin-block-end-mobile, 18px);
+  font-size: var(--hershey-component-jump-links-typography-heading-font-size-mobile, 28px);
+  line-height: var(--hershey-component-jump-links-typography-heading-line-height, 1.5);
+  text-align: center;
+}
+
+.jump-links .jump-links-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--hershey-component-jump-links-gap-grid-mobile, 18px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* below 768px a tile is a single row: icon, then label */
+.jump-links .jump-links-tile {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--hershey-component-jump-links-gap-tile-mobile, 18px);
+  min-height: var(--hershey-component-jump-links-layout-tile-min-height-mobile, 75px);
+  border:
+    var(--hershey-component-jump-links-border-tile-width, 3px)
+    solid
+    var(--hershey-component-jump-links-color-tile-border, #3f000b);
+  border-radius: var(--hershey-component-jump-links-border-tile-radius, 8px);
+  padding: var(--hershey-component-jump-links-spacing-tile-padding-mobile, 20px);
+  background-color: var(--hershey-component-jump-links-color-tile-background, #fff);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+
+.jump-links .jump-links-tile:is(:hover, :focus-visible) {
+  border-color: var(--hershey-component-jump-links-color-tile-border-hover, #08a9a0);
+}
+
+.jump-links .jump-links-icon {
+  flex-shrink: 0;
+  width: var(--hershey-component-jump-links-layout-icon-size-mobile, 30px);
+  height: var(--hershey-component-jump-links-layout-icon-size-mobile, 30px);
+}
+
+.jump-links .jump-links-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.jump-links .jump-links-label {
+  border-bottom:
+    var(--hershey-component-jump-links-border-label-rule-width, 1px)
+    solid
+    var(--hershey-component-jump-links-color-label-rule, #3f000b);
+  font-size: var(--hershey-component-jump-links-typography-label-font-size-mobile, 16px);
+  font-weight: var(--hershey-component-jump-links-typography-label-font-weight, 600);
+  line-height: var(--hershey-component-jump-links-typography-label-line-height, 1.4);
+  transition: border-color 0.2s;
+}
+
+.jump-links .jump-links-tile:is(:hover, :focus-visible) .jump-links-label {
+  border-bottom-color: transparent;
+}
+
+/* from 768px the tiles are 2:1 cards with the icon centred above the label */
+@media (width >= 768px) {
+  main > .section.jump-links-container > .default-content-wrapper > h2 {
+    margin-bottom: var(--hershey-component-jump-links-spacing-heading-margin-block-end, 32px);
+  }
+
+  .jump-links .jump-links-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--hershey-component-jump-links-gap-grid, 24px);
+  }
+
+  .jump-links .jump-links-tile {
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--hershey-component-jump-links-gap-tile, 16px);
+    min-height: 0;
+    aspect-ratio: 2 / 1;
+    padding: var(--hershey-component-jump-links-spacing-tile-padding, 24px);
+    text-align: center;
+  }
+
+  .jump-links .jump-links-icon {
+    width: var(--hershey-component-jump-links-layout-icon-size, 50px);
+    height: var(--hershey-component-jump-links-layout-icon-size, 50px);
+  }
+
+  .jump-links .jump-links-label {
+    font-size: var(--hershey-component-jump-links-typography-label-font-size, 18px);
+  }
+}
+
+/* from 992px the band continues the hero above it, so it has no top padding and no gutters */
+@media (width >= 992px) {
+  main > .section.jump-links-container {
+    padding: 0 0 var(--hershey-component-jump-links-spacing-band-padding-block-end, 160px);
+  }
+
+  main > .section.jump-links-container > .default-content-wrapper > h2 {
+    font-size: var(--hershey-component-jump-links-typography-heading-font-size, 36px);
+  }
+
+  .jump-links .jump-links-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

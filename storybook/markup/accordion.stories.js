@@ -10,7 +10,7 @@ const ITEMS = [
   ['Where can I find more recipes?', null],
 ];
 
-function renderAccordion(items, { open = false } = {}) {
+function renderAccordion(items, { open = false, sectionStyle = '' } = {}) {
   const root = createPage('Blocks', 'Accordion');
   const main = showcase(root);
   const block = element('div', 'accordion block');
@@ -31,7 +31,12 @@ function renderAccordion(items, { open = false } = {}) {
   });
   decorateAccordion(block);
   if (open) block.querySelector('details')?.setAttribute('open', '');
-  section(main, block, 'accordion-container');
+  const container = section(main, block, `${sectionStyle} accordion-container`.trim());
+  if (sectionStyle) {
+    const heading = element('div', 'default-content-wrapper');
+    heading.append(element('h2', '', 'Trending Topics'));
+    container.prepend(heading);
+  }
   return root;
 }
 
@@ -44,4 +49,6 @@ export default {
 
 export const Default = { render: () => renderAccordion(ITEMS) };
 export const FirstOpen = { render: () => renderAccordion(ITEMS, { open: true }) };
+/** `faq` section style (hersheyland.com/about/faqs): centred heading, teal rules, maroon plus/minus. */
+export const Faq = { render: () => renderAccordion(ITEMS, { open: true, sectionStyle: 'faq' }) };
 export const MissingQuestion = { render: () => renderAccordion([['', 'This row has no question and is removed.'], ...ITEMS]) };

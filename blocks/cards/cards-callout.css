@@ -1,0 +1,150 @@
+/*
+ * Cards (callout): photo, linked title and description over a teal bar ("Your Baking Questions,
+ * Answered" on hersheyland.com/about/faqs). A kiss-dot carousel below 992px, a row of three from
+ * 992px. Values come from component.cards.callout.* tokens; literal fallbacks are measured on that page.
+ */
+
+main > .section.cards-container:has(.cards.callout) {
+  padding:
+    var(--hershey-component-cards-callout-band-padding-block-start-mobile, 30px)
+    0
+    var(--hershey-component-cards-callout-band-padding-block-end-mobile, 60px);
+  color: var(--hershey-component-cards-callout-color-foreground, #3f000b);
+}
+
+main > .section.cards-container:has(.cards.callout) > div {
+  max-width: none;
+  padding: 0;
+}
+
+main > .section.cards-container:has(.cards.callout) > .default-content-wrapper > h2 {
+  margin: 0 var(--hershey-component-cards-callout-track-padding-inline-start-mobile, 16px) var(--hershey-component-cards-callout-heading-margin-block-end-mobile, 8px);
+  font-size: var(--hershey-component-cards-callout-heading-font-size-mobile, 28px);
+  line-height: var(--hershey-component-cards-callout-line-height, 1.5);
+  text-align: center;
+}
+
+/* the track starts half a gap past the section inset and runs off the right edge */
+.cards.callout > ul {
+  grid-auto-columns: var(--hershey-component-cards-callout-card-width-mobile, 280px);
+  gap: var(--hershey-component-cards-callout-gap-mobile, 12px);
+  padding: 0 var(--hershey-component-cards-callout-track-padding-inline-start-mobile, 16px);
+  padding-inline-start: calc(var(--hershey-component-cards-callout-track-padding-inline-start-mobile, 16px) + var(--hershey-component-cards-callout-gap-mobile, 12px) / 2);
+  scroll-padding-inline-start: calc(var(--hershey-component-cards-callout-track-padding-inline-start-mobile, 16px) + var(--hershey-component-cards-callout-gap-mobile, 12px) / 2);
+  scrollbar-width: none;
+}
+
+.cards.callout > ul > li {
+  position: relative;
+  min-height: var(--hershey-component-cards-callout-card-min-height-mobile, 478px);
+  border: 0;
+  background-color: var(--hershey-component-cards-callout-color-card-background, #fff);
+}
+
+/* the bar sits over the bottom padding of the tallest card, so it lines up across the row */
+.cards.callout > ul > li::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--hershey-component-cards-callout-bar-height, 8px);
+  background-color: var(--hershey-component-cards-callout-color-bar, #08a9a0);
+}
+
+.cards.callout > ul > li img {
+  border-radius: var(--hershey-component-cards-callout-image-border-radius, 8px) var(--hershey-component-cards-callout-image-border-radius, 8px) 0 0;
+}
+
+.cards.callout .cards-card-body {
+  margin: 0;
+  padding: var(--hershey-component-cards-callout-body-padding, 20px);
+  font-family: var(--body-font-family);
+  line-height: var(--hershey-component-cards-callout-line-height, 1.5);
+}
+
+.cards.callout h3 {
+  margin: var(--hershey-component-cards-callout-title-margin-block, 10px) 0;
+  font-family: var(--body-font-family);
+  font-size: var(--hershey-component-cards-callout-title-font-size, 24px);
+  font-weight: var(--hershey-component-cards-callout-title-font-weight, 700);
+  line-height: var(--hershey-component-cards-callout-line-height, 1.5);
+}
+
+.cards.callout h3 a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards.callout h3 a:hover,
+.cards.callout h3 a:focus-visible {
+  text-decoration: underline;
+}
+
+.cards.callout .cards-card-body p {
+  margin: 0;
+  font-size: var(--hershey-component-cards-callout-text-font-size, 16px);
+  font-weight: var(--hershey-component-cards-callout-text-font-weight, 500);
+}
+
+/* kiss-dot pager only; no arrows */
+.cards.callout .cards-slider-controls {
+  display: none;
+}
+
+.cards.callout .cards-slider-dots {
+  gap: var(--hershey-component-cards-callout-indicator-gap, 10px);
+  margin-top: var(--hershey-component-cards-callout-indicator-margin-block-start, 20px);
+  padding-inline-start: var(--hershey-component-cards-callout-track-padding-inline-start-mobile, 16px);
+}
+
+.cards.callout .cards-slider-dot {
+  width: var(--hershey-component-cards-callout-indicator-size, 20px);
+  height: var(--hershey-component-cards-callout-indicator-size, 20px);
+  background-image: url('/icons/kiss-indicator-inactive-blue.svg');
+}
+
+.cards.callout .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/kiss-indicator-active-blue.svg');
+}
+
+@media (width >= 768px) {
+  .cards.callout > ul {
+    grid-auto-columns: var(--hershey-component-cards-callout-card-width-tablet, 290px);
+    gap: var(--hershey-component-cards-callout-gap-tablet, 19px);
+  }
+
+  .cards.callout h3 {
+    margin-bottom: var(--hershey-component-cards-callout-text-margin-block-end, 15px);
+  }
+
+  .cards.callout .cards-card-body p {
+    margin-bottom: var(--hershey-component-cards-callout-text-margin-block-end, 15px);
+  }
+}
+
+@media (width >= 992px) {
+  main > .section.cards-container:has(.cards.callout) {
+    padding:
+      var(--hershey-component-cards-callout-band-padding-block-start, 70px)
+      0
+      var(--hershey-component-cards-callout-band-padding-block-end, 140px);
+  }
+
+  main > .section.cards-container:has(.cards.callout) > .default-content-wrapper > h2 {
+    margin-bottom: var(--hershey-component-cards-callout-heading-margin-block-end, 20px);
+    font-size: var(--hershey-component-cards-callout-heading-font-size, 36px);
+  }
+
+  .cards.callout > ul {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--hershey-component-cards-callout-gap, 38px);
+    width: min(100% - 2 * var(--hershey-component-cards-callout-gutter, 12px), var(--hershey-component-cards-callout-max-width, 1066px));
+    margin: 0 auto;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .cards.callout > ul > li {
+    min-height: 0;
+  }
+}

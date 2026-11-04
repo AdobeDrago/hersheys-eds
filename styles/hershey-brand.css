@@ -26,28 +26,6 @@
   object-fit: cover;
 }
 
-/* brand pages: full-width artwork between two bands (e.g. a milk splash), authored as an image in
-   an `artwork` section; unlike `divider` it keeps the artwork's own proportions */
-.hershey-home main > .section.artwork {
-  padding: 0;
-}
-
-.hershey-home main > .section.artwork > .default-content-wrapper {
-  max-width: none;
-  padding: 0;
-}
-
-.hershey-home main > .section.artwork p {
-  margin: 0;
-  line-height: 0;
-}
-
-.hershey-home main > .section.artwork img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 /* brand pages: artwork between the two brand colour bands sits on a hard split of both colours,
    the first above (`brand-split`, e.g. the candy shapes on /good-and-plenty) or the second above
    (`brand-split-reverse`); brand themes set both colours */
