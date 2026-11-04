@@ -172,8 +172,23 @@ function buildShell(block, config) {
   block.replaceChildren(root);
 
   return {
-    form, input, reset, clear, panel, facetsMount, facetsCount, stats, sort, sortList, status, hits, more, config,
-    progress, progressText, progressFill,
+    form,
+    input,
+    reset,
+    clear,
+    panel,
+    facetsMount,
+    facetsCount,
+    stats,
+    sort,
+    sortList,
+    status,
+    hits,
+    more,
+    config,
+    progress,
+    progressText,
+    progressFill,
   };
 }
 

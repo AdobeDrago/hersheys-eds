@@ -58,7 +58,8 @@ const SHEET_NUTRIENTS = [
 const NUTRITION_DV = /\s+(\d+(?:\.\d+)?\s?%)\s*\*?$/;
 const NUTRITION_AMOUNT = /\s+(<?\s?\d[\d.,]*\s?(?:g|mg|mcg|µg|iu|kcal))$/i;
 const NUTRITION_SERVINGS = /servings?\s+per\s+container/i;
-const NUTRITION_SERVING_SIZE = /^\s*serving\s+size\s+(.+)$/i;
+const NUTRITION_SERVING_SIZE = /^\s*serving\s+size:?\s+(.+)$/i;
+const NUTRITION_AMOUNT_HEADER = /^\s*amount\s+per\s+serving:?\s*$/i;
 const NUTRITION_CALORIES = /^\s*calories\s+(\d[\d,]*)\s*$/i;
 const NUTRITION_DV_HEADER = /^\s*%\s*daily\s+value\*?\s*$/i;
 const NUTRITION_SUB = /^(saturated|trans|poly|mono|dietary\s+fiber|soluble|insoluble|total\s+sugars|sugar\s+alcohol)/i;
@@ -94,7 +95,8 @@ function parseNutritionLine(line) {
     const match = text.match(NUTRITION_DV);
     if (match) {
       [, dv] = match;
-      text = text.slice(0, match.index).trim();
+      // "21g – 27%": drop the dash authors put between amount and %DV
+      text = text.slice(0, match.index).replace(/\s*[–—-]$/, '').trim();
     }
   }
   let name = text;
@@ -209,6 +211,10 @@ function decorateNutritionLabel(cell) {
       el.remove();
       return;
     }
+    if (NUTRITION_AMOUNT_HEADER.test(text)) {
+      el.classList.add('recipe-details-nutrition-amount-header');
+      return;
+    }
     if (NUTRITION_DV_HEADER.test(text)) {
       el.classList.add('recipe-details-nutrition-dv-header');
       dvHeaderPresent = true;
@@ -220,7 +226,7 @@ function decorateNutritionLabel(cell) {
     }
     if (NUTRITION_SERVINGS.test(text)) {
       // split "Servings Per Container 24" so the count can sit right-aligned
-      const count = text.match(/^(.*?)\s+(\d[\d.,]*|varied)$/i);
+      const count = text.match(/^(.*?):?\s+((?:\d[\d.,]*|varied)(?:\s+servings?)?)$/i);
       if (count) el.replaceWith(nutritionSummaryRow(count[1], count[2], 'servings'));
       else el.classList.add('recipe-details-nutrition-servings');
       return;

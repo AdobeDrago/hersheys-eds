@@ -24,7 +24,7 @@ const INGREDIENTS_SHEET = '/recipes/ingredients.json';
 const TOOLS_HEADING = /you.?ll\s+need|tools|equipment/i;
 const DIRECTIONS_HEADING = /direction|instruction|method|steps/i;
 const HEADING = 'h1, h2, h3, h4, h5, h6';
-const SUMMARY_ITEM = /(Prep|Bake|Total):\s*([^|]+)/gi;
+const SUMMARY_ITEM = /(Prep|Bake|Total):\s*(.+?)(?=\s*(?:\||\b(?:Prep|Bake|Total):|$))/gi;
 
 let blockCount = 0;
 
@@ -317,16 +317,21 @@ function decorateIngredients(cell) {
       const firstText = [...item.childNodes]
         .find((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
       const amount = firstText?.textContent.match(
-        /^(\s*(?:\d+\s+)?(?:\d+\/\d+|\d+)(?:\s+(?:cups?|tbsp|tsp))?)\s+/i,
+        /^(\s*(?:\d+\s+)?(?:\d+\/\d+|\d+)(?:\s+(?:cups?|tbsps?|tablespoons?|tsps?|teaspoons?|scoops?|oz|ounces?|lbs?|pounds?|pkgs?|packages?|cans?|pints?|quarts?|sticks?|slices?|squares?|envelopes?|containers?|jars?|pinch|dash)\.?)?)\s+/i,
       );
-      if (!amount) return;
+      const name = document.createElement('span');
+      name.className = 'recipe-details-ingredients-ingredient-name';
+      if (!amount) {
+        // no amount: the name still takes the name column, as on the source
+        name.append(...item.childNodes);
+        item.append(name);
+        return;
+      }
 
       firstText.textContent = firstText.textContent.slice(amount[0].length);
       const quantity = document.createElement('span');
       quantity.className = 'recipe-details-ingredients-ingredient-amount';
       quantity.textContent = amount[1].trim();
-      const name = document.createElement('span');
-      name.className = 'recipe-details-ingredients-ingredient-name';
       name.append(...item.childNodes);
       item.append(quantity, name);
     });
@@ -368,16 +373,12 @@ async function updateWakeLock(control, status, state) {
   try {
     state.sentinel = await navigator.wakeLock.request('screen');
     status.textContent = 'Bake Mode is on.';
+    // the switch stays on, as on the source; visibilitychange re-requests the lock
     state.sentinel.addEventListener('release', () => {
       state.sentinel = null;
-      if (document.visibilityState === 'visible' && control.checked) {
-        control.checked = false;
-        status.textContent = 'Bake Mode was turned off.';
-      }
     });
   } catch (e) {
-    control.checked = false;
-    status.textContent = 'Bake Mode is not available on this device.';
+    status.textContent = 'Bake Mode could not keep the screen on.';
   }
 }
 

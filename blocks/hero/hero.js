@@ -116,7 +116,17 @@ function buildShareBar(title, imageUrl) {
   nav.setAttribute('aria-label', `Share this ${noun}`);
   const ul = document.createElement('ul');
 
+  const toggle = shareItem('toggle', 'Share');
+  const toggleButton = toggle.querySelector('button');
+  toggleButton.setAttribute('aria-expanded', 'true');
+  toggleButton.addEventListener('click', () => {
+    const open = toggleButton.getAttribute('aria-expanded') !== 'true';
+    toggleButton.setAttribute('aria-expanded', String(open));
+    nav.classList.toggle('is-collapsed', !open);
+  });
+
   ul.append(
+    toggle,
     shareItem('facebook', 'Share on Facebook', `https://www.facebook.com/sharer/sharer.php?u=${url}`),
     shareItem('pinterest', 'Pin on Pinterest', `https://www.pinterest.com/pin/create/button/?url=${url}&description=${text}${imageUrl ? `&media=${encodeURIComponent(imageUrl)}` : ''}`),
     shareItem('email', 'Share by email', `mailto:?subject=${text}&body=${url}`),
