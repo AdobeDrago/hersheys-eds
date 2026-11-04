@@ -48,12 +48,22 @@ async function copyToClipboard(value) {
 }
 
 function renderChips(list, onSelect) {
-  list.replaceChildren(...THEMES.map(({ label, value }) => {
+  list.replaceChildren(...THEMES.map(({ label, value, colors = [] }) => {
     const li = document.createElement('li');
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'theme-picker-chip';
-    button.textContent = label;
+    const swatches = document.createElement('span');
+    swatches.className = 'theme-picker-swatches';
+    swatches.setAttribute('aria-hidden', 'true');
+    swatches.append(...colors.map((color) => {
+      const dot = document.createElement('span');
+      dot.style.background = color;
+      return dot;
+    }));
+    const text = document.createElement('span');
+    text.textContent = label;
+    button.append(swatches, text);
     button.title = `Copy ${value}`;
     button.dataset.value = value;
     button.addEventListener('click', () => onSelect(value));

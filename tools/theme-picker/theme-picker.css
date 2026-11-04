@@ -22,6 +22,9 @@ body {
 }
 
 .theme-picker-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 6px 14px;
   border: 1px solid transparent;
   border-radius: 6px;
@@ -46,4 +49,19 @@ body {
   margin: 0;
   font-size: 12px;
   color: #6e6e6e;
+}
+
+.theme-picker-swatches {
+  display: inline-flex;
+}
+
+.theme-picker-swatches span {
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgb(0 0 0 / 20%);
+  border-radius: 50%;
+}
+
+.theme-picker-swatches span + span {
+  margin-inline-start: -4px;
 }
