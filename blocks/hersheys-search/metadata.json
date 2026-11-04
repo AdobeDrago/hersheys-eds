@@ -1,6 +1,6 @@
 {
-  "variantName": "search-recipes",
-  "baseBlock": "search-recipes",
+  "variantName": "hersheys-search",
+  "baseBlock": "hersheys-search",
   "canonicalModel": "standalone",
   "visualCharacteristics": {
     "colorScheme": "light",
@@ -22,6 +22,6 @@
     "activities"
   ],
   "memberVariantIds": [
-    "search-recipes"
+    "hersheys-search"
   ]
 }

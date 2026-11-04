@@ -974,13 +974,13 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
             <tr><td>newsletter</td><td>Signup form with authored labels and client-side email/ZIP validation; shows an authored thank-you card on submit. No network request in the block.</td></tr>
             <tr><td>newsletter-signup</td><td>Two-column email capture on recipe pages: heading and note left, email field, consent checkbox and button right; stacks below 820px.</td></tr>
             <tr><td>recipe-details</td><td>Recipe pages. Variants <code class="code-inline">ingredients</code> (ingredients and directions) and <code class="code-inline">nutrition</code> (Nutrition Facts label and contact box); each loads its own script and stylesheet.</td></tr>
-            <tr><td>search-recipes</td><td>Algolia-backed listing (variants <code class="code-inline">recipes</code>, <code class="code-inline">activities</code>, <code class="code-inline">products</code>, <code class="code-inline">stories</code>): search, facets, sort, result grid, paging; 8 s timeout to an error state.</td></tr>
+            <tr><td>hersheys-search</td><td>Algolia-backed listing (variants <code class="code-inline">recipes</code>, <code class="code-inline">activities</code>, <code class="code-inline">products</code>, <code class="code-inline">stories</code>): search, facets, sort, result grid, paging; 8 s timeout to an error state.</td></tr>
             <tr><td>social-share</td><td>Share tray (Facebook, Pinterest, Email) and copy-link button using shared Font Awesome Free icon styles.</td></tr>
             <tr><td>tabs</td><td>Tabbed content (recipe collections, with arrow/Home/End keys); <code class="code-inline">nutrition</code> variant for Nutrition Facts, Ingredients and Dietary Info, choosing the sheet tab from <code class="code-inline">brand</code> metadata.</td></tr>
             <tr><td>widget</td><td>Loads a widget from <code class="code-inline">widgets/&lt;path&gt;/&lt;name&gt;.html</code> into the page; created by auto-blocking from <code class="code-inline">/widgets/</code> links.</td></tr>
           </tbody>
         </table>
-        <p style="margin-top:8px;">Several blocks have an authoring README (<code class="code-inline">blocks/hero/README.md</code>, <code class="code-inline">blocks/columns/README.md</code>, <code class="code-inline">blocks/breadcrumb-trail/README.md</code>, <code class="code-inline">blocks/search-recipes/README.md</code>) and a <code class="code-inline">metadata.json</code> describing variants.</p>
+        <p style="margin-top:8px;">Several blocks have an authoring README (<code class="code-inline">blocks/hero/README.md</code>, <code class="code-inline">blocks/columns/README.md</code>, <code class="code-inline">blocks/breadcrumb-trail/README.md</code>, <code class="code-inline">blocks/hersheys-search/README.md</code>) and a <code class="code-inline">metadata.json</code> describing variants.</p>
       </section>
 
       <section class="doc-section" id="supporting-modules">
@@ -1002,7 +1002,7 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
             <tr><td><code class="code-inline">consent-check.js</code></td><td>No exports. Waits for consent and imports <code class="code-inline">consented.js</code> once. Imported by <code class="code-inline">delayed.js</code>.</td></tr>
             <tr><td><code class="code-inline">consented.js</code></td><td>Loads Adobe Launch only after consent and only from <code class="code-inline">launch-url</code> metadata; Hershey’s own Launch libraries are refused. Imported by <code class="code-inline">consent-check.js</code>.</td></tr>
             <tr><td><code class="code-inline">bazaarvoice.js</code></td><td>Default export <code class="code-inline">loadBazaarvoice()</code>: loads <code class="code-inline">bv.js</code>, syncs tracking cookies to consent. Imported by <code class="code-inline">delayed.js</code> on pages with <code class="code-inline">[data-bv-show]</code>.</td></tr>
-            <tr><td><code class="code-inline">recipes-search.js</code></td><td><code class="code-inline">DEFAULT_CONFIG</code>, <code class="code-inline">resolveConfig</code>, <code class="code-inline">absoluteUrl</code>, <code class="code-inline">mapHit</code>, <code class="code-inline">orderFacetValues</code>, <code class="code-inline">groupFacetFilters</code>, <code class="code-inline">searchRecipes</code>. Algolia client (search-only key, optional proxy <code class="code-inline">endpoint</code>). Imported by <code class="code-inline">search-recipes.js</code>.</td></tr>
+            <tr><td><code class="code-inline">recipes-search.js</code></td><td><code class="code-inline">DEFAULT_CONFIG</code>, <code class="code-inline">resolveConfig</code>, <code class="code-inline">absoluteUrl</code>, <code class="code-inline">mapHit</code>, <code class="code-inline">orderFacetValues</code>, <code class="code-inline">groupFacetFilters</code>, <code class="code-inline">searchRecipes</code>. Algolia client (search-only key, optional proxy <code class="code-inline">endpoint</code>). Imported by <code class="code-inline">hersheys-search.js</code>.</td></tr>
             <tr><td><code class="code-inline">delayed.js</code></td><td>Delayed phase: loads OneTrust (test domain script unless <code class="code-inline">onetrust-id</code> metadata is set), then <code class="code-inline">consent-check.js</code>; Bazaarvoice when needed.</td></tr>
           </tbody>
         </table>
@@ -1287,7 +1287,7 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           Journey 7 · Activity pages <span class="status-badge sb-progress">In progress</span>
         </h2>
         <div class="section-rule"></div>
-        <p>Activity (craft) detail pages author <code class="code-inline">template: hershey-recipe</code> and keep the recipe layout; the activities listing is the <code class="code-inline">activities</code> variant of search-recipes and shares the product pages' brand tokens.</p>
+        <p>Activity (craft) detail pages author <code class="code-inline">template: hershey-recipe</code> and keep the recipe layout; the activities listing is the <code class="code-inline">activities</code> variant of hersheys-search and shares the product pages' brand tokens.</p>
         <ul class="checklist">
           <li class="check-item">
             <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>

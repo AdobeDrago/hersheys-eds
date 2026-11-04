@@ -67,7 +67,7 @@ export const DEFAULT_CONFIG = {
 };
 
 /**
- * Per-listing overrides, chosen by the block's variant class (`search-recipes activities`).
+ * Per-listing overrides, chosen by the block's variant class (`hersheys-search activities`).
  * Anything not listed here comes from DEFAULT_CONFIG.
  */
 export const LISTING_TYPES = {

@@ -1,21 +1,21 @@
 /* Search (Recipes): Algolia-backed listing (recipes, activities) with banner, filters, sort, show more. */
 
-main > .section.search-recipes-container {
+main > .section.hersheys-search-container {
   margin-top: 0;
 }
 
-.search-recipes-container .search-recipes-wrapper {
+.hersheys-search-container .hersheys-search-wrapper {
   max-width: unset;
   padding: 0;
 }
 
-.search-recipes .search-recipes-root {
+.hersheys-search .hersheys-search-root {
   color: var(--hershey-component-search-recipes-color-text, var(--text-color));
   font-family: var(--hershey-component-search-recipes-body-font-family, var(--body-font-family));
   font-size: var(--hershey-component-search-recipes-body-font-size, var(--body-font-size-s));
 }
 
-.search-recipes .sr-only {
+.hersheys-search .sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -28,7 +28,7 @@ main > .section.search-recipes-container {
 }
 
 /* banner: heading and search field over the authored background picture */
-.search-recipes .search-recipes-banner {
+.hersheys-search .hersheys-search-banner {
   position: relative;
   isolation: isolate;
   padding: var(--hershey-component-search-recipes-banner-padding-top-mobile, 20px) 0 var(--hershey-component-search-recipes-banner-padding-bottom-mobile, 60px);
@@ -36,20 +36,20 @@ main > .section.search-recipes-container {
   text-align: center;
 }
 
-.search-recipes .search-recipes-banner picture {
+.hersheys-search .hersheys-search-banner picture {
   position: absolute;
   inset: 0;
   z-index: -1;
 }
 
-.search-recipes .search-recipes-banner img {
+.hersheys-search .hersheys-search-banner img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.search-recipes .search-recipes-title {
+.hersheys-search .hersheys-search-title {
   margin: 30px 0 10px;
   color: var(--hershey-component-search-recipes-banner-color-text, var(--background-color));
   font-family: var(--hershey-component-search-recipes-heading-font-family, var(--heading-font-family));
@@ -58,13 +58,13 @@ main > .section.search-recipes-container {
   line-height: 1.5;
 }
 
-.search-recipes .search-recipes-form {
+.hersheys-search .hersheys-search-form {
   position: relative;
   max-width: var(--hershey-component-search-recipes-banner-search-width, 750px);
   margin: 0 calc(var(--hershey-component-search-recipes-layout-inset-mobile, 10px) * 4);
 }
 
-.search-recipes .search-recipes-query {
+.hersheys-search .hersheys-search-query {
   font: inherit;
   color: var(--hershey-component-search-recipes-color-text, var(--text-color));
   background: var(--hershey-component-search-recipes-color-surface, var(--background-color));
@@ -79,11 +79,11 @@ main > .section.search-recipes-container {
   appearance: none;
 }
 
-.search-recipes .search-recipes-query::-webkit-search-cancel-button {
+.hersheys-search .hersheys-search-query::-webkit-search-cancel-button {
   display: none;
 }
 
-.search-recipes .search-recipes-reset {
+.hersheys-search .hersheys-search-reset {
   position: absolute;
   inset-block: 0;
   inset-inline-end: calc(var(--hershey-component-search-recipes-banner-button-size-mobile, 30px) + 20px);
@@ -97,7 +97,7 @@ main > .section.search-recipes-container {
   cursor: pointer;
 }
 
-.search-recipes .search-recipes-reset::before {
+.hersheys-search .hersheys-search-reset::before {
   content: '';
   display: block;
   width: 100%;
@@ -106,11 +106,11 @@ main > .section.search-recipes-container {
   mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="black" stroke-width="1.6" stroke-linecap="round"><path d="m4 4 12 12M16 4 4 16"/></svg>') center / contain no-repeat;
 }
 
-.search-recipes .search-recipes-query::placeholder {
+.hersheys-search .hersheys-search-query::placeholder {
   color: var(--hershey-system-color-text-placeholder, currentcolor);
 }
 
-.search-recipes .search-recipes-submit {
+.hersheys-search .hersheys-search-submit {
   position: absolute;
   inset-block: 0;
   inset-inline-end: 5px;
@@ -124,7 +124,7 @@ main > .section.search-recipes-container {
   cursor: pointer;
 }
 
-.search-recipes .search-recipes-submit::before {
+.hersheys-search .hersheys-search-submit::before {
   content: '';
   display: block;
   width: 50%;
@@ -136,37 +136,37 @@ main > .section.search-recipes-container {
 
 /* the live heading runs edge to edge on a 375px phone; narrower ones wrap */
 @media (width >= 375px) and (width < 992px) {
-  .search-recipes .search-recipes-title {
+  .hersheys-search .hersheys-search-title {
     white-space: nowrap;
   }
 }
 
 /* results: filters on the left (stacked on mobile), count and sort above the grid */
-.search-recipes .search-recipes-layout {
+.hersheys-search .hersheys-search-layout {
   max-width: var(--hershey-component-search-recipes-layout-max-width, 1500px);
   margin: 0 auto;
   padding: 0 var(--hershey-component-search-recipes-layout-inset-mobile, 10px);
 }
 
-.search-recipes .search-recipes-stats {
+.hersheys-search .hersheys-search-stats {
   margin: 0;
   padding: 15px 0 15px 10px;
   font-size: var(--hershey-component-search-recipes-count-font-size, 22px);
   line-height: 30px;
 }
 
-.search-recipes .search-recipes-stats strong {
+.hersheys-search .hersheys-search-stats strong {
   font-weight: var(--hershey-component-search-recipes-label-font-weight, 700);
 }
 
-.search-recipes .search-recipes-panel {
+.hersheys-search .hersheys-search-panel {
   overflow: hidden;
   margin-bottom: 15px;
   border-radius: var(--hershey-component-search-recipes-facets-border-radius, 5px);
   background: var(--hershey-component-search-recipes-color-surface, var(--background-color));
 }
 
-.search-recipes .search-recipes-panel-head {
+.hersheys-search .hersheys-search-panel-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -178,17 +178,17 @@ main > .section.search-recipes-container {
   cursor: pointer;
 }
 
-.search-recipes .search-recipes-panel-head::-webkit-details-marker {
+.hersheys-search .hersheys-search-panel-head::-webkit-details-marker {
   display: none;
 }
 
-.search-recipes .search-recipes-facets-title {
+.hersheys-search .hersheys-search-facets-title {
   line-height: 1.05;
   font-size: var(--hershey-component-search-recipes-card-title-font-size, 18px);
   font-weight: var(--hershey-component-search-recipes-label-font-weight, 700);
 }
 
-.search-recipes .search-recipes-facets-title::after {
+.hersheys-search .hersheys-search-facets-title::after {
   content: '';
   display: inline-block;
   width: 10px;
@@ -199,11 +199,11 @@ main > .section.search-recipes-container {
   transform: translateY(-3px) rotate(45deg);
 }
 
-.search-recipes .search-recipes-panel[open] .search-recipes-facets-title::after {
+.hersheys-search .hersheys-search-panel[open] .hersheys-search-facets-title::after {
   transform: translateY(1px) rotate(-135deg);
 }
 
-.search-recipes .search-recipes-facets-count {
+.hersheys-search .hersheys-search-facets-count {
   display: none;
   font-size: var(--hershey-component-search-recipes-facets-count-font-size, 12px);
   font-weight: var(--hershey-component-search-recipes-label-font-weight, 700);
@@ -211,19 +211,19 @@ main > .section.search-recipes-container {
   text-transform: uppercase;
 }
 
-.search-recipes .search-recipes-facets-list {
+.hersheys-search .hersheys-search-facets-list {
   padding: 0 var(--hershey-component-search-recipes-facets-head-padding-mobile, 14px);
 }
 
-.search-recipes .search-recipes-facet {
+.hersheys-search .hersheys-search-facet {
   border-bottom: var(--hershey-component-search-recipes-control-border-width, 1px) var(--hershey-component-search-recipes-control-border-style, solid) var(--hershey-component-search-recipes-facets-group-color-divider, #ddd);
 }
 
-.search-recipes .search-recipes-facet:last-child {
+.hersheys-search .hersheys-search-facet:last-child {
   border-bottom: 0;
 }
 
-.search-recipes .search-recipes-facet-legend {
+.hersheys-search .hersheys-search-facet-legend {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -234,26 +234,26 @@ main > .section.search-recipes-container {
   cursor: pointer;
 }
 
-.search-recipes .search-recipes-facet-legend::-webkit-details-marker {
+.hersheys-search .hersheys-search-facet-legend::-webkit-details-marker {
   display: none;
 }
 
-.search-recipes .search-recipes-facet-legend::after {
+.hersheys-search .hersheys-search-facet-legend::after {
   content: '+';
   color: var(--hershey-component-search-recipes-facets-group-color-icon, var(--link-color));
   font-size: 24px;
   line-height: 1;
 }
 
-.search-recipes .search-recipes-facet[open] > .search-recipes-facet-legend::after {
+.hersheys-search .hersheys-search-facet[open] > .hersheys-search-facet-legend::after {
   content: '\2212';
 }
 
-.search-recipes .search-recipes-facet-values {
+.hersheys-search .hersheys-search-facet-values {
   padding-bottom: 10px;
 }
 
-.search-recipes .search-recipes-facet-row {
+.hersheys-search .hersheys-search-facet-row {
   display: flex;
   gap: 10px;
   align-items: flex-start;
@@ -261,19 +261,19 @@ main > .section.search-recipes-container {
   font-size: var(--hershey-component-search-recipes-facets-group-font-size, 16px);
 }
 
-.search-recipes .search-recipes-facet-row label {
+.hersheys-search .hersheys-search-facet-row label {
   cursor: pointer;
   text-transform: uppercase;
 }
 
-.search-recipes .search-recipes-facet-stars {
+.hersheys-search .hersheys-search-facet-stars {
   color: var(--hershey-component-search-recipes-facets-star-color, currentcolor);
   font-size: 22px;
   letter-spacing: 2px;
   line-height: 1;
 }
 
-.search-recipes .search-recipes-clear {
+.hersheys-search .hersheys-search-clear {
   margin: 0 var(--hershey-component-search-recipes-facets-head-padding-mobile, 14px) 14px;
   padding: 0;
   border: 0;
@@ -285,7 +285,7 @@ main > .section.search-recipes-container {
   cursor: pointer;
 }
 
-.search-recipes .search-recipes-sortby {
+.hersheys-search .hersheys-search-sortby {
   display: flex;
   gap: 5px;
   align-items: center;
@@ -294,16 +294,16 @@ main > .section.search-recipes-container {
   font-weight: var(--hershey-component-search-recipes-label-font-weight, 700);
 }
 
-.search-recipes .search-recipes-sort-label {
+.hersheys-search .hersheys-search-sort-label {
   font-size: var(--hershey-component-search-recipes-card-title-font-size, 18px);
 }
 
-.search-recipes .search-recipes-sortbox {
+.hersheys-search .hersheys-search-sortbox {
   position: relative;
   width: var(--hershey-component-search-recipes-sort-width, 230px);
 }
 
-.search-recipes .search-recipes-sort {
+.hersheys-search .hersheys-search-sort {
   position: relative;
   z-index: 3;
   box-sizing: border-box;
@@ -321,7 +321,7 @@ main > .section.search-recipes-container {
   cursor: pointer;
 }
 
-.search-recipes .search-recipes-sort::after {
+.hersheys-search .hersheys-search-sort::after {
   content: '';
   position: absolute;
   inset-inline-end: 16px;
@@ -333,15 +333,15 @@ main > .section.search-recipes-container {
   transform: translateY(-75%) rotate(45deg);
 }
 
-.search-recipes .search-recipes-sort[aria-expanded="true"] {
+.hersheys-search .hersheys-search-sort[aria-expanded="true"] {
   border-color: var(--hershey-component-search-recipes-sort-color-border-open, var(--link-color));
 }
 
-.search-recipes .search-recipes-sort[aria-expanded="true"]::after {
+.hersheys-search .hersheys-search-sort[aria-expanded="true"]::after {
   transform: translateY(-25%) rotate(-135deg);
 }
 
-.search-recipes .search-recipes-sort-list {
+.hersheys-search .hersheys-search-sort-list {
   position: absolute;
   top: 14px;
   left: 0;
@@ -359,33 +359,33 @@ main > .section.search-recipes-container {
   font-weight: 500;
 }
 
-.search-recipes .search-recipes-sort-list[hidden] {
+.hersheys-search .hersheys-search-sort-list[hidden] {
   display: none;
 }
 
-.search-recipes .search-recipes-sort-option {
+.hersheys-search .hersheys-search-sort-option {
   padding: 6px 15px;
   cursor: pointer;
 }
 
-.search-recipes .search-recipes-sort-option:hover,
-.search-recipes .search-recipes-sort-option:focus-visible {
+.hersheys-search .hersheys-search-sort-option:hover,
+.hersheys-search .hersheys-search-sort-option:focus-visible {
   background: var(--hershey-component-search-recipes-color-surface-subtle, var(--light-color));
 }
 
-.search-recipes .search-recipes-status {
+.hersheys-search .hersheys-search-status {
   margin: 0 0 var(--hershey-component-search-recipes-layout-gap-compact, 16px);
   padding: var(--hershey-component-search-recipes-control-padding-block, 12px) var(--hershey-component-search-recipes-control-padding-inline, 18px);
   background: var(--hershey-component-search-recipes-color-surface-subtle, var(--light-color));
   border-radius: var(--hershey-component-search-recipes-control-border-radius, 4px);
 }
 
-.search-recipes .search-recipes-hits[aria-busy="true"] {
+.hersheys-search .hersheys-search-hits[aria-busy="true"] {
   opacity: var(--hershey-component-search-recipes-busy-opacity, 0.5);
   pointer-events: none;
 }
 
-.search-recipes .search-recipes-hits {
+.hersheys-search .hersheys-search-hits {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin: 0;
@@ -393,12 +393,12 @@ main > .section.search-recipes-container {
   list-style: none;
 }
 
-.search-recipes .search-recipes-card {
+.hersheys-search .hersheys-search-card {
   margin: 0;
   padding: var(--hershey-component-search-recipes-card-gutter-mobile, 10px);
 }
 
-.search-recipes .search-recipes-card-link {
+.hersheys-search .hersheys-search-card-link {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -414,24 +414,24 @@ main > .section.search-recipes-container {
   transition: transform 0.3s ease-out;
 }
 
-.search-recipes .search-recipes-card-image {
+.hersheys-search .hersheys-search-card-image {
   position: relative;
   aspect-ratio: 16 / 9;
   background: var(--hershey-component-search-recipes-color-surface-subtle, var(--light-color));
 }
 
-.search-recipes .search-recipes-card-image img {
+.hersheys-search .hersheys-search-card-image img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.search-recipes .search-recipes-card-body {
+.hersheys-search .hersheys-search-card-body {
   padding: var(--hershey-component-search-recipes-card-body-inset, 10px);
 }
 
-.search-recipes .search-recipes-card-title {
+.hersheys-search .hersheys-search-card-title {
   margin: 0;
   font-family: var(--hershey-component-search-recipes-card-title-font-family, var(--body-font-family));
   font-size: var(--hershey-component-search-recipes-card-title-font-size-mobile, 20px);
@@ -439,20 +439,20 @@ main > .section.search-recipes-container {
   line-height: 1.5;
 }
 
-.search-recipes .search-recipes-card-desc {
+.hersheys-search .hersheys-search-card-desc {
   margin: 0;
   color: var(--hershey-component-search-recipes-card-desc-color, inherit);
   font-size: var(--hershey-component-search-recipes-card-desc-font-size-mobile, 12px);
   line-height: 1.5;
 }
 
-.search-recipes .search-recipes-card-rating {
+.hersheys-search .hersheys-search-card-rating {
   margin: 0;
   line-height: 1;
   font-size: var(--hershey-component-search-recipes-caption-font-size, var(--body-font-size-xs));
 }
 
-.search-recipes .search-recipes-progress {
+.hersheys-search .hersheys-search-progress {
   position: relative;
   width: var(--hershey-component-search-recipes-more-width, 258px);
   height: var(--hershey-component-search-recipes-progress-height, 4px);
@@ -460,7 +460,7 @@ main > .section.search-recipes-container {
   background: var(--hershey-component-search-recipes-progress-color-track, #ccc);
 }
 
-.search-recipes .search-recipes-progress-text {
+.hersheys-search .hersheys-search-progress-text {
   position: absolute;
   bottom: 8px;
   left: 50%;
@@ -472,13 +472,13 @@ main > .section.search-recipes-container {
   text-align: center;
 }
 
-.search-recipes .search-recipes-progress-fill {
+.hersheys-search .hersheys-search-progress-fill {
   display: block;
   height: 100%;
   background: var(--hershey-component-search-recipes-progress-color-fill, currentcolor);
 }
 
-.search-recipes .search-recipes-more {
+.hersheys-search .hersheys-search-more {
   display: block;
   min-width: var(--hershey-component-search-recipes-more-width, 258px);
   height: var(--hershey-component-search-recipes-more-height, 51px);
@@ -494,46 +494,46 @@ main > .section.search-recipes-container {
   cursor: pointer;
 }
 
-.search-recipes .search-recipes-progress[hidden],
-.search-recipes .search-recipes-more[hidden] {
+.hersheys-search .hersheys-search-progress[hidden],
+.hersheys-search .hersheys-search-more[hidden] {
   display: none;
 }
 
-.search-recipes .search-recipes-more:disabled {
+.hersheys-search .hersheys-search-more:disabled {
   opacity: var(--hershey-component-search-recipes-busy-opacity, 0.5);
   cursor: default;
 }
 
 @media (width >= 992px) {
-  .search-recipes .search-recipes-banner {
+  .hersheys-search .hersheys-search-banner {
     padding: var(--hershey-component-search-recipes-banner-padding-top, 50px) 0 var(--hershey-component-search-recipes-banner-padding-bottom, 110px);
   }
 
-  .search-recipes .search-recipes-title {
+  .hersheys-search .hersheys-search-title {
     font-size: var(--hershey-component-search-recipes-heading-font-size-desktop, var(--heading-font-size-xl));
   }
 
-  .search-recipes .search-recipes-form {
+  .hersheys-search .hersheys-search-form {
     margin: 0 auto;
   }
 
-  .search-recipes .search-recipes-query {
+  .hersheys-search .hersheys-search-query {
     height: var(--hershey-component-search-recipes-banner-search-height, 55px);
     padding: 3px 45px 3px 25px;
     font-size: var(--hershey-component-search-recipes-banner-search-font-size, 15px);
   }
 
-  .search-recipes .search-recipes-reset {
+  .hersheys-search .hersheys-search-reset {
     inset-inline-end: calc(var(--hershey-component-search-recipes-banner-button-size, 45px) + 20px);
   }
 
-  .search-recipes .search-recipes-submit {
+  .hersheys-search .hersheys-search-submit {
     inset-inline-end: 5px;
     width: var(--hershey-component-search-recipes-banner-button-size, 45px);
     height: var(--hershey-component-search-recipes-banner-button-size, 45px);
   }
 
-  .search-recipes .search-recipes-layout {
+  .hersheys-search .hersheys-search-layout {
     position: relative;
     display: grid;
     grid-template-columns: 25% 75%;
@@ -541,7 +541,7 @@ main > .section.search-recipes-container {
   }
 
   /* sidebar stays in view and scrolls on its own, as on hersheyland.com */
-  .search-recipes .search-recipes-facets {
+  .hersheys-search .hersheys-search-facets {
     position: sticky;
     top: 120px;
     align-self: start;
@@ -550,218 +550,218 @@ main > .section.search-recipes-container {
     padding: 0 var(--hershey-component-search-recipes-facets-inset, 25px);
   }
 
-  .search-recipes .search-recipes-facets::-webkit-scrollbar {
+  .hersheys-search .hersheys-search-facets::-webkit-scrollbar {
     width: 5px;
   }
 
-  .search-recipes .search-recipes-facets::-webkit-scrollbar-thumb {
+  .hersheys-search .hersheys-search-facets::-webkit-scrollbar-thumb {
     border-radius: 11px;
     background: #d9d9d9;
   }
 
-  .search-recipes .search-recipes-facets::-webkit-scrollbar-track {
+  .hersheys-search .hersheys-search-facets::-webkit-scrollbar-track {
     border-radius: 0;
   }
 
-  .search-recipes .search-recipes-stats {
+  .hersheys-search .hersheys-search-stats {
     padding: 0 0 24px;
   }
 
-  .search-recipes .search-recipes-panel {
+  .hersheys-search .hersheys-search-panel {
     margin-bottom: 0;
     border: var(--hershey-component-search-recipes-facets-border-width, 2px) var(--hershey-component-search-recipes-control-border-style, solid) var(--hershey-component-search-recipes-facets-color-border, #ddd);
   }
 
-  .search-recipes .search-recipes-more {
+  .hersheys-search .hersheys-search-more {
     margin: 10px auto 70px;
   }
 
-  .search-recipes .search-recipes-panel-head {
+  .hersheys-search .hersheys-search-panel-head {
     padding: var(--hershey-component-search-recipes-facets-head-padding, 20px);
     background: var(--hershey-component-search-recipes-facets-head-color-surface, var(--light-color));
     color: inherit;
     cursor: default;
   }
 
-  .search-recipes .search-recipes-facets-title::after {
+  .hersheys-search .hersheys-search-facets-title::after {
     display: none;
   }
 
-  .search-recipes .search-recipes-facets-count {
+  .hersheys-search .hersheys-search-facets-count {
     display: block;
   }
 
-  .search-recipes .search-recipes-facets-list {
+  .hersheys-search .hersheys-search-facets-list {
     padding: 0 15px;
   }
 
-  .search-recipes .search-recipes-main {
+  .hersheys-search .hersheys-search-main {
     padding: 68px 25px 0;
   }
 
-  .search-recipes .search-recipes-sortby {
+  .hersheys-search .hersheys-search-sortby {
     position: absolute;
     top: 30px;
     right: 25px;
     padding: 0;
   }
 
-  .search-recipes .search-recipes-hits {
+  .hersheys-search .hersheys-search-hits {
     grid-template-columns: repeat(3, 1fr);
     margin: 0;
   }
 
-  .search-recipes .search-recipes-hits .search-recipes-card {
+  .hersheys-search .hersheys-search-hits .hersheys-search-card {
     padding: var(--hershey-component-search-recipes-card-gutter, 15px);
   }
 
-  .search-recipes .search-recipes-card-title {
+  .hersheys-search .hersheys-search-card-title {
     font-size: var(--hershey-component-search-recipes-card-title-font-size, 18px);
   }
 }
 
 /* recipes: purple band */
-.search-recipes.recipes .search-recipes-banner {
+.hersheys-search.recipes .hersheys-search-banner {
   background-color: var(--hershey-component-search-recipes-banner-color-surface-recipes, var(--dark-color));
 }
 
 /* products: flat cards with a square image tile, narrower results container */
-.search-recipes.products .search-recipes-title {
+.hersheys-search.products .hersheys-search-title {
   color: var(--hershey-system-color-text-primary);
 }
 
-.search-recipes.products .search-recipes-card {
+.hersheys-search.products .hersheys-search-card {
   padding-bottom: 0;
 }
 
-.search-recipes.products .search-recipes-card-link {
+.hersheys-search.products .hersheys-search-card-link {
   margin-bottom: calc(var(--hershey-component-search-recipes-card-gutter-mobile, 10px) * 2);
   border-radius: 0;
   box-shadow: none;
   background: none;
 }
 
-.search-recipes.products .search-recipes-card-image {
+.hersheys-search.products .hersheys-search-card-image {
   aspect-ratio: 1;
   border-radius: var(--hershey-component-search-recipes-card-tile-radius, 4px);
   background: var(--hershey-component-search-recipes-card-tile-color-surface, var(--light-color));
   transition: background-color 0.3s;
 }
 
-.search-recipes.products .search-recipes-card-image img {
+.hersheys-search.products .hersheys-search-card-image img {
   object-fit: contain;
 }
 
-.search-recipes.products .search-recipes-card-body {
+.hersheys-search.products .hersheys-search-card-body {
   padding: var(--hershey-component-search-recipes-card-text-top, 14px) 0 0;
 }
 
-.search-recipes.products .search-recipes-card-title {
+.hersheys-search.products .hersheys-search-card-title {
   font-size: var(--hershey-component-search-recipes-card-title-font-size-products-mobile, 14px);
   line-height: 1.5;
 }
 
 @media (width >= 992px) {
-  .search-recipes.products .search-recipes-layout {
+  .hersheys-search.products .hersheys-search-layout {
     max-width: var(--hershey-component-search-recipes-layout-max-width-products, 1260px);
   }
 
-  .search-recipes.products .search-recipes-main {
+  .hersheys-search.products .hersheys-search-main {
     padding-top: 64px;
   }
 
-  .search-recipes.products .search-recipes-card-link {
+  .hersheys-search.products .hersheys-search-card-link {
     margin-bottom: var(--hershey-component-search-recipes-card-gutter-mobile, 10px);
     padding-bottom: var(--hershey-component-search-recipes-card-padding-bottom, 35px);
   }
 
-  .search-recipes.products .search-recipes-hits {
+  .hersheys-search.products .hersheys-search-hits {
     gap: 0 var(--hershey-component-search-recipes-card-gap, 25px);
     padding-left: var(--hershey-component-search-recipes-card-gap, 25px);
   }
 
-  .search-recipes.products .search-recipes-hits .search-recipes-card {
+  .hersheys-search.products .hersheys-search-hits .hersheys-search-card {
     padding: 0;
   }
 
-  .search-recipes.products .search-recipes-card-title {
+  .hersheys-search.products .hersheys-search-card-title {
     font-size: var(--hershey-component-search-recipes-card-title-font-size, 18px);
   }
 
-  .search-recipes.products .search-recipes-card-desc {
+  .hersheys-search.products .hersheys-search-card-desc {
     font-size: var(--hershey-component-search-recipes-card-desc-font-size, 14px);
   }
 }
 
-.search-recipes .search-recipes-query:focus-visible {
+.hersheys-search .hersheys-search-query:focus-visible {
   outline: var(--hershey-component-search-recipes-banner-search-focus-width, 3px) auto var(--hershey-component-search-recipes-banner-search-color-focus, currentcolor);
   outline-offset: 0;
 }
 
-.search-recipes .search-recipes-sort:focus-visible,
-.search-recipes .search-recipes-sort-option:focus-visible,
-.search-recipes .search-recipes-stats:focus-visible,
-.search-recipes .search-recipes-more:focus-visible,
-.search-recipes .search-recipes-submit:focus-visible,
-.search-recipes .search-recipes-card-link:focus-visible {
+.hersheys-search .hersheys-search-sort:focus-visible,
+.hersheys-search .hersheys-search-sort-option:focus-visible,
+.hersheys-search .hersheys-search-stats:focus-visible,
+.hersheys-search .hersheys-search-more:focus-visible,
+.hersheys-search .hersheys-search-submit:focus-visible,
+.hersheys-search .hersheys-search-card-link:focus-visible {
   outline: var(--hershey-component-search-recipes-focus-width, 2px) solid var(--hershey-component-search-recipes-color-focus, var(--link-color));
   outline-offset: var(--hershey-component-search-recipes-focus-offset, 3px);
 }
 
 /* products: the image tile turns pink under the pointer */
-.search-recipes.products .search-recipes-card-link:hover .search-recipes-card-image,
-.search-recipes.products .search-recipes-card-link:focus-visible .search-recipes-card-image {
+.hersheys-search.products .hersheys-search-card-link:hover .hersheys-search-card-image,
+.hersheys-search.products .hersheys-search-card-link:focus-visible .hersheys-search-card-image {
   background: var(--hershey-component-search-recipes-card-tile-color-surface-hover, var(--light-color));
 }
 
 /* hover: activities cards pop and underline; product cards stay flat */
-.search-recipes .search-recipes-card-link:hover {
+.hersheys-search .hersheys-search-card-link:hover {
   transform: scale(1.05);
 }
 
-.search-recipes .search-recipes-card-link:hover .search-recipes-card-title {
+.hersheys-search .hersheys-search-card-link:hover .hersheys-search-card-title {
   text-decoration: underline;
 }
 
-.search-recipes.products .search-recipes-card-link:hover {
+.hersheys-search.products .hersheys-search-card-link:hover {
   transform: none;
 }
 
-.search-recipes.products .search-recipes-card-link:hover .search-recipes-card-title {
+.hersheys-search.products .hersheys-search-card-link:hover .hersheys-search-card-title {
   text-decoration: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .search-recipes .search-recipes-card-link {
+  .hersheys-search .hersheys-search-card-link {
     transition: none;
   }
 
-  .search-recipes .search-recipes-card-link:hover {
+  .hersheys-search .hersheys-search-card-link:hover {
     transform: none;
   }
 }
 
 /* applied filters: removable chips above the Filter By panel (matches hersheyland.com) */
-.search-recipes .search-recipes-applied {
+.hersheys-search .hersheys-search-applied {
   margin-bottom: 16px;
 }
 
-.search-recipes .search-recipes-applied-title {
+.hersheys-search .hersheys-search-applied-title {
   margin: 0 0 8px;
   font-weight: var(--hershey-component-search-recipes-label-font-weight, 700);
 }
 
-.search-recipes .search-recipes-chips {
+.hersheys-search .hersheys-search-chips {
   margin: 0 0 12px;
   padding: 0;
   list-style: none;
 }
 
-.search-recipes .search-recipes-chip {
+.hersheys-search .hersheys-search-chip {
   margin-top: 5px;
 }
 
-.search-recipes .search-recipes-chip-remove {
+.hersheys-search .hersheys-search-chip-remove {
   position: relative;
   display: block;
   box-sizing: border-box;
@@ -779,7 +779,7 @@ main > .section.search-recipes-container {
   cursor: pointer;
 }
 
-.search-recipes .search-recipes-chip-remove::after {
+.hersheys-search .hersheys-search-chip-remove::after {
   content: '\00d7';
   position: absolute;
   top: 50%;
@@ -791,21 +791,21 @@ main > .section.search-recipes-container {
   line-height: 1;
 }
 
-.search-recipes .search-recipes-chip-key {
+.hersheys-search .hersheys-search-chip-key {
   font-weight: 400;
   text-transform: capitalize;
 }
 
-.search-recipes .search-recipes-chip-value {
+.hersheys-search .hersheys-search-chip-value {
   font-weight: 700;
   text-transform: capitalize;
 }
 
-.search-recipes .search-recipes-chip-value.is-brand {
+.hersheys-search .hersheys-search-chip-value.is-brand {
   text-transform: uppercase;
 }
 
-.search-recipes .search-recipes-applied .search-recipes-clear {
+.hersheys-search .hersheys-search-applied .hersheys-search-clear {
   margin: 0;
   padding: 0;
   border-bottom: 1px solid #007bbd;
@@ -817,7 +817,7 @@ main > .section.search-recipes-container {
 }
 
 /* product tag pill (Seasonal, Limited Edition) */
-.search-recipes .search-recipes-card-tag {
+.hersheys-search .hersheys-search-card-tag {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -836,7 +836,7 @@ main > .section.search-recipes-container {
   text-transform: uppercase;
 }
 
-.search-recipes .search-recipes-card-tag-icon {
+.hersheys-search .hersheys-search-card-tag-icon {
   width: 1em;
   height: 1em;
   background: currentcolor;

@@ -1,4 +1,4 @@
-# search-recipes
+# hersheys-search
 
 Algolia-backed listing (search banner, collapsible facets, sort, "Show More") for the all-recipes and activities experiences.
 
@@ -6,7 +6,7 @@ Algolia-backed listing (search banner, collapsible facets, sort, "Show More") fo
 
 Model: `standalone`
 
-Add a **search-recipes** block table on the page. The block loads results from Algolia on decorate — no hit cells are authored.
+Add a **hersheys-search** block table on the page. The block loads results from Algolia on decorate — no hit cells are authored.
 
 Config rows (key | value), all optional:
 
