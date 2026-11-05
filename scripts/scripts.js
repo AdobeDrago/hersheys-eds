@@ -10,6 +10,8 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  getMetadata,
+  toClassName,
 } from './aem.js';
 import loadHersheyTheme from './hershey-theme.js';
 import { BRAND_THEMES } from './brand-themes.js';
@@ -185,6 +187,62 @@ export function decorateMain(main) {
   decorateButtons(main);
 }
 
+function preloadLink(attributes) {
+  const link = document.createElement('link');
+  Object.entries(attributes).forEach(([name, value]) => link.setAttribute(name, value));
+  document.head.append(link);
+}
+
+/**
+ * Product pages: starts what the product hero waits for alongside the theme and block code, at
+ * the URLs hero-product.js requests them with, so it reuses these responses.
+ * - its own script and styles (hero.js loads them only after itself)
+ * - the product master sheet tab its fields come from, when the block leaves fields empty
+ * - its first image (the LCP image), the page's own product image (`image` metadata), unless the
+ *   block authors one, in the gallery's renditions (1000px wide from 900px, else 750px)
+ * @param {Element} doc The container element
+ */
+function preloadProductHero(doc) {
+  const block = doc.querySelector('main .hero.product');
+  if (!block) return;
+  // the product hero's code, which hero.js would only import once it has loaded itself
+  const base = window.hlx.codeBasePath;
+  preloadLink({ rel: 'modulepreload', href: `${base}/blocks/hero/hero-product.js` });
+  // the hero's authored fields (field name aliases as in hero-product.js)
+  const ALIASES = {
+    'image-front': 'imageFront', 'front-image': 'imageFront', image: 'imageFront', 'image-back': 'imageBack', 'back-image': 'imageBack', title: 'title', name: 'title', description: 'description', size: 'size', sizes: 'size',
+  };
+  const authored = new Set();
+  [...block.children].forEach((row) => {
+    const [key, value] = row.children;
+    const field = ALIASES[toClassName(key?.textContent || '')];
+    if (field && (value?.textContent.trim() || value?.querySelector('picture, img'))) authored.add(field);
+  });
+  let image = '';
+  try {
+    image = new URL(getMetadata('og:image'), window.location.href).pathname;
+  } catch {
+    // no page image
+  }
+  const pageImage = !authored.has('imageFront') && image.includes('/media_');
+  // the hero reads the sheet only for fields the block leaves out (the page image stands in for
+  // the front image)
+  const needsSheet = ['imageFront', 'imageBack', 'title', 'size', 'description']
+    .some((field) => !authored.has(field) && !(field === 'imageFront' && pageImage));
+  const sheet = getMetadata('brand').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '');
+  if (needsSheet && sheet) {
+    preloadLink({
+      rel: 'preload', as: 'fetch', crossorigin: 'anonymous', href: `/products/product-master.json?sheet=${sheet}`,
+    });
+  }
+  if (!pageImage) return;
+  [['(min-width: 900px)', 1000], ['(max-width: 899px)', 750]].forEach(([media, width]) => {
+    preloadLink({
+      rel: 'preload', as: 'image', type: 'image/webp', fetchpriority: 'high', media, href: `${image}?width=${width}&format=webply&optimize=medium`,
+    });
+  });
+}
+
 /**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
@@ -200,41 +258,48 @@ async function loadEager(doc) {
     && !document.body.classList.contains('hershey-recipe')) document.body.classList.add('hershey-product');
   // story pages share the product pages' brand tokens and fonts
   if (window.location.pathname.startsWith('/stories/')) document.body.classList.add('hershey-product', 'hershey-story');
+  // product pages: the product hero's sheet and image are requested now, in parallel with the
+  // theme and block code, instead of after hero-product.js has loaded
+  preloadProductHero(doc);
+  let themeReady = Promise.resolve();
   if (document.body.classList.contains('hershey-home')
     || document.body.classList.contains('hershey-product')
     || document.body.classList.contains('hershey-recipe')) {
-    await loadHersheyTheme();
     // brand themes (e.g. `theme: reese-primary`) override the product hero and card tokens
     const brandTheme = BRAND_THEMES.find(({ value }) => document.body.classList.contains(value));
-    if (brandTheme) {
-      const base = window.hlx.codeBasePath;
-      const isBrandPage = brandTheme.file === 'brands';
-      if (isBrandPage) document.body.classList.add('hershey-brand');
-      // brand pages (`file: 'brands'`) load their section styles ahead of the theme tokens
-      await Promise.all([
-        isBrandPage ? loadCSS(`${base}/styles/hershey-brand.css`) : null,
-        loadCSS(`${base}/design/themes/${brandTheme.file || brandTheme.value}.css`),
-      ]);
-    }
+    const base = window.hlx.codeBasePath;
+    const isBrandPage = brandTheme?.file === 'brands';
+    if (isBrandPage) document.body.classList.add('hershey-brand');
+    // the theme stylesheets load together (brand pages also load their section styles); the
+    // page is revealed once they are in, while the blocks above the fold load in parallel
+    themeReady = Promise.all([
+      loadHersheyTheme(),
+      isBrandPage ? loadCSS(`${base}/styles/hershey-brand.css`) : null,
+      brandTheme ? loadCSS(`${base}/design/themes/${brandTheme.file || brandTheme.value}.css`) : null,
+    ]);
   }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
-    document.body.classList.add('appear');
     // the hero is the LCP element but is often not the first section (the breadcrumb is), so
     // load the sections up to it together; each is revealed only once the ones above it are,
     // so the hero can never appear above a section that is still loading
     const sections = [...main.querySelectorAll(':scope > .section')];
     const hero = main.querySelector('.hero')?.closest('.section');
     let above = Promise.resolve();
-    await Promise.all(sections.slice(0, sections.indexOf(hero) + 1 || 1).map((section) => {
+    const loaded = Promise.all(sections.slice(0, sections.indexOf(hero) + 1 || 1).map((section) => {
       const waitFor = above;
-      above = loadSection(section, async (loaded) => {
+      above = loadSection(section, async (done) => {
         await waitFor;
-        if (loaded === sections[0] || loaded === hero) await waitForFirstImage(loaded);
+        if (done === sections[0] || done === hero) await waitForFirstImage(done);
       });
       return above;
     }));
+    await themeReady;
+    document.body.classList.add('appear');
+    await loaded;
+  } else {
+    await themeReady;
   }
 
   try {
