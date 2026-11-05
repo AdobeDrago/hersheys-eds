@@ -32,16 +32,20 @@ function decorateSlider(block, list) {
   });
   const dots = document.createElement('div');
   dots.className = 'cards-slider-dots';
-  // related, callout and dots sliders, and the product, stories and content sliders on brand
-  // pages, show one page indicator per page of cards
+  // related, callout and dots sliders, and the product, stories, content and brands sliders on
+  // brand pages, show one page indicator per page of cards
   const paged = ['related', 'callout', 'dots'].some((name) => block.classList.contains(name))
-    || (isBrandPage() && ['product', 'stories', 'content'].some((name) => block.classList.contains(name)));
+    || (isBrandPage() && ['product', 'stories', 'content', 'brands'].some((name) => block.classList.contains(name)));
+  // the brands slider pages by the cards that fit whole in the track, as on hersheyland.com
+  const byCard = block.classList.contains('brands');
   // a page is the visible track width plus one gap; the track padding is not scrollable content
   const measure = () => {
     const style = getComputedStyle(list);
     const inset = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
     const gap = parseFloat(style.columnGap) || 0;
-    const step = list.clientWidth - inset + gap;
+    let step = list.clientWidth - inset + gap;
+    const card = byCard && list.firstElementChild ? list.firstElementChild.offsetWidth + gap : 0;
+    if (card) step = Math.max(1, Math.floor(step / card)) * card;
     return { inset, gap, step };
   };
   const update = () => {
