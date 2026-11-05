@@ -18,8 +18,6 @@
  * The section is marked `recipe-details-nutrition-section`.
  */
 
-import { loadExternalJson } from '../../scripts/external-json.js';
-
 const NUTRITION_SHEET = '/recipes/nutrition.json';
 const NUTRITION_FOOTNOTE = '* The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.';
 
@@ -30,31 +28,31 @@ const NUTRITION_FOOTNOTE = '* The % Daily Value (DV) tells you how much a nutrie
 const SHEET_NUTRIENTS = [
   {
     key: 'totalFat',
-    name: 'Total Fat', label: 'total-fat',
+    name: 'Total Fat',
     children: [
-      { key: 'saturatedFat', name: 'Saturated Fat', label: 'saturated-fat' },
-      { key: 'transFat', name: 'Trans Fat', label: 'trans-fat' },
+      { key: 'saturatedFat', name: 'Saturated Fat' },
+      { key: 'transFat', name: 'Trans Fat' },
     ],
   },
-  { key: 'cholesterol', name: 'Cholesterol', label: 'cholesterol' },
-  { key: 'sodium', name: 'Sodium', label: 'sodium' },
+  { key: 'cholesterol', name: 'Cholesterol' },
+  { key: 'sodium', name: 'Sodium' },
   {
     key: 'totalCarbohydrates',
-    name: 'Total Carbohydrates', label: 'total-carbohydrates',
+    name: 'Total Carbohydrates',
     children: [
-      { key: 'dietaryFiber', name: 'Dietary Fiber', label: 'dietary-fiber' },
+      { key: 'dietaryFiber', name: 'Dietary Fiber' },
       {
         key: 'totalSugars',
-        name: 'Total Sugars', label: 'total-sugars',
-        children: [{ key: 'addedSugars', name: 'Added Sugars', label: 'added-sugar', includes: true }],
+        name: 'Total Sugars',
+        children: [{ key: 'addedSugars', name: 'Added Sugars', includes: true }],
       },
     ],
   },
-  { key: 'protein', name: 'Protein', label: 'protein' },
-  { key: 'vitaminD', name: 'Vitamin D', label: 'vitamin-d', micro: true },
-  { key: 'calcium', name: 'Calcium', label: 'calcium', micro: true },
-  { key: 'iron', name: 'Iron', label: 'iron', micro: true },
-  { key: 'potassium', name: 'Potassium', label: 'potassium', micro: true },
+  { key: 'protein', name: 'Protein' },
+  { key: 'vitaminD', name: 'Vitamin D', micro: true },
+  { key: 'calcium', name: 'Calcium', micro: true },
+  { key: 'iron', name: 'Iron', micro: true },
+  { key: 'potassium', name: 'Potassium', micro: true },
 ];
 
 const NUTRITION_DV = /\s+(\d+(?:\.\d+)?\s?%)\s*\*?$/;
@@ -298,22 +296,20 @@ async function fetchNutrition() {
  * are left out.
  * @param {Object<string, string>} row
  * @param {Array<object>} nutrients
- * @param {Object<string, string>} [dict] third-party labels; fall back to the built-in names
  * @returns {HTMLUListElement|null}
  */
-function buildSheetList(row, nutrients, dict = {}) {
+function buildSheetList(row, nutrients) {
   const list = document.createElement('ul');
   nutrients.forEach(({
-    key, name: defaultName, label, children, includes, micro,
+    key, name, children, includes, micro,
   }) => {
-    const name = dict[label] || defaultName;
     const amount = String(row[key] ?? '').trim();
-    const nested = children ? buildSheetList(row, children, dict) : null;
+    const nested = children ? buildSheetList(row, children) : null;
     if (!amount && !nested) return;
     const dv = String(row[`${key}DV`] ?? '').trim();
     const li = document.createElement('li');
     const p = document.createElement('p');
-    const text = includes ? `${dict.includes || 'Includes'} ${amount} ${name}` : `${name} ${amount}`.trim();
+    const text = includes ? `Includes ${amount} ${name}` : `${name} ${amount}`.trim();
     // top-level nutrients are bold on the label, as authored
     if (nutrients === SHEET_NUTRIENTS && !micro) {
       const strong = document.createElement('strong');
@@ -335,10 +331,8 @@ function buildSheetList(row, nutrients, dict = {}) {
  * Fills the label cell with the sheet values, in the shape an author would type.
  * @param {Element} cell
  * @param {Object<string, string>} row
- * @param {Object<string, string>} [dict] third-party labels; fall back to the built-in text
  */
-function renderNutrition(cell, row, dict = {}) {
-  const t = (key, fallback) => dict[key] || fallback;
+function renderNutrition(cell, row) {
   const value = (key) => String(row[key] ?? '').trim();
   const paragraph = (text) => {
     const p = document.createElement('p');
@@ -348,15 +342,15 @@ function renderNutrition(cell, row, dict = {}) {
   let heading = cell.querySelector(':scope > :is(h1, h2, h3, h4, h5, h6)');
   if (!heading) {
     heading = document.createElement('h3');
-    heading.textContent = t('nutrition-facts', 'Nutrition Facts');
+    heading.textContent = 'Nutrition Facts';
   }
   const content = [heading];
-  if (value('servingsPerContainer')) content.push(paragraph(`${t('servings-per-container', 'Servings Per Container')} ${value('servingsPerContainer')}`));
-  if (value('servingSize')) content.push(paragraph(`${t('serving-size', 'Serving size')} ${value('servingSize')}`));
+  if (value('servingsPerContainer')) content.push(paragraph(`Servings Per Container ${value('servingsPerContainer')}`));
+  if (value('servingSize')) content.push(paragraph(`Serving size ${value('servingSize')}`));
   content.push(paragraph('Amount per serving'));
-  if (value('calories')) content.push(paragraph(`${t('calories', 'Calories')} ${value('calories')}`));
-  const list = buildSheetList(row, SHEET_NUTRIENTS, dict);
-  if (list) content.push(list, paragraph(dict['the-daily-value'] ? `* ${dict['the-daily-value']}` : NUTRITION_FOOTNOTE));
+  if (value('calories')) content.push(paragraph(`Calories ${value('calories')}`));
+  const list = buildSheetList(row, SHEET_NUTRIENTS);
+  if (list) content.push(list, paragraph(NUTRITION_FOOTNOTE));
   cell.replaceChildren(...content);
 }
 
@@ -387,13 +381,13 @@ export default async function decorate(block) {
       || (cells.length > 1 ? cells[0] : null);
 
     if (!hasAuthoredNutrition(label)) {
-      const [sheetRow, dict] = await Promise.all([fetchNutrition(), loadExternalJson()]);
+      const sheetRow = await fetchNutrition();
       if (sheetRow) {
         if (!label) {
           label = document.createElement('div');
           row.prepend(label);
         }
-        renderNutrition(label, sheetRow, dict || {});
+        renderNutrition(label, sheetRow);
       }
     }
 
