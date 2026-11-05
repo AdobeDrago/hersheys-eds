@@ -10,9 +10,11 @@ const ITEMS = [
   ['Where can I find more recipes?', null],
 ];
 
-function renderAccordion(items, { open = false, sectionStyle = '' } = {}) {
+function renderAccordion(items, { open = false, sectionStyle = '', brand = false } = {}) {
   const root = createPage('Blocks', 'Accordion');
   const main = showcase(root);
+  // brand pages carry `hershey-brand` on body; scoped to the specimen so the docs UI is untouched
+  if (brand) root.querySelector('[data-showcase]').classList.add('hershey-brand');
   const block = element('div', 'accordion block');
   items.forEach(([question, answer]) => {
     const row = element('div');
@@ -32,7 +34,7 @@ function renderAccordion(items, { open = false, sectionStyle = '' } = {}) {
   decorateAccordion(block);
   if (open) block.querySelector('details')?.setAttribute('open', '');
   const container = section(main, block, `${sectionStyle} accordion-container`.trim());
-  if (sectionStyle) {
+  if (sectionStyle || brand) {
     const heading = element('div', 'default-content-wrapper');
     heading.append(element('h2', '', 'Trending Topics'));
     container.prepend(heading);
@@ -52,3 +54,5 @@ export const FirstOpen = { render: () => renderAccordion(ITEMS, { open: true }) 
 /** `faq` section style (hersheyland.com/about/faqs): centred heading, teal rules, maroon plus/minus. */
 export const Faq = { render: () => renderAccordion(ITEMS, { open: true, sectionStyle: 'faq' }) };
 export const MissingQuestion = { render: () => renderAccordion([['', 'This row has no question and is removed.'], ...ITEMS]) };
+/** Brand page treatment (`hershey-brand`): two-thirds column, questions keep their colour. */
+export const Brand = { render: () => renderAccordion(ITEMS, { open: true, brand: true }) };
