@@ -4,10 +4,10 @@ import {
   createPage, element, link, section, showcase,
 } from './story-helpers.js';
 
-function renderTrail(items, current = true) {
+function renderTrail(items, current = true, variant = '') {
   const root = createPage('Blocks', 'Breadcrumb Trail');
   const main = showcase(root);
-  const block = element('div', 'breadcrumb-trail block');
+  const block = element('div', `breadcrumb-trail ${variant} block`.replace(/\s+/g, ' '));
   const cell = element('div');
   const list = element('ul');
   items.forEach((label, i) => {
@@ -38,3 +38,10 @@ export const LongTrail = {
   render: () => renderTrail(['Home', 'Recipes', 'Holidays & Celebrations', 'Halloween', 'Candy Treats', 'Reese’s Peanut Butter Monster Cookie Bars']),
 };
 export const LinkedCurrentPage = { render: () => renderTrail(['Home', 'Recipes', 'Desserts'], false) };
+/** `Breadcrumb Trail (back)`: one back link on a full-width maroon bar with a chevron. */
+export const Back = {
+  render: () => {
+    const root = renderTrail(['VIEW ALL PRODUCTS'], false, 'back');
+    return root;
+  },
+};

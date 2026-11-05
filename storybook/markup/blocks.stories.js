@@ -3,6 +3,7 @@ import '@adobe/aem-boilerplate/blocks/cards/cards.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-recipes.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-callout.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-brand.css';
+import '@adobe/aem-boilerplate/blocks/cards/cards-brand-slider.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-product.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-quotes.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-steps.css';
@@ -13,6 +14,7 @@ import {
 function render({
   heading, copy, showImage, count, variant,
 }) {
+  document.body.classList.remove('hershey-brand');
   const root = createPage('Blocks', 'Cards');
   const main = showcase(root);
   const cards = element('div', `cards ${variant} block`);
@@ -113,9 +115,11 @@ export const RelatedRecipes = {
  * button as default content around the block, inside one section.
  */
 function renderBrand(name, {
-  classes, intro = true, button = false, rows,
+  classes, intro = true, button = false, rows, brandPage = false, eyebrow = 'HERSHEY’S',
 }) {
-  const root = createPage('Blocks', 'Cards', `Cards (${classes.replace(/ /g, ', ')}), as authored on brand pages.`);
+  // brand pages carry this body class (scripts.js); some variants lay out differently with it
+  document.body.classList.toggle('hershey-brand', brandPage);
+  const root = createPage('Blocks', 'Cards', `Cards (${classes.replace(/ /g, ', ')})${brandPage ? ', on a brand page (body.hershey-brand)' : ''}.`);
   const main = showcase(root);
   const cards = element('div', `cards ${classes} block`);
   rows.forEach((cells) => {
@@ -126,7 +130,8 @@ function renderBrand(name, {
   const container = section(main, cards);
   if (intro) {
     const head = element('div', 'default-content-wrapper');
-    head.append(element('p', '', 'HERSHEY’S'), element('h2', '', name));
+    if (eyebrow) head.append(element('p', '', eyebrow));
+    head.append(element('h2', '', name));
     container.prepend(head);
   }
   if (button) {
@@ -278,5 +283,66 @@ export const Steps = {
       imageCell(step),
       cellOf(element('p', '', `Step ${i + 1}: ${step.toLowerCase()} your favorite.`)),
     ]),
+  }),
+};
+
+/** `Cards (slider, related, recipes)` with authored cards. Authored cards win over Algolia. */
+export const Recipes = {
+  render: () => renderBrand('You Might Also Enjoy...', {
+    classes: 'slider related recipes',
+    eyebrow: '',
+    button: true,
+    rows: cardRows(6, { titleLink: true }),
+  }),
+};
+
+/** `Cards (product, slider)` on a brand page: product cards scroll with arrows and dots. */
+export const ProductSlider = {
+  render: () => renderBrand('Our Products', {
+    classes: 'product slider',
+    eyebrow: '',
+    button: true,
+    brandPage: true,
+    rows: productRows(8),
+  }),
+};
+
+/** `Cards (brand, slider)`: handled as the product variant, so it looks like Product Slider. */
+export const BrandSlider = {
+  render: () => renderBrand('Our Products', {
+    classes: 'brand slider',
+    eyebrow: '',
+    button: true,
+    brandPage: true,
+    rows: productRows(8),
+  }),
+};
+
+/** `Cards (slider, brands)` on a brand page: the band without the following-section rule. */
+export const BrandsBrandPage = {
+  render: () => renderBrand('Get a Taste of Our Brands', {
+    classes: 'slider brands',
+    button: true,
+    brandPage: true,
+    rows: cardRows(6, { titleLink: true }),
+  }),
+};
+
+/** `Cards (stories, slider)` on a brand page: one kiss indicator per page of cards. */
+export const StoriesBrandPage = {
+  render: () => renderBrand('More Ways to Enjoy', {
+    classes: 'stories slider',
+    brandPage: true,
+    rows: cardRows(6, { copy: 'A short story about a favorite.', cta: 'Read more' }),
+  }),
+};
+
+/** `Cards (slider, content)` on a brand page: one kiss indicator per page of cards. */
+export const ContentBrandPage = {
+  render: () => renderBrand('Dessert Ideas', {
+    classes: 'slider content',
+    button: true,
+    brandPage: true,
+    rows: cardRows(8, { titleLink: true }),
   }),
 };

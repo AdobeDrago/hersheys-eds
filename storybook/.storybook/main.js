@@ -12,6 +12,7 @@ export default {
     { from: '../../icons', to: '/icons' },
     // cards.js lazy-loads its variant stylesheets from the code base path
     { from: '../../blocks/cards', to: '/blocks/cards' },
+    { from: '../../blocks/columns', to: '/blocks/columns' },
     { from: '../../styles', to: '/styles' },
   ],
   core: { disableTelemetry: true },
@@ -47,6 +48,7 @@ export default {
         allow: [
           ...(config.server?.fs?.allow || [searchForWorkspaceRoot(config.root || process.cwd())]),
           fileURLToPath(new URL('../../fonts', import.meta.url)),
+          fileURLToPath(new URL('../../icons', import.meta.url)),
         ],
       },
     };
