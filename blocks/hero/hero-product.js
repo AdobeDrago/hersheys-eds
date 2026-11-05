@@ -603,7 +603,8 @@ function buildLabel(text) {
  * @returns {Promise<{ row: Element, media: Element, details: Element }>}
  */
 async function buildFromFields(block, fields) {
-  const needsSheet = SHEET_FIELDS.some((field) => !fields[field]);
+  // a missing label alone does not need the sheet (author `label` for one)
+  const needsSheet = SHEET_FIELDS.some((field) => field !== 'label' && !fields[field]);
   const { product, products } = needsSheet ? await findProduct() : {};
   const sheet = product || {};
   const alt = sheet.imageAlt || sheet.title || sheet.name || '';
