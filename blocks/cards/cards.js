@@ -121,6 +121,15 @@ export default async function decorate(block) {
     decorateSteps(block);
     return;
   }
+  if (block.classList.contains('wheel')) {
+    // the wheel variant has its own markup, so it loads its own script and styles
+    const [{ default: decorateWheel }] = await Promise.all([
+      import('./cards-wheel.js'),
+      loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-wheel.css`),
+    ]);
+    decorateWheel(block);
+    return;
+  }
   // brand page variants carry their own styles
   const brandStyles = BRAND_VARIANTS.some((variant) => block.classList.contains(variant))
     ? loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-brand.css`)

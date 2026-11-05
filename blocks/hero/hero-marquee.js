@@ -53,8 +53,10 @@ function findStrip(block) {
  * `Hero (marquee, band)`: rows of one wide strip of lettering scrolling sideways, each row in
  * the opposite direction to the one above. The block is clipped to the height set on it
  * (`--hero-marquee-band-height`), so the last row can be cut off. Add `rows-N` for another number
- * of rows. Authored as one cell holding the strip (a picture, or a link to an image file); its alt
- * text is the readable copy and the rows are decorative.
+ * of rows, and `right` to start with a row scrolling to the right. Page themes can set the speed in
+ * pixels a second (`--hero-marquee-band-speed`). Authored as one cell holding the strip (a
+ * picture, or a link to an image file); its alt text is the readable copy and the rows are
+ * decorative.
  * @param {Element} block The hero block
  */
 function decorateBand(block) {
@@ -62,10 +64,11 @@ function decorateBand(block) {
   if (!strip) return;
   const count = Number(([...block.classList].find((c) => /^rows-\d+$/.test(c)) || '').slice(5))
     || BAND_ROWS;
+  const offset = block.classList.contains('right') ? 1 : 0;
   const rows = Array.from({ length: count }, (_, index) => {
     const row = document.createElement('div');
     row.className = 'hero-marquee-strip-row';
-    if (index % 2) row.classList.add('reverse');
+    if ((index + offset) % 2) row.classList.add('reverse');
     row.setAttribute('aria-hidden', 'true');
     const track = document.createElement('div');
     track.className = 'hero-marquee-strip-track';
@@ -90,7 +93,9 @@ function decorateBand(block) {
   const first = rows[0].querySelector('img');
   const setSpeed = () => {
     const { width } = first.getBoundingClientRect();
-    if (width) block.style.setProperty('--hero-marquee-band-duration', `${width / BAND_SPEED}s`);
+    const speed = parseFloat(getComputedStyle(block).getPropertyValue('--hero-marquee-band-speed'))
+      || BAND_SPEED;
+    if (width) block.style.setProperty('--hero-marquee-band-duration', `${width / speed}s`);
   };
   if (first.complete) setSpeed();
   else first.addEventListener('load', setSpeed, { once: true });

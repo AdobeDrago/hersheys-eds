@@ -8,7 +8,9 @@ const BVID_LINE = /^bvid\s*:/i;
  *
  * Content model: one row per product, 2 cells.
  *   Cell 1: product image (picture, or a link to an image, e.g. Scene7).
- *   Cell 2: h3 product name linking to the product page, then a size paragraph.
+ *   Cell 2: h3 product name linking to the product page, then a size paragraph. A paragraph
+ *   before the name is a badge over the photo (e.g. `Seasonal` or `Limited Edition`, which get
+ *   their icon; any other text shows without one).
  *   A `bvid: <gtin>` paragraph is tolerated (rating data) and not shown.
  * The whole card links to the product page.
  *
@@ -32,11 +34,28 @@ function imageFrom(cell) {
 }
 
 /**
- * @param {{href?: string, src: string, name: string, sizes: string[]}} product
+ * The badge over a product photo, e.g. "Seasonal" with a snowflake as on /kisses.
+ * @param {string} text
+ * @returns {HTMLParagraphElement}
+ */
+function buildTag(text) {
+  const tag = document.createElement('p');
+  tag.className = 'cards-product-tag';
+  if (/seasonal/i.test(text)) tag.classList.add('cards-product-tag-seasonal');
+  if (/limited\s*edition/i.test(text)) tag.classList.add('cards-product-tag-limited-edition');
+  const icon = document.createElement('span');
+  icon.className = 'cards-product-tag-icon';
+  icon.setAttribute('aria-hidden', 'true');
+  tag.append(icon, text);
+  return tag;
+}
+
+/**
+ * @param {{href?: string, src: string, name: string, sizes: string[], tag?: string}} product
  * @returns {HTMLLIElement}
  */
 function buildCard({
-  href, src, name, sizes,
+  href, src, name, sizes, tag,
 }) {
   const card = document.createElement('a');
   card.className = 'cards-product-card';
@@ -63,6 +82,7 @@ function buildCard({
   });
 
   card.append(media, body);
+  if (tag) card.append(buildTag(tag));
   const item = document.createElement('li');
   item.append(card);
   return item;
@@ -95,14 +115,21 @@ export default function decorate(block) {
     const image = mediaCell && imageFrom(mediaCell);
     if (!title || !image) return;
 
-    const sizes = [...bodyCell.querySelectorAll('p')]
+    const paragraphs = [...bodyCell.querySelectorAll('p')];
+    // a paragraph before the name is the badge; the ones after are sizes
+    // eslint-disable-next-line no-bitwise
+    const before = (p) => title.compareDocumentPosition(p) & Node.DOCUMENT_POSITION_PRECEDING;
+    const sizes = paragraphs.filter((p) => !before(p))
       .map((p) => p.textContent.trim())
       .filter((text) => text && !BVID_LINE.test(text));
+    const tag = paragraphs
+      .find((p) => before(p) && !BVID_LINE.test(p.textContent.trim()))?.textContent.trim();
     list.append(buildCard({
       href: title.querySelector('a[href]')?.href,
       src: image.src,
       name: title.textContent.trim(),
       sizes,
+      tag,
     }));
   });
   block.replaceChildren(list);
