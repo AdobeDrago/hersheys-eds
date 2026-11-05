@@ -1168,10 +1168,12 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
   border-radius: var(--hershey-component-columns-callout-framed-border-radius, 8px);
 }
 
+/* the photo fills its frame, as on hersheyland.com, even when its shape differs a little */
 .columns.callout.framed > div > .columns-img-col img {
   height: calc(100cqi * 9 / 16);
   aspect-ratio: auto;
   border-radius: 0;
+  object-fit: fill;
 }
 
 .columns.callout.framed p:has(+ h2) {
