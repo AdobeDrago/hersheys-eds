@@ -2906,6 +2906,7 @@
   --hershey-component-breadcrumb-trail-color-text: var(--hershey-system-color-text-primary);
   --hershey-component-breadcrumb-trail-color-link: var(--hershey-system-color-link-accent);
   --hershey-component-breadcrumb-trail-color-home-icon: var(--hershey-system-color-icon-home);
+  --hershey-component-breadcrumb-trail-color-background: var(--hershey-system-color-surface-default);
   --hershey-component-breadcrumb-trail-divider-color: var(--hershey-system-color-border-rule);
   --hershey-component-breadcrumb-trail-divider-width: var(--hershey-system-border-width-divider);
   --hershey-component-breadcrumb-trail-divider-style: var(--hershey-system-border-style-default);

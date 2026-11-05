@@ -24,7 +24,9 @@ main > .section > .breadcrumb-trail-wrapper {
   max-width: none;
 }
 
+/* white even inside a coloured section, so the maroon separators and current page stay visible */
 .breadcrumb-trail {
+  background-color: var(--hershey-component-breadcrumb-trail-color-background, #fff);
   color: var(--hershey-component-breadcrumb-trail-foreground, #3f000b);
   font-family: var(--hershey-component-breadcrumb-trail-base-font-family, hershey-tt, sans-serif);
   font-size: var(--hershey-component-breadcrumb-trail-base-font-size, 17px);
