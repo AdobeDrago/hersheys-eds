@@ -4,29 +4,52 @@ import { loadCSS } from '../../scripts/aem.js';
 const BRAND_VARIANTS = ['fact', 'callout', 'article', 'video', 'quotes', 'blog', 'blobs'];
 
 /**
+ * The embedded YouTube player for a video id.
+ * @param {string} id The YouTube video id
+ * @param {string} title The player's accessible title
+ * @param {boolean} autoplay Whether the video starts at once
+ * @returns {HTMLIFrameElement} The player
+ */
+function buildPlayer(id, title, autoplay) {
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(id)}?${autoplay ? 'autoplay=1&' : ''}rel=0`;
+  iframe.title = title || 'Video';
+  iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+  if (!autoplay) iframe.loading = 'lazy';
+  return iframe;
+}
+
+/**
  * `Columns (video)`: the YouTube link beside the poster becomes a play button that swaps the
- * poster for the embedded player.
+ * poster for the embedded player. `Columns (video, player)`, or a YouTube link without a poster,
+ * shows the player at once, as the HERSHEY'S trailer on hersheyland.com does.
  * @param {Element} block The columns block element
  */
 function decorateVideo(block) {
+  const player = block.classList.contains('player');
   block.querySelectorAll(':scope > div > div').forEach((cell) => {
     const link = [...cell.querySelectorAll('a[href]')].find((a) => /youtu\.?be/.test(a.href));
-    const picture = cell.querySelector('picture');
-    if (!link || !picture) return;
+    if (!link) return;
     const url = new URL(link.href);
     const id = url.searchParams.get('v') || url.pathname.split('/').pop();
     if (!id) return;
-    const alt = picture.querySelector('img')?.alt || '';
+    const picture = cell.querySelector('picture');
+    const alt = picture?.querySelector('img')?.alt || '';
+    if (player || !picture) {
+      // the poster's alt text, or else the link text unless it is the bare URL, titles the player
+      const text = link.textContent.trim();
+      const title = alt || (text === link.href ? 'YouTube video player' : text);
+      (link.closest('p') || link).replaceWith(buildPlayer(id, title, false));
+      picture?.closest('p')?.remove();
+      picture?.remove();
+      return;
+    }
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'columns-video-play';
     button.setAttribute('aria-label', alt ? `Play video: ${alt}` : 'Play video');
     button.addEventListener('click', () => {
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`;
-      iframe.title = alt || 'Video';
-      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-      cell.replaceChildren(iframe);
+      cell.replaceChildren(buildPlayer(id, alt, true));
     }, { once: true });
     (link.closest('p') || link).replaceWith(button);
   });

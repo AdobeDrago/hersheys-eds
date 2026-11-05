@@ -3863,7 +3863,35 @@
 
 .hershey-home.hersheys-brand-primary main > div.section.hs-c2 + div.section {
   --hershey-component-cards-product-slider-band-padding-block-start: 121px;
-  --hershey-component-cards-product-slider-band-padding-block-end: 274px;
+  --hershey-component-cards-product-slider-band-padding-block-end: 160px;
+}
+
+/* the shop pill under a product slider is 80% wide below 768px, then at least 210px, and at least
+   200px from 992px, as on hersheyland.com; it sits 64px under the page dots below 992px */
+.hershey-home.hersheys-brand-primary main > div.section:has(.cards.product.slider) {
+  --hershey-component-cards-product-slider-cta-margin-block-start: 64px;
+}
+
+.hershey-home.hersheys-brand-primary main > div.section:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+  box-sizing: border-box;
+  width: 80%;
+}
+
+@media (width >= 768px) {
+  .hershey-home.hersheys-brand-primary main > div.section:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+    width: auto;
+    min-width: 210px;
+  }
+}
+
+@media (width >= 992px) {
+  .hershey-home.hersheys-brand-primary main > div.section:has(.cards.product.slider) {
+    --hershey-component-cards-product-slider-cta-margin-block-start: 53px;
+  }
+
+  .hershey-home.hersheys-brand-primary main > div.section:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+    min-width: 200px;
+  }
 }
 
 .hershey-home.hersheys-brand-primary main > div.section.hs-fact-3 + div.section {
@@ -4148,6 +4176,11 @@
   border-radius: 0;
   padding: 50px 0;
   background: none;
+}
+
+/* the live trailer is the YouTube player itself, with square corners */
+.hershey-home.hersheys-brand-primary main .columns.video iframe {
+  border-radius: 0;
 }
 
 .hershey-home.hersheys-brand-primary main .columns.video > div > div:first-child p,
