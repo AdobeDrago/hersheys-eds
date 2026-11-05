@@ -185,11 +185,18 @@
 }
 
 /*
- * REESE'S "did you know" banners (`campaign-text` sections): white copy on the orange band, a bold
- * eyebrow and a 36px heading on twelve columns, as on hersheyland.com/reeses.
+ * REESE'S "did you know" banners (`campaign-text` sections): white copy on a dark brown REESE'S
+ * cup, as on hersheyland.com/reeses. The cup fills the band less 50px top and bottom, centred at
+ * its own width (wider than the band, so its sides run off the edges); the eyebrow and the heading
+ * sit 20px inside it, with space that grows with the width above the eyebrow and under the
+ * heading.
  */
 .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text {
-  padding-inline: 20px;
+  padding: 70px 0;
+  background-image: url('/icons/reeses-cup-facts-silhouette.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto calc(100% - 100px);
   color: #fff;
   text-align: center;
 }
@@ -206,7 +213,8 @@
 }
 
 .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text > .default-content-wrapper > p {
-  margin: 0 0 24px;
+  margin: 0 0 12px;
+  padding: 4vw 40px 0;
   font-size: 19px;
   font-weight: 700;
   line-height: 1.5;
@@ -214,18 +222,17 @@
 
 .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text > .default-content-wrapper > h2 {
   margin: 0;
+  padding: 0 40px 4vw;
   color: #fff;
   font-size: 28px;
   font-weight: 900;
+  line-height: 35px;
 }
 
 @media (width >= 992px) {
-  .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text {
-    padding: 70px 0 127px;
-  }
-
+  /* the copy spans the band up to 1200px, not the campaign's ten columns */
   .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text > .default-content-wrapper:first-child {
-    width: min(1120px, 100%);
+    width: auto;
   }
 
   /* a banner straight under a call-out starts 20px lower */
@@ -233,14 +240,16 @@
     padding-top: 90px;
   }
 
-  .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text > .default-content-wrapper > p {
-    margin-bottom: 69px;
-  }
-
   .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text > .default-content-wrapper > h2 {
     font-size: 36px;
     line-height: 45px;
   }
+}
+
+/* each orange band reaches a pixel over the one above, so no hairline of the white page shows
+   where a band ends part-way through a pixel */
+.hershey-home:is(.reeses-primary, .oreo-cup-primary) main > div.section.brand-color + div.section.brand-color {
+  box-shadow: 0 -1px 0 var(--hershey-system-color-surface-brand-band);
 }
 
 
@@ -2872,7 +2881,8 @@
 /*
  * REESE'S OREO closing band: Section Metadata style `oreo-spotlight`. A heading, a button and fine
  * print, centred on the turning scalloped disc. The disc is decoration in /icons; its top edge
- * shows from 250px above the band.
+ * shows from 250px above the band. The band, not the disc, cuts the disc off: a cut on the disc
+ * would turn with it and hide the disc after a while.
  */
 .hershey-home.oreo-cup-primary main > div.section.oreo-spotlight {
   position: relative;
@@ -2880,6 +2890,7 @@
   min-height: 517px;
   padding: 0;
   overflow-x: clip;
+  clip-path: inset(-250px 0 0);
   color: #fff;
   text-align: center;
 }
@@ -2893,7 +2904,6 @@
   width: 130%;
   aspect-ratio: 1920 / 1935;
   background: url('/icons/oreo-spotlight-disc.svg') center / 100% 100% no-repeat;
-  clip-path: inset(0 0 calc(100% - 767px) 0);
   transform: translateX(-50%);
   animation: oreo-spotlight-spin 240s linear infinite;
   pointer-events: none;
@@ -5083,6 +5093,25 @@
   .hershey-home.kisses-primary .poll.quiz::before,
   .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span {
     transition: none;
+  }
+}
+
+/* stylelint-enable no-descending-specificity */
+
+/* stylelint-disable no-descending-specificity -- this REESE'S band rule targets one section only */
+
+/* REESE'S: the shopping band slides under the wave art above it, as on hersheyland.com/reeses: by
+   60px below 769px and 220px from there; below 992px its heading sits 35px lower in the band */
+.hershey-home.reeses-primary main > .section.artwork + .section:has(.cards.product.slider) {
+  --hershey-component-cards-product-slider-band-padding-block-start-mobile: 95px;
+  --hershey-component-cards-product-slider-band-padding-block-start-tablet: 105px;
+
+  margin-top: -60px;
+}
+
+@media (width > 768px) {
+  .hershey-home.reeses-primary main > .section.artwork + .section:has(.cards.product.slider) {
+    margin-top: -220px;
   }
 }
 
