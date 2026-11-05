@@ -321,6 +321,7 @@ function renderHits(ui, state) {
   } = ui;
   const { result } = state;
   hits.setAttribute('aria-busy', state.loading ? 'true' : 'false');
+  hits.classList.toggle('hersheys-search-hits-pending', !state.result && !state.error);
 
   if (state.error) {
     status.hidden = false;
