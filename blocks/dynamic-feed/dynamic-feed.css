@@ -1,0 +1,230 @@
+/* Dynamic Feed: cards built from a JSON API. Layout is a block option: grid (default), list, carousel.
+ * --feed-columns comes from the authored `columns` row. */
+.dynamic-feed {
+  --feed-gap: 24px;
+  --feed-radius: 8px;
+  --feed-surface: var(--background-color);
+  --feed-muted: var(--dark-color);
+  --feed-placeholder: var(--light-color);
+
+  font-family: var(--body-font-family);
+  color: var(--text-color);
+}
+
+.dynamic-feed .dynamic-feed-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: var(--feed-gap);
+}
+
+.dynamic-feed .dynamic-feed-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: var(--feed-radius);
+  overflow: hidden;
+  background: var(--feed-surface);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 12%);
+}
+
+/* overflow: hidden keeps tall images from stretching the box past its aspect ratio */
+.dynamic-feed .dynamic-feed-media {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--feed-placeholder);
+}
+
+.dynamic-feed .dynamic-feed-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dynamic-feed .dynamic-feed-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.dynamic-feed .dynamic-feed-title {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xs);
+  line-height: 1.25;
+}
+
+.dynamic-feed .dynamic-feed-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dynamic-feed .dynamic-feed-title a:hover {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+.dynamic-feed .dynamic-feed-title a:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+/* the whole card is the link target for pointer users; keyboard focus stays on the title link */
+.dynamic-feed .dynamic-feed-card:has(.dynamic-feed-title a) {
+  position: relative;
+}
+
+.dynamic-feed .dynamic-feed-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.dynamic-feed .dynamic-feed-date {
+  font-size: var(--body-font-size-xs);
+  color: var(--feed-muted);
+}
+
+.dynamic-feed .dynamic-feed-description {
+  margin: 0;
+  font-size: var(--body-font-size-xs);
+  line-height: 1.5;
+}
+
+.dynamic-feed .dynamic-feed-more {
+  display: flex;
+  margin: var(--feed-gap) auto 0;
+}
+
+.dynamic-feed .dynamic-feed-more[hidden] {
+  display: none;
+}
+
+.dynamic-feed .dynamic-feed-status {
+  margin: var(--feed-gap) 0 0;
+  font-size: var(--body-font-size-xs);
+  text-align: center;
+}
+
+.dynamic-feed .dynamic-feed-status:empty {
+  display: none;
+}
+
+.dynamic-feed.is-empty .dynamic-feed-status {
+  padding: 32px 16px;
+  border-radius: var(--feed-radius);
+  background: var(--feed-placeholder);
+  font-size: var(--body-font-size-s);
+}
+
+/* loading skeleton */
+.dynamic-feed .dynamic-feed-skeleton {
+  border-radius: var(--feed-radius);
+  overflow: hidden;
+  background: var(--feed-surface);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 12%);
+}
+
+.dynamic-feed .dynamic-feed-skeleton .dynamic-feed-media,
+.dynamic-feed .dynamic-feed-skeleton span {
+  background: linear-gradient(90deg, var(--feed-placeholder) 25%, #e6e6e6 50%, var(--feed-placeholder) 75%);
+  background-size: 200% 100%;
+  animation: dynamic-feed-shimmer 1.4s linear infinite;
+}
+
+.dynamic-feed .dynamic-feed-skeleton span {
+  display: block;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.dynamic-feed .dynamic-feed-skeleton span:first-child {
+  height: 20px;
+  width: 80%;
+}
+
+.dynamic-feed .dynamic-feed-skeleton span:last-child {
+  width: 60%;
+}
+
+@keyframes dynamic-feed-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dynamic-feed .dynamic-feed-skeleton .dynamic-feed-media,
+  .dynamic-feed .dynamic-feed-skeleton span {
+    animation: none;
+  }
+}
+
+/* grid: one column, two from 600px, the authored column count from 900px */
+.dynamic-feed.grid .dynamic-feed-list {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (width >= 600px) {
+  .dynamic-feed.grid .dynamic-feed-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .dynamic-feed.grid .dynamic-feed-list {
+    grid-template-columns: repeat(var(--feed-columns, 3), 1fr);
+  }
+}
+
+/* list: stacked rows; image beside the text from 600px */
+.dynamic-feed.list .dynamic-feed-list {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (width >= 600px) {
+  .dynamic-feed.list .dynamic-feed-card {
+    flex-direction: row;
+  }
+
+  /* not stretched to the row height, so the image keeps its 16:9 box */
+  .dynamic-feed.list .dynamic-feed-media {
+    flex: 0 0 240px;
+    align-self: flex-start;
+  }
+
+  .dynamic-feed.list .dynamic-feed-body {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* carousel: horizontal scroll-snap track, about 80% card width on mobile, three per view on desktop */
+.dynamic-feed.carousel .dynamic-feed-list {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 4px;
+  padding: 4px 4px 16px;
+  overscroll-behavior-x: contain;
+}
+
+.dynamic-feed.carousel .dynamic-feed-list:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+.dynamic-feed.carousel .dynamic-feed-item {
+  flex: 0 0 80%;
+  scroll-snap-align: start;
+}
+
+@media (width >= 900px) {
+  .dynamic-feed.carousel .dynamic-feed-item {
+    flex-basis: calc((100% - 2 * var(--feed-gap)) / 3);
+  }
+}
