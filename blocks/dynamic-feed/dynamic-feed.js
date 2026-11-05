@@ -76,8 +76,9 @@ function toPositiveInt(text, fallback) {
  * Turns the block's key/value rows into a validated config. Authors may omit rows or add
  * unknown ones; omitted rows take their defaults, unknown ones are ignored.
  * @param {Element} block The dynamic-feed block
- * @returns {{ endpoint: URL|null, itemsPath: string, fields: Object<string, string>,
- *   next: { paths: string[], param: string }, max: number, columns: number }}
+ * @returns {{ endpoint: URL|null, imageBase: URL|null, itemsPath: string,
+ *   fields: Object<string, string>, next: { paths: string[], param: string },
+ *   max: number, columns: number }}
  */
 function readConfig(block) {
   const rows = new Map([...block.children].map((row) => {
@@ -88,6 +89,8 @@ function readConfig(block) {
   }));
   return {
     endpoint: toHttpsUrl(rows.get('endpoint') || ''),
+    // APIs that return site-relative image paths (`/content/dam/…`) name the site that serves them
+    imageBase: toHttpsUrl(rows.get('image base') || ''),
     itemsPath: rows.get('items') || '',
     fields: parseFields(rows.get('fields') || 'title=title;description=description;image=image;link=url;date=date'),
     next: parseNext(rows.get('next') || ''),
@@ -183,15 +186,16 @@ function truncate(text, limit) {
  * URL; nothing from the API is ever treated as HTML.
  * @param {*} raw One item from the API array
  * @param {Object<string, string>} fields Card field to JSON path
- * @param {URL} base Endpoint, for resolving relative links and images
+ * @param {URL} base Endpoint, for resolving relative links
+ * @param {URL} imageBase For resolving relative images
  * @returns {{ title: string, description: string, image: string, link: string, date: string }}
  */
-function mapItem(raw, fields, base) {
+function mapItem(raw, fields, base, imageBase) {
   const read = (key) => (fields[key] ? toText(getPath(raw, fields[key])) : '');
   return {
     title: read('title'),
     description: truncate(read('description'), DESCRIPTION_LIMIT),
-    image: toHttpsUrl(read('image'), base)?.href || '',
+    image: toHttpsUrl(read('image'), imageBase)?.href || '',
     link: toHttpsUrl(read('link'), base)?.href || '',
     date: read('date'),
   };
@@ -322,8 +326,9 @@ async function loadPage(url, config) {
     const data = await loadJson(url);
     const raw = getPath(data, config.itemsPath);
     if (!Array.isArray(raw)) throw new Error(`No array at "${config.itemsPath || '(root)'}"`);
+    const imageBase = config.imageBase || config.endpoint;
     const items = raw.slice(0, config.max)
-      .map((entry) => mapItem(entry, config.fields, config.endpoint))
+      .map((entry) => mapItem(entry, config.fields, config.endpoint, imageBase))
       .filter((item) => item.title || item.link);
     return { ok: true, items, nextUrl: findNextUrl(data, config.next, config.endpoint) };
   } catch (error) {
