@@ -122,7 +122,8 @@ Options:
   the photo, for photos that fade into the panel colour (e.g. `/about/faqs`).
 
 The panel colour comes from the brand theme. In a section with Section Metadata `Style: cream`
-(e.g. `/about/faqs`) the panel is light cream (`#fef3e3`).
+(e.g. `/about/faqs`) the panel is light cream (`#fef3e3`); with `Style: maroon` (e.g. `/about/visit`)
+it is maroon (`#3f000b`) with white text.
 
 ## Marquee (`marquee`)
 

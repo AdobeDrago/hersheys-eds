@@ -214,3 +214,34 @@ export const Pair = {
     cellOf(picture('Second', 800, 600)),
   ]]),
 };
+function buttonRow(label, className) {
+  const row = element('p', 'button-wrapper');
+  row.append(link(label, undefined, `button ${className}`));
+  return row;
+}
+
+function renderPanel({ heading, copy }, variant) {
+  const root = createPage('Blocks', 'Columns');
+  const main = showcase(root);
+  const columns = element('div', `columns article panel ${variant} block`.trim());
+  const row = element('div');
+  const content = element('div');
+  content.append(
+    element('p', '', 'Chocolate & Fun'),
+    element('h3', '', heading),
+    element('p', '', copy),
+    buttonRow('Explore Events', 'primary'),
+    buttonRow('Plan Your Visit', 'secondary'),
+  );
+  const image = element('div');
+  image.append(picture('Attraction', 592, 377));
+  if (variant === 'yellow') row.append(image, content);
+  else row.append(content, image);
+  columns.append(row);
+  decorateColumns(columns);
+  section(main, columns);
+  return root;
+}
+
+export const Panel = { render: (args) => renderPanel(args, '') };
+export const PanelYellow = { render: (args) => renderPanel(args, 'yellow') };

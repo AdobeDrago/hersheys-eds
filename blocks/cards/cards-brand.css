@@ -352,6 +352,36 @@ body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.br
   }
 }
 
+/* next to a `Columns (article, panel)` band (e.g. the Chocolate World locations and "Experience
+   Hershey at Home" on /about/visit) the band sits closer to the panel */
+body:not(.hershey-brand) main > .section:has(> .columns-wrapper > .columns.article.panel) + .section:has(> .cards-wrapper > .cards.slider.brands) {
+  padding-top: var(--hershey-component-cards-brands-panel-band-padding-block-start-mobile, 29px);
+}
+
+body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands):has(+ .section > .columns-wrapper > .columns.article.panel) {
+  padding-bottom: var(--hershey-component-cards-brands-panel-band-padding-block-end-mobile, 35px);
+}
+
+@media (width >= 768px) {
+  body:not(.hershey-brand) main > .section:has(> .columns-wrapper > .columns.article.panel) + .section:has(> .cards-wrapper > .cards.slider.brands) {
+    padding-top: var(--hershey-component-cards-brands-panel-band-padding-block-start-tablet, 51px);
+  }
+
+  body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands):has(+ .section > .columns-wrapper > .columns.article.panel) {
+    padding-bottom: var(--hershey-component-cards-brands-panel-band-padding-block-end-tablet, 57px);
+  }
+}
+
+@media (width >= 992px) {
+  body:not(.hershey-brand) main > .section:has(> .columns-wrapper > .columns.article.panel) + .section:has(> .cards-wrapper > .cards.slider.brands) {
+    padding-top: var(--hershey-component-cards-brands-panel-band-padding-block-start, 90px);
+  }
+
+  body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands):has(+ .section > .columns-wrapper > .columns.article.panel) {
+    padding-bottom: var(--hershey-component-cards-brands-panel-band-padding-block-end, 69px);
+  }
+}
+
 /*
  * spotlight variant (`Cards (spotlight)`): hersheyland.com's recipe feature set on brand pages,
  * e.g. /brands/hersheys/cookies-n-creme. The first card is a large spotlight beside a column of

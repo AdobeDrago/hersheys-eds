@@ -133,6 +133,11 @@
   overflow: hidden;
 }
 
+/* page themes can pull the rows together (`--hero-marquee-band-row-overlap`), e.g. on /kisses */
+.hero.marquee.band .hero-marquee-strip-row + .hero-marquee-strip-row {
+  margin-top: calc(-1 * var(--hero-marquee-band-row-overlap, 0px));
+}
+
 .hero.marquee.band .hero-marquee-strip-track {
   display: flex;
   width: max-content;

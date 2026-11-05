@@ -182,6 +182,22 @@ test('Jump Links builds one linked tile per authored row and drops rows without 
   await expect(tiles.first().locator('.jump-links-icon img')).toHaveAttribute('alt', '');
 });
 
+test('Jump Links text option shows underlined blue links without tile borders', async ({ page }) => {
+  await open(page, 'blocks-jump-links--text');
+  const tiles = page.locator('.jump-links.text .jump-links-tile');
+  await expect(tiles).toHaveCount(4);
+  await expect(tiles.first()).toHaveCSS('border-top-width', '0px');
+  await expect(tiles.first()).toHaveCSS('color', 'rgb(0, 123, 189)');
+  await expect(tiles.first().locator('.jump-links-label')).toHaveCSS('border-bottom-color', 'rgb(0, 123, 189)');
+});
+
+test('Columns article panel draws a purple panel behind the copy', async ({ page }) => {
+  await open(page, 'blocks-columns--panel');
+  await expect(page.locator('.columns.article.panel h3')).toHaveCSS('color', 'rgb(255, 255, 255)');
+  const row = page.locator('.columns.article.panel > div');
+  await expect.poll(() => row.evaluate((node) => getComputedStyle(node, '::before').backgroundColor)).toBe('rgb(114, 73, 144)');
+});
+
 test('Accordion faq section style uses teal rules and keeps closed questions maroon', async ({ page }) => {
   await open(page, 'blocks-accordion--faq');
   await expect(page.locator('.faq h2')).toHaveCSS('text-align', 'center');
