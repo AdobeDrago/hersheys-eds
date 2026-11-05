@@ -3,11 +3,13 @@ import { loadExternalJson, getExternalJsonUrl } from '../../scripts/external-jso
 /**
  * Loads third-party JSON from the authored path and lists its entries.
  *
- * Content model: 1 row x 1 cell with the path after the domain, without the extension
- * (e.g. `libs/cq/i18n/dict.en-US`). The domain and `.json` are added in
- * scripts/external-json.js.
- * The page navigates straight to the formed url, as previewing a sheet opens its .json.
- * Inside an iframe (e.g. an editor canvas) it shows the link and the entries instead.
+ * Content model: 1 row x 1 cell with the path after the domain, extension included
+ * (e.g. `libs/cq/i18n/dict.en-US.json`). The domain is set in scripts/external-json.js.
+ * The formed url is always shown as a link, so the JSON can be opened directly even
+ * when the browser blocks the request (CORS).
+ * Variant `redirect` (authored as External Json (Redirect)): the page navigates straight
+ * to the formed url, as previewing a sheet opens its .json. Skipped inside an iframe
+ * (e.g. an editor canvas), where the link is shown instead.
  * @param {Element} block
  */
 export default async function decorate(block) {
@@ -16,7 +18,7 @@ export default async function decorate(block) {
   if (!path) return;
 
   const url = getExternalJsonUrl(path);
-  if (window.top === window.self) {
+  if (block.classList.contains('redirect') && window.top === window.self) {
     window.location.replace(url);
     return;
   }
