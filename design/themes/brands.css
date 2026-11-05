@@ -4699,19 +4699,62 @@
   padding: 30px 25px 0;
 }
 
-/* white kiss page indicators and copy on the brown bands */
+/* white kiss page indicators on the brown bands */
 .hershey-home.kisses-primary main .cards.slider .cards-slider-dot {
-  background-image: url('/icons/kiss-indicator-inactive-light.svg');
-}
-
-.hershey-home.kisses-primary main .cards.slider .cards-slider-dot[aria-current='true'] {
-  background-image: url('/icons/kiss-indicator-active-light.svg');
+  filter: brightness(0) invert(1);
 }
 
 /* the hero pill spans most of the column below 992px */
 @media (width < 992px) {
   .hershey-home.kisses-primary .hero.brand a.button.primary:any-link {
     min-width: 90%;
+  }
+}
+
+/* a paragraph that is all italic is a small caption, e.g. the Pokémon copyright line */
+.hershey-home.kisses-primary .hero.brand .hero-brand-text p:has(> em:only-child) {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/*
+ * a secondary call to action (an italic link, e.g. "Shop KISSES"): an underlined text link in the
+ * copy colour, below the pill; from 992px the two sit side by side at the same width, as on
+ * hersheyland.com/brands/kisses
+ */
+.hershey-home.kisses-primary .hero.brand a.button.secondary:any-link {
+  display: block;
+  margin-top: 15px;
+  background-color: transparent;
+  color: var(--hershey-component-hero-brand-color-foreground, #3f000b);
+  text-decoration: underline;
+}
+
+.hershey-home.kisses-primary .hero.brand a.button.secondary:hover,
+.hershey-home.kisses-primary .hero.brand a.button.secondary:focus-visible {
+  background-color: transparent;
+  color: var(--hershey-component-hero-brand-color-foreground, #3f000b);
+  text-decoration: none;
+}
+
+@media (width >= 992px) {
+  .hershey-home.kisses-primary .hero.brand .hero-brand-text:has(> p.button-wrapper > .secondary) {
+    flex-flow: row wrap;
+    align-content: center;
+  }
+
+  .hershey-home.kisses-primary .hero.brand .hero-brand-text:has(> p.button-wrapper > .secondary) > * {
+    flex: 0 0 100%;
+  }
+
+  .hershey-home.kisses-primary .hero.brand .hero-brand-text:has(> p.button-wrapper > .secondary) > p.button-wrapper {
+    flex: 0 0 calc(50% - 2 * var(--hershey-component-hero-brand-cta-gutter, 12.5px));
+  }
+
+  .hershey-home.kisses-primary .hero.brand .hero-brand-text:has(> p.button-wrapper > .secondary) a.button:any-link {
+    display: block;
+    min-width: 0;
+    margin: 0;
   }
 }
 
@@ -4772,6 +4815,46 @@
   font-size: 28px;
 }
 
+/*
+ * badge over the product photo (a paragraph before the product name, e.g. "Seasonal"): a white pill
+ * 10px in from the card's top left, with an icon for Seasonal and Limited Edition. Measured on
+ * hersheyland.com/brands/kisses at 1280px.
+ */
+.hershey-home.kisses-primary .cards.product .cards-product-card {
+  position: relative;
+}
+
+.hershey-home.kisses-primary .cards.product .cards-product-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  border-radius: 25px;
+  padding: 4.5px 15px;
+  background: #fff;
+  color: #3f000b;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.hershey-home.kisses-primary .cards.product .cards-product-tag-seasonal .cards-product-tag-icon,
+.hershey-home.kisses-primary .cards.product .cards-product-tag-limited-edition .cards-product-tag-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  background-color: currentcolor;
+  mask: url('/icons/snowflake.svg') center / contain no-repeat;
+}
+
+.hershey-home.kisses-primary .cards.product .cards-product-tag-limited-edition .cards-product-tag-icon {
+  mask-image: url('/icons/limited-edition.svg');
+}
+
 /* the quick facts: scattered KISSES behind the question, clusters fading in on a right answer */
 .hershey-home.kisses-primary .poll.quiz::before {
   content: '';
@@ -4789,11 +4872,14 @@
 
 .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span {
   position: absolute;
+  inset: var(--t, auto) var(--r, auto) var(--b, auto) var(--l, auto);
+  width: var(--w);
   aspect-ratio: 1;
   background: url('/icons/kisses-quiz-cluster-1.webp') center / contain no-repeat;
   opacity: 0;
   transform: translateY(10px) scale(0.9);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--d, 0s);
 }
 
 .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:is(:nth-child(2), :nth-child(3), :nth-child(7)) {
@@ -4805,48 +4891,14 @@
   transform: none;
 }
 
-/* mobile: three clusters across the top, two along the bottom */
-.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(1) {
-  top: 3%;
-  left: 2%;
-  width: clamp(95px, 30vw, 150px);
-}
-
-.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(2) {
-  top: 15%;
-  left: 36%;
-  width: clamp(55px, 18vw, 85px);
-  transition-delay: 0.1s;
-}
-
-.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(3) {
-  display: none;
-}
-
-.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(4) {
-  top: 2%;
-  right: 3%;
-  width: clamp(95px, 30vw, 150px);
-  transition-delay: 0.12s;
-}
-
-.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(5) {
-  bottom: 6%;
-  left: 4%;
-  width: clamp(95px, 30vw, 150px);
-  transition-delay: 0.22s;
-}
-
-.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(6) {
-  right: 6%;
-  bottom: 5%;
-  width: clamp(95px, 30vw, 150px);
-  transition-delay: 0.16s;
-}
-
-.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(7) {
-  display: none;
-}
+/* mobile: three clusters across the top, two along the bottom (top / right / bottom / left, width, delay) */
+/* stylelint-disable declaration-block-single-line-max-declarations -- one line per cluster keeps the layout table readable */
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(1) { --t: 3%; --l: 2%; --w: clamp(95px, 30vw, 150px); }
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(2) { --t: 15%; --l: 36%; --w: clamp(55px, 18vw, 85px); --d: 0.1s; }
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(4) { --t: 2%; --r: 3%; --w: clamp(95px, 30vw, 150px); --d: 0.12s; }
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(5) { --b: 6%; --l: 4%; --w: clamp(95px, 30vw, 150px); --d: 0.22s; }
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(6) { --r: 6%; --b: 5%; --w: clamp(95px, 30vw, 150px); --d: 0.16s; }
+.hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:is(:nth-child(3), :nth-child(7)) { display: none; }
 
 @media (width >= 700px) {
   .hershey-home.kisses-primary .poll.quiz::before {
@@ -4854,54 +4906,24 @@
   }
 
   .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(n) {
-    inset: auto;
+    --t: auto;
+    --r: auto;
+    --b: auto;
+    --l: auto;
+
     display: block;
   }
 
-  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(1) {
-    top: 4%;
-    left: -2%;
-    width: clamp(115px, 17vw, 205px);
-  }
-
-  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(2) {
-    top: 5%;
-    right: 26%;
-    width: clamp(80px, 11vw, 135px);
-  }
-
-  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(3) {
-    top: 44%;
-    left: -1%;
-    width: clamp(52px, 7vw, 90px);
-    transition-delay: 0.18s;
-  }
-
-  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(4) {
-    top: 26%;
-    right: -5%;
-    width: clamp(120px, 18vw, 215px);
-  }
-
-  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(5) {
-    bottom: 4%;
-    left: 6%;
-    width: clamp(115px, 17vw, 205px);
-  }
-
-  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(6) {
-    right: -2%;
-    bottom: 4%;
-    width: clamp(120px, 18vw, 215px);
-  }
-
-  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(7) {
-    bottom: 8%;
-    left: 44%;
-    width: clamp(52px, 7vw, 88px);
-    transition-delay: 0.26s;
-  }
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(1) { --t: 4%; --l: -2%; --w: clamp(115px, 17vw, 205px); }
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(2) { --t: 5%; --r: 26%; --w: clamp(80px, 11vw, 135px); }
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(3) { --t: 44%; --l: -1%; --w: clamp(52px, 7vw, 90px); --d: 0.18s; }
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(4) { --t: 26%; --r: -5%; --w: clamp(120px, 18vw, 215px); }
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(5) { --b: 4%; --l: 6%; --w: clamp(115px, 17vw, 205px); }
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(6) { --r: -2%; --b: 4%; --w: clamp(120px, 18vw, 215px); }
+  .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span:nth-child(7) { --b: 8%; --l: 44%; --w: clamp(52px, 7vw, 88px); --d: 0.26s; }
 }
+
+/* stylelint-enable declaration-block-single-line-max-declarations */
 
 @media (width >= 901px) {
   .hershey-home.kisses-primary {
