@@ -628,6 +628,119 @@ main > .section > .columns-wrapper:has(> .columns.article) {
 }
 
 /*
+ * article `panel` option (`Columns (article, panel)`): the article sits on a purple panel that the
+ * photo overlaps, e.g. the attractions on hersheyland.com/about/visit. Add `yellow` for a yellow
+ * panel with maroon copy. Below 992px the photo sits on top and rises above the panel; from 992px
+ * the panel stops short of the photo's outer edge and the photo is centred against it. The photo
+ * keeps its authored side. Values from component.columns.article.panel-* tokens.
+ */
+main > .section:has(> .columns-wrapper > .columns.article.panel) {
+  padding:
+    var(--hershey-component-columns-article-panel-section-padding-block-start-mobile, 25px)
+    var(--hershey-component-columns-article-section-padding-inline-mobile, 10px)
+    var(--hershey-component-columns-article-panel-section-padding-block-end-mobile, 45px);
+}
+
+.columns.article.panel {
+  --hershey-component-columns-article-link-color: currentcolor;
+
+  color: var(--hershey-component-columns-article-panel-foreground, #fff);
+}
+
+.columns.article.panel.yellow {
+  color: var(--hershey-component-columns-article-panel-yellow-foreground, #3f000b);
+}
+
+.columns.article.panel > div {
+  position: relative;
+  isolation: isolate;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.columns.article.panel > div::before {
+  content: '';
+  position: absolute;
+  inset:
+    var(--hershey-component-columns-article-panel-offset-mobile, 54px)
+    var(--hershey-component-columns-article-panel-inset-mobile, 10px)
+    0;
+  z-index: -1;
+  border-radius: var(--hershey-component-columns-article-panel-border-radius, 8px);
+  background-color: var(--hershey-component-columns-article-panel-background, #724990);
+}
+
+.columns.article.panel.yellow > div::before {
+  background-color: var(--hershey-component-columns-article-panel-yellow-background, #ffc627);
+}
+
+.columns.article.panel > div > div {
+  flex: none;
+}
+
+.columns.article.panel > div > .columns-img-col {
+  order: -1;
+}
+
+.columns.article.panel :is(h2, h3) {
+  padding: 0 var(--hershey-component-columns-article-panel-title-padding-inline-mobile, 15px);
+}
+
+@media (width >= 992px) {
+  .columns.article.panel :is(h2, h3) {
+    padding: 0;
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.article.panel) {
+    padding: var(--hershey-component-columns-article-panel-section-padding-block, 65px) 0;
+  }
+
+  .columns.article.panel > div {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .columns.article.panel > div > .columns-img-col {
+    flex: 0 0 47%;
+    order: 0;
+  }
+
+  .columns.article.panel > div > :not(.columns-img-col) {
+    flex: 1;
+  }
+
+  /* the panel stops short of the photo's outer edge: on the right by default, on the left when the
+     photo comes first */
+  .columns.article.panel > div::before {
+    inset: 0 10% 0 0;
+  }
+
+  .columns.article.panel > div:has(> .columns-img-col:first-child)::before {
+    inset: 0 0 0 10%;
+  }
+
+  /* copy before the photo sits closer to the photo */
+  .columns.article.panel > div > :not(.columns-img-col):first-child {
+    padding-right: var(--hershey-component-columns-article-panel-copy-padding-inline-end, 35px);
+    padding-left: var(--hershey-component-columns-article-copy-padding-inline-start, 70px);
+  }
+
+  /* a single button keeps its own width */
+  .columns.article.panel p.button-wrapper:has(> .primary):not(:has(~ p.button-wrapper)) {
+    flex-basis: var(--hershey-component-columns-article-panel-cta-width, 290px);
+    padding-right: 0;
+  }
+}
+
+/* from 1200px copy before the photo also sits further from the panel edge */
+@media (width >= 1200px) {
+  .columns.article.panel > div > :not(.columns-img-col):first-child {
+    padding-right: var(--hershey-component-columns-article-panel-copy-padding-inline-end-wide, 20px);
+    padding-left: var(--hershey-component-columns-article-panel-copy-padding-inline-start-wide, 130px);
+  }
+}
+
+/*
  * video variant (`Columns (video)`): a YouTube poster with a play button beside a white story box
  * that overlaps it, e.g. "PINKY UP. Flavor On." on /brands/hersheys/creme-bars; columns.js plays
  * the video in place. The band heading is default content. Values from

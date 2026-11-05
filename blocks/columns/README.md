@@ -24,6 +24,27 @@ link), side by side on desktop and stacked on mobile.
 | --- | --- |
 | image | H2, paragraph, **bold link**, *italic link* |
 
+## Article (`article`)
+
+Authored as **Columns (article)**. An eyebrow, heading, copy, pill button and text link beside a
+photo, e.g. the S'mores feature on `/brands/hersheys/cookies-n-creme`. The eyebrow is the paragraph
+before the heading; the bold link is the button and the italic link the text link. Below 992px the
+photo sits on top and the copy is centred.
+
+| Columns (article) | |
+| --- | --- |
+| photo | eyebrow, H3, paragraph, **bold link**, *italic link* |
+
+Options:
+
+- `panel` (`Columns (article, panel)`): the copy sits on a purple panel that the photo overlaps,
+  e.g. the attractions on `/about/visit`. The photo keeps its authored side from 992px (put the
+  photo cell first for a photo on the left) and sits on top, rising above the panel, below 992px.
+  A single button keeps its own width. The heading's id is what a `Jump Links (text)` link points at.
+- `yellow` (`Columns (article, panel, yellow)`): a yellow panel with maroon copy.
+
+A band of brand tiles (`Cards (slider, brands)`) next to a panel sits closer to it.
+
 ## Universal Editor fields
 
 N/A (Document Authoring project)

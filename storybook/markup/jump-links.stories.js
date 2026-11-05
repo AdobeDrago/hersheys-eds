@@ -13,10 +13,17 @@ const TILES = [
   ['Milton & The Hershey Company', '#milton--the-hershey-company'],
 ];
 
-function renderJumpLinks(tiles, { icons = true } = {}) {
+const ATTRACTIONS = [
+  ["Hershey's Chocolate World", '#visit-hersheys-chocolate-world-attraction'],
+  ['Hersheypark', '#play-at-hersheypark'],
+  ['The Hershey Story Museum', '#discover-at-the-hershey-story-museum'],
+  ['Super Sweet Adventure', '#imagine-at-hershey-super-sweet-adventure'],
+];
+
+function renderJumpLinks(tiles, { icons = true, text = false } = {}) {
   const root = createPage('Blocks', 'Jump Links');
   const main = showcase(root);
-  const block = element('div', 'jump-links block');
+  const block = element('div', text ? 'jump-links text block' : 'jump-links block');
   tiles.forEach(([label, href]) => {
     const row = element('div');
     const icon = element('div');
@@ -29,7 +36,14 @@ function renderJumpLinks(tiles, { icons = true } = {}) {
   decorateJumpLinks(block);
   const container = element('div', 'section jump-links-container');
   const heading = element('div', 'default-content-wrapper');
-  heading.append(element('h2', '', 'Jump to a Section'));
+  if (text) {
+    heading.append(
+      element('h2', '', 'Sweet Ways to Experience Hershey'),
+      element('p', '', 'There are plenty of ways you and the family can savor Hershey goodness in person.'),
+    );
+  } else {
+    heading.append(element('h2', '', 'Jump to a Section'));
+  }
   const wrapper = element('div', 'jump-links-wrapper');
   wrapper.append(block);
   container.append(heading, wrapper);
@@ -48,3 +62,4 @@ export default {
 export const Default = { render: () => renderJumpLinks(TILES) };
 export const WithoutIcons = { render: () => renderJumpLinks(TILES.slice(0, 3), { icons: false }) };
 export const MissingLink = { render: () => renderJumpLinks([['Not linked', ''], ...TILES.slice(0, 2)]) };
+export const Text = { render: () => renderJumpLinks(ATTRACTIONS, { icons: false, text: true }) };
