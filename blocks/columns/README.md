@@ -6,6 +6,8 @@ Columns block. Layout variants keep authored rows. Recipe ingredients and nutrit
 
 The decorator counts the columns and marks image-only cells. `feature` and `homepage-hero` are layout classes on the same block. The wrapper and section are `columns-wrapper` and `columns-container`.
 
+Option `portrait` (`Columns (portrait)`): the image is drawn 1086px tall and cropped at the sides; from 900px it fills half the row and the band's full height, with the text beside it. Used for the Milton Hershey illustration on `/about`.
+
 ## Fact (`fact`)
 
 Authored as **Columns (fact)**. Brand pages: a "Did You Know?" quick fact. A 16:9 illustration sits beside an H3 and a paragraph. The image takes a third of a ten-column container, and the text sits 50px lower. Cells keep their authored order (image first or text first) at every width. Below 992px the cells stack and are centred. The text colour comes from `component.columns.fact.color-foreground`, which brand themes override (for example `symphony-primary`).
@@ -42,8 +44,25 @@ Options:
   photo cell first for a photo on the left) and sits on top, rising above the panel, below 992px.
   A single button keeps its own width. The heading's id is what a `Jump Links (text)` link points at.
 - `yellow` (`Columns (article, panel, yellow)`): a yellow panel with maroon copy.
+- `tan` (`Columns (article, panel, tan)`): a greige panel with maroon copy and 90px above and
+  below the band from 992px, e.g. the timeline and visit panels on `/about`.
+
+Each further row is another panel, 60px below the one before (160px from 992px).
 
 A band of brand tiles (`Cards (slider, brands)`) next to a panel sits closer to it.
+
+## Follow (`follow`)
+
+Authored as **Columns (follow)**. Copy and a row of social links beside a portrait video, e.g.
+"So really, Hersheyland is yours" on `/about`. Links to TikTok, Instagram, Facebook, Pinterest and
+YouTube show the site's icon (from `/icons/social-*.svg`); the link text stays as the accessible
+name. In the video cell, a link to an `.mp4` file (or a YouTube URL) next to the poster becomes a
+play button that swaps the poster for the player. The poster is 600px tall and cropped; it is 302px
+wide from 992px. Below 992px the cells stack and the icons wrap.
+
+| Columns (follow) | |
+| --- | --- |
+| paragraphs, paragraph of social links | poster picture, [Play video](/path/to/video.mp4) |
 
 ## Universal Editor fields
 

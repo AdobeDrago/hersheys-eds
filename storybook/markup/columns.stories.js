@@ -1,5 +1,6 @@
 import decorateColumns from '@adobe/aem-boilerplate/blocks/columns/columns.js';
 import '@adobe/aem-boilerplate/blocks/columns/columns.css';
+import '@adobe/aem-boilerplate/blocks/columns/columns-brand.css';
 import {
   contentArgTypes, createPage, element, link, picture, section, showcase,
 } from './story-helpers.js';
@@ -66,3 +67,33 @@ function renderPanel({ heading, copy }, variant) {
 
 export const Panel = { render: (args) => renderPanel(args, '') };
 export const PanelYellow = { render: (args) => renderPanel(args, 'yellow') };
+export const PanelTan = { render: (args) => renderPanel(args, 'tan') };
+
+/** `Columns (follow)`: copy and social icon links beside a portrait poster that plays an .mp4. */
+export const Follow = {
+  render: ({ copy }) => {
+    const root = createPage('Blocks', 'Columns');
+    const main = showcase(root);
+    const columns = element('div', 'columns follow block');
+    const row = element('div');
+    const content = element('div');
+    const social = element('p');
+    social.append(
+      link('TikTok', 'https://www.tiktok.com/@hersheys'),
+      link('Instagram', 'https://www.instagram.com/hersheys/'),
+      link('YouTube', 'https://www.youtube.com/@hersheys'),
+    );
+    content.append(element('p', '', copy), social);
+    const video = element('div');
+    const poster = element('p');
+    poster.append(picture('World Kindness Day', 302, 600));
+    const play = element('p');
+    play.append(link('Play video', '/media/kindness-day.mp4'));
+    video.append(poster, play);
+    row.append(content, video);
+    columns.append(row);
+    decorateColumns(columns);
+    section(main, columns);
+    return root;
+  },
+};
