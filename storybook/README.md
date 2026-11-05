@@ -125,6 +125,23 @@ shows a labeled form and live result. Both are explicitly mocks: this
 repository still has no production widget implementation. Fixture assets
 are not shipped by EDS.
 
+## Adding a new block to Storybook
+
+The repo has a Claude Code skill, `block-to-story`
+([`.claude/skills/block-to-story/SKILL.md`](../.claude/skills/block-to-story/SKILL.md)),
+that writes `storybook/markup/<block>.stories.js` from a block's JS, CSS and README.
+Run it from the repo root in Claude Code:
+
+```text
+/block-to-story            # every block that has no story yet
+/block-to-story poll tabs  # only the named blocks
+```
+
+It reads the block, builds author-shaped markup, adds Default, variant and edge-case
+stories with controls, then runs ESLint and `npm run storybook:build`. It does not
+commit. Review the generated story and open it with `npm run storybook` before
+merging. It skips `fragment`, `instagram`, `header` and `footer`.
+
 ## Accessibility and regression testing
 
 `@storybook/addon-a11y` runs axe against `[data-showcase]`, not the Docs UI.
