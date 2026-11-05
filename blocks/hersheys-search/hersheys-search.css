@@ -393,6 +393,12 @@ main > .section.hersheys-search-container {
   list-style: none;
 }
 
+/* until the first results arrive, hold a screenful so the footer stays below the fold
+   instead of being pushed out of view (a layout shift) when the cards render */
+.hersheys-search .hersheys-search-hits:empty {
+  min-height: 100svh;
+}
+
 .hersheys-search .hersheys-search-card {
   margin: 0;
   padding: var(--hershey-component-search-recipes-card-gutter-mobile, 10px);
