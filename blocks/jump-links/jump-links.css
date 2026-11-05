@@ -130,3 +130,75 @@ main > .section.jump-links-container > .default-content-wrapper > h2 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/*
+ * text option (`Jump Links (text)`): underlined text links below an intro, without tiles or icons,
+ * e.g. "Sweet Ways to Experience Hershey" on hersheyland.com/about/visit. One link per row until
+ * 992px, then one row of four.
+ */
+main > .section.jump-links-container:has(> .jump-links-wrapper > .jump-links.text) {
+  padding:
+    var(--hershey-component-jump-links-spacing-text-band-padding-block-start-mobile, 35px)
+    var(--hershey-component-jump-links-spacing-text-band-padding-inline-mobile, 20px)
+    var(--hershey-component-jump-links-spacing-text-band-padding-block-end-mobile, 51px);
+  text-align: center;
+}
+
+main > .section.jump-links-container:has(> .jump-links-wrapper > .jump-links.text) > .default-content-wrapper {
+  max-width: var(--hershey-component-jump-links-layout-text-max-width, 790px);
+}
+
+main > .section.jump-links-container:has(> .jump-links-wrapper > .jump-links.text) > .default-content-wrapper > h2 {
+  margin-bottom: 0.3em;
+  line-height: var(--hershey-component-jump-links-typography-text-heading-line-height, 1.3);
+}
+
+main > .section.jump-links-container:has(> .jump-links-wrapper > .jump-links.text) > .default-content-wrapper > p {
+  margin: 0 0 1.5em;
+  font-size: var(--hershey-component-jump-links-typography-text-label-font-size, 17px);
+  line-height: var(--hershey-component-jump-links-typography-text-label-line-height, 1.5);
+}
+
+/* the label takes the link colour for its rule and the text option's type */
+.jump-links.text {
+  --hershey-component-jump-links-color-label-rule: currentcolor;
+  --hershey-component-jump-links-typography-label-font-size-mobile: var(--hershey-component-jump-links-typography-text-label-font-size, 17px);
+  --hershey-component-jump-links-typography-label-font-size: var(--hershey-component-jump-links-typography-text-label-font-size, 17px);
+  --hershey-component-jump-links-typography-label-font-weight: var(--hershey-component-jump-links-typography-text-label-font-weight, 700);
+  --hershey-component-jump-links-typography-label-line-height: var(--hershey-component-jump-links-typography-text-label-line-height, 1.5);
+}
+
+/* the list carries the label type so each row's line box matches the link */
+.jump-links.text .jump-links-list {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--hershey-component-jump-links-gap-text-mobile, 40px);
+  padding-top: var(--hershey-component-jump-links-spacing-text-list-padding-block-start-mobile, 11px);
+  font-size: var(--hershey-component-jump-links-typography-text-label-font-size, 17px);
+  line-height: var(--hershey-component-jump-links-typography-text-label-line-height, 1.5);
+}
+
+.jump-links.text .jump-links-tile {
+  display: inline;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: none;
+  color: var(--hershey-component-jump-links-color-text-link, #007bbd);
+}
+
+@media (width >= 992px) {
+  main > .section.jump-links-container:has(> .jump-links-wrapper > .jump-links.text) {
+    padding:
+      var(--hershey-component-jump-links-spacing-text-band-padding-block-start, 90px)
+      0
+      var(--hershey-component-jump-links-spacing-text-band-padding-block-end, 62px);
+  }
+
+  .jump-links.text .jump-links-list {
+    grid-template-columns: repeat(4, var(--hershey-component-jump-links-layout-text-column-width, 160px));
+    justify-content: center;
+    gap: var(--hershey-component-jump-links-gap-text, 45px);
+    padding-top: var(--hershey-component-jump-links-spacing-text-list-padding-block-start, 41px);
+  }
+}

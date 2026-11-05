@@ -127,6 +127,48 @@
   background-color: var(--hershey-system-color-surface-cream-light);
 }
 
+/* `maroon` section style: a maroon band with white text, e.g. the hero on /about/visit */
+.hershey-home main > .maroon {
+  --hershey-component-hero-brand-band-background: var(--hershey-system-color-surface-inverse);
+  --hershey-component-hero-brand-color-foreground: var(--hershey-system-color-text-inverse);
+
+  background-color: var(--hershey-system-color-surface-inverse);
+  color: var(--hershey-system-color-text-inverse);
+}
+
+/* `tan` section style: a warm tan band, e.g. the lower features on /about/visit */
+.hershey-home main > .tan {
+  background-color: var(--hershey-system-color-surface-brand-band);
+}
+
+/* `tan-wave` section style: a white band with the warm tan of the next band rising behind its
+   content in a wave, e.g. Hersheypark on /about/visit */
+.hershey-home main > .tan-wave {
+  background: var(--hershey-system-color-surface-default) url('/icons/hersheys-kisses-wave.svg') center / cover no-repeat;
+}
+
+/* `shapes` section style: faint brand shapes behind this band and the bands after it, e.g. from the
+   intro to the Chocolate World locations on /about/visit; later bands with a colour cover them */
+.hershey-home main > .shapes {
+  position: relative;
+}
+
+.hershey-home main > .shapes::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: var(--hershey-system-size-region-shapes-pattern-height-mobile, 1920px);
+  background: url('/icons/visit-us-pattern-munsell-maroon.svg') center / cover no-repeat;
+  pointer-events: none;
+}
+
+@media (width >= 992px) {
+  .hershey-home main > .shapes::before {
+    height: var(--hershey-system-size-region-shapes-pattern-height, 1580px);
+  }
+}
+
 .hershey-home main > .halloween {
   --text-color: var(--hershey-system-color-text-inverse);
   --link-color: var(--hershey-system-color-text-inverse);
