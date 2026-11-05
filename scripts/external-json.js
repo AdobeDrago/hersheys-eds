@@ -13,13 +13,13 @@ export const EXTERNAL_JSON_PROXY = '';
 const cache = new Map();
 
 /**
- * Builds the JSON url from the domain and the authored path (extension included).
- * @param {string} path e.g. `libs/cq/i18n/dict.en-US.json`
+ * Builds the JSON url: domain + authored path + `.json`.
+ * @param {string} path without extension, e.g. `libs/cq/i18n/dict.en-US`
  * @returns {string}
  */
 export function getExternalJsonUrl(path) {
-  const clean = String(path).trim().replace(/^\/+/, '');
-  return `${EXTERNAL_JSON_PROXY || EXTERNAL_JSON_DOMAIN}/${clean}`;
+  const clean = String(path).trim().replace(/^\/+/, '').replace(/\.json$/, '');
+  return `${EXTERNAL_JSON_PROXY || EXTERNAL_JSON_DOMAIN}/${clean}.json`;
 }
 
 /**
