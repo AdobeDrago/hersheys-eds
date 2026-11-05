@@ -1403,6 +1403,20 @@ main > .section:has(> .cards-wrapper > .cards.grid) > .default-content-wrapper h
   mask: url('../../icons/clock.svg') center / contain no-repeat;
 }
 
+/* a POPULAR tag has a star, a little wider than tall, as on hersheyland.com */
+.cards.grid .cards-card-body p.cards-card-tag-popular::before {
+  width: var(--hershey-component-cards-grid-tag-popular-icon-width-mobile, 14px);
+  height: var(--hershey-component-cards-grid-tag-popular-icon-height-mobile, 12px);
+  mask-image: url('../../icons/star.svg');
+}
+
+@media (width >= 992px) {
+  .cards.grid .cards-card-body p.cards-card-tag-popular::before {
+    width: var(--hershey-component-cards-grid-tag-popular-icon-width, 16px);
+    height: var(--hershey-component-cards-grid-tag-popular-icon-height, 14px);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .cards.grid > ul > li {
     transition: transform var(--hershey-component-cards-grid-card-hover-duration, 300ms) var(--hershey-component-cards-grid-card-hover-easing, ease-out);

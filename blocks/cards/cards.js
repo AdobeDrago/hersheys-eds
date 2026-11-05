@@ -168,6 +168,14 @@ export default async function decorate(block) {
     });
   }
   ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  // a grid tag reading "Popular" gets a star instead of the clock, as on hersheyland.com
+  if (block.classList.contains('grid')) {
+    ul.querySelectorAll('.cards-card-body p').forEach((tag) => {
+      if (tag.nextElementSibling?.tagName === 'H3' && /^popular$/i.test(tag.textContent.trim())) {
+        tag.classList.add('cards-card-tag-popular');
+      }
+    });
+  }
   // recipes: authored cards win; Algolia only fills a block without any
   if (block.classList.contains('recipes')) {
     // the recipes styles cover authored cards too; Algolia only fills a block without any

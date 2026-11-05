@@ -3838,22 +3838,17 @@
   --hershey-component-columns-callout-link-color-hover: #fff;
   --hershey-component-columns-article-link-color: #fff;
 
-  /* the live buttons are blue pills with white text */
-  --hershey-component-hero-brand-cta-background: #007bbd;
-  --hershey-component-hero-brand-cta-foreground: #fff;
-  --hershey-component-hero-brand-cta-background-hover: initial;
-  --hershey-component-columns-callout-cta-background: #007bbd;
-  --hershey-component-columns-callout-cta-foreground: #fff;
-  --hershey-component-columns-callout-cta-background-hover: initial;
-  --hershey-component-cards-grid-cta-background: #007bbd;
-  --hershey-component-cards-grid-cta-foreground: #fff;
-  --hershey-component-cards-grid-cta-background-hover: initial;
-  --hershey-component-cards-product-slider-cta-background: #007bbd;
-  --hershey-component-cards-product-slider-cta-foreground: #fff;
-  --hershey-component-cards-product-slider-cta-background-hover: initial;
-  --hershey-component-cards-brands-cta-background: #007bbd;
-  --hershey-component-cards-brands-cta-foreground: #fff;
-  --hershey-component-cards-brands-cta-background-hover: initial;
+  /* the live buttons are cream pills with brown text (2026-11-05); the hero, slider and grid ones
+     come from the theme above. The call-out and article pills keep their colour on hover. */
+  --hershey-component-columns-callout-cta-background-hover: #feebd0;
+  --hershey-component-columns-article-cta-background: #feebd0;
+  --hershey-component-columns-article-cta-foreground: #3f000b;
+  --hershey-component-columns-article-cta-background-hover: #feebd0;
+  --hershey-component-campaign-cta-background: #feebd0;
+  --hershey-component-campaign-cta-foreground: #3f000b;
+  --hershey-component-campaign-cta-background-hover: #e8cda8;
+  --hershey-component-campaign-cta-font-size: 18px;
+  --hershey-component-campaign-cta-line-height: 27px;
   --hershey-component-cards-product-slider-control-offset: 65px;
   --hershey-component-cards-product-slider-indicator-margin-top: 26px;
 }
@@ -3977,6 +3972,83 @@
   line-height: 1.3;
 }
 
+/* from 992px the fact and photo follow the width, as on hersheyland.com: from 1280px they sit in
+   a centred 1280px row (fact 35px in, photo at 520px, 725px wide); below that the fact is 25px in
+   and the photo fills the rest. The photo rises 10% of its height above the band and does not set
+   the band's height; below 1280px the band ends 98px under the fact. */
+@media (width >= 992px) {
+  /* the photo lies over the foil edges and may reach into the bands above and below */
+  .hershey-home.hersheys-brand-primary main > div.section:is(.hs-fact-1, .hs-fact-2, .hs-fact-3) {
+    overflow: clip visible;
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact {
+    --hs-fact-edge: 0px;
+    --hs-fact-inset: 25px;
+    --hs-fact-photo-start: calc(37.5cqi + 38px);
+    --hs-fact-photo-width: calc(62.5cqi - 62px);
+    --hs-fact-copy-width: calc(50cqi - 160px);
+
+    container-type: inline-size;
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact > div {
+    gap: 0;
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact > div > div:first-child {
+    flex-basis: calc(var(--hs-fact-edge) + var(--hs-fact-photo-start));
+    padding-left: calc(var(--hs-fact-edge) + var(--hs-fact-inset));
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact :is(p, h3) {
+    max-width: var(--hs-fact-copy-width);
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact > div > div:last-child {
+    height: 0;
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact img,
+  .hershey-home.hersheys-brand-primary main :is(.hs-fact-2, .hs-fact-3) .columns.hs-fact img {
+    position: relative;
+    z-index: 3;
+    width: var(--hs-fact-photo-width);
+    height: auto;
+    aspect-ratio: 725 / 518;
+    margin-top: 25px;
+    translate: 0 -10%;
+  }
+
+  .hershey-home.hersheys-brand-primary main .hs-fact-2 .columns.hs-fact img {
+    aspect-ratio: 725 / 499;
+  }
+
+  .hershey-home.hersheys-brand-primary main .hs-fact-3 .columns.hs-fact img {
+    aspect-ratio: 725 / 537;
+  }
+}
+
+@media (width >= 992px) and (width < 1280px) {
+  .hershey-home.hersheys-brand-primary main > div.section:is(.hs-fact-1, .hs-fact-2, .hs-fact-3) {
+    height: auto;
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact > div > div:first-child {
+    padding-bottom: 123px;
+  }
+}
+
+@media (width >= 1280px) {
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact {
+    --hs-fact-edge: calc((100cqi - 1280px) / 2);
+    --hs-fact-inset: 35px;
+    --hs-fact-photo-start: 520px;
+    --hs-fact-photo-width: 725px;
+    --hs-fact-copy-width: 470px;
+  }
+}
+
 /* hero: the wordmark is an image set behind the (visually hidden) heading; the photo sits low */
 .hershey-home.hersheys-brand-primary main > div.section.hs-hero .hero-brand-text {
   justify-content: flex-start;
@@ -4053,6 +4125,10 @@
   line-height: 1.3;
 }
 
+.hershey-home.hersheys-brand-primary main > div.section.campaign-text:has(.columns.video) > .default-content-wrapper > p:not(.button-wrapper) {
+  text-align: center;
+}
+
 .hershey-home.hersheys-brand-primary main .columns-wrapper:has(> .columns.video) {
   margin-top: -30px;
 }
@@ -4065,10 +4141,13 @@
   justify-content: center;
 }
 
+/* the trailer sits straight on the band, without a card behind it */
 .hershey-home.hersheys-brand-primary main .columns.video > div > div:first-child {
   flex: 0 0 560px;
   margin: 0;
+  border-radius: 0;
   padding: 50px 0;
+  background: none;
 }
 
 .hershey-home.hersheys-brand-primary main .columns.video > div > div:first-child p,
@@ -4155,6 +4234,15 @@
 .hershey-home.hersheys-brand-primary main > div.section:has(.cards.slider.brands):not(.hs-family) .default-content-wrapper > h2,
 .hershey-home.hersheys-brand-primary main > div.section:has(.cards.slider.brands):not(.hs-family) .cards-card-body :is(h3, a) {
   color: #f6f6f6;
+}
+
+/* the slider page indicators are white rings on the brown bands, filled when current */
+.hershey-home.hersheys-brand-primary main > div.section.brand-color .cards.slider .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-light.svg');
+}
+
+.hershey-home.hersheys-brand-primary main > div.section.brand-color .cards.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-light.svg');
 }
 
 /* the FAQ chevrons are navy on the white band */
