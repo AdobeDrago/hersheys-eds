@@ -2,6 +2,10 @@ import decorateCards from '@adobe/aem-boilerplate/blocks/cards/cards.js';
 import '@adobe/aem-boilerplate/blocks/cards/cards.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-recipes.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-callout.css';
+import '@adobe/aem-boilerplate/blocks/cards/cards-brand.css';
+import '@adobe/aem-boilerplate/blocks/cards/cards-product.css';
+import '@adobe/aem-boilerplate/blocks/cards/cards-quotes.css';
+import '@adobe/aem-boilerplate/blocks/cards/cards-steps.css';
 import {
   contentArgTypes, createPage, element, link, picture, section, showcase,
 } from './story-helpers.js';
@@ -102,4 +106,177 @@ export const RelatedRecipes = {
     decorateCards(cards);
     return root;
   },
+};
+
+/**
+ * Builds a Cards block the way brand pages author it: an optional intro (eyebrow, heading) and
+ * button as default content around the block, inside one section.
+ */
+function renderBrand(name, {
+  classes, intro = true, button = false, rows,
+}) {
+  const root = createPage('Blocks', 'Cards', `Cards (${classes.replace(/ /g, ', ')}), as authored on brand pages.`);
+  const main = showcase(root);
+  const cards = element('div', `cards ${classes} block`);
+  rows.forEach((cells) => {
+    const row = element('div');
+    cells.forEach((cell) => row.append(cell));
+    cards.append(row);
+  });
+  const container = section(main, cards);
+  if (intro) {
+    const head = element('div', 'default-content-wrapper');
+    head.append(element('p', '', 'HERSHEY’S'), element('h2', '', name));
+    container.prepend(head);
+  }
+  if (button) {
+    const tail = element('div', 'default-content-wrapper');
+    const p = element('p', 'button-wrapper');
+    p.append(link('View All', undefined, 'button'));
+    tail.append(p);
+    container.append(tail);
+  }
+  decorateCards(cards);
+  return root;
+}
+
+function cellOf(...nodes) {
+  const div = element('div');
+  div.append(...nodes);
+  return div;
+}
+
+function imageCell(label) {
+  return cellOf(picture(label, 800, 800));
+}
+
+function bodyCell({
+  tag, title, copy, cta, titleLink,
+}) {
+  const nodes = [];
+  if (tag) nodes.push(element('p', '', tag));
+  const heading = element('h3');
+  if (titleLink) heading.append(link(title)); else heading.textContent = title;
+  nodes.push(heading);
+  if (copy) nodes.push(element('p', '', copy));
+  if (cta) {
+    const p = element('p');
+    p.append(link(cta));
+    nodes.push(p);
+  }
+  return cellOf(...nodes);
+}
+
+const cardRows = (count, body) => Array.from({ length: count }, (_, i) => [
+  imageCell(`Item ${i + 1}`),
+  bodyCell({ title: `Sweet idea ${i + 1}`, ...body }),
+]);
+
+/** `Cards (slider, brands)`: the “Get a Taste of Our Brands” band, tiles beside the intro. */
+export const Brands = {
+  render: () => renderBrand('Get a Taste of Our Brands', {
+    classes: 'slider brands',
+    button: true,
+    rows: cardRows(6, { titleLink: true }),
+  }),
+};
+
+/** `Cards (spotlight)`: one large card beside a column of smaller cards from 992px. */
+export const Spotlight = {
+  render: () => renderBrand('Recipes to Try', {
+    classes: 'spotlight',
+    button: true,
+    rows: cardRows(4, { copy: 'Cookies, bars and more.', cta: 'Get the recipe' }),
+  }),
+};
+
+/** `Cards (stories, slider)`: square photos with a story box over their lower edge. */
+export const Stories = {
+  render: () => renderBrand('More Ways to Enjoy', {
+    classes: 'stories slider',
+    rows: cardRows(4, { copy: 'A short story about a favorite.', cta: 'Read more' }),
+  }),
+};
+
+/** `Cards (tiles)`: coloured flavour tiles; odd tiles orange, even purple. */
+export const Tiles = {
+  render: () => renderBrand('Elevate the Everyday', {
+    classes: 'tiles',
+    rows: cardRows(4, { copy: 'A flavor for every craving.' }),
+  }),
+};
+
+/** `Cards (shop)`: an introduction card with no picture, then product tiles with a shop button. */
+export const Shop = {
+  render: () => renderBrand('Sweet, Salty and Perfectly Creamy', {
+    classes: 'shop',
+    intro: false,
+    rows: [
+      [bodyCell({ title: 'Sweet, Salty and Perfectly Creamy', copy: 'Find your favorite below.' })],
+      ...cardRows(3, { cta: 'Shop now' }),
+    ],
+  }),
+};
+
+/** `Cards (grid)`: recipe feature list; the paragraph before the title is the photo tag. */
+export const Grid = {
+  render: () => renderBrand('Chocolate + Mint Recipes', {
+    classes: 'grid',
+    rows: cardRows(6, { tag: '30 min', titleLink: true }),
+  }),
+};
+
+/** `Cards (slider, content)`: white recipe or story cards; one, two, then three per view. */
+export const Content = {
+  render: () => renderBrand('Dessert Ideas', {
+    classes: 'slider content',
+    button: true,
+    rows: cardRows(6, { titleLink: true }),
+  }),
+};
+
+function productRows(count) {
+  return Array.from({ length: count }, (_, i) => [
+    imageCell(`Product ${i + 1}`),
+    bodyCell({ title: `Chocolate Bar ${i + 1}`, titleLink: true, copy: '1.55 oz' }),
+  ]);
+}
+
+/** `Cards (product)`: the whole card links to the product page. */
+export const Product = {
+  render: () => renderBrand('Our Products', { classes: 'product', intro: false, rows: productRows(4) }),
+};
+
+/** `Cards (product, related)` with authored rows. Authored cards win over Algolia. */
+export const ProductRelated = {
+  render: () => renderBrand('Related Products', { classes: 'product related', intro: false, rows: productRows(4) }),
+};
+
+/** `Cards (quotes)`: top edge picture, slides (eyebrow, quote, author), bottom edge picture. */
+export const Quotes = {
+  render: () => {
+    const slide = (n) => cellOf(
+      element('p', '', 'FAN FAVORITE'),
+      element('p', '', `“This is the best treat I have ever had, number ${n}.”`),
+      element('p', '', `Fan ${n}`),
+    );
+    return renderBrand('Fan Quotes', {
+      classes: 'quotes',
+      intro: false,
+      rows: [[imageCell('Top edge')], [slide(1)], [slide(2)], [slide(3)], [imageCell('Bottom edge')]],
+    });
+  },
+};
+
+/** `Cards (steps)`: one slide at a time; each row is heading, product picture, caption. */
+export const Steps = {
+  render: () => renderBrand('Unwrap. Enjoy. Repeat.', {
+    classes: 'steps',
+    intro: false,
+    rows: ['Unwrap', 'Enjoy', 'Repeat'].map((step, i) => [
+      cellOf(element('p', '', step)),
+      imageCell(step),
+      cellOf(element('p', '', `Step ${i + 1}: ${step.toLowerCase()} your favorite.`)),
+    ]),
+  }),
 };

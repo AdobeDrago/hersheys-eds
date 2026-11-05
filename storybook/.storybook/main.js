@@ -9,6 +9,9 @@ export default {
     { from: '../../fonts', to: '/fonts' },
     { from: '../fixtures/widgets', to: '/widgets' },
     { from: '../../design', to: '/design' },
+    { from: '../../icons', to: '/icons' },
+    // cards.js lazy-loads its variant stylesheets from the code base path
+    { from: '../../blocks/cards', to: '/blocks/cards' },
     { from: '../../styles', to: '/styles' },
   ],
   core: { disableTelemetry: true },
@@ -24,6 +27,19 @@ export default {
         { find: '../fragment/fragment.js', replacement: fileURLToPath(new URL('../markup/fragment-fixture.js', import.meta.url)) },
       ],
     };
+    config.plugins = [
+      ...(config.plugins || []),
+      {
+        // scripts/aem.js is vendored and loads blocks with a computed import() path, which Vite
+        // cannot analyze and warns about; the file stays untouched, only its served copy is marked
+        name: 'aem-js-vite-ignore',
+        enforce: 'pre',
+        transform(code, id) {
+          if (!/\/scripts\/aem\.js$/.test(id.split('?')[0])) return null;
+          return code.replace(/import\(\s*`/g, 'import(/* @vite-ignore */ `');
+        },
+      },
+    ];
     config.server = {
       ...config.server,
       fs: {
