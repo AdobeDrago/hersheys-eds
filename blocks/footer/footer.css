@@ -1,12 +1,13 @@
 footer {
   background-color: var(--light-color);
   font-size: var(--body-font-size-xs);
+  min-height: var(--hershey-reference-size-height-1000, 1000px);
 }
 
 footer .footer > div {
   margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+  max-width: var(--hershey-reference-size-width-1200, 1200px);
+  padding: var(--hershey-reference-spacing-40, 40px) var(--hershey-reference-spacing-24, 24px) var(--hershey-reference-spacing-24, 24px);
 }
 
 footer .footer p {
@@ -14,8 +15,12 @@ footer .footer p {
 }
 
 @media (width >= 992px) {
+  footer {
+    min-height: 0;
+  }
+
   footer .footer > div {
-    padding: 40px 32px 24px;
+    padding: var(--hershey-reference-spacing-40, 40px) var(--hershey-reference-spacing-32, 32px) var(--hershey-reference-spacing-24, 24px);
   }
 }
 
