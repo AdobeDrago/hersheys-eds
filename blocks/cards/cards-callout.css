@@ -50,7 +50,15 @@ main > .section.cards-container:has(.cards.callout) > .default-content-wrapper >
   background-color: var(--hershey-component-cards-callout-color-bar, #08a9a0);
 }
 
+/* `blue` option (`Cards (callout, blue)`): a dark blue bar, e.g. "More About Milton & The Hershey Company" on /about */
+.cards.callout.blue > ul > li::after {
+  background-color: var(--hershey-component-cards-callout-color-bar-blue, #003594);
+}
+
+/* photos keep their authored proportions (4:3 on /about/faqs, 3:2 on /about) */
 .cards.callout > ul > li img {
+  height: auto;
+  aspect-ratio: auto;
   border-radius: var(--hershey-component-cards-callout-image-border-radius, 8px) var(--hershey-component-cards-callout-image-border-radius, 8px) 0 0;
 }
 

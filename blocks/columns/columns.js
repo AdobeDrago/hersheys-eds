@@ -1,16 +1,30 @@
 import { loadCSS } from '../../scripts/aem.js';
 
 // variants only brand pages author; their styles live in columns-brand.css
-const BRAND_VARIANTS = ['fact', 'callout', 'article', 'video', 'quotes', 'blog', 'blobs'];
+const BRAND_VARIANTS = ['fact', 'callout', 'article', 'video', 'quotes', 'blog', 'blobs', 'follow'];
+
+const YOUTUBE = /youtu\.?be/;
+const MP4 = /\.mp4$/i;
 
 /**
- * The embedded YouTube player for a video id.
- * @param {string} id The YouTube video id
+ * The player for a video link: the YouTube embed, or the .mp4 itself with controls.
+ * @param {URL} url The video link
  * @param {string} title The player's accessible title
  * @param {boolean} autoplay Whether the video starts at once
- * @returns {HTMLIFrameElement} The player
+ * @returns {Element|null} The player, or null when the link has no YouTube id
  */
-function buildPlayer(id, title, autoplay) {
+function createPlayer(url, title, autoplay) {
+  if (MP4.test(url.pathname)) {
+    const video = document.createElement('video');
+    video.src = url.href;
+    video.controls = true;
+    video.autoplay = autoplay;
+    video.playsInline = true;
+    video.title = title;
+    return video;
+  }
+  const id = url.searchParams.get('v') || url.pathname.split('/').pop();
+  if (!id) return null;
   const iframe = document.createElement('iframe');
   iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(id)}?${autoplay ? 'autoplay=1&' : ''}rel=0`;
   iframe.title = title || 'Video';
@@ -20,37 +34,38 @@ function buildPlayer(id, title, autoplay) {
 }
 
 /**
- * `Columns (video)`: the YouTube link beside the poster becomes a play button that swaps the
- * poster for the embedded player. `Columns (video, player)`, or a YouTube link without a poster,
- * shows the player at once, as the HERSHEY'S trailer on hersheyland.com does.
+ * `Columns (video)` and `Columns (follow)`: the YouTube or .mp4 link beside the poster becomes a
+ * play button that swaps the poster for the player. `Columns (video, player)`, or a link without a
+ * poster, shows the player at once, as the HERSHEY'S trailer on hersheyland.com does.
  * @param {Element} block The columns block element
  */
 function decorateVideo(block) {
-  const player = block.classList.contains('player');
+  const showPlayer = block.classList.contains('player');
   block.querySelectorAll(':scope > div > div').forEach((cell) => {
-    const link = [...cell.querySelectorAll('a[href]')].find((a) => /youtu\.?be/.test(a.href));
+    const link = [...cell.querySelectorAll('a[href]')]
+      .find((a) => YOUTUBE.test(a.href) || MP4.test(new URL(a.href).pathname));
     if (!link) return;
     const url = new URL(link.href);
-    const id = url.searchParams.get('v') || url.pathname.split('/').pop();
-    if (!id) return;
     const picture = cell.querySelector('picture');
     const alt = picture?.querySelector('img')?.alt || '';
-    if (player || !picture) {
+    if (showPlayer || !picture) {
       // the poster's alt text, or else the link text unless it is the bare URL, titles the player
       const text = link.textContent.trim();
-      const title = alt || (text === link.href ? 'YouTube video player' : text);
-      (link.closest('p') || link).replaceWith(buildPlayer(id, title, false));
+      const title = alt || (text === link.href ? 'Video player' : text);
+      const inline = createPlayer(url, title, false);
+      if (!inline) return;
+      (link.closest('p') || link).replaceWith(inline);
       picture?.closest('p')?.remove();
       picture?.remove();
       return;
     }
+    const player = createPlayer(url, alt || 'Video', true);
+    if (!player) return;
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'columns-video-play';
     button.setAttribute('aria-label', alt ? `Play video: ${alt}` : 'Play video');
-    button.addEventListener('click', () => {
-      cell.replaceChildren(buildPlayer(id, alt, true));
-    }, { once: true });
+    button.addEventListener('click', () => cell.replaceChildren(player), { once: true });
     (link.closest('p') || link).replaceWith(button);
   });
 }
@@ -63,7 +78,7 @@ export default async function decorate(block) {
   const brandStyles = BRAND_VARIANTS.some((variant) => block.classList.contains(variant))
     ? loadCSS(`${window.hlx.codeBasePath}/blocks/columns/columns-brand.css`)
     : null;
-  if (block.classList.contains('video')) decorateVideo(block);
+  if (block.classList.contains('video') || block.classList.contains('follow')) decorateVideo(block);
   const cols = [...(block.firstElementChild?.children || [])];
   block.classList.add(`columns-${cols.length}-cols`);
 
