@@ -49,3 +49,33 @@ export const TwoAnswers = {
 export const NoVotes = {
   args: { question: 'What should we make next?', answers: [{ label: 'Brownies', votes: 0 }, { label: 'Cookies', votes: 0 }] },
 };
+
+function renderQuiz({ correctIndex }) {
+  const root = createPage('Blocks', 'Poll', 'Quiz variant: choose an answer to see Correct! or Better luck next time!');
+  const main = showcase(root);
+  const block = element('div', 'poll quiz block');
+  const field = (key, ...nodes) => {
+    const row = element('div');
+    const value = element('div');
+    value.append(...nodes);
+    row.append(element('div', '', key), value);
+    block.append(row);
+  };
+  field('eyebrow', element('p', '', 'DID YOU KNOW?'));
+  field('question', element('p', '', 'In what year were the first Hershey’s Kisses made?'));
+  const list = element('ul');
+  ['1896', '1907', '1925'].forEach((label, i) => {
+    const li = element('li');
+    if (i === correctIndex) li.append(element('strong', '', label)); else li.textContent = label;
+    list.append(li);
+  });
+  field('options', list);
+  field('answer', element('p', '', 'Milton Hershey introduced the Kiss in 1907.'));
+  field('note', element('p', '', 'Fun fact: the wrapped Kiss arrived in 1921.'));
+  decoratePoll(block);
+  section(main, block);
+  return root;
+}
+
+/** `Poll (quiz)`: key/value rows (eyebrow, question, options with right one bold, answer). */
+export const Quiz = { render: () => renderQuiz({ correctIndex: 1 }), args: { correctIndex: 1 } };
