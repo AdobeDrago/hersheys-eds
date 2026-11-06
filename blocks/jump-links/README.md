@@ -34,6 +34,21 @@ text in lower case, with spaces turned into hyphens and punctuation removed, so
 The band colour comes from the section. On /about/faqs the hero and the jump links sections both use
 Section Metadata `Style: cream`.
 
+## Text option (`text`)
+
+Authored as **Jump Links (text)**: underlined text links without tiles, under an intro heading and
+paragraph, e.g. "Sweet Ways to Experience Hershey" on
+[hersheyland.com/about/visit](https://www.hersheyland.com/about/visit). Each row is a single link;
+icons are not used.
+
+| Jump Links (text) |
+| --- |
+| [Hershey's Chocolate World](#visit-hersheys-chocolate-world-attraction) |
+| [Hersheypark](#play-at-hersheypark) |
+
+- Below 992px: one centred link per row.
+- From 992px: one row of four links; longer labels wrap.
+
 ## Universal Editor fields
 
 N/A (Document Authoring project)

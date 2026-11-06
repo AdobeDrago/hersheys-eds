@@ -182,6 +182,40 @@ test('Jump Links builds one linked tile per authored row and drops rows without 
   await expect(tiles.first().locator('.jump-links-icon img')).toHaveAttribute('alt', '');
 });
 
+test('Jump Links text option shows underlined blue links without tile borders', async ({ page }) => {
+  await open(page, 'blocks-jump-links--text');
+  const tiles = page.locator('.jump-links.text .jump-links-tile');
+  await expect(tiles).toHaveCount(4);
+  await expect(tiles.first()).toHaveCSS('border-top-width', '0px');
+  await expect(tiles.first()).toHaveCSS('color', 'rgb(0, 123, 189)');
+  await expect(tiles.first().locator('.jump-links-label')).toHaveCSS('border-bottom-color', 'rgb(0, 123, 189)');
+});
+
+test('Columns article panel draws a purple panel behind the copy', async ({ page }) => {
+  await open(page, 'blocks-columns--panel');
+  await expect(page.locator('.columns.article.panel h3')).toHaveCSS('color', 'rgb(255, 255, 255)');
+  const row = page.locator('.columns.article.panel > div');
+  await expect.poll(() => row.evaluate((node) => getComputedStyle(node, '::before').backgroundColor)).toBe('rgb(114, 73, 144)');
+});
+
+test('Columns article panel tan draws a greige panel with maroon copy', async ({ page }) => {
+  await open(page, 'blocks-columns--panel-tan');
+  await expect(page.locator('.columns.article.panel.tan h3')).toHaveCSS('color', 'rgb(63, 0, 11)');
+  const row = page.locator('.columns.article.panel.tan > div');
+  await expect.poll(() => row.evaluate((node) => getComputedStyle(node, '::before').backgroundColor)).toBe('rgb(226, 214, 197)');
+});
+
+test('Columns follow shows social icons and plays the mp4 in place of the poster', async ({ page }) => {
+  await open(page, 'blocks-columns--follow');
+  const tiktok = page.locator('.columns.follow a[href*="tiktok.com"]');
+  await expect(tiktok).toHaveCSS('width', '40px');
+  await expect(tiktok).toHaveAccessibleName('TikTok');
+  const play = page.getByRole('button', { name: /^Play video/ });
+  await play.click();
+  await expect(page.locator('.columns.follow video')).toHaveAttribute('src', /\/media\/kindness-day\.mp4$/);
+  await expect(play).toHaveCount(0);
+});
+
 test('Accordion faq section style uses teal rules and keeps closed questions maroon', async ({ page }) => {
   await open(page, 'blocks-accordion--faq');
   await expect(page.locator('.faq h2')).toHaveCSS('text-align', 'center');

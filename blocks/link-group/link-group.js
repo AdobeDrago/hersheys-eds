@@ -110,7 +110,7 @@ export default function decorate(block) {
 
   block.replaceChildren(head, slider);
   block.closest('.section')?.classList.add('link-group-section');
-  // the footer's ribbon sits on this band's colour instead of the page grey
-  document.body.classList.add('footer-on-dark');
+  // the footer's ribbon sits on the dark band's colour instead of the page grey
+  if (!block.classList.contains('light')) document.body.classList.add('footer-on-dark');
   update();
 }

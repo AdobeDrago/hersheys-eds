@@ -207,6 +207,46 @@ function useAlphaRenditions(picture) {
   if (img && img.getAttribute('src')) img.setAttribute('src', alphaRendition(img.getAttribute('src')));
 }
 
+// renditions of first-party gallery images (createOptimizedPicture breakpoints); scripts.js
+// preloads the same URLs for the page's own product image
+const GALLERY_BREAKPOINTS = [{ media: '(min-width: 900px)', width: '1000' }, { width: '750' }];
+
+/**
+ * The page's own product image: the `image` metadata (og:image) when it is an image of this site,
+ * as on every migrated product page, where it is the front of the pack. Empty otherwise.
+ * @returns {string} the image path
+ */
+function metadataImage() {
+  const value = getMetadata('og:image');
+  if (!value) return '';
+  try {
+    const url = new URL(value, window.location.href);
+    return url.pathname.includes('/media_') ? url.pathname : '';
+  } catch {
+    return '';
+  }
+}
+
+// widths of the Scene7 renditions offered for the gallery image, and the width it is shown at:
+// the column beside the details from 992px, the page width less its gutter below
+const SCENE7_WIDTHS = [400, 550, 700, 900];
+const GALLERY_SIZES = '(min-width: 992px) 440px, calc(100vw - 20px)';
+const THUMB_WIDTH = 240;
+
+/**
+ * A Scene7 rendition of an image at a given width (transparent, unpadded, see alphaRendition).
+ * Other images are returned as they are.
+ * @param {string} src
+ * @param {number} width
+ * @returns {string}
+ */
+function scene7Width(src, width) {
+  if (!src || !src.includes('/is/image/')) return src;
+  const [base, query = ''] = src.split('?');
+  const params = query.split('&').filter((p) => p && !/^(wid|hei)=/.test(p));
+  return alphaRendition(`${base}?${[...params, `wid=${width}`].join('&')}`);
+}
+
 /**
  * Builds the product image gallery from the pictures in the media cell.
  * @param {Element} cell
@@ -224,7 +264,8 @@ function buildGallery(cell) {
     slide.setAttribute('role', 'group');
     slide.setAttribute('aria-roledescription', 'slide');
     slide.setAttribute('aria-label', `${i + 1} of ${pictures.length}`);
-    const optimized = optimize(picture, i === 0, [{ media: '(min-width: 900px)', width: '1000' }, { width: '750' }]);
+    const optimized = picture.dataset.optimized ? picture
+      : optimize(picture, i === 0, GALLERY_BREAKPOINTS);
     useAlphaRenditions(optimized);
     // the first slide is the visible, above-the-fold product image (LCP candidate);
     // pictures from other origins (e.g. Scene7) bypass createOptimizedPicture and arrive lazy
@@ -256,9 +297,13 @@ function buildGallery(cell) {
       const img = slide.querySelector('img');
       if (img) {
         const thumbImg = document.createElement('img');
-        thumbImg.src = img.currentSrc || img.src;
         thumbImg.alt = '';
         thumbImg.loading = 'lazy';
+        // a small rendition of Scene7 and of this site's images; others reuse the slide's image
+        const { origin, pathname } = new URL(img.src, window.location.href);
+        if (img.src.includes('/is/image/')) thumbImg.src = scene7Width(img.src, THUMB_WIDTH);
+        else if (origin === window.location.origin) thumbImg.src = `${pathname}?width=${THUMB_WIDTH}&format=webply&optimize=medium`;
+        else thumbImg.src = img.currentSrc || img.src;
         btn.append(thumbImg);
       }
       thumbs.append(btn);
@@ -433,17 +478,28 @@ function decorateDetails(cell) {
 
 /**
  * Renders a sheet image URL as a picture, through the Dynamic Media renderer when available.
+ * Loading hints are set before the source, so the first image is requested at high priority
+ * and the others only when shown; Scene7 images get renditions sized to the gallery.
  * @param {string} src
  * @param {string} alt
+ * @param {boolean} eager the visible, above-the-fold image
  */
-function buildPicture(src, alt) {
+function buildPicture(src, alt, eager = false) {
   // eslint-disable-next-line no-underscore-dangle
   const dmPicture = window.__dmRender__?.(src, alt);
   if (dmPicture) return dmPicture;
   const picture = document.createElement('picture');
   const img = document.createElement('img');
-  img.src = src;
   img.alt = alt;
+  img.loading = eager ? 'eager' : 'lazy';
+  if (eager) img.fetchPriority = 'high';
+  if (src.includes('/is/image/')) {
+    img.sizes = GALLERY_SIZES;
+    img.srcset = SCENE7_WIDTHS.map((width) => `${scene7Width(src, width)} ${width}w`).join(', ');
+    img.src = scene7Width(src, SCENE7_WIDTHS[SCENE7_WIDTHS.length - 1]);
+  } else {
+    img.src = src;
+  }
   picture.append(img);
   return picture;
 }
@@ -497,7 +553,7 @@ function readFields(block) {
  * @param {Element} cell
  * @param {string} alt fallback alt text
  */
-function fieldPicture(cell, alt) {
+function fieldPicture(cell, alt, eager = false) {
   const picture = cell.querySelector('picture');
   if (picture) return picture;
   const img = cell.querySelector('img');
@@ -510,7 +566,7 @@ function fieldPicture(cell, alt) {
   const url = (link ? link.href : cell.textContent).trim();
   if (!/^https?:\/\//i.test(url)) return null;
   const linkText = link?.textContent.trim();
-  return buildPicture(url, linkText && linkText !== url ? linkText : alt);
+  return buildPicture(url, linkText && linkText !== url ? linkText : alt, eager);
 }
 
 /**
@@ -603,14 +659,29 @@ function buildLabel(text) {
  * @returns {Promise<{ row: Element, media: Element, details: Element }>}
  */
 async function buildFromFields(block, fields) {
-  const needsSheet = SHEET_FIELDS.some((field) => !fields[field]);
+  // the page's own product image needs nothing from the sheet: it starts loading right away
+  // (it is the LCP image) while the sheet is read for the rest
+  const pageImage = !fields.imageFront && metadataImage();
+  const early = pageImage && createOptimizedPicture(pageImage, '', true, GALLERY_BREAKPOINTS);
+  if (early) {
+    early.dataset.optimized = 'true';
+    early.querySelector('img').fetchPriority = 'high';
+  }
+  // the sheet is read only for what the block leaves out: the page's own image stands in for the
+  // front image, and a missing label alone does not need it (author `label` for one)
+  const needsSheet = SHEET_FIELDS.some((field) => !fields[field]
+    && field !== 'label' && !(field === 'imageFront' && pageImage));
   const { product, products } = needsSheet ? await findProduct() : {};
   const sheet = product || {};
-  const alt = sheet.imageAlt || sheet.title || sheet.name || '';
+  const authoredAlt = [fields.title, fields.size].map((cell) => cell?.textContent.trim())
+    .filter(Boolean).join(', ');
+  const alt = sheet.imageAlt || sheet.title || sheet.name || authoredAlt;
+  if (early) early.querySelector('img').alt = alt;
 
   const media = document.createElement('div');
-  const front = fields.imageFront ? fieldPicture(fields.imageFront, alt)
-    : sheet.image && buildPicture(sheet.image.trim(), alt);
+  let front = early;
+  if (fields.imageFront) front = fieldPicture(fields.imageFront, alt, true);
+  else if (!early && sheet.image) front = buildPicture(sheet.image.trim(), alt, true);
   const back = fields.imageBack ? fieldPicture(fields.imageBack, alt)
     : sheet.imageBack && buildPicture(sheet.imageBack.trim(), sheet.imageBackAlt || alt);
   media.append(...[front, back].filter(Boolean));

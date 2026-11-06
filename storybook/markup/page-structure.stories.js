@@ -36,6 +36,30 @@ export default {
 };
 export const Header = { render: () => renderStructure('Header', decorateHeader) };
 export const Footer = { render: () => renderStructure('Footer', decorateFooter) };
+
+/**
+ * `Header (hershey-nav)`: the block gets the variant when its nav fragment holds a
+ * `.hershey-nav` section, which the local fixture does. This story also opens the first
+ * dropdown so the mega menu is visible (desktop widths).
+ */
+export const HersheyNav = {
+  render: () => {
+    const root = renderStructure('Header', decorateHeader);
+    const block = root.querySelector('.header.block');
+    new MutationObserver((_, observer) => {
+      if (block.dataset.blockStatus !== 'loaded') return;
+      observer.disconnect();
+      block.querySelector('.nav-drop > button')?.setAttribute('aria-expanded', 'true');
+    }).observe(block, { attributes: true, attributeFilter: ['data-block-status'] });
+    return root;
+  },
+};
+
+/**
+ * `Footer (hershey-footer)`: the block gets the variant when its footer fragment holds a
+ * `.newsletter` section (newsletter band, brand row, links and legal links).
+ */
+export const HersheyFooter = { render: () => renderStructure('Footer', decorateFooter) };
 export const Fragment = {
   args: { heading: 'A separately authored moment', copy: 'Reusable content belongs in its own document.', showImage: true },
   argTypes: contentArgTypes,

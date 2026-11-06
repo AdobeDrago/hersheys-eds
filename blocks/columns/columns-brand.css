@@ -628,6 +628,136 @@ main > .section > .columns-wrapper:has(> .columns.article) {
 }
 
 /*
+ * article `panel` option (`Columns (article, panel)`): the article sits on a purple panel that the
+ * photo overlaps, e.g. the attractions on hersheyland.com/about/visit. Add `yellow` for a yellow
+ * panel with maroon copy. Below 992px the photo sits on top and rises above the panel; from 992px
+ * the panel stops short of the photo's outer edge and the photo is centred against it. The photo
+ * keeps its authored side. Values from component.columns.article.panel-* tokens.
+ */
+main > .section:has(> .columns-wrapper > .columns.article.panel) {
+  padding:
+    var(--hershey-component-columns-article-panel-section-padding-block-start-mobile, 25px)
+    var(--hershey-component-columns-article-section-padding-inline-mobile, 10px)
+    var(--hershey-component-columns-article-panel-section-padding-block-end-mobile, 45px);
+}
+
+.columns.article.panel {
+  --hershey-component-columns-article-link-color: currentcolor;
+
+  color: var(--hershey-component-columns-article-panel-foreground, #fff);
+}
+
+.columns.article.panel:is(.yellow, .tan) {
+  color: var(--hershey-component-columns-article-panel-yellow-foreground, #3f000b);
+}
+
+/* each further row is another panel */
+.columns.article.panel > div + div {
+  margin-top: var(--hershey-component-columns-article-panel-row-gap-mobile, 60px);
+}
+
+.columns.article.panel > div {
+  position: relative;
+  isolation: isolate;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.columns.article.panel > div::before {
+  content: '';
+  position: absolute;
+  inset:
+    var(--hershey-component-columns-article-panel-offset-mobile, 54px)
+    var(--hershey-component-columns-article-panel-inset-mobile, 10px)
+    0;
+  z-index: -1;
+  border-radius: var(--hershey-component-columns-article-panel-border-radius, 8px);
+  background-color: var(--hershey-component-columns-article-panel-background, #724990);
+}
+
+.columns.article.panel.yellow > div::before {
+  background-color: var(--hershey-component-columns-article-panel-yellow-background, #ffc627);
+}
+
+.columns.article.panel.tan > div::before {
+  background-color: var(--hershey-component-columns-article-panel-tan-background, #e2d6c5);
+}
+
+.columns.article.panel > div > div {
+  flex: none;
+}
+
+.columns.article.panel > div > .columns-img-col {
+  order: -1;
+}
+
+.columns.article.panel :is(h2, h3) {
+  padding: 0 var(--hershey-component-columns-article-panel-title-padding-inline-mobile, 15px);
+}
+
+@media (width >= 992px) {
+  .columns.article.panel :is(h2, h3) {
+    padding: 0;
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.article.panel) {
+    padding: var(--hershey-component-columns-article-panel-section-padding-block, 65px) 0;
+  }
+
+  .columns.article.panel > div {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .columns.article.panel > div > .columns-img-col {
+    flex: 0 0 47%;
+    order: 0;
+  }
+
+  .columns.article.panel > div > :not(.columns-img-col) {
+    flex: 1;
+  }
+
+  .columns.article.panel > div + div {
+    margin-top: var(--hershey-component-columns-article-panel-row-gap, 160px);
+  }
+
+  main > .section:has(> .columns-wrapper > .columns.article.panel.tan) {
+    padding-block: var(--hershey-component-columns-article-panel-tan-section-padding-block, 90px);
+  }
+
+  /* the panel stops short of the photo's outer edge: on the right by default, on the left when the
+     photo comes first */
+  .columns.article.panel > div::before {
+    inset: 0 10% 0 0;
+  }
+
+  .columns.article.panel > div:has(> .columns-img-col:first-child)::before {
+    inset: 0 0 0 10%;
+  }
+
+  /* copy before the photo sits closer to the photo */
+  .columns.article.panel > div > :not(.columns-img-col):first-child {
+    padding-right: var(--hershey-component-columns-article-panel-copy-padding-inline-end, 35px);
+    padding-left: var(--hershey-component-columns-article-copy-padding-inline-start, 70px);
+  }
+
+  /* a single button keeps its own width */
+  .columns.article.panel p.button-wrapper:has(> .primary):not(:has(~ p.button-wrapper)) {
+    flex-basis: var(--hershey-component-columns-article-panel-cta-width, 290px);
+    padding-right: 0;
+  }
+}
+
+/* from 1200px copy before the photo also sits further from the panel edge */
+@media (width >= 1200px) {
+  .columns.article.panel > div > :not(.columns-img-col):first-child {
+    padding-right: var(--hershey-component-columns-article-panel-copy-padding-inline-end-wide, 20px);
+    padding-left: var(--hershey-component-columns-article-panel-copy-padding-inline-start-wide, 130px);
+  }
+}
+
+/*
  * video variant (`Columns (video)`): a YouTube poster with a play button beside a white story box
  * that overlaps it, e.g. "PINKY UP. Flavor On." on /brands/hersheys/creme-bars; columns.js plays
  * the video in place. The band heading is default content. Values from
@@ -739,6 +869,141 @@ main > .section:has(> .columns-wrapper > .columns.video) > .default-content-wrap
   padding: 0 var(--hershey-component-columns-video-copy-inset, 5px);
   font-size: var(--hershey-component-columns-video-copy-font-size, 17px);
   line-height: var(--hershey-component-columns-video-copy-line-height, 1.5);
+}
+
+/*
+ * follow variant (`Columns (follow)`): copy and a row of social links beside a portrait video,
+ * e.g. "So really, Hersheyland is yours" on /about. Links to TikTok, Instagram, Facebook, Pinterest
+ * and YouTube show the site's icon (the link text stays as the accessible name); the .mp4 link
+ * beside the poster plays the video in place. Stacked below 992px. Values from
+ * component.columns.follow.* tokens.
+ */
+main > .section:has(> .columns-wrapper > .columns.follow) {
+  padding:
+    var(--hershey-component-columns-follow-section-padding-block-start-mobile, 45px)
+    var(--hershey-component-columns-follow-section-padding-inline-mobile, 45px)
+    var(--hershey-component-columns-follow-section-padding-block-end-mobile, 50px);
+}
+
+.columns.follow > div {
+  gap: var(--hershey-component-columns-follow-gap-mobile, 33px);
+}
+
+.columns.follow p {
+  margin: 0 0 1.5em;
+  font-size: var(--hershey-component-columns-follow-copy-font-size, 17px);
+  line-height: 1.5;
+}
+
+.columns.follow p:last-child {
+  margin-bottom: 0;
+}
+
+.columns.follow p:has(> a[href*='tiktok.com'], > a[href*='instagram.com'], > a[href*='facebook.com'], > a[href*='pinterest.com'], > a[href*='youtube.com']) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hershey-component-columns-follow-icon-row-gap-mobile, 9px) var(--hershey-component-columns-follow-icon-gap-mobile, 18px);
+}
+
+.columns.follow :is(a[href*='tiktok.com'], a[href*='instagram.com'], a[href*='facebook.com'], a[href*='pinterest.com'], a[href*='youtube.com']) {
+  width: var(--hershey-component-columns-follow-icon-size, 40px);
+  height: var(--hershey-component-columns-follow-icon-size, 40px);
+  overflow: hidden;
+  background-color: currentcolor;
+  color: var(--hershey-component-columns-follow-icon-color, #3c131c);
+  font-size: 0;
+  mask: var(--columns-follow-icon) center / contain no-repeat;
+}
+
+.columns.follow a[href*='tiktok.com'] { --columns-follow-icon: url('/icons/social-tiktok.svg'); }
+.columns.follow a[href*='instagram.com'] { --columns-follow-icon: url('/icons/social-instagram.svg'); }
+.columns.follow a[href*='facebook.com'] { --columns-follow-icon: url('/icons/social-facebook.svg'); }
+.columns.follow a[href*='pinterest.com'] { --columns-follow-icon: url('/icons/social-pinterest.svg'); }
+.columns.follow a[href*='youtube.com'] { --columns-follow-icon: url('/icons/social-youtube.svg'); }
+
+.columns.follow :is(a[href*='tiktok.com'], a[href*='instagram.com'], a[href*='facebook.com'], a[href*='pinterest.com'], a[href*='youtube.com']):hover {
+  opacity: 0.8;
+}
+
+/* the video cell: a portrait poster with the play button and its label in the middle */
+.columns.follow > div > div:has(.columns-video-play, video) {
+  position: relative;
+}
+
+.columns.follow > div > div:has(.columns-video-play, video) p {
+  margin: 0;
+  line-height: 0;
+}
+
+.columns.follow :is(img, video) {
+  display: block;
+  width: 100%;
+  height: var(--hershey-component-columns-follow-video-height, 600px);
+  object-fit: cover;
+}
+
+.columns.follow .columns-video-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--hershey-component-columns-follow-play-gap, 2px);
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--hershey-component-columns-follow-play-color, #fff);
+  font-size: var(--hershey-component-columns-follow-play-font-size, 14px);
+  font-weight: 700;
+  letter-spacing: var(--hershey-component-columns-follow-play-letter-spacing, 1px);
+  line-height: normal;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.columns.follow .columns-video-play::before {
+  content: '';
+  width: var(--hershey-component-columns-follow-play-size, 50px);
+  height: var(--hershey-component-columns-follow-play-size, 50px);
+  background: url('/icons/video-play.svg') center / contain no-repeat;
+}
+
+.columns.follow .columns-video-play::after {
+  content: 'Play video';
+  width: var(--hershey-component-columns-follow-play-label-width, 85px);
+  text-align: center;
+}
+
+@media (width >= 992px) {
+  main > .section:has(> .columns-wrapper > .columns.follow) {
+    padding:
+      var(--hershey-component-columns-follow-section-padding-block-start, 90px)
+      0
+      var(--hershey-component-columns-follow-section-padding-block-end, 70px);
+  }
+
+  .columns.follow > div {
+    align-items: center;
+    gap: 0;
+  }
+
+  .columns.follow > div > div {
+    flex: 1;
+  }
+
+  .columns.follow > div > div:not(:has(.columns-video-play, video)) {
+    max-width: var(--hershey-component-columns-follow-copy-max-width, 420px);
+    padding: 0 var(--hershey-component-columns-follow-copy-padding-inline-end, 190px) 0 var(--hershey-component-columns-follow-copy-padding-inline-start, 130px);
+  }
+
+  .columns.follow p:has(> a[href*='tiktok.com'], > a[href*='instagram.com'], > a[href*='facebook.com'], > a[href*='pinterest.com'], > a[href*='youtube.com']) {
+    gap: var(--hershey-component-columns-follow-icon-gap, 30px);
+  }
+
+  .columns.follow > div > div:has(.columns-video-play, video) {
+    flex: 0 0 var(--hershey-component-columns-follow-video-width, 302px);
+  }
 }
 
 /*
@@ -1055,10 +1320,12 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
   border-radius: var(--hershey-component-columns-callout-framed-border-radius, 8px);
 }
 
+/* the photo fills its frame, as on hersheyland.com, even when its shape differs a little */
 .columns.callout.framed > div > .columns-img-col img {
   height: calc(100cqi * 9 / 16);
   aspect-ratio: auto;
   border-radius: 0;
+  object-fit: fill;
 }
 
 .columns.callout.framed p:has(+ h2) {

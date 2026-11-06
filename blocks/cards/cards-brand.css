@@ -86,6 +86,8 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
   --cards-brands-card: calc(100cqi - var(--hershey-component-cards-brands-card-offset-mobile, 110px));
 
   container-type: inline-size;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   text-align: left;
 }
 
@@ -202,6 +204,26 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
   transform: scaleX(-1);
 }
 
+/* kiss-shaped page indicators between the arrows, as on hersheyland.com */
+.cards.slider.brands .cards-slider-controls,
+.cards.slider.brands .cards-slider-dots {
+  grid-area: 2 / 1;
+}
+
+/* the row overlaps the arrows, so only the indicators take clicks; the space after the last
+   indicator centres them as on hersheyland.com */
+.cards.slider.brands .cards-slider-dots {
+  box-sizing: border-box;
+  align-self: start;
+  margin-top: var(--hershey-component-cards-brands-indicator-margin-block-start, 28px);
+  padding-right: var(--hershey-component-cards-brands-indicator-gap, 6px);
+  pointer-events: none;
+}
+
+.cards.slider.brands .cards-slider-dot {
+  pointer-events: auto;
+}
+
 @media (width >= 768px) {
   main > .section:has(> .cards-wrapper > .cards.slider.brands) {
     padding-top: var(--hershey-component-cards-brands-band-padding-block-start-tablet, 87px);
@@ -227,11 +249,20 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
     --cards-brands-card: calc((100cqi - var(--hershey-component-cards-brands-track-edge-tablet, 100px)) / 3 - var(--hershey-component-cards-brands-card-offset-tablet, 25px));
   }
 
+  /* the arrows' gap is the token at 768px and widens by a third of the extra width, as on
+     hersheyland.com */
   .cards.slider.brands .cards-slider-controls {
     justify-content: center;
-    gap: var(--hershey-component-cards-brands-control-gap-tablet, 246px);
+    gap: calc(var(--hershey-component-cards-brands-control-gap-tablet, 246px) + (100cqi - 768px) / 3);
     margin-top: var(--hershey-component-cards-brands-control-margin-block-start-tablet, 29px);
     padding: 0;
+  }
+
+  /* from 768px the indicators centre on a row that starts in from the column edge */
+  .cards.slider.brands .cards-slider-dots {
+    justify-self: start;
+    width: var(--hershey-component-cards-brands-indicator-row-width, 87%);
+    margin-left: var(--hershey-component-cards-brands-indicator-row-inset, 81px);
   }
 }
 
@@ -349,6 +380,36 @@ body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.br
   body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands):has(+ .section > *) {
     padding-top: var(--hershey-component-cards-brands-mid-band-padding-block-start, 188px);
     padding-bottom: var(--hershey-component-cards-brands-mid-band-padding-block-end, 164px);
+  }
+}
+
+/* next to a `Columns (article, panel)` band (e.g. the Chocolate World locations and "Experience
+   Hershey at Home" on /about/visit) the band sits closer to the panel */
+body:not(.hershey-brand) main > .section:has(> .columns-wrapper > .columns.article.panel) + .section:has(> .cards-wrapper > .cards.slider.brands) {
+  padding-top: var(--hershey-component-cards-brands-panel-band-padding-block-start-mobile, 29px);
+}
+
+body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands):has(+ .section > .columns-wrapper > .columns.article.panel) {
+  padding-bottom: var(--hershey-component-cards-brands-panel-band-padding-block-end-mobile, 35px);
+}
+
+@media (width >= 768px) {
+  body:not(.hershey-brand) main > .section:has(> .columns-wrapper > .columns.article.panel) + .section:has(> .cards-wrapper > .cards.slider.brands) {
+    padding-top: var(--hershey-component-cards-brands-panel-band-padding-block-start-tablet, 51px);
+  }
+
+  body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands):has(+ .section > .columns-wrapper > .columns.article.panel) {
+    padding-bottom: var(--hershey-component-cards-brands-panel-band-padding-block-end-tablet, 57px);
+  }
+}
+
+@media (width >= 992px) {
+  body:not(.hershey-brand) main > .section:has(> .columns-wrapper > .columns.article.panel) + .section:has(> .cards-wrapper > .cards.slider.brands) {
+    padding-top: var(--hershey-component-cards-brands-panel-band-padding-block-start, 90px);
+  }
+
+  body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands):has(+ .section > .columns-wrapper > .columns.article.panel) {
+    padding-bottom: var(--hershey-component-cards-brands-panel-band-padding-block-end, 69px);
   }
 }
 
@@ -1340,6 +1401,20 @@ main > .section:has(> .cards-wrapper > .cards.grid) > .default-content-wrapper h
   height: var(--hershey-component-cards-grid-tag-icon-size-mobile, 12px);
   background-color: currentcolor;
   mask: url('../../icons/clock.svg') center / contain no-repeat;
+}
+
+/* a POPULAR tag has a star, a little wider than tall, as on hersheyland.com */
+.cards.grid .cards-card-body p.cards-card-tag-popular::before {
+  width: var(--hershey-component-cards-grid-tag-popular-icon-width-mobile, 14px);
+  height: var(--hershey-component-cards-grid-tag-popular-icon-height-mobile, 12px);
+  mask-image: url('../../icons/star.svg');
+}
+
+@media (width >= 992px) {
+  .cards.grid .cards-card-body p.cards-card-tag-popular::before {
+    width: var(--hershey-component-cards-grid-tag-popular-icon-width, 16px);
+    height: var(--hershey-component-cards-grid-tag-popular-icon-height, 14px);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

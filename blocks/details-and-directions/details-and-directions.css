@@ -266,12 +266,11 @@
 }
 
 .details-and-directions .details-and-directions-supply-list a:any-link {
-  border-bottom: var(--hershey-component-details-and-directions-link-border-width, 1px) solid currentcolor;
   color: var(--hershey-component-details-and-directions-link-color, #007bbd);
   font-size: var(--hershey-component-details-and-directions-typography-link-font-size, 18px);
   font-weight: var(--hershey-component-details-and-directions-link-font-weight, 700);
   line-height: var(--hershey-component-details-and-directions-typography-copy-line-height, 27px);
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .details-and-directions .details-and-directions-supply-list a:hover {

@@ -127,6 +127,317 @@
   background-color: var(--hershey-system-color-surface-cream-light);
 }
 
+/* `maroon` section style: a maroon band with white text, e.g. the hero on /about/visit */
+.hershey-home main > .maroon {
+  --hershey-component-hero-brand-band-background: var(--hershey-system-color-surface-inverse);
+  --hershey-component-hero-brand-color-foreground: var(--hershey-system-color-text-inverse);
+
+  background-color: var(--hershey-system-color-surface-inverse);
+  color: var(--hershey-system-color-text-inverse);
+}
+
+/* `tan` section style: a warm tan band, e.g. the lower features on /about/visit and most of /about;
+   a brand hero in the band takes the same colour */
+.hershey-home main > .tan {
+  --hershey-component-hero-brand-band-background: var(--hershey-system-color-surface-brand-band);
+
+  background-color: var(--hershey-system-color-surface-brand-band);
+}
+
+/* stylelint-disable no-descending-specificity -- these section styles target their own sections only */
+
+/* `brown` section style: a dark brown band with cream kisses shapes and white text, e.g. "Made-With-Love
+   Desserts" on /about. Below 768px the text is centred and the shapes sit behind the photo only */
+.hershey-home main > .section.brown {
+  --link-color: currentcolor;
+  --link-hover-color: currentcolor;
+
+  padding-top: var(--hershey-system-spacing-brand-brown-band-start-mobile, 45px);
+  padding-bottom: var(--hershey-system-spacing-brand-brown-band-end-mobile, 40px);
+  background-color: var(--hershey-system-color-surface-dark-brown, #3c131c);
+  color: var(--hershey-system-color-text-inverse);
+  text-align: center;
+}
+
+.hershey-home main > .brown > .default-content-wrapper {
+  padding-inline: var(--hershey-system-spacing-brand-brown-inset-mobile, 11px);
+}
+
+/* `backdrop` section style: from 768px the first picture fills the band behind its content; the
+   other pictures only show below 768px, in their authored place, e.g. the candy around "the Best
+   Candy & Snacks" on /about */
+.hershey-home main > .section.backdrop {
+  position: relative;
+  isolation: isolate;
+  padding: 0;
+}
+
+.hershey-home main > .backdrop > .default-content-wrapper {
+  max-width: none;
+}
+
+.hershey-home main > .backdrop p:has(> picture) {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home main > .backdrop img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hershey-home main > .backdrop p:first-child:has(> picture) {
+  display: none;
+}
+
+.hershey-home main > .backdrop > .default-content-wrapper > :not(p:has(> picture)) {
+  max-width: var(--hershey-system-layout-container-backdrop-text, 558px);
+  margin-inline: auto;
+  padding-inline: var(--hershey-system-spacing-brand-backdrop-inset-mobile, 26px);
+  box-sizing: content-box;
+  text-align: center;
+}
+
+/* `pips` and `pips-end` section styles: dark brown brand pips behind the band, e.g. behind the
+   panels (`pips`) and the Milton & The Hershey Company cards (`pips-end`) on /about */
+.hershey-home main > .pips {
+  background-image: url('/icons/about-hershey-pips-top.svg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hershey-home main > .pips-end {
+  background-image: url('/icons/about-hersheys-pips-bottom.svg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* the eyebrow paragraph, heading and copy of a text block in a `backdrop` or `brown` band; a link in
+   the heading is underlined in the text colour */
+.hershey-home main > :is(.backdrop, .brown) p:has(+ h3) {
+  margin: 0 0 var(--hershey-system-spacing-brand-eyebrow-end, 5.4px);
+  font-size: var(--hershey-system-typography-eyebrow-strong-font-size-mobile, 16px);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.hershey-home main > :is(.backdrop, .brown) h3 {
+  margin: 0 0 var(--hershey-system-spacing-brand-title-end, 8.4px);
+  font-size: var(--hershey-system-typography-brand-heading-3-font-size-mobile, 24px);
+  line-height: 1.3;
+}
+
+.hershey-home main > :is(.backdrop, .brown) h3 a:any-link {
+  border-bottom: 1px solid currentcolor;
+  color: inherit;
+  text-decoration: none;
+}
+
+.hershey-home main > :is(.backdrop, .brown) h3 + p {
+  margin: 0 0 1.5em;
+  font-size: var(--hershey-system-typography-body-font-size-copy, 17px);
+  line-height: 1.5;
+}
+
+/* a pull quote: large italic heading type; the underlined words are purple instead, and a second
+   paragraph is the attribution */
+.hershey-home main .default-content-wrapper > blockquote {
+  margin: var(--hershey-system-spacing-brand-quote-margin-mobile, 30px) 0;
+  padding: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--hershey-system-typography-quote-font-size-mobile, 30px);
+  font-style: italic;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.hershey-home main .default-content-wrapper > blockquote p {
+  margin: 0;
+}
+
+.hershey-home main .default-content-wrapper > blockquote u {
+  color: var(--hershey-system-color-text-highlight, #5a357b);
+  text-decoration: none;
+}
+
+.hershey-home main .default-content-wrapper > blockquote p + p:last-child {
+  margin: var(--hershey-system-spacing-brand-quote-attribution-start, 20px) 0 0;
+  font-size: var(--hershey-system-typography-quote-attribution-font-size-mobile, 16px);
+}
+
+.hershey-home main > .brown .default-content-wrapper > blockquote {
+  margin:
+    var(--hershey-system-spacing-brand-quote-margin-start-mobile, 47px)
+    var(--hershey-system-spacing-brand-quote-inset-mobile, 8px)
+    var(--hershey-system-spacing-brand-quote-margin-end-mobile, 53px);
+  color: var(--hershey-system-color-text-on-dark-cream, #feebd0);
+  font-size: var(--hershey-system-typography-quote-font-size-brown-mobile, 26px);
+  text-align: left;
+}
+
+/* the authored line break is for the wide quote; small screens wrap it naturally */
+.hershey-home main > .brown .default-content-wrapper > blockquote br {
+  display: none;
+}
+
+/* the photo after a quote in the brown band is centred and rises into the quote's bottom margin;
+   below 768px its row runs to the band's edges so the shapes around it are not cut off */
+.hershey-home main > .brown .default-content-wrapper > blockquote + p:has(> picture) {
+  max-width: var(--hershey-system-layout-container-quote-photo, 720px);
+  margin: 0 calc(-1 * var(--hershey-system-spacing-brand-brown-edge-mobile, 35px)) var(--hershey-system-spacing-brand-quote-photo-end-mobile, 45px);
+  background: url('/icons/about-hersheys-kisses-shapes-pattern-mobile.svg') center / cover no-repeat;
+  line-height: 0;
+}
+
+.hershey-home main > .brown .default-content-wrapper > blockquote + p img {
+  width: 100%;
+  max-width: var(--hershey-system-layout-container-quote-photo-mobile, 305px);
+  height: auto;
+}
+
+/* `artwork` with two pictures: the first from 992px, the second (drawn for small screens) below */
+.hershey-home main > .section.artwork p > picture + picture {
+  display: none;
+}
+
+@media (width < 992px) {
+  .hershey-home main > .section.artwork p > picture:has(+ picture) {
+    display: none;
+  }
+
+  .hershey-home main > .section.artwork p > picture + picture {
+    display: block;
+  }
+}
+
+@media (width >= 768px) {
+  .hershey-home main > .section.brown {
+    background: var(--hershey-system-color-surface-dark-brown, #3c131c) url('/icons/about-hersheys-kisses-shapes-pattern.svg') center / cover no-repeat;
+    text-align: start;
+  }
+
+  .hershey-home main > .backdrop > .default-content-wrapper > :not(p:has(> picture)) {
+    text-align: start;
+  }
+
+  .hershey-home main > :is(.backdrop, .brown) p:has(+ h3) {
+    font-size: var(--hershey-system-typography-eyebrow-strong-font-size, 18px);
+  }
+
+  .hershey-home main .default-content-wrapper > blockquote {
+    margin: 0;
+    padding: var(--hershey-system-spacing-brand-quote-padding, 30px) var(--hershey-system-spacing-brand-quote-inset, 75px);
+    font-size: var(--hershey-system-typography-quote-font-size, 68px);
+  }
+
+  .hershey-home main .default-content-wrapper > blockquote p + p:last-child {
+    font-size: var(--hershey-system-typography-quote-attribution-font-size, 26px);
+  }
+
+  .hershey-home main > .brown .default-content-wrapper > blockquote {
+    margin: var(--hershey-system-spacing-brand-quote-margin-start, 110px) 0 calc(-1 * var(--hershey-system-spacing-brand-quote-overlap, 33px));
+    padding-inline: 0;
+    font-size: var(--hershey-system-typography-quote-font-size, 68px);
+    text-align: right;
+  }
+
+  .hershey-home main > .brown .default-content-wrapper > blockquote br {
+    display: inline;
+  }
+
+  .hershey-home main > .brown .default-content-wrapper > blockquote + p:has(> picture) {
+    margin: 0 auto var(--hershey-system-spacing-brand-quote-photo-end, 89px);
+    background: none;
+  }
+
+  .hershey-home main > .brown .default-content-wrapper > blockquote + p img {
+    max-width: none;
+  }
+
+  .hershey-home main > .section.backdrop {
+    padding: var(--hershey-system-spacing-brand-backdrop-top, 270px) 0 var(--hershey-system-spacing-brand-backdrop-end, 205px);
+  }
+
+  .hershey-home main > .backdrop p:first-child:has(> picture) {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .hershey-home main > .backdrop p:first-child img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hershey-home main > .backdrop p:not(:first-child):has(> picture) {
+    display: none;
+  }
+}
+
+@media (width >= 992px) {
+  /* the shapes start below the first text block, clear of its copy */
+  .hershey-home main > .section.brown {
+    position: relative;
+    isolation: isolate;
+    padding-top: 0;
+    padding-bottom: var(--hershey-system-spacing-brand-brown-band-end, 50px);
+    background-image: none;
+  }
+
+  .hershey-home main > .section.brown::before {
+    content: '';
+    position: absolute;
+    inset: var(--hershey-system-spacing-brand-brown-pattern-start, 226px) 0 0;
+    z-index: -1;
+    background: url('/icons/about-hersheys-kisses-shapes-pattern.svg') center / cover no-repeat;
+  }
+
+  .hershey-home main > .brown > .default-content-wrapper {
+    max-width: var(--hershey-system-layout-container-brown, 1160px);
+    padding-inline: var(--hershey-system-spacing-brand-brown-inset, 40px);
+  }
+
+  .hershey-home main > .brown > .default-content-wrapper > :is(p:not(:has(> picture)), h3) {
+    max-width: var(--hershey-system-layout-container-brown-text, 530px);
+  }
+
+  .hershey-home main > :is(.backdrop, .brown) h3 {
+    font-size: var(--hershey-system-typography-brand-heading-3-font-size-desktop, 28px);
+  }
+}
+
+/* `tan-wave` section style: a white band with the warm tan of the next band rising behind its
+   content in a wave, e.g. Hersheypark on /about/visit */
+.hershey-home main > .tan-wave {
+  background: var(--hershey-system-color-surface-default) url('/icons/hersheys-kisses-wave.svg') center / cover no-repeat;
+}
+
+/* `shapes` section style: faint brand shapes behind this band and the bands after it, e.g. from the
+   intro to the Chocolate World locations on /about/visit; later bands with a colour cover them */
+.hershey-home main > .shapes {
+  position: relative;
+}
+
+.hershey-home main > .shapes::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: var(--hershey-system-size-region-shapes-pattern-height-mobile, 1920px);
+  background: url('/icons/visit-us-pattern-munsell-maroon.svg') center / cover no-repeat;
+  pointer-events: none;
+}
+
+@media (width >= 992px) {
+  .hershey-home main > .shapes::before {
+    height: var(--hershey-system-size-region-shapes-pattern-height, 1580px);
+  }
+}
+
 .hershey-home main > .halloween {
   --text-color: var(--hershey-system-color-text-inverse);
   --link-color: var(--hershey-system-color-text-inverse);
@@ -290,4 +601,295 @@
     width: 150%;
     max-width: none;
   }
+}
+
+/* the wave after the `brown` band keeps a fixed height, cropped at the sides */
+.hershey-home main > .brown + .section.artwork.wave img {
+  height: var(--hershey-system-size-brand-wave-band-mobile, 150px);
+  object-fit: cover;
+}
+
+/* from 992px a wave is drawn at a fixed height, cropped at the sides; after a `backdrop` band it is
+   drawn over the foot of that band's artwork (e.g. the Kisses waves on /about) */
+@media (width >= 992px) {
+  .hershey-home main > .section.backdrop:has(+ .artwork.wave) {
+    padding-bottom: calc(var(--hershey-system-spacing-brand-backdrop-end, 205px) + var(--hershey-system-size-brand-wave-overlay, 340px));
+  }
+
+  .hershey-home main > .backdrop + .section.artwork.wave {
+    position: relative;
+    margin-top: calc(-1 * var(--hershey-system-size-brand-wave-overlay, 340px));
+    background-color: transparent;
+  }
+
+  .hershey-home main > .backdrop + .section.artwork.wave img {
+    height: var(--hershey-system-size-brand-wave-overlay, 340px);
+    object-fit: cover;
+  }
+
+  .hershey-home main > .brown + .section.artwork.wave img {
+    height: var(--hershey-system-size-brand-wave-band, 450px);
+  }
+}
+
+/* below 992px the candy artwork itself runs into the brown band, so the wave after it is not drawn */
+@media (width < 992px) {
+  .hershey-home main > .backdrop + .section.artwork.wave {
+    display: none;
+  }
+}
+
+/* pages closing on a `tan` band (only the empty metadata section may follow it): the footer ribbon
+   sits on the same tan, as on /about */
+.hershey-home:has(main > .section.tan:nth-last-child(-n+2)) .footer.hershey-footer .newsletter {
+  background: var(--hershey-system-color-surface-brand-band);
+}
+
+/* `teal` section style: a teal band, e.g. the hero and its confetti divider on /inspiration; a brand
+   hero in the band takes the same colour */
+.hershey-home main > .teal {
+  --hershey-component-hero-brand-band-background: var(--hershey-system-color-surface-teal-band, #46bfb8);
+
+  background-color: var(--hershey-system-color-surface-teal-band, #46bfb8);
+}
+
+/* /inspiration (`theme: inspiration` page metadata). Everything below is scoped to that page, so no
+   other page that uses the same blocks changes. Values are measured on hersheyland.com/inspiration. */
+.hershey-home.inspiration {
+  /* banners sit flush on their band; the call to action is the blue pill */
+  --hershey-component-banner-background: transparent;
+  --hershey-component-banner-cta-background: var(--hershey-reference-color-brand-blue, #007bbd);
+  --hershey-component-banner-cta-foreground: #fff;
+  --hershey-component-banner-cta-hover-background: var(--hershey-reference-color-brand-blue-deep, #005f84);
+
+  /* the Letter to Santa panel is periwinkle with maroon copy */
+  --hershey-component-columns-article-panel-background: var(--hershey-reference-color-brand-periwinkle, #bfcce4);
+  --hershey-component-columns-article-panel-foreground: #3f000b;
+
+  /* Holiday Fun with Candy: a wider spotlight, 20px under its heading */
+  --hershey-component-cards-spotlight-layout-max-width: 1345px;
+  --hershey-component-cards-spotlight-track-padding-block-start: 20px;
+  --hershey-component-cards-spotlight-section-padding-block-start: 50px;
+  --hershey-component-cards-spotlight-section-padding-block-end: 106px;
+
+  /* the banner above already leaves 140px, so the occasions slider starts close under it */
+  --hershey-component-link-group-light-padding-block-start: 20px;
+}
+
+.hershey-home.inspiration main > .maroon {
+  --hershey-component-banner-foreground: #fff;
+}
+
+.hershey-home.inspiration main > .tan {
+  --hershey-component-banner-foreground: #3f000b;
+}
+
+.hershey-home.inspiration main > .section > .default-content-wrapper > h2 {
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* banners: copy on the left, the button centred in the right-hand third, 140px above and below */
+.hershey-home.inspiration main > .banner-container {
+  padding-block: 0;
+}
+
+.hershey-home.inspiration .banner {
+  padding-block: 70px;
+}
+
+@media (width >= 900px) {
+  .hershey-home.inspiration .banner {
+    padding-block: 140px;
+  }
+
+  .hershey-home.inspiration .banner .banner-content {
+    max-width: 1120px;
+    padding-inline: 0;
+  }
+
+  .hershey-home.inspiration .banner .banner-text {
+    padding-bottom: 0;
+  }
+
+  .hershey-home.inspiration .banner .banner-cta {
+    min-width: 200px;
+  }
+
+  .hershey-home.inspiration .banner .banner-action {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* Holiday Guides: white cards with a navy foot, centred under a centred heading */
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.welcome-cards) {
+  padding-block: 119px 35px;
+}
+
+/* the craft art that rises behind these cards (`artwork, supplies`) is drawn later, so the cards and
+   button sit above it */
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.welcome-cards) > div {
+  position: relative;
+  z-index: 1;
+}
+
+.hershey-home.inspiration .cards.welcome-cards {
+  max-width: 1066px;
+  margin-inline: auto;
+}
+
+.hershey-home.inspiration .cards.welcome-cards > ul > li {
+  overflow: hidden;
+  border-bottom: 8px solid var(--hershey-reference-color-brand-navy, #003594);
+  border-radius: 8px 8px 0 0;
+  background: #fff;
+  box-shadow: 0 0 10px -4px #808080;
+}
+
+.hershey-home.inspiration .cards.welcome-cards img {
+  aspect-ratio: 330 / 247;
+  border-radius: 0;
+}
+
+.hershey-home.inspiration .cards.welcome-cards .cards-card-body {
+  margin: 0;
+  padding: 20px;
+}
+
+.hershey-home.inspiration .cards.welcome-cards h3 {
+  margin: 0 0 12px;
+  font-family: var(--body-font-family);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.hershey-home.inspiration .cards.welcome-cards p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hershey-home.inspiration .cards.welcome-cards > ul > li {
+    transition: transform 300ms ease-out;
+  }
+
+  .hershey-home.inspiration .cards.welcome-cards > ul > li:hover,
+  .hershey-home.inspiration .cards.welcome-cards > ul > li:focus-within {
+    z-index: 1;
+    transform: scale(1.05);
+  }
+}
+
+.hershey-home.inspiration .cards.welcome-cards > ul > li:hover h3 a,
+.hershey-home.inspiration .cards.welcome-cards > ul > li:focus-within h3 a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.welcome-cards) > .cards-wrapper + .default-content-wrapper {
+  margin-top: 85px;
+  text-align: center;
+}
+
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.welcome-cards) > .cards-wrapper + .default-content-wrapper p {
+  text-align: center;
+}
+
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.welcome-cards) > .cards-wrapper + .default-content-wrapper a.button {
+  min-width: 200px;
+  padding: 16px 18px;
+  line-height: 26px;
+}
+
+/* `artwork, supplies`: the craft supplies drawn above the maroon wave rise behind the Holiday Guides
+   cards, as on the live page. The artwork is transparent over the overlap and cream below it. */
+.hershey-home.inspiration main > .section.artwork.supplies {
+  background-color: var(--hershey-system-color-surface-brand-band);
+}
+
+@media (width >= 768px) {
+  .hershey-home.inspiration main > .section.artwork.supplies {
+    --supplies-overlap: 48.6vw;
+
+    position: relative;
+    margin-top: calc(-1 * var(--supplies-overlap));
+    background: linear-gradient(to bottom, transparent var(--supplies-overlap), var(--hershey-system-color-surface-brand-band) var(--supplies-overlap));
+    pointer-events: none;
+  }
+}
+
+/* What Are You Planning?: four square tiles with an underlined caption, centred under the heading */
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.social) {
+  padding-block: 125px 103px;
+}
+
+.hershey-home.inspiration .cards.social {
+  max-width: 1210px;
+  margin-inline: auto;
+  background: transparent;
+}
+
+.hershey-home.inspiration .cards.social > ul {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 20px;
+}
+
+.hershey-home.inspiration .cards.social > ul > li {
+  background: transparent;
+}
+
+.hershey-home.inspiration .cards.social > ul > li img {
+  border-radius: 8px;
+}
+
+.hershey-home.inspiration .cards.social .cards-card-image {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hershey-home.inspiration .cards.social > ul > li img {
+    transition: transform 300ms ease-out;
+  }
+
+  .hershey-home.inspiration .cards.social > ul > li:hover img,
+  .hershey-home.inspiration .cards.social > ul > li:focus-within img {
+    transform: scale(1.2);
+  }
+}
+
+.hershey-home.inspiration .cards.social > ul > li:hover .cards-card-body a:any-link,
+.hershey-home.inspiration .cards.social > ul > li:focus-within .cards-card-body a:any-link {
+  text-decoration: none;
+}
+
+.hershey-home.inspiration .cards.social .cards-card-body {
+  margin: 28px 0 0;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hershey-home.inspiration .cards.social .cards-card-body a:any-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+
+@media (width >= 900px) {
+  .hershey-home.inspiration .cards.social > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 50px;
+  }
+}
+
+.hershey-home.inspiration .link-group h2 {
+  line-height: 1.5;
 }

@@ -185,11 +185,18 @@
 }
 
 /*
- * REESE'S "did you know" banners (`campaign-text` sections): white copy on the orange band, a bold
- * eyebrow and a 36px heading on twelve columns, as on hersheyland.com/reeses.
+ * REESE'S "did you know" banners (`campaign-text` sections): white copy on a dark brown REESE'S
+ * cup, as on hersheyland.com/reeses. The cup fills the band less 50px top and bottom, centred at
+ * its own width (wider than the band, so its sides run off the edges); the eyebrow and the heading
+ * sit 20px inside it, with space that grows with the width above the eyebrow and under the
+ * heading.
  */
 .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text {
-  padding-inline: 20px;
+  padding: 70px 0;
+  background-image: url('/icons/reeses-cup-facts-silhouette.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto calc(100% - 100px);
   color: #fff;
   text-align: center;
 }
@@ -206,7 +213,8 @@
 }
 
 .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text > .default-content-wrapper > p {
-  margin: 0 0 24px;
+  margin: 0 0 12px;
+  padding: 4vw 40px 0;
   font-size: 19px;
   font-weight: 700;
   line-height: 1.5;
@@ -214,18 +222,17 @@
 
 .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text > .default-content-wrapper > h2 {
   margin: 0;
+  padding: 0 40px 4vw;
   color: #fff;
   font-size: 28px;
   font-weight: 900;
+  line-height: 35px;
 }
 
 @media (width >= 992px) {
-  .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text {
-    padding: 70px 0 127px;
-  }
-
+  /* the copy spans the band up to 1200px, not the campaign's ten columns */
   .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text > .default-content-wrapper:first-child {
-    width: min(1120px, 100%);
+    width: auto;
   }
 
   /* a banner straight under a call-out starts 20px lower */
@@ -233,14 +240,16 @@
     padding-top: 90px;
   }
 
-  .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text > .default-content-wrapper > p {
-    margin-bottom: 69px;
-  }
-
   .hershey-home:is(.reeses-primary, .oreo-cup-primary) main > .section.campaign-text > .default-content-wrapper > h2 {
     font-size: 36px;
     line-height: 45px;
   }
+}
+
+/* each orange band reaches a pixel over the one above, so no hairline of the white page shows
+   where a band ends part-way through a pixel */
+.hershey-home:is(.reeses-primary, .oreo-cup-primary) main > div.section.brand-color + div.section.brand-color {
+  box-shadow: 0 -1px 0 var(--hershey-system-color-surface-brand-band);
 }
 
 
@@ -2872,7 +2881,8 @@
 /*
  * REESE'S OREO closing band: Section Metadata style `oreo-spotlight`. A heading, a button and fine
  * print, centred on the turning scalloped disc. The disc is decoration in /icons; its top edge
- * shows from 250px above the band.
+ * shows from 250px above the band. The band, not the disc, cuts the disc off: a cut on the disc
+ * would turn with it and hide the disc after a while.
  */
 .hershey-home.oreo-cup-primary main > div.section.oreo-spotlight {
   position: relative;
@@ -2880,6 +2890,7 @@
   min-height: 517px;
   padding: 0;
   overflow-x: clip;
+  clip-path: inset(-250px 0 0);
   color: #fff;
   text-align: center;
 }
@@ -2893,7 +2904,6 @@
   width: 130%;
   aspect-ratio: 1920 / 1935;
   background: url('/icons/oreo-spotlight-disc.svg') center / 100% 100% no-repeat;
-  clip-path: inset(0 0 calc(100% - 767px) 0);
   transform: translateX(-50%);
   animation: oreo-spotlight-spin 240s linear infinite;
   pointer-events: none;
@@ -3838,22 +3848,17 @@
   --hershey-component-columns-callout-link-color-hover: #fff;
   --hershey-component-columns-article-link-color: #fff;
 
-  /* the live buttons are blue pills with white text */
-  --hershey-component-hero-brand-cta-background: #007bbd;
-  --hershey-component-hero-brand-cta-foreground: #fff;
-  --hershey-component-hero-brand-cta-background-hover: initial;
-  --hershey-component-columns-callout-cta-background: #007bbd;
-  --hershey-component-columns-callout-cta-foreground: #fff;
-  --hershey-component-columns-callout-cta-background-hover: initial;
-  --hershey-component-cards-grid-cta-background: #007bbd;
-  --hershey-component-cards-grid-cta-foreground: #fff;
-  --hershey-component-cards-grid-cta-background-hover: initial;
-  --hershey-component-cards-product-slider-cta-background: #007bbd;
-  --hershey-component-cards-product-slider-cta-foreground: #fff;
-  --hershey-component-cards-product-slider-cta-background-hover: initial;
-  --hershey-component-cards-brands-cta-background: #007bbd;
-  --hershey-component-cards-brands-cta-foreground: #fff;
-  --hershey-component-cards-brands-cta-background-hover: initial;
+  /* the live buttons are cream pills with brown text (2026-11-05); the hero, slider and grid ones
+     come from the theme above. The call-out and article pills keep their colour on hover. */
+  --hershey-component-columns-callout-cta-background-hover: #feebd0;
+  --hershey-component-columns-article-cta-background: #feebd0;
+  --hershey-component-columns-article-cta-foreground: #3f000b;
+  --hershey-component-columns-article-cta-background-hover: #feebd0;
+  --hershey-component-campaign-cta-background: #feebd0;
+  --hershey-component-campaign-cta-foreground: #3f000b;
+  --hershey-component-campaign-cta-background-hover: #e8cda8;
+  --hershey-component-campaign-cta-font-size: 18px;
+  --hershey-component-campaign-cta-line-height: 27px;
   --hershey-component-cards-product-slider-control-offset: 65px;
   --hershey-component-cards-product-slider-indicator-margin-top: 26px;
 }
@@ -3868,7 +3873,35 @@
 
 .hershey-home.hersheys-brand-primary main > div.section.hs-c2 + div.section {
   --hershey-component-cards-product-slider-band-padding-block-start: 121px;
-  --hershey-component-cards-product-slider-band-padding-block-end: 274px;
+  --hershey-component-cards-product-slider-band-padding-block-end: 160px;
+}
+
+/* the shop pill under a product slider is 80% wide below 768px, then at least 210px, and at least
+   200px from 992px, as on hersheyland.com; it sits 64px under the page dots below 992px */
+.hershey-home.hersheys-brand-primary main > div.section:has(.cards.product.slider) {
+  --hershey-component-cards-product-slider-cta-margin-block-start: 64px;
+}
+
+.hershey-home.hersheys-brand-primary main > div.section:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+  box-sizing: border-box;
+  width: 80%;
+}
+
+@media (width >= 768px) {
+  .hershey-home.hersheys-brand-primary main > div.section:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+    width: auto;
+    min-width: 210px;
+  }
+}
+
+@media (width >= 992px) {
+  .hershey-home.hersheys-brand-primary main > div.section:has(.cards.product.slider) {
+    --hershey-component-cards-product-slider-cta-margin-block-start: 53px;
+  }
+
+  .hershey-home.hersheys-brand-primary main > div.section:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+    min-width: 200px;
+  }
 }
 
 .hershey-home.hersheys-brand-primary main > div.section.hs-fact-3 + div.section {
@@ -3977,6 +4010,83 @@
   line-height: 1.3;
 }
 
+/* from 992px the fact and photo follow the width, as on hersheyland.com: from 1280px they sit in
+   a centred 1280px row (fact 35px in, photo at 520px, 725px wide); below that the fact is 25px in
+   and the photo fills the rest. The photo rises 10% of its height above the band and does not set
+   the band's height; below 1280px the band ends 98px under the fact. */
+@media (width >= 992px) {
+  /* the photo lies over the foil edges and may reach into the bands above and below */
+  .hershey-home.hersheys-brand-primary main > div.section:is(.hs-fact-1, .hs-fact-2, .hs-fact-3) {
+    overflow: clip visible;
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact {
+    --hs-fact-edge: 0px;
+    --hs-fact-inset: 25px;
+    --hs-fact-photo-start: calc(37.5cqi + 38px);
+    --hs-fact-photo-width: calc(62.5cqi - 62px);
+    --hs-fact-copy-width: calc(50cqi - 160px);
+
+    container-type: inline-size;
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact > div {
+    gap: 0;
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact > div > div:first-child {
+    flex-basis: calc(var(--hs-fact-edge) + var(--hs-fact-photo-start));
+    padding-left: calc(var(--hs-fact-edge) + var(--hs-fact-inset));
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact :is(p, h3) {
+    max-width: var(--hs-fact-copy-width);
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact > div > div:last-child {
+    height: 0;
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact img,
+  .hershey-home.hersheys-brand-primary main :is(.hs-fact-2, .hs-fact-3) .columns.hs-fact img {
+    position: relative;
+    z-index: 3;
+    width: var(--hs-fact-photo-width);
+    height: auto;
+    aspect-ratio: 725 / 518;
+    margin-top: 25px;
+    translate: 0 -10%;
+  }
+
+  .hershey-home.hersheys-brand-primary main .hs-fact-2 .columns.hs-fact img {
+    aspect-ratio: 725 / 499;
+  }
+
+  .hershey-home.hersheys-brand-primary main .hs-fact-3 .columns.hs-fact img {
+    aspect-ratio: 725 / 537;
+  }
+}
+
+@media (width >= 992px) and (width < 1280px) {
+  .hershey-home.hersheys-brand-primary main > div.section:is(.hs-fact-1, .hs-fact-2, .hs-fact-3) {
+    height: auto;
+  }
+
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact > div > div:first-child {
+    padding-bottom: 123px;
+  }
+}
+
+@media (width >= 1280px) {
+  .hershey-home.hersheys-brand-primary main .columns.hs-fact {
+    --hs-fact-edge: calc((100cqi - 1280px) / 2);
+    --hs-fact-inset: 35px;
+    --hs-fact-photo-start: 520px;
+    --hs-fact-photo-width: 725px;
+    --hs-fact-copy-width: 470px;
+  }
+}
+
 /* hero: the wordmark is an image set behind the (visually hidden) heading; the photo sits low */
 .hershey-home.hersheys-brand-primary main > div.section.hs-hero .hero-brand-text {
   justify-content: flex-start;
@@ -4053,6 +4163,10 @@
   line-height: 1.3;
 }
 
+.hershey-home.hersheys-brand-primary main > div.section.campaign-text:has(.columns.video) > .default-content-wrapper > p:not(.button-wrapper) {
+  text-align: center;
+}
+
 .hershey-home.hersheys-brand-primary main .columns-wrapper:has(> .columns.video) {
   margin-top: -30px;
 }
@@ -4065,10 +4179,18 @@
   justify-content: center;
 }
 
+/* the trailer sits straight on the band, without a card behind it */
 .hershey-home.hersheys-brand-primary main .columns.video > div > div:first-child {
   flex: 0 0 560px;
   margin: 0;
+  border-radius: 0;
   padding: 50px 0;
+  background: none;
+}
+
+/* the live trailer is the YouTube player itself, with square corners */
+.hershey-home.hersheys-brand-primary main .columns.video iframe {
+  border-radius: 0;
 }
 
 .hershey-home.hersheys-brand-primary main .columns.video > div > div:first-child p,
@@ -4155,6 +4277,15 @@
 .hershey-home.hersheys-brand-primary main > div.section:has(.cards.slider.brands):not(.hs-family) .default-content-wrapper > h2,
 .hershey-home.hersheys-brand-primary main > div.section:has(.cards.slider.brands):not(.hs-family) .cards-card-body :is(h3, a) {
   color: #f6f6f6;
+}
+
+/* the slider page indicators are white rings on the brown bands, filled when current */
+.hershey-home.hersheys-brand-primary main > div.section.brand-color .cards.slider .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-light.svg');
+}
+
+.hershey-home.hersheys-brand-primary main > div.section.brand-color .cards.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-light.svg');
 }
 
 /* the FAQ chevrons are navy on the white band */
@@ -4962,6 +5093,25 @@
   .hershey-home.kisses-primary .poll.quiz::before,
   .hershey-home.kisses-primary .poll.quiz .poll-quiz-decor span {
     transition: none;
+  }
+}
+
+/* stylelint-enable no-descending-specificity */
+
+/* stylelint-disable no-descending-specificity -- this REESE'S band rule targets one section only */
+
+/* REESE'S: the shopping band slides under the wave art above it, as on hersheyland.com/reeses: by
+   60px below 769px and 220px from there; below 992px its heading sits 35px lower in the band */
+.hershey-home.reeses-primary main > .section.artwork + .section:has(.cards.product.slider) {
+  --hershey-component-cards-product-slider-band-padding-block-start-mobile: 95px;
+  --hershey-component-cards-product-slider-band-padding-block-start-tablet: 105px;
+
+  margin-top: -60px;
+}
+
+@media (width > 768px) {
+  .hershey-home.reeses-primary main > .section.artwork + .section:has(.cards.product.slider) {
+    margin-top: -220px;
   }
 }
 
