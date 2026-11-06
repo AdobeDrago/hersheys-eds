@@ -35,8 +35,8 @@ function createPlayer(url, title, autoplay) {
 
 /**
  * `Columns (video)` and `Columns (follow)`: the YouTube or .mp4 link beside the poster becomes a
- * play button that swaps the poster for the player. `Columns (video, player)`, or a link without a
- * poster, shows the player at once, as the HERSHEY'S trailer on hersheyland.com does.
+ * play button that swaps the poster for the player. `Columns (video, player)` shows the player in
+ * place of the poster at once, as the HERSHEY'S trailer on hersheyland.com does.
  * @param {Element} block The columns block element
  */
 function decorateVideo(block) {
@@ -44,19 +44,17 @@ function decorateVideo(block) {
   block.querySelectorAll(':scope > div > div').forEach((cell) => {
     const link = [...cell.querySelectorAll('a[href]')]
       .find((a) => YOUTUBE.test(a.href) || MP4.test(new URL(a.href).pathname));
-    if (!link) return;
-    const url = new URL(link.href);
     const picture = cell.querySelector('picture');
-    const alt = picture?.querySelector('img')?.alt || '';
-    if (showPlayer || !picture) {
-      // the poster's alt text, or else the link text unless it is the bare URL, titles the player
-      const text = link.textContent.trim();
-      const title = alt || (text === link.href ? 'Video player' : text);
-      const inline = createPlayer(url, title, false);
+    // only a link beside a poster is a video; a link on its own (e.g. a YouTube channel among
+    // the social links of `Columns (follow)`) stays a link
+    if (!link || !picture) return;
+    const url = new URL(link.href);
+    const alt = picture.querySelector('img')?.alt || '';
+    if (showPlayer) {
+      const inline = createPlayer(url, alt || 'Video player', false);
       if (!inline) return;
       (link.closest('p') || link).replaceWith(inline);
-      picture?.closest('p')?.remove();
-      picture?.remove();
+      (picture.closest('p') || picture).remove();
       return;
     }
     const player = createPlayer(url, alt || 'Video', true);
