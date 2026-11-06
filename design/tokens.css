@@ -195,8 +195,8 @@
   --hershey-reference-spacing-344: 344px;
   --hershey-reference-spacing-22-5: 22.5px;
   --hershey-reference-spacing-16-5: 16.5px;
-  --hershey-reference-spacing-0-5: 0.5px;
-  --hershey-reference-spacing-1-25: 1.25px;
+  --hershey-reference-spacing-2-2: 2.2px;
+  --hershey-reference-spacing-1-5: 1.5px;
   --hershey-reference-spacing-36-6: 36.6px;
   --hershey-reference-spacing-38-3: 38.3px;
   --hershey-reference-spacing-17-5: 17.5px;
@@ -1095,8 +1095,8 @@
   --hershey-system-spacing-inset-comfortable: var(--hershey-reference-spacing-24);
   --hershey-system-spacing-inset-large: var(--hershey-reference-spacing-32);
   --hershey-system-spacing-inset-x-large: var(--hershey-reference-spacing-48);
-  --hershey-system-spacing-inset-chevron-offset: var(--hershey-reference-spacing-0-5);
-  --hershey-system-spacing-inset-chevron-offset-expanded: var(--hershey-reference-spacing-1-25);
+  --hershey-system-spacing-inset-chevron-offset: var(--hershey-reference-spacing-2-2);
+  --hershey-system-spacing-inset-chevron-offset-expanded: var(--hershey-reference-spacing-1-5);
   --hershey-system-spacing-inset-icon-offset: var(--hershey-reference-spacing-2);
   --hershey-system-spacing-inset-snug: var(--hershey-reference-spacing-10);
   --hershey-system-spacing-inset-hairline: var(--hershey-reference-spacing-2);
