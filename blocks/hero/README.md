@@ -123,7 +123,11 @@ Options:
 
 The panel colour comes from the brand theme. In a section with Section Metadata `Style: cream`
 (e.g. `/about/faqs`) the panel is light cream (`#fef3e3`); with `Style: maroon` (e.g. `/about/visit`)
-it is maroon (`#3f000b`) with white text.
+it is maroon (`#3f000b`) with white text; with `Style: tan` (e.g. `/about`) it is the warm tan of
+the band.
+
+Underlined words in the title (`<u>`) are purple with a lime rule under them, e.g. "find
+inspiration." on `/about`.
 
 ## Marquee (`marquee`)
 

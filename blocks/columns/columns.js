@@ -1,33 +1,55 @@
 import { loadCSS } from '../../scripts/aem.js';
 
 // variants only brand pages author; their styles live in columns-brand.css
-const BRAND_VARIANTS = ['fact', 'callout', 'article', 'video', 'quotes', 'blog', 'blobs'];
+const BRAND_VARIANTS = ['fact', 'callout', 'article', 'video', 'quotes', 'blog', 'blobs', 'follow'];
+
+const YOUTUBE = /youtu\.?be/;
+const MP4 = /\.mp4$/i;
 
 /**
- * `Columns (video)`: the YouTube link beside the poster becomes a play button that swaps the
- * poster for the embedded player.
+ * The player that replaces a poster: the YouTube embed, or the .mp4 itself with controls.
+ * @param {URL} url The video link
+ * @param {string} title The poster's alt text
+ * @returns {Element|null} The player, or null when the link has no YouTube id
+ */
+function createPlayer(url, title) {
+  if (MP4.test(url.pathname)) {
+    const video = document.createElement('video');
+    video.src = url.href;
+    video.controls = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.title = title;
+    return video;
+  }
+  const id = url.searchParams.get('v') || url.pathname.split('/').pop();
+  if (!id) return null;
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`;
+  iframe.title = title;
+  iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+  return iframe;
+}
+
+/**
+ * `Columns (video)` and `Columns (follow)`: the YouTube or .mp4 link beside the poster becomes a
+ * play button that swaps the poster for the player.
  * @param {Element} block The columns block element
  */
 function decorateVideo(block) {
   block.querySelectorAll(':scope > div > div').forEach((cell) => {
-    const link = [...cell.querySelectorAll('a[href]')].find((a) => /youtu\.?be/.test(a.href));
+    const link = [...cell.querySelectorAll('a[href]')]
+      .find((a) => YOUTUBE.test(a.href) || MP4.test(new URL(a.href).pathname));
     const picture = cell.querySelector('picture');
     if (!link || !picture) return;
-    const url = new URL(link.href);
-    const id = url.searchParams.get('v') || url.pathname.split('/').pop();
-    if (!id) return;
     const alt = picture.querySelector('img')?.alt || '';
+    const player = createPlayer(new URL(link.href), alt || 'Video');
+    if (!player) return;
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'columns-video-play';
     button.setAttribute('aria-label', alt ? `Play video: ${alt}` : 'Play video');
-    button.addEventListener('click', () => {
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`;
-      iframe.title = alt || 'Video';
-      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-      cell.replaceChildren(iframe);
-    }, { once: true });
+    button.addEventListener('click', () => cell.replaceChildren(player), { once: true });
     (link.closest('p') || link).replaceWith(button);
   });
 }
@@ -40,7 +62,7 @@ export default async function decorate(block) {
   const brandStyles = BRAND_VARIANTS.some((variant) => block.classList.contains(variant))
     ? loadCSS(`${window.hlx.codeBasePath}/blocks/columns/columns-brand.css`)
     : null;
-  if (block.classList.contains('video')) decorateVideo(block);
+  if (block.classList.contains('video') || block.classList.contains('follow')) decorateVideo(block);
   const cols = [...(block.firstElementChild?.children || [])];
   block.classList.add(`columns-${cols.length}-cols`);
 

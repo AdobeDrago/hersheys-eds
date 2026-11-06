@@ -15,3 +15,5 @@ Model: `standalone`
 - Row 1: the eyebrow paragraph and the h2.
 - Every other row is one tile: a picture and a link; the link text is the label.
 - The block adds `link-group-section` to its section (dark brown band) and `footer-on-dark` to the body so the footer ribbon sits on the same colour.
+
+Option `light` (`Link Group (light)`): maroon text on the section's own colour instead of the dark band, e.g. "More About Hersheyland" in a `tan` section on `/about`. The footer ribbon is not moved onto the dark colour. Below 768px each tile is 249px wide with a peek of the next.

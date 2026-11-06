@@ -97,6 +97,13 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
   line-height: var(--hershey-component-hero-brand-title-line-height, 1.2);
 }
 
+/* underlined words in the title are purple with a lime underline, e.g. "find inspiration." on /about */
+.hero.brand h1 u {
+  border-bottom: var(--hershey-component-hero-brand-highlight-rule-width, 4px) solid var(--hershey-component-hero-brand-highlight-rule-color, #b7d34a);
+  color: var(--hershey-component-hero-brand-highlight-color, #5a357b);
+  text-decoration: none;
+}
+
 .hero.brand p {
   max-width: var(--hershey-component-hero-brand-intro-max-width-mobile, 697px);
   margin: 0 auto var(--hershey-component-hero-brand-intro-margin-block-end-mobile, 12px);

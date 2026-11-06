@@ -6,6 +6,9 @@
 main .section.link-group-section {
   margin: 0;
   padding: 70px 0 200px;
+}
+
+main .section.link-group-section:not(:has(> .link-group-wrapper > .link-group.light)) {
   background: #3c131c;
   color: #fff;
 }
@@ -211,6 +214,33 @@ main .section.link-group-section > .link-group-wrapper {
 
   .link-group .link-group-controls {
     padding-right: 8px;
+  }
+}
+
+/* `light` option (`Link Group (light)`): maroon text on the section's own colour (e.g. the warm
+   tan of "More About Hersheyland" on /about) instead of the dark brown band */
+main .section.link-group-section:has(> .link-group-wrapper > .link-group.light) {
+  padding: var(--hershey-component-link-group-light-padding-block-start, 120px) 0 var(--hershey-component-link-group-light-padding-block-end, 130px);
+  color: var(--hershey-component-link-group-light-foreground, #3f000b);
+}
+
+.link-group.light :is(.link-group-eyebrow, h2),
+.link-group.light .link-group-tile a {
+  color: inherit;
+}
+
+.link-group.light .link-group-dots button:focus-visible {
+  outline-color: currentcolor;
+}
+
+/* below 768px a light group shows one large tile at a time with a peek of the next */
+@media (width < 768px) {
+  .link-group.light .link-group-track {
+    gap: var(--hershey-component-link-group-light-tile-gap-mobile, 21px);
+  }
+
+  .link-group.light .link-group-tile {
+    flex-basis: var(--hershey-component-link-group-light-tile-size-mobile, 249px);
   }
 }
 
