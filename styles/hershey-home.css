@@ -644,3 +644,252 @@
 .hershey-home:has(main > .section.tan:nth-last-child(-n+2)) .footer.hershey-footer .newsletter {
   background: var(--hershey-system-color-surface-brand-band);
 }
+
+/* `teal` section style: a teal band, e.g. the hero and its confetti divider on /inspiration; a brand
+   hero in the band takes the same colour */
+.hershey-home main > .teal {
+  --hershey-component-hero-brand-band-background: var(--hershey-system-color-surface-teal-band, #46bfb8);
+
+  background-color: var(--hershey-system-color-surface-teal-band, #46bfb8);
+}
+
+/* /inspiration (`theme: inspiration` page metadata). Everything below is scoped to that page, so no
+   other page that uses the same blocks changes. Values are measured on hersheyland.com/inspiration. */
+.hershey-home.inspiration {
+  /* banners sit flush on their band; the call to action is the blue pill */
+  --hershey-component-banner-background: transparent;
+  --hershey-component-banner-cta-background: var(--hershey-reference-color-brand-blue, #007bbd);
+  --hershey-component-banner-cta-foreground: #fff;
+  --hershey-component-banner-cta-hover-background: var(--hershey-reference-color-brand-blue-deep, #005f84);
+
+  /* the Letter to Santa panel is periwinkle with maroon copy */
+  --hershey-component-columns-article-panel-background: var(--hershey-reference-color-brand-periwinkle, #bfcce4);
+  --hershey-component-columns-article-panel-foreground: #3f000b;
+
+  /* Holiday Fun with Candy: a wider spotlight, 20px under its heading */
+  --hershey-component-cards-spotlight-layout-max-width: 1345px;
+  --hershey-component-cards-spotlight-track-padding-block-start: 20px;
+  --hershey-component-cards-spotlight-section-padding-block-start: 50px;
+  --hershey-component-cards-spotlight-section-padding-block-end: 106px;
+
+  /* the banner above already leaves 140px, so the occasions slider starts close under it */
+  --hershey-component-link-group-light-padding-block-start: 20px;
+}
+
+.hershey-home.inspiration main > .maroon {
+  --hershey-component-banner-foreground: #fff;
+}
+
+.hershey-home.inspiration main > .tan {
+  --hershey-component-banner-foreground: #3f000b;
+}
+
+.hershey-home.inspiration main > .section > .default-content-wrapper > h2 {
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* banners: copy on the left, the button centred in the right-hand third, 140px above and below */
+.hershey-home.inspiration main > .banner-container {
+  padding-block: 0;
+}
+
+.hershey-home.inspiration .banner {
+  padding-block: 70px;
+}
+
+@media (width >= 900px) {
+  .hershey-home.inspiration .banner {
+    padding-block: 140px;
+  }
+
+  .hershey-home.inspiration .banner .banner-content {
+    max-width: 1120px;
+    padding-inline: 0;
+  }
+
+  .hershey-home.inspiration .banner .banner-text {
+    padding-bottom: 0;
+  }
+
+  .hershey-home.inspiration .banner .banner-cta {
+    min-width: 200px;
+  }
+
+  .hershey-home.inspiration .banner .banner-action {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* Holiday Guides: white cards with a navy foot, centred under a centred heading */
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.welcome-cards) {
+  padding-block: 119px 35px;
+}
+
+/* the craft art that rises behind these cards (`artwork, supplies`) is drawn later, so the cards and
+   button sit above it */
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.welcome-cards) > div {
+  position: relative;
+  z-index: 1;
+}
+
+.hershey-home.inspiration .cards.welcome-cards {
+  max-width: 1066px;
+  margin-inline: auto;
+}
+
+.hershey-home.inspiration .cards.welcome-cards > ul > li {
+  overflow: hidden;
+  border-bottom: 8px solid var(--hershey-reference-color-brand-navy, #003594);
+  border-radius: 8px 8px 0 0;
+  background: #fff;
+  box-shadow: 0 0 10px -4px #808080;
+}
+
+.hershey-home.inspiration .cards.welcome-cards img {
+  aspect-ratio: 330 / 247;
+  border-radius: 0;
+}
+
+.hershey-home.inspiration .cards.welcome-cards .cards-card-body {
+  margin: 0;
+  padding: 20px;
+}
+
+.hershey-home.inspiration .cards.welcome-cards h3 {
+  margin: 0 0 12px;
+  font-family: var(--body-font-family);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.hershey-home.inspiration .cards.welcome-cards p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hershey-home.inspiration .cards.welcome-cards > ul > li {
+    transition: transform 300ms ease-out;
+  }
+
+  .hershey-home.inspiration .cards.welcome-cards > ul > li:hover,
+  .hershey-home.inspiration .cards.welcome-cards > ul > li:focus-within {
+    z-index: 1;
+    transform: scale(1.05);
+  }
+}
+
+.hershey-home.inspiration .cards.welcome-cards > ul > li:hover h3 a,
+.hershey-home.inspiration .cards.welcome-cards > ul > li:focus-within h3 a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.welcome-cards) > .cards-wrapper + .default-content-wrapper {
+  margin-top: 85px;
+  text-align: center;
+}
+
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.welcome-cards) > .cards-wrapper + .default-content-wrapper p {
+  text-align: center;
+}
+
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.welcome-cards) > .cards-wrapper + .default-content-wrapper a.button {
+  min-width: 200px;
+  padding: 16px 18px;
+  line-height: 26px;
+}
+
+/* `artwork, supplies`: the craft supplies drawn above the maroon wave rise behind the Holiday Guides
+   cards, as on the live page. The artwork is transparent over the overlap and cream below it. */
+.hershey-home.inspiration main > .section.artwork.supplies {
+  background-color: var(--hershey-system-color-surface-brand-band);
+}
+
+@media (width >= 768px) {
+  .hershey-home.inspiration main > .section.artwork.supplies {
+    --supplies-overlap: 48.6vw;
+
+    position: relative;
+    margin-top: calc(-1 * var(--supplies-overlap));
+    background: linear-gradient(to bottom, transparent var(--supplies-overlap), var(--hershey-system-color-surface-brand-band) var(--supplies-overlap));
+    pointer-events: none;
+  }
+}
+
+/* What Are You Planning?: four square tiles with an underlined caption, centred under the heading */
+.hershey-home.inspiration main > .section:has(> .cards-wrapper > .cards.social) {
+  padding-block: 125px 103px;
+}
+
+.hershey-home.inspiration .cards.social {
+  max-width: 1210px;
+  margin-inline: auto;
+  background: transparent;
+}
+
+.hershey-home.inspiration .cards.social > ul {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 20px;
+}
+
+.hershey-home.inspiration .cards.social > ul > li {
+  background: transparent;
+}
+
+.hershey-home.inspiration .cards.social > ul > li img {
+  border-radius: 8px;
+}
+
+.hershey-home.inspiration .cards.social .cards-card-image {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hershey-home.inspiration .cards.social > ul > li img {
+    transition: transform 300ms ease-out;
+  }
+
+  .hershey-home.inspiration .cards.social > ul > li:hover img,
+  .hershey-home.inspiration .cards.social > ul > li:focus-within img {
+    transform: scale(1.2);
+  }
+}
+
+.hershey-home.inspiration .cards.social > ul > li:hover .cards-card-body a:any-link,
+.hershey-home.inspiration .cards.social > ul > li:focus-within .cards-card-body a:any-link {
+  text-decoration: none;
+}
+
+.hershey-home.inspiration .cards.social .cards-card-body {
+  margin: 28px 0 0;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hershey-home.inspiration .cards.social .cards-card-body a:any-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+
+@media (width >= 900px) {
+  .hershey-home.inspiration .cards.social > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 50px;
+  }
+}
+
+.hershey-home.inspiration .link-group h2 {
+  line-height: 1.5;
+}
