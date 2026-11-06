@@ -32,16 +32,20 @@ function decorateSlider(block, list) {
   });
   const dots = document.createElement('div');
   dots.className = 'cards-slider-dots';
-  // related, callout and dots sliders, and the product, stories and content sliders on brand
-  // pages, show one page indicator per page of cards
+  // related, callout and dots sliders, and the product, stories, content and brands sliders on
+  // brand pages, show one page indicator per page of cards
   const paged = ['related', 'callout', 'dots'].some((name) => block.classList.contains(name))
-    || (isBrandPage() && ['product', 'stories', 'content'].some((name) => block.classList.contains(name)));
+    || (isBrandPage() && ['product', 'stories', 'content', 'brands'].some((name) => block.classList.contains(name)));
+  // the brands slider pages by the cards that fit whole in the track, as on hersheyland.com
+  const byCard = block.classList.contains('brands');
   // a page is the visible track width plus one gap; the track padding is not scrollable content
   const measure = () => {
     const style = getComputedStyle(list);
     const inset = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
     const gap = parseFloat(style.columnGap) || 0;
-    const step = list.clientWidth - inset + gap;
+    let step = list.clientWidth - inset + gap;
+    const card = byCard && list.firstElementChild ? list.firstElementChild.offsetWidth + gap : 0;
+    if (card) step = Math.max(1, Math.floor(step / card)) * card;
     return { inset, gap, step };
   };
   const update = () => {
@@ -164,6 +168,14 @@ export default async function decorate(block) {
     });
   }
   ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  // a grid tag reading "Popular" gets a star instead of the clock, as on hersheyland.com
+  if (block.classList.contains('grid')) {
+    ul.querySelectorAll('.cards-card-body p').forEach((tag) => {
+      if (tag.nextElementSibling?.tagName === 'H3' && /^popular$/i.test(tag.textContent.trim())) {
+        tag.classList.add('cards-card-tag-popular');
+      }
+    });
+  }
   // recipes: authored cards win; Algolia only fills a block without any
   if (block.classList.contains('recipes')) {
     // the recipes styles cover authored cards too; Algolia only fills a block without any
