@@ -4789,6 +4789,12 @@
 /* stylelint-disable no-descending-specificity */
 .hershey-home.kisses-primary {
   --hershey-component-hero-brand-square-media-height: 740px;
+
+  /* product tiles: the name and size panel under the photo, and the shop pill's 17px text */
+  --hershey-component-cards-product-slider-body-min-height: 137px;
+  --hershey-component-cards-product-slider-body-min-height-mobile: 102px;
+  --hershey-component-cards-product-slider-cta-font-size: 17px;
+  --hershey-component-cards-product-slider-cta-line-height: 27px;
   --hershey-component-cards-grid-section-padding-block-start: 110px;
   --hershey-component-cards-grid-section-padding-block-end: 92px;
   --hershey-component-cards-product-slider-band-padding-block-start-mobile: 40px;
@@ -4937,13 +4943,30 @@
   padding: 87px 10px 3px;
 }
 
+/* the wheel and its copy stop growing at a 1400px band (1260px inside its padding), centred, as on
+   hersheyland.com/kisses */
 .hershey-home.kisses-primary main > .section > .cards-wrapper:has(> .cards.wheel) {
-  max-width: none;
+  max-width: 1260px;
+  margin-inline: auto;
   padding: 0;
 }
 
 .hershey-home.kisses-primary .cards.wheel .cards-wheel-copy h2 {
   font-size: 28px;
+}
+
+/* the hero photo is centred in its square on phones, then kept to its left edge, as on
+   hersheyland.com/kisses */
+@media (width < 768px) {
+  .hershey-home.kisses-primary .hero.brand .hero-brand-media img {
+    object-position: 50% 50%;
+  }
+}
+
+/* the shop pill under the product slider is at least 210px wide below 992px, as on
+   hersheyland.com/kisses */
+.hershey-home.kisses-primary main > div.section:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+  min-width: 210px;
 }
 
 /*
@@ -5086,6 +5109,11 @@
 
   .hershey-home.kisses-primary .cards.wheel .cards-wheel-copy h2 {
     font-size: 36px;
+  }
+
+  /* the shop pill under the product slider is at least 200px wide from 992px (210px below) */
+  .hershey-home.kisses-primary main > div.section:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+    min-width: 200px;
   }
 
   /* the call-out pills fit their text, and the pill and link sit centred in one row with a gap
