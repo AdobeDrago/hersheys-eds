@@ -6202,10 +6202,49 @@
   background: #ffa448 url('/icons/rolo-candy-pieces.svg') center top / 100% auto no-repeat;
 }
 
-/* ROLO: call-out copy and buttons are left-aligned (rolo-callout-left) and the shop slider's page
+/* ROLO: from 992px the call-out copy and its pill are left-aligned (the pill 5px in on the square
+   call-outs, 10px out on the wide one); below that they are centred and the pill runs the copy
+   width, as on hersheyland.com/rolo. The brands band copy is white, and the shop slider's page
    dots are plain brown rings, filled when current */
-.hershey-home.rolo-brand-primary main .columns.callout :is(h2, p) {
-  text-align: left;
+@media (width >= 992px) {
+  .hershey-home.rolo-brand-primary main .columns.callout :is(h2, p) {
+    text-align: left;
+  }
+
+  .hershey-home.rolo-brand-primary main .columns.callout > div > :not(.columns-img-col) {
+    justify-content: flex-start;
+  }
+
+  .hershey-home.rolo-brand-primary main .section .columns.callout > div > div p.button-wrapper {
+    padding-left: 10px;
+    text-align: left;
+  }
+
+  .hershey-home.rolo-brand-primary main .section .columns.callout.square > div > div p.button-wrapper {
+    padding-left: 25px;
+  }
+}
+
+/* phones: the pills 55px from the screen edges on the pretzel and baking call-outs, 45px on the
+   other two */
+@media (width < 992px) {
+  .hershey-home.rolo-brand-primary main .section .columns.callout > div > div a.button.primary {
+    display: block;
+    width: auto;
+    margin-inline: 5px;
+  }
+
+  .hershey-home.rolo-brand-primary main .section:is(.rolo-pretzel, .rolo-c1) .columns.callout > div > div a.button.primary {
+    margin-inline: 35px;
+  }
+
+  .hershey-home.rolo-brand-primary main .section.rolo-c3 .columns.callout > div > div a.button.primary {
+    margin-inline: 25px;
+  }
+}
+
+.hershey-home.rolo-brand-primary main > .section:has(> .cards-wrapper > .cards.slider.brands) {
+  --hershey-component-cards-brands-color-foreground: #fff;
 }
 
 .hershey-home.rolo-brand-primary main .cards.product.slider .cards-slider-dot {
