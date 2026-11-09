@@ -170,10 +170,16 @@
   width: var(--hershey-component-cards-product-slider-indicator-size-mobile, 16px);
   height: var(--hershey-component-cards-product-slider-indicator-size-mobile, 16px);
   margin-right: var(--hershey-component-cards-product-slider-indicator-gap, 6px);
+  background-image: var(--hershey-component-cards-product-slider-indicator-image, url('/icons/kiss-indicator-inactive.svg'));
 }
 
 .cards.product.slider .cards-slider-dot:last-child {
   margin-right: 0;
+}
+
+/* kiss-shaped indicators unless a brand theme picks another shape (white orbs on /jolly-rancher) */
+.cards.product.slider .cards-slider-dot[aria-current='true'] {
+  background-image: var(--hershey-component-cards-product-slider-indicator-image-active, url('/icons/kiss-indicator-active.svg'));
 }
 
 @media (width >= 768px) {

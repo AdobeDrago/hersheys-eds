@@ -1089,19 +1089,19 @@
   /* pill buttons */
   --hershey-component-hero-brand-cta-background: #007bbd;
   --hershey-component-hero-brand-cta-foreground: #fff;
-  --hershey-component-hero-brand-cta-background-hover: #d6e2f1;
+  --hershey-component-hero-brand-cta-background-hover: #268fc7;
   --hershey-component-columns-callout-cta-background: #007bbd;
   --hershey-component-columns-callout-cta-foreground: #fff;
-  --hershey-component-columns-callout-cta-background-hover: #d6e2f1;
+  --hershey-component-columns-callout-cta-background-hover: #268fc7;
   --hershey-component-cards-grid-cta-background: #007bbd;
   --hershey-component-cards-grid-cta-foreground: #fff;
-  --hershey-component-cards-grid-cta-background-hover: #d6e2f1;
+  --hershey-component-cards-grid-cta-background-hover: #268fc7;
   --hershey-component-cards-product-slider-cta-background: #007bbd;
   --hershey-component-cards-product-slider-cta-foreground: #fff;
-  --hershey-component-cards-product-slider-cta-background-hover: #d6e2f1;
+  --hershey-component-cards-product-slider-cta-background-hover: #268fc7;
   --hershey-component-cards-brands-cta-background: #007bbd;
   --hershey-component-cards-brands-cta-foreground: #fff;
-  --hershey-component-cards-brands-cta-background-hover: #d6e2f1;
+  --hershey-component-cards-brands-cta-background-hover: #268fc7;
 
   /* brands band copy is white on the royal blue */
   --hershey-component-cards-brands-color-foreground: #fff;
@@ -1112,6 +1112,8 @@
 }
 
 .hershey-home.jolly-rancher-primary main .section.brand-color {
+  --hershey-component-cards-product-slider-indicator-image: url('/icons/orb-indicator-inactive-light.svg');
+  --hershey-component-cards-product-slider-indicator-image-active: url('/icons/orb-indicator-active-light.svg');
   --hershey-component-cards-product-band-background: #215dab;
   --hershey-component-cards-product-heading-foreground: #fff;
   --hershey-component-cards-product-slider-foreground: #fff;
@@ -1133,6 +1135,8 @@
 }
 
 .hershey-home.jolly-rancher-primary main .section.brand-color-alt {
+  --hershey-component-cards-product-slider-indicator-image: url('/icons/orb-indicator-inactive-light.svg');
+  --hershey-component-cards-product-slider-indicator-image-active: url('/icons/orb-indicator-active-light.svg');
   --hershey-component-cards-product-band-background: #003594;
   --hershey-component-cards-product-heading-foreground: #fff;
   --hershey-component-cards-product-slider-foreground: #fff;
