@@ -475,6 +475,9 @@
   --hershey-component-columns-callout-cta-background: #db350f;
   --hershey-component-columns-callout-cta-foreground: #fff;
   --hershey-component-columns-callout-cta-background-hover: #e2603f;
+  --hershey-component-columns-article-cta-background: #db350f;
+  --hershey-component-columns-article-cta-foreground: #fff;
+  --hershey-component-columns-article-cta-background-hover: #e2603f;
   --hershey-component-cards-grid-cta-background: #db350f;
   --hershey-component-cards-grid-cta-foreground: #fff;
   --hershey-component-cards-grid-cta-background-hover: #e2603f;
@@ -524,8 +527,10 @@
   --hershey-component-cards-product-slider-foreground: #fff;
   --hershey-component-cards-product-slider-size-color: #fff;
   --hershey-component-accordion-label-color: #fff;
-  --hershey-component-accordion-label-color-inactive: #fff;
-  --hershey-component-accordion-brand-label-color-inactive: #fff;
+
+  /* while one FAQ is open the closed questions turn grey, as on hersheyland.com/payday */
+  --hershey-component-accordion-label-color-inactive: #999;
+  --hershey-component-accordion-brand-label-color-inactive: #999;
   --hershey-component-accordion-brand-answer-color: #fff;
   --hershey-component-accordion-brand-link-color: #fff;
   --hershey-component-accordion-border-color: #fff;
@@ -536,6 +541,12 @@
 
 .hershey-home.payday-brand-primary main .section.brand-color-alt .default-content-wrapper > h2 {
   color: #fff;
+}
+
+/* ...and their plus signs turn light grey */
+.hershey-home.payday-brand-primary main .section.brand-color-alt .accordion:has(.accordion-item[open]) .accordion-item:not([open]) .accordion-item-label::before,
+.hershey-home.payday-brand-primary main .section.brand-color-alt .accordion:has(.accordion-item[open]) .accordion-item:not([open]) .accordion-item-label::after {
+  background: #e1e1e1;
 }
 
 .hershey-home.payday-brand-primary main .section:not(.brand-color, .brand-color-alt, .warm-tan, .dark-chocolate, .cool-tan) {
@@ -2723,15 +2734,53 @@
   background-image: url('/icons/payday-peanut-transition-1.svg');
 }
 
+/* a plain 90px band, then the drips covering the bottom 90px (as live) so they meet the FAQ band */
 .hershey-home.payday-brand-primary main > div.section.payday-transition-2 {
-  min-height: 180px;
+  min-height: 90px;
+  padding-top: 90px;
   background-image: url('/icons/payday-peanut-transition-2.svg');
-  background-position: center bottom;
-  background-size: 100% 90px;
+  background-origin: content-box;
 }
 
 .hershey-home.payday-brand-primary main > div.section:has(> .columns-wrapper > .columns.blobs):not(.payday-product) {
   padding: 70px 0 69px;
+}
+
+/* call-out text links (e.g. Explore More Recipes) are brown, as on hersheyland.com/payday */
+.hershey-home.payday-brand-primary main .columns.callout {
+  --hershey-component-columns-callout-link-color: #3f000b;
+  --hershey-component-columns-callout-link-color-hover: #3f000b;
+}
+
+@media (width >= 992px) {
+  /* the article pill is 290px wide, on one line */
+  .hershey-home.payday-brand-primary main .columns.article a.button.primary {
+    width: 290px;
+    max-width: none;
+  }
+
+  /* the call-out pills fit their text; the pill and link spread with equal space around each across
+     the copy column less 30px either side (the cell's padding grows by 50px and the heading and
+     copy reach back out over it) */
+  .hershey-home.payday-brand-primary main .columns.callout > div > div:not(.columns-img-col) {
+    padding-inline: 60px;
+  }
+
+  .hershey-home.payday-brand-primary main .columns.callout > div > div:not(.columns-img-col) > :not(.button-wrapper) {
+    width: calc(100% + 60px);
+    margin-inline: -30px;
+  }
+
+  .hershey-home.payday-brand-primary main .columns.callout > div > div:not(.columns-img-col) > p.button-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .hershey-home.payday-brand-primary main .columns.callout a.button.primary {
+    width: auto;
+  }
 }
 
 .hershey-home.payday-brand-primary main > div.section.payday-product {
