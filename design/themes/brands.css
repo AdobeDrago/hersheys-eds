@@ -387,8 +387,16 @@
 .hershey-home.kit-kat-primary main .section.brand-color {
   --hershey-component-cards-product-band-background: #d30009;
   --hershey-component-cards-product-heading-foreground: #fff;
-  --hershey-component-cards-product-slider-foreground: #fff;
-  --hershey-component-cards-product-slider-size-color: #fff;
+
+  /* product tiles are white cards with a cream photo panel and brown copy, as on
+     hersheyland.com/kit-kat */
+  --hershey-component-cards-product-slider-foreground: #3f000b;
+  --hershey-component-cards-product-slider-size-color: #3f000b;
+  --hershey-component-cards-product-slider-card-background: #fff;
+  --hershey-component-cards-product-slider-image-background: #fde3ca;
+
+  /* the closing brands band: white eyebrow, heading and brand names */
+  --hershey-component-cards-brands-color-foreground: #fff;
   --hershey-component-accordion-label-color: #fff;
   --hershey-component-accordion-label-color-inactive: #fff;
   --hershey-component-accordion-brand-label-color-inactive: #fff;
@@ -415,7 +423,9 @@
   --hershey-component-accordion-brand-label-color-inactive: #fff;
   --hershey-component-accordion-brand-answer-color: #fff;
   --hershey-component-accordion-brand-link-color: #fff;
-  --hershey-component-accordion-border-color: #fff;
+
+  /* the FAQ rules are KIT KAT red, as on hersheyland.com/kit-kat */
+  --hershey-component-accordion-border-color: #a71e22;
   --hershey-component-accordion-icon-color: #fff;
 
   color: #fff;
@@ -3100,6 +3110,27 @@
   min-height: 270px;
   padding: 0;
   background: #502c1e url('/icons/kit-kat-footer-transition.svg') center / cover no-repeat;
+}
+
+/* the recipes band sits on the orange, pink and brown stripes, as on hersheyland.com/kit-kat */
+.hershey-home.kit-kat-primary main > div.section:has(> .cards-wrapper > .cards.grid) {
+  background: #d30009 url('/icons/kit-kat-accent-stripes-2.svg') center / cover no-repeat;
+}
+
+/* a product tile's photo panel turns KIT KAT pink while hovered */
+.hershey-home.kit-kat-primary .cards.product.slider .cards-product-card:is(:hover, :focus-visible) .cards-product-image {
+  background-color: #f9dfe0;
+}
+
+/* each red or brown band reaches a pixel over the one above, so no hairline of the band above (or
+   the white page) shows where a band ends part-way through a pixel */
+.hershey-home.kit-kat-primary main > div.section.brand-color + div.section.brand-color-alt {
+  box-shadow: 0 -1px 0 #502c1e;
+}
+
+.hershey-home.kit-kat-primary main > div.section.brand-color-alt + div.section.brand-color,
+.hershey-home.kit-kat-primary main > div.section.brand-color + div.section.brand-color {
+  box-shadow: 0 -1px 0 #d30009;
 }
 
 /*
