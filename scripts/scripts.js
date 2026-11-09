@@ -322,6 +322,11 @@ async function loadLazy(doc) {
   const main = doc.querySelector('main');
   await loadSections(main);
 
+  // sections with an `animate-*` style animate their parts in as they scroll into view
+  if (main?.querySelector('.section[class*="animate-"]')) {
+    import('./scroll-reveal.js').then(({ default: scrollReveal }) => scrollReveal(main));
+  }
+
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
