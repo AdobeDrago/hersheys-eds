@@ -277,6 +277,8 @@ async function loadEager(doc) {
       isBrandPage ? loadCSS(`${base}/styles/hershey-brand.css`) : null,
       brandTheme ? loadCSS(`${base}/design/themes/${brandTheme.file || brandTheme.value}.css`) : null,
     ]);
+    // a licensed font kit loads on the side: a failure only leaves the fallback face in place
+    if (brandTheme?.fontKit) loadCSS(brandTheme.fontKit).catch(() => {});
   }
   const main = doc.querySelector('main');
   if (main) {

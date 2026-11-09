@@ -3795,9 +3795,20 @@
 }
 
 /* product names and sizes in Montserrat, as written */
-.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-product-body :is(h3, p) {
+.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-product-body :is(h3, h3 a, p) {
   font-family: montserrat, sans-serif;
   text-transform: none;
+}
+
+/* product names are bold maroon, the size line 14px black, as on live */
+.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-product-body :is(h3, h3 a) {
+  color: #3f000b;
+  font-weight: 700;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-product-body p {
+  font-size: 14px;
+  line-height: 21px;
 }
 
 /* page dots: red rings, filled for the current page */
@@ -3819,7 +3830,7 @@
    992px */
 .hershey-home.sour-strips-primary main > div.section:is(.ss-recipes, .ss-recipe) {
   position: relative;
-  background: #000 url('/icons/sour-strips-black-splash-mid.webp') left top / 1440px auto repeat-y;
+  background: #000 url('/icons/sour-strips-black-splash-mid.webp') left top / max(1440px, 100%) auto repeat-y;
 }
 
 .hershey-home.sour-strips-primary main > div.section.ss-recipes {
@@ -3833,7 +3844,7 @@
   position: absolute;
   right: 0;
   left: 0;
-  height: var(--ss-splash-top);
+  aspect-ratio: 2880 / 818;
   background: #fff url('/icons/sour-strips-black-splash-top.webp') center top / 100% auto no-repeat;
 }
 
