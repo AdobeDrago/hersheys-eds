@@ -13,6 +13,10 @@ function decorateSlider(block, list) {
   sliderId += 1;
   list.id = `cards-slider-${sliderId}`;
   list.tabIndex = 0;
+  // a `single` slider moves one card (and its gap) per click, as the Newest Treats do on hersheyland.com
+  const single = block.classList.contains('single');
+  const cardStep = () => list.firstElementChild.offsetWidth
+    + (parseFloat(getComputedStyle(list).columnGap) || 0);
   const controls = document.createElement('div');
   controls.className = 'cards-slider-controls';
   const buttons = [-1, 1].map((direction) => {
@@ -23,7 +27,7 @@ function decorateSlider(block, list) {
     button.setAttribute('aria-controls', list.id);
     button.addEventListener('click', () => {
       list.scrollBy({
-        left: direction * list.clientWidth,
+        left: direction * (single ? cardStep() : list.clientWidth),
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
       });
     });
@@ -191,3 +195,5 @@ export default async function decorate(block) {
   if (block.classList.contains('slider')) decorateSlider(block, ul);
   await Promise.all([brandStyles, calloutStyles]);
 }
+
+// code resync marker

@@ -67,6 +67,13 @@
   }
 }
 
+/* option `reverse` (`Columns (feature, reverse)`): the picture stays on the left instead of the right */
+@media (width >= 900px) {
+  .columns.feature.reverse > div > .columns-img-col {
+    order: 0;
+  }
+}
+
 /* activity variant (story pages): text starts at the top, call to action is a pill button, lists are indented */
 .columns.activity a.button:any-link {
   display: inline-block;
@@ -211,3 +218,5 @@
     flex: 0 0 50%;
   }
 }
+
+/* code resync marker */

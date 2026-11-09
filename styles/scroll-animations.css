@@ -1,0 +1,55 @@
+/*
+ * Scroll animations (scripts/scroll-animations.js): a part is hidden until it scrolls into view, then
+ * animates to its own look once. The movement uses `translate`, so a part's own transform (e.g. a
+ * hover zoom) still applies. A part waits at `--scroll-animate-from` opacity (0 unless set).
+ */
+.scroll-animate:not(.scroll-animate-shown) {
+  opacity: var(--scroll-animate-from, 0);
+}
+
+.scroll-animate-rise:not(.scroll-animate-shown) {
+  translate: 0 100%;
+}
+
+.scroll-animate-fade-up:not(.scroll-animate-shown) {
+  translate: 0 100px;
+}
+
+.scroll-animate-shown {
+  animation-duration: var(--scroll-animate-duration, 400ms);
+  animation-timing-function: ease;
+  animation-delay: var(--scroll-animate-delay, 0ms);
+  animation-fill-mode: both;
+}
+
+.scroll-animate-fade.scroll-animate-shown {
+  animation-name: scroll-animate-fade;
+}
+
+.scroll-animate-fade-up.scroll-animate-shown {
+  animation-name: scroll-animate-fade-up;
+}
+
+.scroll-animate-rise.scroll-animate-shown {
+  animation-name: scroll-animate-rise;
+}
+
+@keyframes scroll-animate-fade {
+  from {
+    opacity: var(--scroll-animate-from, 0);
+  }
+}
+
+@keyframes scroll-animate-fade-up {
+  from {
+    opacity: var(--scroll-animate-from, 0);
+    translate: 0 100px;
+  }
+}
+
+@keyframes scroll-animate-rise {
+  from {
+    opacity: var(--scroll-animate-from, 0);
+    translate: 0 100%;
+  }
+}
