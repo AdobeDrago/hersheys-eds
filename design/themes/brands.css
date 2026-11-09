@@ -874,22 +874,25 @@
   --hershey-component-cards-grid-section-padding-block-start: 40px;
   --hershey-component-cards-grid-section-padding-block-end: 82px;
 
-  /* pill buttons */
-  --hershey-component-hero-brand-cta-background: #f7a1ce;
-  --hershey-component-hero-brand-cta-foreground: #003594;
-  --hershey-component-hero-brand-cta-background-hover: #fbc4e0;
-  --hershey-component-columns-callout-cta-background: #f7a1ce;
-  --hershey-component-columns-callout-cta-foreground: #003594;
-  --hershey-component-columns-callout-cta-background-hover: #fbc4e0;
-  --hershey-component-cards-grid-cta-background: #f7a1ce;
-  --hershey-component-cards-grid-cta-foreground: #003594;
-  --hershey-component-cards-grid-cta-background-hover: #fbc4e0;
-  --hershey-component-cards-product-slider-cta-background: #f7a1ce;
-  --hershey-component-cards-product-slider-cta-foreground: #003594;
-  --hershey-component-cards-product-slider-cta-background-hover: #fbc4e0;
-  --hershey-component-cards-brands-cta-background: #f7a1ce;
-  --hershey-component-cards-brands-cta-foreground: #003594;
-  --hershey-component-cards-brands-cta-background-hover: #fbc4e0;
+  /* pill buttons: blue on every band */
+  --hershey-component-hero-brand-cta-background: #007bbd;
+  --hershey-component-hero-brand-cta-foreground: #fff;
+  --hershey-component-hero-brand-cta-background-hover: #268fc7;
+  --hershey-component-columns-callout-cta-background: #007bbd;
+  --hershey-component-columns-callout-cta-foreground: #fff;
+  --hershey-component-columns-callout-cta-background-hover: #268fc7;
+  --hershey-component-cards-grid-cta-background: #007bbd;
+  --hershey-component-cards-grid-cta-foreground: #fff;
+  --hershey-component-cards-grid-cta-background-hover: #268fc7;
+  --hershey-component-cards-product-slider-cta-background: #007bbd;
+  --hershey-component-cards-product-slider-cta-foreground: #fff;
+  --hershey-component-cards-product-slider-cta-background-hover: #268fc7;
+  --hershey-component-cards-brands-cta-background: #007bbd;
+  --hershey-component-cards-brands-cta-foreground: #fff;
+  --hershey-component-cards-brands-cta-background-hover: #268fc7;
+
+  /* brands band copy is white on the blue */
+  --hershey-component-cards-brands-color-foreground: #fff;
 
   /* spacing measured on hersheyland.com/bubbleyum: a FAQ list that ends 110px sooner */
   --hershey-component-columns-callout-section-padding-block-start: 0;
@@ -4146,15 +4149,19 @@
   padding: 90px 0 50px;
 }
 
+/* brown copy and text link on the pink paper */
 .hershey-home.bubbleyum-primary main > div.section.by-pink {
+  --hershey-component-columns-callout-link-color: #3f000b;
+  --hershey-component-columns-callout-link-color-hover: #3f000b;
+
   padding: 360px 0 410px;
   background: #f7a1ce url('/icons/bubble-yum-pink-paper-tear.jpg') center / cover no-repeat;
-  color: #003594;
+  color: #3f000b;
 }
 
 .hershey-home.bubbleyum-primary main > div.section.by-pink h2,
 .hershey-home.bubbleyum-primary main > div.section.by-pink p {
-  color: #003594;
+  color: #3f000b;
 }
 
 .hershey-home.bubbleyum-primary main > div.section.by-c {
@@ -4229,6 +4236,74 @@
   box-sizing: border-box;
   background: #f7a1ce;
   color: #003594;
+}
+
+/* call-out pills, as on live: below 768px they sit 23px further under the copy and span the copy
+   box (less 25px either side when alone); from 768px a pill followed by a text link is 60% of the
+   copy box, 24px further down; the link sits 20px under its pill below 992px. From 992px a pill and
+   a text link fit their text and share one row with equal space around each across the copy
+   column less 50px either side (the cell grows 50px of padding and the copy reaches back over it) */
+@media (width < 768px) {
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div > h2 + p {
+    margin-bottom: 45px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div p.button-wrapper {
+    padding-inline: 45px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper {
+    padding-inline: 20px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div p.button-wrapper > a.button.primary {
+    display: block;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (width < 992px) {
+  .hershey-home.bubbleyum-primary main .columns.callout p.button-wrapper:has(> .secondary) {
+    margin-top: 10px;
+  }
+}
+
+@media (width >= 768px) and (width < 992px) {
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > h2 + p {
+    margin-bottom: 46px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper {
+    padding-inline: 20px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper > a.button.primary {
+    width: 60%;
+    max-width: none;
+  }
+}
+
+@media (width >= 992px) {
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) {
+    padding-inline: 60px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > :not(.button-wrapper) {
+    width: calc(100% + 60px);
+    margin-inline: -30px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > p.button-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) a.button.primary {
+    width: auto;
+  }
 }
 
 /*
