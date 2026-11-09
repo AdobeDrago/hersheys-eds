@@ -4805,8 +4805,10 @@
   --hershey-component-accordion-brand-section-padding-block-start-mobile: 100px;
   --hershey-component-accordion-brand-section-padding-inline-start-mobile: 16px;
   --hershey-component-accordion-brand-section-padding-inline-end-mobile: 15px;
-  --hershey-component-columns-callout-link-color: #fff;
-  --hershey-component-columns-callout-link-color-hover: #fff;
+
+  /* the call-out text links (e.g. Shop HUGS) are cream, as on hersheyland.com/kisses */
+  --hershey-component-columns-callout-link-color: #feebd0;
+  --hershey-component-columns-callout-link-color-hover: #feebd0;
   --hershey-component-cards-brands-color-foreground: #fff;
   --hero-marquee-band-speed: 36;
 }
@@ -4953,6 +4955,16 @@
 
 .hershey-home.kisses-primary .cards.wheel .cards-wheel-copy h2 {
   font-size: 28px;
+}
+
+/* a product tile's photo panel takes its brand's tint while hovered, as on hersheyland.com/kisses:
+   HERSHEY'S (KISSES, HUGS) pink, REESE'S peach; the panel fades over 0.3s (cards-product.css) */
+.hershey-home.kisses-primary .cards.product.slider .cards-product-card:is(:hover, :focus-visible) .cards-product-image {
+  background-color: #e4cace;
+}
+
+.hershey-home.kisses-primary .cards.product.slider .cards-product-card[href*="/reeses-"]:is(:hover, :focus-visible) .cards-product-image {
+  background-color: #ffe9df;
 }
 
 /* the hero photo is centred in its square on phones, then kept to its left edge, as on
