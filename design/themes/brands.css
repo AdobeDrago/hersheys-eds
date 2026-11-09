@@ -684,19 +684,24 @@
   /* pill buttons */
   --hershey-component-hero-brand-cta-background: #c0081c;
   --hershey-component-hero-brand-cta-foreground: #fff;
-  --hershey-component-hero-brand-cta-background-hover: #d83a4b;
+  --hershey-component-hero-brand-cta-background-hover: #fff780;
+  --hershey-component-hero-brand-cta-foreground-hover: #3f000b;
   --hershey-component-columns-callout-cta-background: #c0081c;
   --hershey-component-columns-callout-cta-foreground: #fff;
-  --hershey-component-columns-callout-cta-background-hover: #d83a4b;
+  --hershey-component-columns-callout-cta-background-hover: #fff;
+  --hershey-component-columns-callout-cta-foreground-hover: #3f000b;
   --hershey-component-cards-grid-cta-background: #c0081c;
   --hershey-component-cards-grid-cta-foreground: #fff;
-  --hershey-component-cards-grid-cta-background-hover: #d83a4b;
+  --hershey-component-cards-grid-cta-background-hover: #fff;
+  --hershey-component-cards-grid-cta-foreground-hover: #3f000b;
   --hershey-component-cards-product-slider-cta-background: #c0081c;
   --hershey-component-cards-product-slider-cta-foreground: #fff;
-  --hershey-component-cards-product-slider-cta-background-hover: #d83a4b;
+  --hershey-component-cards-product-slider-cta-background-hover: #fff;
+  --hershey-component-cards-product-slider-cta-foreground-hover: #3f000b;
   --hershey-component-cards-brands-cta-background: #c0081c;
   --hershey-component-cards-brands-cta-foreground: #fff;
-  --hershey-component-cards-brands-cta-background-hover: #d83a4b;
+  --hershey-component-cards-brands-cta-background-hover: #fff;
+  --hershey-component-cards-brands-cta-foreground-hover: #3f000b;
 
   /* spacing measured on hersheyland.com/rolo: square call-outs sit straight on the band, the FAQ
      starts 120px down and ends 91px below its list, and the brand tiles start 138px down */
@@ -4110,13 +4115,14 @@
 
 .hershey-home.rolo-brand-primary main > div.section.rolo-secret {
   --hershey-component-cards-grid-section-padding-block-start: 0;
+  --hershey-component-cards-grid-heading-max-width: 1260px;
 
   padding-top: 0;
 }
 
 .hershey-home.rolo-brand-primary main > div.section.rolo-secret > .default-content-wrapper > h2,
 .hershey-home.rolo-brand-primary main > div.section.rolo-secret h2:first-child {
-  margin: 0 0 68px;
+  margin: 0 auto 68px;
   font-size: 96px;
   line-height: 1;
   text-align: center;
@@ -6210,14 +6216,13 @@
   color: #fff;
 }
 
+/* the art is drawn at the page width and cropped to the band, so it never reaches up over the shop
+   slider's button; it runs 1px under the band so no hairline shows against the next one */
 .hershey-home.rolo-brand-primary main > div.section.rolo-poll::before {
   content: '';
   position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  aspect-ratio: 1920 / 1100;
-  background: #55281e url('/icons/rolo-arcs.svg') center / 100% 100% no-repeat;
+  inset: 0 0 -1px;
+  background: #55281e url('/icons/rolo-arcs.svg') center top / 100% auto no-repeat;
   scale: 1 -1;
 }
 

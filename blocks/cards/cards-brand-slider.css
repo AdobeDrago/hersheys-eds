@@ -44,6 +44,7 @@
 .section.cards-container:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button:focus-visible {
   border: var(--hershey-component-cards-product-slider-cta-border-width, 0) solid var(--hershey-component-cards-product-slider-cta-border-color, #fff);
   background-color: var(--hershey-component-cards-product-slider-cta-background-hover, #268fc7);
+  color: var(--hershey-component-cards-product-slider-cta-foreground-hover, var(--hershey-component-cards-product-slider-cta-foreground, #fff));
 }
 
 .cards.product.slider {

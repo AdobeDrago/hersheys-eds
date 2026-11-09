@@ -234,7 +234,7 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
 .columns.callout a.button.primary:focus-visible {
   border: 0;
   background-color: var(--hershey-component-columns-callout-cta-background-hover, #268fc7);
-  color: var(--hershey-component-columns-callout-cta-foreground, #fff);
+  color: var(--hershey-component-columns-callout-cta-foreground-hover, var(--hershey-component-columns-callout-cta-foreground, #fff));
 }
 
 /* secondary call to action is an underlined text link; the underline goes on hover */

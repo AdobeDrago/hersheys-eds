@@ -78,6 +78,7 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:h
 main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:focus-visible {
   border: 0;
   background-color: var(--hershey-component-cards-brands-cta-background-hover, #268fc7);
+  color: var(--hershey-component-cards-brands-cta-foreground-hover, var(--hershey-component-cards-brands-cta-foreground, #fff));
 }
 
 .cards.slider.brands {
@@ -1460,7 +1461,7 @@ main > .section:has(> .cards-wrapper > .cards.grid) > .cards-wrapper + .default-
 main > .section:has(> .cards-wrapper > .cards.grid) > .cards-wrapper + .default-content-wrapper a.button:hover,
 main > .section:has(> .cards-wrapper > .cards.grid) > .cards-wrapper + .default-content-wrapper a.button:focus-visible {
   background-color: var(--hershey-component-cards-grid-cta-background-hover, #268fc7);
-  color: var(--hershey-component-cards-grid-cta-foreground, #fff);
+  color: var(--hershey-component-cards-grid-cta-foreground-hover, var(--hershey-component-cards-grid-cta-foreground, #fff));
 }
 
 @media (width >= 768px) {
