@@ -735,12 +735,12 @@
   z-index: 1;
 }
 
-.hershey-home.inspiration .cards.welcome-cards {
+.hershey-home:is(.inspiration, .homepage) .cards.welcome-cards {
   max-width: 1066px;
   margin-inline: auto;
 }
 
-.hershey-home.inspiration .cards.welcome-cards > ul > li {
+.hershey-home:is(.inspiration, .homepage) .cards.welcome-cards > ul > li {
   overflow: hidden;
   border-bottom: 8px solid var(--hershey-reference-color-brand-navy, #003594);
   border-radius: 8px 8px 0 0;
@@ -748,17 +748,17 @@
   box-shadow: 0 0 10px -4px #808080;
 }
 
-.hershey-home.inspiration .cards.welcome-cards img {
+.hershey-home:is(.inspiration, .homepage) .cards.welcome-cards img {
   aspect-ratio: 330 / 247;
   border-radius: 0;
 }
 
-.hershey-home.inspiration .cards.welcome-cards .cards-card-body {
+.hershey-home:is(.inspiration, .homepage) .cards.welcome-cards .cards-card-body {
   margin: 0;
   padding: 20px;
 }
 
-.hershey-home.inspiration .cards.welcome-cards h3 {
+.hershey-home:is(.inspiration, .homepage) .cards.welcome-cards h3 {
   margin: 0 0 12px;
   font-family: var(--body-font-family);
   font-size: 24px;
@@ -766,26 +766,26 @@
   line-height: 1.5;
 }
 
-.hershey-home.inspiration .cards.welcome-cards p {
+.hershey-home:is(.inspiration, .homepage) .cards.welcome-cards p {
   margin: 0;
   font-size: 16px;
   line-height: 1.5;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hershey-home.inspiration .cards.welcome-cards > ul > li {
+  .hershey-home:is(.inspiration, .homepage) .cards.welcome-cards > ul > li {
     transition: transform 300ms ease-out;
   }
 
-  .hershey-home.inspiration .cards.welcome-cards > ul > li:hover,
-  .hershey-home.inspiration .cards.welcome-cards > ul > li:focus-within {
+  .hershey-home:is(.inspiration, .homepage) .cards.welcome-cards > ul > li:hover,
+  .hershey-home:is(.inspiration, .homepage) .cards.welcome-cards > ul > li:focus-within {
     z-index: 1;
     transform: scale(1.05);
   }
 }
 
-.hershey-home.inspiration .cards.welcome-cards > ul > li:hover h3 a,
-.hershey-home.inspiration .cards.welcome-cards > ul > li:focus-within h3 a {
+.hershey-home:is(.inspiration, .homepage) .cards.welcome-cards > ul > li:hover h3 a,
+.hershey-home:is(.inspiration, .homepage) .cards.welcome-cards > ul > li:focus-within h3 a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
@@ -892,4 +892,468 @@
 
 .hershey-home.inspiration .link-group h2 {
   line-height: 1.5;
+}
+
+/* the homepage (`theme: homepage` page metadata). Scoped to that page, so the older authored homepage
+   and every other page that uses these blocks are unchanged. Values are measured on hersheyland.com. */
+.hershey-home.homepage main > .welcome {
+  position: relative;
+  padding: 0;
+  background: var(--hershey-system-color-surface-default);
+}
+
+/* the brand shapes (two pictures, each in its own paragraph: desktop, then mobile) fill the band
+   behind the cards; only the one for the current width is drawn */
+.hershey-home.homepage .welcome > .default-content-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 0;
+}
+
+.hershey-home.homepage .welcome > .default-content-wrapper > p {
+  display: none;
+  height: 100%;
+  margin: 0;
+  background: none;
+}
+
+.hershey-home.homepage .welcome > .default-content-wrapper > p:nth-child(2) {
+  display: block;
+}
+
+.hershey-home.homepage .welcome > .default-content-wrapper picture,
+.hershey-home.homepage .welcome > .default-content-wrapper img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (width >= 768px) {
+  .hershey-home.homepage .welcome > .default-content-wrapper > p:first-child {
+    display: block;
+  }
+
+  .hershey-home.homepage .welcome > .default-content-wrapper > p:nth-child(2) {
+    display: none;
+  }
+}
+
+.hershey-home.homepage .welcome > .cards-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 90px 25px 100px;
+}
+
+@media (width >= 768px) {
+  .hershey-home.homepage .welcome > .cards-wrapper {
+    padding-block: 180px 230px;
+  }
+}
+
+/* the three welcome cards share the look defined for /inspiration above (white card, navy foot, grow on
+   hover); the homepage differs only in a 38px gap, 3:2 photos and a little more room under the copy */
+.hershey-home.homepage .cards.welcome-cards > ul {
+  gap: 38px;
+}
+
+.hershey-home.homepage .cards.welcome-cards img {
+  aspect-ratio: 3 / 2;
+}
+
+.hershey-home.homepage .cards.welcome-cards .cards-card-body {
+  padding: 20px 20px 39px;
+  text-align: left;
+}
+
+/* Hershey's Newest Treats (`cards slider stories`, section `newest`): from 992px a left-aligned heading
+   over a row of 371px tiles with the next tile peeking, and the arrows on the tiles' sides */
+.hershey-home.homepage {
+  --hershey-component-cards-stories-control-size: 56px;
+  --hershey-component-cards-stories-section-padding-block-start: 95px;
+}
+
+.hershey-home.homepage main > .newest:has(> .cards-wrapper > .cards.stories) > .default-content-wrapper h2 {
+  text-align: left;
+}
+
+@media (width >= 992px) {
+  .hershey-home.homepage main > .newest:has(> .cards-wrapper > .cards.stories) > .default-content-wrapper h2 {
+    padding-inline: 25px;
+  }
+
+  .hershey-home.homepage .newest .cards.slider.stories {
+    position: relative;
+  }
+
+  .hershey-home.homepage .newest .cards.slider.stories > ul {
+    grid-auto-columns: 371px;
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    gap: 25px;
+    padding-inline: 18px;
+    overflow-x: auto;
+    scroll-padding-inline: 18px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .hershey-home.homepage .newest .cards.slider.stories > ul > li {
+    aspect-ratio: 5 / 6;
+    scroll-snap-align: start;
+  }
+
+  .hershey-home.homepage .newest .cards.stories .cards-card-body {
+    right: 15px;
+    left: 15px;
+    width: auto;
+    padding: 10px 15px;
+  }
+
+  .hershey-home.homepage .newest .cards.stories h3 {
+    font-size: 24px;
+  }
+
+  /* arrows centred on the photos' height, at the slider's sides; the kiss dots are not used here */
+  .hershey-home.homepage .newest .cards.slider.stories .cards-slider-controls {
+    position: absolute;
+    inset: 27px 0 auto;
+    grid-area: auto;
+    height: 371px;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hershey-home.homepage .newest .cards.slider.stories .cards-slider-controls button {
+    pointer-events: auto;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 20%);
+  }
+
+  .hershey-home.homepage .newest .cards.slider.stories .cards-slider-dots {
+    display: none;
+  }
+}
+
+/* the tile titles are plain maroon text, underlined only on hover, as on live */
+.hershey-home.homepage .newest .cards.stories h3 a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* hero: from 900px a 740px band, the text on the left half and the photo filling the right half */
+@media (width >= 900px) {
+  .hershey-home.homepage main > .section:first-child:has(> .columns-wrapper > .columns.homepage-hero) {
+    padding: 0;
+  }
+
+  .hershey-home.homepage main > .section:first-child:has(> .columns-wrapper > .columns.homepage-hero) > .columns-wrapper {
+    max-width: none;
+    padding: 0;
+  }
+
+  .hershey-home.homepage .columns.homepage-hero > div {
+    gap: 0;
+  }
+
+  .hershey-home.homepage .columns.homepage-hero > div > div {
+    flex: 0 0 50%;
+    box-sizing: border-box;
+  }
+
+  .hershey-home.homepage .columns.homepage-hero > div > div:not(.columns-img-col) {
+    padding-inline: 115px;
+  }
+
+  .hershey-home.homepage .columns.homepage-hero > div > .columns-img-col img {
+    aspect-ratio: 720 / 740;
+    object-fit: cover;
+  }
+}
+
+/* feature bands: a 1260px container with two equal halves (630px photos), 160px between the two
+   stacked features, and the copy centred in its column */
+.hershey-home.homepage main > .section > .columns-wrapper:has(> .columns.feature) {
+  max-width: 1260px;
+}
+
+@media (width >= 900px) {
+  .hershey-home.homepage .columns.feature > div {
+    gap: 0;
+  }
+
+  .hershey-home.homepage .columns.feature > div > div {
+    flex: 0 0 50%;
+    box-sizing: border-box;
+  }
+
+  .hershey-home.homepage .columns.feature > div > div:not(.columns-img-col) {
+    padding-inline: 40px;
+  }
+
+  .hershey-home.homepage main > .maroon:has(> .columns-wrapper > .columns.feature) {
+    padding-block: 50px 0;
+  }
+}
+
+.hershey-home.homepage .creme > .columns-wrapper + .columns-wrapper {
+  margin-top: 160px;
+}
+
+.hershey-home.homepage .columns.feature > div > div:not(.columns-img-col) {
+  text-align: center;
+}
+
+/* the creme and gingerbread features: 592 x 377 photos, the copy taking the rest of the row */
+@media (width >= 900px) {
+  .hershey-home.homepage main > .creme {
+    padding-bottom: 106px;
+  }
+
+  .hershey-home.homepage .creme .columns.feature > div > div:not(.columns-img-col) {
+    flex: 1;
+  }
+
+  .hershey-home.homepage .creme .columns.feature > div > .columns-img-col {
+    flex: 0 0 592px;
+  }
+
+  .hershey-home.homepage .creme .columns.feature img {
+    aspect-ratio: 592 / 377;
+    object-fit: cover;
+  }
+}
+
+/* hero below 900px: the photo first, then the centred heading and intro, as on live */
+@media (width < 900px) {
+  .hershey-home.homepage .columns.homepage-hero > div > .columns-img-col {
+    order: 0;
+  }
+
+  .hershey-home.homepage .columns.homepage-hero > div > div:not(.columns-img-col) {
+    text-align: center;
+  }
+}
+
+/* the copy column's side padding per band, as on live (it sets the paragraph's width; the headings are a
+   little narrower, so they take a margin): movie and history 30px; creme 70/58px; gingerbread (photo
+   on the left) 70/80px. The creme and gingerbread headings are 28px */
+@media (width >= 900px) {
+  .hershey-home.homepage .maroon .columns.feature > div > div:not(.columns-img-col),
+  .hershey-home.homepage .chocolate .columns.feature > div > div:not(.columns-img-col) {
+    padding-inline: 30px;
+  }
+
+  .hershey-home.homepage .creme .columns.feature > div > div:not(.columns-img-col) {
+    padding-inline: 70px 58px;
+  }
+
+  .hershey-home.homepage .creme .columns.feature.reverse > div > div:not(.columns-img-col) {
+    padding-inline: 70px 80px;
+  }
+
+  .hershey-home.homepage .maroon .columns.feature h2 {
+    margin-inline: 7px;
+  }
+
+  .hershey-home.homepage .creme .columns.feature:not(.reverse) h2 {
+    margin-inline: 0 15px;
+  }
+
+  .hershey-home.homepage .creme .columns.feature.reverse h2 {
+    margin-inline: 25px 24px;
+  }
+}
+
+.hershey-home.homepage .creme .columns.feature h2 {
+  font-size: 28px;
+  line-height: 1.5;
+}
+
+/* feature buttons: 55px tall pills (the 2px border is part of that); the creme and gingerbread ones are
+   at least 290px wide */
+.hershey-home.homepage .columns.feature a.button {
+  padding: 16.5px;
+  line-height: 1;
+}
+
+.hershey-home.homepage .creme .columns.feature a.button {
+  min-width: 290px;
+}
+
+/* the Hersheyland band: the button and the timeline link share one centred row, the link bold and
+   underlined */
+.hershey-home.homepage .chocolate .columns.feature > div > div:not(.columns-img-col) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: 24px;
+}
+
+.hershey-home.homepage .chocolate .columns.feature > div > div:not(.columns-img-col) > :is(h2, p:first-of-type) {
+  flex: 0 0 100%;
+}
+
+.hershey-home.homepage .chocolate .columns.feature > div > div:not(.columns-img-col) > p:last-child a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+/* the recipe collections button: 260 x 62 */
+.hershey-home.homepage .recipes > .default-content-wrapper a.button {
+  min-width: 260px;
+  padding: 15px 18px;
+  border-radius: 35px;
+  font-size: 17px;
+  line-height: 28px;
+}
+
+/* recipe collections: one maroon pill bar of five equal tabs (the selected one a white pill with blue
+   text) over a 1000px panel with the photo on the left */
+.hershey-home.homepage .tabs.recipes {
+  max-width: 1000px;
+  margin-inline: auto;
+}
+
+.hershey-home.homepage .tabs.recipes .tabs-list {
+  gap: 0;
+  margin-bottom: 50px;
+  border-radius: 35px;
+  padding: 10px;
+  background: var(--hershey-system-color-surface-inverse);
+}
+
+.hershey-home.homepage .tabs.recipes .tabs-list button {
+  flex: 1 1 0;
+  height: 50px;
+  border: 0;
+  border-radius: 25px;
+  padding: 0 10px;
+  color: var(--hershey-system-color-text-inverse);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.hershey-home.homepage .tabs.recipes .tabs-list button[aria-selected="true"] {
+  background: #fff;
+  color: var(--hershey-reference-color-brand-blue, #007bbd);
+  font-weight: 700;
+}
+
+.hershey-home.homepage .tabs.recipes .tabs-panel {
+  padding: 0 0 38px;
+  text-align: left;
+}
+
+.hershey-home.homepage main > .recipes {
+  padding-bottom: calc(var(--hershey-system-spacing-section-default) + 21px);
+}
+
+.hershey-home.homepage .tabs.recipes .tabs-panel-content h3 {
+  font-size: 28px;
+  line-height: 1.5;
+}
+
+@media (width >= 900px) {
+  .hershey-home.homepage .tabs.recipes .tabs-panel:has(> picture) {
+    grid-template-columns: 485px 1fr;
+    gap: 50px;
+  }
+}
+
+/* below 900px the bar scrolls sideways, each tab a fixed 132px wide, and the creme buttons run full width */
+@media (width < 900px) {
+  .hershey-home.homepage .tabs.recipes .tabs-list {
+    scrollbar-width: none;
+  }
+
+  .hershey-home.homepage .tabs.recipes .tabs-list button {
+    flex: 0 0 132px;
+    line-height: 1.2;
+  }
+
+  .hershey-home.homepage .creme .columns.feature a.button {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+/* Can't Decide? Try One of These!: the link group's page dots are blue circles here */
+.hershey-home.homepage .link-group .link-group-dots button {
+  background-image: url('/icons/orb-indicator-inactive-blue.svg');
+}
+
+.hershey-home.homepage .link-group .link-group-dots button.active {
+  background-image: url('/icons/orb-indicator-active-blue.svg');
+}
+
+/* scroll reveal (scripts/scroll-reveal.js): the feature bands fade up as they come into view */
+.hershey-home.homepage .reveal {
+  opacity: 0;
+  transform: translate3d(0, 100px, 0);
+}
+
+.hershey-home.homepage .reveal.revealed {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--reveal-duration, 0.8s) ease-out, transform var(--reveal-duration, 0.8s) ease-out;
+}
+
+.hershey-home.homepage .reveal-heading {
+  --reveal-duration: 0.5s;
+}
+
+.hershey-home.homepage .reveal-photo {
+  --reveal-duration: 1s;
+}
+
+/* copy sizes, as on live: 20px/30px in the hero, movie and history bands; 17px/25.5px in the creme and
+   gingerbread bands and the recipe panel; all weight 500 */
+.hershey-home.homepage .columns.homepage-hero p,
+.hershey-home.homepage .maroon .columns.feature p:first-of-type,
+.hershey-home.homepage .chocolate .columns.feature p:first-of-type {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.hershey-home.homepage .creme .columns.feature p:first-of-type,
+.hershey-home.homepage .tabs.recipes .tabs-panel-content p {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 25.5px;
+}
+
+/* links inside the recipe copy are brown and underlined, not the default blue */
+.hershey-home.homepage .tabs.recipes .tabs-panel-content p a:any-link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.hershey-home.homepage .tabs.recipes .tabs-panel-content {
+  padding-right: 20px;
+}
+
+/* Newest Treats: a tile (photo and title card together) grows on hover, and the track has room for it */
+@media (width >= 992px) {
+  .hershey-home.homepage .newest .cards.slider.stories > ul {
+    margin-block: -12px;
+    padding-block: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hershey-home.homepage .newest .cards.stories > ul > li {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .hershey-home.homepage .newest .cards.stories > ul > li:hover,
+  .hershey-home.homepage .newest .cards.stories > ul > li:focus-within {
+    transform: scale(1.05);
+  }
 }

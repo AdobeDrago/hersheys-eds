@@ -325,6 +325,11 @@ async function loadLazy(doc) {
   const main = doc.querySelector('main');
   await loadSections(main);
 
+  // the homepage's feature bands fade up as they scroll into view
+  if (doc.body.classList.contains('homepage')) {
+    import('./scroll-reveal.js').then(({ default: revealOnScroll }) => revealOnScroll(main));
+  }
+
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
