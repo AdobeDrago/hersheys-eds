@@ -3412,26 +3412,56 @@
 
 /*
  * SOUR STRIPS brand theme (`theme: sour-strips-primary` page metadata), measured on
- * hersheyland.com/brands/sourstrips (2026-11-04). A blue graffiti hero, white bands, a black
- * feature band and red pill buttons. The brand sets its headings in RusticoFarmero and its copy in
- * Montserrat; neither face is in this project yet, so the stacks fall back to system fonts.
+ * hersheyland.com/brands/sourstrips at 1280px and 375px (2026-11-09). Section Metadata styles name
+ * the bands: `ss-hero` (graffiti hero with the bag fan), `ss-about` and `ss-bite` (square photo
+ * beside the copy), `ss-icons` (the three splats), `ss-flavors` (the flip cards on pink splashes),
+ * `ss-shop` (product slider), `ss-recipes` and `ss-recipe` (the black splatter band and its two
+ * recipes), `ss-fam` (over the Instagram feed) and `ss-fan` (the bags above the footer). Copy is
+ * Montserrat (served from /fonts); headings are RusticoFarmero, a licensed fonts.net face this
+ * project does not carry, so they fall back to Roboto Condensed. The artwork is decoration,
+ * kept in /icons.
  */
+@font-face {
+  font-family: montserrat;
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/montserrat-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 .hershey-home.sour-strips-primary {
-  --hershey-component-hero-brand-band-background: #1e7eae;
+  --ss-red: #eb4a47;
+  --ss-splash-top: 28.4vw;
+  --hershey-component-hero-brand-band-background: transparent;
   --hershey-component-hero-brand-color-foreground: #fff;
   --hershey-system-color-surface-brand-band: #fff;
   --hershey-system-color-surface-brand-band-alt: #000;
   --hershey-system-color-text-brand-band: #000;
 
-  /* red pill buttons */
-  --hershey-component-hero-brand-cta-background: #eb4a47;
+  /* red pill buttons, white with red text on hover */
+  --hershey-component-hero-brand-cta-background: var(--ss-red);
   --hershey-component-hero-brand-cta-foreground: #fff;
-  --hershey-component-columns-callout-cta-background: #eb4a47;
+  --hershey-component-hero-brand-cta-background-hover: #fff;
+  --hershey-component-columns-callout-cta-background: var(--ss-red);
   --hershey-component-columns-callout-cta-foreground: #fff;
-  --hershey-component-cards-product-slider-cta-background: #eb4a47;
+  --hershey-component-columns-callout-cta-background-hover: #fff;
+  --hershey-component-columns-callout-link-color: var(--ss-red);
+  --hershey-component-columns-callout-link-color-hover: var(--ss-red);
+  --hershey-component-cards-product-slider-cta-background: var(--ss-red);
   --hershey-component-cards-product-slider-cta-foreground: #fff;
-  --hershey-component-cards-grid-cta-background: #eb4a47;
+  --hershey-component-cards-grid-cta-background: var(--ss-red);
   --hershey-component-cards-grid-cta-foreground: #fff;
+
+  /* flavour flip cards: the character pattern, denser on the front */
+  --cards-flip-front-background: url('/icons/sour-strips-character-background-pattern.webp') 0 0 / 50%;
+  --cards-flip-back-background: url('/icons/sour-strips-character-background-pattern.webp') 0 0 / 100%;
+  --cards-flip-cta-background: var(--ss-red);
+  --cards-flip-cta-background-hover: #ec5451;
+}
+
+.hershey-home.sour-strips-primary main {
+  font-family: montserrat, sans-serif;
 }
 
 .hershey-home.sour-strips-primary main .section.brand-color {
@@ -3449,22 +3479,587 @@
 }
 
 .hershey-home.sour-strips-primary main :is(h1, h2, h3) {
-  font-family: RusticoFarmero, Impact, 'Arial Narrow Bold', sans-serif;
+  font-family: RusticoFarmero, roboto-condensed, 'Arial Narrow', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
 }
 
+.hershey-home.sour-strips-primary main h2 {
+  margin: 0;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.hershey-home.sour-strips-primary main a.button.primary:is(:hover, :focus-visible) {
+  background-color: #fff;
+  color: var(--ss-red);
+}
+
+/* hero: the title and pill centred over the graffiti, the bag fan along the foot (705px tall, 900px
+   from 992px) */
 .hershey-home.sour-strips-primary main > div.section.ss-hero {
+  padding: 0;
   background: #1e7eae url('/icons/sour-strips-graffiti-hero-pattern.svg') center / cover no-repeat;
   color: #fff;
 }
 
-.hershey-home.sour-strips-primary main > div.section.ss-flavors .cards > ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 30px;
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-content {
+  position: relative;
+  display: block;
+  min-height: 705px;
+  overflow: hidden;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-logo {
+  display: none;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-text {
+  position: relative;
+  z-index: 1;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  padding: 80px 20px 0;
+  text-align: center;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero h1 {
+  margin: 0;
+  font-size: 76px;
+  line-height: 1;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero p.button-wrapper {
+  margin: 15px 0 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero a.button.primary {
+  display: block;
+  width: 268px;
+  min-width: 0;
+  margin: 0 auto;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  padding: 7px;
+  font-family: montserrat, sans-serif;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero a.button.primary:is(:hover, :focus-visible) {
+  border-color: #000;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-media {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: max(750px, 100%);
+  height: auto;
+  aspect-ratio: auto;
+  translate: -50% 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-media picture {
+  position: static;
+  display: block;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* about and bites: the square photo above the copy, beside it (half each) from 992px */
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) {
+  padding: 55px 0 30px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-bite {
+  padding: 25px 0 54px;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) > .columns-wrapper {
+  max-width: none;
+  margin: 0 10px;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout > div > .columns-img-col img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout > div > :not(.columns-img-col) {
+  padding: 0 30px;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout > div > :not(.columns-img-col) > * {
+  width: 100%;
+  margin-inline: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout h2 {
+  margin: 40px 0 10px;
+  font-size: 46px;
+  line-height: 1;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout p.button-wrapper {
+  margin: 21px 0 0;
   padding: 0;
-  list-style: none;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-about .columns.callout p.button-wrapper {
+  padding: 0 5px;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout a.button.primary {
+  display: block;
+  width: 100%;
+  max-width: none;
+  border-radius: 25px;
+  padding: 13px;
+  font-family: montserrat, sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+/* the text link under the pill, in TT Norms as on live */
+.hershey-home.sour-strips-primary main > div.section.ss-bite .columns.callout p.button-wrapper:has(> .secondary) {
+  margin-top: 20px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-bite .columns.callout a.button.secondary {
+  border-bottom-color: var(--ss-red);
+  font-family: hershey-tt, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* the three splats on the white-to-black grunge */
+.hershey-home.sour-strips-primary main > div.section.ss-icons {
+  padding: 50px 0 36px;
+  background: #fff url('/icons/sour-strips-macros-background.webp') center / cover no-repeat;
+  color: #fff;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons > .columns-wrapper {
+  max-width: 990px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons .columns > div {
+  flex-direction: row;
+  gap: 0;
+  align-items: flex-start;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons .columns > div > div {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons .columns p {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons .columns img {
+  width: min(250px, 100%);
+  height: auto;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons .columns h3 {
+  margin: 15px 0 0;
+  color: #fff;
+  font-size: 21px;
+  line-height: 25px;
+}
+
+/* flavours: the flip cards on the pink splashes, which start 45px down (50px from 992px) */
+.hershey-home.sour-strips-primary main > div.section.ss-flavors {
+  padding: 90px 0 46px;
+  background: #fff url('/icons/sour-strips-pink-splash.webp') center 45px / auto calc(100% - 45px) no-repeat;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-flavors > .default-content-wrapper {
+  max-width: none;
+  margin: 0 0 39px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-flavors > .cards-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hershey-home.sour-strips-primary main .cards.flip .cards-flip-back :is(p, a.button) {
+  font-family: hershey-tt, sans-serif;
+}
+
+.hershey-home.sour-strips-primary main .cards.flip .cards-flip-back h3 {
+  color: #000;
+}
+
+/* shop: the product slider under a 48px (64px from 992px) heading */
+.hershey-home.sour-strips-primary main > div.section.ss-shop {
+  --hershey-component-cards-product-slider-band-padding-block-start-mobile: 60px;
+  --hershey-component-cards-product-slider-band-padding-block-start: 51px;
+  --hershey-component-cards-product-slider-heading-font-size-mobile: 48px;
+  --hershey-component-cards-product-slider-heading-font-size-desktop: 64px;
+  --hershey-component-cards-product-slider-heading-line-height: 1;
+  --hershey-component-cards-product-slider-band-padding-block-end-mobile: 50px;
+  --hershey-component-cards-product-slider-band-padding-block-end: 100px;
+  --hershey-component-cards-product-slider-indicator-margin-top: 25px;
+  --hershey-component-cards-product-slider-indicator-gap: 8px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-shop > .default-content-wrapper > h2 {
+  font-family: RusticoFarmero, roboto-condensed, 'Arial Narrow', sans-serif;
+  font-weight: 400;
+}
+
+/* product names and sizes in Montserrat, as written */
+.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-product-body :is(h3, p) {
+  font-family: montserrat, sans-serif;
+  text-transform: none;
+}
+
+/* page dots: red rings, filled for the current page */
+.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-slider-dot {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--ss-red);
+  border-radius: 50%;
+  background: none;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-slider-dot[aria-current='true'] {
+  background: var(--ss-red);
+}
+
+/* recipes: the black grunge band between two splatter edges (each 409/1440 of the width, drawn on
+   white over the band's top and bottom), the recipe copy centred under its photo, beside it from
+   992px */
+.hershey-home.sour-strips-primary main > div.section:is(.ss-recipes, .ss-recipe) {
+  position: relative;
+  background: #000 url('/icons/sour-strips-black-splash-mid.webp') left top / 1440px auto repeat-y;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes {
+  padding: calc(var(--ss-splash-top) + 45px) 10px 0;
+  text-align: center;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes::before,
+.hershey-home.sour-strips-primary main > div.section.ss-recipe + div.section.ss-recipe::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: var(--ss-splash-top);
+  background: #fff url('/icons/sour-strips-black-splash-top.webp') center top / 100% auto no-repeat;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes::before {
+  top: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes > .default-content-wrapper {
+  max-width: 670px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes > .default-content-wrapper > h2 {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe {
+  padding: 46px 20px 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe + div.section.ss-recipe {
+  padding: 75px 30px calc(50px + var(--ss-splash-top));
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe + div.section.ss-recipe::after {
+  bottom: 0;
+  background-image: url('/icons/sour-strips-black-splash-btm.webp');
+  background-position: center bottom;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout > div > .columns-img-col {
+  order: -1;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout > div > .columns-img-col img {
+  aspect-ratio: 592 / 377;
+  object-fit: cover;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout > div > :not(.columns-img-col) {
+  padding: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout h3 {
+  margin: 30px 0 0;
+  color: #fff;
+  font-size: 46px;
+  line-height: 46px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout p {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+/* sour fam: the heading and copy over the Instagram feed; the bags sit on the footer */
+.hershey-home.sour-strips-primary main > div.section.ss-fam {
+  padding: 55px 0 0;
+  text-align: center;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fam > .default-content-wrapper {
+  max-width: 740px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fam h2 {
+  margin: 0 0 14px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fam p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.hershey-home.sour-strips-primary main > div.section:empty {
+  display: none;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fan {
+  padding: 0;
+  overflow: hidden;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fan > .default-content-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fan p {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fan img {
+  display: block;
+  width: max(938px, 100%);
+  max-width: none;
+  height: auto;
+  margin-left: 50%;
+  translate: -50% 0;
+}
+
+@media (width >= 992px) {
+  .hershey-home.sour-strips-primary {
+    --cards-flip-front-background: url('/icons/sour-strips-character-background-pattern.webp') 0 0 / 50%;
+  }
+
+  .hershey-home.sour-strips-primary main h2 {
+    font-size: 64px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-content {
+    min-height: 900px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-text {
+    padding-top: 140px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-hero h1 {
+    font-size: 96px;
+    line-height: 1.1;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-hero a.button.primary {
+    display: inline-block;
+    width: auto;
+    padding: 13.5px 20px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-about {
+    padding: 110px 0 20px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-bite {
+    padding: 50px 0;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout > div > * {
+    flex: 0 0 50%;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout > div > :not(.columns-img-col) {
+    flex-wrap: wrap;
+    place-content: center flex-start;
+    text-align: left;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout h2 {
+    margin: 0 0 10px;
+    font-size: 64px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout p.button-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+    margin: 21px 0 0;
+    padding: 0;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-about .columns.callout p.button-wrapper {
+    margin-left: 5px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout a.button.primary {
+    display: inline-block;
+    width: auto;
+    border-radius: 44px;
+    padding: 18.5px;
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  /* the pill and the text link share a row, 50px apart */
+  .hershey-home.sour-strips-primary main > div.section.ss-bite .columns.callout p.button-wrapper:has(> .secondary) {
+    align-self: center;
+    margin: 21px 0 0 50px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-bite .columns.callout a.button.secondary {
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-icons {
+    box-sizing: border-box;
+    min-height: 459px;
+    padding: 100px 0 0;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-icons .columns h3 {
+    margin-top: 29px;
+    font-size: 36px;
+    line-height: 36px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-flavors {
+    padding: 280px 0 347px;
+    background-position: center 50px;
+    background-size: auto calc(100% - 50px);
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-flavors > .default-content-wrapper {
+    margin-bottom: 98px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipes {
+    padding-top: calc(var(--ss-splash-top) + 50px);
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipes > .default-content-wrapper > h2 {
+    font-size: 64px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipes p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* sushi: photo left (592px), copy 70px beside it; cupcakes: copy 130px in, photo right */
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe {
+    padding: 119px 0 70px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe + div.section.ss-recipe {
+    padding: 70px 0 calc(95px + var(--ss-splash-top));
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout > div > .columns-img-col {
+    flex: 0 0 592px;
+    order: 0;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout > div > :not(.columns-img-col) {
+    flex: 1 1 auto;
+    padding: 0 80px 0 70px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe + div.section.ss-recipe .columns.callout > div > :not(.columns-img-col) {
+    padding: 0 20px 0 130px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout h3 {
+    margin: 0 0 10px;
+    font-size: 64px;
+    line-height: 64px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout p.button-wrapper {
+    margin-top: 24px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout a.button.primary {
+    width: 290px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-fam {
+    padding-top: 50px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-fam h2 {
+    margin-bottom: 19px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-fam p {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 /*

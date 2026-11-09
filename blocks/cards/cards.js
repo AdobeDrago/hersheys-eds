@@ -191,6 +191,14 @@ export default async function decorate(block) {
     ]);
     if (module) ul.replaceChildren(...await module.default(block));
   }
+  // the flip variant turns each card over when clicked; it loads its own script and styles
+  if (block.classList.contains('flip')) {
+    const [{ default: decorateFlip }] = await Promise.all([
+      import('./cards-flip.js'),
+      loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-flip.css`),
+    ]);
+    decorateFlip(ul);
+  }
   block.replaceChildren(ul);
   if (block.classList.contains('slider')) decorateSlider(block, ul);
   await Promise.all([brandStyles, calloutStyles]);
