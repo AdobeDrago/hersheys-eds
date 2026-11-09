@@ -770,11 +770,11 @@
  */
 .hershey-home.cadbury-brand-primary {
   --hershey-component-hero-brand-band-background: #40257c;
-  --hershey-component-hero-brand-color-foreground: #e6bc7e;
+  --hershey-component-hero-brand-color-foreground: #fff;
   --hershey-component-hero-brand-square-media-height: 597px;
   --hershey-system-color-surface-brand-band: #40257c;
   --hershey-system-color-surface-brand-band-alt: #5c398f;
-  --hershey-system-color-text-brand-band: #e6bc7e;
+  --hershey-system-color-text-brand-band: #fff;
 
   /* product slider, recipe and FAQ bands */
   --hershey-component-cards-product-slider-band-padding-block-start: 31px;
@@ -782,63 +782,82 @@
   --hershey-component-cards-grid-section-padding-block-start: 40px;
   --hershey-component-cards-grid-section-padding-block-end: 82px;
 
-  /* pill buttons */
-  --hershey-component-hero-brand-cta-background: #e6bc7e;
-  --hershey-component-hero-brand-cta-foreground: #40257c;
-  --hershey-component-hero-brand-cta-background-hover: #f182c4;
-  --hershey-component-columns-callout-cta-background: #e6bc7e;
-  --hershey-component-columns-callout-cta-foreground: #40257c;
-  --hershey-component-columns-callout-cta-background-hover: #f182c4;
-  --hershey-component-cards-grid-cta-background: #e6bc7e;
-  --hershey-component-cards-grid-cta-foreground: #40257c;
-  --hershey-component-cards-grid-cta-background-hover: #f182c4;
-  --hershey-component-cards-product-slider-cta-background: #e6bc7e;
-  --hershey-component-cards-product-slider-cta-foreground: #40257c;
-  --hershey-component-cards-product-slider-cta-background-hover: #f182c4;
-  --hershey-component-cards-brands-cta-background: #e6bc7e;
-  --hershey-component-cards-brands-cta-foreground: #40257c;
-  --hershey-component-cards-brands-cta-background-hover: #f182c4;
+  /* pill buttons: brown on a gold gradient (painted by the pill rule further down), white once
+     hovered, as on hersheyland.com/cadbury */
+  --hershey-component-hero-brand-cta-background: #fff;
+  --hershey-component-hero-brand-cta-foreground: #3f000b;
+  --hershey-component-hero-brand-cta-background-hover: #fff;
+  --hershey-component-columns-callout-cta-background: #fff;
+  --hershey-component-columns-callout-cta-foreground: #3f000b;
+  --hershey-component-columns-callout-cta-background-hover: #fff;
+  --hershey-component-cards-grid-cta-background: #fff;
+  --hershey-component-cards-grid-cta-foreground: #3f000b;
+  --hershey-component-cards-grid-cta-background-hover: #fff;
+  --hershey-component-cards-product-slider-cta-background: #fff;
+  --hershey-component-cards-product-slider-cta-foreground: #3f000b;
+  --hershey-component-cards-product-slider-cta-background-hover: #fff;
+  --hershey-component-cards-brands-cta-background: #fff;
+  --hershey-component-cards-brands-cta-foreground: #3f000b;
+  --hershey-component-cards-brands-cta-background-hover: #fff;
+
+  /* the story box beside the video is the gold gradient too */
+  --hershey-component-columns-video-story-background: linear-gradient(to left, #d4ab5b 0%, #ffeaaf 50%, #d4ab5b 100%);
+  --hershey-component-columns-video-copy-inset: 0;
+
+  /* the brands band: white eyebrow and brand names (the heading is gold, below) */
+  --hershey-component-cards-brands-color-foreground: #fff;
+}
+
+/* headings are gold and copy white on both purples, as on live; product names, sizes and FAQ
+   questions and answers are white, the FAQ rules gold */
+.hershey-home.cadbury-brand-primary main .section:is(.brand-color, .brand-color-alt) {
+  --hershey-component-cards-product-heading-foreground: #e6bc7e;
+  --hershey-component-cards-product-slider-foreground: #fff;
+  --hershey-component-cards-product-slider-size-color: #fff;
+  --hershey-component-accordion-label-color: #fff;
+  --hershey-component-accordion-label-color-inactive: #fff;
+  --hershey-component-accordion-brand-label-color-inactive: #fff;
+  --hershey-component-accordion-brand-answer-color: #fff;
+  --hershey-component-accordion-brand-link-color: #fff;
+  --hershey-component-accordion-border-color: #e6bc7e;
+  --hershey-component-accordion-icon-color: #fff;
+
+  color: #fff;
 }
 
 .hershey-home.cadbury-brand-primary main .section.brand-color {
   --hershey-component-cards-product-band-background: #40257c;
-  --hershey-component-cards-product-heading-foreground: #e6bc7e;
-  --hershey-component-cards-product-slider-foreground: #e6bc7e;
-  --hershey-component-cards-product-slider-size-color: #e6bc7e;
-  --hershey-component-accordion-label-color: #e6bc7e;
-  --hershey-component-accordion-label-color-inactive: #e6bc7e;
-  --hershey-component-accordion-brand-label-color-inactive: #e6bc7e;
-  --hershey-component-accordion-brand-answer-color: #e6bc7e;
-  --hershey-component-accordion-brand-link-color: #e6bc7e;
-  --hershey-component-accordion-border-color: #e6bc7e;
-  --hershey-component-accordion-icon-color: #e6bc7e;
-
-  color: #e6bc7e;
-}
-
-.hershey-home.cadbury-brand-primary main .section.brand-color .default-content-wrapper > h2,
-.hershey-home.cadbury-brand-primary main .section.campaign-text > .default-content-wrapper > h2 {
-  color: #e6bc7e;
 }
 
 .hershey-home.cadbury-brand-primary main .section.brand-color-alt {
   --hershey-component-cards-product-band-background: #5c398f;
-  --hershey-component-cards-product-heading-foreground: #e6bc7e;
-  --hershey-component-cards-product-slider-foreground: #e6bc7e;
-  --hershey-component-cards-product-slider-size-color: #e6bc7e;
-  --hershey-component-accordion-label-color: #e6bc7e;
-  --hershey-component-accordion-label-color-inactive: #e6bc7e;
-  --hershey-component-accordion-brand-label-color-inactive: #e6bc7e;
-  --hershey-component-accordion-brand-answer-color: #e6bc7e;
-  --hershey-component-accordion-brand-link-color: #e6bc7e;
-  --hershey-component-accordion-border-color: #e6bc7e;
-  --hershey-component-accordion-icon-color: #e6bc7e;
+}
 
+.hershey-home.cadbury-brand-primary main .section:is(.brand-color, .brand-color-alt) .default-content-wrapper > h2,
+.hershey-home.cadbury-brand-primary main .section.campaign-text > .default-content-wrapper > h2,
+.hershey-home.cadbury-brand-primary main .hero.brand h1 {
   color: #e6bc7e;
 }
 
-.hershey-home.cadbury-brand-primary main .section.brand-color-alt .default-content-wrapper > h2 {
-  color: #e6bc7e;
+/* pills: the gold gradient sits under the label and fades out on hover or focus, leaving the
+   white pill */
+.hershey-home.cadbury-brand-primary main a.button:any-link:not(.secondary) {
+  position: relative;
+  isolation: isolate;
+}
+
+.hershey-home.cadbury-brand-primary main a.button:any-link:not(.secondary)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(to left, #d4ab5b 0%, #ffeaaf 50%, #d4ab5b 100%);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.hershey-home.cadbury-brand-primary main a.button:any-link:not(.secondary):is(:hover, :focus-visible)::before {
+  opacity: 0;
 }
 
 .hershey-home.cadbury-brand-primary main .section:not(.brand-color, .brand-color-alt, .warm-tan, .dark-chocolate, .cool-tan) {
@@ -4337,6 +4356,8 @@
 .hershey-home.shaqalicious-primary main {
   --shaq-gradient-start: 1290px;
 
+  /* keeps the call-outs' colour rays (below) over the gradient and under the page content */
+  isolation: isolate;
   background: linear-gradient(#5844f5 var(--shaq-gradient-start), #b769ff calc(100% - var(--shaq-gradient-end, 44.93vw)));
 }
 
@@ -4385,7 +4406,26 @@
 
 /* the three call-outs sit on 50px gaps: 50/0, 50/50 and 0/50 */
 .hershey-home.shaqalicious-primary main > div.section.hero-container + div.section:has(> .columns-wrapper > .columns.callout) {
+  position: relative;
   padding: 50px 0 0;
+}
+
+/* the colour rays run behind the three call-outs as one picture, covering them (centred, from the
+   left from 992px), as on live. The bands are about as tall as each other, the middle one 50px more */
+.hershey-home.shaqalicious-primary main > div.section.hero-container + div.section:has(> .columns-wrapper > .columns.callout)::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: calc(300% + 50px);
+  background: url('/icons/shaqalicious-color-rays-top.svg') 50% 0 / cover no-repeat;
+  pointer-events: none;
+}
+
+@media (width >= 992px) {
+  .hershey-home.shaqalicious-primary main > div.section.hero-container + div.section:has(> .columns-wrapper > .columns.callout)::before {
+    background-position: 0 0;
+  }
 }
 
 .hershey-home.shaqalicious-primary main > div.section:has(> .columns-wrapper > .columns.callout) + div.section:has(> .columns-wrapper > .columns.callout):has(+ div.section > .columns-wrapper > .columns.callout) {
@@ -4477,11 +4517,58 @@
   line-height: 1.5;
 }
 
+/* the product slider band: the lower colour rays cover it (centred, from the right from 992px); the
+   page dots sit 29px under the cards on phones, 27px on tablets and 26px from 992px, the arrows
+   level with them on phones, then 16px and 65.5px below the cards' half-height, as on live */
 .hershey-home.shaqalicious-primary main > div.section.shaq-find {
+  --hershey-component-cards-product-slider-band-padding-block-start-mobile: 95px;
+  --hershey-component-cards-product-slider-band-padding-block-start-tablet: 105px;
   --hershey-component-cards-product-slider-band-padding-block-start: 101px;
-  --hershey-component-cards-product-slider-band-padding-block-end: 96px;
+  --hershey-component-cards-product-slider-band-padding-block-end-mobile: 46px;
+  --hershey-component-cards-product-slider-band-padding-block-end: 111px;
+  --hershey-component-cards-product-slider-indicator-margin-top: 29px;
+  --hershey-component-cards-product-slider-control-offset-tablet: 16px;
+  --hershey-component-cards-product-slider-control-offset: 65.5px;
 
-  background: url('/icons/shaqalicious-color-rays-top.svg') center top / 100% auto no-repeat, url('/icons/shaqalicious-color-rays-btm.svg') center bottom / 100% auto no-repeat;
+  background: url('/icons/shaqalicious-color-rays-btm.svg') 50% 0 / cover no-repeat;
+}
+
+@media (width >= 768px) {
+  .hershey-home.shaqalicious-primary main > div.section.shaq-find {
+    --hershey-component-cards-product-slider-indicator-margin-top: 27px;
+  }
+}
+
+@media (width >= 992px) {
+  .hershey-home.shaqalicious-primary main > div.section.shaq-find {
+    --hershey-component-cards-product-slider-indicator-margin-top: 26px;
+
+    background-position: 100% 0;
+  }
+}
+
+/* live's arrows sit 21.5px higher while its heading takes two lines (992px to 1023px) */
+@media (width >= 992px) and (width < 1024px) {
+  .hershey-home.shaqalicious-primary main > div.section.shaq-find {
+    --hershey-component-cards-product-slider-control-offset: 44px;
+  }
+}
+
+/* the product slider's page indicators are white rings, filled when current, as on
+   hersheyland.com/shaqalicious */
+.hershey-home.shaqalicious-primary main .cards.product.slider .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-light.svg');
+}
+
+.hershey-home.shaqalicious-primary main .cards.product.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-light.svg');
+}
+
+/* from 992px a product tile's photo panel turns lavender while hovered (fading over 0.3s), as on live */
+@media (width >= 992px) {
+  .hershey-home.shaqalicious-primary .cards.product.slider .cards-product-card:is(:hover, :focus-visible) .cards-product-image {
+    background-color: #bfa8e6;
+  }
 }
 
 .hershey-home.shaqalicious-primary main > div.section.shaq-follow {
@@ -4526,13 +4613,13 @@
   font-weight: 600;
 }
 
-/* the Instagram feed runs the page width (10px in from 1200px); the trademark line closes the band
-   in a violet box, 16px in from the left and 25px from the right below 992px, the page width to
-   1199px, then 10px in, the 17px copy 10px inside it (25px from 992px) in 30px padding. The band
-   pads 24px a side below 992px, 32px from it */
+/* the Instagram feed and, under it, the trademark line in its violet box share one width: 16px in
+   from the left and 25px from the right below 992px, the page width to 1199px, then 10px in, at
+   most 1260px and centred. The 17px copy sits 10px inside the box (25px from 992px) in 30px
+   padding. The band pads 24px a side below 992px, 32px from it */
 .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .instagram-wrapper {
   max-width: none;
-  margin-inline: -24px;
+  margin-inline: -8px 1px;
 }
 
 .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .default-content-wrapper {
@@ -4556,7 +4643,7 @@
 @media (width >= 1200px) {
   .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .instagram-wrapper,
   .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .default-content-wrapper {
-    margin-inline: -22px;
+    margin-inline: max(-22px, (100% - 1260px) / 2);
   }
 }
 
@@ -5600,9 +5687,313 @@
   margin: 0;
 }
 
-/* CADBURY page art: section spacing measured on hersheyland.com/cadbury at 1440px */
+/* CADBURY page art: section spacing measured on hersheyland.com/cadbury at 1440px. The hero title
+   is gold-gradient lettering and the hero 740px tall from 992px */
+.hershey-home.cadbury-brand-primary main .columns.callout h2 {
+  color: #e6bc7e;
+}
+
+/* the product sliders' page indicators are white rings, filled when current */
+.hershey-home.cadbury-brand-primary main .cards.product.slider .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-light.svg');
+}
+
+.hershey-home.cadbury-brand-primary main .cards.product.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-light.svg');
+}
+
+/* the brands band heading is gold too (this outranks the block's own colour rule) */
+.hershey-home.cadbury-brand-primary main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > h2 {
+  color: #e6bc7e;
+}
+
+.hershey-home.cadbury-brand-primary main .hero.brand h1 {
+  background: linear-gradient(to left, #d4ab5b 0%, #ffeaaf 50%, #d4ab5b 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary {
+    --hershey-component-hero-brand-square-media-height: 740px;
+  }
+}
+
+/* below 992px the intro ends 10px over the band's foot; on phones the logo tucks 25px up over
+   the photo, with the title 10px under it */
+@media (width < 992px) {
+  .hershey-home.cadbury-brand-primary main .hero.brand .hero-brand-text {
+    padding-bottom: 10px;
+  }
+}
+
+@media (width < 768px) {
+  .hershey-home.cadbury-brand-primary main .hero.brand .hero-brand-logo {
+    position: relative;
+    margin-top: -40px;
+  }
+
+  .hershey-home.cadbury-brand-primary main .hero.brand h1 {
+    padding-top: 10px;
+  }
+}
+
+/* "Chocolate That Goes Beyond What's Expected": centred in 950px (10px in on phones), white 17px
+   copy */
+.hershey-home.cadbury-brand-primary main > div.section.cb-intro {
+  padding: 70px 10px 50px;
+  text-align: center;
+}
+
+@media (width >= 768px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-intro {
+    padding-inline: 25px;
+  }
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-intro > .default-content-wrapper {
+  max-width: 950px;
+  margin-inline: auto;
+  padding: 0;
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-intro h2 {
+  margin: 0 0 0.3em;
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-intro h2 {
+    font-size: 36px;
+  }
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-intro p {
+  margin: 0 0 1.5em;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* the video sits right under the intro on phones (its poster the full width less 25px, the story
+   box 15px in), 20px under it from 992px, and 64px over the product band; the story box copy is
+   500 weight */
+.hershey-home.cadbury-brand-primary main > div.section.cb-video {
+  --hershey-component-columns-video-inset-start-mobile: 0;
+
+  padding: 0 0 64px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-video {
+    padding-top: 20px;
+  }
+}
+
+.hershey-home.cadbury-brand-primary main .columns.video > div > div:last-child p {
+  font-weight: 500;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main .columns.video > div > div:last-child p {
+    margin-top: 10px;
+  }
+}
+
+/* the call-outs are centred below 992px (the history copy 20px wider than its heading, the other
+   two 10px wider than the default), then read from the left edge of their copy column, the
+   history call-out's 50px in; paragraphs sit 14px apart */
+@media (width < 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section.artwork + div.section.cb-callout-a .columns.callout p:not(.button-wrapper) {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  /* the caramel and creme egg call-outs: photos 10px in, copy 40px from the left, 50px from the
+     right */
+  .hershey-home.cadbury-brand-primary main > div.section:is(.cb-callout-a, .cb-callout-b):not(.artwork + .cb-callout-a) {
+    padding-top: 60px;
+    padding-inline: 10px 20px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-callout-b.columns-container {
+    padding-bottom: 10px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section:is(.cb-callout-a, .cb-callout-b):not(.artwork + .cb-callout-a) .columns.callout :is(h2, p:not(.button-wrapper)) {
+    width: calc(100% - 40px);
+    margin-inline: 20px;
+  }
+
+  /* the pills run the copy width (5px further in on the call-outs), the full width on the dessert
+     recipe */
+  .hershey-home.cadbury-brand-primary main .section .columns.callout > div > div a.button.primary {
+    display: block;
+    width: auto;
+    margin-inline: 15px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout > div > div a.button.primary {
+    margin-inline: 0;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-video {
+    padding-bottom: 0;
+  }
+}
+
+/* phones: the See All pill is 300px wide; the brands band pill is pink with white lettering, 10px
+   further in, as on live */
+@media (width < 768px) {
+  .hershey-home.cadbury-brand-primary main .section.cards-container:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+    display: block;
+    width: 300px;
+    margin-inline: auto;
+  }
+
+  .hershey-home.cadbury-brand-primary main > .section:has(> .cards-wrapper > .cards.slider.brands) {
+    --hershey-component-cards-brands-cta-background: #e30488;
+    --hershey-component-cards-brands-cta-background-hover: #e30488;
+    --hershey-component-cards-brands-cta-foreground: #fff;
+  }
+
+  .hershey-home.cadbury-brand-primary main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link {
+    width: calc(100% - 10px);
+    margin-inline: 10px 0;
+  }
+
+  .hershey-home.cadbury-brand-primary main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link::before {
+    content: none;
+  }
+}
+
+/* the intro copy sits 10px from the left and 20px from the right on phones */
+@media (width < 768px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-intro {
+    padding-right: 20px;
+  }
+
+  .hershey-home.cadbury-brand-primary main .columns.video h3 {
+    margin-inline: 23px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun > .columns-wrapper {
+    padding-inline: 20px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square h2 {
+    margin-top: 21px;
+  }
+
+  /* the recipe cards stack, 354px wide, 5px apart */
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .cards.grid > ul {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .cards.grid > ul > li {
+    margin: 5px 9px 0 12px;
+  }
+}
+
+.hershey-home.cadbury-brand-primary main .columns.callout.square h2 + p:has(+ p:not(.button-wrapper)) {
+  margin-bottom: 4px;
+}
+
+/* the dessert recipe call-out: a 735px landscape photo (rounded) beside centred copy, 80px under
+   the band heading, which is 950px wide */
+.hershey-home.cadbury-brand-primary main > div.section.cb-fun > .default-content-wrapper:first-child h2 {
+  max-width: 950px;
+  margin-inline: auto;
+  line-height: 1.3;
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square > div > .columns-img-col img {
+  aspect-ratio: 735 / 413;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* on tablets the dessert photo is nearly square, 20px in */
+@media (width >= 768px) and (width < 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square > div > .columns-img-col img {
+    aspect-ratio: 728 / 648;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun > .columns-wrapper {
+    padding-inline: 20px;
+  }
+}
+
+/* the dessert call-out keeps to the 1260px layout, 37px under the band heading (80px from 992px);
+   the recipe cards follow 40px under it (103px), the More CADBURY Recipes pill 38px under them */
+.hershey-home.cadbury-brand-primary main > div.section.cb-fun > .columns-wrapper {
+  max-width: 1260px;
+  margin: 37px auto 0;
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-fun > .cards-wrapper {
+  margin-top: 40px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun > .columns-wrapper {
+    margin-top: 80px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun > .cards-wrapper {
+    margin-top: 103px;
+  }
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-fun > .cards-wrapper + .default-content-wrapper {
+  margin-top: 38px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section:is(.cb-callout-a, .cb-callout-b) .columns.callout > div > :not(.columns-img-col) {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section:is(.cb-callout-a, .cb-callout-b) .columns.callout p.button-wrapper {
+    padding-left: 25px;
+    text-align: left;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.artwork + div.section.cb-callout-a .columns.callout > div > :not(.columns-img-col) {
+    padding-left: 30px;
+    padding-right: 29px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square > div > .columns-img-col {
+    flex-basis: 735px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square > div > :not(.columns-img-col) {
+    flex: 1 1 0;
+    padding-top: 36px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square h2 {
+    margin-bottom: 25px;
+  }
+}
+
+/* the See All pill sits 52px under the slider (71px from 992px), 45px over the band's foot (93px) */
 .hershey-home.cadbury-brand-primary main div.section.brand-color.cb-shop.cards-container {
-  padding-bottom: 125px;
+  --hershey-component-cards-product-slider-cta-margin-block-start: 52px;
+
+  padding-bottom: 45px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main div.section.brand-color.cb-shop.cards-container {
+    --hershey-component-cards-product-slider-cta-margin-block-start: 71px;
+
+    padding-bottom: 93px;
+  }
 }
 
 .hershey-home.cadbury-brand-primary main div.section.cb-callout-a {
@@ -5614,19 +6005,48 @@
 }
 
 .hershey-home.cadbury-brand-primary main div.section.brand-color-alt.cards-container {
-  padding-bottom: 197px;
+  padding-bottom: 147px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main div.section.brand-color-alt.cards-container {
+    padding-bottom: 209px;
+  }
 }
 
 .hershey-home.cadbury-brand-primary main div.section.cb-fun {
-  padding-block: 16px 0;
+  padding-block: 16px 58px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main div.section.cb-fun {
+    padding-bottom: 75px;
+  }
 }
 
 .hershey-home.cadbury-brand-primary main div.section.brand-color.accordion-container {
-  padding-block: 45px 75px;
+  padding-block: 45px 20px;
+}
+
+@media (width >= 768px) {
+  .hershey-home.cadbury-brand-primary main div.section.brand-color.accordion-container {
+    padding-bottom: 50px;
+  }
 }
 
 .hershey-home.cadbury-brand-primary main div.section.cb-logo {
-  padding-block: 50px 49px;
+  padding-block: 50px 35px;
+}
+
+/* on phones the brands band starts right under the CADBURY script, its eyebrow 41px down */
+@media (width < 768px) {
+  .hershey-home.cadbury-brand-primary main div.section.cb-logo {
+    padding-bottom: 0;
+  }
+
+  .hershey-home.cadbury-brand-primary main div.section.cb-logo + div.section {
+    --hershey-component-cards-brands-band-padding-block-start-mobile: 41px;
+  }
 }
 
 /* ICE BREAKERS page art and spacing (measured on hersheyland.com/ice-breakers at 1440px, 2026-11-04) */

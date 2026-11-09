@@ -13,7 +13,8 @@ function decorateSlider(block, list) {
   sliderId += 1;
   list.id = `cards-slider-${sliderId}`;
   list.tabIndex = 0;
-  // a `single` slider moves one card (and its gap) per click, as the Newest Treats do on hersheyland.com
+  // a `single` slider moves one card (and its gap) per click, as the Newest Treats do on
+  // hersheyland.com
   const single = block.classList.contains('single');
   const cardStep = () => list.firstElementChild.offsetWidth
     + (parseFloat(getComputedStyle(list).columnGap) || 0);
