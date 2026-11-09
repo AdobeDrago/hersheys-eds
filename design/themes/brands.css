@@ -1098,6 +1098,7 @@
   --hershey-component-cards-grid-cta-background-hover: #268fc7;
   --hershey-component-cards-product-slider-cta-background: #007bbd;
   --hershey-component-cards-product-slider-cta-foreground: #fff;
+  --hershey-component-cards-product-slider-cta-border-width: 3px;
   --hershey-component-cards-product-slider-cta-background-hover: #268fc7;
   --hershey-component-cards-brands-cta-background: #007bbd;
   --hershey-component-cards-brands-cta-foreground: #fff;
@@ -4230,6 +4231,13 @@
 
 .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .columns-wrapper:first-child {
   margin-bottom: 309px;
+}
+
+/* the "Did You Know?" strip in the pale top of the gradient keeps the brown copy */
+.hershey-home.jolly-rancher-primary main > div.section.jr-fun .columns.jr-fact,
+.hershey-home.jolly-rancher-primary main > div.section.jr-fun .columns.jr-fact h3,
+.hershey-home.jolly-rancher-primary main > div.section.jr-fun .columns.jr-fact p {
+  color: #3f000b;
 }
 
 /* the recipe and craft headings are brown on the purple */
