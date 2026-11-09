@@ -2975,64 +2975,87 @@
  * (a "Did You Know?" box on its own backdrop), `kk-art` (frosted donut stripes) and `kk-footer`
  * (the wave into the brands). The artwork is decoration, kept in /icons.
  */
+
+/* the hero, as on hersheyland.com/kit-kat: below 992px the break animation is a square the width of
+   the page above the centred copy; from 992px the band is 740px tall, the copy fills the left
+   44.5% (centred down the band, 7vw in) and the animation the right 55.5% */
 .hershey-home.kit-kat-primary main > div.section.kk-hero {
   --hershey-component-hero-brand-band-background: transparent;
 
   position: relative;
   box-sizing: border-box;
-  min-height: 597px;
   padding: 0;
   background: #d30009;
 }
 
-.hershey-home.kit-kat-primary main > div.section.kk-hero::after {
+.hershey-home.kit-kat-primary main > div.section.kk-hero::before {
   content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 791px;
-  height: 100%;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
   background: url('/icons/kit-kat-hero-break-animation.gif') center / contain no-repeat;
   pointer-events: none;
 }
 
 .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-content {
-  display: grid;
-  grid-template-columns: 634px 1fr;
-  min-height: 597px;
+  display: block;
+  min-height: 0;
   background: transparent;
 }
 
 .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text {
   position: relative;
   z-index: 1;
-  grid-area: 1 / 1;
   box-sizing: border-box;
   justify-content: flex-start;
-  width: 634px;
-  padding: 149px 0 0 116px;
+  width: auto;
+  min-height: 0;
+  padding: 15px 20px;
   background: transparent;
-  text-align: left;
+  text-align: center;
 }
 
-.hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo img {
-  width: 247px;
+/* the logo is half the copy column wide, at its own shape */
+.hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo picture {
   height: auto;
 }
 
+.hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo img {
+  display: block;
+  width: 50%;
+  height: auto;
+  margin: 0 auto;
+}
+
 .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text p {
-  width: 423px;
-  margin: 50px 0 0;
+  width: auto;
+  max-width: none;
+  margin: 15px 0 25.5px;
   font-size: 17px;
   line-height: 1.5;
 }
 
+/* the pill's paragraph is only as tall as the pill */
 .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text p.button-wrapper {
-  margin-top: 31px;
+  display: flex;
+  margin: 0 10px;
 }
 
 .hershey-home.kit-kat-primary main > div.section.kk-hero a.button:any-link {
-  min-width: 250px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 12px 0;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .hershey-home.kit-kat-primary main > div.section.kk-hero h1 {
@@ -3041,6 +3064,55 @@
   height: 1px;
   overflow: hidden;
   clip-path: inset(50%);
+}
+
+@media (width >= 992px) {
+  .hershey-home.kit-kat-primary main > div.section.kk-hero::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55.5%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-content {
+    display: grid;
+    grid-template-columns: 44.5% 1fr;
+    align-items: center;
+    min-height: 740px;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text {
+    grid-area: 1 / 1;
+    padding: 15px 25px 15px calc(15px + 7vw);
+    text-align: left;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo {
+    margin-bottom: 35px;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo img {
+    margin: 0;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text p {
+    margin: 0 0 30px;
+    padding-right: 70px;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text p.button-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero a.button:any-link {
+    width: 250px;
+    padding: 14px 0;
+    font-size: 18px;
+    line-height: 27px;
+  }
 }
 
 .hershey-home.kit-kat-primary main > div.section.kk-peppermint {
@@ -3122,15 +3194,26 @@
   background-color: #f9dfe0;
 }
 
-/* each red or brown band reaches a pixel over the one above, so no hairline of the band above (or
-   the white page) shows where a band ends part-way through a pixel */
-.hershey-home.kit-kat-primary main > div.section.brand-color + div.section.brand-color-alt {
+/* each plain red or brown band reaches a pixel over the one above, so no hairline of the band above
+   (or the white page) shows where a band ends part-way through a pixel; bands drawn on artwork
+   (the stripes, the frosted donut, the recipes) start in the artwork's own colour, so they don't */
+.hershey-home.kit-kat-primary main > div.section.brand-color + div.section.brand-color-alt:not(.kk-footer) {
   box-shadow: 0 -1px 0 #502c1e;
 }
 
-.hershey-home.kit-kat-primary main > div.section.brand-color-alt + div.section.brand-color,
-.hershey-home.kit-kat-primary main > div.section.brand-color + div.section.brand-color {
+.hershey-home.kit-kat-primary main > div.section.brand-color-alt + div.section.brand-color:not(.kk-art, .kk-dyk-1, .kk-dyk-3, :has(> .cards-wrapper > .cards.grid)),
+.hershey-home.kit-kat-primary main > div.section.brand-color + div.section.brand-color:not(.kk-art, .kk-dyk-1, .kk-dyk-3, :has(> .cards-wrapper > .cards.grid)) {
   box-shadow: 0 -1px 0 #d30009;
+}
+
+/* the product slider's page indicators are white rings, filled when current, as on
+   hersheyland.com/kit-kat */
+.hershey-home.kit-kat-primary main .cards.product.slider .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-light.svg');
+}
+
+.hershey-home.kit-kat-primary main .cards.product.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-light.svg');
 }
 
 /*
