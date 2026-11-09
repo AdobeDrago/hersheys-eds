@@ -806,6 +806,9 @@
 
   /* the brands band: white eyebrow and brand names (the heading is gold, below) */
   --hershey-component-cards-brands-color-foreground: #fff;
+
+  /* product photos turn lavender while the card is hovered */
+  --hershey-component-cards-product-slider-image-background-hover: #ebe3fc;
 }
 
 /* headings are gold and copy white on both purples, as on live; product names, sizes and FAQ
@@ -831,6 +834,14 @@
 
 .hershey-home.cadbury-brand-primary main .section.brand-color-alt {
   --hershey-component-cards-product-band-background: #5c398f;
+}
+
+/* inline links in the call-out copy are bold white with a white rule, as on live */
+.hershey-home.cadbury-brand-primary main .section:is(.brand-color, .brand-color-alt) .columns.callout p:not(.button-wrapper) a {
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .hershey-home.cadbury-brand-primary main .section:is(.brand-color, .brand-color-alt) .default-content-wrapper > h2,
