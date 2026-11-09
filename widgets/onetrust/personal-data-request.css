@@ -1,0 +1,11 @@
+.personal-data-request .personal-data-request-frame {
+  width: 100%;
+  background: #fff;
+}
+
+.personal-data-request .personal-data-request-iframe {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  border: 0;
+}

@@ -317,7 +317,10 @@ async function loadEager(doc) {
  * @param {Element} doc The container element
  */
 async function loadLazy(doc) {
-  loadHeader(doc.querySelector('body > header'));
+  // pages can opt out of the site header with `header: off` in page metadata
+  if (getMetadata('header').toLowerCase() !== 'off') {
+    loadHeader(doc.querySelector('body > header'));
+  }
 
   const main = doc.querySelector('main');
   await loadSections(main);
