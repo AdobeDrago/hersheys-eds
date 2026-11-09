@@ -318,8 +318,12 @@ async function loadEager(doc) {
  */
 async function loadLazy(doc) {
   // pages can opt out of the site header with `header: off` in page metadata
-  if (getMetadata('header').toLowerCase() !== 'off') {
-    loadHeader(doc.querySelector('body > header'));
+  const header = doc.querySelector('body > header');
+  if (getMetadata('header').toLowerCase() === 'off') {
+    // the empty header still reserves the nav height, so drop it
+    header.remove();
+  } else {
+    loadHeader(header);
   }
 
   const main = doc.querySelector('main');
