@@ -484,9 +484,11 @@
   --hershey-component-cards-product-slider-cta-background: #db350f;
   --hershey-component-cards-product-slider-cta-foreground: #fff;
   --hershey-component-cards-product-slider-cta-background-hover: #e2603f;
-  --hershey-component-cards-brands-cta-background: #db350f;
+
+  /* the brands band pill stays blue */
+  --hershey-component-cards-brands-cta-background: #007bbd;
   --hershey-component-cards-brands-cta-foreground: #fff;
-  --hershey-component-cards-brands-cta-background-hover: #e2603f;
+  --hershey-component-cards-brands-cta-background-hover: #268fc7;
 
   /* spacing measured on hersheyland.com/payday: square call-outs on a 90px foot, a FAQ list that
      runs to the foot of its band and a brands band whose tiles start 48px down */
