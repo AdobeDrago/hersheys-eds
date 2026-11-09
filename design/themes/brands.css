@@ -1026,6 +1026,10 @@
   --hershey-component-cards-brands-cta-background: #fff;
   --hershey-component-cards-brands-cta-foreground: #0074c7;
   --hershey-component-cards-brands-cta-background-hover: #dfeef8;
+
+  /* the secondary call-out link is bold white with a white rule, as on live */
+  --hershey-component-columns-callout-link-color: #fff;
+  --hershey-component-columns-callout-link-color-hover: #fff;
 }
 
 .hershey-home.ice-breakers-primary main .section.brand-color {
