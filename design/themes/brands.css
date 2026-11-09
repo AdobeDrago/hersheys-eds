@@ -1248,11 +1248,14 @@
  * section type: the main band, the alternate band and plain white sections.
  */
 .hershey-home.shaqalicious-primary {
-  --hershey-component-hero-brand-band-background: #472180;
+  --hershey-component-hero-brand-band-background: #5844f5;
   --hershey-component-hero-brand-color-foreground: #fff;
-  --hershey-component-hero-brand-square-media-height: 597px;
-  --hershey-system-color-surface-brand-band: #472180;
+  --hershey-component-hero-brand-square-media-height: 740px;
+
+  /* the bands are clear over the page gradient (see the SHAQ-A-LICIOUS page art below) */
+  --hershey-system-color-surface-brand-band: transparent;
   --hershey-system-color-text-brand-band: #fff;
+  --hershey-component-cards-brands-color-foreground: #fff;
 
   /* product slider, recipe and FAQ bands */
   --hershey-component-cards-product-slider-band-padding-block-start: 31px;
@@ -1279,7 +1282,7 @@
 }
 
 .hershey-home.shaqalicious-primary main .section.brand-color {
-  --hershey-component-cards-product-band-background: #472180;
+  --hershey-component-cards-product-band-background: transparent;
   --hershey-component-cards-product-heading-foreground: #fff;
   --hershey-component-cards-product-slider-foreground: #fff;
   --hershey-component-cards-product-slider-size-color: #fff;
@@ -3729,10 +3732,21 @@
  * `shaq-hero`, `shaq-fact`, `shaq-about` (the brand shapes), `shaq-find` (product slider on colour
  * rays), `shaq-follow` (the Instagram feature, drawn here), `shaq-faq` (stars) and `shaq-brands`.
  * The artwork is decoration, kept in /icons.
+ *
+ * One gradient, royal violet into lavender, runs from the foot of the hero to the top of the brand
+ * shapes under the brands band (the shapes' 44.93vw at the foot of the page), as on live.
  */
-.hershey-home.shaqalicious-primary main > div.section.shaq-hero {
-  --hershey-component-hero-brand-square-media-height: 597px;
+.hershey-home.shaqalicious-primary main {
+  --shaq-gradient-start: 1290px;
 
+  background: linear-gradient(#5844f5 var(--shaq-gradient-start), #b769ff calc(100% - var(--shaq-gradient-end, 44.93vw)));
+}
+
+.hershey-home.shaqalicious-primary main > div.section.breadcrumb-trail-container {
+  background: #fff;
+}
+
+.hershey-home.shaqalicious-primary main > div.section.shaq-hero {
   padding: 0;
 }
 
@@ -3743,6 +3757,32 @@
   height: 83px;
   margin-bottom: 20px;
   background: url('/icons/shaqalicious-logo.svg') left center / contain no-repeat;
+}
+
+/* below 992px the intro is inset 20px within the title's width */
+@media (width < 992px) {
+  .hershey-home.shaqalicious-primary main > div.section.shaq-hero .hero-brand-text p {
+    padding-inline: 20px;
+  }
+}
+
+/* from 992px: the logo is 120px tall and half the copy's width, over a 52px title */
+@media (width >= 992px) {
+  .hershey-home.shaqalicious-primary main {
+    --shaq-gradient-start: 795px;
+  }
+
+  .hershey-home.shaqalicious-primary main > div.section.shaq-hero .hero-brand-text::before {
+    width: 50%;
+    height: 120px;
+    margin-bottom: 0;
+  }
+
+  .hershey-home.shaqalicious-primary main > div.section.shaq-hero h1 {
+    margin-bottom: 21px;
+    font-size: 52px;
+    line-height: 62.4px;
+  }
 }
 
 /* the three call-outs sit on 50px gaps: 50/0, 50/50 and 0/50 */
@@ -3808,7 +3848,7 @@
   box-sizing: border-box;
   min-height: 1123px;
   padding: 90px 0 0;
-  background: #472180 url('/icons/shaqalicious-brand-shapes.svg') center / cover no-repeat;
+  background: url('/icons/shaqalicious-brand-shapes.svg') center / cover no-repeat;
   text-align: center;
 }
 
@@ -3843,7 +3883,7 @@
   --hershey-component-cards-product-slider-band-padding-block-start: 101px;
   --hershey-component-cards-product-slider-band-padding-block-end: 96px;
 
-  background: url('/icons/shaqalicious-color-rays-top.svg') center top / 100% auto no-repeat, url('/icons/shaqalicious-color-rays-btm.svg') center bottom / 100% auto no-repeat, #472180;
+  background: url('/icons/shaqalicious-color-rays-top.svg') center top / 100% auto no-repeat, url('/icons/shaqalicious-color-rays-btm.svg') center bottom / 100% auto no-repeat;
 }
 
 .hershey-home.shaqalicious-primary main > div.section.shaq-follow {
@@ -3892,15 +3932,19 @@
   --hershey-component-accordion-brand-section-padding-block-start: 160px;
   --hershey-component-accordion-brand-section-padding-block-end: 67px;
 
-  background: #472180 url('/icons/shaqalicious-faq-stars.svg') center / cover no-repeat;
+  background: url('/icons/shaqalicious-faq-stars.svg') center / cover no-repeat;
 }
 
+/* the brand shapes (44.93vw tall, at the foot of the band) start 361px under the brands heading, and
+   the footer ribbon runs over their lower part */
 .hershey-home.shaqalicious-primary main > div.section.shaq-brands {
   --hershey-component-cards-brands-band-padding-block-start: 48px;
-  --hershey-component-cards-brands-band-padding-block-end: 44px;
-  --hershey-component-cards-brands-band-padding-block-end-wide: 44px;
+  --hershey-component-cards-brands-band-padding-block-end-mobile: 290px;
+  --hershey-component-cards-brands-band-padding-block-end-tablet: 508px;
+  --hershey-component-cards-brands-band-padding-block-end: calc(106px + 44.93vw);
+  --hershey-component-cards-brands-band-padding-block-end-wide: calc(106px + 44.93vw);
 
-  background: #472180 url('/icons/shaqalicious-footer-pattern.svg') center bottom / 100% auto no-repeat;
+  background: url('/icons/shaqalicious-footer-pattern.svg') center bottom / 100% auto no-repeat;
 }
 
 /*
