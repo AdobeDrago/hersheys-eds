@@ -4841,6 +4841,16 @@
   object-fit: cover;
 }
 
+/* the brand logo above the title: live art, not authored in the page */
+.hershey-home.bubbleyum-primary main .hero.brand .hero-brand-text::before {
+  content: '';
+  display: block;
+  width: 252px;
+  height: 120px;
+  margin-bottom: 10px;
+  background: url('/icons/bubble-yum-logo.svg') left center / contain no-repeat;
+}
+
 .hershey-home.bubbleyum-primary main > div.section:is(.by-a, .by-c, .by-d, .by-pink, .by-dyk) {
   box-sizing: border-box;
 }
