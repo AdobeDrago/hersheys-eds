@@ -1044,6 +1044,27 @@
   text-decoration: none;
 }
 
+/* the story box is see-through, and its links are underlined (the stories variant's border) only while the
+   tile is hovered or focused, not at rest */
+.hershey-home.homepage .newest .cards.slider.stories > ul > li {
+  aspect-ratio: 5 / 7;
+}
+
+.hershey-home.homepage .newest .cards.stories .cards-card-body {
+  inset: calc(100% * 5 / 7) 0 auto;
+  padding: 12px 0 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.hershey-home.homepage .newest .cards.stories .cards-card-body a:any-link {
+  border-bottom-color: transparent;
+}
+
+.hershey-home.homepage .newest .cards.stories > ul > li:is(:hover, :focus-within) .cards-card-body a:any-link {
+  border-bottom-color: currentcolor;
+}
+
 /* hero: from 900px a 740px band, the text on the left half and the photo filling the right half */
 @media (width >= 900px) {
   .hershey-home.homepage main > .section:first-child:has(> .columns-wrapper > .columns.homepage-hero) {
