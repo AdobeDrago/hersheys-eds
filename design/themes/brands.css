@@ -1079,6 +1079,9 @@
   --hershey-component-cards-brands-cta-foreground: #fff;
   --hershey-component-cards-brands-cta-background-hover: #d6e2f1;
 
+  /* brands band copy is white on the royal blue */
+  --hershey-component-cards-brands-color-foreground: #fff;
+
   /* spacing measured on hersheyland.com/jolly-rancher: a FAQ band that ends 110px sooner than the default */
   --hershey-component-columns-callout-section-padding-block-start: 0;
   --hershey-component-columns-callout-section-padding-block-end: 50px;
@@ -3507,8 +3510,9 @@
  * JOLLY RANCHER page art (`theme: jolly-rancher-primary`), measured on hersheyland.com/jolly-rancher
  * at 1440px (2026-11-04). Section Metadata styles name the bands: `jr-callout-a` and `jr-callout-b`
  * (square call-out spacing), `jr-poll` (the Elfsight flavor debate), `jr-fact-band` (a "Did You
- * Know?" strip), `jr-fun` (recipes and crafts on the purple gradient) and `jr-footer`. The blue
- * gradient runs on from the shop slider through the "What's in a Name?" strip to the Berry callout.
+ * Know?" strip), `jr-fun` (recipes and crafts on the purple gradient, ending in the yellow-edged
+ * curve) and `jr-footer` (the candy silhouette into the brands band). The blue gradient runs on
+ * from the shop slider through the "What's in a Name?" strip to the Berry callout.
  */
 .hershey-home.jolly-rancher-primary main > div.section:is(.jr-callout-a, .jr-callout-b, .jr-poll, .jr-fact-band) {
   box-sizing: border-box;
@@ -3586,10 +3590,13 @@
   color: #3f000b;
 }
 
+/* the band ends in the white curve with its yellow edge, covering its last 170px (180px from
+   992px) as live's art box does: as wide as the page, or wider to keep its height */
 .hershey-home.jolly-rancher-primary main > div.section.jr-fun {
   box-sizing: border-box;
   padding: 50px 0 198px;
   background:
+    url('/icons/jolly-rancher-curved-divisional.svg') center bottom / max(100%, 1661px) auto no-repeat,
     url('/icons/jolly-rancher-purple-shapes.svg') center 375px / auto 1353px no-repeat,
     linear-gradient(#f1ffff 10%, #ffc6e3 20%, #c84b9b 35%, #962991 100%);
   color: #3f000b;
@@ -3599,32 +3606,119 @@
   margin-bottom: 309px;
 }
 
-.hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper {
-  margin-bottom: -69px;
+/* the recipe and craft headings are brown on the purple */
+.hershey-home.jolly-rancher-primary main > div.section.jr-fun > .default-content-wrapper > h2 {
+  color: #3f000b;
 }
 
 .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .default-content-wrapper > p + h2 {
   padding-top: 142px;
 }
 
+@media (width >= 992px) {
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun {
+    padding-bottom: 191px;
+    background-size: max(100%, 1759px) auto, auto 1353px, auto;
+  }
+
+  /* the craft cards: three centred cards growing with the page (245px wide at 1280px) 35px apart
+     (55px from 1400px), the photo 128/245 of their width; the button fits its text 45px under them */
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .default-content-wrapper > p + h2 {
+    margin-bottom: 35px;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper {
+    margin-bottom: 0;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper + .default-content-wrapper {
+    margin-top: 45px;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards.grid > ul {
+    grid-template-columns: repeat(3, calc(28vw - 113px));
+    gap: 35px;
+    justify-content: center;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards.grid > ul > li {
+    margin: 0;
+    box-shadow: 0 0 12px rgb(39 1 7 / 8%);
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards-card-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 245 / 128;
+    object-fit: cover;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards-card-body {
+    padding: 15px 10px;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards-card-body h3 {
+    margin: 0;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper + .default-content-wrapper a.button.primary {
+    width: auto;
+    padding: 17px 20px;
+    line-height: 28px;
+  }
+}
+
+/* from 1400px the row sits 10px left of centre, as live's slider does */
+@media (width >= 1400px) {
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards.grid > ul {
+    grid-template-columns: repeat(3, calc(27.7vw - 129px));
+    gap: 55px;
+    translate: -10px 0;
+  }
+}
+
+/* the FAQ: brown heading and questions on the hard candies art (covering the band), light grey
+   rules and blue +/-; the open question turns near-black and the others grey */
 .hershey-home.jolly-rancher-primary main > div.section:is(.instagram-container:not(.jr-poll), :has(> .accordion-wrapper)) {
-  --hershey-component-accordion-brand-section-padding-block-end: 250px;
+  --hershey-component-accordion-brand-section-padding-block-start-mobile: 20px;
+  --hershey-component-accordion-brand-section-padding-block-end: 110px;
   --hershey-component-accordion-label-color: #3f000b;
-  --hershey-component-accordion-label-color-inactive: #3f000b;
-  --hershey-component-accordion-brand-label-color-inactive: #3f000b;
+  --hershey-component-accordion-label-color-inactive: #999;
+  --hershey-component-accordion-brand-label-color-inactive: #999;
   --hershey-component-accordion-brand-answer-color: #3f000b;
   --hershey-component-accordion-brand-link-color: #3f000b;
-  --hershey-component-accordion-border-color: #3f000b;
-  --hershey-component-accordion-icon-color: #3f000b;
+  --hershey-component-accordion-border-color: #e1e1e1;
+  --hershey-component-accordion-icon-color: #003594;
 
   background: #fff;
   color: #3f000b;
 }
 
+.hershey-home.jolly-rancher-primary main > div.section:has(> .accordion-wrapper):not(.jr-poll) {
+  background: #fff url('/icons/jolly-rancher-faq-candies.webp') center / cover no-repeat;
+}
+
+.hershey-home.jolly-rancher-primary main > div.section:has(> .accordion-wrapper) > .default-content-wrapper > h2 {
+  color: #3f000b;
+}
+
+.hershey-home.jolly-rancher-primary main > div.section:has(> .accordion-wrapper) .accordion-item[open] > .accordion-item-label {
+  color: #1b1b1b;
+}
+
+/* white, then the blue candy silhouette (90px, 180px from 992px) running into the brands band */
 .hershey-home.jolly-rancher-primary main > div.section.jr-footer {
-  min-height: 180px;
-  padding: 0;
-  background: #962991 url('/icons/jolly-rancher-curved-divisional.svg') center / cover no-repeat;
+  min-height: 90px;
+  padding: 45px 0 0;
+  background: #fff url('/icons/jolly-rancher-candies-silhouette.svg') center / cover no-repeat;
+  background-origin: content-box;
+}
+
+@media (width >= 992px) {
+  .hershey-home.jolly-rancher-primary main > div.section.jr-footer {
+    min-height: 180px;
+    padding-top: 90px;
+  }
 }
 
 /*
