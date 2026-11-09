@@ -4554,6 +4554,12 @@
   }
 }
 
+/* the product slider's arrows stay white and wrap round (back from the first page goes to the
+   last), as on hersheyland.com/shaqalicious; cards.js reads the switch */
+.hershey-home.shaqalicious-primary main .cards.product.slider {
+  --cards-slider-wrap: 1;
+}
+
 /* the product slider's page indicators are white rings, filled when current, as on
    hersheyland.com/shaqalicious */
 .hershey-home.shaqalicious-primary main .cards.product.slider .cards-slider-dot {

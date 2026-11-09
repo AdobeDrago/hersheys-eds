@@ -18,6 +18,11 @@ function decorateSlider(block, list) {
   const single = block.classList.contains('single');
   const cardStep = () => list.firstElementChild.offsetWidth
     + (parseFloat(getComputedStyle(list).columnGap) || 0);
+  // a brand theme may let the arrows wrap round (`--cards-slider-wrap: 1`), as the SHAQ-A-LICIOUS
+  // product slider does on hersheyland.com: back from the first page goes to the last, and on
+  const wraps = () => getComputedStyle(block).getPropertyValue('--cards-slider-wrap').trim() === '1';
+  const atStart = () => list.scrollLeft <= 1;
+  const atEnd = () => list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
   const controls = document.createElement('div');
   controls.className = 'cards-slider-controls';
   const buttons = [-1, 1].map((direction) => {
@@ -27,10 +32,12 @@ function decorateSlider(block, list) {
     button.setAttribute('aria-label', direction < 0 ? 'Previous cards' : 'Next cards');
     button.setAttribute('aria-controls', list.id);
     button.addEventListener('click', () => {
-      list.scrollBy({
-        left: direction * (single ? cardStep() : list.clientWidth),
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
-      });
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+      if (wraps() && (direction < 0 ? atStart() : atEnd())) {
+        list.scrollTo({ left: direction < 0 ? list.scrollWidth : 0, behavior });
+        return;
+      }
+      list.scrollBy({ left: direction * (single ? cardStep() : list.clientWidth), behavior });
     });
     controls.append(button);
     return button;
@@ -55,8 +62,9 @@ function decorateSlider(block, list) {
     return { inset, gap, step };
   };
   const update = () => {
-    buttons[0].disabled = list.scrollLeft <= 1;
-    buttons[1].disabled = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
+    const wrap = wraps();
+    buttons[0].disabled = !wrap && atStart();
+    buttons[1].disabled = !wrap && atEnd();
     // nothing to scroll: every card is visible, so the arrows and page indicator are not needed
     const fits = list.scrollWidth <= list.clientWidth + 1;
     controls.hidden = fits;
@@ -65,8 +73,7 @@ function decorateSlider(block, list) {
     // one kiss-shaped indicator per page of cards
     const { inset, gap, step } = measure();
     const pages = Math.max(1, Math.ceil((list.scrollWidth - inset + gap) / step - 0.01));
-    const atEnd = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
-    const current = atEnd ? pages - 1 : Math.min(pages - 1, Math.round(list.scrollLeft / step));
+    const current = atEnd() ? pages - 1 : Math.min(pages - 1, Math.round(list.scrollLeft / step));
     if (dots.children.length !== pages) {
       dots.replaceChildren(...Array.from({ length: pages }, (_, page) => {
         const dot = document.createElement('button');
