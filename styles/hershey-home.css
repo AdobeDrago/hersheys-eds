@@ -1333,6 +1333,12 @@
   --reveal-duration: 1s;
 }
 
+/* "Welcome to / Hersheyland" always breaks after "to": the width tracks the font size, so wide screens
+   do not pull the heading onto one line */
+.hershey-home.homepage .columns.homepage-hero h1 {
+  max-width: 8em;
+}
+
 /* copy sizes, as on live: 20px/30px in the hero, movie and history bands; 17px/25.5px in the creme and
    gingerbread bands and the recipe panel; all weight 500 */
 .hershey-home.homepage .columns.homepage-hero p,
