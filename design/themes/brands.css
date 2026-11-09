@@ -5087,6 +5087,24 @@
   .hershey-home.kisses-primary .cards.wheel .cards-wheel-copy h2 {
     font-size: 36px;
   }
+
+  /* the call-out pills fit their text, and the pill and link sit centred in one row with a gap
+     of half the copy column less 161px, as on hersheyland.com/kisses; the copy column is the
+     cell less the copy's 20px margins */
+  .hershey-home.kisses-primary main .columns.callout > div > div:not(.columns-img-col) {
+    justify-content: center;
+    column-gap: max(0px, 50% - 181px);
+  }
+
+  .hershey-home.kisses-primary main .columns.callout > div > div:not(.columns-img-col) > p.button-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 0;
+  }
+
+  .hershey-home.kisses-primary main .columns.callout a.button.primary {
+    width: auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
