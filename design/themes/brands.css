@@ -2545,6 +2545,64 @@
   border: 2px solid #cc0a12;
 }
 
+/* call-out pills span the copy box below 768px: less 25px either side when alone, the whole box
+   when a text link follows */
+@media (width < 768px) {
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div p.button-wrapper {
+    padding-inline: 25px;
+  }
+
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div p.button-wrapper > a.button.primary {
+    display: block;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* below 992px a pill followed by a text link is measured on the whole copy box (60% of it from
+   768px), and the link sits 20px under it (the pill keeps its 10px margin below) */
+@media (width < 992px) {
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper {
+    padding-inline: 0;
+  }
+
+  .hershey-home.dots-pretzels-primary main .columns.callout p.button-wrapper:has(> .secondary) {
+    margin-top: 10px;
+  }
+}
+
+@media (width >= 768px) and (width < 992px) {
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper > a.button.primary {
+    width: 60%;
+    max-width: none;
+  }
+}
+
+/* from 992px a pill and a text link fit their text and spread with equal space around each across
+   the copy column less 50px either side, wrapping when they don't fit (the cell's padding grows by
+   50px and the heading and copy reach back out over it) */
+@media (width >= 992px) {
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) {
+    padding-inline: 60px;
+  }
+
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > :not(.button-wrapper) {
+    width: calc(100% + 60px);
+    margin-inline: -30px;
+  }
+
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > p.button-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) a.button.primary {
+    width: auto;
+  }
+}
+
 /*
  * ZERO brand theme (`theme: zero-primary` page metadata).
  * Overrides only the brand page tokens that differ from the default Hershey look: the frosty blue
