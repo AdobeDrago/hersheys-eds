@@ -6,6 +6,11 @@ import { loadCSS } from './aem.js';
  * The effects are in styles/scroll-animations.css:
  * - `rise`: fades in while rising its own height (animate.css fadeInUp on hersheyland.com)
  * - `fade` and `fade-up` (rises 100px): AOS fade and fade-up on hersheyland.com
+ * Extra Section Metadata styles tune a section, as the call-outs on /hersheys are tuned on
+ * hersheyland.com: `animate-photo-<ms>` sets the photos' duration, `animate-secondary-<ms>` the
+ * text links' (e.g. 3000 for "Discover the Hershey Legacy"), and `animate-replay` makes the
+ * parts hide again once they scroll back below the viewport, so they animate in each time they
+ * come up into view (otherwise they animate once).
  * `parts` maps selectors to each one's duration (ms). A part starts once its top is `offset` px
  * into the viewport, measured where it will end up; `offset` grows by `offsetStep` for each next
  * part of the section, and `delay` (ms) staggers them the same way. `from` is the opacity a part
@@ -37,6 +42,12 @@ const STYLES = {
   },
 };
 
+// styles that change one kind of part's duration: [style pattern, the parts' selector]
+const DURATIONS = [
+  [/^animate-photo-(\d+)$/, 'picture img'],
+  [/^animate-secondary-(\d+)$/, 'a.button.secondary'],
+];
+
 /** Selector for the sections this module animates. */
 export const ANIMATED_SECTIONS = Object.keys(STYLES).map((style) => `.section.${style}`).join(', ');
 
@@ -52,7 +63,8 @@ function drop(part, effect) {
 }
 
 /**
- * Hides each part of the animated sections until it scrolls into view, then plays its effect once.
+ * Hides each part of the animated sections until it scrolls into view, then plays its effect (once,
+ * or each time it comes back into view with `animate-replay`).
  * @param {Element} main The main element, with its sections loaded
  */
 export default async function scrollAnimations(main) {
@@ -63,10 +75,18 @@ export default async function scrollAnimations(main) {
   await loadCSS(`${window.hlx.codeBasePath}/styles/scroll-animations.css`);
   sections.forEach((section) => {
     const rule = STYLES[Object.keys(STYLES).find((style) => section.classList.contains(style))];
-    const parts = Object.entries(rule.parts)
-      .flatMap(([selector, duration]) => [...section.querySelectorAll(selector)]
-        .map((part) => [part, duration]));
-    parts.forEach(([part, duration], index) => {
+    const replay = section.classList.contains('animate-replay');
+    const timed = { ...rule.parts };
+    DURATIONS.forEach(([pattern, selector]) => {
+      const match = [...section.classList].map((name) => name.match(pattern)).find(Boolean);
+      if (match) timed[selector] = Number(match[1]);
+    });
+    // a part that several selectors match keeps the last one's duration
+    const parts = new Map();
+    Object.entries(timed).forEach(([selector, duration]) => {
+      section.querySelectorAll(selector).forEach((part) => parts.set(part, duration));
+    });
+    [...parts].forEach(([part, duration], index) => {
       // measured before the part is moved down
       const margin = drop(part, rule.effect) - (rule.offset || 0) - (rule.offsetStep || 0) * index;
       part.classList.add('scroll-animate', `scroll-animate-${rule.effect}`);
@@ -74,11 +94,19 @@ export default async function scrollAnimations(main) {
       part.style.setProperty('--scroll-animate-delay', `${(rule.delay || 0) * index}ms`);
       if (rule.from) part.style.setProperty('--scroll-animate-from', rule.from);
       const observer = new IntersectionObserver((entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        observer.disconnect();
+        if (!entries[entries.length - 1].isIntersecting) return;
         part.classList.add('scroll-animate-shown');
+        if (!replay) observer.disconnect();
       }, { rootMargin: `0px 0px ${margin}px 0px` });
       observer.observe(part);
+      if (!replay) return;
+      // as on hersheyland.com, a part is hidden again as soon as its top is back below the viewport
+      new IntersectionObserver((entries) => {
+        const entry = entries[entries.length - 1];
+        if (!entry.isIntersecting && entry.boundingClientRect.top >= window.innerHeight) {
+          part.classList.remove('scroll-animate-shown');
+        }
+      }).observe(part);
     });
   });
 }
