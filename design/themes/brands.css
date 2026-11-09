@@ -3536,6 +3536,12 @@
   line-height: 1;
 }
 
+/* the brand name inside a heading is red, authored as bold text */
+.hershey-home.sour-strips-primary main :is(h2, h3) strong {
+  color: var(--ss-red);
+  font-weight: inherit;
+}
+
 .hershey-home.sour-strips-primary main a.button.primary:is(:hover, :focus-visible) {
   background-color: #fff;
   color: var(--ss-red);
@@ -3631,8 +3637,9 @@
 }
 
 .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) > .columns-wrapper {
+  width: min(1260px, 100% - 20px);
   max-width: none;
-  margin: 0 10px;
+  margin-inline: auto;
 }
 
 .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout > div > .columns-img-col img {
@@ -3669,6 +3676,11 @@
 
 .hershey-home.sour-strips-primary main > div.section.ss-about .columns.callout p.button-wrapper {
   padding: 0 5px;
+}
+
+/* the About and Bite pills have a 2px rule in their own colour, as on live */
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout a.button.primary {
+  border: 2px solid var(--ss-red);
 }
 
 .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout a.button.primary {
@@ -3730,6 +3742,7 @@
 }
 
 .hershey-home.sour-strips-primary main > div.section.ss-icons .columns h3 {
+  white-space: nowrap;
   margin: 15px 0 0;
   color: #fff;
   font-size: 21px;
@@ -3750,7 +3763,8 @@
 }
 
 .hershey-home.sour-strips-primary main > div.section.ss-flavors > .cards-wrapper {
-  max-width: none;
+  max-width: 1260px;
+  margin-inline: auto;
   padding: 0;
 }
 
@@ -3916,6 +3930,84 @@
   overflow: hidden;
 }
 
+/* the footer wave runs 70px over the foot of the bags, as on live */
+@media (width >= 992px) {
+  .hershey-home.sour-strips-primary main > div.section.ss-fan {
+    margin-bottom: -70px;
+  }
+
+  .hershey-home.sour-strips-primary footer {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(transparent 70px, #f8f8f8 70px);
+  }
+
+  .hershey-home.sour-strips-primary footer :is(.footer, .newsletter) {
+    background-color: transparent;
+  }
+}
+
+/* the SOUR STRIPS header: its logo and three links on white, 107px tall, as on live (the page points
+   `nav` at /sour-strips-nav) */
+@media (width >= 992px) {
+  .hershey-home.sour-strips-primary {
+    --nav-height: 107px;
+  }
+
+  /* the page starts 80px down as on live, so the 107px header covers the top 27px of the hero */
+  .hershey-home.sour-strips-primary main {
+    margin-top: -27px;
+  }
+
+  .hershey-home.sour-strips-primary header nav {
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 31px;
+    max-width: none;
+    padding: 16px 20px 0;
+    font-family: montserrat, sans-serif;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-brand {
+    flex: 0 0 140px;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-brand img {
+    width: 120px;
+    margin-left: 10px;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-sections {
+    flex: 0 1 auto;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-sections ul {
+    gap: 45px;
+    margin-top: 25px;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-sections ul > li {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-sections a:any-link {
+    color: #000;
+  }
+
+  /* links that leave the site carry the small box-and-arrow mark */
+  .hershey-home.sour-strips-primary header nav .nav-sections a[href^='http']:not([href*='hersheyland.com'])::after {
+    content: '';
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    margin-left: 6px;
+    background: currentcolor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+}
+
 .hershey-home.sour-strips-primary main > div.section.ss-fan > .default-content-wrapper {
   max-width: none;
   padding: 0;
@@ -3944,12 +4036,25 @@
     font-size: 64px;
   }
 
+  /* the heading band is 359px; the bag fan runs full width under it and sets the height (725px at
+     1713px wide), as on live */
   .hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-content {
-    min-height: 900px;
+    display: flex;
+    flex-direction: column-reverse;
+    min-height: 0;
   }
 
   .hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-text {
+    flex: 0 0 auto;
+    height: 359px;
     padding-top: 140px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-media {
+    position: static;
+    flex: 0 0 auto;
+    width: 100%;
+    translate: none;
   }
 
   .hershey-home.sour-strips-primary main > div.section.ss-hero h1 {
@@ -3984,6 +4089,18 @@
   .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout h2 {
     margin: 0 0 10px;
     font-size: 64px;
+    white-space: nowrap;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout > div > :not(.columns-img-col) {
+    min-width: 0;
+  }
+
+  /* the paragraph runs 10px in from the photo's column edge, the heading 30px */
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout p:not(.button-wrapper) {
+    width: calc(100% + 40px);
+    margin-inline: -20px;
+    color: #3f000b;
   }
 
   .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout p.button-wrapper {
@@ -4040,7 +4157,7 @@
   }
 
   .hershey-home.sour-strips-primary main > div.section.ss-recipes {
-    padding-top: calc(var(--ss-splash-top) + 50px);
+    padding-top: calc(var(--ss-splash-top) + 44px);
   }
 
   .hershey-home.sour-strips-primary main > div.section.ss-recipes > .default-content-wrapper > h2 {
@@ -4054,11 +4171,11 @@
 
   /* sushi: photo left (592px), copy 70px beside it; cupcakes: copy 130px in, photo right */
   .hershey-home.sour-strips-primary main > div.section.ss-recipe {
-    padding: 119px 0 70px;
+    padding: 132px 0 70px;
   }
 
   .hershey-home.sour-strips-primary main > div.section.ss-recipe + div.section.ss-recipe {
-    padding: 70px 0 calc(95px + var(--ss-splash-top));
+    padding: 70px 0 calc(63px + var(--ss-splash-top));
   }
 
   .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout > div > .columns-img-col {
@@ -4079,6 +4196,7 @@
     margin: 0 0 10px;
     font-size: 64px;
     line-height: 64px;
+    white-space: nowrap;
   }
 
   .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout p {
@@ -4095,11 +4213,14 @@
   }
 
   .hershey-home.sour-strips-primary main > div.section.ss-fam {
-    padding-top: 50px;
+    padding-block: 50px 90px;
   }
 
   .hershey-home.sour-strips-primary main > div.section.ss-fam h2 {
+    display: flex;
+    justify-content: center;
     margin-bottom: 19px;
+    white-space: nowrap;
   }
 
   .hershey-home.sour-strips-primary main > div.section.ss-fam p {
