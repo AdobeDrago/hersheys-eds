@@ -4110,10 +4110,8 @@
     min-width: 0;
   }
 
-  /* the paragraph runs 10px in from the photo's column edge, the heading 30px */
+  /* the paragraph text starts on the heading's left edge, in maroon */
   .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout p:not(.button-wrapper) {
-    width: calc(100% + 40px);
-    margin-inline: -20px;
     color: #3f000b;
   }
 
