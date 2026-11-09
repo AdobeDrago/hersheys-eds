@@ -194,3 +194,5 @@ export default async function decorate(block) {
   if (block.classList.contains('slider')) decorateSlider(block, ul);
   await Promise.all([brandStyles, calloutStyles]);
 }
+
+// code resync marker
