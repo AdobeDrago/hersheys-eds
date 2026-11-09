@@ -3928,9 +3928,53 @@
   font-weight: 600;
 }
 
+/* the Instagram feed runs the page width (10px in from 1200px); the trademark line closes the band
+   in a violet box, 16px in from the left and 25px from the right below 992px, the page width to
+   1199px, then 10px in, the 17px copy 10px inside it (25px from 992px) in 30px padding. The band
+   pads 24px a side below 992px, 32px from it */
+.hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .instagram-wrapper {
+  max-width: none;
+  margin-inline: -24px;
+}
+
+.hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .default-content-wrapper {
+  max-width: none;
+  margin: 22px 1px 0 -8px;
+  padding: 0 10px;
+  background: #701ef6;
+}
+
+@media (width >= 992px) {
+  .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .instagram-wrapper {
+    margin-inline: -32px;
+  }
+
+  .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .default-content-wrapper {
+    margin-inline: -32px;
+    padding-inline: 25px;
+  }
+}
+
+@media (width >= 1200px) {
+  .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .instagram-wrapper,
+  .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .default-content-wrapper {
+    margin-inline: -22px;
+  }
+}
+
+.hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .default-content-wrapper p {
+  margin: 0 0 25.5px;
+  padding: 30px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 25.5px;
+}
+
 .hershey-home.shaqalicious-primary main > div.section.shaq-faq {
   --hershey-component-accordion-brand-section-padding-block-start: 160px;
-  --hershey-component-accordion-brand-section-padding-block-end: 67px;
+  --hershey-component-accordion-brand-section-padding-block-end-mobile: 71px;
+  --hershey-component-accordion-brand-section-padding-block-end: 110px;
+  --hershey-component-accordion-border-color: #afd37e;
 
   background: url('/icons/shaqalicious-faq-stars.svg') center / cover no-repeat;
 }
