@@ -668,6 +668,8 @@
  * section type: the main band, the alternate band and plain white sections.
  */
 .hershey-home.rolo-brand-primary {
+  /* the Unwrap / Enjoy / Repeat steps band is a lighter brown, as on hersheyland.com/rolo */
+  --hershey-component-cards-steps-band-background: #55281e;
   --hershey-component-hero-brand-band-background: #55281e;
   --hershey-component-hero-brand-color-foreground: #fff;
   --hershey-component-hero-brand-square-media-height: 653px;

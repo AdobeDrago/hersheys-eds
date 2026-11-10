@@ -48,9 +48,10 @@ function decorateSlider(block, list) {
   // brand pages, show one page indicator per page of cards
   const paged = ['related', 'callout', 'dots'].some((name) => block.classList.contains(name))
     || (isBrandPage() && ['product', 'stories', 'content', 'brands'].some((name) => block.classList.contains(name)));
-  // the brands and product sliders page by the cards that fit whole in the track, as on
-  // hersheyland.com (one card per page on phones)
-  const byCard = ['brands', 'product'].some((name) => block.classList.contains(name));
+  // the brands sliders, and the product sliders on brand pages, page by the cards that fit whole
+  // in the track, as on hersheyland.com (one card per page on phones)
+  const byCard = block.classList.contains('brands')
+    || (isBrandPage() && block.classList.contains('product'));
   // a page is the visible track width plus one gap; the track padding is not scrollable content
   const measure = () => {
     const style = getComputedStyle(list);
