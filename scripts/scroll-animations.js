@@ -6,6 +6,9 @@ import { loadCSS } from './aem.js';
  * The effects are in styles/scroll-animations.css:
  * - `rise`: fades in while rising its own height (animate.css fadeInUp on hersheyland.com)
  * - `fade` and `fade-up` (rises 100px): AOS fade and fade-up on hersheyland.com
+ * - `come-in`: the whole content of the section (not its band) fades in together over 1s as the
+ *   section comes into view, once (the `come-in` keyframes on hersheyland.com's brand sliders and
+ *   recipe lists)
  * Extra Section Metadata styles tune a section, as the call-outs on /hersheys are tuned on
  * hersheyland.com: `animate-photo-<ms>` sets the photos' duration, `animate-secondary-<ms>` the
  * text links' (e.g. 3000 for "Discover the Hershey Legacy"), and `animate-replay` makes the
@@ -36,6 +39,8 @@ const STYLES = {
   'animate-brighten': {
     effect: 'fade', parts: { 'picture img': 400 }, from: 0.25, delay: 100, offset: 200, offsetStep: 50,
   },
+  // the section's content fades in as one, over 1s (the brand sliders and recipes on /hersheys)
+  'animate-come-in': { effect: 'fade', group: true, parts: { ':scope > *': 1000 } },
   // the images rise 100px into place one after another (the stacked cups)
   'animate-fade-up': {
     effect: 'fade-up', parts: { 'picture img': 400 }, delay: 100, offset: 550,
@@ -86,6 +91,22 @@ export default async function scrollAnimations(main) {
     Object.entries(timed).forEach(([selector, duration]) => {
       section.querySelectorAll(selector).forEach((part) => parts.set(part, duration));
     });
+    if (rule.group) {
+      // the parts start together, when the first one that has a box (a heading wrapper that lays
+      // out through its parent has none) comes into view
+      const items = [...parts.keys()];
+      items.forEach((part) => {
+        part.classList.add('scroll-animate', `scroll-animate-${rule.effect}`);
+        part.style.setProperty('--scroll-animate-duration', `${parts.get(part)}ms`);
+      });
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries[entries.length - 1].isIntersecting) return;
+        items.forEach((part) => part.classList.add('scroll-animate-shown'));
+        observer.disconnect();
+      });
+      observer.observe(items.find((part) => part.getClientRects().length) || items[0]);
+      return;
+    }
     [...parts].forEach(([part, duration], index) => {
       // measured before the part is moved down
       const margin = drop(part, rule.effect) - (rule.offset || 0) - (rule.offsetStep || 0) * index;
