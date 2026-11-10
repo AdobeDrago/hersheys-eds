@@ -3050,6 +3050,56 @@
 
 .hershey-home.almond-joy-mounds-primary main > div.section:has(> .accordion-wrapper) + div.section:has(> .accordion-wrapper) {
   --hershey-component-accordion-brand-section-padding-block-end: 72px;
+  --hershey-component-accordion-border-color: #b21d3a;
+}
+
+/* corrections measured against hersheyland.com/almond-joy-mounds (2026-11-10) */
+
+/* hero: the logo is nearly as wide as the title under it */
+.hershey-home.almond-joy-mounds-primary .hero.brand .hero-brand-logo {
+  width: 346px;
+  height: auto;
+}
+
+.hershey-home.almond-joy-mounds-primary .hero.brand .hero-brand-logo :is(picture, img) {
+  height: auto;
+}
+
+/* brands band: white eyebrow, heading and brand names on the dark band, a dull-blue pill and no
+   page indicators under the arrows */
+.hershey-home.almond-joy-mounds-primary main > div.section:has(.cards.brands) {
+  --hershey-component-cards-brands-color-foreground: #fff;
+  --hershey-component-cards-brands-cta-background: #3579b8;
+  --hershey-component-cards-brands-cta-background-hover: #4a8ac4;
+
+  color: #fff;
+}
+
+.hershey-home.almond-joy-mounds-primary main .cards.brands .cards-slider-dots {
+  display: none;
+}
+
+/* FAQ: blue rules on the ALMOND JOY list, crimson on the MOUNDS list, a bold navy plus */
+.hershey-home.almond-joy-mounds-primary main > div.section:has(> .accordion-wrapper) {
+  --hershey-component-accordion-border-color: #3f80b7;
+  --hershey-component-accordion-icon-color: #13348e;
+}
+
+/* product slider: both arrows stay white with a blue chevron and wrap round, the page indicators
+   are maroon rings, filled when current */
+.hershey-home.almond-joy-mounds-primary main .cards.product.slider {
+  --cards-slider-wrap: 1;
+  --hershey-component-cards-product-slider-control-color: #2a73b8;
+  --hershey-component-cards-product-slider-indicator-image: url('/icons/orb-indicator-inactive-maroon.svg');
+  --hershey-component-cards-product-slider-indicator-image-active: url('/icons/orb-indicator-active-maroon.svg');
+}
+
+.hershey-home.almond-joy-mounds-primary main .cards.product.slider .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-maroon.svg');
+}
+
+.hershey-home.almond-joy-mounds-primary main .cards.product.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-maroon.svg');
 }
 
 /*
