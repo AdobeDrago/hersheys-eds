@@ -9,17 +9,38 @@ import { loadCSS } from './aem.js';
  * - `come-in`: the whole content of the section (not its band) fades in together over 1s as the
  *   section comes into view, once (the `come-in` keyframes on hersheyland.com's brand sliders and
  *   recipe lists)
- * Extra Section Metadata styles tune a section, as the call-outs on /hersheys are tuned on
- * hersheyland.com: `animate-photo-<ms>` sets the photos' duration, `animate-secondary-<ms>` the
- * text links' (e.g. 3000 for "Discover the Hershey Legacy"), and `animate-replay` makes the
- * parts hide again once they scroll back below the viewport, so they animate in each time they
- * come up into view (otherwise they animate once).
+ * Presets, one style each, are the call-outs on /hersheys as they are tuned on hersheyland.com
+ * (the parts hide again once they scroll back below the viewport, so they animate in each time
+ * they come up into view):
+ * - `animate-callout`: photo, heading, copy and button rise in
+ * - `animate-callout-article`: as `animate-callout` with a 500ms photo and a 3000ms text link
+ *   (the article-style call-out, "Discover the Hershey Legacy")
+ * - `animate-callout-secondary`: as `animate-callout` with a 1000ms text link
+ * Extra Section Metadata styles can still tune a section: `animate-photo-<ms>` sets the photos'
+ * duration, `animate-secondary-<ms>` the text links', and `animate-replay` makes the parts
+ * animate in each time they come up into view (otherwise they animate once).
  * `parts` maps selectors to each one's duration (ms). A part starts once its top is `offset` px
  * into the viewport, measured where it will end up; `offset` grows by `offsetStep` for each next
  * part of the section, and `delay` (ms) staggers them the same way. `from` is the opacity a part
  * waits at.
  */
+const CALLOUT = {
+  effect: 'rise',
+  parts: {
+    'picture img': 1000,
+    ':is(h1, h2, h3, h4)': 500,
+    ':is(h1, h2, h3, h4) + p:not(.button-wrapper)': 800,
+    'a.button': 800,
+  },
+  replay: true,
+};
+
 const STYLES = {
+  'animate-callout': CALLOUT,
+  'animate-callout-article': {
+    ...CALLOUT, durations: { 'picture img': 500, 'a.button.secondary': 3000 },
+  },
+  'animate-callout-secondary': { ...CALLOUT, durations: { 'a.button.secondary': 1000 } },
   // each photo, heading, the copy right under a heading and button rises in as it comes into view
   // (the call-outs); other paragraphs, e.g. fine print, stay put
   'animate-rise': {
@@ -80,8 +101,8 @@ export default async function scrollAnimations(main) {
   await loadCSS(`${window.hlx.codeBasePath}/styles/scroll-animations.css`);
   sections.forEach((section) => {
     const rule = STYLES[Object.keys(STYLES).find((style) => section.classList.contains(style))];
-    const replay = section.classList.contains('animate-replay');
-    const timed = { ...rule.parts };
+    const replay = rule.replay || section.classList.contains('animate-replay');
+    const timed = { ...rule.parts, ...rule.durations };
     DURATIONS.forEach(([pattern, selector]) => {
       const match = [...section.classList].map((name) => name.match(pattern)).find(Boolean);
       if (match) timed[selector] = Number(match[1]);
