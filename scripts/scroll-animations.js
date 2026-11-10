@@ -16,6 +16,9 @@ import { loadCSS } from './aem.js';
  * - `animate-callout-article`: as `animate-callout` with a 500ms photo and a 3000ms text link
  *   (the article-style call-out, "Discover the Hershey Legacy")
  * - `animate-callout-secondary`: as `animate-callout` with a 1000ms text link
+ * - `animate-callout-text`: as `animate-callout` without the photo (it stays put), the SOUR STRIPS
+ *   recipe call-outs
+ * - `animate-callout-button`: only the button rises in (the CADBURY "Grab Your Bag" call-out)
  * Extra Section Metadata styles can still tune a section: `animate-photo-<ms>` sets the photos'
  * duration, `animate-secondary-<ms>` the text links', and `animate-replay` makes the parts
  * animate in each time they come up into view (otherwise they animate once).
@@ -38,8 +41,13 @@ const CALLOUT = {
   fullyInView: true,
 };
 
+// the same without the photo
+const { 'picture img': photo, ...TEXT_PARTS } = CALLOUT.parts;
+
 const STYLES = {
   'animate-callout': CALLOUT,
+  'animate-callout-text': { ...CALLOUT, parts: TEXT_PARTS },
+  'animate-callout-button': { ...CALLOUT, parts: { 'a.button': CALLOUT.parts['a.button'] } },
   'animate-callout-article': {
     ...CALLOUT, durations: { 'picture img': 500, 'a.button.secondary': 3000 },
   },
