@@ -33,6 +33,9 @@ const CALLOUT = {
     'a.button': 800,
   },
   replay: true,
+  // a part starts once the whole of it is in view (its bottom edge reaches the viewport's), as the
+  // call-outs on hersheyland.com/hersheys do, so the rise is seen
+  fullyInView: true,
 };
 
 const STYLES = {
@@ -130,7 +133,8 @@ export default async function scrollAnimations(main) {
     }
     [...parts].forEach(([part, duration], index) => {
       // measured before the part is moved down
-      const margin = drop(part, rule.effect) - (rule.offset || 0) - (rule.offsetStep || 0) * index;
+      const margin = rule.fullyInView
+        ? 0 : drop(part, rule.effect) - (rule.offset || 0) - (rule.offsetStep || 0) * index;
       part.classList.add('scroll-animate', `scroll-animate-${rule.effect}`);
       part.style.setProperty('--scroll-animate-duration', `${duration}ms`);
       part.style.setProperty('--scroll-animate-delay', `${(rule.delay || 0) * index}ms`);
