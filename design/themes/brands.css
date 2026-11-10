@@ -2793,9 +2793,12 @@
   font-weight: 700;
 }
 
-/* the hero runs up under the header, as on hersheyland.com */
+/* the hero runs up under the header, as on hersheyland.com; the turning disc of the closing band
+   reaches far below it, and `clip-path` hides it but still counts it toward the page height, so
+   main is clipped at its end and the page ends at the footer, as on live */
 .hershey-home.oreo-cup-primary main {
   margin-top: -80px;
+  overflow-y: clip;
 }
 
 /* the first call-out under a different band starts 50px below it */
@@ -3131,6 +3134,26 @@
   transform: translateX(-50%);
   animation: oreo-spotlight-spin 240s linear infinite;
   pointer-events: none;
+}
+
+/* the empty section the page ends with adds a gap between the band and the footer; live has none */
+.hershey-home.oreo-cup-primary main > div.section:not(:has(*)) {
+  display: none;
+}
+
+/* the blue band runs down behind the footer wave, as on live: the footer is pulled 174px up over the
+   band (the page then ends where live's does) and is see-through above the wave */
+@media (width >= 992px) {
+  .hershey-home.oreo-cup-primary footer {
+    position: relative;
+    z-index: 1;
+    margin-top: -174px;
+    background: linear-gradient(transparent 300px, var(--hershey-component-footer-surface-page, #f5f5f5) 300px);
+  }
+
+  .hershey-home.oreo-cup-primary footer :is(.footer, .newsletter) {
+    background-color: transparent;
+  }
 }
 
 @keyframes oreo-spotlight-spin {
