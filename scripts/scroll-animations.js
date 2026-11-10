@@ -19,6 +19,12 @@ import { loadCSS } from './aem.js';
  * - `animate-callout-text`: as `animate-callout` without the photo (it stays put), the SOUR STRIPS
  *   recipe call-outs
  * - `animate-callout-button`: only the button rises in (the CADBURY "Grab Your Bag" call-out)
+ * - `animate-slide-<px>`: the section's content rises `<px>` while it fades in, over 0.7s, as the
+ *   sections that fade up on hersheyland.com (`animate-slide-28` on CADBURY, `-32` on KISSES)
+ * - `animate-slide-card`: the same over 100px, the move 0.8s and the fade 1.2s (the SOUR STRIPS
+ *   flavors section)
+ * - `animate-slide-icons`: each column rises 80px, the move 1s and the fade 0.8s (the SOUR STRIPS
+ *   icons)
  * Extra Section Metadata styles can still tune a section: `animate-photo-<ms>` sets the photos'
  * duration, `animate-secondary-<ms>` the text links', and `animate-replay` makes the parts
  * animate in each time they come up into view (otherwise they animate once).
@@ -44,7 +50,26 @@ const CALLOUT = {
 // the same without the photo
 const { 'picture img': photo, ...TEXT_PARTS } = CALLOUT.parts;
 
+const EASE_OUT_EXPO = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
 const STYLES = {
+  'animate-slide-card': {
+    effect: 'slide',
+    group: true,
+    parts: { ':scope > *': 800 },
+    slide: {
+      distance: 100, move: 'ease-out', fadeMs: 1200, fade: EASE_OUT_EXPO,
+    },
+    offset: 200,
+  },
+  'animate-slide-icons': {
+    effect: 'slide',
+    parts: { '.columns > div > div': 1000 },
+    slide: {
+      distance: 80, move: EASE_OUT_EXPO, fadeMs: 800, fade: 'ease-out',
+    },
+    offset: 80,
+  },
   'animate-callout': CALLOUT,
   'animate-callout-text': { ...CALLOUT, parts: TEXT_PARTS },
   'animate-callout-button': { ...CALLOUT, parts: { 'a.button': CALLOUT.parts['a.button'] } },
@@ -86,7 +111,48 @@ const DURATIONS = [
 ];
 
 /** Selector for the sections this module animates. */
-export const ANIMATED_SECTIONS = Object.keys(STYLES).map((style) => `.section.${style}`).join(', ');
+export const ANIMATED_SECTIONS = [
+  ...Object.keys(STYLES).map((style) => `.section.${style}`),
+  '.section[class*="animate-slide-"]',
+].join(', ');
+
+/**
+ * The effect a section's style asks for.
+ * @param {Element} section The section
+ * @returns {object|undefined} The rule: a preset, or `animate-slide-<px>`
+ */
+function ruleOf(section) {
+  const preset = Object.keys(STYLES).find((style) => section.classList.contains(style));
+  if (preset) return STYLES[preset];
+  const slide = [...section.classList].map((name) => name.match(/^animate-slide-(\d+)$/)).find(Boolean);
+  if (!slide) return undefined;
+  return {
+    effect: 'slide',
+    group: true,
+    parts: { ':scope > *': 700 },
+    slide: {
+      distance: Number(slide[1]), move: 'ease', fadeMs: 700, fade: 'ease',
+    },
+    offset: 150,
+  };
+}
+
+/**
+ * Sets the distance, durations and easings of a `slide` part.
+ * @param {Element} part The part
+ * @param {object} rule The part's rule
+ * @param {number} moveMs How long the move takes
+ */
+function setSlide(part, rule, moveMs) {
+  const {
+    distance, move, fadeMs, fade,
+  } = rule.slide;
+  part.style.setProperty('--scroll-animate-distance', `${distance}px`);
+  part.style.setProperty('--scroll-animate-duration', `${moveMs}ms`);
+  part.style.setProperty('--scroll-animate-move-easing', move);
+  part.style.setProperty('--scroll-animate-fade-duration', `${fadeMs}ms`);
+  part.style.setProperty('--scroll-animate-fade-easing', fade);
+}
 
 /**
  * How far a hidden part sits below where it ends up.
@@ -111,7 +177,7 @@ export default async function scrollAnimations(main) {
   // the parts are hidden only once the styles that show them again are in
   await loadCSS(`${window.hlx.codeBasePath}/styles/scroll-animations.css`);
   sections.forEach((section) => {
-    const rule = STYLES[Object.keys(STYLES).find((style) => section.classList.contains(style))];
+    const rule = ruleOf(section);
     const replay = rule.replay || section.classList.contains('animate-replay');
     const timed = { ...rule.parts, ...rule.durations };
     DURATIONS.forEach(([pattern, selector]) => {
@@ -129,22 +195,27 @@ export default async function scrollAnimations(main) {
       const items = [...parts.keys()];
       items.forEach((part) => {
         part.classList.add('scroll-animate', `scroll-animate-${rule.effect}`);
-        part.style.setProperty('--scroll-animate-duration', `${parts.get(part)}ms`);
+        if (rule.slide) setSlide(part, rule, parts.get(part));
+        else part.style.setProperty('--scroll-animate-duration', `${parts.get(part)}ms`);
       });
+      // a sliding group starts once its top, where it will end up, is `offset` px into the viewport
+      const margin = rule.slide ? rule.slide.distance - (rule.offset || 0) : 0;
       const observer = new IntersectionObserver((entries) => {
         if (!entries[entries.length - 1].isIntersecting) return;
         items.forEach((part) => part.classList.add('scroll-animate-shown'));
         observer.disconnect();
-      });
+      }, { rootMargin: `0px 0px ${margin}px 0px` });
       observer.observe(items.find((part) => part.getClientRects().length) || items[0]);
       return;
     }
     [...parts].forEach(([part, duration], index) => {
       // measured before the part is moved down
+      const dropped = rule.slide ? rule.slide.distance : drop(part, rule.effect);
       const margin = rule.fullyInView
-        ? 0 : drop(part, rule.effect) - (rule.offset || 0) - (rule.offsetStep || 0) * index;
+        ? 0 : dropped - (rule.offset || 0) - (rule.offsetStep || 0) * index;
       part.classList.add('scroll-animate', `scroll-animate-${rule.effect}`);
-      part.style.setProperty('--scroll-animate-duration', `${duration}ms`);
+      if (rule.slide) setSlide(part, rule, duration);
+      else part.style.setProperty('--scroll-animate-duration', `${duration}ms`);
       part.style.setProperty('--scroll-animate-delay', `${(rule.delay || 0) * index}ms`);
       if (rule.from) part.style.setProperty('--scroll-animate-from', rule.from);
       const observer = new IntersectionObserver((entries) => {

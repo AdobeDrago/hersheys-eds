@@ -15,6 +15,10 @@
   translate: 0 100px;
 }
 
+.scroll-animate-slide:not(.scroll-animate-shown) {
+  translate: 0 var(--scroll-animate-distance, 30px);
+}
+
 .scroll-animate-shown {
   animation-duration: var(--scroll-animate-duration, 400ms);
   animation-timing-function: ease;
@@ -34,6 +38,13 @@
   animation-name: scroll-animate-rise;
 }
 
+/* the fade and the move are timed apart (a section that fades over 1.2s while it moves over 0.8s) */
+.scroll-animate-slide.scroll-animate-shown {
+  animation-name: scroll-animate-slide-fade, scroll-animate-slide-move;
+  animation-duration: var(--scroll-animate-fade-duration, 700ms), var(--scroll-animate-duration, 700ms);
+  animation-timing-function: var(--scroll-animate-fade-easing, ease), var(--scroll-animate-move-easing, ease);
+}
+
 @keyframes scroll-animate-fade {
   from {
     opacity: var(--scroll-animate-from, 0);
@@ -51,5 +62,17 @@
   from {
     opacity: var(--scroll-animate-from, 0);
     translate: 0 100%;
+  }
+}
+
+@keyframes scroll-animate-slide-fade {
+  from {
+    opacity: var(--scroll-animate-from, 0);
+  }
+}
+
+@keyframes scroll-animate-slide-move {
+  from {
+    translate: 0 var(--scroll-animate-distance, 30px);
   }
 }
