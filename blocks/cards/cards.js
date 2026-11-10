@@ -13,10 +13,16 @@ function decorateSlider(block, list) {
   sliderId += 1;
   list.id = `cards-slider-${sliderId}`;
   list.tabIndex = 0;
-  // a `single` slider moves one card (and its gap) per click, as the Newest Treats do on hersheyland.com
+  // a `single` slider moves one card (and its gap) per click, as the Newest Treats do on
+  // hersheyland.com
   const single = block.classList.contains('single');
   const cardStep = () => list.firstElementChild.offsetWidth
     + (parseFloat(getComputedStyle(list).columnGap) || 0);
+  // a brand theme may let the arrows wrap round (`--cards-slider-wrap: 1`), as the SHAQ-A-LICIOUS
+  // product slider does on hersheyland.com: back from the first page goes to the last, and on
+  const wraps = () => getComputedStyle(block).getPropertyValue('--cards-slider-wrap').trim() === '1';
+  const atStart = () => list.scrollLeft <= 1;
+  const atEnd = () => list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
   const controls = document.createElement('div');
   controls.className = 'cards-slider-controls';
   const buttons = [-1, 1].map((direction) => {
@@ -26,10 +32,12 @@ function decorateSlider(block, list) {
     button.setAttribute('aria-label', direction < 0 ? 'Previous cards' : 'Next cards');
     button.setAttribute('aria-controls', list.id);
     button.addEventListener('click', () => {
-      list.scrollBy({
-        left: direction * (single ? cardStep() : list.clientWidth),
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
-      });
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+      if (wraps() && (direction < 0 ? atStart() : atEnd())) {
+        list.scrollTo({ left: direction < 0 ? list.scrollWidth : 0, behavior });
+        return;
+      }
+      list.scrollBy({ left: direction * (single ? cardStep() : list.clientWidth), behavior });
     });
     controls.append(button);
     return button;
@@ -40,8 +48,10 @@ function decorateSlider(block, list) {
   // brand pages, show one page indicator per page of cards
   const paged = ['related', 'callout', 'dots'].some((name) => block.classList.contains(name))
     || (isBrandPage() && ['product', 'stories', 'content', 'brands'].some((name) => block.classList.contains(name)));
-  // the brands slider pages by the cards that fit whole in the track, as on hersheyland.com
-  const byCard = block.classList.contains('brands');
+  // the brands sliders, and the product sliders on brand pages, page by the cards that fit whole
+  // in the track, as on hersheyland.com (one card per page on phones)
+  const byCard = block.classList.contains('brands')
+    || (isBrandPage() && block.classList.contains('product'));
   // a page is the visible track width plus one gap; the track padding is not scrollable content
   const measure = () => {
     const style = getComputedStyle(list);
@@ -53,8 +63,9 @@ function decorateSlider(block, list) {
     return { inset, gap, step };
   };
   const update = () => {
-    buttons[0].disabled = list.scrollLeft <= 1;
-    buttons[1].disabled = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
+    const wrap = wraps();
+    buttons[0].disabled = !wrap && atStart();
+    buttons[1].disabled = !wrap && atEnd();
     // nothing to scroll: every card is visible, so the arrows and page indicator are not needed
     const fits = list.scrollWidth <= list.clientWidth + 1;
     controls.hidden = fits;
@@ -63,8 +74,7 @@ function decorateSlider(block, list) {
     // one kiss-shaped indicator per page of cards
     const { inset, gap, step } = measure();
     const pages = Math.max(1, Math.ceil((list.scrollWidth - inset + gap) / step - 0.01));
-    const atEnd = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
-    const current = atEnd ? pages - 1 : Math.min(pages - 1, Math.round(list.scrollLeft / step));
+    const current = atEnd() ? pages - 1 : Math.min(pages - 1, Math.round(list.scrollLeft / step));
     if (dots.children.length !== pages) {
       dots.replaceChildren(...Array.from({ length: pages }, (_, page) => {
         const dot = document.createElement('button');
@@ -189,6 +199,14 @@ export default async function decorate(block) {
       loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-recipes.css`),
     ]);
     if (module) ul.replaceChildren(...await module.default(block));
+  }
+  // the flip variant turns each card over when clicked; it loads its own script and styles
+  if (block.classList.contains('flip')) {
+    const [{ default: decorateFlip }] = await Promise.all([
+      import('./cards-flip.js'),
+      loadCSS(`${window.hlx.codeBasePath}/blocks/cards/cards-flip.css`),
+    ]);
+    decorateFlip(ul);
   }
   block.replaceChildren(ul);
   if (block.classList.contains('slider')) decorateSlider(block, ul);

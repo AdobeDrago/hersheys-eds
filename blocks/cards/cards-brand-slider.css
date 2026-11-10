@@ -44,6 +44,7 @@
 .section.cards-container:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button:focus-visible {
   border: var(--hershey-component-cards-product-slider-cta-border-width, 0) solid var(--hershey-component-cards-product-slider-cta-border-color, #fff);
   background-color: var(--hershey-component-cards-product-slider-cta-background-hover, #268fc7);
+  color: var(--hershey-component-cards-product-slider-cta-foreground-hover, var(--hershey-component-cards-product-slider-cta-foreground, #fff));
 }
 
 .cards.product.slider {
@@ -76,10 +77,14 @@
 /* the card sits straight on the band colour unless a brand theme gives the photo a colour of its
    own (e.g. red tiles on /5th-avenue) */
 /* stylelint-disable-next-line no-descending-specificity -- overrides the hover rule above for the slider only */
-.cards.product.slider .cards-product-image,
+.cards.product.slider .cards-product-image {
+  background-color: var(--hershey-component-cards-product-slider-image-background, transparent);
+}
+
+/* a brand theme may tint the photo while the card is hovered (lavender on /cadbury) */
 .cards.product.slider .cards-product-card:hover .cards-product-image,
 .cards.product.slider .cards-product-card:focus-visible .cards-product-image {
-  background-color: var(--hershey-component-cards-product-slider-image-background, transparent);
+  background-color: var(--hershey-component-cards-product-slider-image-background-hover, var(--hershey-component-cards-product-slider-image-background, transparent));
 }
 
 /* brand themes may set the card copy colour for a coloured band (e.g. white on YORK blue) and a card
@@ -170,10 +175,16 @@
   width: var(--hershey-component-cards-product-slider-indicator-size-mobile, 16px);
   height: var(--hershey-component-cards-product-slider-indicator-size-mobile, 16px);
   margin-right: var(--hershey-component-cards-product-slider-indicator-gap, 6px);
+  background-image: var(--hershey-component-cards-product-slider-indicator-image, url('/icons/kiss-indicator-inactive.svg'));
 }
 
 .cards.product.slider .cards-slider-dot:last-child {
   margin-right: 0;
+}
+
+/* kiss-shaped indicators unless a brand theme picks another shape (white orbs on /jolly-rancher) */
+.cards.product.slider .cards-slider-dot[aria-current='true'] {
+  background-image: var(--hershey-component-cards-product-slider-indicator-image-active, url('/icons/kiss-indicator-active.svg'));
 }
 
 @media (width >= 768px) {

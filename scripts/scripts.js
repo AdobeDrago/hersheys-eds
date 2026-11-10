@@ -277,6 +277,8 @@ async function loadEager(doc) {
       isBrandPage ? loadCSS(`${base}/styles/hershey-brand.css`) : null,
       brandTheme ? loadCSS(`${base}/design/themes/${brandTheme.file || brandTheme.value}.css`) : null,
     ]);
+    // a licensed font kit loads on the side: a failure only leaves the fallback face in place
+    if (brandTheme?.fontKit) loadCSS(brandTheme.fontKit).catch(() => {});
   }
   const main = doc.querySelector('main');
   if (main) {
@@ -328,6 +330,11 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+
+  // sections with an `animate-*` style animate their parts in as they scroll into view
+  if (main?.querySelector('.section[class*="animate-"]')) {
+    import('./scroll-animations.js').then(({ default: scrollAnimations }) => scrollAnimations(main));
+  }
 
   // the homepage's feature bands fade up as they scroll into view
   if (doc.body.classList.contains('homepage')) {
