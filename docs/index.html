@@ -1053,10 +1053,6 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
           <span><strong>SEO is lower on EDS.</strong> EDS scores 69 on every page against 85–92 live. The cause was not investigated here; the uniform score points to something site-wide on the preview host or in the page head, so check the failing SEO audits in the report before launch.</span>
         </div>
-        <div class="notice warning">
-          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
-          <span><strong>Live product runs are incomplete.</strong> Both live product-page reports (<code class="code-inline">/products</code> and the product detail page) carry Lighthouse's warning "The page loaded too slowly to finish within the time limit. Results may be incomplete." Treat those live numbers as indicative, not exact.</span>
-        </div>
         <h3>Pages audited</h3>
         <table class="spec-table">
           <thead><tr><th>Page</th><th>Live</th><th>EDS</th></tr></thead>
@@ -1205,7 +1201,7 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
               <div class="lh-compare-side">
                 <div class="lh-compare-side-header">
                   <span class="lh-compare-label">Live</span>
-                  <div class="lh-scores"><span class="lh-score lh-score-bad">Perf 28</span><span class="lh-score lh-score-good">A11y 90</span><span class="lh-score lh-score-ok">BP 54</span><span class="lh-score lh-score-ok">SEO 85</span></div>
+                  <div class="lh-scores"><span class="lh-score lh-score-bad">Perf 43</span><span class="lh-score lh-score-good">A11y 95</span><span class="lh-score lh-score-bad">BP 35</span><span class="lh-score lh-score-good">SEO 92</span></div>
                 </div>
                 <img src="images/products-live.jpg" alt="Lighthouse mobile report for www.hersheyland.com/products" loading="lazy">
               </div>
@@ -1226,7 +1222,7 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
               <div class="lh-compare-side">
                 <div class="lh-compare-side-header">
                   <span class="lh-compare-label">Live</span>
-                  <div class="lh-scores"><span class="lh-score lh-score-bad">Perf 26</span><span class="lh-score lh-score-good">A11y 92</span><span class="lh-score lh-score-ok">BP 77</span><span class="lh-score lh-score-ok">SEO 85</span></div>
+                  <div class="lh-scores"><span class="lh-score lh-score-bad">Perf 47</span><span class="lh-score lh-score-good">A11y 96</span><span class="lh-score lh-score-ok">BP 73</span><span class="lh-score lh-score-good">SEO 92</span></div>
                 </div>
                 <img src="images/product-hersheys-milk-chocolate-live.jpg" alt="Lighthouse mobile report for www.hersheyland.com/products/hersheys-milk-chocolate-candy-bars-9-3-oz-6-pack.html" loading="lazy">
               </div>
