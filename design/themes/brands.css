@@ -387,8 +387,16 @@
 .hershey-home.kit-kat-primary main .section.brand-color {
   --hershey-component-cards-product-band-background: #d30009;
   --hershey-component-cards-product-heading-foreground: #fff;
-  --hershey-component-cards-product-slider-foreground: #fff;
-  --hershey-component-cards-product-slider-size-color: #fff;
+
+  /* product tiles are white cards with a cream photo panel and brown copy, as on
+     hersheyland.com/kit-kat */
+  --hershey-component-cards-product-slider-foreground: #3f000b;
+  --hershey-component-cards-product-slider-size-color: #3f000b;
+  --hershey-component-cards-product-slider-card-background: #fff;
+  --hershey-component-cards-product-slider-image-background: #fde3ca;
+
+  /* the closing brands band: white eyebrow, heading and brand names */
+  --hershey-component-cards-brands-color-foreground: #fff;
   --hershey-component-accordion-label-color: #fff;
   --hershey-component-accordion-label-color-inactive: #fff;
   --hershey-component-accordion-brand-label-color-inactive: #fff;
@@ -415,7 +423,9 @@
   --hershey-component-accordion-brand-label-color-inactive: #fff;
   --hershey-component-accordion-brand-answer-color: #fff;
   --hershey-component-accordion-brand-link-color: #fff;
-  --hershey-component-accordion-border-color: #fff;
+
+  /* the FAQ rules are KIT KAT red, as on hersheyland.com/kit-kat */
+  --hershey-component-accordion-border-color: #a71e22;
   --hershey-component-accordion-icon-color: #fff;
 
   color: #fff;
@@ -465,15 +475,20 @@
   --hershey-component-columns-callout-cta-background: #db350f;
   --hershey-component-columns-callout-cta-foreground: #fff;
   --hershey-component-columns-callout-cta-background-hover: #e2603f;
+  --hershey-component-columns-article-cta-background: #db350f;
+  --hershey-component-columns-article-cta-foreground: #fff;
+  --hershey-component-columns-article-cta-background-hover: #e2603f;
   --hershey-component-cards-grid-cta-background: #db350f;
   --hershey-component-cards-grid-cta-foreground: #fff;
   --hershey-component-cards-grid-cta-background-hover: #e2603f;
   --hershey-component-cards-product-slider-cta-background: #db350f;
   --hershey-component-cards-product-slider-cta-foreground: #fff;
   --hershey-component-cards-product-slider-cta-background-hover: #e2603f;
-  --hershey-component-cards-brands-cta-background: #db350f;
+
+  /* the brands band pill stays blue */
+  --hershey-component-cards-brands-cta-background: #007bbd;
   --hershey-component-cards-brands-cta-foreground: #fff;
-  --hershey-component-cards-brands-cta-background-hover: #e2603f;
+  --hershey-component-cards-brands-cta-background-hover: #268fc7;
 
   /* spacing measured on hersheyland.com/payday: square call-outs on a 90px foot, a FAQ list that
      runs to the foot of its band and a brands band whose tiles start 48px down */
@@ -514,8 +529,10 @@
   --hershey-component-cards-product-slider-foreground: #fff;
   --hershey-component-cards-product-slider-size-color: #fff;
   --hershey-component-accordion-label-color: #fff;
-  --hershey-component-accordion-label-color-inactive: #fff;
-  --hershey-component-accordion-brand-label-color-inactive: #fff;
+
+  /* while one FAQ is open the closed questions turn grey, as on hersheyland.com/payday */
+  --hershey-component-accordion-label-color-inactive: #999;
+  --hershey-component-accordion-brand-label-color-inactive: #999;
   --hershey-component-accordion-brand-answer-color: #fff;
   --hershey-component-accordion-brand-link-color: #fff;
   --hershey-component-accordion-border-color: #fff;
@@ -526,6 +543,12 @@
 
 .hershey-home.payday-brand-primary main .section.brand-color-alt .default-content-wrapper > h2 {
   color: #fff;
+}
+
+/* ...and their plus signs turn light grey */
+.hershey-home.payday-brand-primary main .section.brand-color-alt .accordion:has(.accordion-item[open]) .accordion-item:not([open]) .accordion-item-label::before,
+.hershey-home.payday-brand-primary main .section.brand-color-alt .accordion:has(.accordion-item[open]) .accordion-item:not([open]) .accordion-item-label::after {
+  background: #e1e1e1;
 }
 
 .hershey-home.payday-brand-primary main .section:not(.brand-color, .brand-color-alt, .warm-tan, .dark-chocolate, .cool-tan) {
@@ -645,6 +668,8 @@
  * section type: the main band, the alternate band and plain white sections.
  */
 .hershey-home.rolo-brand-primary {
+  /* the Unwrap / Enjoy / Repeat steps band is a lighter brown, as on hersheyland.com/rolo */
+  --hershey-component-cards-steps-band-background: #55281e;
   --hershey-component-hero-brand-band-background: #55281e;
   --hershey-component-hero-brand-color-foreground: #fff;
   --hershey-component-hero-brand-square-media-height: 653px;
@@ -661,19 +686,24 @@
   /* pill buttons */
   --hershey-component-hero-brand-cta-background: #c0081c;
   --hershey-component-hero-brand-cta-foreground: #fff;
-  --hershey-component-hero-brand-cta-background-hover: #d83a4b;
+  --hershey-component-hero-brand-cta-background-hover: #fff780;
+  --hershey-component-hero-brand-cta-foreground-hover: #3f000b;
   --hershey-component-columns-callout-cta-background: #c0081c;
   --hershey-component-columns-callout-cta-foreground: #fff;
-  --hershey-component-columns-callout-cta-background-hover: #d83a4b;
+  --hershey-component-columns-callout-cta-background-hover: #fff;
+  --hershey-component-columns-callout-cta-foreground-hover: #3f000b;
   --hershey-component-cards-grid-cta-background: #c0081c;
   --hershey-component-cards-grid-cta-foreground: #fff;
-  --hershey-component-cards-grid-cta-background-hover: #d83a4b;
+  --hershey-component-cards-grid-cta-background-hover: #fff;
+  --hershey-component-cards-grid-cta-foreground-hover: #3f000b;
   --hershey-component-cards-product-slider-cta-background: #c0081c;
   --hershey-component-cards-product-slider-cta-foreground: #fff;
-  --hershey-component-cards-product-slider-cta-background-hover: #d83a4b;
+  --hershey-component-cards-product-slider-cta-background-hover: #fff;
+  --hershey-component-cards-product-slider-cta-foreground-hover: #3f000b;
   --hershey-component-cards-brands-cta-background: #c0081c;
   --hershey-component-cards-brands-cta-foreground: #fff;
-  --hershey-component-cards-brands-cta-background-hover: #d83a4b;
+  --hershey-component-cards-brands-cta-background-hover: #fff;
+  --hershey-component-cards-brands-cta-foreground-hover: #3f000b;
 
   /* spacing measured on hersheyland.com/rolo: square call-outs sit straight on the band, the FAQ
      starts 120px down and ends 91px below its list, and the brand tiles start 138px down */
@@ -747,11 +777,11 @@
  */
 .hershey-home.cadbury-brand-primary {
   --hershey-component-hero-brand-band-background: #40257c;
-  --hershey-component-hero-brand-color-foreground: #e6bc7e;
+  --hershey-component-hero-brand-color-foreground: #fff;
   --hershey-component-hero-brand-square-media-height: 597px;
   --hershey-system-color-surface-brand-band: #40257c;
   --hershey-system-color-surface-brand-band-alt: #5c398f;
-  --hershey-system-color-text-brand-band: #e6bc7e;
+  --hershey-system-color-text-brand-band: #fff;
 
   /* product slider, recipe and FAQ bands */
   --hershey-component-cards-product-slider-band-padding-block-start: 31px;
@@ -759,63 +789,93 @@
   --hershey-component-cards-grid-section-padding-block-start: 40px;
   --hershey-component-cards-grid-section-padding-block-end: 82px;
 
-  /* pill buttons */
-  --hershey-component-hero-brand-cta-background: #e6bc7e;
-  --hershey-component-hero-brand-cta-foreground: #40257c;
-  --hershey-component-hero-brand-cta-background-hover: #f182c4;
-  --hershey-component-columns-callout-cta-background: #e6bc7e;
-  --hershey-component-columns-callout-cta-foreground: #40257c;
-  --hershey-component-columns-callout-cta-background-hover: #f182c4;
-  --hershey-component-cards-grid-cta-background: #e6bc7e;
-  --hershey-component-cards-grid-cta-foreground: #40257c;
-  --hershey-component-cards-grid-cta-background-hover: #f182c4;
-  --hershey-component-cards-product-slider-cta-background: #e6bc7e;
-  --hershey-component-cards-product-slider-cta-foreground: #40257c;
-  --hershey-component-cards-product-slider-cta-background-hover: #f182c4;
-  --hershey-component-cards-brands-cta-background: #e6bc7e;
-  --hershey-component-cards-brands-cta-foreground: #40257c;
-  --hershey-component-cards-brands-cta-background-hover: #f182c4;
+  /* pill buttons: brown on a gold gradient (painted by the pill rule further down), white once
+     hovered, as on hersheyland.com/cadbury */
+  --hershey-component-hero-brand-cta-background: #fff;
+  --hershey-component-hero-brand-cta-foreground: #3f000b;
+  --hershey-component-hero-brand-cta-background-hover: #fff;
+  --hershey-component-columns-callout-cta-background: #fff;
+  --hershey-component-columns-callout-cta-foreground: #3f000b;
+  --hershey-component-columns-callout-cta-background-hover: #fff;
+  --hershey-component-cards-grid-cta-background: #fff;
+  --hershey-component-cards-grid-cta-foreground: #3f000b;
+  --hershey-component-cards-grid-cta-background-hover: #fff;
+  --hershey-component-cards-product-slider-cta-background: #fff;
+  --hershey-component-cards-product-slider-cta-foreground: #3f000b;
+  --hershey-component-cards-product-slider-cta-background-hover: #fff;
+  --hershey-component-cards-brands-cta-background: #fff;
+  --hershey-component-cards-brands-cta-foreground: #3f000b;
+  --hershey-component-cards-brands-cta-background-hover: #fff;
+
+  /* the story box beside the video is the gold gradient too */
+  --hershey-component-columns-video-story-background: linear-gradient(to left, #d4ab5b 0%, #ffeaaf 50%, #d4ab5b 100%);
+  --hershey-component-columns-video-copy-inset: 0;
+
+  /* the brands band: white eyebrow and brand names (the heading is gold, below) */
+  --hershey-component-cards-brands-color-foreground: #fff;
+
+  /* product photos turn lavender while the card is hovered */
+  --hershey-component-cards-product-slider-image-background-hover: #ebe3fc;
+}
+
+/* headings are gold and copy white on both purples, as on live; product names, sizes and FAQ
+   questions and answers are white, the FAQ rules gold */
+.hershey-home.cadbury-brand-primary main .section:is(.brand-color, .brand-color-alt) {
+  --hershey-component-cards-product-heading-foreground: #e6bc7e;
+  --hershey-component-cards-product-slider-foreground: #fff;
+  --hershey-component-cards-product-slider-size-color: #fff;
+  --hershey-component-accordion-label-color: #fff;
+  --hershey-component-accordion-label-color-inactive: #fff;
+  --hershey-component-accordion-brand-label-color-inactive: #fff;
+  --hershey-component-accordion-brand-answer-color: #fff;
+  --hershey-component-accordion-brand-link-color: #fff;
+  --hershey-component-accordion-border-color: #e6bc7e;
+  --hershey-component-accordion-icon-color: #fff;
+
+  color: #fff;
 }
 
 .hershey-home.cadbury-brand-primary main .section.brand-color {
   --hershey-component-cards-product-band-background: #40257c;
-  --hershey-component-cards-product-heading-foreground: #e6bc7e;
-  --hershey-component-cards-product-slider-foreground: #e6bc7e;
-  --hershey-component-cards-product-slider-size-color: #e6bc7e;
-  --hershey-component-accordion-label-color: #e6bc7e;
-  --hershey-component-accordion-label-color-inactive: #e6bc7e;
-  --hershey-component-accordion-brand-label-color-inactive: #e6bc7e;
-  --hershey-component-accordion-brand-answer-color: #e6bc7e;
-  --hershey-component-accordion-brand-link-color: #e6bc7e;
-  --hershey-component-accordion-border-color: #e6bc7e;
-  --hershey-component-accordion-icon-color: #e6bc7e;
-
-  color: #e6bc7e;
-}
-
-.hershey-home.cadbury-brand-primary main .section.brand-color .default-content-wrapper > h2,
-.hershey-home.cadbury-brand-primary main .section.campaign-text > .default-content-wrapper > h2 {
-  color: #e6bc7e;
 }
 
 .hershey-home.cadbury-brand-primary main .section.brand-color-alt {
   --hershey-component-cards-product-band-background: #5c398f;
-  --hershey-component-cards-product-heading-foreground: #e6bc7e;
-  --hershey-component-cards-product-slider-foreground: #e6bc7e;
-  --hershey-component-cards-product-slider-size-color: #e6bc7e;
-  --hershey-component-accordion-label-color: #e6bc7e;
-  --hershey-component-accordion-label-color-inactive: #e6bc7e;
-  --hershey-component-accordion-brand-label-color-inactive: #e6bc7e;
-  --hershey-component-accordion-brand-answer-color: #e6bc7e;
-  --hershey-component-accordion-brand-link-color: #e6bc7e;
-  --hershey-component-accordion-border-color: #e6bc7e;
-  --hershey-component-accordion-icon-color: #e6bc7e;
+}
 
+/* inline links in the call-out copy are bold white with a white rule, as on live */
+.hershey-home.cadbury-brand-primary main .section:is(.brand-color, .brand-color-alt) .columns.callout p:not(.button-wrapper) a {
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hershey-home.cadbury-brand-primary main .section:is(.brand-color, .brand-color-alt) .default-content-wrapper > h2,
+.hershey-home.cadbury-brand-primary main .section.campaign-text > .default-content-wrapper > h2,
+.hershey-home.cadbury-brand-primary main .hero.brand h1 {
   color: #e6bc7e;
 }
 
-.hershey-home.cadbury-brand-primary main .section.brand-color-alt .default-content-wrapper > h2 {
-  color: #e6bc7e;
+/* pills: the gold gradient sits under the label and fades out on hover or focus, leaving the
+   white pill */
+.hershey-home.cadbury-brand-primary main a.button:any-link:not(.secondary) {
+  position: relative;
+  isolation: isolate;
+}
+
+.hershey-home.cadbury-brand-primary main a.button:any-link:not(.secondary)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(to left, #d4ab5b 0%, #ffeaaf 50%, #d4ab5b 100%);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.hershey-home.cadbury-brand-primary main a.button:any-link:not(.secondary):is(:hover, :focus-visible)::before {
+  opacity: 0;
 }
 
 .hershey-home.cadbury-brand-primary main .section:not(.brand-color, .brand-color-alt, .warm-tan, .dark-chocolate, .cool-tan) {
@@ -851,22 +911,25 @@
   --hershey-component-cards-grid-section-padding-block-start: 40px;
   --hershey-component-cards-grid-section-padding-block-end: 82px;
 
-  /* pill buttons */
-  --hershey-component-hero-brand-cta-background: #f7a1ce;
-  --hershey-component-hero-brand-cta-foreground: #003594;
-  --hershey-component-hero-brand-cta-background-hover: #fbc4e0;
-  --hershey-component-columns-callout-cta-background: #f7a1ce;
-  --hershey-component-columns-callout-cta-foreground: #003594;
-  --hershey-component-columns-callout-cta-background-hover: #fbc4e0;
-  --hershey-component-cards-grid-cta-background: #f7a1ce;
-  --hershey-component-cards-grid-cta-foreground: #003594;
-  --hershey-component-cards-grid-cta-background-hover: #fbc4e0;
-  --hershey-component-cards-product-slider-cta-background: #f7a1ce;
-  --hershey-component-cards-product-slider-cta-foreground: #003594;
-  --hershey-component-cards-product-slider-cta-background-hover: #fbc4e0;
-  --hershey-component-cards-brands-cta-background: #f7a1ce;
-  --hershey-component-cards-brands-cta-foreground: #003594;
-  --hershey-component-cards-brands-cta-background-hover: #fbc4e0;
+  /* pill buttons: blue on every band */
+  --hershey-component-hero-brand-cta-background: #007bbd;
+  --hershey-component-hero-brand-cta-foreground: #fff;
+  --hershey-component-hero-brand-cta-background-hover: #268fc7;
+  --hershey-component-columns-callout-cta-background: #007bbd;
+  --hershey-component-columns-callout-cta-foreground: #fff;
+  --hershey-component-columns-callout-cta-background-hover: #268fc7;
+  --hershey-component-cards-grid-cta-background: #007bbd;
+  --hershey-component-cards-grid-cta-foreground: #fff;
+  --hershey-component-cards-grid-cta-background-hover: #268fc7;
+  --hershey-component-cards-product-slider-cta-background: #007bbd;
+  --hershey-component-cards-product-slider-cta-foreground: #fff;
+  --hershey-component-cards-product-slider-cta-background-hover: #268fc7;
+  --hershey-component-cards-brands-cta-background: #007bbd;
+  --hershey-component-cards-brands-cta-foreground: #fff;
+  --hershey-component-cards-brands-cta-background-hover: #268fc7;
+
+  /* brands band copy is white on the blue */
+  --hershey-component-cards-brands-color-foreground: #fff;
 
   /* spacing measured on hersheyland.com/bubbleyum: a FAQ list that ends 110px sooner */
   --hershey-component-columns-callout-section-padding-block-start: 0;
@@ -939,8 +1002,8 @@
   --hershey-component-hero-brand-band-background: #0074c7;
   --hershey-component-hero-brand-color-foreground: #fff;
   --hershey-component-hero-brand-square-media-height: 597px;
-  --hershey-system-color-surface-brand-band: #5a357b;
-  --hershey-system-color-surface-brand-band-alt: #5a357b;
+  --hershey-system-color-surface-brand-band: #004988;
+  --hershey-system-color-surface-brand-band-alt: #004988;
   --hershey-system-color-text-brand-band: #fff;
 
   /* product slider, recipe and FAQ bands */
@@ -953,22 +1016,26 @@
   --hershey-component-hero-brand-cta-background: #fff;
   --hershey-component-hero-brand-cta-foreground: #0074c7;
   --hershey-component-hero-brand-cta-background-hover: #dfeef8;
-  --hershey-component-columns-callout-cta-background: #007bbd;
-  --hershey-component-columns-callout-cta-foreground: #fff;
-  --hershey-component-columns-callout-cta-background-hover: #006ba6;
-  --hershey-component-cards-grid-cta-background: #007bbd;
-  --hershey-component-cards-grid-cta-foreground: #fff;
-  --hershey-component-cards-grid-cta-background-hover: #006ba6;
-  --hershey-component-cards-product-slider-cta-background: #007bbd;
-  --hershey-component-cards-product-slider-cta-foreground: #fff;
-  --hershey-component-cards-product-slider-cta-background-hover: #006ba6;
-  --hershey-component-cards-brands-cta-background: #007bbd;
-  --hershey-component-cards-brands-cta-foreground: #fff;
-  --hershey-component-cards-brands-cta-background-hover: #006ba6;
+  --hershey-component-columns-callout-cta-background: #fff;
+  --hershey-component-columns-callout-cta-foreground: #0074c7;
+  --hershey-component-columns-callout-cta-background-hover: #dfeef8;
+  --hershey-component-cards-grid-cta-background: #fff;
+  --hershey-component-cards-grid-cta-foreground: #0074c7;
+  --hershey-component-cards-grid-cta-background-hover: #dfeef8;
+  --hershey-component-cards-product-slider-cta-background: #fff;
+  --hershey-component-cards-product-slider-cta-foreground: #0074c7;
+  --hershey-component-cards-product-slider-cta-background-hover: #dfeef8;
+  --hershey-component-cards-brands-cta-background: #fff;
+  --hershey-component-cards-brands-cta-foreground: #0074c7;
+  --hershey-component-cards-brands-cta-background-hover: #dfeef8;
+
+  /* the secondary call-out link is bold white with a white rule, as on live */
+  --hershey-component-columns-callout-link-color: #fff;
+  --hershey-component-columns-callout-link-color-hover: #fff;
 }
 
 .hershey-home.ice-breakers-primary main .section.brand-color {
-  --hershey-component-cards-product-band-background: #5a357b;
+  --hershey-component-cards-product-band-background: #004988;
   --hershey-component-cards-product-heading-foreground: #fff;
   --hershey-component-cards-product-slider-foreground: #fff;
   --hershey-component-cards-product-slider-size-color: #fff;
@@ -979,6 +1046,8 @@
   --hershey-component-accordion-brand-link-color: #fff;
   --hershey-component-accordion-border-color: #fff;
   --hershey-component-accordion-icon-color: #fff;
+  --hershey-component-cards-product-slider-indicator-image: url('/icons/orb-indicator-inactive-light.svg');
+  --hershey-component-cards-product-slider-indicator-image-active: url('/icons/orb-indicator-active-light.svg');
 
   color: #fff;
 }
@@ -989,7 +1058,7 @@
 }
 
 .hershey-home.ice-breakers-primary main .section.brand-color-alt {
-  --hershey-component-cards-product-band-background: #5a357b;
+  --hershey-component-cards-product-band-background: #004988;
   --hershey-component-cards-product-heading-foreground: #fff;
   --hershey-component-cards-product-slider-foreground: #fff;
   --hershey-component-cards-product-slider-size-color: #fff;
@@ -1044,19 +1113,23 @@
   /* pill buttons */
   --hershey-component-hero-brand-cta-background: #007bbd;
   --hershey-component-hero-brand-cta-foreground: #fff;
-  --hershey-component-hero-brand-cta-background-hover: #d6e2f1;
+  --hershey-component-hero-brand-cta-background-hover: #268fc7;
   --hershey-component-columns-callout-cta-background: #007bbd;
   --hershey-component-columns-callout-cta-foreground: #fff;
-  --hershey-component-columns-callout-cta-background-hover: #d6e2f1;
+  --hershey-component-columns-callout-cta-background-hover: #268fc7;
   --hershey-component-cards-grid-cta-background: #007bbd;
   --hershey-component-cards-grid-cta-foreground: #fff;
-  --hershey-component-cards-grid-cta-background-hover: #d6e2f1;
+  --hershey-component-cards-grid-cta-background-hover: #268fc7;
   --hershey-component-cards-product-slider-cta-background: #007bbd;
   --hershey-component-cards-product-slider-cta-foreground: #fff;
-  --hershey-component-cards-product-slider-cta-background-hover: #d6e2f1;
+  --hershey-component-cards-product-slider-cta-border-width: 3px;
+  --hershey-component-cards-product-slider-cta-background-hover: #268fc7;
   --hershey-component-cards-brands-cta-background: #007bbd;
   --hershey-component-cards-brands-cta-foreground: #fff;
-  --hershey-component-cards-brands-cta-background-hover: #d6e2f1;
+  --hershey-component-cards-brands-cta-background-hover: #268fc7;
+
+  /* brands band copy is white on the royal blue */
+  --hershey-component-cards-brands-color-foreground: #fff;
 
   /* spacing measured on hersheyland.com/jolly-rancher: a FAQ band that ends 110px sooner than the default */
   --hershey-component-columns-callout-section-padding-block-start: 0;
@@ -1064,6 +1137,8 @@
 }
 
 .hershey-home.jolly-rancher-primary main .section.brand-color {
+  --hershey-component-cards-product-slider-indicator-image: url('/icons/orb-indicator-inactive-light.svg');
+  --hershey-component-cards-product-slider-indicator-image-active: url('/icons/orb-indicator-active-light.svg');
   --hershey-component-cards-product-band-background: #215dab;
   --hershey-component-cards-product-heading-foreground: #fff;
   --hershey-component-cards-product-slider-foreground: #fff;
@@ -1085,6 +1160,8 @@
 }
 
 .hershey-home.jolly-rancher-primary main .section.brand-color-alt {
+  --hershey-component-cards-product-slider-indicator-image: url('/icons/orb-indicator-inactive-light.svg');
+  --hershey-component-cards-product-slider-indicator-image-active: url('/icons/orb-indicator-active-light.svg');
   --hershey-component-cards-product-band-background: #003594;
   --hershey-component-cards-product-heading-foreground: #fff;
   --hershey-component-cards-product-slider-foreground: #fff;
@@ -1222,11 +1299,14 @@
  * section type: the main band, the alternate band and plain white sections.
  */
 .hershey-home.shaqalicious-primary {
-  --hershey-component-hero-brand-band-background: #472180;
+  --hershey-component-hero-brand-band-background: #5844f5;
   --hershey-component-hero-brand-color-foreground: #fff;
-  --hershey-component-hero-brand-square-media-height: 597px;
-  --hershey-system-color-surface-brand-band: #472180;
+  --hershey-component-hero-brand-square-media-height: 740px;
+
+  /* the bands are clear over the page gradient (see the SHAQ-A-LICIOUS page art below) */
+  --hershey-system-color-surface-brand-band: transparent;
   --hershey-system-color-text-brand-band: #fff;
+  --hershey-component-cards-brands-color-foreground: #fff;
 
   /* product slider, recipe and FAQ bands */
   --hershey-component-cards-product-slider-band-padding-block-start: 31px;
@@ -1253,7 +1333,7 @@
 }
 
 .hershey-home.shaqalicious-primary main .section.brand-color {
-  --hershey-component-cards-product-band-background: #472180;
+  --hershey-component-cards-product-band-background: transparent;
   --hershey-component-cards-product-heading-foreground: #fff;
   --hershey-component-cards-product-slider-foreground: #fff;
   --hershey-component-cards-product-slider-size-color: #fff;
@@ -2524,6 +2604,64 @@
   border: 2px solid #cc0a12;
 }
 
+/* call-out pills span the copy box below 768px: less 25px either side when alone, the whole box
+   when a text link follows */
+@media (width < 768px) {
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div p.button-wrapper {
+    padding-inline: 25px;
+  }
+
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div p.button-wrapper > a.button.primary {
+    display: block;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* below 992px a pill followed by a text link is measured on the whole copy box (60% of it from
+   768px), and the link sits 20px under it (the pill keeps its 10px margin below) */
+@media (width < 992px) {
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper {
+    padding-inline: 0;
+  }
+
+  .hershey-home.dots-pretzels-primary main .columns.callout p.button-wrapper:has(> .secondary) {
+    margin-top: 10px;
+  }
+}
+
+@media (width >= 768px) and (width < 992px) {
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper > a.button.primary {
+    width: 60%;
+    max-width: none;
+  }
+}
+
+/* from 992px a pill and a text link fit their text and spread with equal space around each across
+   the copy column less 50px either side, wrapping when they don't fit (the cell's padding grows by
+   50px and the heading and copy reach back out over it) */
+@media (width >= 992px) {
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) {
+    padding-inline: 60px;
+  }
+
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > :not(.button-wrapper) {
+    width: calc(100% + 60px);
+    margin-inline: -30px;
+  }
+
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > p.button-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .hershey-home.dots-pretzels-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) a.button.primary {
+    width: auto;
+  }
+}
+
 /*
  * ZERO brand theme (`theme: zero-primary` page metadata).
  * Overrides only the brand page tokens that differ from the default Hershey look: the frosty blue
@@ -2657,9 +2795,12 @@
   font-weight: 700;
 }
 
-/* the hero runs up under the header, as on hersheyland.com */
+/* the hero runs up under the header, as on hersheyland.com; the turning disc of the closing band
+   reaches far below it, and `clip-path` hides it but still counts it toward the page height, so
+   main is clipped at its end and the page ends at the footer, as on live */
 .hershey-home.oreo-cup-primary main {
   margin-top: -80px;
+  overflow-y: clip;
 }
 
 /* the first call-out under a different band starts 50px below it */
@@ -2713,15 +2854,53 @@
   background-image: url('/icons/payday-peanut-transition-1.svg');
 }
 
+/* a plain 90px band, then the drips covering the bottom 90px (as live) so they meet the FAQ band */
 .hershey-home.payday-brand-primary main > div.section.payday-transition-2 {
-  min-height: 180px;
+  min-height: 90px;
+  padding-top: 90px;
   background-image: url('/icons/payday-peanut-transition-2.svg');
-  background-position: center bottom;
-  background-size: 100% 90px;
+  background-origin: content-box;
 }
 
 .hershey-home.payday-brand-primary main > div.section:has(> .columns-wrapper > .columns.blobs):not(.payday-product) {
   padding: 70px 0 69px;
+}
+
+/* call-out text links (e.g. Explore More Recipes) are brown, as on hersheyland.com/payday */
+.hershey-home.payday-brand-primary main .columns.callout {
+  --hershey-component-columns-callout-link-color: #3f000b;
+  --hershey-component-columns-callout-link-color-hover: #3f000b;
+}
+
+@media (width >= 992px) {
+  /* the article pill is 290px wide, on one line */
+  .hershey-home.payday-brand-primary main .columns.article a.button.primary {
+    width: 290px;
+    max-width: none;
+  }
+
+  /* the call-out pills fit their text; the pill and link spread with equal space around each across
+     the copy column less 30px either side (the cell's padding grows by 50px and the heading and
+     copy reach back out over it) */
+  .hershey-home.payday-brand-primary main .columns.callout > div > div:not(.columns-img-col) {
+    padding-inline: 60px;
+  }
+
+  .hershey-home.payday-brand-primary main .columns.callout > div > div:not(.columns-img-col) > :not(.button-wrapper) {
+    width: calc(100% + 60px);
+    margin-inline: -30px;
+  }
+
+  .hershey-home.payday-brand-primary main .columns.callout > div > div:not(.columns-img-col) > p.button-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .hershey-home.payday-brand-primary main .columns.callout a.button.primary {
+    width: auto;
+  }
 }
 
 .hershey-home.payday-brand-primary main > div.section.payday-product {
@@ -2876,6 +3055,56 @@
 
 .hershey-home.almond-joy-mounds-primary main > div.section:has(> .accordion-wrapper) + div.section:has(> .accordion-wrapper) {
   --hershey-component-accordion-brand-section-padding-block-end: 72px;
+  --hershey-component-accordion-border-color: #b21d3a;
+}
+
+/* corrections measured against hersheyland.com/almond-joy-mounds (2026-11-10) */
+
+/* hero: the logo is nearly as wide as the title under it */
+.hershey-home.almond-joy-mounds-primary .hero.brand .hero-brand-logo {
+  width: 346px;
+  height: auto;
+}
+
+.hershey-home.almond-joy-mounds-primary .hero.brand .hero-brand-logo :is(picture, img) {
+  height: auto;
+}
+
+/* brands band: white eyebrow, heading and brand names on the dark band, a dull-blue pill and no
+   page indicators under the arrows */
+.hershey-home.almond-joy-mounds-primary main > div.section:has(.cards.brands) {
+  --hershey-component-cards-brands-color-foreground: #fff;
+  --hershey-component-cards-brands-cta-background: #3579b8;
+  --hershey-component-cards-brands-cta-background-hover: #4a8ac4;
+
+  color: #fff;
+}
+
+.hershey-home.almond-joy-mounds-primary main .cards.brands .cards-slider-dots {
+  display: none;
+}
+
+/* FAQ: blue rules on the ALMOND JOY list, crimson on the MOUNDS list, a bold navy plus */
+.hershey-home.almond-joy-mounds-primary main > div.section:has(> .accordion-wrapper) {
+  --hershey-component-accordion-border-color: #3f80b7;
+  --hershey-component-accordion-icon-color: #13348e;
+}
+
+/* product slider: both arrows stay white with a blue chevron and wrap round, the page indicators
+   are maroon rings, filled when current */
+.hershey-home.almond-joy-mounds-primary main .cards.product.slider {
+  --cards-slider-wrap: 1;
+  --hershey-component-cards-product-slider-control-color: #2a73b8;
+  --hershey-component-cards-product-slider-indicator-image: url('/icons/orb-indicator-inactive-maroon.svg');
+  --hershey-component-cards-product-slider-indicator-image-active: url('/icons/orb-indicator-active-maroon.svg');
+}
+
+.hershey-home.almond-joy-mounds-primary main .cards.product.slider .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-maroon.svg');
+}
+
+.hershey-home.almond-joy-mounds-primary main .cards.product.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-maroon.svg');
 }
 
 /*
@@ -2907,6 +3136,26 @@
   transform: translateX(-50%);
   animation: oreo-spotlight-spin 240s linear infinite;
   pointer-events: none;
+}
+
+/* the empty section the page ends with adds a gap between the band and the footer; live has none */
+.hershey-home.oreo-cup-primary main > div.section:not(:has(*)) {
+  display: none;
+}
+
+/* the blue band runs down behind the footer wave, as on live: the footer is pulled 174px up over the
+   band (the page then ends where live's does) and is see-through above the wave */
+@media (width >= 992px) {
+  .hershey-home.oreo-cup-primary footer {
+    position: relative;
+    z-index: 1;
+    margin-top: -174px;
+    background: linear-gradient(transparent 300px, var(--hershey-component-footer-surface-page, #f5f5f5) 300px);
+  }
+
+  .hershey-home.oreo-cup-primary footer :is(.footer, .newsletter) {
+    background-color: transparent;
+  }
 }
 
 @keyframes oreo-spotlight-spin {
@@ -2965,64 +3214,87 @@
  * (a "Did You Know?" box on its own backdrop), `kk-art` (frosted donut stripes) and `kk-footer`
  * (the wave into the brands). The artwork is decoration, kept in /icons.
  */
+
+/* the hero, as on hersheyland.com/kit-kat: below 992px the break animation is a square the width of
+   the page above the centred copy; from 992px the band is 740px tall, the copy fills the left
+   44.5% (centred down the band, 7vw in) and the animation the right 55.5% */
 .hershey-home.kit-kat-primary main > div.section.kk-hero {
   --hershey-component-hero-brand-band-background: transparent;
 
   position: relative;
   box-sizing: border-box;
-  min-height: 597px;
   padding: 0;
   background: #d30009;
 }
 
-.hershey-home.kit-kat-primary main > div.section.kk-hero::after {
+.hershey-home.kit-kat-primary main > div.section.kk-hero::before {
   content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 791px;
-  height: 100%;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
   background: url('/icons/kit-kat-hero-break-animation.gif') center / contain no-repeat;
   pointer-events: none;
 }
 
 .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-content {
-  display: grid;
-  grid-template-columns: 634px 1fr;
-  min-height: 597px;
+  display: block;
+  min-height: 0;
   background: transparent;
 }
 
 .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text {
   position: relative;
   z-index: 1;
-  grid-area: 1 / 1;
   box-sizing: border-box;
   justify-content: flex-start;
-  width: 634px;
-  padding: 149px 0 0 116px;
+  width: auto;
+  min-height: 0;
+  padding: 15px 20px;
   background: transparent;
-  text-align: left;
+  text-align: center;
 }
 
-.hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo img {
-  width: 247px;
+/* the logo is half the copy column wide, at its own shape */
+.hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo picture {
   height: auto;
 }
 
+.hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo img {
+  display: block;
+  width: 50%;
+  height: auto;
+  margin: 0 auto;
+}
+
 .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text p {
-  width: 423px;
-  margin: 50px 0 0;
+  width: auto;
+  max-width: none;
+  margin: 15px 0 25.5px;
   font-size: 17px;
   line-height: 1.5;
 }
 
+/* the pill's paragraph is only as tall as the pill */
 .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text p.button-wrapper {
-  margin-top: 31px;
+  display: flex;
+  margin: 0 10px;
 }
 
 .hershey-home.kit-kat-primary main > div.section.kk-hero a.button:any-link {
-  min-width: 250px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 12px 0;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .hershey-home.kit-kat-primary main > div.section.kk-hero h1 {
@@ -3031,6 +3303,55 @@
   height: 1px;
   overflow: hidden;
   clip-path: inset(50%);
+}
+
+@media (width >= 992px) {
+  .hershey-home.kit-kat-primary main > div.section.kk-hero::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55.5%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-content {
+    display: grid;
+    grid-template-columns: 44.5% 1fr;
+    align-items: center;
+    min-height: 740px;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text {
+    grid-area: 1 / 1;
+    padding: 15px 25px 15px calc(15px + 7vw);
+    text-align: left;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo {
+    margin-bottom: 35px;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-logo img {
+    margin: 0;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text p {
+    margin: 0 0 30px;
+    padding-right: 70px;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero .hero-brand-text p.button-wrapper {
+    margin: 0;
+    padding: 0;
+  }
+
+  .hershey-home.kit-kat-primary main > div.section.kk-hero a.button:any-link {
+    width: 250px;
+    padding: 14px 0;
+    font-size: 18px;
+    line-height: 27px;
+  }
 }
 
 .hershey-home.kit-kat-primary main > div.section.kk-peppermint {
@@ -3100,6 +3421,38 @@
   min-height: 270px;
   padding: 0;
   background: #502c1e url('/icons/kit-kat-footer-transition.svg') center / cover no-repeat;
+}
+
+/* the recipes band sits on the orange, pink and brown stripes, as on hersheyland.com/kit-kat */
+.hershey-home.kit-kat-primary main > div.section:has(> .cards-wrapper > .cards.grid) {
+  background: #d30009 url('/icons/kit-kat-accent-stripes-2.svg') center / cover no-repeat;
+}
+
+/* a product tile's photo panel turns KIT KAT pink while hovered */
+.hershey-home.kit-kat-primary .cards.product.slider .cards-product-card:is(:hover, :focus-visible) .cards-product-image {
+  background-color: #f9dfe0;
+}
+
+/* each plain red or brown band reaches a pixel over the one above, so no hairline of the band above
+   (or the white page) shows where a band ends part-way through a pixel; bands drawn on artwork
+   (the stripes, the frosted donut, the recipes) start in the artwork's own colour, so they don't */
+.hershey-home.kit-kat-primary main > div.section.brand-color + div.section.brand-color-alt:not(.kk-footer) {
+  box-shadow: 0 -1px 0 #502c1e;
+}
+
+.hershey-home.kit-kat-primary main > div.section.brand-color-alt + div.section.brand-color:not(.kk-art, .kk-dyk-1, .kk-dyk-3, :has(> .cards-wrapper > .cards.grid)),
+.hershey-home.kit-kat-primary main > div.section.brand-color + div.section.brand-color:not(.kk-art, .kk-dyk-1, .kk-dyk-3, :has(> .cards-wrapper > .cards.grid)) {
+  box-shadow: 0 -1px 0 #d30009;
+}
+
+/* the product slider's page indicators are white rings, filled when current, as on
+   hersheyland.com/kit-kat */
+.hershey-home.kit-kat-primary main .cards.product.slider .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-light.svg');
+}
+
+.hershey-home.kit-kat-primary main .cards.product.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-light.svg');
 }
 
 /*
@@ -3180,26 +3533,56 @@
 
 /*
  * SOUR STRIPS brand theme (`theme: sour-strips-primary` page metadata), measured on
- * hersheyland.com/brands/sourstrips (2026-11-04). A blue graffiti hero, white bands, a black
- * feature band and red pill buttons. The brand sets its headings in RusticoFarmero and its copy in
- * Montserrat; neither face is in this project yet, so the stacks fall back to system fonts.
+ * hersheyland.com/brands/sourstrips at 1280px and 375px (2026-11-09). Section Metadata styles name
+ * the bands: `ss-hero` (graffiti hero with the bag fan), `ss-about` and `ss-bite` (square photo
+ * beside the copy), `ss-icons` (the three splats), `ss-flavors` (the flip cards on pink splashes),
+ * `ss-shop` (product slider), `ss-recipes` and `ss-recipe` (the black splatter band and its two
+ * recipes), `ss-fam` (over the Instagram feed) and `ss-fan` (the bags above the footer). Copy is
+ * Montserrat (served from /fonts); headings are RusticoFarmero, a licensed fonts.net face this
+ * project does not carry, so they fall back to Roboto Condensed. The artwork is decoration,
+ * kept in /icons.
  */
+@font-face {
+  font-family: montserrat;
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/montserrat-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 .hershey-home.sour-strips-primary {
-  --hershey-component-hero-brand-band-background: #1e7eae;
+  --ss-red: #eb4a47;
+  --ss-splash-top: 28.4vw;
+  --hershey-component-hero-brand-band-background: transparent;
   --hershey-component-hero-brand-color-foreground: #fff;
   --hershey-system-color-surface-brand-band: #fff;
   --hershey-system-color-surface-brand-band-alt: #000;
   --hershey-system-color-text-brand-band: #000;
 
-  /* red pill buttons */
-  --hershey-component-hero-brand-cta-background: #eb4a47;
+  /* red pill buttons, white with red text on hover */
+  --hershey-component-hero-brand-cta-background: var(--ss-red);
   --hershey-component-hero-brand-cta-foreground: #fff;
-  --hershey-component-columns-callout-cta-background: #eb4a47;
+  --hershey-component-hero-brand-cta-background-hover: #fff;
+  --hershey-component-columns-callout-cta-background: var(--ss-red);
   --hershey-component-columns-callout-cta-foreground: #fff;
-  --hershey-component-cards-product-slider-cta-background: #eb4a47;
+  --hershey-component-columns-callout-cta-background-hover: #fff;
+  --hershey-component-columns-callout-link-color: var(--ss-red);
+  --hershey-component-columns-callout-link-color-hover: var(--ss-red);
+  --hershey-component-cards-product-slider-cta-background: var(--ss-red);
   --hershey-component-cards-product-slider-cta-foreground: #fff;
-  --hershey-component-cards-grid-cta-background: #eb4a47;
+  --hershey-component-cards-grid-cta-background: var(--ss-red);
   --hershey-component-cards-grid-cta-foreground: #fff;
+
+  /* flavour flip cards: the character pattern, denser on the front */
+  --cards-flip-front-background: url('/icons/sour-strips-character-background-pattern.webp') 0 0 / 50%;
+  --cards-flip-back-background: url('/icons/sour-strips-character-background-pattern.webp') 0 0 / 100%;
+  --cards-flip-cta-background: var(--ss-red);
+  --cards-flip-cta-background-hover: #ec5451;
+}
+
+.hershey-home.sour-strips-primary main {
+  font-family: montserrat, sans-serif;
 }
 
 .hershey-home.sour-strips-primary main .section.brand-color {
@@ -3217,22 +3600,720 @@
 }
 
 .hershey-home.sour-strips-primary main :is(h1, h2, h3) {
-  font-family: RusticoFarmero, Impact, 'Arial Narrow Bold', sans-serif;
+  font-family: RusticoFarmero, roboto-condensed, 'Arial Narrow', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
 }
 
+.hershey-home.sour-strips-primary main h2 {
+  margin: 0;
+  font-size: 48px;
+  line-height: 1;
+}
+
+/* the brand name inside a heading is red, authored as bold text */
+.hershey-home.sour-strips-primary main :is(h2, h3) strong {
+  color: var(--ss-red);
+  font-weight: inherit;
+}
+
+.hershey-home.sour-strips-primary main a.button.primary:is(:hover, :focus-visible) {
+  background-color: #fff;
+  color: var(--ss-red);
+}
+
+/* hero: the title and pill centred over the graffiti, the bag fan along the foot (705px tall, 900px
+   from 992px) */
 .hershey-home.sour-strips-primary main > div.section.ss-hero {
+  padding: 0;
   background: #1e7eae url('/icons/sour-strips-graffiti-hero-pattern.svg') center / cover no-repeat;
   color: #fff;
 }
 
-.hershey-home.sour-strips-primary main > div.section.ss-flavors .cards > ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 30px;
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-content {
+  position: relative;
+  display: block;
+  min-height: 705px;
+  overflow: hidden;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-logo {
+  display: none;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-text {
+  position: relative;
+  z-index: 1;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  padding: 80px 20px 0;
+  text-align: center;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero h1 {
+  margin: 0;
+  font-size: 76px;
+  line-height: 1;
+  text-shadow: 0 0 12px rgb(0 0 0 / 75%);
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero p.button-wrapper {
+  margin: 15px 0 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero a.button.primary {
+  display: block;
+  width: 268px;
+  min-width: 0;
+  margin: 0 auto;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  padding: 7px;
+  font-family: montserrat, sans-serif;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero a.button.primary:is(:hover, :focus-visible) {
+  border-color: #000;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-media {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: max(750px, 100%);
+  height: auto;
+  aspect-ratio: auto;
+  translate: -50% 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-media picture {
+  position: static;
+  display: block;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* about and bites: the square photo above the copy, beside it (half each) from 992px */
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) {
+  padding: 55px 0 30px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-bite {
+  padding: 25px 0 54px;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) > .columns-wrapper {
+  width: min(1260px, 100% - 20px);
+  max-width: none;
+  margin-inline: auto;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout > div > .columns-img-col img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout > div > :not(.columns-img-col) {
+  padding: 0 30px;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout > div > :not(.columns-img-col) > * {
+  width: 100%;
+  margin-inline: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout h2 {
+  margin: 40px 0 10px;
+  font-size: 46px;
+  line-height: 1;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout p.button-wrapper {
+  margin: 21px 0 0;
   padding: 0;
-  list-style: none;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-about .columns.callout p.button-wrapper {
+  padding: 0 5px;
+}
+
+/* the About and Bite pills have a 2px rule in their own colour, as on live */
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout a.button.primary {
+  border: 2px solid var(--ss-red);
+}
+
+.hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout a.button.primary {
+  display: block;
+  width: 100%;
+  max-width: none;
+  border-radius: 25px;
+  padding: 13px;
+  font-family: montserrat, sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+/* the text link under the pill, in TT Norms as on live */
+.hershey-home.sour-strips-primary main > div.section.ss-bite .columns.callout p.button-wrapper:has(> .secondary) {
+  margin-top: 20px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-bite .columns.callout a.button.secondary {
+  border-bottom-color: var(--ss-red);
+  font-family: hershey-tt, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* the three splats on the white-to-black grunge */
+.hershey-home.sour-strips-primary main > div.section.ss-icons {
+  padding: 50px 0 36px;
+  background: #fff url('/icons/sour-strips-macros-background.webp') center / cover no-repeat;
+  color: #fff;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons > .columns-wrapper {
+  max-width: 990px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons .columns > div {
+  flex-direction: row;
+  gap: 0;
+  align-items: flex-start;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons .columns > div > div {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons .columns p {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons .columns img {
+  width: min(250px, 100%);
+  height: auto;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-icons .columns h3 {
+  white-space: nowrap;
+  margin: 15px 0 0;
+  color: #fff;
+  font-size: 21px;
+  line-height: 25px;
+}
+
+/* flavours: the flip cards on the pink splashes, which start 45px down (50px from 992px) */
+.hershey-home.sour-strips-primary main > div.section.ss-flavors {
+  padding: 90px 0 46px;
+  background: #fff url('/icons/sour-strips-pink-splash.webp') center 45px / auto calc(100% - 45px) no-repeat;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-flavors > .default-content-wrapper {
+  max-width: none;
+  margin: 0 0 39px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-flavors > .cards-wrapper {
+  max-width: 1260px;
+  margin-inline: auto;
+  padding: 0;
+}
+
+.hershey-home.sour-strips-primary main .cards.flip .cards-flip-back :is(p, a.button) {
+  font-family: hershey-tt, sans-serif;
+}
+
+.hershey-home.sour-strips-primary main .cards.flip .cards-flip-back h3 {
+  color: #000;
+}
+
+/* shop: the product slider under a 48px (64px from 992px) heading */
+.hershey-home.sour-strips-primary main > div.section.ss-shop {
+  --hershey-component-cards-product-slider-band-padding-block-start-mobile: 60px;
+  --hershey-component-cards-product-slider-band-padding-block-start: 51px;
+  --hershey-component-cards-product-slider-heading-font-size-mobile: 48px;
+  --hershey-component-cards-product-slider-heading-font-size-desktop: 64px;
+  --hershey-component-cards-product-slider-heading-line-height: 1;
+  --hershey-component-cards-product-slider-band-padding-block-end-mobile: 50px;
+  --hershey-component-cards-product-slider-band-padding-block-end: 100px;
+  --hershey-component-cards-product-slider-indicator-margin-top: 25px;
+  --hershey-component-cards-product-slider-indicator-gap: 8px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-shop > .default-content-wrapper > h2 {
+  font-family: RusticoFarmero, roboto-condensed, 'Arial Narrow', sans-serif;
+  font-weight: 400;
+}
+
+/* product names and sizes in Montserrat, as written */
+.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-product-body :is(h3, h3 a, p) {
+  font-family: montserrat, sans-serif;
+  text-transform: none;
+}
+
+/* product names are bold maroon, the size line 14px black, as on live */
+.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-product-body :is(h3, h3 a) {
+  color: #3f000b;
+  font-weight: 700;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-product-body p {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+/* page dots: red rings, filled for the current page */
+.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-slider-dot {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--ss-red);
+  border-radius: 50%;
+  background: none;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-shop .cards-slider-dot[aria-current='true'] {
+  background: var(--ss-red);
+}
+
+/* recipes: the black grunge band between two splatter edges (each 409/1440 of the width, drawn on
+   white over the band's top and bottom), the recipe copy centred under its photo, beside it from
+   992px */
+.hershey-home.sour-strips-primary main > div.section:is(.ss-recipes, .ss-recipe) {
+  position: relative;
+  background: #000 url('/icons/sour-strips-black-splash-mid.webp') left top / max(1440px, 100%) auto repeat-y;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes {
+  padding: calc(var(--ss-splash-top) + 45px) 10px 0;
+  text-align: center;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes::before,
+.hershey-home.sour-strips-primary main > div.section.ss-recipe + div.section.ss-recipe::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  aspect-ratio: 2880 / 818;
+  background: #fff url('/icons/sour-strips-black-splash-top.webp') center top / 100% auto no-repeat;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes::before {
+  top: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes > .default-content-wrapper {
+  max-width: 670px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes > .default-content-wrapper > h2 {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipes p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe {
+  padding: 46px 20px 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe + div.section.ss-recipe {
+  padding: 75px 30px calc(50px + var(--ss-splash-top));
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe + div.section.ss-recipe::after {
+  bottom: 0;
+  background-image: url('/icons/sour-strips-black-splash-btm.webp');
+  background-position: center bottom;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout > div > .columns-img-col {
+  order: -1;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout > div > .columns-img-col img {
+  aspect-ratio: 592 / 377;
+  object-fit: cover;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout > div > :not(.columns-img-col) {
+  padding: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout h3 {
+  margin: 30px 0 0;
+  color: #fff;
+  font-size: 46px;
+  line-height: 46px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout p {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+/* sour fam: the heading and copy over the Instagram feed; the bags sit on the footer */
+.hershey-home.sour-strips-primary main > div.section.ss-fam {
+  padding: 55px 0 0;
+  text-align: center;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fam > .default-content-wrapper {
+  max-width: 740px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fam h2 {
+  margin: 0 0 14px;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fam p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.hershey-home.sour-strips-primary main > div.section:empty {
+  display: none;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fan {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* the footer wave runs 70px over the foot of the bags, as on live */
+@media (width >= 992px) {
+  .hershey-home.sour-strips-primary main > div.section.ss-fan {
+    margin-bottom: -70px;
+  }
+
+  .hershey-home.sour-strips-primary footer {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(transparent 70px, #f8f8f8 70px);
+  }
+
+  .hershey-home.sour-strips-primary footer :is(.footer, .newsletter) {
+    background-color: transparent;
+  }
+}
+
+/* the SOUR STRIPS header: its logo and three links on white, 107px tall, as on live (the page points
+   `nav` at /sour-strips-nav) */
+@media (width >= 992px) {
+  .hershey-home.sour-strips-primary {
+    --nav-height: 107px;
+  }
+
+  /* the page starts 80px down as on live, so the 107px header covers the top 27px of the hero */
+  .hershey-home.sour-strips-primary main {
+    margin-top: -27px;
+  }
+
+  .hershey-home.sour-strips-primary header nav {
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 31px;
+    max-width: none;
+    padding: 16px 20px 0;
+    font-family: montserrat, sans-serif;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-brand {
+    flex: 0 0 140px;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-brand img {
+    width: 120px;
+    margin-left: 10px;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-sections {
+    flex: 0 1 auto;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-sections ul {
+    gap: 45px;
+    margin-top: 25px;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-sections ul > li {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .hershey-home.sour-strips-primary header nav .nav-sections a:any-link {
+    color: #000;
+  }
+
+  /* links that leave the site carry the small box-and-arrow mark */
+  .hershey-home.sour-strips-primary header nav .nav-sections a[href^='http']:not([href*='hersheyland.com'])::after {
+    content: '';
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    margin-left: 6px;
+    background: currentcolor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fan > .default-content-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fan p {
+  margin: 0;
+  line-height: 0;
+}
+
+.hershey-home.sour-strips-primary main > div.section.ss-fan img {
+  display: block;
+  width: max(938px, 100%);
+  max-width: none;
+  height: auto;
+  margin-left: 50%;
+  translate: -50% 0;
+}
+
+@media (width >= 992px) {
+  .hershey-home.sour-strips-primary {
+    --cards-flip-front-background: url('/icons/sour-strips-character-background-pattern.webp') 0 0 / 50%;
+  }
+
+  .hershey-home.sour-strips-primary main h2 {
+    font-size: 64px;
+  }
+
+  /* the heading band is 359px; the bag fan runs full width under it and sets the height (725px at
+     1713px wide), as on live */
+  .hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-content {
+    display: flex;
+    flex-direction: column-reverse;
+    min-height: 0;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-text {
+    flex: 0 0 auto;
+    height: 359px;
+    padding-top: 140px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-hero .hero-brand-media {
+    position: static;
+    flex: 0 0 auto;
+    width: 100%;
+    translate: none;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-hero h1 {
+    max-width: 900px;
+    margin-inline: auto;
+    font-size: 96px;
+    line-height: 1.1;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-hero a.button.primary {
+    display: inline-block;
+    width: auto;
+    padding: 13.5px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-about {
+    padding: 110px 0 20px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-bite {
+    padding: 50px 0;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout > div > * {
+    flex: 0 0 50%;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout > div > :not(.columns-img-col) {
+    flex-wrap: wrap;
+    place-content: center flex-start;
+    text-align: left;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout h2 {
+    margin: 0 0 10px;
+    font-size: 64px;
+    white-space: nowrap;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout > div > :not(.columns-img-col) {
+    min-width: 0;
+  }
+
+  /* the paragraph text starts on the heading's left edge, in maroon */
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite) .columns.callout p:not(.button-wrapper) {
+    color: #3f000b;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout p.button-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+    margin: 21px 0 0;
+    padding: 0;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-about .columns.callout p.button-wrapper {
+    margin-left: 5px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section:is(.ss-about, .ss-bite, .ss-recipe) .columns.callout a.button.primary {
+    display: inline-block;
+    width: auto;
+    border-radius: 44px;
+    padding: 18.5px;
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  /* the pill and the text link share a row, 50px apart */
+  .hershey-home.sour-strips-primary main > div.section.ss-bite .columns.callout p.button-wrapper:has(> .secondary) {
+    align-self: center;
+    margin: 21px 0 0 50px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-bite .columns.callout a.button.secondary {
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-icons {
+    box-sizing: border-box;
+    min-height: 459px;
+    padding: 100px 0 0;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-icons .columns h3 {
+    margin-top: 29px;
+    font-size: 36px;
+    line-height: 36px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-flavors {
+    padding: 280px 0 347px;
+    background-position: center 50px;
+    background-size: auto calc(100% - 50px);
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-flavors > .default-content-wrapper {
+    margin-bottom: 98px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipes {
+    padding-top: calc(var(--ss-splash-top) + 44px);
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipes > .default-content-wrapper > h2 {
+    font-size: 64px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipes p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* sushi: photo left (592px), copy 70px beside it; cupcakes: copy 130px in, photo right */
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe {
+    padding: 132px 0 70px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe + div.section.ss-recipe {
+    padding: 70px 0 calc(63px + var(--ss-splash-top));
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout > div > .columns-img-col {
+    flex: 0 0 592px;
+    order: 0;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout > div > :not(.columns-img-col) {
+    flex: 1 1 auto;
+    padding: 0 80px 0 70px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe + div.section.ss-recipe .columns.callout > div > :not(.columns-img-col) {
+    padding: 0 20px 0 130px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout h3 {
+    margin: 0 0 10px;
+    font-size: 64px;
+    line-height: 64px;
+    white-space: nowrap;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout p.button-wrapper {
+    margin-top: 24px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-recipe .columns.callout a.button.primary {
+    width: 290px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-fam {
+    padding-block: 50px 90px;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-fam h2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 19px;
+    white-space: nowrap;
+  }
+
+  .hershey-home.sour-strips-primary main > div.section.ss-fam p {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 /*
@@ -3248,13 +4329,14 @@
 
 .hershey-home.rolo-brand-primary main > div.section.rolo-secret {
   --hershey-component-cards-grid-section-padding-block-start: 0;
+  --hershey-component-cards-grid-heading-max-width: 1260px;
 
   padding-top: 0;
 }
 
 .hershey-home.rolo-brand-primary main > div.section.rolo-secret > .default-content-wrapper > h2,
 .hershey-home.rolo-brand-primary main > div.section.rolo-secret h2:first-child {
-  margin: 0 0 68px;
+  margin: 0 auto 68px;
   font-size: 96px;
   line-height: 1;
   text-align: center;
@@ -3286,8 +4368,9 @@
  * JOLLY RANCHER page art (`theme: jolly-rancher-primary`), measured on hersheyland.com/jolly-rancher
  * at 1440px (2026-11-04). Section Metadata styles name the bands: `jr-callout-a` and `jr-callout-b`
  * (square call-out spacing), `jr-poll` (the Elfsight flavor debate), `jr-fact-band` (a "Did You
- * Know?" strip), `jr-fun` (recipes and crafts on the purple gradient) and `jr-footer`. The blue
- * gradient runs on from the shop slider through the "What's in a Name?" strip to the Berry callout.
+ * Know?" strip), `jr-fun` (recipes and crafts on the purple gradient, ending in the yellow-edged
+ * curve) and `jr-footer` (the candy silhouette into the brands band). The blue gradient runs on
+ * from the shop slider through the "What's in a Name?" strip to the Berry callout.
  */
 .hershey-home.jolly-rancher-primary main > div.section:is(.jr-callout-a, .jr-callout-b, .jr-poll, .jr-fact-band) {
   box-sizing: border-box;
@@ -3365,10 +4448,13 @@
   color: #3f000b;
 }
 
+/* the band ends in the white curve with its yellow edge, covering its last 170px (180px from
+   992px) as live's art box does: as wide as the page, or wider to keep its height */
 .hershey-home.jolly-rancher-primary main > div.section.jr-fun {
   box-sizing: border-box;
   padding: 50px 0 198px;
   background:
+    url('/icons/jolly-rancher-curved-divisional.svg') center bottom / max(100%, 1661px) auto no-repeat,
     url('/icons/jolly-rancher-purple-shapes.svg') center 375px / auto 1353px no-repeat,
     linear-gradient(#f1ffff 10%, #ffc6e3 20%, #c84b9b 35%, #962991 100%);
   color: #3f000b;
@@ -3378,32 +4464,126 @@
   margin-bottom: 309px;
 }
 
-.hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper {
-  margin-bottom: -69px;
+/* the "Did You Know?" strip in the pale top of the gradient keeps the brown copy */
+.hershey-home.jolly-rancher-primary main > div.section.jr-fun .columns.jr-fact,
+.hershey-home.jolly-rancher-primary main > div.section.jr-fun .columns.jr-fact h3,
+.hershey-home.jolly-rancher-primary main > div.section.jr-fun .columns.jr-fact p {
+  color: #3f000b;
+}
+
+/* the recipe and craft headings are brown on the purple */
+.hershey-home.jolly-rancher-primary main > div.section.jr-fun > .default-content-wrapper > h2 {
+  color: #3f000b;
 }
 
 .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .default-content-wrapper > p + h2 {
   padding-top: 142px;
 }
 
+@media (width >= 992px) {
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun {
+    padding-bottom: 191px;
+    background-size: max(100%, 1759px) auto, auto 1353px, auto;
+  }
+
+  /* the craft cards: three centred cards growing with the page (245px wide at 1280px) 35px apart
+     (55px from 1400px), the photo 128/245 of their width; the button fits its text 45px under them */
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .default-content-wrapper > p + h2 {
+    margin-bottom: 35px;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper {
+    margin-bottom: 0;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper + .default-content-wrapper {
+    margin-top: 45px;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards.grid > ul {
+    grid-template-columns: repeat(3, calc(28vw - 113px));
+    gap: 35px;
+    justify-content: center;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards.grid > ul > li {
+    margin: 0;
+    box-shadow: 0 0 12px rgb(39 1 7 / 8%);
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards-card-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 245 / 128;
+    object-fit: cover;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards-card-body {
+    padding: 15px 10px;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards-card-body h3 {
+    margin: 0;
+  }
+
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper + .default-content-wrapper a.button.primary {
+    width: auto;
+    padding: 17px 20px;
+    line-height: 28px;
+  }
+}
+
+/* from 1400px the row sits 10px left of centre, as live's slider does */
+@media (width >= 1400px) {
+  .hershey-home.jolly-rancher-primary main > div.section.jr-fun > .cards-wrapper + .default-content-wrapper + .cards-wrapper .cards.grid > ul {
+    grid-template-columns: repeat(3, calc(27.7vw - 129px));
+    gap: 55px;
+    translate: -10px 0;
+  }
+}
+
+/* the FAQ: brown heading and questions on the hard candies art (covering the band), light grey
+   rules and blue +/-; the open question turns near-black and the others grey */
 .hershey-home.jolly-rancher-primary main > div.section:is(.instagram-container:not(.jr-poll), :has(> .accordion-wrapper)) {
-  --hershey-component-accordion-brand-section-padding-block-end: 250px;
+  --hershey-component-accordion-brand-section-padding-block-start-mobile: 20px;
+  --hershey-component-accordion-brand-section-padding-block-end: 110px;
   --hershey-component-accordion-label-color: #3f000b;
-  --hershey-component-accordion-label-color-inactive: #3f000b;
-  --hershey-component-accordion-brand-label-color-inactive: #3f000b;
+  --hershey-component-accordion-label-color-inactive: #999;
+  --hershey-component-accordion-brand-label-color-inactive: #999;
   --hershey-component-accordion-brand-answer-color: #3f000b;
   --hershey-component-accordion-brand-link-color: #3f000b;
-  --hershey-component-accordion-border-color: #3f000b;
-  --hershey-component-accordion-icon-color: #3f000b;
+  --hershey-component-accordion-border-color: #e1e1e1;
+  --hershey-component-accordion-icon-color: #003594;
 
   background: #fff;
   color: #3f000b;
 }
 
+.hershey-home.jolly-rancher-primary main > div.section:has(> .accordion-wrapper):not(.jr-poll) {
+  background: #fff url('/icons/jolly-rancher-faq-candies.webp') center / cover no-repeat;
+}
+
+.hershey-home.jolly-rancher-primary main > div.section:has(> .accordion-wrapper) > .default-content-wrapper > h2 {
+  color: #3f000b;
+}
+
+.hershey-home.jolly-rancher-primary main > div.section:has(> .accordion-wrapper) .accordion-item[open] > .accordion-item-label {
+  color: #1b1b1b;
+}
+
+/* white, then the blue candy silhouette (90px, 180px from 992px) running into the brands band */
 .hershey-home.jolly-rancher-primary main > div.section.jr-footer {
-  min-height: 180px;
-  padding: 0;
-  background: #962991 url('/icons/jolly-rancher-curved-divisional.svg') center / cover no-repeat;
+  min-height: 90px;
+  padding: 45px 0 0;
+  background: #fff url('/icons/jolly-rancher-candies-silhouette.svg') center / cover no-repeat;
+  background-origin: content-box;
+}
+
+@media (width >= 992px) {
+  .hershey-home.jolly-rancher-primary main > div.section.jr-footer {
+    min-height: 180px;
+    padding-top: 90px;
+  }
 }
 
 /*
@@ -3412,10 +4592,23 @@
  * `shaq-hero`, `shaq-fact`, `shaq-about` (the brand shapes), `shaq-find` (product slider on colour
  * rays), `shaq-follow` (the Instagram feature, drawn here), `shaq-faq` (stars) and `shaq-brands`.
  * The artwork is decoration, kept in /icons.
+ *
+ * One gradient, royal violet into lavender, runs from the foot of the hero to the top of the brand
+ * shapes under the brands band (the shapes' 44.93vw at the foot of the page), as on live.
  */
-.hershey-home.shaqalicious-primary main > div.section.shaq-hero {
-  --hershey-component-hero-brand-square-media-height: 597px;
+.hershey-home.shaqalicious-primary main {
+  --shaq-gradient-start: 1290px;
 
+  /* keeps the call-outs' colour rays (below) over the gradient and under the page content */
+  isolation: isolate;
+  background: linear-gradient(#5844f5 var(--shaq-gradient-start), #b769ff calc(100% - var(--shaq-gradient-end, 44.93vw)));
+}
+
+.hershey-home.shaqalicious-primary main > div.section.breadcrumb-trail-container {
+  background: #fff;
+}
+
+.hershey-home.shaqalicious-primary main > div.section.shaq-hero {
   padding: 0;
 }
 
@@ -3428,9 +4621,54 @@
   background: url('/icons/shaqalicious-logo.svg') left center / contain no-repeat;
 }
 
+/* below 992px the intro is inset 20px within the title's width */
+@media (width < 992px) {
+  .hershey-home.shaqalicious-primary main > div.section.shaq-hero .hero-brand-text p {
+    padding-inline: 20px;
+  }
+}
+
+/* from 992px: the logo is 120px tall and half the copy's width, over a 52px title */
+@media (width >= 992px) {
+  .hershey-home.shaqalicious-primary main {
+    --shaq-gradient-start: 795px;
+  }
+
+  .hershey-home.shaqalicious-primary main > div.section.shaq-hero .hero-brand-text::before {
+    width: 50%;
+    height: 120px;
+    margin-bottom: 0;
+  }
+
+  .hershey-home.shaqalicious-primary main > div.section.shaq-hero h1 {
+    margin-bottom: 21px;
+    font-size: 52px;
+    line-height: 62.4px;
+  }
+}
+
 /* the three call-outs sit on 50px gaps: 50/0, 50/50 and 0/50 */
 .hershey-home.shaqalicious-primary main > div.section.hero-container + div.section:has(> .columns-wrapper > .columns.callout) {
+  position: relative;
   padding: 50px 0 0;
+}
+
+/* the colour rays run behind the three call-outs as one picture, covering them (centred, from the
+   left from 992px), as on live. The bands are about as tall as each other, the middle one 50px more */
+.hershey-home.shaqalicious-primary main > div.section.hero-container + div.section:has(> .columns-wrapper > .columns.callout)::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: calc(300% + 50px);
+  background: url('/icons/shaqalicious-color-rays-top.svg') 50% 0 / cover no-repeat;
+  pointer-events: none;
+}
+
+@media (width >= 992px) {
+  .hershey-home.shaqalicious-primary main > div.section.hero-container + div.section:has(> .columns-wrapper > .columns.callout)::before {
+    background-position: 0 0;
+  }
 }
 
 .hershey-home.shaqalicious-primary main > div.section:has(> .columns-wrapper > .columns.callout) + div.section:has(> .columns-wrapper > .columns.callout):has(+ div.section > .columns-wrapper > .columns.callout) {
@@ -3491,7 +4729,7 @@
   box-sizing: border-box;
   min-height: 1123px;
   padding: 90px 0 0;
-  background: #472180 url('/icons/shaqalicious-brand-shapes.svg') center / cover no-repeat;
+  background: url('/icons/shaqalicious-brand-shapes.svg') center / cover no-repeat;
   text-align: center;
 }
 
@@ -3522,11 +4760,64 @@
   line-height: 1.5;
 }
 
+/* the product slider band: the lower colour rays cover it (centred, from the right from 992px); the
+   page dots sit 29px under the cards on phones, 27px on tablets and 26px from 992px, the arrows
+   level with them on phones, then 16px and 65.5px below the cards' half-height, as on live */
 .hershey-home.shaqalicious-primary main > div.section.shaq-find {
+  --hershey-component-cards-product-slider-band-padding-block-start-mobile: 95px;
+  --hershey-component-cards-product-slider-band-padding-block-start-tablet: 105px;
   --hershey-component-cards-product-slider-band-padding-block-start: 101px;
-  --hershey-component-cards-product-slider-band-padding-block-end: 96px;
+  --hershey-component-cards-product-slider-band-padding-block-end-mobile: 46px;
+  --hershey-component-cards-product-slider-band-padding-block-end: 111px;
+  --hershey-component-cards-product-slider-indicator-margin-top: 29px;
+  --hershey-component-cards-product-slider-control-offset-tablet: 16px;
+  --hershey-component-cards-product-slider-control-offset: 65.5px;
 
-  background: url('/icons/shaqalicious-color-rays-top.svg') center top / 100% auto no-repeat, url('/icons/shaqalicious-color-rays-btm.svg') center bottom / 100% auto no-repeat, #472180;
+  background: url('/icons/shaqalicious-color-rays-btm.svg') 50% 0 / cover no-repeat;
+}
+
+@media (width >= 768px) {
+  .hershey-home.shaqalicious-primary main > div.section.shaq-find {
+    --hershey-component-cards-product-slider-indicator-margin-top: 27px;
+  }
+}
+
+@media (width >= 992px) {
+  .hershey-home.shaqalicious-primary main > div.section.shaq-find {
+    --hershey-component-cards-product-slider-indicator-margin-top: 26px;
+
+    background-position: 100% 0;
+  }
+}
+
+/* live's arrows sit 21.5px higher while its heading takes two lines (992px to 1023px) */
+@media (width >= 992px) and (width < 1024px) {
+  .hershey-home.shaqalicious-primary main > div.section.shaq-find {
+    --hershey-component-cards-product-slider-control-offset: 44px;
+  }
+}
+
+/* the product slider's arrows stay white and wrap round (back from the first page goes to the
+   last), as on hersheyland.com/shaqalicious; cards.js reads the switch */
+.hershey-home.shaqalicious-primary main .cards.product.slider {
+  --cards-slider-wrap: 1;
+}
+
+/* the product slider's page indicators are white rings, filled when current, as on
+   hersheyland.com/shaqalicious */
+.hershey-home.shaqalicious-primary main .cards.product.slider .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-light.svg');
+}
+
+.hershey-home.shaqalicious-primary main .cards.product.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-light.svg');
+}
+
+/* from 992px a product tile's photo panel turns lavender while hovered (fading over 0.3s), as on live */
+@media (width >= 992px) {
+  .hershey-home.shaqalicious-primary .cards.product.slider .cards-product-card:is(:hover, :focus-visible) .cards-product-image {
+    background-color: #bfa8e6;
+  }
 }
 
 .hershey-home.shaqalicious-primary main > div.section.shaq-follow {
@@ -3571,19 +4862,67 @@
   font-weight: 600;
 }
 
-.hershey-home.shaqalicious-primary main > div.section.shaq-faq {
-  --hershey-component-accordion-brand-section-padding-block-start: 160px;
-  --hershey-component-accordion-brand-section-padding-block-end: 67px;
-
-  background: #472180 url('/icons/shaqalicious-faq-stars.svg') center / cover no-repeat;
+/* the Instagram feed and, under it, the trademark line in its violet box share one width: 16px in
+   from the left and 25px from the right below 992px, the page width to 1199px, then 10px in, at
+   most 1260px and centred. The 17px copy sits 10px inside the box (25px from 992px) in 30px
+   padding. The band pads 24px a side below 992px, 32px from it */
+.hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .instagram-wrapper {
+  max-width: none;
+  margin-inline: -8px 1px;
 }
 
+.hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .default-content-wrapper {
+  max-width: none;
+  margin: 22px 1px 0 -8px;
+  padding: 0 10px;
+  background: #701ef6;
+}
+
+@media (width >= 992px) {
+  .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .instagram-wrapper {
+    margin-inline: -32px;
+  }
+
+  .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .default-content-wrapper {
+    margin-inline: -32px;
+    padding-inline: 25px;
+  }
+}
+
+@media (width >= 1200px) {
+  .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .instagram-wrapper,
+  .hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .default-content-wrapper {
+    margin-inline: max(-22px, (100% - 1260px) / 2);
+  }
+}
+
+.hershey-home.shaqalicious-primary main > div.section:has(> .instagram-wrapper) > .default-content-wrapper p {
+  margin: 0 0 25.5px;
+  padding: 30px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 25.5px;
+}
+
+.hershey-home.shaqalicious-primary main > div.section.shaq-faq {
+  --hershey-component-accordion-brand-section-padding-block-start: 160px;
+  --hershey-component-accordion-brand-section-padding-block-end-mobile: 71px;
+  --hershey-component-accordion-brand-section-padding-block-end: 110px;
+  --hershey-component-accordion-border-color: #afd37e;
+
+  background: url('/icons/shaqalicious-faq-stars.svg') center / cover no-repeat;
+}
+
+/* the brand shapes (44.93vw tall, at the foot of the band) start 361px under the brands heading, and
+   the footer ribbon runs over their lower part */
 .hershey-home.shaqalicious-primary main > div.section.shaq-brands {
   --hershey-component-cards-brands-band-padding-block-start: 48px;
-  --hershey-component-cards-brands-band-padding-block-end: 44px;
-  --hershey-component-cards-brands-band-padding-block-end-wide: 44px;
+  --hershey-component-cards-brands-band-padding-block-end-mobile: 290px;
+  --hershey-component-cards-brands-band-padding-block-end-tablet: 508px;
+  --hershey-component-cards-brands-band-padding-block-end: calc(106px + 44.93vw);
+  --hershey-component-cards-brands-band-padding-block-end-wide: calc(106px + 44.93vw);
 
-  background: #472180 url('/icons/shaqalicious-footer-pattern.svg') center bottom / 100% auto no-repeat;
+  background: url('/icons/shaqalicious-footer-pattern.svg') center bottom / 100% auto no-repeat;
 }
 
 /*
@@ -3733,6 +5072,16 @@
   object-fit: cover;
 }
 
+/* the brand logo above the title: live art, not authored in the page */
+.hershey-home.bubbleyum-primary main .hero.brand .hero-brand-text::before {
+  content: '';
+  display: block;
+  width: 252px;
+  height: 120px;
+  margin-bottom: 10px;
+  background: url('/icons/bubble-yum-logo.svg') left center / contain no-repeat;
+}
+
 .hershey-home.bubbleyum-primary main > div.section:is(.by-a, .by-c, .by-d, .by-pink, .by-dyk) {
   box-sizing: border-box;
 }
@@ -3741,15 +5090,19 @@
   padding: 90px 0 50px;
 }
 
+/* brown copy and text link on the pink paper */
 .hershey-home.bubbleyum-primary main > div.section.by-pink {
+  --hershey-component-columns-callout-link-color: #3f000b;
+  --hershey-component-columns-callout-link-color-hover: #3f000b;
+
   padding: 360px 0 410px;
   background: #f7a1ce url('/icons/bubble-yum-pink-paper-tear.jpg') center / cover no-repeat;
-  color: #003594;
+  color: #3f000b;
 }
 
 .hershey-home.bubbleyum-primary main > div.section.by-pink h2,
 .hershey-home.bubbleyum-primary main > div.section.by-pink p {
-  color: #003594;
+  color: #3f000b;
 }
 
 .hershey-home.bubbleyum-primary main > div.section.by-c {
@@ -3824,6 +5177,74 @@
   box-sizing: border-box;
   background: #f7a1ce;
   color: #003594;
+}
+
+/* call-out pills, as on live: below 768px they sit 23px further under the copy and span the copy
+   box (less 25px either side when alone); from 768px a pill followed by a text link is 60% of the
+   copy box, 24px further down; the link sits 20px under its pill below 992px. From 992px a pill and
+   a text link fit their text and share one row with equal space around each across the copy
+   column less 50px either side (the cell grows 50px of padding and the copy reaches back over it) */
+@media (width < 768px) {
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div > h2 + p {
+    margin-bottom: 45px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div p.button-wrapper {
+    padding-inline: 45px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper {
+    padding-inline: 20px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div p.button-wrapper > a.button.primary {
+    display: block;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (width < 992px) {
+  .hershey-home.bubbleyum-primary main .columns.callout p.button-wrapper:has(> .secondary) {
+    margin-top: 10px;
+  }
+}
+
+@media (width >= 768px) and (width < 992px) {
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > h2 + p {
+    margin-bottom: 46px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper {
+    padding-inline: 20px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper > a.button.primary {
+    width: 60%;
+    max-width: none;
+  }
+}
+
+@media (width >= 992px) {
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) {
+    padding-inline: 60px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > :not(.button-wrapper) {
+    width: calc(100% + 60px);
+    margin-inline: -30px;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > p.button-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .hershey-home.bubbleyum-primary main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) a.button.primary {
+    width: auto;
+  }
 }
 
 /*
@@ -4525,9 +5946,313 @@
   margin: 0;
 }
 
-/* CADBURY page art: section spacing measured on hersheyland.com/cadbury at 1440px */
+/* CADBURY page art: section spacing measured on hersheyland.com/cadbury at 1440px. The hero title
+   is gold-gradient lettering and the hero 740px tall from 992px */
+.hershey-home.cadbury-brand-primary main .columns.callout h2 {
+  color: #e6bc7e;
+}
+
+/* the product sliders' page indicators are white rings, filled when current */
+.hershey-home.cadbury-brand-primary main .cards.product.slider .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-light.svg');
+}
+
+.hershey-home.cadbury-brand-primary main .cards.product.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-light.svg');
+}
+
+/* the brands band heading is gold too (this outranks the block's own colour rule) */
+.hershey-home.cadbury-brand-primary main > .section:has(> .cards-wrapper > .cards.slider.brands) > .default-content-wrapper > h2 {
+  color: #e6bc7e;
+}
+
+.hershey-home.cadbury-brand-primary main .hero.brand h1 {
+  background: linear-gradient(to left, #d4ab5b 0%, #ffeaaf 50%, #d4ab5b 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary {
+    --hershey-component-hero-brand-square-media-height: 740px;
+  }
+}
+
+/* below 992px the intro ends 10px over the band's foot; on phones the logo tucks 25px up over
+   the photo, with the title 10px under it */
+@media (width < 992px) {
+  .hershey-home.cadbury-brand-primary main .hero.brand .hero-brand-text {
+    padding-bottom: 10px;
+  }
+}
+
+@media (width < 768px) {
+  .hershey-home.cadbury-brand-primary main .hero.brand .hero-brand-logo {
+    position: relative;
+    margin-top: -40px;
+  }
+
+  .hershey-home.cadbury-brand-primary main .hero.brand h1 {
+    padding-top: 10px;
+  }
+}
+
+/* "Chocolate That Goes Beyond What's Expected": centred in 950px (10px in on phones), white 17px
+   copy */
+.hershey-home.cadbury-brand-primary main > div.section.cb-intro {
+  padding: 70px 10px 50px;
+  text-align: center;
+}
+
+@media (width >= 768px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-intro {
+    padding-inline: 25px;
+  }
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-intro > .default-content-wrapper {
+  max-width: 950px;
+  margin-inline: auto;
+  padding: 0;
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-intro h2 {
+  margin: 0 0 0.3em;
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-intro h2 {
+    font-size: 36px;
+  }
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-intro p {
+  margin: 0 0 1.5em;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* the video sits right under the intro on phones (its poster the full width less 25px, the story
+   box 15px in), 20px under it from 992px, and 64px over the product band; the story box copy is
+   500 weight */
+.hershey-home.cadbury-brand-primary main > div.section.cb-video {
+  --hershey-component-columns-video-inset-start-mobile: 0;
+
+  padding: 0 0 64px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-video {
+    padding-top: 20px;
+  }
+}
+
+.hershey-home.cadbury-brand-primary main .columns.video > div > div:last-child p {
+  font-weight: 500;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main .columns.video > div > div:last-child p {
+    margin-top: 10px;
+  }
+}
+
+/* the call-outs are centred below 992px (the history copy 20px wider than its heading, the other
+   two 10px wider than the default), then read from the left edge of their copy column, the
+   history call-out's 50px in; paragraphs sit 14px apart */
+@media (width < 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section.artwork + div.section.cb-callout-a .columns.callout p:not(.button-wrapper) {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  /* the caramel and creme egg call-outs: photos 10px in, copy 40px from the left, 50px from the
+     right */
+  .hershey-home.cadbury-brand-primary main > div.section:is(.cb-callout-a, .cb-callout-b):not(.artwork + .cb-callout-a) {
+    padding-top: 60px;
+    padding-inline: 10px 20px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-callout-b.columns-container {
+    padding-bottom: 10px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section:is(.cb-callout-a, .cb-callout-b):not(.artwork + .cb-callout-a) .columns.callout :is(h2, p:not(.button-wrapper)) {
+    width: calc(100% - 40px);
+    margin-inline: 20px;
+  }
+
+  /* the pills run the copy width (5px further in on the call-outs), the full width on the dessert
+     recipe */
+  .hershey-home.cadbury-brand-primary main .section .columns.callout > div > div a.button.primary {
+    display: block;
+    width: auto;
+    margin-inline: 15px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout > div > div a.button.primary {
+    margin-inline: 0;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-video {
+    padding-bottom: 0;
+  }
+}
+
+/* phones: the See All pill is 300px wide; the brands band pill is pink with white lettering, 10px
+   further in, as on live */
+@media (width < 768px) {
+  .hershey-home.cadbury-brand-primary main .section.cards-container:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+    display: block;
+    width: 300px;
+    margin-inline: auto;
+  }
+
+  .hershey-home.cadbury-brand-primary main > .section:has(> .cards-wrapper > .cards.slider.brands) {
+    --hershey-component-cards-brands-cta-background: #e30488;
+    --hershey-component-cards-brands-cta-background-hover: #e30488;
+    --hershey-component-cards-brands-cta-foreground: #fff;
+  }
+
+  .hershey-home.cadbury-brand-primary main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link {
+    width: calc(100% - 10px);
+    margin-inline: 10px 0;
+  }
+
+  .hershey-home.cadbury-brand-primary main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link::before {
+    content: none;
+  }
+}
+
+/* the intro copy sits 10px from the left and 20px from the right on phones */
+@media (width < 768px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-intro {
+    padding-right: 20px;
+  }
+
+  .hershey-home.cadbury-brand-primary main .columns.video h3 {
+    margin-inline: 23px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun > .columns-wrapper {
+    padding-inline: 20px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square h2 {
+    margin-top: 21px;
+  }
+
+  /* the recipe cards stack, 354px wide, 5px apart */
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .cards.grid > ul {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .cards.grid > ul > li {
+    margin: 5px 9px 0 12px;
+  }
+}
+
+.hershey-home.cadbury-brand-primary main .columns.callout.square h2 + p:has(+ p:not(.button-wrapper)) {
+  margin-bottom: 4px;
+}
+
+/* the dessert recipe call-out: a 735px landscape photo (rounded) beside centred copy, 80px under
+   the band heading, which is 950px wide */
+.hershey-home.cadbury-brand-primary main > div.section.cb-fun > .default-content-wrapper:first-child h2 {
+  max-width: 950px;
+  margin-inline: auto;
+  line-height: 1.3;
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square > div > .columns-img-col img {
+  aspect-ratio: 735 / 413;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* on tablets the dessert photo is nearly square, 20px in */
+@media (width >= 768px) and (width < 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square > div > .columns-img-col img {
+    aspect-ratio: 728 / 648;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun > .columns-wrapper {
+    padding-inline: 20px;
+  }
+}
+
+/* the dessert call-out keeps to the 1260px layout, 37px under the band heading (80px from 992px);
+   the recipe cards follow 40px under it (103px), the More CADBURY Recipes pill 38px under them */
+.hershey-home.cadbury-brand-primary main > div.section.cb-fun > .columns-wrapper {
+  max-width: 1260px;
+  margin: 37px auto 0;
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-fun > .cards-wrapper {
+  margin-top: 40px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun > .columns-wrapper {
+    margin-top: 80px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun > .cards-wrapper {
+    margin-top: 103px;
+  }
+}
+
+.hershey-home.cadbury-brand-primary main > div.section.cb-fun > .cards-wrapper + .default-content-wrapper {
+  margin-top: 38px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main > div.section:is(.cb-callout-a, .cb-callout-b) .columns.callout > div > :not(.columns-img-col) {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section:is(.cb-callout-a, .cb-callout-b) .columns.callout p.button-wrapper {
+    padding-left: 25px;
+    text-align: left;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.artwork + div.section.cb-callout-a .columns.callout > div > :not(.columns-img-col) {
+    padding-left: 30px;
+    padding-right: 29px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square > div > .columns-img-col {
+    flex-basis: 735px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square > div > :not(.columns-img-col) {
+    flex: 1 1 0;
+    padding-top: 36px;
+  }
+
+  .hershey-home.cadbury-brand-primary main > div.section.cb-fun .columns.callout.square h2 {
+    margin-bottom: 25px;
+  }
+}
+
+/* the See All pill sits 52px under the slider (71px from 992px), 45px over the band's foot (93px) */
 .hershey-home.cadbury-brand-primary main div.section.brand-color.cb-shop.cards-container {
-  padding-bottom: 125px;
+  --hershey-component-cards-product-slider-cta-margin-block-start: 52px;
+
+  padding-bottom: 45px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main div.section.brand-color.cb-shop.cards-container {
+    --hershey-component-cards-product-slider-cta-margin-block-start: 71px;
+
+    padding-bottom: 93px;
+  }
 }
 
 .hershey-home.cadbury-brand-primary main div.section.cb-callout-a {
@@ -4539,19 +6264,48 @@
 }
 
 .hershey-home.cadbury-brand-primary main div.section.brand-color-alt.cards-container {
-  padding-bottom: 197px;
+  padding-bottom: 147px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main div.section.brand-color-alt.cards-container {
+    padding-bottom: 209px;
+  }
 }
 
 .hershey-home.cadbury-brand-primary main div.section.cb-fun {
-  padding-block: 16px 0;
+  padding-block: 16px 58px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.cadbury-brand-primary main div.section.cb-fun {
+    padding-bottom: 75px;
+  }
 }
 
 .hershey-home.cadbury-brand-primary main div.section.brand-color.accordion-container {
-  padding-block: 45px 75px;
+  padding-block: 45px 20px;
+}
+
+@media (width >= 768px) {
+  .hershey-home.cadbury-brand-primary main div.section.brand-color.accordion-container {
+    padding-bottom: 50px;
+  }
 }
 
 .hershey-home.cadbury-brand-primary main div.section.cb-logo {
-  padding-block: 50px 49px;
+  padding-block: 50px 35px;
+}
+
+/* on phones the brands band starts right under the CADBURY script, its eyebrow 41px down */
+@media (width < 768px) {
+  .hershey-home.cadbury-brand-primary main div.section.cb-logo {
+    padding-bottom: 0;
+  }
+
+  .hershey-home.cadbury-brand-primary main div.section.cb-logo + div.section {
+    --hershey-component-cards-brands-band-padding-block-start-mobile: 41px;
+  }
 }
 
 /* ICE BREAKERS page art and spacing (measured on hersheyland.com/ice-breakers at 1440px, 2026-11-04) */
@@ -4564,23 +6318,23 @@
 }
 
 .hershey-home.ice-breakers-primary main > div.section.ib-band-top {
-  background-color: #fff;
+  background-color: #0074c7;
   background-image: url('/icons/ice-breakers-mint-brand-shape-top.svg');
 }
 
 .hershey-home.ice-breakers-primary main > div.section.ib-band-bottom {
-  background-color: #fff;
+  background-color: #0074c7;
   background-image: url('/icons/ice-breakers-mint-brand-shape-bottom.svg');
 }
 
 .hershey-home.ice-breakers-primary main > div.section.ib-band-cubes {
-  background-color: #5a357b;
+  background-color: #0074c7;
   background-image: url('/icons/ice-breakers-ice-cubes-brand-shape-divisional-element.svg');
 }
 
 .hershey-home.ice-breakers-primary main > div.section.ib-band-shapes {
   min-height: 180px;
-  background-color: #5a357b;
+  background-color: #004988;
   background-image: url('/icons/ice-breakers-brand-shapes-pattern.svg');
 }
 
@@ -4590,6 +6344,12 @@
 
 .hershey-home.ice-breakers-primary main > div.section.ib-callout-wide {
   padding-block: 50px 90px;
+}
+
+/* the call-outs and the second "Did You Know?" without a brand band sit on the light blue, as live */
+.hershey-home.ice-breakers-primary main > div.section:is(.ib-callout, .ib-dyk2):not(.brand-color) {
+  background-color: #0074c7;
+  color: #fff;
 }
 
 .hershey-home.ice-breakers-primary main > div.section.brand-color:has(.cards.product) {
@@ -4603,8 +6363,12 @@
 }
 
 .hershey-home.ice-breakers-primary main > div.section:has(.cards.brands) {
+  --hershey-component-cards-brands-color-foreground: #fff;
+
   min-height: 822px;
   box-sizing: border-box;
+  background-color: #0074c7;
+  color: #fff;
 }
 
 .hershey-home.ice-breakers-primary main > div.section.ib-dyk {
@@ -4626,7 +6390,12 @@
   height: 447px;
   padding: 140px 0 0 169px;
   box-sizing: border-box;
-  color: #3f000b;
+  color: #fff;
+}
+
+.hershey-home.ice-breakers-primary main > div.section.ib-dyk2 a {
+  color: #fff;
+  font-weight: 700;
 }
 
 .hershey-home.ice-breakers-primary main > div.section.ib-dyk2 .columns > div {
@@ -4676,14 +6445,13 @@
   color: #fff;
 }
 
+/* the art is drawn at the page width and cropped to the band, so it never reaches up over the shop
+   slider's button; it runs 1px under the band so no hairline shows against the next one */
 .hershey-home.rolo-brand-primary main > div.section.rolo-poll::before {
   content: '';
   position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  aspect-ratio: 1920 / 1100;
-  background: #55281e url('/icons/rolo-arcs.svg') center / 100% 100% no-repeat;
+  inset: 0 0 -1px;
+  background: #55281e url('/icons/rolo-arcs.svg') center top / 100% auto no-repeat;
   scale: 1 -1;
 }
 
@@ -4701,10 +6469,49 @@
   background: #ffa448 url('/icons/rolo-candy-pieces.svg') center top / 100% auto no-repeat;
 }
 
-/* ROLO: call-out copy and buttons are left-aligned (rolo-callout-left) and the shop slider's page
+/* ROLO: from 992px the call-out copy and its pill are left-aligned (the pill 5px in on the square
+   call-outs, 10px out on the wide one); below that they are centred and the pill runs the copy
+   width, as on hersheyland.com/rolo. The brands band copy is white, and the shop slider's page
    dots are plain brown rings, filled when current */
-.hershey-home.rolo-brand-primary main .columns.callout :is(h2, p) {
-  text-align: left;
+@media (width >= 992px) {
+  .hershey-home.rolo-brand-primary main .columns.callout :is(h2, p) {
+    text-align: left;
+  }
+
+  .hershey-home.rolo-brand-primary main .columns.callout > div > :not(.columns-img-col) {
+    justify-content: flex-start;
+  }
+
+  .hershey-home.rolo-brand-primary main .section .columns.callout > div > div p.button-wrapper {
+    padding-left: 10px;
+    text-align: left;
+  }
+
+  .hershey-home.rolo-brand-primary main .section .columns.callout.square > div > div p.button-wrapper {
+    padding-left: 25px;
+  }
+}
+
+/* phones: the pills 55px from the screen edges on the pretzel and baking call-outs, 45px on the
+   other two */
+@media (width < 992px) {
+  .hershey-home.rolo-brand-primary main .section .columns.callout > div > div a.button.primary {
+    display: block;
+    width: auto;
+    margin-inline: 5px;
+  }
+
+  .hershey-home.rolo-brand-primary main .section:is(.rolo-pretzel, .rolo-c1) .columns.callout > div > div a.button.primary {
+    margin-inline: 35px;
+  }
+
+  .hershey-home.rolo-brand-primary main .section.rolo-c3 .columns.callout > div > div a.button.primary {
+    margin-inline: 25px;
+  }
+}
+
+.hershey-home.rolo-brand-primary main > .section:has(> .cards-wrapper > .cards.slider.brands) {
+  --hershey-component-cards-brands-color-foreground: #fff;
 }
 
 .hershey-home.rolo-brand-primary main .cards.product.slider .cards-slider-dot {
@@ -4789,6 +6596,12 @@
 /* stylelint-disable no-descending-specificity */
 .hershey-home.kisses-primary {
   --hershey-component-hero-brand-square-media-height: 740px;
+
+  /* product tiles: the name and size panel under the photo, and the shop pill's 17px text */
+  --hershey-component-cards-product-slider-body-min-height: 137px;
+  --hershey-component-cards-product-slider-body-min-height-mobile: 102px;
+  --hershey-component-cards-product-slider-cta-font-size: 17px;
+  --hershey-component-cards-product-slider-cta-line-height: 27px;
   --hershey-component-cards-grid-section-padding-block-start: 110px;
   --hershey-component-cards-grid-section-padding-block-end: 92px;
   --hershey-component-cards-product-slider-band-padding-block-start-mobile: 40px;
@@ -4799,8 +6612,10 @@
   --hershey-component-accordion-brand-section-padding-block-start-mobile: 100px;
   --hershey-component-accordion-brand-section-padding-inline-start-mobile: 16px;
   --hershey-component-accordion-brand-section-padding-inline-end-mobile: 15px;
-  --hershey-component-columns-callout-link-color: #fff;
-  --hershey-component-columns-callout-link-color-hover: #fff;
+
+  /* the call-out text links (e.g. Shop HUGS) are cream, as on hersheyland.com/kisses */
+  --hershey-component-columns-callout-link-color: #feebd0;
+  --hershey-component-columns-callout-link-color-hover: #feebd0;
   --hershey-component-cards-brands-color-foreground: #fff;
   --hero-marquee-band-speed: 36;
 }
@@ -4937,13 +6752,40 @@
   padding: 87px 10px 3px;
 }
 
+/* the wheel and its copy stop growing at a 1400px band (1260px inside its padding), centred, as on
+   hersheyland.com/kisses */
 .hershey-home.kisses-primary main > .section > .cards-wrapper:has(> .cards.wheel) {
-  max-width: none;
+  max-width: 1260px;
+  margin-inline: auto;
   padding: 0;
 }
 
 .hershey-home.kisses-primary .cards.wheel .cards-wheel-copy h2 {
   font-size: 28px;
+}
+
+/* a product tile's photo panel takes its brand's tint while hovered, as on hersheyland.com/kisses:
+   HERSHEY'S (KISSES, HUGS) pink, REESE'S peach; the panel fades over 0.3s (cards-product.css) */
+.hershey-home.kisses-primary .cards.product.slider .cards-product-card:is(:hover, :focus-visible) .cards-product-image {
+  background-color: #e4cace;
+}
+
+.hershey-home.kisses-primary .cards.product.slider .cards-product-card[href*="/reeses-"]:is(:hover, :focus-visible) .cards-product-image {
+  background-color: #ffe9df;
+}
+
+/* the hero photo is centred in its square on phones, then kept to its left edge, as on
+   hersheyland.com/kisses */
+@media (width < 768px) {
+  .hershey-home.kisses-primary .hero.brand .hero-brand-media img {
+    object-position: 50% 50%;
+  }
+}
+
+/* the shop pill under the product slider is at least 210px wide below 992px, as on
+   hersheyland.com/kisses */
+.hershey-home.kisses-primary main > div.section:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+  min-width: 210px;
 }
 
 /*
@@ -5086,6 +6928,29 @@
 
   .hershey-home.kisses-primary .cards.wheel .cards-wheel-copy h2 {
     font-size: 36px;
+  }
+
+  /* the shop pill under the product slider is at least 200px wide from 992px (210px below) */
+  .hershey-home.kisses-primary main > div.section:has(.cards.product.slider) .cards-wrapper + .default-content-wrapper a.button {
+    min-width: 200px;
+  }
+
+  /* the call-out pills fit their text, and the pill and link sit centred in one row with a gap
+     of half the copy column less 161px, as on hersheyland.com/kisses; the copy column is the
+     cell less the copy's 20px margins */
+  .hershey-home.kisses-primary main .columns.callout > div > div:not(.columns-img-col) {
+    justify-content: center;
+    column-gap: max(0px, 50% - 181px);
+  }
+
+  .hershey-home.kisses-primary main .columns.callout > div > div:not(.columns-img-col) > p.button-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 0;
+  }
+
+  .hershey-home.kisses-primary main .columns.callout a.button.primary {
+    width: auto;
   }
 }
 

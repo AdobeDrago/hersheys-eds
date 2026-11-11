@@ -278,7 +278,7 @@ main > .section:has(> .hero-wrapper > .hero.brand) > .hero-wrapper {
 .hero.brand a.button:hover,
 .hero.brand a.button:focus-visible {
   background-color: var(--hershey-component-hero-brand-cta-background-hover, #268fc7);
-  color: var(--hershey-component-hero-brand-cta-foreground, #fff);
+  color: var(--hershey-component-hero-brand-cta-foreground-hover, var(--hershey-component-hero-brand-cta-foreground, #fff));
 }
 
 @media (width >= 992px) {
