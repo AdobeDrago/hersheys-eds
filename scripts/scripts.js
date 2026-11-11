@@ -315,17 +315,6 @@ async function loadEager(doc) {
 }
 
 /**
- * True while authoring: Document Authoring's visual editor (loads the page with `?quick-edit=`),
- * preview (*.aem.page, *.hlx.page) and local development. False on the live site.
- * @returns {boolean}
- */
-function isAuthoringView() {
-  const { hostname, search } = window.location;
-  if (new URLSearchParams(search).has('quick-edit')) return true;
-  return hostname === 'localhost' || hostname === '127.0.0.1' || /\.(aem|hlx)\.page$/.test(hostname);
-}
-
-/**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
@@ -350,11 +339,6 @@ async function loadLazy(doc) {
   // the homepage's feature bands fade up as they scroll into view
   if (doc.body.classList.contains('homepage')) {
     import('./scroll-reveal.js').then(({ default: revealOnScroll }) => revealOnScroll(main));
-  }
-
-  // authors see which blocks are filled in from a sheet; never on the live site
-  if (isAuthoringView()) {
-    import('./authoring-indicators.js').then(({ default: markDynamicBlocks }) => markDynamicBlocks(main));
   }
 
   const { hash } = window.location;
