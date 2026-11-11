@@ -47,12 +47,10 @@ async function copyToClipboard(value) {
   }
 }
 
-// product pages use the base themes (no `file`), brand pages the ones in brands.css;
-// any other page has no matching group, so every theme is shown
+// /products/ pages use the product themes (no `file`); every other page uses the brand themes
 function themesForPath(path) {
-  if (/^\/products(\/|$)/.test(path)) return THEMES.filter((t) => !t.file);
-  if (/^\/brands(\/|$)/.test(path)) return THEMES.filter((t) => t.file === 'brands');
-  return THEMES;
+  const isProduct = /^\/products(\/|$)/.test(path);
+  return THEMES.filter((t) => (isProduct ? !t.file : t.file === 'brands'));
 }
 
 function renderChips(list, themes, onSelect) {
@@ -86,7 +84,7 @@ function markCurrent(list, theme) {
   const { context, token } = await DA_SDK;
   const path = normalizePath(context.path);
   const matching = themesForPath(path);
-  let showAll = matching.length === THEMES.length;
+  let showAll = false;
   let theme = '';
 
   const onSelect = async (value) => {
