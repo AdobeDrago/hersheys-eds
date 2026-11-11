@@ -44,10 +44,10 @@ function decorateSlider(block, list) {
   });
   const dots = document.createElement('div');
   dots.className = 'cards-slider-dots';
-  // related, callout and dots sliders, and the product, stories, content and brands sliders on
+  // related, callout, dots and brands sliders, and the product, stories and content sliders on
   // brand pages, show one page indicator per page of cards
-  const paged = ['related', 'callout', 'dots'].some((name) => block.classList.contains(name))
-    || (isBrandPage() && ['product', 'stories', 'content', 'brands'].some((name) => block.classList.contains(name)));
+  const paged = ['related', 'callout', 'dots', 'brands'].some((name) => block.classList.contains(name))
+    || (isBrandPage() && ['product', 'stories', 'content'].some((name) => block.classList.contains(name)));
   // the brands sliders, and the product sliders on brand pages, page by the cards that fit whole
   // in the track, as on hersheyland.com (one card per page on phones)
   const byCard = block.classList.contains('brands')
