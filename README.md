@@ -37,6 +37,11 @@ Edit [navigation in DA](https://da.live/edit#/adobedrago/hersheys-eds/nav) and
 [the footer in DA](https://da.live/edit#/adobedrago/hersheys-eds/footer).
 Navigation uses three sections: linked logo (`Style: hershey-nav`), a nested
 list of categories and links, and a link to the existing Hersheyland search page.
+An optional fourth section adds the dark utility bar above the header (Get
+Inspired, Visit Chocolate World, Shop Products). Bold the current site's link
+to mark it; without a bold link the first one is current. An image in that
+section replaces the default Kisses marker. The bar hides on scroll down and
+returns on scroll up.
 The search link becomes a GET form using the source service's `searchQuery`
 parameter. Submenu images are the original source icons.
 

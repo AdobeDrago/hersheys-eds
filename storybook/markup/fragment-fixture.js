@@ -69,7 +69,16 @@ function navFragment(main) {
     link('Search products, recipes and activity ideas', `${SITE}/search`),
     media('Search', 24, 24, ''),
   ));
-  main.append(brand.section, sections.section, tools.section);
+  // optional utility bar: the bold link is the current site
+  const utility = contentSection('');
+  const current = element('strong');
+  current.append(link('Get Inspired', SITE));
+  utility.wrapper.append(list([
+    item(current),
+    item(link('Visit Chocolate World', `${SITE}/chocolate-world`)),
+    item(link('Shop Products', `${SITE}/shop`)),
+  ]));
+  main.append(brand.section, sections.section, tools.section, utility.section);
 }
 
 function footerFragment(main) {
