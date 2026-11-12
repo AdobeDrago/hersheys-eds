@@ -47,10 +47,10 @@ async function copyToClipboard(value) {
   }
 }
 
-// authors list brand pages in the DA sheet /brand-pages (column `path`, trailing * = prefix)
+// authors list brand pages in the DA sheet /brands/brand-pages (column `path`, trailing * = prefix)
 async function fetchBrandPaths() {
   try {
-    const resp = await fetch('/brand-pages.json');
+    const resp = await fetch('/brands/brand-pages.json');
     if (!resp.ok) return null;
     const json = await resp.json();
     const rows = json.data || json[':names']?.map((name) => json[name]?.data).find(Boolean) || [];
