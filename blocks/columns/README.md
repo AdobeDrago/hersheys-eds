@@ -6,7 +6,7 @@ Columns block. Layout variants keep authored rows. Recipe ingredients and nutrit
 
 The decorator counts the columns and marks image-only cells. `feature` and `homepage-hero` are layout classes on the same block. The wrapper and section are `columns-wrapper` and `columns-container`.
 
-Option `portrait` (`Columns (portrait)`): the image is drawn 1086px tall and cropped at the sides; from 900px it fills half the row and the band's full height, with the text beside it. Used for the Milton Hershey illustration on `/about`.
+Option `portrait` (`Columns (portrait)`): the image is drawn 633px tall (476px below 900px) and cropped at the sides; from 900px it fills half the row and the band's full height, with the text beside it. Used for the Milton Hershey illustration on `/about`.
 
 ## Fact (`fact`)
 
