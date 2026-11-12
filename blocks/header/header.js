@@ -170,11 +170,15 @@ export default async function decorate(block) {
     navSections?.querySelectorAll('li').forEach((item) => {
       const links = [...item.querySelectorAll(':scope > a, :scope > p > a')];
       const imageLink = links.find((link) => link.querySelector('picture'));
-      const textLink = links.find((link) => link !== imageLink
-        && link.href === imageLink?.href && link.textContent.trim());
+      // a text link authored next to the icon is the item's link, whatever its URL
+      const textLink = links.find((link) => link !== imageLink && link.textContent.trim());
       if (imageLink && textLink) {
+        const iconWrapper = imageLink.closest('p');
         textLink.prepend(imageLink.querySelector('picture'));
         imageLink.remove();
+        if (iconWrapper && iconWrapper !== textLink.closest('p') && !iconWrapper.children.length) {
+          iconWrapper.remove();
+        }
       } else if (imageLink) {
         // icon link followed by a plain text label: make the label part of the link
         const label = imageLink.closest('p')?.nextElementSibling;
