@@ -12,6 +12,15 @@ export default async function decorate(block) {
     await decorateNutrition(block);
     return;
   }
+  if (block.classList.contains('brand-tiles')) {
+    // the brand listing has its own markup, so it loads its own script and styles
+    const [{ default: decorateBrandTiles }] = await Promise.all([
+      import('./tabs-brand-tiles.js'),
+      loadCSS(`${window.hlx.codeBasePath}/blocks/tabs/tabs-brand-tiles.css`),
+    ]);
+    decorateBrandTiles(block);
+    return;
+  }
   tabsId += 1;
   const id = `tabs-${tabsId}`;
   const list = document.createElement('div');
