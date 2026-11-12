@@ -362,6 +362,17 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
   }
 }
 
+/* brands band on a page without a brand theme (e.g. /about/visit, /about/faqs): the large bottom
+   space and the pulled-up footer wave belong to brand pages (hershey-brand.css), so the band
+   closes with the normal section spacing and the empty metadata section after it is hidden */
+body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands) {
+  padding-bottom: var(--hershey-system-spacing-section-large, 80px);
+}
+
+body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands) ~ .section:empty {
+  display: none;
+}
+
 /* the band's bottom space above holds the footer wave (or a divider wave on brand pages); off brand
    pages a band with more content after it (e.g. "Question about our brands?" on /about/faqs) is
    spaced like the bands around it */

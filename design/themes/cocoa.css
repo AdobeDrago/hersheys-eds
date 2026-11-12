@@ -505,8 +505,10 @@
   --hershey-reference-size-height-398: 398px;
   --hershey-reference-size-height-405: 405px;
   --hershey-reference-size-height-450: 450px;
+  --hershey-reference-size-height-476: 476px;
   --hershey-reference-size-height-478: 478px;
   --hershey-reference-size-height-600: 600px;
+  --hershey-reference-size-height-633: 633px;
   --hershey-reference-size-height-1086: 1086px;
   --hershey-reference-size-height-1580: 1580px;
   --hershey-reference-size-height-1920: 1920px;
@@ -1011,7 +1013,8 @@
   --hershey-system-size-region-callout-bar: var(--hershey-reference-size-height-8);
   --hershey-system-size-region-shapes-pattern-height: var(--hershey-reference-size-height-1580);
   --hershey-system-size-region-shapes-pattern-height-mobile: var(--hershey-reference-size-height-1920);
-  --hershey-system-size-region-columns-portrait-image-height: var(--hershey-reference-size-height-1086);
+  --hershey-system-size-region-columns-portrait-image-height: var(--hershey-reference-size-height-633);
+  --hershey-system-size-region-columns-portrait-image-height-mobile: var(--hershey-reference-size-height-476);
   --hershey-system-size-region-columns-follow-video-height: var(--hershey-reference-size-height-600);
   --hershey-system-size-line-box-tight: var(--hershey-reference-size-height-20);
   --hershey-system-size-line-box-note: var(--hershey-reference-size-height-22);
@@ -2604,6 +2607,7 @@
   --hershey-component-columns-video-story-shadow: var(--hershey-system-elevation-shadow-card);
   --hershey-component-columns-video-story-foreground: var(--hershey-system-color-text-primary);
   --hershey-component-columns-portrait-image-height: var(--hershey-system-size-region-columns-portrait-image-height);
+  --hershey-component-columns-portrait-image-height-mobile: var(--hershey-system-size-region-columns-portrait-image-height-mobile);
   --hershey-component-columns-portrait-gap: var(--hershey-system-spacing-gap-columns-portrait-gap);
   --hershey-component-columns-follow-section-padding-block-start-mobile: var(--hershey-system-spacing-brand-columns-follow-section-padding-block-start-mobile);
   --hershey-component-columns-follow-section-padding-inline-mobile: var(--hershey-system-spacing-brand-columns-follow-section-padding-inline-mobile);

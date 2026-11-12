@@ -112,6 +112,8 @@ Content model: 1 row x 2 cells, in any order.
 | brand photo | logo image, H1 title, intro paragraph(s) |
 
 The logo is the picture in the same cell as the heading; any other picture is the photo.
+Put a second photo in the image cell to use a different image below 992px: the first photo shows
+from 992px, the second below it.
 A missing logo or photo is left out.
 
 Options:
