@@ -47,10 +47,31 @@ async function copyToClipboard(value) {
   }
 }
 
-// /products/ pages use the product themes (no `file`); every other page uses the brand themes
-function themesForPath(path) {
-  const isProduct = /^\/products(\/|$)/.test(path);
-  return THEMES.filter((t) => (isProduct ? !t.file : t.file === 'brands'));
+// authors list brand pages in the DA sheet /brand-pages (column `path`, trailing * = prefix)
+async function fetchBrandPaths() {
+  try {
+    const resp = await fetch('/brand-pages.json');
+    if (!resp.ok) return null;
+    const json = await resp.json();
+    const rows = json.data || json[':names']?.map((name) => json[name]?.data).find(Boolean) || [];
+    return rows.map((row) => normalizePath(String(row.path || '').trim())).filter(Boolean);
+  } catch {
+    return null;
+  }
+}
+
+function isBrandPath(path, brandPaths) {
+  return brandPaths.some((entry) => (entry.endsWith('*')
+    ? path.startsWith(entry.slice(0, -1))
+    : entry === path));
+}
+
+// /products/ pages use the product themes (no `file`), listed brand pages the brand themes,
+// other pages none; if the sheet can't be read (null) every theme is shown
+function themesForPath(path, brandPaths) {
+  if (/^\/products(\/|$)/.test(path)) return THEMES.filter((t) => !t.file);
+  if (!brandPaths) return THEMES;
+  return isBrandPath(path, brandPaths) ? THEMES.filter((t) => t.file === 'brands') : [];
 }
 
 function renderChips(list, themes, onSelect) {
@@ -83,7 +104,7 @@ function markCurrent(list, theme) {
 
   const { context, token } = await DA_SDK;
   const path = normalizePath(context.path);
-  const matching = themesForPath(path);
+  const matching = themesForPath(path, await fetchBrandPaths());
   let showAll = false;
   let theme = '';
 
@@ -97,6 +118,7 @@ function markCurrent(list, theme) {
     markCurrent(list, theme);
   };
 
+  if (!matching.length) status.textContent = 'No theme applies to this page.';
   if (!showAll) {
     const toggle = document.createElement('button');
     toggle.type = 'button';
@@ -108,7 +130,7 @@ function markCurrent(list, theme) {
   }
 
   render();
-  status.textContent = 'Click a theme to copy its value.';
+  if (matching.length) status.textContent = 'Click a theme to copy its value.';
 
   try {
     theme = await fetchTheme(sourceUrl({ org: context.org, repo: context.repo, path }), token);
