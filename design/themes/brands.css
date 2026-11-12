@@ -8097,4 +8097,15 @@
   mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg>') center / contain no-repeat;
 }
 
+/* the hero pill fits its text: 18.5px either side on chocolate (197px for "Shop All Chocolate") and
+   sweets (246px), 27px on zero sugar (193px), as measured on live */
+.hershey-home:is(.chocolate-primary, .sweets-primary, .zero-sugar-primary) main .hero.brand a.button {
+  min-width: 0;
+  padding-inline: 18.5px;
+}
+
+.hershey-home.zero-sugar-primary main .hero.brand a.button {
+  padding-inline: 27px;
+}
+
 /* stylelint-enable no-descending-specificity */
