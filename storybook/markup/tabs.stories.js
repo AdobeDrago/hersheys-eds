@@ -1,8 +1,6 @@
 import decorateTabs from '@adobe/aem-boilerplate/blocks/tabs/tabs.js';
-import decorateBrandTiles from '@adobe/aem-boilerplate/blocks/tabs/tabs-brand-tiles.js';
 import '@adobe/aem-boilerplate/blocks/tabs/tabs.css';
 import '@adobe/aem-boilerplate/blocks/tabs/tabs-nutrition.css';
-import '@adobe/aem-boilerplate/blocks/tabs/tabs-brand-tiles.css';
 import {
   contentArgTypes, createPage, element, picture, section, showcase,
 } from './story-helpers.js';
@@ -149,43 +147,6 @@ export const NutritionFromSheet = {
       window.fetch = realFetch;
       metas.forEach((meta) => meta.remove());
     });
-    return root;
-  },
-};
-
-export const BrandTiles = {
-  name: 'Brand tiles',
-  args: {
-    heading: 'Explore & Shop Our Brands',
-    tabs: { 'A-Z': 6, Chocolate: 4, Sweets: 3 },
-  },
-  argTypes: {
-    tabs: { control: 'object', description: 'Tab label and how many tiles it holds. A tile is a picture and a link; links to other sites open in a new tab with an external-link icon.' },
-  },
-  parameters: {
-    docs: { description: { story: 'Tabs (brand-tiles), the brand listing on /brands: a full-width dark bar of tabs over rows of four brand tiles (three from 768px, two below). Left/Right/Home/End move between tabs.' } },
-  },
-  render: ({ heading, tabs: tabCounts }) => {
-    const root = createPage('Blocks', 'Tabs (brand-tiles)');
-    const main = showcase(root);
-    const block = element('div', 'tabs brand-tiles block');
-    Object.entries(tabCounts).forEach(([label, count]) => {
-      const row = element('div');
-      const list = element('ul');
-      Array.from({ length: count }, (_, i) => `${label} brand ${i + 1}`).forEach((name, i) => {
-        const item = element('li');
-        const link = element('a', '', name.toUpperCase());
-        link.href = i === count - 1 ? 'https://www.example.com/' : '#';
-        item.append(picture(name), link);
-        list.append(item);
-      });
-      row.append(element('div', '', label), element('div', '', ''));
-      row.lastElementChild.append(list);
-      block.append(row);
-    });
-    const container = section(main, block);
-    container.querySelector('div').before(element('h2', '', heading));
-    decorateBrandTiles(block);
     return root;
   },
 };
