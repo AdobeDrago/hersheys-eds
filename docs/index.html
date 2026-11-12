@@ -615,6 +615,10 @@
         <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0114.25 14H1.75A1.75 1.75 0 010 12.25v-8.5zm1.75-.25a.25.25 0 00-.25.25v.5h13v-.5a.25.25 0 00-.25-.25H1.75zM1.5 5.5v6.75c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.5h-13z"/></svg>
         Linting &amp; CI
       </a>
+      <a class="sidebar-link" href="#ema">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a1 1 0 01.894.553l1.382 2.764 3.11.452a1 1 0 01.554 1.705l-2.25 2.193.531 3.097a1 1 0 01-1.451 1.054L8 10.347l-2.77 1.471a1 1 0 01-1.451-1.054l.531-3.097-2.25-2.193a1 1 0 01.554-1.705l3.11-.452L7.106.553A1 1 0 018 0z"/></svg>
+        EMA migration
+      </a>
       <a class="sidebar-link" href="#deploying">
         <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 15.4V13a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2.4a5.5 5.5 0 002-1.1V9.5A5.5 5.5 0 003 9.5v4.8a5.5 5.5 0 003.5 1.1z"/></svg>
         Deploying
@@ -884,6 +888,86 @@ npm run lint:js       <span class="cmt"># ESLint (airbnb-base)</span>
 npm run lint:css      <span class="cmt"># Stylelint (blocks, styles, design and Storybook CSS)</span>
 npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span></div>
         <p style="margin-top:12px;"><code class="code-inline">.github/workflows/main.yaml</code> runs <code class="code-inline">npm run lint</code> on every push — it does not run a build, deploy, or test step. The design token tests (<code class="code-inline">npm run test:tokens</code>) and Storybook suites (<code class="code-inline">storybook:test</code>, <code class="code-inline">storybook:test:browser</code>) exist but are run manually.</p>
+      </section>
+
+      <section class="doc-section" id="ema">
+        <h2>
+          <span class="section-icon icon-purple">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a1 1 0 01.894.553l1.382 2.764 3.11.452a1 1 0 01.554 1.705l-2.25 2.193.531 3.097a1 1 0 01-1.451 1.054L8 10.347l-2.77 1.471a1 1 0 01-1.451-1.054l.531-3.097-2.25-2.193a1 1 0 01.554-1.705l3.11-.452L7.106.553A1 1 0 018 0z"/></svg>
+          </span>
+          EMA (Experience Modernization Agent) for Migration
+        </h2>
+        <div class="section-rule"></div>
+        <p>EMA is the AI-assisted workflow this project uses to accelerate page and block migrations onto Edge Delivery Services. Rather than a single prompt, it is run as a short, repeatable sequence of tasks that first brings the agent up to speed on the project, then carries out the migration, and finally checks the result back against its source — so every migration is grounded in current project context and is validated rather than taken on faith.</p>
+
+        <h3>AEM Coder content migration checklist</h3>
+        <p>The checklist below is run at the start of every AI-assisted migration task to warm up the agent and validate its output. It is a template: items in curly braces or shown as example URLs (<code class="code-inline">{block-1}</code>, <code class="code-inline">https://example.com/source-page</code>) are placeholders to be substituted with the actual block name or source URL for the page in hand before the checklist is run.</p>
+
+        <div class="notice info">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><strong>Placeholders, not literal targets.</strong> Replace every bracketed or example value with the real block name or source URL before running a step — the checklist itself is never executed against <code class="code-inline">example.com</code> or a literal <code class="code-inline">{block-1}</code>.</span>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Warm up on project documentation</div>
+              <p>Read <code class="code-inline">AGENTS.md</code> and this document before making any changes, so the agent's output follows established blocks, conventions, and the project's EDS standards rather than inventing new patterns.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Migrate the page</div>
+              <p>Migrate the page at <code class="code-inline">{source-page-url}</code> into EDS-compatible markup, re-modeling its content as sections and blocks per <a href="https://www.aem.live/developer/markup-sections-blocks" target="_blank" rel="noopener" style="color:var(--accent);">AEM's markup conventions</a>.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Migrate the design</div>
+              <p>Migrate the visual design from <code class="code-inline">{design-source-url}</code>, translating layout, typography, and styling into block-scoped CSS consistent with the project's design tokens and breakpoints.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Style each migrated block</div>
+              <p>Style the following blocks individually against the source design, one at a time:</p>
+              <ul class="req-list">
+                <li><code class="code-inline">{block-1}</code></li>
+                <li><code class="code-inline">{block-2}</code></li>
+                <li><code class="code-inline">{block-3}</code></li>
+              </ul>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Critique each styled block</div>
+              <p>Review the styled output for the blocks below against the source design and this project's CSS guidelines, flagging any visual or accessibility gaps before moving on:</p>
+              <ul class="req-list">
+                <li><code class="code-inline">{block-1}</code></li>
+                <li><code class="code-inline">{block-2}</code></li>
+              </ul>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Validate the migrated page</div>
+              <p>Compare the migrated page side by side with its source at <code class="code-inline">{source-page-url}</code>, confirming content parity, layout fidelity, and that no sections or blocks were dropped in translation.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-num"></div>
+            <div class="step-body">
+              <div class="step-title">Set up navigation</div>
+              <p>Set up site navigation sourced from <code class="code-inline">{navigation-source-url}</code>, so the migrated page links correctly into the rest of the site.</p>
+            </div>
+          </li>
+        </ol>
       </section>
 
       <section class="doc-section" id="deploying">
