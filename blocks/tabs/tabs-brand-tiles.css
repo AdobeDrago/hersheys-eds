@@ -1,0 +1,133 @@
+/*
+ * `Tabs (brand-tiles)`: the brand listing on /brands (live .cmp-tabs with a link-group grid on
+ * hersheyland.com/brands). A full-width dark bar of four tabs, then 315px tiles in rows of four.
+ * Values are the measured ones; the tokens are component.tabs.brand-tiles.*
+ */
+main > .section:has(> .tabs-wrapper > .tabs.brand-tiles) {
+  padding: 0;
+}
+
+main > .section > .tabs-wrapper:has(> .tabs.brand-tiles) {
+  max-width: none;
+  padding: 0;
+}
+
+.tabs.brand-tiles .brand-tiles-bar {
+  background: var(--hershey-component-tabs-brand-tiles-bar-background, #3c131c);
+}
+
+.tabs.brand-tiles .tabs-list {
+  display: flex;
+  max-width: var(--hershey-component-tabs-brand-tiles-max-width, 1260px);
+  margin: 0 auto;
+  padding: 0;
+  overflow: visible;
+  gap: 0;
+}
+
+.tabs.brand-tiles .tabs-list button {
+  flex: 1 1 0;
+  height: var(--hershey-component-tabs-brand-tiles-tab-height, 60px);
+  border: 0;
+  border-radius: 0;
+  padding: 10px;
+  background: transparent;
+  color: var(--hershey-component-tabs-brand-tiles-tab-color, #fff);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.tabs.brand-tiles .tabs-list button[aria-selected='true'] {
+  background: var(--hershey-component-tabs-brand-tiles-tab-selected-background, #fff);
+  color: var(--hershey-component-tabs-brand-tiles-tab-selected-color, #007bbd);
+}
+
+.tabs.brand-tiles .tabs-list button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+}
+
+.tabs.brand-tiles .tabs-list button[aria-selected='true']:focus-visible {
+  outline-color: #007bbd;
+}
+
+.tabs.brand-tiles .tabs-panel {
+  display: block;
+  padding: 70px 0;
+}
+
+.tabs.brand-tiles .tabs-panel[hidden] {
+  display: none;
+}
+
+.tabs.brand-tiles .brand-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: var(--hershey-component-tabs-brand-tiles-max-width, 1260px);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.tabs.brand-tiles .brand-tiles-grid > li {
+  margin: 0 0 24px;
+}
+
+.tabs.brand-tiles .brand-tile {
+  display: block;
+  padding: 23px var(--hershey-component-tabs-brand-tiles-tile-padding-inline, 25px) 27px;
+  color: var(--hershey-component-tabs-brand-tiles-tile-color, #3f000b);
+  text-decoration: none;
+}
+
+.tabs.brand-tiles .brand-tile-image {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabs.brand-tiles .brand-tile-image picture,
+.tabs.brand-tiles .brand-tile-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tabs.brand-tiles .brand-tile-label {
+  display: block;
+  margin-top: 24px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+}
+
+.tabs.brand-tiles .brand-tile-label > span:first-child {
+  border-bottom: 1px solid currentcolor;
+}
+
+.tabs.brand-tiles .brand-tile-external {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.3em;
+  vertical-align: -0.1em;
+  background: currentcolor;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg>') center / contain no-repeat;
+}
+
+@media (width >= 768px) {
+  .tabs.brand-tiles .brand-tiles-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width >= 992px) {
+  .tabs.brand-tiles .brand-tiles-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

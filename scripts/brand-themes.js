@@ -55,4 +55,9 @@ export const BRAND_THEMES = [
   { label: 'MILK DUDS', value: 'milk-duds-primary', file: 'brands' },
   { label: "DOT'S HOMESTYLE PRETZELS", value: 'dots-pretzels-primary', file: 'brands' },
   { label: 'ZERO', value: 'zero-primary', file: 'brands' },
+  { label: 'CHOCOLATE', value: 'chocolate-primary', file: 'brands' },
+  { label: 'SWEETS', value: 'sweets-primary', file: 'brands' },
+  { label: 'SNACKS', value: 'snacks-primary', file: 'brands' },
+  { label: 'ZERO SUGAR', value: 'zero-sugar-primary', file: 'brands' },
+  { label: 'ALL BRANDS', value: 'all-brands-primary', file: 'brands' },
 ];

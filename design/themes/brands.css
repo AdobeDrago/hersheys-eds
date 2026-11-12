@@ -6980,4 +6980,1121 @@
   }
 }
 
+
+
+/*
+ * CHOCOLATE category page theme (`theme: chocolate-primary` page metadata). The hero and the
+ * "Science of Chocolate" band are the dark chocolate brand band, the creme bar call-out sits on the
+ * tan alternate band, and every other section is white with brown copy and blue pill buttons (the
+ * defaults). Values measured on hersheyland.com/brands/chocolate (2026-11-12). Section Metadata
+ * style `choc-moment` brown-links the secondary link of the creme bar call-out.
+ */
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) {
+  --hershey-component-hero-brand-band-background: #3f000b;
+  --hershey-component-hero-brand-color-foreground: #f6f6f6;
+  --hershey-system-color-surface-brand-band: #3f000b;
+  --hershey-system-color-text-brand-band: #f6f6f6;
+  --hershey-system-color-surface-brand-band-alt: #e2cca8;
+  --hershey-component-cards-product-slider-control-color: #003594;
+  --hershey-component-hero-brand-square-media-height: max(342px, calc(100vh - 160px));
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.brand-color {
+  --hershey-component-cards-product-band-background: #3f000b;
+  --hershey-component-cards-product-heading-foreground: #f6f6f6;
+  --hershey-component-cards-product-slider-foreground: #f6f6f6;
+  --hershey-component-cards-product-slider-size-color: #f6f6f6;
+
+  color: #f6f6f6;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.brand-color .default-content-wrapper > h2 {
+  color: #f6f6f6;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section:not(.brand-color, .brand-color-alt, .warm-tan, .dark-chocolate, .cool-tan) {
+  --hershey-component-cards-product-band-background: #fff;
+  --hershey-component-cards-product-heading-foreground: #3f000b;
+  --hershey-component-cards-product-slider-foreground: #3f000b;
+  --hershey-component-cards-product-slider-size-color: #3f000b;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-moment {
+  --hershey-component-columns-callout-link-color: #3f000b;
+  --hershey-component-columns-callout-link-color-hover: #3f000b;
+  --hershey-component-columns-callout-section-padding-block-start: 98px;
+  --hershey-component-columns-callout-section-padding-block-end: 98px;
+}
+
+/*
+ * CHOCOLATE category page details (`theme: chocolate-primary`), measured on hersheyland.com/brands/chocolate
+ * at 1440px (2026-11-12): the hero is the viewport less the 160px header and breadcrumb, the call-out
+ * pills fit their text, the sliders' page indicators are circles (blue, brown on the cream band), and
+ * the `choc-quick` product sliders ("What's New", "What's Trending") have a left heading and a white
+ * caption card that overlaps the foot of each photo.
+ */
+@media (width >= 992px) {
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout a.button.primary {
+    width: auto;
+    padding-inline: 22px;
+  }
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-quick .default-content-wrapper > h2 {
+  text-align: left;
+}
+
+/* the intro band is as tall as the live art layer (654px at 1440px) with its copy centred in it */
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main > .section.choc-intro {
+  display: grid;
+  align-content: center;
+  min-height: var(--choc-intro-height, 654px);
+  padding-block: 0;
+}
+
+/* the art spans the whole band, so the copy column must not be its containing block (no slide-in on
+   this section: an animated translate would make the column one) */
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main > .section.choc-intro > .default-content-wrapper:first-child {
+  position: static;
+}
+
+/* the OREO trademark line is fine print */
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout p:has(> em:only-child):not(:has(a)) {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+@media (width >= 992px) {
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout p.button-wrapper > a.button.primary {
+    width: auto;
+    padding-inline: 22px;
+  }
+
+  /* "The Science of Chocolate": the copy on the left, the pill pushed to the right edge */
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-lab .columns > div {
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-lab .columns > div > div:first-child {
+    flex: 0 1 650px;
+  }
+
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-lab .columns > div > div:last-child {
+    flex: 0 0 auto;
+  }
+}
+
+/* a pill followed by a text link in a call-out lays out as on /dots-pretzels (same measurements) */
+@media (width < 992px) {
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper {
+    padding-inline: 0;
+  }
+
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout p.button-wrapper:has(> .secondary) {
+    margin-top: 10px;
+  }
+}
+
+@media (width >= 768px) and (width < 992px) {
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) p.button-wrapper > a.button.primary {
+    width: 60%;
+    max-width: none;
+  }
+}
+
+@media (width >= 992px) {
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) {
+    padding-inline: 60px;
+  }
+
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > :not(.button-wrapper) {
+    width: calc(100% + 60px);
+    margin-inline: -30px;
+  }
+
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) > p.button-wrapper {
+    flex: 0 0 auto;
+    width: auto;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout > div > div:has(.button-wrapper ~ .button-wrapper) a.button.primary {
+    width: auto;
+  }
+}
+
+/*
+ * Section heights, measured on hersheyland.com/brands/chocolate at 1713px wide (2026-11-12): the
+ * intro band is 654px, the swirls take their natural height (the first one under 70px of white),
+ * the call-outs have their own padding, the quick-link sliders show 371px cards 24px apart and the
+ * brand bands are as tall as the live ones.
+ */
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main > .section.divider img {
+  height: auto;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main > .section.divider.choc-swirl-top {
+  padding-top: 70px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-cookie {
+  --hershey-component-columns-callout-section-padding-block-start: 25px;
+  --hershey-component-columns-callout-section-padding-block-end: 25px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-oreo {
+  --hershey-component-columns-callout-section-padding-block-start: 45px;
+  --hershey-component-columns-callout-section-padding-block-end: 45px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-movie {
+  --hershey-component-columns-callout-section-padding-block-start: 155px;
+  --hershey-component-columns-callout-section-padding-block-end: 136px;
+
+  /* the photo's height follows the viewport, the live band does not */
+  box-sizing: border-box;
+  min-height: 587px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-quick {
+  --hershey-component-cards-product-slider-band-padding-block-start: 83px;
+  --hershey-component-cards-product-slider-band-padding-block-end: 121px;
+  --hershey-component-cards-product-slider-max-width: 1186px;
+  --hershey-component-cards-product-slider-card-width-wide: 371px;
+  --hershey-component-cards-product-slider-gap-wide: 24px;
+  --hershey-component-cards-product-slider-body-min-height: 0;
+
+  /* the arrows are white circles on the photo's centre line, 15px outside the track */
+  --hershey-component-cards-product-slider-control-gutter: 15px;
+  --hershey-component-cards-product-slider-control-offset: -36px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-quick .cards.product .cards-product-image {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* the caption is a white card over the foot of the photo */
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-quick .cards.product.slider .cards-product-body {
+  position: relative;
+  margin: -60px 15px 0;
+  border-radius: 10px;
+  padding: 10px 15px;
+  background: #fff;
+  box-shadow: 0 0 12px rgb(39 1 7 / 8%);
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-quick .cards.product.slider .cards-product-body h3 {
+  font-family: hershey-gazpacho, serif;
+  font-size: 22px;
+  line-height: 29px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-quick .cards.product.slider .cards-product-size {
+  padding: 6px 0 0;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-lab {
+  display: grid;
+  align-content: center;
+  box-sizing: border-box;
+  min-height: 354px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-lab ~ .section.choc-quick {
+  --hershey-component-cards-product-slider-band-padding-block-end: 201px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.warm-tan {
+  --hershey-component-cards-brands-band-padding-block-end: 95px;
+  --hershey-component-cards-brands-band-padding-block-end-wide: 95px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section:has(.cards.slider.brands):not(.warm-tan) {
+  --hershey-component-cards-brands-band-padding-block-end: 295px;
+  --hershey-component-cards-brands-band-padding-block-end-wide: 295px;
+}
+
+/* the creme bar and movie night photos keep their own ratio in a 50/50 call-out (587px wide in a
+   630px column at 1260px) */
+@media (width >= 992px) {
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section:is(.choc-moment, .choc-movie) .columns.callout > div > .columns-img-col {
+    flex: 0 0 50%;
+  }
+
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section:is(.choc-moment, .choc-movie) .columns.callout > div > :not(.columns-img-col) {
+    flex: 0 0 50%;
+  }
+
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section:is(.choc-moment, .choc-movie) .columns.callout > div > .columns-img-col img {
+    width: 93.2%;
+    aspect-ratio: auto;
+    border-radius: 8px;
+  }
+}
+
+/*
+ * Type, measured on hersheyland.com/brands/chocolate (2026-11-12): body copy is 17px/25.5px at
+ * weight 500, the creme bar and movie night titles are 28px/42px, the pills are 18px bold, and the
+ * intro title has a 48px first line over a 36px second line.
+ */
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main > .section.choc-intro .default-content-wrapper > :is(h2, p:not(:first-child)) {
+  max-width: 790px;
+  margin-inline: auto;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main > .section.choc-intro .default-content-wrapper > h2 {
+  line-height: 54px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main > .section.choc-intro h2 strong {
+  font-size: 48px;
+  line-height: 48px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main > .section.choc-intro .default-content-wrapper > p:not(:first-child) {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 25.5px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout p:not(.button-wrapper, :has(> em:only-child)) {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 25.5px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section:is(.choc-moment, .choc-movie) .columns.callout h2 {
+  font-size: 28px;
+  line-height: 42px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout a.button.primary {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout a.button.secondary,
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout p.button-wrapper > a:not(.button) {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+}
+
+@media (width >= 992px) {
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .columns.callout p.button-wrapper > a.button.primary {
+    padding: 18.5px 30px;
+  }
+
+  /* "The Science of Chocolate": 740px of copy, 17px copy and a 200x61 pill */
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-lab .columns > div > div:first-child {
+    flex: 0 1 740px;
+  }
+
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-lab .columns p {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 25.5px;
+  }
+
+  .hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-lab .columns a.button {
+    padding: 17.75px 50px;
+    font-size: 17px;
+    line-height: 25.5px;
+  }
+}
+
+/*
+ * "Shop Hershey Exclusives": three white product cards 371px wide and 76px apart over the brown
+ * shape art (the first paragraph's picture), then a pill with an external-link icon.
+ */
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main > .section.choc-exclusives {
+  box-sizing: border-box;
+  min-height: 908px;
+  padding-block: 50px 61px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main > .section.choc-exclusives .default-content-wrapper > h2 {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-exclusives .cards.product > ul {
+  display: grid;
+  grid-template-columns: repeat(3, 371px);
+  gap: 76px;
+  justify-content: center;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-exclusives .cards.product > ul > li {
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 0 12px rgb(39 1 7 / 8%);
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-exclusives .cards-product-image {
+  display: grid;
+  place-items: center;
+  height: 385px;
+  padding: 20px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-exclusives .cards-product-image img {
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-exclusives .cards-product-body {
+  padding: 24px 30px 30px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-exclusives .cards-product-body h3 {
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-exclusives .cards-product-size {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-exclusives p.button-wrapper {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-exclusives p.button-wrapper a.button::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.4em;
+  vertical-align: -0.1em;
+  background: currentcolor;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg>') center / contain no-repeat;
+}
+
+/* the page shows no slider page dots; the bands keep the room live gives them */
+.hershey-home.chocolate-primary main .cards .cards-slider-dots {
+  display: none;
+}
+
+.hershey-home:is(.chocolate-primary, .sweets-primary, .snacks-primary, .zero-sugar-primary) main .section.choc-quick h2 {
+  line-height: 36px;
+}
+
+/*
+ * SWEETS, SNACKS and ZERO SUGAR category pages share the chocolate page styles above and only change
+ * the hero band (brown copy on the band's colour, blue pill) and, for SWEETS, the intro band height.
+ * Colours measured on hersheyland.com/brands/sweets, /snacks and /zero-sugar.html (2026-11-12).
+ */
+.hershey-home.sweets-primary {
+  --hershey-component-hero-brand-band-background: #c1eae7;
+  --hershey-component-hero-brand-color-foreground: #3f000b;
+  --choc-intro-height: 629px;
+}
+
+.hershey-home.snacks-primary {
+  --hershey-component-hero-brand-band-background: #ffe293;
+  --hershey-component-hero-brand-color-foreground: #3f000b;
+}
+
+.hershey-home.zero-sugar-primary {
+  --hershey-component-hero-brand-band-background: #e2d6c5;
+  --hershey-component-hero-brand-color-foreground: #3f000b;
+}
+
+/* a brands slider with only two tiles keeps them 24px apart (239px tiles on live) */
+@media (width >= 992px) {
+  .hershey-home:is(.sweets-primary, .snacks-primary, .zero-sugar-primary) main .cards.slider.brands > ul:has(> li:nth-child(2):last-child) {
+    justify-content: start;
+    gap: 24px;
+  }
+}
+
+/*
+ * ZERO SUGAR bottom bands, measured on hersheyland.com/brands/zero-sugar.html at 1425px wide
+ * (2026-11-12): the "Did You Know?" box (1138px wide, 50px padding, tan) sits on a 452px cream band,
+ * the silhouette art strip is a 230px cream divider and the tiles band below is tan with 90px above
+ * and 300px below its content.
+ */
+.hershey-home.zero-sugar-primary main .section.zs-fact-band {
+  box-sizing: border-box;
+  padding: 90px 20px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-fact-band > .columns-wrapper {
+  box-sizing: border-box;
+  max-width: 1138px;
+  margin-inline: auto;
+  padding: 58px 120px;
+  background: #e2d6c5;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-fact-band .columns > div {
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-fact-band .columns h2 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  line-height: 36.4px;
+  text-align: left;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-fact-band .columns p {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 25.5px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-fact-band .columns a.button {
+  padding: 17px 20px;
+  font-size: 17px;
+  line-height: 25.5px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.zero-sugar-primary main .section.zs-fact-band .columns > div > div:first-child {
+    flex: 0 1 549px;
+  }
+
+  .hershey-home.zero-sugar-primary main .section.zs-fact-band .columns > div > div:last-child {
+    flex: 0 0 auto;
+  }
+}
+
+.hershey-home.zero-sugar-primary main > .section.zs-art {
+  background: #feebd0;
+}
+
+.hershey-home.zero-sugar-primary main > .section.zs-art img {
+  height: 230px;
+  object-fit: cover;
+}
+
+.hershey-home.zero-sugar-primary main .section.cool-tan:has(.cards.slider.brands) {
+  --hershey-component-cards-brands-band-padding-block-start: 90px;
+  --hershey-component-cards-brands-band-padding-block-end: 392px;
+  --hershey-component-cards-brands-band-padding-block-end-wide: 392px;
+}
+
+/* live keeps "Explore Products & Flavors" on one line */
+.hershey-home.zero-sugar-primary main .section.cool-tan:has(.cards.slider.brands) > .default-content-wrapper > h2 {
+  white-space: nowrap;
+}
+
+/*
+ * ZERO SUGAR sections, measured on hersheyland.com/brands/zero-sugar.html at 1440px (2026-11-12).
+ * The "Zero Sugar, 100% Delicious" band: two 603px photo cards 50px apart, each with a white caption
+ * box (20px in from the left, 20px up from the foot) that overlaps the photo. The photos already
+ * carry the cream gradient.
+ */
+.hershey-home.zero-sugar-primary main > .section.zs-duo-band {
+  padding-block: 138px 90px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .default-content-wrapper > h2 {
+  margin: 0 0 27px;
+  font-size: 36px;
+  line-height: 54px;
+  text-align: center;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .columns-wrapper {
+  max-width: 1260px;
+  padding: 0;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .columns > div {
+  display: grid;
+  grid-template-columns: repeat(2, 603px);
+  gap: 50px;
+  justify-content: center;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .columns > div > div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 603px;
+  padding: 0 100px 20px 20px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .columns p:has(> picture) {
+  margin: 0;
+  padding: 0;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .columns picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 603px;
+  height: 603px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .columns img {
+  display: block;
+  width: 603px;
+  max-width: none;
+  height: 603px;
+}
+
+/* the caption is one white box made of the heading, copy and link */
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .columns :is(h3, p:not(:has(> picture))) {
+  position: relative;
+  margin: 0;
+  padding: 0 15px;
+  background: #fff;
+  text-align: left;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .columns h3 {
+  border-radius: 8px 8px 0 0;
+  padding-top: 25px;
+  font-size: 28px;
+  line-height: 36.4px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .columns p:not(:has(> picture)) {
+  padding-top: 10px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 25.5px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .columns p:not(:has(> picture)):last-child {
+  border-radius: 0 0 8px 8px;
+  padding-top: 20px;
+  padding-bottom: 25px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-duo-band .columns p:not(:has(> picture)) a {
+  color: #007bbd;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* the product sliders: the default 304px cards, a tan ring behind each photo, blue circle dots */
+.hershey-home.zero-sugar-primary main .section.zs-ring .cards-product-image {
+  position: relative;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-ring .cards-product-image::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 6px solid #e2d6c5;
+  border-radius: 50%;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-ring .cards-product-image img {
+  position: relative;
+}
+
+.hershey-home.zero-sugar-primary main .cards.product.slider .cards-slider-dot {
+  background-image: url('/icons/orb-indicator-inactive-blue.svg');
+}
+
+.hershey-home.zero-sugar-primary main .cards.product.slider .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/orb-indicator-active-blue.svg');
+}
+
+/* kiss-shaped blue indicators under the brand tiles */
+.hershey-home.zero-sugar-primary main .cards.slider.brands .cards-slider-dot {
+  background-image: url('/icons/kiss-indicator-inactive-blue.svg');
+}
+
+.hershey-home.zero-sugar-primary main .cards.slider.brands .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/kiss-indicator-active-blue.svg');
+}
+
+/* the quote call-out: 20px copy, an italic attribution, the photo on the right */
+.hershey-home.zero-sugar-primary main .section.zs-quote {
+  --hershey-component-columns-callout-section-padding-block-start: 110px;
+  --hershey-component-columns-callout-section-padding-block-end: 50px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-quote .columns.callout p:not(.button-wrapper) {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-quote .columns.callout p:has(> em:only-child):not(:has(a)) {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+/* Mints & Gum: a 848px row of copy and a 399x224 photo */
+.hershey-home.zero-sugar-primary main .section.zs-mints {
+  padding-block: 100px 153px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-mints .columns-wrapper {
+  max-width: 849px;
+  padding: 0;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-mints .columns > div {
+  align-items: center;
+  gap: 50px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-mints .columns > div > div {
+  flex: 0 0 399px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-mints .columns img {
+  display: block;
+  width: 399px;
+  height: auto;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-mints h2 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  line-height: 36.4px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-mints p {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 25.5px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-mints p a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* the soft waves around the mints band are 180px tall */
+.hershey-home.zero-sugar-primary main > .section.zs-wave {
+  background: #fff;
+}
+
+.hershey-home.zero-sugar-primary main > .section.zs-wave-top {
+  background: #e2d6c5;
+}
+
+.hershey-home.zero-sugar-primary main > .section.zs-wave img {
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Baking Essentials: three 304px cards on cream, no controls; a card's photo turns pink (#e4cace) while it
+   is hovered, as on live */
+.hershey-home.zero-sugar-primary main .section.zs-baking .cards-slider-controls,
+.hershey-home.zero-sugar-primary main .section.zs-baking .cards-slider-dots {
+  display: none;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-baking {
+  --hershey-component-cards-product-slider-image-background-hover: #e4cace;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-baking .cards-product-image {
+  transition: background-color 0.3s;
+}
+
+/* Dessert recipes: centred copy over a feature card and three stacked ones; the spotlight block sizes the
+   intro wrapper at 790px, live's is 950px wide */
+.hershey-home.zero-sugar-primary main > .section.zs-dessert.cards-container > .default-content-wrapper:first-child {
+  width: 100%;
+  max-width: 950px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-dessert .default-content-wrapper > :is(h2, p:not(:has(> picture:only-child))) {
+  max-width: 950px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* the intro's link is bold with a 1px rule under it; the pill sits in the middle of the 1260px column */
+.hershey-home.zero-sugar-primary main .section.zs-dessert .default-content-wrapper > p:not(.button-wrapper) a {
+  border-bottom: 1px solid currentcolor;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-dessert .cards-wrapper + .default-content-wrapper {
+  max-width: 1260px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-dessert .cards-wrapper + .default-content-wrapper > p.button-wrapper:first-child {
+  max-width: none;
+  margin-inline: 0;
+  text-align: center;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-dessert .default-content-wrapper > p:not(.button-wrapper) {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 25.5px;
+}
+
+/* band heights measured on live: the slider ends 20px under its pill, Baking Essentials is 680px and
+   the dessert band keeps 210px under its pill, with the cards 1260px wide */
+.hershey-home.zero-sugar-primary main .section.zs-ring {
+  --hershey-component-cards-product-slider-band-padding-block-end: 20px;
+}
+
+.hershey-home.zero-sugar-primary main > .section.zs-baking.cards-container {
+  --hershey-component-cards-product-band-background: #feebd0;
+
+  padding-block: 101px 71px;
+}
+
+.hershey-home.zero-sugar-primary main .section.zs-dessert {
+  --hershey-component-cards-spotlight-section-padding-inline: 0px;
+  --hershey-component-cards-spotlight-section-padding-block-start: 62px;
+  --hershey-component-cards-spotlight-section-padding-block-end: 231px;
+  --hershey-component-cards-spotlight-track-padding-block-start: 20px;
+}
+
+/*
+ * SWEETS page details (`theme: sweets-primary`), measured on hersheyland.com/brands/sweets at 1440px
+ * (2026-11-12): the intro copy sits 8px under its title, the product sliders show no page dots (the brand tiles slider does), and the
+ * "Shop SOUR STRIPS" and "Shop More ..." pills end with an external-link icon.
+ */
+.hershey-home.sweets-primary main > .section.choc-intro .default-content-wrapper > h2 {
+  margin-bottom: 8px;
+}
+
+.hershey-home.sweets-primary main > .section.choc-intro .default-content-wrapper > p:not(:first-child) {
+  margin-top: 8px;
+}
+
+.hershey-home.sweets-primary main .cards.product .cards-slider-dots {
+  display: none;
+}
+
+/* the brand tiles slider ("Explore Our Family of Brands") keeps its blue circle page dots */
+.hershey-home.sweets-primary main .cards.slider.brands .cards-slider-dot {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #007bbd;
+  border-radius: 50%;
+  background: none;
+}
+
+.hershey-home.sweets-primary main .cards.slider.brands .cards-slider-dot[aria-current='true'] {
+  background: #007bbd;
+}
+
+.hershey-home.sweets-primary main .section.sw-sour .columns.callout p.button-wrapper a.button.primary::after,
+.hershey-home.sweets-primary main .section.sw-slider .cards-wrapper + .default-content-wrapper a.button::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.4em;
+  vertical-align: -0.1em;
+  background: currentcolor;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg>') center / contain no-repeat;
+}
+
+/* band heights measured on live: slider bands 778px (81px above the title, 298px cards 61px apart, the
+   pill 78px under them and 50px below it), What's New 692px, Serious About Sour 730px, Movie Night
+   567px and Related Brands 732px */
+.hershey-home.sweets-primary main .section.sw-slider {
+  --hershey-component-cards-product-slider-band-padding-block-start: 81px;
+  --hershey-component-cards-product-slider-band-padding-block-end: 50px;
+  --hershey-component-cards-product-slider-heading-margin-block-end: 16px;
+  --hershey-component-cards-product-slider-card-width-wide: 298px;
+  --hershey-component-cards-product-slider-gap-wide: 61px;
+  --hershey-component-cards-product-slider-cta-margin-block-start: 78px;
+}
+
+.hershey-home.sweets-primary main .section.choc-quick {
+  --hershey-component-cards-product-slider-band-padding-block-end: 101px;
+}
+
+.hershey-home.sweets-primary main .section.sw-sour {
+  --hershey-component-columns-callout-section-padding-block-start: 50px;
+  --hershey-component-columns-callout-section-padding-block-end: 50px;
+}
+
+.hershey-home.sweets-primary main .section.choc-movie {
+  --hershey-component-columns-callout-section-padding-block-start: 105px;
+  --hershey-component-columns-callout-section-padding-block-end: 85px;
+
+  min-height: 567px;
+}
+
+/* the Movie Night photo is a 1280x720 file shown cropped (cover) in a 592x377 box, so it reads larger */
+@media (width >= 992px) {
+  .hershey-home.sweets-primary main .section.choc-movie .columns.callout > div > .columns-img-col img {
+    width: 94%;
+    aspect-ratio: 592 / 377;
+    object-fit: cover;
+  }
+}
+
+/*
+ * SNACKS page details (`theme: snacks-primary`), measured on hersheyland.com/brands/snacks at 1440px
+ * (2026-11-12): the hero pill fits its text, the intro copy sits 8px under its title, no slider shows
+ * page dots, the Parmesan Garlic and Big, Bold Flavor call-outs have 630px square photos, the "Shop
+ * More ..." pills and the Protein Bars tile labels end with an external-link icon, and the Parmesan
+ * Garlic popcorn art stays still while the call-out's parts animate.
+ */
+.hershey-home.snacks-primary main > .section.choc-intro .default-content-wrapper > h2 {
+  margin-bottom: 8px;
+}
+
+.hershey-home.snacks-primary main > .section.choc-intro .default-content-wrapper > p:not(:first-child) {
+  margin-top: 0;
+}
+
+.hershey-home.snacks-primary main .cards .cards-slider-dots {
+  display: none;
+}
+
+.hershey-home.snacks-primary main .section.sn-slider .cards-wrapper + .default-content-wrapper a.button::after,
+.hershey-home.snacks-primary main .section.warm-tan .cards.slider.brands h3 a::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.4em;
+  vertical-align: -0.1em;
+  background: currentcolor;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg>') center / contain no-repeat;
+}
+
+/* the hero pill fits its text (193px wide: 133px of text and 30px either side); the call-out pills have
+   18.5px either side */
+.hershey-home.snacks-primary main .hero.brand a.button {
+  min-width: 0;
+  padding-inline: 30px;
+}
+
+.hershey-home.snacks-primary main .section:is(.sn-parmesan, .sn-bold) .columns.callout p.button-wrapper > a.button.primary {
+  padding-inline: 18.5px;
+}
+
+.hershey-home.snacks-primary main .section.choc-movie .columns.callout p.button-wrapper > a.button.primary {
+  padding-inline: 48px;
+}
+
+/* the popcorn art behind "Say Hello to Parmesan Garlic" does not animate on live */
+.hershey-home.snacks-primary main > .section.sn-parmesan.decorated > .default-content-wrapper:first-child > p:first-child picture img {
+  opacity: 1;
+  translate: none;
+  animation: none;
+}
+
+.hershey-home.snacks-primary main .section:is(.sn-parmesan, .sn-bold) {
+  --hershey-component-columns-callout-section-padding-block-start: 90px;
+  --hershey-component-columns-callout-section-padding-block-end: 50px;
+}
+
+.hershey-home.snacks-primary main .section.sn-parmesan .columns.callout > div {
+  align-items: center;
+  min-height: 770px;
+}
+
+.hershey-home.snacks-primary main .section:is(.sn-parmesan, .sn-bold) .columns.callout p:not(.button-wrapper) {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+/* slider bands as measured on live (see the sweets bands): 298px cards 61px apart, the pill 78px under them */
+.hershey-home.snacks-primary main .section.sn-slider {
+  --hershey-component-cards-product-slider-band-padding-block-start: 81px;
+  --hershey-component-cards-product-slider-band-padding-block-end: 50px;
+  --hershey-component-cards-product-slider-heading-margin-block-end: 16px;
+  --hershey-component-cards-product-slider-card-width-wide: 298px;
+  --hershey-component-cards-product-slider-gap-wide: 61px;
+  --hershey-component-cards-product-slider-cta-margin-block-start: 78px;
+}
+
+.hershey-home.snacks-primary main .section.choc-quick {
+  --hershey-component-cards-product-slider-band-padding-block-end: 161px;
+}
+
+/* the second slider ("Chocolate, Bark & Clusters") is 90px taller than the first on live */
+.hershey-home.snacks-primary main .section.sn-slider ~ .section.sn-slider {
+  --hershey-component-cards-product-slider-band-padding-block-end: 140px;
+}
+
+/* Protein Bars 499px and Related Brands 726px on live */
+.hershey-home.snacks-primary main .section.warm-tan {
+  --hershey-component-cards-brands-band-padding-block-end: 136px;
+  --hershey-component-cards-brands-band-padding-block-end-wide: 136px;
+}
+
+.hershey-home.snacks-primary main .section:has(.cards.slider.brands):not(.warm-tan) {
+  --hershey-component-cards-brands-band-padding-block-end: 336px;
+  --hershey-component-cards-brands-band-padding-block-end-wide: 336px;
+}
+
+/* the Movie Night photo is a 1920x1080 file shown cropped (cover) in a 592x377 box */
+.hershey-home.snacks-primary main .section.choc-movie {
+  --hershey-component-columns-callout-section-padding-block-start: 115px;
+  --hershey-component-columns-callout-section-padding-block-end: 95px;
+
+  min-height: 587px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.snacks-primary main .section.choc-movie .columns.callout > div > .columns-img-col img {
+    width: 94%;
+    aspect-ratio: 592 / 377;
+    object-fit: cover;
+  }
+}
+
+/*
+ * ALL BRANDS listing page (`theme: all-brands-primary`), measured on hersheyland.com/brands at 1440px
+ * (2026-11-12): a cream hero with brown copy, a 380px wave band, the 249px intro on tan (740px copy
+ * column, 90px above and 75px below), the `Tabs (brand-tiles)` listing, then a 230px candy and snacks
+ * strip with 140px of white below it. Section Metadata styles: `ab-wave`, `ab-intro`, `ab-tabs`, `ab-end`.
+ */
+.hershey-home.all-brands-primary {
+  --hershey-component-hero-brand-band-background: #feebd0;
+  --hershey-component-hero-brand-color-foreground: #3f000b;
+  --hershey-component-hero-brand-square-media-height: max(342px, calc(100vh - 160px));
+}
+
+.hershey-home.all-brands-primary main .hero.brand a.button {
+  min-width: 0;
+  padding-inline: 30px;
+}
+
+.hershey-home.all-brands-primary main > .section.ab-wave {
+  box-sizing: border-box;
+  min-height: 380px;
+  padding: 0;
+}
+
+.hershey-home.all-brands-primary main > .section.ab-intro {
+  display: grid;
+  align-content: center;
+  box-sizing: border-box;
+  min-height: 249px;
+  padding: 90px 20px 75px;
+  text-align: center;
+}
+
+.hershey-home.all-brands-primary main > .section.ab-intro .default-content-wrapper {
+  max-width: 740px;
+  margin-inline: auto;
+}
+
+.hershey-home.all-brands-primary main > .section.ab-intro .default-content-wrapper > h2 {
+  margin: 0 0 10.8px;
+  line-height: 46.8px;
+}
+
+.hershey-home.all-brands-primary main > .section.ab-intro .default-content-wrapper > p {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 25.5px;
+}
+
+.hershey-home.all-brands-primary main > .section.ab-tabs {
+  padding: 0;
+}
+
+.hershey-home.all-brands-primary main > .section.ab-end {
+  box-sizing: border-box;
+  min-height: 230px;
+  padding: 0;
+}
+
+/* "Explore Products & Flavors": a 782px purple band with white copy; the tiles keep the maroon kiss dots */
+.hershey-home.all-brands-primary main > .section.ab-explore {
+  --hershey-component-cards-brands-color-foreground: #fff;
+  --hershey-component-cards-brands-band-padding-block-start: 98px;
+  --hershey-component-cards-brands-band-padding-block-end: 344px;
+  --hershey-component-cards-brands-band-padding-block-end-wide: 344px;
+
+  box-sizing: border-box;
+  min-height: 782px;
+  margin: 0;
+  background: #5a357b;
+  color: #fff;
+}
+
+/* the empty section DA keeps the page metadata in takes no room */
+.hershey-home.all-brands-primary main > .section:not(:has(*)) {
+  display: none;
+}
+
+/*
+ * CHOCOLATE page details, measured on hersheyland.com/brands/chocolate at 1440px (2026-11-12): the
+ * intro copy sits 8px under its title, the Movie Night photo is a 1920x1080 file cropped (cover) to
+ * 592x377, the two brand tile sliders show blue (cream band: brown) circle page dots, and the
+ * LILY'S tile label ends with the external-link icon.
+ */
+.hershey-home.chocolate-primary main > .section.choc-intro .default-content-wrapper > h2 {
+  margin-bottom: 8px;
+}
+
+.hershey-home.chocolate-primary main > .section.choc-intro .default-content-wrapper > p:not(:first-child) {
+  margin-top: 8px;
+}
+
+.hershey-home.chocolate-primary main .section.choc-movie {
+  --hershey-component-columns-callout-section-padding-block-start: 115px;
+  --hershey-component-columns-callout-section-padding-block-end: 95px;
+}
+
+@media (width >= 992px) {
+  .hershey-home.chocolate-primary main .section.choc-movie .columns.callout > div > .columns-img-col img {
+    width: 94%;
+    aspect-ratio: 592 / 377;
+    object-fit: cover;
+  }
+}
+
+.hershey-home.chocolate-primary main .cards.slider.brands .cards-slider-dots {
+  display: flex;
+}
+
+.hershey-home.chocolate-primary main .cards.slider.brands .cards-slider-dot {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #007bbd;
+  border-radius: 50%;
+  background: none;
+}
+
+.hershey-home.chocolate-primary main .cards.slider.brands .cards-slider-dot[aria-current='true'] {
+  background: #007bbd;
+}
+
+.hershey-home.chocolate-primary main .section.warm-tan .cards.slider.brands .cards-slider-dot {
+  border-color: #3f000b;
+}
+
+.hershey-home.chocolate-primary main .section.warm-tan .cards.slider.brands .cards-slider-dot[aria-current='true'] {
+  background: #3f000b;
+}
+
+.hershey-home.chocolate-primary main .cards.slider.brands h3 a[href^='https://www.lilys.com']::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.4em;
+  vertical-align: -0.1em;
+  background: currentcolor;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14 21 3"/></svg>') center / contain no-repeat;
+}
+
 /* stylelint-enable no-descending-specificity */
