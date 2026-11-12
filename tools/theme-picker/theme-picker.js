@@ -47,8 +47,35 @@ async function copyToClipboard(value) {
   }
 }
 
-function renderChips(list, onSelect) {
-  list.replaceChildren(...THEMES.map(({ label, value }) => {
+// authors list brand pages in the DA sheet /brand-pages (column `path`, trailing * = prefix)
+async function fetchBrandPaths() {
+  try {
+    const resp = await fetch('/brand-pages.json');
+    if (!resp.ok) return null;
+    const json = await resp.json();
+    const rows = json.data || json[':names']?.map((name) => json[name]?.data).find(Boolean) || [];
+    return rows.map((row) => normalizePath(String(row.path || '').trim())).filter(Boolean);
+  } catch {
+    return null;
+  }
+}
+
+function isBrandPath(path, brandPaths) {
+  return brandPaths.some((entry) => (entry.endsWith('*')
+    ? path.startsWith(entry.slice(0, -1))
+    : entry === path));
+}
+
+// /products/ pages use the product themes (no `file`), listed brand pages the brand themes,
+// other pages none; if the sheet can't be read (null) every theme is shown
+function themesForPath(path, brandPaths) {
+  if (/^\/products(\/|$)/.test(path)) return THEMES.filter((t) => !t.file);
+  if (!brandPaths) return THEMES;
+  return isBrandPath(path, brandPaths) ? THEMES.filter((t) => t.file === 'brands') : [];
+}
+
+function renderChips(list, themes, onSelect) {
+  list.replaceChildren(...themes.map(({ label, value }) => {
     const li = document.createElement('li');
     const button = document.createElement('button');
     button.type = 'button';
@@ -75,20 +102,38 @@ function markCurrent(list, theme) {
   const current = document.querySelector('.theme-picker-current-value');
   const status = document.querySelector('.theme-picker-status');
 
-  renderChips(list, async (value) => {
+  const { context, token } = await DA_SDK;
+  const path = normalizePath(context.path);
+  const matching = themesForPath(path, await fetchBrandPaths());
+  let showAll = false;
+  let theme = '';
+
+  const onSelect = async (value) => {
     status.textContent = await copyToClipboard(value)
       ? `Copied ${value}. Paste it into Page → Page Metadata → theme.`
       : `Could not copy. Type ${value} into the theme field.`;
-  });
-  status.textContent = 'Click a theme to copy its value.';
+  };
+  const render = () => {
+    renderChips(list, showAll ? THEMES : matching, onSelect);
+    markCurrent(list, theme);
+  };
 
-  const { context, token } = await DA_SDK;
+  if (!matching.length) status.textContent = 'No theme applies to this page.';
+  if (!showAll) {
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'theme-picker-toggle';
+    const label = () => { toggle.textContent = showAll ? 'Show matching themes' : 'Show all themes'; };
+    toggle.addEventListener('click', () => { showAll = !showAll; label(); render(); });
+    label();
+    list.before(toggle);
+  }
+
+  render();
+  if (matching.length) status.textContent = 'Click a theme to copy its value.';
+
   try {
-    const theme = await fetchTheme(sourceUrl({
-      org: context.org,
-      repo: context.repo,
-      path: normalizePath(context.path),
-    }), token);
+    theme = await fetchTheme(sourceUrl({ org: context.org, repo: context.repo, path }), token);
     current.textContent = theme || 'not set';
     markCurrent(list, theme);
   } catch {
