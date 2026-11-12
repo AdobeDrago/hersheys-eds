@@ -25,7 +25,14 @@ export const BRAND_THEMES = [
   { label: 'PAYDAY', value: 'payday-brand-primary', file: 'brands' },
   { label: 'ALMOND JOY & MOUNDS', value: 'almond-joy-mounds-primary', file: 'brands' },
   { label: 'MOUNDS', value: 'mounds-primary', file: 'brands' },
-  { label: 'SOUR STRIPS', value: 'sour-strips-primary', file: 'brands' },
+  {
+    label: 'SOUR STRIPS',
+    value: 'sour-strips-primary',
+    file: 'brands',
+    // headings are RusticoFarmero, a licensed fonts.net face: the kit loads as on hersheyland.com
+    fontKit: 'https://cdn.fonts.net/kit/9f2e5c9e-d220-4715-a3c0-bf3f497817e4/'
+      + '9f2e5c9e-d220-4715-a3c0-bf3f497817e4.css',
+  },
   { label: 'ROLO', value: 'rolo-brand-primary', file: 'brands' },
   { label: 'CADBURY', value: 'cadbury-brand-primary', file: 'brands' },
   { label: 'BUBBLE YUM', value: 'bubbleyum-primary', file: 'brands' },

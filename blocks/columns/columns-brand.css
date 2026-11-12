@@ -234,7 +234,7 @@ main > .section > .columns-wrapper:has(> .columns.callout) {
 .columns.callout a.button.primary:focus-visible {
   border: 0;
   background-color: var(--hershey-component-columns-callout-cta-background-hover, #268fc7);
-  color: var(--hershey-component-columns-callout-cta-foreground, #fff);
+  color: var(--hershey-component-columns-callout-cta-foreground-hover, var(--hershey-component-columns-callout-cta-foreground, #fff));
 }
 
 /* secondary call to action is an underlined text link; the underline goes on hover */
@@ -1561,17 +1561,26 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
   width: min(370px, 100%);
 }
 
+/* the heading tilts left and the copy right, as on hersheyland.com/payday */
 .hershey-home main .section.columns-container .columns.blobs h2 {
   margin: 0;
   color: #fff;
   font-size: 36px;
   font-weight: 900;
-  line-height: 1.65;
+  line-height: 1.3;
+  text-align: center;
+  rotate: -7deg;
 }
 
 .hershey-home main .section.columns-container .columns.blobs p {
   margin: 0;
   color: #fff;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.hershey-home main .section.columns-container .columns.blobs > div > div:last-child p {
+  rotate: 7deg;
 }
 
 .columns.blobs picture,
@@ -1622,6 +1631,7 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
     background: none;
   }
 
+  /* the blob keeps its own shape, centred in its box */
   .columns.blobs > div > div:first-child::before,
   .columns.blobs > div > div:last-child::before {
     content: '';
@@ -1630,7 +1640,7 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
     left: 25px;
     z-index: 0;
     width: 444px;
-    background: no-repeat 0 0 / 100% 100%;
+    background: no-repeat center / contain;
   }
 
   .columns.blobs > div > div:first-child::before {
@@ -1643,18 +1653,29 @@ main > .section > .columns-wrapper:has(> .columns.blog) {
     background-image: url('/icons/payday-right-bar.svg');
   }
 
+  /* the heading sits in the middle of its blob, a little low */
+  .columns.blobs > div > div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 271px;
+    padding-top: 10px;
+  }
+
   .hershey-home main .section.columns-container .columns.blobs h2 {
     position: relative;
     z-index: 1;
-    width: 335px;
-    margin: 51px 0 0 17px;
+    width: 320px;
+    margin: 0 0 0 25px;
   }
 
   .hershey-home main .section.columns-container .columns.blobs > div > div:last-child p {
     position: relative;
     z-index: 1;
-    width: 350px;
-    margin: 50px 0 0 37px;
+    box-sizing: border-box;
+    width: 336px;
+    margin: 70px 0 0 45px;
+    padding: 10px 0 0 20px;
   }
 
   /* the drip artwork is cropped to the row height */

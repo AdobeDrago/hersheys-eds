@@ -7,6 +7,7 @@ import '@adobe/aem-boilerplate/blocks/cards/cards-brand-slider.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-product.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-quotes.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-steps.css';
+import '@adobe/aem-boilerplate/blocks/cards/cards-wheel.css';
 import {
   contentArgTypes, createPage, element, link, picture, section, showcase,
 } from './story-helpers.js';
@@ -345,4 +346,45 @@ export const ContentBrandPage = {
     brandPage: true,
     rows: cardRows(8, { titleLink: true }),
   }),
+};
+
+/** `Cards (product)` with badges: a paragraph before the name gets an icon for known tags. */
+export const ProductBadges = {
+  render: () => renderBrand('Our Products', {
+    classes: 'product',
+    intro: false,
+    rows: ['Seasonal', 'Limited Edition', 'New'].map((tag, i) => [
+      imageCell(`Product ${i + 1}`),
+      cellOf(
+        element('p', '', tag),
+        (() => { const h = element('h3'); h.append(link(`Chocolate Bar ${i + 1}`)); return h; })(),
+        element('p', '', '1.55 oz'),
+      ),
+    ]),
+  }),
+};
+
+/**
+ * `Cards (wheel)`: rows are the copy, the wheel artwork on its own, then one row per wedge
+ * (product picture and link, clockwise from the wedge right of the top). Spin lands on a random
+ * wedge and shows its product; reduced motion skips the animation.
+ */
+export const Wheel = {
+  render: () => {
+    const flavors = ['Milk Chocolate', 'Almond', 'Caramel', 'Dark', 'Cookies n Creme', 'Mint']
+      .map((name) => {
+        const p = element('p');
+        p.append(link(name));
+        return [imageCell(name), cellOf(p)];
+      });
+    return renderBrand('Which KISSES Will You Try Next?', {
+      classes: 'wheel',
+      intro: false,
+      rows: [
+        [cellOf(element('h2', '', 'Which KISSES Will You Try Next?'), element('p', '', 'Give the wheel a spin.'))],
+        [imageCell('Wheel art')],
+        ...flavors,
+      ],
+    });
+  },
 };

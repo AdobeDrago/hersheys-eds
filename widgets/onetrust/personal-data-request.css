@@ -1,0 +1,26 @@
+/* OneTrust CCPA webform embed; mirrors the live .cmp-iframe styles */
+/* the form carries its own full-bleed banner, so drop the theme's section inset and width cap */
+main > .section.personal-data-request-container,
+.hershey-home main > .section.personal-data-request-container {
+  margin: 0;
+  padding: 0;
+}
+
+main > .section.personal-data-request-container > div,
+.hershey-home main > .section.personal-data-request-container > div {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.personal-data-request .personal-data-request-frame {
+  width: 100%;
+  background: #fff;
+}
+
+.personal-data-request .personal-data-request-iframe {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  border: 0;
+}

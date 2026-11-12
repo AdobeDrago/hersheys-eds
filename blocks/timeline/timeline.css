@@ -82,8 +82,8 @@ main .section.timeline-dark .timeline-wrapper {
 
 .timeline .timeline-intro p {
   margin: 0 0 24px;
-  font-family: var(--body-font-family);
-  font-size: 20px;
+  font-family: var(--hershey-system-typography-body-font-family, hershey-tt, sans-serif);
+  font-size: 17px;
   line-height: 1.3;
 }
 

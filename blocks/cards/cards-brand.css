@@ -78,6 +78,7 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:h
 main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:focus-visible {
   border: 0;
   background-color: var(--hershey-component-cards-brands-cta-background-hover, #268fc7);
+  color: var(--hershey-component-cards-brands-cta-foreground-hover, var(--hershey-component-cards-brands-cta-foreground, #fff));
 }
 
 .cards.slider.brands {
@@ -359,6 +360,17 @@ main > .section:has(> .cards-wrapper > .cards.slider.brands) a.button:any-link:f
   main > .section:has(> .cards-wrapper > .cards.slider.brands) {
     padding-bottom: var(--hershey-component-cards-brands-band-padding-block-end-wide, 344px);
   }
+}
+
+/* brands band on a page without a brand theme (e.g. /about/visit, /about/faqs): the large bottom
+   space and the pulled-up footer wave belong to brand pages (hershey-brand.css), so the band
+   closes with the normal section spacing and the empty metadata section after it is hidden */
+body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands) {
+  padding-bottom: var(--hershey-system-spacing-section-large, 80px);
+}
+
+body:not(.hershey-brand) main > .section:has(> .cards-wrapper > .cards.slider.brands) ~ .section:empty {
+  display: none;
 }
 
 /* the band's bottom space above holds the footer wave (or a divider wave on brand pages); off brand
@@ -1460,7 +1472,7 @@ main > .section:has(> .cards-wrapper > .cards.grid) > .cards-wrapper + .default-
 main > .section:has(> .cards-wrapper > .cards.grid) > .cards-wrapper + .default-content-wrapper a.button:hover,
 main > .section:has(> .cards-wrapper > .cards.grid) > .cards-wrapper + .default-content-wrapper a.button:focus-visible {
   background-color: var(--hershey-component-cards-grid-cta-background-hover, #268fc7);
-  color: var(--hershey-component-cards-grid-cta-foreground, #fff);
+  color: var(--hershey-component-cards-grid-cta-foreground-hover, var(--hershey-component-cards-grid-cta-foreground, #fff));
 }
 
 @media (width >= 768px) {

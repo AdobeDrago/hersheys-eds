@@ -675,6 +675,10 @@
         <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
         7 · Activity pages
       </a>
+      <a class="sidebar-link" href="#j8-progress">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+        8 · About pages
+      </a>
     </div>
 
     <div class="sidebar-section">
@@ -695,7 +699,7 @@
       <div class="page-hero" id="site-intro">
         <div class="page-hero-eyebrow">Hersheyland · EDS</div>
         <h1>EDS Migration Docs</h1>
-        <p class="page-hero-sub">Architecture, blocks and delivery notes for the Hersheyland Edge Delivery Services site: homepage, shared navigation, product, recipe, story, brand and activity pages.</p>
+        <p class="page-hero-sub">Architecture, blocks and delivery notes for the Hersheyland Edge Delivery Services site: homepage, shared navigation, product, recipe, story, brand, activity and about pages.</p>
       </div>
 
       <!-- OVERVIEW -->
@@ -706,7 +710,7 @@
       </div>
 
       <section class="doc-section">
-        <p>This pilot migrates the Hersheyland homepage, shared navigation, and product, recipe, story, brand and activity pages to <strong>Edge Delivery Services</strong> as authorable blocks, keeping consent-gated third-party integrations (OneTrust, Bazaarvoice, PriceSpider, Algolia) off the critical path. Product and recipe pages are <strong>complete</strong>; the homepage, header &amp; footer, stories, brand and activity journeys are <strong>in progress</strong>.</p>
+        <p>This pilot migrates the Hersheyland homepage, shared navigation, and product, recipe, story, brand, activity and about pages to <strong>Edge Delivery Services</strong> as authorable blocks, keeping consent-gated third-party integrations (OneTrust, Bazaarvoice, PriceSpider, Algolia) off the critical path. The homepage, product, recipe and story pages and the header &amp; footer are <strong>complete</strong>; the brand, activity and about journeys are <strong>in progress</strong>.</p>
         <h3>Purpose</h3>
         <ul class="req-list">
           <li>Authorable migration of the Hersheyland homepage using original source images and licensed fonts (from the repository README), extended to shared navigation, product, recipe and story pages.</li>
@@ -733,16 +737,17 @@
         <table class="spec-table">
           <thead><tr><th>Journey</th><th>Validates</th><th>Status</th><th>Preview</th></tr></thead>
           <tbody>
-            <tr><td><a href="#j1-progress" style="color:var(--brand-blue);">1 · Homepage</a></td><td>Homepage and its themed sections</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/</a></td></tr>
-            <tr><td><a href="#j2-progress" style="color:var(--brand-blue);">2 · Header &amp; footer</a></td><td>Shared navigation and footer</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/nav" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/nav</a></td></tr>
+            <tr><td><a href="#j1-progress" style="color:var(--brand-blue);">1 · Homepage</a></td><td>Homepage and its themed sections</td><td><span class="nav-status ns-done">Complete</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/</a></td></tr>
+            <tr><td><a href="#j2-progress" style="color:var(--brand-blue);">2 · Header &amp; footer</a></td><td>Shared navigation and footer</td><td><span class="nav-status ns-done">Complete</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/nav" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/nav</a></td></tr>
             <tr><td><a href="#j3-progress" style="color:var(--brand-blue);">3 · Product pages</a></td><td>Product detail pages under <code class="code-inline">/products/</code></td><td><span class="nav-status ns-done">Complete</span></td><td><code class="code-inline">/products/…</code></td></tr>
             <tr><td><a href="#j4-progress" style="color:var(--brand-blue);">4 · Recipe pages</a></td><td>Recipe pages and recipe search</td><td><span class="nav-status ns-done">Complete</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/recipes/all-recipes" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/recipes/all-recipes</a></td></tr>
-            <tr><td><a href="#j5-progress" style="color:var(--brand-blue);">5 · Stories</a></td><td>Editorial story pages under <code class="code-inline">/stories/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><code class="code-inline">/stories/…</code></td></tr>
-            <tr><td><a href="#j6-progress" style="color:var(--brand-blue);">6 · Brand pages</a></td><td>Brand landing pages under <code class="code-inline">/brands/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><code class="code-inline">/brands/…</code></td></tr>
-            <tr><td><a href="#j7-progress" style="color:var(--brand-blue);">7 · Activity pages</a></td><td>Activity (craft) listing and detail pages under <code class="code-inline">/activities/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><code class="code-inline">/activities/…</code></td></tr>
+            <tr><td><a href="#j5-progress" style="color:var(--brand-blue);">5 · Stories</a></td><td>Editorial story pages under <code class="code-inline">/stories/</code></td><td><span class="nav-status ns-done">Complete</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/stories/how-to-throw-a-last-minute-party" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/stories/how-to-throw-a-last-minute-party</a></td></tr>
+            <tr><td><a href="#j6-progress" style="color:var(--brand-blue);">6 · Brand pages</a></td><td>Brand landing pages (<code class="code-inline">/brands/…</code> and brand pages authored at the site root, such as <code class="code-inline">/symphony</code>, <code class="code-inline">/kisses</code>, <code class="code-inline">/reeses</code>)</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/symphony" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/symphony</a></td></tr>
+            <tr><td><a href="#j7-progress" style="color:var(--brand-blue);">7 · Activity pages</a></td><td>Activity (craft) listing and detail pages under <code class="code-inline">/activities/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/activities/halloween-candy-web" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/activities/halloween-candy-web</a></td></tr>
+            <tr><td><a href="#j8-progress" style="color:var(--brand-blue);">8 · About pages</a></td><td>FAQs, history, visit and newsletter pages under <code class="code-inline">/about/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/about/faqs" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/about/faqs</a></td></tr>
           </tbody>
         </table>
-        <p style="margin-top:8px;">Status values were supplied by the team (product and recipe complete; brand, activity and story in progress); paths other than the homepage, <code class="code-inline">/nav</code> and <code class="code-inline">/recipes/all-recipes</code> are path prefixes, not specific pages.</p>
+        <p style="margin-top:8px;">Status values were supplied by the team (homepage, product, recipe, story and header &amp; footer complete; brand, activity and about in progress). Product pages still show a path prefix, not a specific page.</p>
 
         <h3>Repository</h3>
         <table class="spec-table">
@@ -915,8 +920,8 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
         <table class="spec-table">
           <thead><tr><th>Base block</th><th>Variant handling</th></tr></thead>
           <tbody>
-            <tr><td><code class="code-inline">cards</code></td><td><code class="code-inline">cards.js</code> imports <code class="code-inline">cards-product.js</code> and <code class="code-inline">cards-product.css</code> when the block has the <code class="code-inline">product</code> class; <code class="code-inline">slider</code> and <code class="code-inline">related</code> are handled in <code class="code-inline">cards.js</code>.</td></tr>
-            <tr><td><code class="code-inline">hero</code></td><td><code class="code-inline">hero.js</code> is the recipe variant and loads <code class="code-inline">hero-article.js</code> (article) or <code class="code-inline">hero-product.js</code> (product) by class.</td></tr>
+            <tr><td><code class="code-inline">cards</code></td><td><code class="code-inline">cards.js</code> imports <code class="code-inline">cards-product.js</code> and <code class="code-inline">cards-product.css</code> when the block has the <code class="code-inline">product</code> class; <code class="code-inline">quotes</code>, <code class="code-inline">steps</code> and <code class="code-inline">wheel</code> likewise import their own <code class="code-inline">cards-&lt;variant&gt;.js</code>; <code class="code-inline">slider</code>, <code class="code-inline">related</code> and <code class="code-inline">callout</code> are handled in <code class="code-inline">cards.js</code>.</td></tr>
+            <tr><td><code class="code-inline">hero</code></td><td><code class="code-inline">hero.js</code> is the recipe variant and loads <code class="code-inline">hero-&lt;variant&gt;.js</code> for the class <code class="code-inline">product</code>, <code class="code-inline">article</code>, <code class="code-inline">brand</code>, <code class="code-inline">marquee</code> or <code class="code-inline">video</code>.</td></tr>
             <tr><td><code class="code-inline">tabs</code></td><td><code class="code-inline">tabs.js</code> imports <code class="code-inline">tabs-nutrition.js</code> and <code class="code-inline">tabs-nutrition.css</code> for the <code class="code-inline">nutrition</code> class.</td></tr>
             <tr><td><code class="code-inline">widget</code></td><td>Built from <code class="code-inline">/widgets/…</code> links (see page decoration); <code class="code-inline">widget.js</code> loads the matching folder under <code class="code-inline">widgets/</code>.</td></tr>
           </tbody>
@@ -940,7 +945,7 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
             <tr><td><code class="code-inline">buildAutoBlocks</code></td><td>Links to <code class="code-inline">/fragments/</code> are replaced by fragment content; links to <code class="code-inline">/widgets/</code> become <code class="code-inline">widget</code> blocks (paragraph replaced when the link is its only content).</td></tr>
             <tr><td><code class="code-inline">decorateButtons</code></td><td>A link alone in a paragraph with authored bold, italic or both becomes <code class="code-inline">button primary</code>, <code class="code-inline">secondary</code> or <code class="code-inline">accent</code>. Image links and links whose text is a URL are skipped.</td></tr>
             <tr><td>Theme loading (eager)</td><td>Body class <code class="code-inline">hershey-home</code>, <code class="code-inline">hershey-product</code> or <code class="code-inline">hershey-recipe</code> loads <code class="code-inline">design/tokens.css</code> + <code class="code-inline">styles/hershey-home.css</code>; a body class matching an entry of <code class="code-inline">BRAND_THEMES</code> then loads <code class="code-inline">design/themes/&lt;name&gt;.css</code>.</td></tr>
-            <tr><td>Path classes</td><td><code class="code-inline">/products/</code> adds <code class="code-inline">hershey-product</code>; <code class="code-inline">/stories/</code> adds <code class="code-inline">hershey-product</code> and <code class="code-inline">hershey-story</code>.</td></tr>
+            <tr><td>Path classes</td><td><code class="code-inline">/products/</code> adds <code class="code-inline">hershey-product</code>; <code class="code-inline">/about</code>, <code class="code-inline">/activities</code>, <code class="code-inline">/all-recipes</code> and <code class="code-inline">/stories</code> add it too unless the page is a <code class="code-inline">hershey-recipe</code>; <code class="code-inline">/stories/</code> also adds <code class="code-inline">hershey-story</code>.</td></tr>
             <tr><td><code class="code-inline">loadFonts</code></td><td>Loads <code class="code-inline">styles/fonts.css</code> eagerly on viewports of 900px or wider or when <code class="code-inline">fonts-loaded</code> is in session storage; otherwise in the lazy phase.</td></tr>
             <tr><td><code class="code-inline">warmUpShopNow</code></td><td><code class="code-inline">/products/</code> pages with a <code class="code-inline">/where-to-buy</code> link: adds a prefetch for the PriceSpider widget script and a prerender hint for the link, once the page is shown.</td></tr>
             <tr><td><code class="code-inline">loadDelayed</code></td><td>After activation, imports <code class="code-inline">scripts/delayed.js</code> 3 seconds later (OneTrust, then consent check, Bazaarvoice on pages with <code class="code-inline">[data-bv-show]</code>).</td></tr>
@@ -957,30 +962,36 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           EDS blocks
         </h2>
         <div class="section-rule"></div>
-        <p>Blocks under <code class="code-inline">blocks/</code> with a decorate entrypoint, in alphabetical order. Variants (such as cards product/slider, hero recipe/article/product, tabs nutrition) are resolved inside their base block.</p>
+        <p>Blocks under <code class="code-inline">blocks/</code> with a decorate entrypoint, in alphabetical order. Variants (such as cards product/slider/quotes/steps/wheel, hero recipe/article/product/marquee/video, tabs nutrition) are resolved inside their base block.</p>
         <table class="spec-table">
           <thead><tr><th>Block</th><th>Purpose</th></tr></thead>
           <tbody>
             <tr><td>accordion</td><td>Questions that expand to answers; each row is a native <code class="code-inline">details</code>/<code class="code-inline">summary</code>.</td></tr>
             <tr><td>banner</td><td>Full-width band with heading, text and one call to action; <code class="code-inline">halloween</code> variant adds the seasonal pattern.</td></tr>
             <tr><td>breadcrumb-trail</td><td>Breadcrumb links with a home icon and chevron separators; trailing unlinked item is the current page.</td></tr>
-            <tr><td>cards</td><td>Card lists. Variants: <code class="code-inline">welcome-cards</code>, <code class="code-inline">social</code>, <code class="code-inline">slider</code> (native scroll with arrow controls), <code class="code-inline">related</code> (slider with dots, Algolia fallback), <code class="code-inline">product</code> (authored product cards with Bazaarvoice id); brand-page variants <code class="code-inline">brands</code>, <code class="code-inline">spotlight</code>, <code class="code-inline">stories</code>, <code class="code-inline">tiles</code>, <code class="code-inline">shop</code>, <code class="code-inline">grid</code>, <code class="code-inline">content</code>.</td></tr>
+            <tr><td>cards</td><td>Card lists. Variants: <code class="code-inline">welcome-cards</code>, <code class="code-inline">social</code>, <code class="code-inline">slider</code> (native scroll with arrow controls), <code class="code-inline">related</code> (slider with dots, Algolia fallback), <code class="code-inline">product</code> (authored product cards with Bazaarvoice id); brand-page variants <code class="code-inline">brands</code>, <code class="code-inline">spotlight</code>, <code class="code-inline">stories</code>, <code class="code-inline">tiles</code>, <code class="code-inline">shop</code>, <code class="code-inline">grid</code>, <code class="code-inline">content</code>; <code class="code-inline">callout</code> (photo, title and description over a teal bar; kiss-dot carousel below 992px, as on the FAQs page); <code class="code-inline">quotes</code> (fan quotes on a blue band between scalloped edges); <code class="code-inline">steps</code> (product slider with a floor shadow); <code class="code-inline">wheel</code> (spin-the-wheel with silver rim, as on the KISSES page). The last three each load their own script and stylesheet.</td></tr>
             <tr><td>columns</td><td>Side-by-side content. Named layouts <code class="code-inline">homepage-hero</code> and <code class="code-inline">feature</code>; <code class="code-inline">recipe</code> builds ingredients, tools, directions and Bake Mode; <code class="code-inline">nutrition</code> builds the Nutrition Facts label and contact box.</td></tr>
             <tr><td>details-and-directions</td><td>Activity pages: You'll Need supplies, directions and Make Mode (needs section style <code class="code-inline">activities</code>); recipes use recipe-details.</td></tr>
             <tr><td>footer</td><td>Loads <code class="code-inline">/footer</code>; brand watermark from the authored logo, link sections, OneTrust cookie-preferences link with a fallback when the CMP failed to load.</td></tr>
             <tr><td>fragment</td><td>Loads another page’s content into this one; the only block imported across blocks (<code class="code-inline">loadFragment</code>).</td></tr>
             <tr><td>header</td><td>Loads <code class="code-inline">/nav</code>; logo, nested category menu, search form; closes on Escape; desktop at 992px.</td></tr>
-            <tr><td>hero</td><td>Recipe hero (default, <code class="code-inline">Hero (Recipe)</code>), <code class="code-inline">article</code> (story image, title, date), <code class="code-inline">brand</code> (brand landing hero) and <code class="code-inline">product</code> (field-table model, image gallery, product-master sheet fallback, Bazaarvoice rating).</td></tr>
+            <tr><td>hero</td><td>Recipe hero (default, <code class="code-inline">Hero (Recipe)</code>), <code class="code-inline">article</code> (story image, title, date), <code class="code-inline">brand</code> (brand landing hero) and <code class="code-inline">product</code> (field-table model, image gallery, product-master sheet fallback, Bazaarvoice rating), <code class="code-inline">marquee</code> (scrolling ticker strips) and <code class="code-inline">video</code> (looping muted background video from an <code class="code-inline">.mp4</code> link, optional poster, pause/play button; used on the About/History page).</td></tr>
+            <tr><td>instagram</td><td>Elfsight Instagram feed: the authored cell holds the Elfsight app id (validated as a UUID); loads <code class="code-inline">elfsightcdn.com/platform.js</code> and removes the container if the script fails. Not consent-gated, to match the live site.</td></tr>
+            <tr><td>jump-links</td><td>In-page navigation: a grid of icon tiles, each linking to a section further down the page ("Jump to a Section" on the FAQs page).</td></tr>
+            <tr><td>link-group</td><td>Dark band with eyebrow and heading beside a slider of square link tiles (three per page, previous/next buttons and kiss dots); "Explore Recipes, Products, Activities &amp; More" on the history page.</td></tr>
             <tr><td>newsletter</td><td>Signup form with authored labels and client-side email/ZIP validation; shows an authored thank-you card on submit. No network request in the block.</td></tr>
             <tr><td>newsletter-signup</td><td>Two-column email capture on recipe pages: heading and note left, email field, consent checkbox and button right; stacks below 820px.</td></tr>
+            <tr><td>poll</td><td>Trivia quiz (<code class="code-inline">Poll (quiz)</code>): authored as key/value rows (<code class="code-inline">eyebrow</code>, <code class="code-inline">question</code>, <code class="code-inline">options</code> with the correct answer in bold, <code class="code-inline">answer</code>, <code class="code-inline">note</code>). Choosing an answer shows "Correct!" or "Better luck next time!" plus the explanation. Nothing is sent; votes for other poll types are kept in <code class="code-inline">localStorage</code> when it is available.</td></tr>
             <tr><td>recipe-details</td><td>Recipe pages. Variants <code class="code-inline">ingredients</code> (ingredients and directions) and <code class="code-inline">nutrition</code> (Nutrition Facts label and contact box); each loads its own script and stylesheet.</td></tr>
             <tr><td>hersheys-search</td><td>Algolia-backed listing (variants <code class="code-inline">recipes</code>, <code class="code-inline">activities</code>, <code class="code-inline">products</code>, <code class="code-inline">stories</code>): search, facets, sort, result grid, paging; 8 s timeout to an error state.</td></tr>
             <tr><td>social-share</td><td>Share tray (Facebook, Pinterest, Email) and copy-link button using shared Font Awesome Free icon styles.</td></tr>
             <tr><td>tabs</td><td>Tabbed content (recipe collections, with arrow/Home/End keys); <code class="code-inline">nutrition</code> variant for Nutrition Facts, Ingredients and Dietary Info, choosing the sheet tab from <code class="code-inline">brand</code> metadata.</td></tr>
+            <tr><td>timeline</td><td>One decade of company history on <code class="code-inline">/about/history</code>: decade label and intro, then year cards in two columns (each row's first cell is <code class="code-inline">left</code> or <code class="code-inline">right</code>). One block per decade.</td></tr>
+            <tr><td>timeline-nav</td><td>"Select a Decade" dropdown under the history hero; each entry jumps to a timeline block by its <code class="code-inline">#1850</code>-style id.</td></tr>
             <tr><td>widget</td><td>Loads a widget from <code class="code-inline">widgets/&lt;path&gt;/&lt;name&gt;.html</code> into the page; created by auto-blocking from <code class="code-inline">/widgets/</code> links.</td></tr>
           </tbody>
         </table>
-        <p style="margin-top:8px;">Several blocks have an authoring README (<code class="code-inline">blocks/hero/README.md</code>, <code class="code-inline">blocks/columns/README.md</code>, <code class="code-inline">blocks/breadcrumb-trail/README.md</code>, <code class="code-inline">blocks/hersheys-search/README.md</code>) and a <code class="code-inline">metadata.json</code> describing variants.</p>
+        <p style="margin-top:8px;">Several blocks have an authoring README (<code class="code-inline">blocks/hero/README.md</code>, <code class="code-inline">blocks/columns/README.md</code>, <code class="code-inline">blocks/breadcrumb-trail/README.md</code>, <code class="code-inline">blocks/hersheys-search/README.md</code>) and a <code class="code-inline">metadata.json</code> describing variants. The newer blocks <code class="code-inline">jump-links</code>, <code class="code-inline">link-group</code>, <code class="code-inline">timeline</code> and <code class="code-inline">timeline-nav</code> have READMEs with authoring tables too. Storybook has a story for each documented block.</p>
       </section>
 
       <section class="doc-section" id="supporting-modules">
@@ -1030,13 +1041,156 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
             <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm8-3.25a.75.75 0 01.75.75v2.69l1.78 1.78a.75.75 0 11-1.06 1.06l-2-2A.75.75 0 017.25 8.5v-3a.75.75 0 01.75-.75z"/></svg>
           </span>
           Lighthouse comparison — Live vs EDS
-          <span class="status-badge sb-warn">Pending</span>
+          <span class="status-badge sb-done">Audited</span>
         </h2>
         <div class="section-rule"></div>
-        <p>Chrome Lighthouse audits of production <code class="code-inline">www.hersheyland.com</code> versus the EDS preview <code class="code-inline">main--hersheys-eds--adobedrago.aem.page</code> are not yet captured.</p>
-        <div class="notice todo">
+        <p>Chrome Lighthouse audits of production <code class="code-inline">www.hersheyland.com</code> versus the EDS preview <code class="code-inline">main--hersheys-eds--adobedrago.aem.page</code>, run on 5 Nov 2026 for six pages: recipe, activity, story, two brand pages and FAQs. Scores are read from the screenshots, which show the full report (A11y = Accessibility, BP = Best Practices).</p>
+        <div class="notice info">
           <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
-          <span><strong>Placeholder</strong> — Lighthouse/PageSpeed results comparing live <a href="https://www.hersheyland.com" target="_blank" rel="noopener">hersheyland.com</a> with EDS were not provided. Save screenshots in <code class="code-inline">docs/images/</code> and add a <code class="code-inline">lh-compare</code> block (see the component library) for each audited page.</span>
+          <span><strong>Method.</strong> Lighthouse in Chrome DevTools, mobile emulation (425 × 909), DevTools throttling set to "No throttling" as shown in the screenshots. These are single runs, not PageSpeed Insights lab results, so expect some run-to-run variation. EDS was audited on the <code class="code-inline">.aem.page</code> preview, not a production domain.</span>
+        </div>
+        <div class="notice warning">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><strong>SEO is lower on EDS.</strong> EDS scores 69 on every page against 85–92 live. The cause was not investigated here; the uniform score points to something site-wide on the preview host or in the page head, so check the failing SEO audits in the report before launch.</span>
+        </div>
+        <h3>Pages audited</h3>
+        <table class="spec-table">
+          <thead><tr><th>Page</th><th>Live</th><th>EDS</th></tr></thead>
+          <tbody>
+            <tr><td>Recipe</td><td><a href="https://www.hersheyland.com/recipes/espresso-filled-mini-cakes.html" target="_blank" rel="noopener" style="color:var(--brand-blue);">www.hersheyland.com/recipes/espresso-filled-mini-cakes.html</a></td><td><a href="https://main--hersheys-eds--adobedrago.aem.page/recipes/espresso-filled-mini-cakes" target="_blank" rel="noopener" style="color:var(--brand-blue);">main--hersheys-eds--adobedrago.aem.page/recipes/espresso-filled-mini-cakes</a></td></tr>
+            <tr><td>Activity</td><td><a href="https://www.hersheyland.com/activities/halloween-candy-web.html" target="_blank" rel="noopener" style="color:var(--brand-blue);">www.hersheyland.com/activities/halloween-candy-web.html</a></td><td><a href="https://main--hersheys-eds--adobedrago.aem.page/activities/halloween-candy-web" target="_blank" rel="noopener" style="color:var(--brand-blue);">main--hersheys-eds--adobedrago.aem.page/activities/halloween-candy-web</a></td></tr>
+            <tr><td>Story</td><td><a href="https://www.hersheyland.com/stories/how-to-throw-a-last-minute-party.html" target="_blank" rel="noopener" style="color:var(--brand-blue);">www.hersheyland.com/stories/how-to-throw-a-last-minute-party.html</a></td><td><a href="https://main--hersheys-eds--adobedrago.aem.page/stories/how-to-throw-a-last-minute-party" target="_blank" rel="noopener" style="color:var(--brand-blue);">main--hersheys-eds--adobedrago.aem.page/stories/how-to-throw-a-last-minute-party</a></td></tr>
+            <tr><td>Brand · HERSHEY'S</td><td><a href="https://www.hersheyland.com/hersheys" target="_blank" rel="noopener" style="color:var(--brand-blue);">www.hersheyland.com/hersheys</a></td><td><a href="https://main--hersheys-eds--adobedrago.aem.page/hersheys" target="_blank" rel="noopener" style="color:var(--brand-blue);">main--hersheys-eds--adobedrago.aem.page/hersheys</a></td></tr>
+            <tr><td>Brand · Symphony</td><td><a href="https://www.hersheyland.com/symphony" target="_blank" rel="noopener" style="color:var(--brand-blue);">www.hersheyland.com/symphony</a></td><td><a href="https://main--hersheys-eds--adobedrago.aem.page/symphony" target="_blank" rel="noopener" style="color:var(--brand-blue);">main--hersheys-eds--adobedrago.aem.page/symphony</a></td></tr>
+            <tr><td>About · FAQs</td><td><a href="https://www.hersheyland.com/about/faqs.html" target="_blank" rel="noopener" style="color:var(--brand-blue);">www.hersheyland.com/about/faqs.html</a></td><td><a href="https://main--hersheys-eds--adobedrago.aem.page/about/faqs" target="_blank" rel="noopener" style="color:var(--brand-blue);">main--hersheys-eds--adobedrago.aem.page/about/faqs</a></td></tr>
+          </tbody>
+        </table>
+        <h3>Reports</h3>
+        <div class="lh-compare">
+          <div class="lh-compare-page">
+            <div class="lh-compare-page-title">Recipe <span>/recipes/espresso-filled-mini-cakes</span></div>
+            <div class="lh-compare-cols">
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">Live</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-ok">Perf 56</span><span class="lh-score lh-score-ok">A11y 82</span><span class="lh-score lh-score-ok">BP 54</span><span class="lh-score lh-score-good">SEO 92</span></div>
+                </div>
+                <img src="images/recipe-espresso-cakes-live.jpg" alt="Lighthouse mobile report for www.hersheyland.com/recipes/espresso-filled-mini-cakes.html" loading="lazy">
+              </div>
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">EDS</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-good">Perf 100</span><span class="lh-score lh-score-good">A11y 100</span><span class="lh-score lh-score-good">BP 100</span><span class="lh-score lh-score-ok">SEO 69</span></div>
+                </div>
+                <img src="images/recipe-espresso-cakes-eds.jpg" alt="Lighthouse mobile report for main--hersheys-eds--adobedrago.aem.page/recipes/espresso-filled-mini-cakes" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lh-compare">
+          <div class="lh-compare-page">
+            <div class="lh-compare-page-title">Activity <span>/activities/halloween-candy-web</span></div>
+            <div class="lh-compare-cols">
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">Live</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-ok">Perf 68</span><span class="lh-score lh-score-good">A11y 92</span><span class="lh-score lh-score-ok">BP 54</span><span class="lh-score lh-score-good">SEO 92</span></div>
+                </div>
+                <img src="images/activity-halloween-candy-web-live.jpg" alt="Lighthouse mobile report for www.hersheyland.com/activities/halloween-candy-web.html" loading="lazy">
+              </div>
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">EDS</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-good">Perf 100</span><span class="lh-score lh-score-good">A11y 100</span><span class="lh-score lh-score-good">BP 100</span><span class="lh-score lh-score-ok">SEO 69</span></div>
+                </div>
+                <img src="images/activity-halloween-candy-web-eds.jpg" alt="Lighthouse mobile report for main--hersheys-eds--adobedrago.aem.page/activities/halloween-candy-web" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lh-compare">
+          <div class="lh-compare-page">
+            <div class="lh-compare-page-title">Story <span>/stories/how-to-throw-a-last-minute-party</span></div>
+            <div class="lh-compare-cols">
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">Live</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-ok">Perf 72</span><span class="lh-score lh-score-ok">A11y 84</span><span class="lh-score lh-score-ok">BP 54</span><span class="lh-score lh-score-good">SEO 92</span></div>
+                </div>
+                <img src="images/story-last-minute-party-live.jpg" alt="Lighthouse mobile report for www.hersheyland.com/stories/how-to-throw-a-last-minute-party.html" loading="lazy">
+              </div>
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">EDS</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-good">Perf 100</span><span class="lh-score lh-score-good">A11y 100</span><span class="lh-score lh-score-good">BP 100</span><span class="lh-score lh-score-ok">SEO 69</span></div>
+                </div>
+                <img src="images/story-last-minute-party-eds.jpg" alt="Lighthouse mobile report for main--hersheys-eds--adobedrago.aem.page/stories/how-to-throw-a-last-minute-party" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lh-compare">
+          <div class="lh-compare-page">
+            <div class="lh-compare-page-title">Brand · HERSHEY'S <span>/hersheys</span></div>
+            <div class="lh-compare-cols">
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">Live</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-bad">Perf 43</span><span class="lh-score lh-score-ok">A11y 77</span><span class="lh-score lh-score-bad">BP 35</span><span class="lh-score lh-score-good">SEO 92</span></div>
+                </div>
+                <img src="images/brand-hersheys-live.jpg" alt="Lighthouse mobile report for www.hersheyland.com/hersheys" loading="lazy">
+              </div>
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">EDS</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-good">Perf 100</span><span class="lh-score lh-score-good">A11y 96</span><span class="lh-score lh-score-good">BP 100</span><span class="lh-score lh-score-ok">SEO 69</span></div>
+                </div>
+                <img src="images/brand-hersheys-eds.jpg" alt="Lighthouse mobile report for main--hersheys-eds--adobedrago.aem.page/hersheys" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lh-compare">
+          <div class="lh-compare-page">
+            <div class="lh-compare-page-title">Brand · Symphony <span>/symphony</span></div>
+            <div class="lh-compare-cols">
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">Live</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-bad">Perf 42</span><span class="lh-score lh-score-ok">A11y 74</span><span class="lh-score lh-score-ok">BP 54</span><span class="lh-score lh-score-good">SEO 92</span></div>
+                </div>
+                <img src="images/brand-symphony-live.jpg" alt="Lighthouse mobile report for www.hersheyland.com/symphony" loading="lazy">
+              </div>
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">EDS</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-good">Perf 100</span><span class="lh-score lh-score-good">A11y 94</span><span class="lh-score lh-score-good">BP 100</span><span class="lh-score lh-score-ok">SEO 69</span></div>
+                </div>
+                <img src="images/brand-symphony-eds.jpg" alt="Lighthouse mobile report for main--hersheys-eds--adobedrago.aem.page/symphony" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lh-compare">
+          <div class="lh-compare-page">
+            <div class="lh-compare-page-title">About · FAQs <span>/about/faqs</span></div>
+            <div class="lh-compare-cols">
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">Live</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-ok">Perf 70</span><span class="lh-score lh-score-ok">A11y 89</span><span class="lh-score lh-score-ok">BP 54</span><span class="lh-score lh-score-ok">SEO 85</span></div>
+                </div>
+                <img src="images/about-faqs-live.jpg" alt="Lighthouse mobile report for www.hersheyland.com/about/faqs.html" loading="lazy">
+              </div>
+              <div class="lh-compare-side">
+                <div class="lh-compare-side-header">
+                  <span class="lh-compare-label">EDS</span>
+                  <div class="lh-scores"><span class="lh-score lh-score-good">Perf 100</span><span class="lh-score lh-score-good">A11y 100</span><span class="lh-score lh-score-good">BP 100</span><span class="lh-score lh-score-ok">SEO 69</span></div>
+                </div>
+                <img src="images/about-faqs-eds.jpg" alt="Lighthouse mobile report for main--hersheys-eds--adobedrago.aem.page/about/faqs" loading="lazy">
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1045,34 +1199,34 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <span class="section-icon icon-green">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
           </span>
-          Journey 1 · Homepage <span class="status-badge sb-progress">In progress</span>
+          Journey 1 · Homepage <span class="status-badge sb-done">Complete</span>
         </h2>
         <div class="section-rule"></div>
         <p>Authored homepage: hero, welcome cards, product and related sliders, feature columns, recipe tabs and social cards, all under the <code class="code-inline">hershey-home</code> template.</p>
         <ul class="checklist">
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Columns (homepage-hero, feature)</div>
               <div class="check-note">Hero and feature bands with desktop/mobile images</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Cards (welcome-cards, slider, social)</div>
               <div class="check-note">Category cards, native-scroll sliders and the eight-post social snapshot</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Tabs (recipes)</div>
               <div class="check-note">Recipe collections with Left/Right, Home and End keys</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Banner</div>
               <div class="check-note">Full-width heading, text and call to action, with a <code class="code-inline">halloween</code> variant</div>
@@ -1086,27 +1240,27 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <span class="section-icon icon-green">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
           </span>
-          Journey 2 · Header &amp; footer <span class="status-badge sb-progress">In progress</span>
+          Journey 2 · Header &amp; footer <span class="status-badge sb-done">Complete</span>
         </h2>
         <div class="section-rule"></div>
         <p>Navigation and footer are authored once in DA (<code class="code-inline">/nav</code>, <code class="code-inline">/footer</code>) and loaded by the header and footer blocks.</p>
         <ul class="checklist">
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Header</div>
               <div class="check-note">Linked logo, nested category list, search link turned into a GET form; closes on Escape; desktop breakpoint at 992px</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Footer</div>
               <div class="check-note">Brand watermark from the authored logo, link columns, cookie-preferences link wired to OneTrust</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Newsletter</div>
               <div class="check-note">Authored form fields with client-side validation and a thank-you card; the block itself sends no network request</div>
@@ -1209,27 +1363,27 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <span class="section-icon icon-green">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
           </span>
-          Journey 5 · Stories <span class="status-badge sb-progress">In progress</span>
+          Journey 5 · Stories <span class="status-badge sb-done">Complete</span>
         </h2>
         <div class="section-rule"></div>
         <p>Story pages share the product pages' brand tokens and fonts (<code class="code-inline">hershey-product</code> + <code class="code-inline">hershey-story</code> body classes) and use the <code class="code-inline">story-plain</code> template styles.</p>
         <ul class="checklist">
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Hero (article)</div>
               <div class="check-note">Story image, h1 and published date</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Columns, Accordion, Banner</div>
               <div class="check-note">Layout and content blocks reused on stories</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Social Share</div>
               <div class="check-note">Share and copy-link controls</div>
@@ -1246,7 +1400,7 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           Journey 6 · Brand pages <span class="status-badge sb-progress">In progress</span>
         </h2>
         <div class="section-rule"></div>
-        <p>Brand landing pages (for example <code class="code-inline">/brands/hersheys/symphony</code>) use a brand page theme from <code class="code-inline">scripts/brand-themes.js</code> (entries with <code class="code-inline">file: 'brands'</code>). A matching theme adds <code class="code-inline">hershey-brand</code> to the body and loads <code class="code-inline">styles/hershey-brand.css</code> before <code class="code-inline">design/themes/brands.css</code>.</p>
+        <p>Brand landing pages (for example <code class="code-inline">/symphony</code>, <code class="code-inline">/kisses</code> or <code class="code-inline">/brands/sourstrips</code>) use a brand page theme from <code class="code-inline">scripts/brand-themes.js</code> (entries with <code class="code-inline">file: 'brands'</code>). A matching theme adds <code class="code-inline">hershey-brand</code> to the body and loads <code class="code-inline">styles/hershey-brand.css</code> before <code class="code-inline">design/themes/brands.css</code>.</p>
         <ul class="checklist">
           <li class="check-item">
             <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
@@ -1272,8 +1426,22 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <li class="check-item">
             <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
+              <div class="check-title">Poll (quiz), Cards (wheel, quotes, steps), Hero (marquee)</div>
+              <div class="check-note">KISSES quiz, spin-the-wheel, Oreo cup quotes, Rolo product slider and the ticker hero, matched to the live brand pages</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Instagram</div>
+              <div class="check-note">Elfsight feed loaded without the consent gate, to match the live site</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
               <div class="check-title">Brand themes</div>
-              <div class="check-note">About 20 brand landing themes (Symphony, YORK, HEATH, SKOR, ZERO and others) alongside the Reese's, Cadbury, Payday and Rolo product themes</div>
+              <div class="check-note">37 brand-page themes (<code class="code-inline">file: 'brands'</code> entries in <code class="code-inline">scripts/brand-themes.js</code>, including Symphony, YORK, KISSES, KIT KAT, REESE'S and Twizzlers) alongside the Reese's, Cadbury, Payday and Rolo product themes</div>
             </div>
           </li>
         </ul>
@@ -1320,6 +1488,40 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
         </ul>
       </section>
 
+      <section class="doc-section" id="j8-progress">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+          </span>
+          Journey 8 · About pages <span class="status-badge sb-progress">In progress</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>DA holds four pages under <code class="code-inline">/about/</code>: <code class="code-inline">faqs</code>, <code class="code-inline">history</code>, <code class="code-inline">visit</code> and <code class="code-inline">newsletter</code>. Paths under <code class="code-inline">/about</code> take the product pages' brand tokens and fonts (<code class="code-inline">hershey-product</code>).</p>
+        <ul class="checklist">
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">FAQs</div>
+              <div class="check-note">Jump Links tiles, Accordion, Cards (callout) "Your Baking Questions, Answered", and a Hero; tan box for the text-only "More FAQs" section</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">History</div>
+              <div class="check-note">Hero (video), Timeline Nav ("Select a Decade"), one Timeline block per decade, Link Group at the end</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Visit and Newsletter</div>
+              <div class="check-note">Pages exist in DA; their block usage was not reviewed here</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
       <section class="doc-section" id="next-steps">
         <h2>
           <span class="section-icon icon-orange">
@@ -1332,15 +1534,15 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <li class="check-item">
             <span class="check-mark cm-todo"></span>
             <div class="check-body">
-              <div class="check-title">Fill the placeholders</div>
-              <div class="check-note">Add the business purpose to the Overview and Lighthouse scores and screenshots (under <code class="code-inline">docs/images/</code>) to the comparison section.</div>
+              <div class="check-title">Fill the placeholders and look into EDS SEO</div>
+              <div class="check-note">Add the business purpose to the Overview. Investigate why EDS scores 69 for SEO on every audited page (85–92 live) and re-run the audits once fixed.</div>
             </div>
           </li>
           <li class="check-item">
             <span class="check-mark cm-todo"></span>
             <div class="check-body">
-              <div class="check-title">Confirm homepage and header &amp; footer status, and previews</div>
-              <div class="check-note">Replace the path prefixes for product and story journeys with specific preview pages, and confirm the status of the homepage and header &amp; footer journeys (not yet supplied).</div>
+              <div class="check-title">Replace the product path prefix with a specific preview page</div>
+              <div class="check-note">The product journey still shows the <code class="code-inline">/products/…</code> prefix in the journeys table.</div>
             </div>
           </li>
           <li class="check-item">
