@@ -197,12 +197,19 @@
   }
 }
 
-/* portrait option: the image is drawn in a tall frame (1086px, as on hersheyland.com), cropped at
+/* portrait option: the image is drawn in a tall frame (633px), cropped at
    the sides; from 900px it fills half the row and the full height of its band (e.g. Milton Hershey
    on /about) */
 .columns.portrait > div > .columns-img-col img {
-  height: var(--hershey-component-columns-portrait-image-height, 1086px);
+  height: var(--hershey-component-columns-portrait-image-height, 633px);
   object-fit: cover;
+}
+
+/* phones and small tablets: a shorter frame */
+@media (width < 900px) {
+  .columns.portrait > div > .columns-img-col img {
+    height: var(--hershey-component-columns-portrait-image-height-mobile, 476px);
+  }
 }
 
 @media (width >= 900px) {

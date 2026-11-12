@@ -91,6 +91,58 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 }
 
 /**
+ * Builds the optional utility bar (4th nav section) shown above the main bar.
+ * The current site's link is authored bold; without one, the first link is current.
+ * Like the original site, the bar slides away on scroll down and returns on scroll up.
+ * @param {Element} section The 4th nav fragment section
+ * @param {Element} nav The nav element
+ * @param {Element} navWrapper The fixed wrapper the bar is placed in
+ */
+function decorateUtility(section, nav, navWrapper) {
+  const links = [...section.querySelectorAll('a[href]')];
+  // an icon authored in the section marks the current link; otherwise the repo's Kisses silhouette
+  const indicator = section.querySelector('img')?.src;
+  section.remove();
+  if (!links.length) return;
+  // a div landmark rather than <nav>, so the block's generic `header nav` rules don't apply
+  const bar = document.createElement('div');
+  bar.className = 'nav-utility';
+  bar.setAttribute('role', 'navigation');
+  bar.setAttribute('aria-label', 'Hershey sites');
+  if (indicator) bar.style.setProperty('--nav-utility-indicator', `url("${indicator}")`);
+  const list = document.createElement('ul');
+  const current = links.find((link) => link.closest('strong, b') || link.querySelector('strong, b'))
+    ?? links[0];
+  links.forEach((link) => {
+    const item = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = link.href;
+    a.textContent = link.textContent.trim();
+    if (link === current) a.setAttribute('aria-current', 'true');
+    item.append(a);
+    list.append(item);
+  });
+  bar.append(list);
+  navWrapper.prepend(bar);
+  navWrapper.classList.add('has-utility');
+
+  let lastY = window.scrollY;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      const y = window.scrollY;
+      const menuOpen = nav.getAttribute('aria-expanded') === 'true';
+      if (!menuOpen && y > lastY && y > bar.offsetHeight) navWrapper.classList.add('utility-hidden');
+      else if (y < lastY || y <= bar.offsetHeight) navWrapper.classList.remove('utility-hidden');
+      lastY = y;
+      ticking = false;
+    });
+  }, { passive: true });
+}
+
+/**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
@@ -112,7 +164,7 @@ export default async function decorate(block) {
   nav.id = `nav-${navigationId}`;
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
+  const classes = ['brand', 'sections', 'tools', 'utility'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
@@ -170,19 +222,17 @@ export default async function decorate(block) {
     navSections?.querySelectorAll('li').forEach((item) => {
       const links = [...item.querySelectorAll(':scope > a, :scope > p > a')];
       const imageLink = links.find((link) => link.querySelector('picture'));
-      const textLink = links.find((link) => link !== imageLink
-        && link.href === imageLink?.href && link.textContent.trim());
-      if (imageLink && textLink) {
-        textLink.prepend(imageLink.querySelector('picture'));
-        imageLink.remove();
-      } else if (imageLink) {
-        // icon link followed by a plain text label: make the label part of the link
-        const label = imageLink.closest('p')?.nextElementSibling;
-        if (label?.tagName === 'P' && !label.querySelector('a')) {
-          imageLink.append(label.textContent.trim());
-          label.remove();
-        }
-      }
+      if (!imageLink) return;
+      // the label is either a sibling link or a plain paragraph after the icon link
+      const textLink = links.find((link) => link !== imageLink && link.textContent.trim());
+      const label = textLink?.closest('p') ?? imageLink.closest('p')?.nextElementSibling;
+      if (!label || label.tagName !== 'P' || !label.textContent.trim()) return;
+      // an authored label link wins unless it is a placeholder ("#")
+      const labelHref = textLink?.getAttribute('href');
+      if (labelHref && labelHref !== '#') imageLink.href = textLink.href;
+      imageLink.removeAttribute('title');
+      imageLink.append(label.textContent.trim());
+      label.remove();
     });
     // current section (e.g. /products/...) is marked so CSS can bold it and show the icon
     const section = window.location.pathname.split('/')[1];
@@ -238,5 +288,8 @@ export default async function decorate(block) {
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
+  const utility = nav.querySelector('.nav-utility');
+  if (utility && block.classList.contains('hershey-nav')) decorateUtility(utility, nav, navWrapper);
+  else utility?.remove();
   block.append(navWrapper);
 }
