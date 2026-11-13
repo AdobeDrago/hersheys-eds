@@ -143,6 +143,17 @@ export const Video = {
   ]], { intro: 'Watch the story' }),
 };
 
+/**
+ * `Columns (video, player)`: the .mp4 link becomes a video player in place of the poster. An
+ * .mp4 is used so nothing reaches YouTube; the file does not exist, so the player stays empty.
+ */
+export const VideoPlayer = {
+  render: () => renderVariant('video player', [[
+    cellOf(picture('Video poster', 1200, 675), linkP('Watch the video', undefined, '/story-trailer.mp4')),
+    cellOf(nodeOf('h3', 'The HERSHEY\'S trailer'), nodeOf('p', COPY)),
+  ]], { intro: 'Watch the story' }),
+};
+
 const quote = (before, highlight, after) => {
   const p = element('p');
   p.append(before, element('strong', '', highlight), after);
