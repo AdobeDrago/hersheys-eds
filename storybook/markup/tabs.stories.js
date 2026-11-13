@@ -1,6 +1,8 @@
 import decorateTabs from '@adobe/aem-boilerplate/blocks/tabs/tabs.js';
 import '@adobe/aem-boilerplate/blocks/tabs/tabs.css';
 import '@adobe/aem-boilerplate/blocks/tabs/tabs-nutrition.css';
+import decorateBrandTiles from '@adobe/aem-boilerplate/blocks/tabs/tabs-brand-tiles.js';
+import '@adobe/aem-boilerplate/blocks/tabs/tabs-brand-tiles.css';
 import {
   contentArgTypes, createPage, element, picture, section, showcase,
 } from './story-helpers.js';
@@ -149,4 +151,72 @@ export const NutritionFromSheet = {
     });
     return root;
   },
+};
+
+function renderBrandTiles({ heading, tabs: tabCounts, paragraphs = false }) {
+  const root = createPage('Blocks', 'Tabs (brand-tiles)');
+  const main = showcase(root);
+  const block = element('div', 'tabs brand-tiles block');
+  Object.entries(tabCounts).forEach(([label, count]) => {
+    const row = element('div');
+    const cell = element('div');
+    const list = element('ul');
+    Array.from({ length: count }, (_, i) => i).forEach((i) => {
+      const name = `${label} brand ${i + 1}`;
+      const anchor = element('a', '', name.toUpperCase());
+      // the last tile of each tab leaves the site, to show the external treatment
+      anchor.href = i === count - 1 ? 'https://www.example.com/' : '#';
+      if (paragraphs) {
+        const image = element('p');
+        image.append(picture(name));
+        const text = element('p');
+        text.append(anchor);
+        cell.append(image, text);
+      } else {
+        const item = element('li');
+        item.append(picture(name), anchor);
+        list.append(item);
+      }
+    });
+    if (!paragraphs) cell.append(list);
+    row.append(element('div', '', label), cell);
+    block.append(row);
+  });
+  const container = section(main, block);
+  container.querySelector('div').before(element('h2', '', heading));
+  decorateBrandTiles(block);
+  return root;
+}
+
+const BRAND_TILES_ARGS = {
+  heading: 'Explore & Shop Our Brands',
+  tabs: { 'A-Z': 6, Chocolate: 4, Sweets: 3 },
+};
+
+/**
+ * `Tabs (brand-tiles)`, the brand listing on /brands: a dark bar of tabs over rows of brand
+ * tiles. A link to another site opens in a new tab and gets an external-link icon. Left/Right/
+ * Home/End move between tabs; check the tab/panel relationships in Accessibility.
+ */
+export const BrandTiles = {
+  name: 'Brand tiles',
+  args: BRAND_TILES_ARGS,
+  argTypes: {
+    tabs: { control: 'object', description: 'Tab label and how many tiles it holds.' },
+  },
+  render: renderBrandTiles,
+};
+
+/** `Tabs (brand-tiles)` with no list: a picture paragraph then a link paragraph make a tile. */
+export const BrandTilesParagraphs = {
+  name: 'Brand tiles (paragraphs)',
+  args: BRAND_TILES_ARGS,
+  render: (args) => renderBrandTiles({ ...args, paragraphs: true }),
+};
+
+/** `Tabs (brand-tiles)` with a single tab holding one tile. */
+export const BrandTilesSingle = {
+  name: 'Brand tiles (single)',
+  args: { heading: 'Explore & Shop Our Brands', tabs: { 'A-Z': 1 } },
+  render: renderBrandTiles,
 };
