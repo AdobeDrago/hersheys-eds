@@ -18,7 +18,7 @@ export default async function decorate(block) {
       import('./tabs-brand-tiles.js'),
       loadCSS(`${window.hlx.codeBasePath}/blocks/tabs/tabs-brand-tiles.css`),
     ]);
-    decorateBrandTiles(block);
+    await decorateBrandTiles(block);
     return;
   }
   tabsId += 1;
