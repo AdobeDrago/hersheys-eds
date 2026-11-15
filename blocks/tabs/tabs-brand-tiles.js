@@ -18,6 +18,8 @@ let tabsId = 0;
  *   picture followed by a paragraph with a link makes one tile. Authored tiles replace the
  *   tab's sheet tiles; an empty cell keeps them. A label that matches no sheet tab adds a tab
  *   after the sheet tabs (it needs tiles). Deleting a row brings back that tab from the sheet.
+ * The sheet is only fetched when something is missing: a row without tiles, or one of the
+ * standard tabs (A-Z, Chocolate, Sweets, Snacks) not authored. Fully authored, it isn't loaded.
  * The whole tile links to the brand page; a link to another site opens in a new tab and gets an
  * external-link icon after its name.
  */
@@ -25,6 +27,9 @@ let tabsId = 0;
 const INTERNAL_HOSTS = /(^|\.)hersheyland\.com$/;
 const BRAND_SHEET = '/brands/brand-pages.json';
 const ALL_TABS = new Set(['az', 'all', 'allbrands']);
+// the sheet's tabs today; when every row has tiles and all of these are authored, the sheet
+// isn't loaded (a new type in the sheet then only shows once a row is emptied or deleted)
+const STANDARD_TABS = ['az', 'chocolate', 'sweet', 'snacks'];
 const byName = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
 
 /**
@@ -209,7 +214,11 @@ export default async function decorate(block) {
     const [label, content] = [...row.children];
     return { label: label?.textContent.trim() || '', tiles: content ? tilesFrom(content) : [] };
   });
-  const brands = await fetchBrands();
+  // the sheet is only loaded when something is missing: an empty row or a standard tab
+  const complete = authored.length
+    && authored.every(({ label, tiles }) => label && tiles.length)
+    && STANDARD_TABS.every((key) => authored.some(({ label }) => isTab(key, label)));
+  const brands = complete ? [] : await fetchBrands();
   tabsId += 1;
   const id = `brand-tiles-${tabsId}`;
   const bar = document.createElement('div');
