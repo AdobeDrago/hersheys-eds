@@ -5,16 +5,19 @@ let tabsId = 0;
 /**
  * Tabs (brand-tiles) variant, loaded by tabs.js for `Tabs (brand-tiles)`, as on /brands.
  *
- * Content model: one row per tab, 2 cells.
- *   Cell 1: the tab label.
+ * The tabs come from the brand-pages sheet (/brands/brand-pages.json; columns path, type, name,
+ * image): sheet rows with a name and an image are tiles, sorted by name. The first tab, A-Z, shows
+ * all of them; then there is one tab per type, in the order the types first appear in the sheet.
+ * A sheet row can have several types, comma-separated (`chocolate, sweet`).
+ *
+ * Authored rows (optional) override the sheet, one row per tab, 2 cells.
+ *   Cell 1: the tab label. It matches the sheet tab with that name (`A-Z` or `All` for A-Z;
+ *   singular and plural both match a type, `Sweets` = sweet) and replaces its label.
  *   Cell 2 (optional): the brand tiles, a list with one item per tile holding the tile image
  *   (a picture) and a link whose text is the brand name. Without a list, a paragraph with a
- *   picture followed by a paragraph with a link makes one tile.
- * Authored tiles win. A row whose second cell is empty or missing gets its tiles from the
- * brand-pages sheet (/brands/brand-pages.json; columns path, type, name, image): rows with a name
- * and an image are tiles, sorted by name. An `A-Z` (or `All`) tab shows all of them; any other
- * tab shows the rows whose type matches its label (`Chocolate` = chocolate, `Sweets` = sweet,
- * `Snacks` = snacks). A row can have several types, comma-separated (`chocolate, sweet`).
+ *   picture followed by a paragraph with a link makes one tile. Authored tiles replace the
+ *   tab's sheet tiles; an empty cell keeps them. A label that matches no sheet tab adds a tab
+ *   after the sheet tabs (it needs tiles). Deleting a row brings back that tab from the sheet.
  * The whole tile links to the brand page; a link to another site opens in a new tab and gets an
  * external-link icon after its name.
  */
@@ -35,15 +38,17 @@ function toKey(text) {
 let brandsPromise;
 
 /**
- * The brand-pages sheet rows that make a tile (name and image), sorted by name; fetched once.
- * @returns {Promise<{path: string, name: string, image: string, types: string[]}[]>}
+ * The brand-pages sheet rows that make a tile (name and image), sorted by name (each keeps its
+ * sheet row index); fetched once.
+ * @returns {Promise<{index: number, path: string, name: string, image: string, types: string[]}[]>}
  */
 function fetchBrands() {
   brandsPromise = brandsPromise || fetch(BRAND_SHEET)
     .then((resp) => (resp.ok ? resp.json() : {}))
     .then((json) => json.data || json[':names']?.map((name) => json[name]?.data).find(Boolean) || [])
     .then((rows) => rows
-      .map((row) => ({
+      .map((row, index) => ({
+        index,
         path: String(row.path || '').trim(),
         name: String(row.name || '').trim(),
         image: String(row.image || '').trim(),
@@ -56,14 +61,14 @@ function fetchBrands() {
 }
 
 /**
- * @param {string[]} types the row's types
- * @param {string} label the tab label
- * @returns {boolean} whether the sheet row belongs on the tab (singular and plural both match)
+ * @param {string} key a sheet tab (`az` or a type)
+ * @param {string} label an authored tab label
+ * @returns {boolean} whether the label names that tab (singular and plural both match)
  */
-function onTab(types, label) {
-  const tab = toKey(label);
-  if (ALL_TABS.has(tab)) return true;
-  return types.some((type) => type === tab || `${type}s` === tab || type === `${tab}s`);
+function isTab(key, label) {
+  const name = toKey(label);
+  if (key === 'az') return ALL_TABS.has(name);
+  return name === key || name === `${key}s` || `${name}s` === key;
 }
 
 /**
@@ -93,11 +98,12 @@ function sheetPicture(image) {
 
 /**
  * @param {{path: string, name: string, image: string, types: string[]}[]} brands
- * @param {string} label the tab label
+ * @param {string} key the sheet tab: `az` for every brand, else a type
  * @returns {{picture: Element, link: HTMLAnchorElement}[]}
  */
-function tilesFromSheet(brands, label) {
-  return brands.filter(({ types }) => onTab(types, label)).map(({ path, name, image }) => {
+function tilesFromSheet(brands, key) {
+  const onTab = ({ types }) => key === 'az' || types.includes(key);
+  return brands.filter(onTab).map(({ path, name, image }) => {
     const link = document.createElement('a');
     link.href = path;
     link.textContent = name;
@@ -168,13 +174,42 @@ function buildTile({ picture, link }) {
   return item;
 }
 
-export default async function decorate(block) {
-  const rows = [...block.children];
-  const authored = rows.map((row) => {
-    const content = row.children[1];
-    return content ? tilesFrom(content) : [];
+/**
+ * The tabs to show: A-Z and one per sheet type, then authored tabs the sheet doesn't have.
+ * Authored rows replace a sheet tab's label and, when they have tiles, its tiles.
+ * @param {{label: string, tiles: object[]}[]} authored
+ * @param {{index: number, types: string[]}[]} brands
+ * @returns {{key: string, label: string, tiles: object[]|null}[]} tiles null = from the sheet
+ */
+function tabsFor(authored, brands) {
+  const tabs = [];
+  if (brands.length) {
+    tabs.push({ key: 'az', label: 'A-Z', tiles: null });
+    // types in the order they first appear in the sheet (brands are sorted by name)
+    [...brands].sort((a, b) => a.index - b.index).forEach(({ types }) => types.forEach((type) => {
+      if (tabs.some(({ key }) => key === type)) return;
+      tabs.push({ key: type, label: type.charAt(0).toUpperCase() + type.slice(1), tiles: null });
+    }));
+  }
+  authored.forEach(({ label, tiles }) => {
+    if (!label) return;
+    const tab = tabs.find(({ key }) => isTab(key, label));
+    if (tab) {
+      tab.label = label;
+      if (tiles.length) tab.tiles = tiles;
+    } else {
+      tabs.push({ key: toKey(label), label, tiles });
+    }
   });
-  const brands = authored.some((tiles) => !tiles.length) ? await fetchBrands() : [];
+  return tabs;
+}
+
+export default async function decorate(block) {
+  const authored = [...block.children].map((row) => {
+    const [label, content] = [...row.children];
+    return { label: label?.textContent.trim() || '', tiles: content ? tilesFrom(content) : [] };
+  });
+  const brands = await fetchBrands();
   tabsId += 1;
   const id = `brand-tiles-${tabsId}`;
   const bar = document.createElement('div');
@@ -186,22 +221,18 @@ export default async function decorate(block) {
   bar.append(list);
   const tabs = [];
   const panels = [];
-  rows.forEach((row, index) => {
-    const label = row.children[0];
-    const text = label?.textContent.trim() || '';
-    // authored tiles win; an empty row is filled from the brand-pages sheet
-    const source = authored[index].length ? authored[index] : tilesFromSheet(brands, text);
-    const tiles = text ? source.map(buildTile) : [];
+  tabsFor(authored, brands).forEach(({ key, label, tiles: chosen }, index) => {
+    // authored tiles win; otherwise the tab's tiles come from the brand-pages sheet
+    const tiles = (chosen || tilesFromSheet(brands, key)).map(buildTile);
     if (!tiles.length) {
       // eslint-disable-next-line no-console
-      console.error('Tabs (brand-tiles) row needs a label and at least one tile (authored or from the brand-pages sheet)', row);
-      row.remove();
+      console.error(`Tabs (brand-tiles) tab "${label}" has no tiles (authored or from the brand-pages sheet)`);
       return;
     }
     const tab = document.createElement('button');
     tab.type = 'button';
     tab.id = `${id}-tab-${index}`;
-    tab.textContent = text;
+    tab.textContent = label;
     tab.setAttribute('role', 'tab');
     tab.setAttribute('aria-controls', `${id}-panel-${index}`);
     const panel = document.createElement('div');
@@ -214,11 +245,11 @@ export default async function decorate(block) {
     grid.className = 'brand-tiles-grid';
     grid.append(...tiles);
     panel.append(grid);
-    row.replaceWith(panel);
     list.append(tab);
     tabs.push(tab);
     panels.push(panel);
   });
+  block.replaceChildren(...panels);
   if (!tabs.length) return;
   const select = (index, focus = false) => {
     tabs.forEach((tab, i) => {
