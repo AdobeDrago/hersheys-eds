@@ -576,7 +576,58 @@
     .main { padding: 24px 20px 60px; }
     .page-hero h1 { font-size: 24px; }
     .url-grid { grid-template-columns: 1fr; }
+    .bg > summary { flex-wrap: wrap; }
+    .bg-desc { flex-basis: 100%; margin-left: 0 !important; }
   }
+
+  /* ── BLOCK AUTHORING GUIDE ── */
+  .bg-tools { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 10px; }
+  .bg-tools input {
+    flex: 1 1 240px; font: inherit; font-size: 13px; padding: 7px 10px;
+    border: 1px solid var(--gray-300); border-radius: 6px; color: var(--brand-text);
+  }
+  .bg-tools input:focus { outline: 2px solid var(--brand-blue); outline-offset: 1px; }
+  .bg-tools button {
+    font: inherit; font-size: 12px; font-weight: 600; padding: 7px 12px; cursor: pointer;
+    border: 1px solid var(--gray-300); border-radius: 6px; background: var(--gray-50); color: var(--brand-navy);
+  }
+  .bg-tools button:hover { background: var(--brand-pale-blue); }
+  .bg { border: 1px solid var(--gray-200); border-radius: 8px; margin: 8px 0; background: var(--gray-50); }
+  .bg[open] { border-color: var(--gray-400); }
+  .bg > summary {
+    display: flex; align-items: center; gap: 8px; padding: 11px 14px; cursor: pointer;
+    list-style: none; font-size: 14px;
+  }
+  .bg > summary::-webkit-details-marker { display: none; }
+  .bg > summary::before {
+    content: ''; width: 6px; height: 6px; flex: none; margin-right: 4px;
+    border-right: 2px solid var(--gray-600); border-bottom: 2px solid var(--gray-600);
+    transform: rotate(-45deg); transition: transform .15s;
+  }
+  .bg[open] > summary::before { transform: rotate(45deg); }
+  .bg > summary:focus-visible { outline: 2px solid var(--brand-blue); outline-offset: -2px; border-radius: 8px; }
+  .bg-name { font-weight: 700; color: var(--brand-navy); }
+  .bg-desc { margin-left: 6px; color: var(--brand-grey-text); font-size: 13px; }
+  .bg-body { padding: 2px 16px 16px 32px; }
+  .bg-body h4 { font-size: 13px; font-weight: 700; color: var(--brand-text); margin: 18px 0 4px; }
+  .bg-body h4:first-child { margin-top: 4px; }
+  .bg-lead { font-size: 13px; margin: 8px 0 0; }
+  .bg-scroll { overflow-x: auto; }
+  .author-table { border-collapse: collapse; font-size: 12.5px; margin: 8px 0; min-width: 100%; }
+  .author-table th {
+    background: var(--brand-navy); color: #fff; text-align: left; font-weight: 600;
+    padding: 6px 10px; border: 1px solid var(--brand-navy);
+  }
+  .author-table td {
+    border: 1px solid var(--gray-300); padding: 6px 10px; vertical-align: top;
+    color: var(--gray-800); line-height: 1.5;
+  }
+  .author-table a { color: var(--brand-blue); text-decoration: underline; }
+  .bg-body .spec-table td:first-child { white-space: normal; }
+  .bg-notes { margin: 6px 0 0; padding-left: 18px; font-size: 13px; color: var(--gray-800); line-height: 1.55; }
+  .bg-notes li { margin: 4px 0; }
+  .bg-notes strong { color: var(--brand-text); }
+  .bg-empty { font-size: 13px; color: var(--brand-grey-text); }
 </style>
 </head>
 <body>
@@ -638,6 +689,26 @@
       <a class="sidebar-link" href="#eds-blocks">
         <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 1A1.5 1.5 0 001 2.5v11A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-11A1.5 1.5 0 0013.5 1h-11zm8.4 1.3l-.1 1.6a.2.2 0 00.32.17l.55-.42.47.36a.2.2 0 00.32-.17l-.13-2.03h.8v11.4H4.4V2.3h6.5z"/></svg>
         EDS blocks
+      </a>
+      <a class="sidebar-link" href="#authoring-basics">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61z"/></svg>
+        Authoring basics
+      </a>
+      <a class="sidebar-link" href="#block-guide">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61z"/></svg>
+        Block authoring guide
+      </a>
+      <a class="sidebar-link" href="#section-styles">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61z"/></svg>
+        Section styles
+      </a>
+      <a class="sidebar-link" href="#page-metadata">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61z"/></svg>
+        Page metadata
+      </a>
+      <a class="sidebar-link" href="#da-tools">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm1.75-.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25H5.5v-13H1.75zM7 14.5h7.25a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H7v13z"/></svg>
+        DA Library &amp; tools
       </a>
       <a class="sidebar-link" href="#supporting-modules">
         <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2h-7zM5 5.5A.5.5 0 015.5 5h5a.5.5 0 010 1h-5A.5.5 0 015 5.5zm0 2.5a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5A.5.5 0 015 8zm.5 2a.5.5 0 000 1h3a.5.5 0 000-1h-3z"/></svg>
@@ -714,7 +785,7 @@
       </div>
 
       <section class="doc-section">
-        <p>This pilot migrates the Hersheyland homepage, shared navigation, and product, recipe, story, brand, activity and about pages to <strong>Edge Delivery Services</strong> as authorable blocks, keeping consent-gated third-party integrations (OneTrust, Bazaarvoice, PriceSpider, Algolia) off the critical path. The homepage, product, recipe and story pages and the header &amp; footer are <strong>complete</strong>; the brand, activity and about journeys are <strong>in progress</strong>.</p>
+        <p>This pilot migrates the Hersheyland homepage, shared navigation, and product, recipe, story, brand, activity and about pages to <strong>Edge Delivery Services</strong> as authorable blocks, keeping consent-gated third-party integrations (OneTrust, Bazaarvoice, PriceSpider, Algolia) off the critical path. All eight journeys are <strong>complete</strong>.</p>
         <h3>Purpose</h3>
         <ul class="req-list">
           <li>Authorable migration of the Hersheyland homepage using original source images and licensed fonts (from the repository README), extended to shared navigation, product, recipe and story pages.</li>
@@ -746,9 +817,9 @@
             <tr><td><a href="#j3-progress" style="color:var(--brand-blue);">3 · Product pages</a></td><td>Product detail pages under <code class="code-inline">/products/</code></td><td><span class="nav-status ns-done">Complete</span></td><td><code class="code-inline">/products/…</code></td></tr>
             <tr><td><a href="#j4-progress" style="color:var(--brand-blue);">4 · Recipe pages</a></td><td>Recipe pages and recipe search</td><td><span class="nav-status ns-done">Complete</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/recipes/all-recipes" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/recipes/all-recipes</a></td></tr>
             <tr><td><a href="#j5-progress" style="color:var(--brand-blue);">5 · Stories</a></td><td>Editorial story pages under <code class="code-inline">/stories/</code></td><td><span class="nav-status ns-done">Complete</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/stories/how-to-throw-a-last-minute-party" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/stories/how-to-throw-a-last-minute-party</a></td></tr>
-            <tr><td><a href="#j6-progress" style="color:var(--brand-blue);">6 · Brand pages</a></td><td>Brand landing pages (<code class="code-inline">/brands/…</code> and brand pages authored at the site root, such as <code class="code-inline">/symphony</code>, <code class="code-inline">/kisses</code>, <code class="code-inline">/reeses</code>)</td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/symphony" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/symphony</a></td></tr>
-            <tr><td><a href="#j7-progress" style="color:var(--brand-blue);">7 · Activity pages</a></td><td>Activity (craft) listing and detail pages under <code class="code-inline">/activities/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/activities/halloween-candy-web" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/activities/halloween-candy-web</a></td></tr>
-            <tr><td><a href="#j8-progress" style="color:var(--brand-blue);">8 · About pages</a></td><td>FAQs, history, visit and newsletter pages under <code class="code-inline">/about/</code></td><td><span class="nav-status ns-progress">In progress</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/about/faqs" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/about/faqs</a></td></tr>
+            <tr><td><a href="#j6-progress" style="color:var(--brand-blue);">6 · Brand pages</a></td><td>Brand landing pages (<code class="code-inline">/brands/…</code> and brand pages authored at the site root, such as <code class="code-inline">/symphony</code>, <code class="code-inline">/kisses</code>, <code class="code-inline">/reeses</code>)</td><td><span class="nav-status ns-done">Complete</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/symphony" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/symphony</a></td></tr>
+            <tr><td><a href="#j7-progress" style="color:var(--brand-blue);">7 · Activity pages</a></td><td>Activity (craft) listing and detail pages under <code class="code-inline">/activities/</code></td><td><span class="nav-status ns-done">Complete</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/activities/halloween-candy-web" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/activities/halloween-candy-web</a></td></tr>
+            <tr><td><a href="#j8-progress" style="color:var(--brand-blue);">8 · About pages</a></td><td>FAQs, history, visit and newsletter pages under <code class="code-inline">/about/</code></td><td><span class="nav-status ns-done">Complete</span></td><td><a href="https://main--hersheys-eds--AdobeDrago.aem.page/about/faqs" target="_blank" rel="noopener" style="color:var(--brand-blue);">https://main--hersheys-eds--AdobeDrago.aem.page/about/faqs</a></td></tr>
           </tbody>
         </table>
         <p style="margin-top:8px;">Status values were supplied by the team (homepage, product, recipe, story and header &amp; footer complete; brand, activity and about in progress). Product pages still show a path prefix, not a specific page.</p>
@@ -1046,36 +1117,780 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           EDS blocks
         </h2>
         <div class="section-rule"></div>
-        <p>Blocks under <code class="code-inline">blocks/</code> with a decorate entrypoint, in alphabetical order. Variants (such as cards product/slider/quotes/steps/wheel, hero recipe/article/product/marquee/video, tabs nutrition) are resolved inside their base block.</p>
+        <p>Blocks under <code class="code-inline">blocks/</code> with a decorate entrypoint, in alphabetical order. Variants (such as cards product/slider/quotes/steps/wheel, hero recipe/article/product/marquee/video, tabs nutrition) are resolved inside their base block. Click a block name for how to author it in the <a href="#block-guide" style="color:var(--brand-blue);">Block authoring guide</a>.</p>
         <table class="spec-table">
           <thead><tr><th>Block</th><th>Purpose</th></tr></thead>
           <tbody>
-            <tr><td>accordion</td><td>Questions that expand to answers; each row is a native <code class="code-inline">details</code>/<code class="code-inline">summary</code>.</td></tr>
-            <tr><td>banner</td><td>Full-width band with heading, text and one call to action; <code class="code-inline">halloween</code> variant adds the seasonal pattern.</td></tr>
-            <tr><td>breadcrumb-trail</td><td>Breadcrumb links with a home icon and chevron separators; trailing unlinked item is the current page.</td></tr>
-            <tr><td>cards</td><td>Card lists. Variants: <code class="code-inline">welcome-cards</code>, <code class="code-inline">social</code>, <code class="code-inline">slider</code> (native scroll with arrow controls), <code class="code-inline">related</code> (slider with dots, Algolia fallback), <code class="code-inline">product</code> (authored product cards with Bazaarvoice id); brand-page variants <code class="code-inline">brands</code>, <code class="code-inline">spotlight</code>, <code class="code-inline">stories</code>, <code class="code-inline">tiles</code>, <code class="code-inline">shop</code>, <code class="code-inline">grid</code>, <code class="code-inline">content</code>; <code class="code-inline">callout</code> (photo, title and description over a teal bar; kiss-dot carousel below 992px, as on the FAQs page); <code class="code-inline">quotes</code> (fan quotes on a blue band between scalloped edges); <code class="code-inline">steps</code> (product slider with a floor shadow); <code class="code-inline">wheel</code> (spin-the-wheel with silver rim, as on the KISSES page). The last three each load their own script and stylesheet.</td></tr>
-            <tr><td>columns</td><td>Side-by-side content. Named layouts <code class="code-inline">homepage-hero</code> and <code class="code-inline">feature</code>; <code class="code-inline">recipe</code> builds ingredients, tools, directions and Bake Mode; <code class="code-inline">nutrition</code> builds the Nutrition Facts label and contact box.</td></tr>
-            <tr><td>details-and-directions</td><td>Activity pages: You'll Need supplies, directions and Make Mode (needs section style <code class="code-inline">activities</code>); recipes use recipe-details.</td></tr>
-            <tr><td>footer</td><td>Loads <code class="code-inline">/footer</code>; brand watermark from the authored logo, link sections, OneTrust cookie-preferences link with a fallback when the CMP failed to load.</td></tr>
-            <tr><td>fragment</td><td>Loads another page’s content into this one; the only block imported across blocks (<code class="code-inline">loadFragment</code>).</td></tr>
-            <tr><td>header</td><td>Loads <code class="code-inline">/nav</code>; logo, nested category menu, search form; closes on Escape; desktop at 992px.</td></tr>
-            <tr><td>hero</td><td>Recipe hero (default, <code class="code-inline">Hero (Recipe)</code>), <code class="code-inline">article</code> (story image, title, date), <code class="code-inline">brand</code> (brand landing hero) and <code class="code-inline">product</code> (field-table model, image gallery, product-master sheet fallback, Bazaarvoice rating), <code class="code-inline">marquee</code> (scrolling ticker strips) and <code class="code-inline">video</code> (looping muted background video from an <code class="code-inline">.mp4</code> link, optional poster, pause/play button; used on the About/History page).</td></tr>
-            <tr><td>instagram</td><td>Elfsight Instagram feed: the authored cell holds the Elfsight app id (validated as a UUID); loads <code class="code-inline">elfsightcdn.com/platform.js</code> and removes the container if the script fails. Not consent-gated, to match the live site.</td></tr>
-            <tr><td>jump-links</td><td>In-page navigation: a grid of icon tiles, each linking to a section further down the page ("Jump to a Section" on the FAQs page).</td></tr>
-            <tr><td>link-group</td><td>Dark band with eyebrow and heading beside a slider of square link tiles (three per page, previous/next buttons and kiss dots); "Explore Recipes, Products, Activities &amp; More" on the history page.</td></tr>
-            <tr><td>newsletter</td><td>Signup form with authored labels and client-side email/ZIP validation; shows an authored thank-you card on submit. No network request in the block.</td></tr>
-            <tr><td>newsletter-signup</td><td>Two-column email capture on recipe pages: heading and note left, email field, consent checkbox and button right; stacks below 820px.</td></tr>
-            <tr><td>poll</td><td>Trivia quiz (<code class="code-inline">Poll (quiz)</code>): authored as key/value rows (<code class="code-inline">eyebrow</code>, <code class="code-inline">question</code>, <code class="code-inline">options</code> with the correct answer in bold, <code class="code-inline">answer</code>, <code class="code-inline">note</code>). Choosing an answer shows "Correct!" or "Better luck next time!" plus the explanation. Nothing is sent; votes for other poll types are kept in <code class="code-inline">localStorage</code> when it is available.</td></tr>
-            <tr><td>recipe-details</td><td>Recipe pages. Variants <code class="code-inline">ingredients</code> (ingredients and directions) and <code class="code-inline">nutrition</code> (Nutrition Facts label and contact box); each loads its own script and stylesheet.</td></tr>
-            <tr><td>hersheys-search</td><td>Algolia-backed listing (variants <code class="code-inline">recipes</code>, <code class="code-inline">activities</code>, <code class="code-inline">products</code>, <code class="code-inline">stories</code>): search, facets, sort, result grid, paging; 8 s timeout to an error state.</td></tr>
-            <tr><td>social-share</td><td>Share tray (Facebook, Pinterest, Email) and copy-link button using shared Font Awesome Free icon styles.</td></tr>
-            <tr><td>tabs</td><td>Tabbed content (recipe collections, with arrow/Home/End keys); <code class="code-inline">nutrition</code> variant for Nutrition Facts, Ingredients and Dietary Info, choosing the sheet tab from <code class="code-inline">brand</code> metadata.</td></tr>
-            <tr><td>timeline</td><td>One decade of company history on <code class="code-inline">/about/history</code>: decade label and intro, then year cards in two columns (each row's first cell is <code class="code-inline">left</code> or <code class="code-inline">right</code>). One block per decade.</td></tr>
-            <tr><td>timeline-nav</td><td>"Select a Decade" dropdown under the history hero; each entry jumps to a timeline block by its <code class="code-inline">#1850</code>-style id.</td></tr>
-            <tr><td>widget</td><td>Loads a widget from <code class="code-inline">widgets/&lt;path&gt;/&lt;name&gt;.html</code> into the page; created by auto-blocking from <code class="code-inline">/widgets/</code> links.</td></tr>
+            <tr><td><a href="#block-accordion" style="color:var(--brand-blue);">accordion</a></td><td>Questions that expand to answers; each row is a native <code class="code-inline">details</code>/<code class="code-inline">summary</code>.</td></tr>
+            <tr><td><a href="#block-banner" style="color:var(--brand-blue);">banner</a></td><td>Full-width band with heading, text and one call to action; <code class="code-inline">halloween</code> variant adds the seasonal pattern.</td></tr>
+            <tr><td><a href="#block-breadcrumb-trail" style="color:var(--brand-blue);">breadcrumb-trail</a></td><td>Breadcrumb links with a home icon and chevron separators; trailing unlinked item is the current page.</td></tr>
+            <tr><td><a href="#block-cards" style="color:var(--brand-blue);">cards</a></td><td>Card lists. Variants: <code class="code-inline">welcome-cards</code>, <code class="code-inline">social</code>, <code class="code-inline">slider</code> (native scroll with arrow controls), <code class="code-inline">related</code> (slider with dots, Algolia fallback), <code class="code-inline">product</code> (authored product cards with Bazaarvoice id); brand-page variants <code class="code-inline">brands</code>, <code class="code-inline">spotlight</code>, <code class="code-inline">stories</code>, <code class="code-inline">tiles</code>, <code class="code-inline">shop</code>, <code class="code-inline">grid</code>, <code class="code-inline">content</code>; <code class="code-inline">callout</code> (photo, title and description over a teal bar; kiss-dot carousel below 992px, as on the FAQs page); <code class="code-inline">quotes</code> (fan quotes on a blue band between scalloped edges); <code class="code-inline">steps</code> (product slider with a floor shadow); <code class="code-inline">wheel</code> (spin-the-wheel with silver rim, as on the KISSES page). The last three each load their own script and stylesheet.</td></tr>
+            <tr><td><a href="#block-columns" style="color:var(--brand-blue);">columns</a></td><td>Side-by-side content. Named layouts <code class="code-inline">homepage-hero</code> and <code class="code-inline">feature</code>; brand-page layouts <code class="code-inline">fact</code>, <code class="code-inline">callout</code>, <code class="code-inline">article</code>, <code class="code-inline">video</code>, <code class="code-inline">follow</code>, <code class="code-inline">quotes</code>, <code class="code-inline">blog</code>, <code class="code-inline">blobs</code>; story layouts <code class="code-inline">activity</code>, <code class="code-inline">craft</code>, <code class="code-inline">closing</code>, <code class="code-inline">pair</code>. Recipe ingredients and nutrition are in recipe-details.</td></tr>
+            <tr><td><a href="#block-details-and-directions" style="color:var(--brand-blue);">details-and-directions</a></td><td>Activity pages: You'll Need supplies, directions and Make Mode (needs section style <code class="code-inline">activities</code>); recipes use recipe-details.</td></tr>
+            <tr><td><a href="#block-footer" style="color:var(--brand-blue);">footer</a></td><td>Loads <code class="code-inline">/footer</code>; brand watermark from the authored logo, link sections, OneTrust cookie-preferences link with a fallback when the CMP failed to load.</td></tr>
+            <tr><td><a href="#block-fragment" style="color:var(--brand-blue);">fragment</a></td><td>Loads another page’s content into this one; the only block imported across blocks (<code class="code-inline">loadFragment</code>).</td></tr>
+            <tr><td><a href="#block-header" style="color:var(--brand-blue);">header</a></td><td>Loads <code class="code-inline">/nav</code>; logo, nested category menu, search form; closes on Escape; desktop at 992px. With <code class="code-inline">Style: hershey-nav</code>, an optional 4th nav section becomes the "Hershey sites" utility bar (bold link = current site), which hides on scroll down and returns on scroll up. Dropdown tile icons zoom on hover (150ms, <code class="code-inline">component.header.motion.tile-hover</code> token).</td></tr>
+            <tr><td><a href="#block-hero" style="color:var(--brand-blue);">hero</a></td><td>Recipe hero (default, <code class="code-inline">Hero (Recipe)</code>), <code class="code-inline">article</code> (story image, title, date), <code class="code-inline">brand</code> (brand landing hero) and <code class="code-inline">product</code> (field-table model, image gallery, product-master sheet fallback, Bazaarvoice rating), <code class="code-inline">marquee</code> (scrolling ticker strips) and <code class="code-inline">video</code> (looping muted background video from an <code class="code-inline">.mp4</code> link, optional poster, pause/play button; used on the About/History page).</td></tr>
+            <tr><td><a href="#block-instagram" style="color:var(--brand-blue);">instagram</a></td><td>Elfsight Instagram feed: the authored cell holds the Elfsight app id (validated as a UUID); loads <code class="code-inline">elfsightcdn.com/platform.js</code> and removes the container if the script fails. Not consent-gated, to match the live site.</td></tr>
+            <tr><td><a href="#block-jump-links" style="color:var(--brand-blue);">jump-links</a></td><td>In-page navigation: a grid of icon tiles, each linking to a section further down the page ("Jump to a Section" on the FAQs page).</td></tr>
+            <tr><td><a href="#block-link-group" style="color:var(--brand-blue);">link-group</a></td><td>Dark band with eyebrow and heading beside a slider of square link tiles (three per page, previous/next buttons and kiss dots); "Explore Recipes, Products, Activities &amp; More" on the history page.</td></tr>
+            <tr><td><a href="#block-newsletter" style="color:var(--brand-blue);">newsletter</a></td><td>Signup form with authored labels and client-side email/ZIP validation; shows an authored thank-you card on submit. No network request in the block.</td></tr>
+            <tr><td><a href="#block-newsletter-signup" style="color:var(--brand-blue);">newsletter-signup</a></td><td>Two-column email capture on recipe pages: heading and note left, email field, consent checkbox and button right; stacks below 820px.</td></tr>
+            <tr><td><a href="#block-poll" style="color:var(--brand-blue);">poll</a></td><td>Trivia quiz (<code class="code-inline">Poll (quiz)</code>): authored as key/value rows (<code class="code-inline">eyebrow</code>, <code class="code-inline">question</code>, <code class="code-inline">options</code> with the correct answer in bold, <code class="code-inline">answer</code>, <code class="code-inline">note</code>). Choosing an answer shows "Correct!" or "Better luck next time!" plus the explanation. Nothing is sent; votes for other poll types are kept in <code class="code-inline">localStorage</code> when it is available.</td></tr>
+            <tr><td><a href="#block-recipe-details" style="color:var(--brand-blue);">recipe-details</a></td><td>Recipe pages. Variants <code class="code-inline">ingredients</code> (ingredients and directions) and <code class="code-inline">nutrition</code> (Nutrition Facts label and contact box); each loads its own script and stylesheet.</td></tr>
+            <tr><td><a href="#block-hersheys-search" style="color:var(--brand-blue);">hersheys-search</a></td><td>Algolia-backed listing (variants <code class="code-inline">recipes</code>, <code class="code-inline">activities</code>, <code class="code-inline">products</code>, <code class="code-inline">stories</code>): search, facets, sort, result grid, paging; 8 s timeout to an error state.</td></tr>
+            <tr><td><a href="#block-social-share" style="color:var(--brand-blue);">social-share</a></td><td>Share tray (Facebook, Pinterest, Email) and copy-link button using shared Font Awesome Free icon styles.</td></tr>
+            <tr><td><a href="#block-tabs" style="color:var(--brand-blue);">tabs</a></td><td>Tabbed content (recipe collections, with arrow/Home/End keys); <code class="code-inline">nutrition</code> variant for Nutrition Facts, Ingredients and Dietary Info, choosing the sheet tab from <code class="code-inline">brand</code> metadata; <code class="code-inline">brand-tiles</code> variant for the tabbed brand-logo grid on <code class="code-inline">/brands</code> (its own script and stylesheet).</td></tr>
+            <tr><td><a href="#block-timeline" style="color:var(--brand-blue);">timeline</a></td><td>One decade of company history on <code class="code-inline">/about/history</code>: decade label and intro, then year cards in two columns (each row's first cell is <code class="code-inline">left</code> or <code class="code-inline">right</code>). One block per decade.</td></tr>
+            <tr><td><a href="#block-timeline-nav" style="color:var(--brand-blue);">timeline-nav</a></td><td>"Select a Decade" dropdown under the history hero; each entry jumps to a timeline block by its <code class="code-inline">#1850</code>-style id.</td></tr>
+            <tr><td><a href="#block-widget" style="color:var(--brand-blue);">widget</a></td><td>Loads a widget from <code class="code-inline">widgets/&lt;path&gt;/&lt;name&gt;.html</code> into the page; created by auto-blocking from <code class="code-inline">/widgets/</code> links.</td></tr>
           </tbody>
         </table>
         <p style="margin-top:8px;">Several blocks have an authoring README (<code class="code-inline">blocks/hero/README.md</code>, <code class="code-inline">blocks/columns/README.md</code>, <code class="code-inline">blocks/breadcrumb-trail/README.md</code>, <code class="code-inline">blocks/hersheys-search/README.md</code>) and a <code class="code-inline">metadata.json</code> describing variants. The newer blocks <code class="code-inline">jump-links</code>, <code class="code-inline">link-group</code>, <code class="code-inline">timeline</code> and <code class="code-inline">timeline-nav</code> have READMEs with authoring tables too. Storybook has a story for each documented block.</p>
+      </section>
+
+      <section class="doc-section" id="authoring-basics">
+        <h2>
+          <span class="section-icon icon-purple">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61zm1.414 1.06a.25.25 0 00-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 000-.354l-1.086-1.086zM11.189 6.25L9.75 4.81l-6.286 6.287a.25.25 0 00-.064.108l-.558 1.953 1.953-.558a.25.25 0 00.108-.064l6.286-6.286z"/></svg>
+          </span>
+          Authoring basics
+        </h2>
+        <div class="section-rule"></div>
+        <p>Rules that apply to every page in Document Authoring (DA). The block guide below assumes them.</p>
+        <table class="spec-table">
+          <thead><tr><th>Topic</th><th>How it works</th></tr></thead>
+          <tbody>
+            <tr><td>Blocks</td><td>A block is a table. The first row holds the block name, with variants in brackets and separated by commas: <code class="code-inline">Cards (product, slider)</code>. An unknown variant name is ignored without an error, so check the spelling.</td></tr>
+            <tr><td>Sections</td><td>A horizontal rule (<code class="code-inline">---</code>) starts a new section. A <code class="code-inline">Section Metadata</code> table inside the section, with a <code class="code-inline">Style</code> row, sets the section's look (see <a href="#section-styles" style="color:var(--brand-blue);">Section styles</a>). <code class="code-inline">Style</code> is the only Section Metadata key the code uses.</td></tr>
+            <tr><td>Page metadata</td><td>A <code class="code-inline">Metadata</code> table at the end of the page. Keys such as <code class="code-inline">template</code>, <code class="code-inline">theme</code>, <code class="code-inline">brand</code> and <code class="code-inline">bvid</code> change how blocks behave (see <a href="#page-metadata" style="color:var(--brand-blue);">Page metadata</a>).</td></tr>
+            <tr><td>Buttons</td><td>A link alone in its own paragraph becomes a button when it is formatted: <strong>bold</strong> = primary, <em>italic</em> = secondary, bold and italic = accent. A plain link stays a text link. Several blocks depend on this, such as the footer newsletter and column callouts.</td></tr>
+            <tr><td>Icons</td><td><code class="code-inline">:icon-name:</code> in text becomes the icon <code class="code-inline">/icons/icon-name.svg</code>.</td></tr>
+            <tr><td>Automatic blocks</td><td>Any link to <code class="code-inline">/fragments/…</code> is replaced by that fragment's content. Any link to <code class="code-inline">/widgets/…</code> becomes a Widget block. This applies everywhere, including inside other blocks and in <code class="code-inline">/nav</code> and <code class="code-inline">/footer</code>.</td></tr>
+            <tr><td>One-line cells</td><td>A cell holding a single line of plain text is served without a paragraph. Blocks that only read paragraphs drop it: the Banner text, the Link Group eyebrow and the Timeline Nav label. Keep that text in the same cell as other content, such as the heading.</td></tr>
+            <tr><td>Data sheets</td><td>Blocks marked <em>Authored first</em> fill empty cells from sheets (<code class="code-inline">/products/product-master</code>, <code class="code-inline">/products/nutrition</code>, <code class="code-inline">/recipes/ingredients</code>, <code class="code-inline">/recipes/nutrition</code>, <code class="code-inline">/activities/youllneedsteps</code>). A sheet must be previewed and published like a page before its rows show. The product master is too large to load whole (the full JSON returns HTTP 413), so the code always reads one brand tab (<code class="code-inline">?sheet=&lt;brand&gt;</code>); its tabs include hersheys, reeses, cadbury, rolo, payday, york, twizzlers and mounds. <code class="code-inline">/products/nutrition</code> has tabs only for hersheys, reeses, cadbury, rolo and payday, so the nutrition fallback does nothing for other brands.</td></tr>
+            <tr><td>Checking a page</td><td>Preview in DA and open <code class="code-inline">main--hersheys-eds--AdobeDrago.aem.page/&lt;path&gt;</code>. To test a code branch, use <code class="code-inline">&lt;branch&gt;--hersheys-eds--AdobeDrago.aem.page/&lt;path&gt;</code>. Every block also has examples in Storybook (<code class="code-inline">npm run storybook</code>).</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-section" id="block-guide">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 1A1.5 1.5 0 001 2.5v11A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-11A1.5 1.5 0 0013.5 1h-11zm8.4 1.3l-.1 1.6a.2.2 0 00.32.17l.55-.42.47.36a.2.2 0 00.32-.17l-.13-2.03h.8v11.4H4.4V2.3h6.5z"/></svg>
+          </span>
+          Block authoring guide
+        </h2>
+        <div class="section-rule"></div>
+        <p>How to author each block and variant, taken from the block code, READMEs and Storybook stories. The example tables show what each row and cell holds. The dark first row is the block name exactly as authors type it.</p>
+        <ul class="bg-notes" style="margin-bottom:6px;">
+          <li><span class="nav-status ns-done">Static</span> everything comes from the authored page. To change it, edit the page.</li>
+          <li><span class="nav-status ns-planned">Authored first</span> authored content wins; a sheet (or Algolia, for related cards) only fills what was left empty.</li>
+          <li><span class="nav-status ns-progress">Dynamic</span> the content is loaded from another document, a sheet or a vendor every time. To change it, edit the source.</li>
+        </ul>
+        <div class="bg-tools">
+          <input type="search" id="bg-filter" placeholder="Filter blocks, e.g. hero, nutrition, slider" aria-label="Filter blocks">
+          <button type="button" id="bg-expand">Expand all</button>
+          <button type="button" id="bg-collapse">Collapse all</button>
+        </div>
+
+        <!-- accordion -->
+        <details class="bg" id="block-accordion">
+          <summary><span class="bg-name">Accordion</span><span class="nav-status ns-done">Static</span><span class="bg-desc">Questions that expand to answers</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Accordion</th></tr>
+              <tr><td>Question</td><td>Answer (any content)</td></tr>
+              <tr><td>Question</td><td>Answer</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Cells:</strong> one row per item. Cell 1 is the question; a row with an empty question is removed. Every cell after the first is merged into the answer.</li>
+              <li><strong>Look:</strong> to get the FAQ layout (two-thirds column, maroon plus/minus), put the block in a section with <code class="code-inline">Style: faq</code>, or on a brand page.</li>
+              <li><strong>Watch out:</strong> keep the question to one paragraph or heading. Several paragraphs all end up inside the clickable line. Every item starts closed.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- banner -->
+        <details class="bg" id="block-banner">
+          <summary><span class="bg-name">Banner</span><span class="nav-status ns-done">Static</span><span class="bg-desc">Dark band with heading, text and one call to action</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Banner</th></tr>
+              <tr><td>Heading<br>Text paragraph</td><td>Call-to-action link</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Variants:</strong> <code class="code-inline">Banner</code>; <code class="code-inline">Banner (halloween)</code> adds the seasonal pattern.</li>
+              <li><strong>Cells:</strong> one row, one or two cells. The block keeps the first heading, the paragraphs without links and the first link. Everything else is dropped.</li>
+              <li><strong>Watch out:</strong> a paragraph containing any link, including an inline link in the body text, is dropped completely, and only one CTA is used. Text on its own line in its own cell is also dropped, so keep it under the heading.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- breadcrumb-trail -->
+        <details class="bg" id="block-breadcrumb-trail">
+          <summary><span class="bg-name">Breadcrumb Trail</span><span class="nav-status ns-done">Static</span><span class="bg-desc">Breadcrumb links with a home icon, or a single back link</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th>Breadcrumb Trail</th></tr>
+              <tr><td>Home link · section link · … · Current page (plain text)</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Cells:</strong> one cell with the links in order. A list, separate paragraphs, or several links in one paragraph all work. Separators (<code class="code-inline">&gt; / | ›</code>) are ignored, so you don't need them.</li>
+              <li><strong>Watch out:</strong> the first link always becomes the home icon, whatever its text. Write the current page as plain text, not a link.</li>
+              <li><strong><code class="code-inline">Breadcrumb Trail (back)</code>:</strong> one link, shown as a back link with a chevron on a maroon bar (e.g. VIEW ALL PRODUCTS). Only the first link is used.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- cards -->
+        <details class="bg" id="block-cards">
+          <summary><span class="bg-name">Cards</span><span class="nav-status ns-done">Static</span><span class="nav-status ns-planned">Authored first</span><span class="bg-desc">Card grids and sliders: 17 variants</span></summary>
+          <div class="bg-body">
+            <h4>Default model (most variants)</h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Cards (slider)</th></tr>
+              <tr><td>Picture</td><td>Heading (linked)<br>Text<br>Link</td></tr>
+              <tr><td>Picture</td><td>Heading (linked)<br>Text</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Cells:</strong> one row per card. A cell holding only a picture is the image; other cells are the body. Both are optional.</li>
+              <li><strong>Watch out:</strong> a picture in the same cell as text counts as body, not image. Default images are cropped to 4:3. In <code class="code-inline">slider</code>, <code class="code-inline">welcome-cards</code>, <code class="code-inline">social</code>, <code class="code-inline">spotlight</code> and <code class="code-inline">grid</code>, the image links to the body's first link.</li>
+              <li><strong>Slider options:</strong> <code class="code-inline">slider</code> adds arrows; <code class="code-inline">single</code> moves one card per click; <code class="code-inline">dots</code> adds page dots. Arrows and dots hide when every card fits.</li>
+            </ul>
+            <h4>Variants</h4>
+            <div class="bg-scroll"><table class="spec-table">
+              <thead><tr><th>Author as</th><th>Use for</th><th>Content</th></tr></thead>
+              <tbody>
+                <tr><td><code class="code-inline">Cards (welcome-cards)</code>, <code class="code-inline">(products)</code>, <code class="code-inline">(social)</code></td><td>Look only: 3-up rounded, round product images, 2–4-up social tiles</td><td>Default model</td></tr>
+                <tr><td><code class="code-inline">Cards (callout)</code>, <code class="code-inline">(callout, blue)</code></td><td>Photo, linked title and text over a teal (or blue) bar, as on /about/faqs</td><td>Default model. Don't add <code class="code-inline">slider</code>; it is added for you.</td></tr>
+                <tr><td><code class="code-inline">Cards (slider, brands)</code></td><td>"Get a Taste of Our Brands" square brand tiles</td><td>Picture | linked H3 brand name. The eyebrow, heading and button go above the block as normal text.</td></tr>
+                <tr><td><code class="code-inline">Cards (spotlight)</code></td><td>Brand-page recipe feature: a big first card beside smaller cards</td><td>Picture | optional tag paragraph, title, text, link. The first card is the big one.</td></tr>
+                <tr><td><code class="code-inline">Cards (stories, slider)</code></td><td>Square photos with a white story box</td><td>Picture | title, text, CTA link</td></tr>
+                <tr><td><code class="code-inline">Cards (tiles)</code></td><td>Coloured flavour tiles</td><td>Picture | title, text. Colours alternate orange and purple by position.</td></tr>
+                <tr><td><code class="code-inline">Cards (shop)</code></td><td>White box: intro, then product tiles with shop buttons</td><td>Row 1: intro text only, no picture. Later rows: picture | title, shop link.</td></tr>
+                <tr><td><code class="code-inline">Cards (grid)</code></td><td>Recipe list, 2 then 3 across, 16:9 photos</td><td>Picture | optional tag right before a linked H3. The tag "Popular" gets a star.</td></tr>
+                <tr><td><code class="code-inline">Cards (slider, content)</code></td><td>Brand-page recipe and story slider</td><td>Picture | linked title</td></tr>
+                <tr><td><code class="code-inline">Cards (flip, slider)</code></td><td>Cards that turn over on click (SOUR STRIPS)</td><td>One or two pictures (front, back) | H2–H4 title, text, button. The title is required.</td></tr>
+                <tr><td><code class="code-inline">Cards (slider, related, recipes)</code> <span class="nav-status ns-planned">Authored first</span></td><td>"You Might Also Enjoy…" on recipe and activity pages</td><td>Leave empty to fill from Algolia (6 related recipes, or activities under /activities/). Authored cards win.</td></tr>
+                <tr><td><code class="code-inline">Cards (product)</code></td><td>Product cards; the whole card links</td><td>See the product table below.</td></tr>
+                <tr><td><code class="code-inline">Cards (product, related)</code> <span class="nav-status ns-planned">Authored first</span></td><td>Related products on product pages</td><td>Leave empty to fill from Algolia (4 products). Authored cards win.</td></tr>
+                <tr><td><code class="code-inline">Cards (product, slider)</code> = <code class="code-inline">Cards (brand, slider)</code></td><td>Brand-page product slider</td><td>Product table. Only slides on brand pages; elsewhere it is a grid.</td></tr>
+                <tr><td><code class="code-inline">Cards (quotes)</code></td><td>Fan quotes on a blue scalloped band (/oreo-cup)</td><td>See the quotes table below.</td></tr>
+                <tr><td><code class="code-inline">Cards (steps)</code></td><td>One-at-a-time product carousel (/rolo)</td><td>See the steps table below.</td></tr>
+                <tr><td><code class="code-inline">Cards (wheel)</code></td><td>Spin-the-wheel flavour picker (/kisses)</td><td>See the wheel table below.</td></tr>
+              </tbody>
+            </table></div>
+            <h4>Cards (product)</h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Cards (product)</th></tr>
+              <tr><td>Picture, or a link to the image</td><td>Badge paragraph (optional, e.g. Seasonal)<br>H3 linked to the product page<br>Size paragraphs<br><code class="code-inline">bvid: 00034000002467</code> (optional, hidden)</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Watch out:</strong> a row without both an image and a heading is dropped without an error. The heading's link is the card link. <code class="code-inline">Seasonal</code> and <code class="code-inline">Limited Edition</code> badges get an icon. The <code class="code-inline">bvid</code> line is hidden and doesn't add a rating.</li>
+            </ul>
+            <h4>Cards (quotes)</h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th>Cards (quotes)</th></tr>
+              <tr><td>Top scalloped-edge picture</td></tr>
+              <tr><td>Eyebrow<br>Quote<br>Author <em>(or a picture on its own)</em></td></tr>
+              <tr><td>… one row per slide …</td></tr>
+              <tr><td>Bottom scalloped-edge picture</td></tr>
+            </table></div>
+            <ul class="bg-notes"><li><strong>Watch out:</strong> the first and last rows are always used as the edges. Leave them out and the first and last quotes disappear. Only the first cell of each slide row is used.</li></ul>
+            <h4>Cards (steps)</h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="3">Cards (steps)</th></tr>
+              <tr><td>Heading text</td><td>Product picture</td><td>Caption</td></tr>
+            </table></div>
+            <ul class="bg-notes"><li><strong>Watch out:</strong> cell order matters. The heading is plain text (formatting is dropped). The floor shadow comes from the code.</li></ul>
+            <h4>Cards (wheel)</h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Cards (wheel)</th></tr>
+              <tr><td>Heading and text (copy row)</td><td></td></tr>
+              <tr><td>Wheel artwork picture (no link)</td><td></td></tr>
+              <tr><td>Product picture</td><td>Link; its text is the product name (one row per wedge)</td></tr>
+            </table></div>
+            <ul class="bg-notes"><li><strong>Watch out:</strong> wedges run clockwise from just right of the top. Their number must match the wedges drawn on the artwork. Without the artwork or at least one wedge the block isn't built. "Spin the Wheel" and the other labels are fixed in code.</li></ul>
+          </div>
+        </details>
+
+        <!-- columns -->
+        <details class="bg" id="block-columns">
+          <summary><span class="bg-name">Columns</span><span class="nav-status ns-done">Static</span><span class="bg-desc">Side-by-side content: homepage hero, features, brand-page layouts</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Columns (feature)</th></tr>
+              <tr><td>H2<br>Paragraph<br><strong>Bold link</strong> (button)</td><td>Picture</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Cells:</strong> any number of rows and cells. The first row sets the column count. Cells stack below 900px (992px for brand layouts).</li>
+              <li><strong>Not here:</strong> recipe ingredients and nutrition now use <a href="#block-recipe-details" style="color:var(--brand-blue);">Recipe Details</a>, not Columns.</li>
+            </ul>
+            <div class="bg-scroll"><table class="spec-table">
+              <thead><tr><th>Author as</th><th>Use for</th><th>Content</th></tr></thead>
+              <tbody>
+                <tr><td><code class="code-inline">Columns</code>, <code class="code-inline">(portrait)</code></td><td>Plain columns; <code class="code-inline">portrait</code> puts the image in a tall cropped frame</td><td>Any</td></tr>
+                <tr><td><code class="code-inline">Columns (homepage-hero)</code></td><td>Homepage hero</td><td>H1, text, button | two pictures: desktop first, mobile second</td></tr>
+                <tr><td><code class="code-inline">Columns (feature)</code>, <code class="code-inline">(feature, reverse)</code></td><td>Copy beside an image; <code class="code-inline">reverse</code> keeps the image on the left</td><td>H2, text, button | picture</td></tr>
+                <tr><td><code class="code-inline">Columns (fact)</code> + <code class="code-inline">wide</code>, <code class="code-inline">boxed</code>, <code class="code-inline">half</code>, <code class="code-inline">inset</code></td><td>"Did You Know?" fact on brand pages; the colour comes from the brand theme</td><td>16:9 illustration | H3, paragraph</td></tr>
+                <tr><td><code class="code-inline">Columns (callout)</code> + <code class="code-inline">framed</code>, <code class="code-inline">square</code></td><td>Wide image beside centred text</td><td>Picture | H2, text, <strong>bold link</strong> (pill), <em>italic link</em> (text link)</td></tr>
+                <tr><td><code class="code-inline">Columns (article)</code>, <code class="code-inline">(article, panel)</code>, <code class="code-inline">(article, panel, yellow|tan)</code></td><td>Article call-out card; <code class="code-inline">panel</code> adds a coloured panel the photo overlaps</td><td>Picture | eyebrow, H3, text, bold link, italic link. Each extra row is another panel.</td></tr>
+                <tr><td><code class="code-inline">Columns (video)</code>, <code class="code-inline">(video, player)</code></td><td>Video poster with play button beside a story box</td><td>Poster picture + YouTube or .mp4 link in the <em>same cell</em> | H3, text. <code class="code-inline">player</code> embeds the player at once.</td></tr>
+                <tr><td><code class="code-inline">Columns (follow)</code></td><td>Copy and social icons beside a portrait video</td><td>Text + a paragraph of social links | poster + video link</td></tr>
+                <tr><td><code class="code-inline">Columns (quotes)</code></td><td>Large italic customer quotes</td><td>Quote with a <strong>bold</strong> highlight, then attribution. Several cells per row sit side by side.</td></tr>
+                <tr><td><code class="code-inline">Columns (blog)</code></td><td>Grey story box with stacked photos</td><td>Pictures | eyebrow, H2, paragraphs</td></tr>
+                <tr><td><code class="code-inline">Columns (blobs)</code></td><td>Heading on a blob, photo, copy on a second blob</td><td>H2 | picture | paragraphs</td></tr>
+                <tr><td><code class="code-inline">Columns (activity)</code>, <code class="code-inline">(craft)</code>, <code class="code-inline">(craft, half)</code>, <code class="code-inline">(closing)</code>, <code class="code-inline">(pair)</code></td><td>Story-page layouts</td><td>activity: H3, lists, button | picture · craft: picture | H3, text, list · closing: picture | text · pair: picture | picture</td></tr>
+              </tbody>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Brand-specific variants:</strong> <code class="code-inline">hs-fact</code> (/hersheys), <code class="code-inline">ajm-fact</code> and <code class="code-inline">ajm-intro</code> (/almond-joy-mounds), <code class="code-inline">by-fact</code> (/bubbleyum), <code class="code-inline">jr-fact</code> (/jolly-rancher), <code class="code-inline">shaq-fact</code> (/shaqalicious), <code class="code-inline">tw-fact</code> (/twizzlers), <code class="code-inline">pirates-badges</code> and <code class="code-inline">pirates-jokes</code> (/pirates-booty). Each is styled in <code class="code-inline">design/themes/brands.css</code> and only works with its brand's theme, so they aren't in the DA library. To reuse one, copy it from its page. <code class="code-inline">zs-duo</code> and <code class="code-inline">zs-mints</code> on /brands/zero-sugar have no styles of their own; those Columns are styled by the page's section styles (<code class="code-inline">zs-duo-band</code>, <code class="code-inline">zs-mints</code>).</li>
+              <li><strong>Watch out:</strong> buttons form only when each link is alone in its own paragraph and is bold or italic. A video link becomes a play button only when a picture shares its cell. For <code class="code-inline">homepage-hero</code>, put the desktop picture first.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- details-and-directions -->
+        <details class="bg" id="block-details-and-directions">
+          <summary><span class="bg-name">Details and Directions</span><span class="nav-status ns-planned">Authored first</span><span class="bg-desc">Activity pages: You'll Need, directions, Make Mode</span></summary>
+          <div class="bg-body">
+            <p class="bg-lead">Text above the block, in the same section:</p>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><td>H2: You'll Need &amp; Step-by-Step Directions<br>Yields: … <em>(optional)</em><br>Make Mode: … <em>(optional switch description)</em></td></tr>
+            </table></div>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Details and Directions</th></tr>
+              <tr><td>You'll Need (heading)<br>• supply<br>• supply</td><td>Directions (heading)<br>1. step (step images inside the item)<br>Tip: … <em>(optional, last)</em></td></tr>
+            </table></div>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Section Metadata</th></tr>
+              <tr><td>Style</td><td>activities</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Required:</strong> <code class="code-inline">Style: activities</code> on the section. Without it the block is not built.</li>
+              <li><strong>Data:</strong> when the You'll Need cell has no items, the supplies come from <code class="code-inline">/activities/youllneedsteps</code> (the row whose <code class="code-inline">pagepath</code> matches the page, columns <code class="code-inline">youllneed1…N</code>). No matching row means only the directions show.</li>
+              <li><strong>Watch out:</strong> the heading above the block is needed for the summary and Make Mode. Only amounts like <code class="code-inline">8</code>, <code class="code-inline">2 tsp</code> or <code class="code-inline">1/2 cup</code> get their own column. Recipe pages use Recipe Details instead.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- footer -->
+        <details class="bg" id="block-footer">
+          <summary><span class="bg-name">Footer</span><span class="nav-status ns-progress">Dynamic</span><span class="bg-desc">Authored once in the /footer document</span></summary>
+          <div class="bg-body">
+            <p class="bg-lead">Not a block you add to pages. Edit <code class="code-inline">/footer</code>; a page can point elsewhere with <code class="code-inline">footer</code> metadata. Each part is a section with a <code class="code-inline">Style</code>:</p>
+            <div class="bg-scroll"><table class="spec-table">
+              <thead><tr><th>Section style</th><th>Content</th></tr></thead>
+              <tbody>
+                <tr><td><code class="code-inline">newsletter</code></td><td>H2, description, eyebrow, artwork picture (optional envelope icon first), and a <strong>bold</strong> sign-up link alone in its paragraph. The link becomes an email form. This style switches on the Hershey footer.</td></tr>
+                <tr><td><code class="code-inline">footer-brand</code></td><td>Logo picture (shown as a faint watermark) and a list of social links, each with an icon image.</td></tr>
+                <tr><td><code class="code-inline">footer-links</code>, <code class="code-inline">footer-legal</code></td><td>Link lists and legal text.</td></tr>
+              </tbody>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Cookie link:</strong> a link with href <code class="code-inline">#</code> whose text contains "cookie" opens the OneTrust preferences.</li>
+              <li><strong>Watch out:</strong> the newsletter link must be bold or italic, or the form isn't built. If <code class="code-inline">/footer</code> isn't published, pages have no footer.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- fragment -->
+        <details class="bg" id="block-fragment">
+          <summary><span class="bg-name">Fragment</span><span class="nav-status ns-progress">Dynamic</span><span class="bg-desc">Reuse another document's content</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th>Fragment</th></tr>
+              <tr><td>Link to <code class="code-inline">/fragments/…</code> (or the path as text)</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Shortcut:</strong> a plain link to <code class="code-inline">/fragments/…</code> anywhere on the page does the same without the table.</li>
+              <li><strong>Watch out:</strong> if the Fragment is alone in its section, the fragment's sections replace it with their own section styles. If the section has other content, the fragment's section styles are lost. The fragment must be published.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- header -->
+        <details class="bg" id="block-header">
+          <summary><span class="bg-name">Header</span><span class="nav-status ns-progress">Dynamic</span><span class="bg-desc">Authored once in the /nav document</span></summary>
+          <div class="bg-body">
+            <p class="bg-lead">Not a block you add to pages. Edit <code class="code-inline">/nav</code>; a page can point elsewhere with <code class="code-inline">nav</code> metadata, or remove the header with <code class="code-inline">header: off</code>. The sections are read by position:</p>
+            <div class="bg-scroll"><table class="spec-table">
+              <thead><tr><th>Section</th><th>Content</th></tr></thead>
+              <tbody>
+                <tr><td>1 · Brand</td><td>Logo linked to the home page. Give this section <code class="code-inline">Style: hershey-nav</code> to switch on the Hershey header.</td></tr>
+                <tr><td>2 · Menu</td><td>A bulleted list. An item with a nested list becomes a dropdown. A picture in its own paragraph becomes the hover indicator. An image link followed by a text link becomes one tile.</td></tr>
+                <tr><td>3 · Tools</td><td>The first link becomes the search form: its href is the results page and its text is the placeholder. An image in the same paragraph is the search icon.</td></tr>
+                <tr><td>4 · Utility <em>(optional)</em></td><td>"Hershey sites" bar: one link per site, the <strong>bold</strong> link is the current site.</td></tr>
+              </tbody>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Watch out:</strong> roles go by section order, so an extra section shifts every role after it. Without <code class="code-inline">hershey-nav</code>, search and the utility bar aren't built.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- hero -->
+        <details class="bg" id="block-hero">
+          <summary><span class="bg-name">Hero</span><span class="nav-status ns-done">Static</span><span class="nav-status ns-planned">Authored first</span><span class="bg-desc">Recipe, article, brand, product, marquee and video heroes</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="spec-table">
+              <thead><tr><th>Author as</th><th>Use for</th><th>Content</th></tr></thead>
+              <tbody>
+                <tr><td><code class="code-inline">Hero</code></td><td>Full-bleed image with text</td><td>Picture | H1, text</td></tr>
+                <tr><td><code class="code-inline">Hero (Recipe)</code></td><td>Recipe and activity overview: category pill, title, rating, skill level, share bar, image or gallery</td><td>See the recipe table below.</td></tr>
+                <tr><td><code class="code-inline">Hero (article)</code>, <code class="code-inline">(article, listing)</code></td><td>Story hero: coloured band, title left, image right. <code class="code-inline">listing</code> is the left-aligned 16:9 version.</td><td>Picture | H1, <code class="code-inline">Published: &lt;date&gt;</code>. Band colour = section <code class="code-inline">Style</code>: blue (default), purple, lime, gold, brown, navy, plum.</td></tr>
+                <tr><td><code class="code-inline">Hero (brand)</code> + <code class="code-inline">square</code>, <code class="code-inline">overlap</code></td><td>Brand landing hero</td><td>Photo (second photo = mobile) | logo picture, H1, intro, optional <strong>bold</strong> CTA link. The logo must share the heading's cell.</td></tr>
+                <tr><td><code class="code-inline">Hero (product)</code> <span class="nav-status ns-planned">Authored first</span></td><td>Product overview: gallery, label, title, rating, sizes, Shop Now</td><td>See the product table below.</td></tr>
+                <tr><td><code class="code-inline">Hero (marquee)</code></td><td>Campaign hero with scrolling ticker text</td><td>Logo + intro | product photo (transparent PNG/WebP). Order matters.</td></tr>
+                <tr><td><code class="code-inline">Hero (marquee, band)</code> + <code class="code-inline">rows-N</code>, <code class="code-inline">right</code></td><td>Band of scrolling lettering</td><td>One cell: a picture, or a link to an .svg/.png/.webp/.jpg (use a link for files over 40KB). The alt or link text is the readable copy.</td></tr>
+                <tr><td><code class="code-inline">Hero (video)</code></td><td>Looping muted background video with pause/play (/about/history)</td><td><code class="code-inline">.mp4</code> link, poster picture, eyebrow, H1, intro. YouTube links don't work here.</td></tr>
+              </tbody>
+            </table></div>
+            <h4>Hero (Recipe)</h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th>Hero (Recipe)</th></tr>
+              <tr><td>Picture <em>(two or more = gallery, used on activity pages)</em></td></tr>
+              <tr><td>Category link (alone in its paragraph, above the title)<br>H1 title<br>Skill Level: Easy<br>Intro paragraphs (shown under the image)</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Metadata:</strong> <code class="code-inline">bvid</code> adds the Bazaarvoice rating. The share bar is added automatically.</li>
+              <li><strong>Watch out:</strong> <code class="code-inline">Style: carousel</code> on a section turns <em>any</em> hero in it into this layout, even <code class="code-inline">Hero (product)</code>.</li>
+            </ul>
+            <h4>Hero (product)</h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Hero (product)</th></tr>
+              <tr><td>label</td><td>Limited Edition / Seasonal / any text</td></tr>
+              <tr><td>image-front</td><td>Picture or image URL</td></tr>
+              <tr><td>image-back</td><td>Picture or image URL</td></tr>
+              <tr><td>Title</td><td>Product name (plain text)</td></tr>
+              <tr><td>Description</td><td>Paragraphs or list</td></tr>
+              <tr><td>size</td><td>List of size links; <strong>bold</strong> = current size</td></tr>
+              <tr><td>button</td><td>Link (empty = Shop Now to /where-to-buy)</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Rows:</strong> all optional, case-insensitive. Aliases: badge/tag, image, front-image, back-image, name, sizes, cta.</li>
+              <li><strong>Metadata:</strong> <code class="code-inline">brand</code> (chooses the sheet tab; HERSHEY'S → hersheys) and <code class="code-inline">bvid</code> (14-digit GTIN: sheet match, rating, Shop Now SKU). The page <code class="code-inline">image</code> can stand in for image-front.</li>
+              <li><strong>Data:</strong> empty images, title, description or sizes are filled from <code class="code-inline">/products/product-master</code>. Sizes are the products in the same family whose Notes say <code class="code-inline">migrated</code>. Authored values always win.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- hersheys-search -->
+        <details class="bg" id="block-hersheys-search">
+          <summary><span class="bg-name">Hersheys Search</span><span class="nav-status ns-progress">Dynamic</span><span class="bg-desc">Algolia listing: recipes, activities, products, stories</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Hersheys Search (activities)</th></tr>
+              <tr><td>title</td><td>Banner heading</td></tr>
+              <tr><td>placeholder</td><td>Search box text</td></tr>
+              <tr><td>background</td><td>Banner picture</td></tr>
+              <tr><td>hits-per-page</td><td>20</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Variants:</strong> <code class="code-inline">Hersheys Search</code> (recipes), <code class="code-inline">(activities)</code>, <code class="code-inline">(products)</code>, <code class="code-inline">(stories)</code>. Stories has no search banner; put a <code class="code-inline">Hero (article, listing)</code> above it.</li>
+              <li><strong>Rows:</strong> all optional; an empty block works. The code also accepts <code class="code-inline">endpoint</code> (https proxy URL) and <code class="code-inline">asset-origin</code>.</li>
+              <li><strong>Data:</strong> results, facets and sorting always come from Algolia. After 8 s without results it shows "Unable to load recipes". Story pages accept <code class="code-inline">?category=</code> and <code class="code-inline">?season=</code> to preselect filters.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- instagram -->
+        <details class="bg" id="block-instagram">
+          <summary><span class="bg-name">Instagram</span><span class="nav-status ns-progress">Dynamic</span><span class="bg-desc">Elfsight Instagram feed</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th>Instagram</th></tr>
+              <tr><td>Elfsight app ID (e.g. <code class="code-inline">1a2b3c4d-…</code>)</td></tr>
+            </table></div>
+            <ul class="bg-notes"><li><strong>Watch out:</strong> the cell must hold only the ID. Any extra text, or a failed Elfsight script, leaves the block empty with no message.</li></ul>
+          </div>
+        </details>
+
+        <!-- jump-links -->
+        <details class="bg" id="block-jump-links">
+          <summary><span class="bg-name">Jump Links</span><span class="nav-status ns-done">Static</span><span class="bg-desc">Icon tiles or text links to sections further down</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Jump Links</th></tr>
+              <tr><td>Icon picture</td><td>Link to <code class="code-inline">#heading-id</code></td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Variants:</strong> <code class="code-inline">Jump Links</code> (icon tiles); <code class="code-inline">Jump Links (text)</code> (underlined links, four per row).</li>
+              <li><strong>Heading ids:</strong> the heading text in lower case, with spaces as hyphens and punctuation removed. "Manufacturing &amp; Products" becomes <code class="code-inline">#manufacturing--products</code> (two hyphens).</li>
+              <li><strong>Watch out:</strong> a row without link text is dropped. Put "Jump to a Section" above the block as normal text. The band colour comes from the section style (e.g. <code class="code-inline">cream</code>).</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- link-group -->
+        <details class="bg" id="block-link-group">
+          <summary><span class="bg-name">Link Group</span><span class="nav-status ns-done">Static</span><span class="bg-desc">Heading beside a slider of square link tiles</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Link Group</th></tr>
+              <tr><td colspan="2">Eyebrow paragraph + H2 (same cell)</td></tr>
+              <tr><td>Picture</td><td>Link (its text is the tile label)</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Variants:</strong> <code class="code-inline">Link Group</code> (dark brown band); <code class="code-inline">Link Group (light)</code> (maroon text on the section's colour, e.g. a <code class="code-inline">tan</code> section).</li>
+              <li><strong>Watch out:</strong> a row needs both a picture and a link to be a tile. Any other row is added to the heading area. Keep the eyebrow in the same cell as the H2, or it is dropped.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- newsletter -->
+        <details class="bg" id="block-newsletter">
+          <summary><span class="bg-name">Newsletter</span><span class="nav-status ns-done">Static</span><span class="bg-desc">Full sign-up form with a thank-you card</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="4">Newsletter</th></tr>
+              <tr><td>content</td><td colspan="3">Heading, intro, small note</td></tr>
+              <tr><td>first name</td><td>Label</td><td>Placeholder</td><td>Error message</td></tr>
+              <tr><td>last name / email / zip</td><td>Label</td><td>Placeholder</td><td>Error message</td></tr>
+              <tr><td>consent</td><td>Consent text</td><td colspan="2">Error message</td></tr>
+              <tr><td>button</td><td colspan="3">Submit label</td></tr>
+              <tr><td>thank you</td><td colspan="3">Picture, heading, message, button link, caption, social links</td></tr>
+              <tr><td>background</td><td colspan="3">Section background image</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Fields:</strong> a field shows only if its row exists, and every field shown is required. ZIP must be a US 5- or 9-digit code.</li>
+              <li><strong>Watch out:</strong> nothing is sent; submitting only validates and shows the thank-you card. Without a <code class="code-inline">button</code> row the button is empty. The social links kept are Instagram, TikTok, YouTube, Facebook and Pinterest.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- newsletter-signup -->
+        <details class="bg" id="block-newsletter-signup">
+          <summary><span class="bg-name">Newsletter Signup</span><span class="nav-status ns-done">Static</span><span class="bg-desc">Email capture on recipe pages (submits for real)</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th>Newsletter Signup</th></tr>
+              <tr><td>Heading<br>Introduction<br>Please note: … (EU/EEA note)<br>Consent paragraph with the privacy link</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Watch out:</strong> the first paragraph with a link is taken as the consent, so don't put links in the intro. The email label, button and confirmation text are fixed in code.</li>
+              <li><strong>Data:</strong> submitting sends the email to Hershey's production list (<code class="code-inline">l.hersheys.com</code>), and the thank-you shows even if that request is rejected. Don't test with real addresses.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- poll -->
+        <details class="bg" id="block-poll">
+          <summary><span class="bg-name">Poll</span><span class="nav-status ns-done">Static</span><span class="bg-desc">Vote poll or trivia quiz</span></summary>
+          <div class="bg-body">
+            <h4>Poll (/rolo)</h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Poll</th></tr>
+              <tr><td colspan="2">Question</td></tr>
+              <tr><td>Answer label</td><td>Starting vote count (digits)</td></tr>
+            </table></div>
+            <h4>Poll (quiz) (/kisses)</h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Poll (quiz)</th></tr>
+              <tr><td>eyebrow</td><td>Optional</td></tr>
+              <tr><td>question</td><td>The question</td></tr>
+              <tr><td>options</td><td>Bulleted list; <strong>bold</strong> the correct answer</td></tr>
+              <tr><td>answer</td><td>Explanation</td></tr>
+              <tr><td>note</td><td>Optional</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Watch out:</strong> vote counts are fixed starting numbers, not real totals. The visitor's vote is saved only in their browser, and changing the question text resets it. In a quiz with no bold option, "Correct!" never shows.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- recipe-details -->
+        <details class="bg" id="block-recipe-details">
+          <summary><span class="bg-name">Recipe Details</span><span class="nav-status ns-planned">Authored first</span><span class="bg-desc">Recipe ingredients and directions, and the Nutrition Facts label</span></summary>
+          <div class="bg-body">
+            <h4>Recipe Details (Ingredients)</h4>
+            <p class="bg-lead">Text above the block, in the same section:</p>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><td>H2: Ingredients &amp; Directions<br>Yields: 24 brownies<br>Prep: 15 min | Bake: 30 min | Total: 45 min</td></tr>
+            </table></div>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Recipe Details (Ingredients)</th></tr>
+              <tr><td>Ingredients (heading)<br>• 2 cups sugar<br>• 1/3 cup cocoa</td><td>You'll Need (heading) • tools<br>Directions (heading)<br>1. step (step images inside the item)<br>Tip: … <em>(optional, last)</em></td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Data:</strong> if the ingredients cell has only a heading, the ingredients come from <code class="code-inline">/recipes/ingredients</code> (row by <code class="code-inline">pagepath</code>, columns <code class="code-inline">ingredient1…N</code>). Any authored ingredient means the sheet is ignored.</li>
+              <li><strong>Watch out:</strong> the H2 above the block is needed for the summary and Bake Mode. Amounts in units like cup, tbsp, tsp, oz, lb, pkg or pinch get their own column.</li>
+            </ul>
+            <h4>Recipe Details (Nutrition)</h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Recipe Details (Nutrition)</th></tr>
+              <tr><td>Nutrition Facts (heading)<br>Servings Per Container 24<br>Serving size 1 brownie (69g)<br>Calories 290<br>• Total Fat 14g 18%<br>&nbsp;&nbsp;◦ Saturated Fat 5g 25%<br>* footnote</td><td>Additional questions? (heading)<br>Contact link (alone in its paragraph)</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Data:</strong> if the label cell has only a heading, the values come from <code class="code-inline">/recipes/nutrition</code> (row by <code class="code-inline">recipe-path</code>).</li>
+              <li><strong>Watch out:</strong> nested list items are sub-nutrients. <code class="code-inline">Recipe Details</code> without a variant isn't built.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- social-share -->
+        <details class="bg" id="block-social-share">
+          <summary><span class="bg-name">Social Share</span><span class="nav-status ns-done">Static</span><span class="bg-desc">Facebook, Pinterest, Email, Print and Copy URL</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th>Social Share</th></tr>
+              <tr><td><em>(leave empty)</em></td></tr>
+            </table></div>
+            <ul class="bg-notes"><li><strong>Watch out:</strong> anything you put in the block is replaced. The networks are fixed. The shared title is the page title up to its first "|".</li></ul>
+          </div>
+        </details>
+
+        <!-- tabs -->
+        <details class="bg" id="block-tabs">
+          <summary><span class="bg-name">Tabs</span><span class="nav-status ns-done">Static</span><span class="nav-status ns-planned">Authored first</span><span class="bg-desc">Tabbed panels, product nutrition, brand-logo grid</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Tabs</th></tr>
+              <tr><td>Tab label (plain text)</td><td>Panel content</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Cells:</strong> one row per tab. A row without a label or content is skipped. <code class="code-inline">Tabs (recipes)</code> only removes the top margin of the panel heading.</li>
+            </ul>
+            <h4>Tabs (nutrition) <span class="nav-status ns-planned">Authored first</span></h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Tabs (nutrition)</th></tr>
+              <tr><td>Nutrition Facts</td><td>Total Fat | 13g | 17%<br>Calories | 210</td></tr>
+              <tr><td>Ingredients</td><td>Paragraphs; one starting "Contains" is the allergen line</td></tr>
+              <tr><td>Dietary Info</td><td>Icon (or <code class="code-inline">:icon-name:</code>) followed by its label</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Data:</strong> an empty or missing Nutrition Facts tab, or an empty block, is filled from <code class="code-inline">/products/nutrition</code> using page metadata <code class="code-inline">brand</code> (sheet tab) and <code class="code-inline">bvid</code> (GTIN).</li>
+              <li><strong>Watch out:</strong> put spaces around the pipes. The label must read "Nutrition Facts". A list becomes a table only if every item is a pipe row.</li>
+            </ul>
+            <h4>Tabs (brand-tiles) (/brands)</h4>
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Tabs (brand-tiles)</th></tr>
+              <tr><td>Tab label</td><td>List: each item a logo picture + a link (text = brand name)</td></tr>
+            </table></div>
+            <ul class="bg-notes"><li><strong>Watch out:</strong> a tile without both picture and link is dropped. Links off hersheyland.com open in a new tab.</li></ul>
+          </div>
+        </details>
+
+        <!-- timeline -->
+        <details class="bg" id="block-timeline">
+          <summary><span class="bg-name">Timeline</span><span class="nav-status ns-done">Static</span><span class="bg-desc">One decade of company history (/about/history)</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th colspan="2">Timeline (dark)</th></tr>
+              <tr><td>left</td><td>H2: 1850s-90s<br>Intro paragraph</td></tr>
+              <tr><td>right</td><td>H3 year<br>Picture<br>H4 title<br>Paragraphs</td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Variants:</strong> <code class="code-inline">Timeline</code> (light) and <code class="code-inline">Timeline (dark)</code>; alternate them. Author one block per decade.</li>
+              <li><strong>Cells:</strong> cell 1 is <code class="code-inline">left</code> or <code class="code-inline">right</code> (anything else counts as left). A row with a picture is a year card; a row without one is the decade intro.</li>
+              <li><strong>Watch out:</strong> the decade H2 must be in a <code class="code-inline">left</code> row. Its first four digits become the anchor (<code class="code-inline">#1850</code>) that Timeline Nav uses.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- timeline-nav -->
+        <details class="bg" id="block-timeline-nav">
+          <summary><span class="bg-name">Timeline Nav</span><span class="nav-status ns-done">Static</span><span class="bg-desc">"Select a Decade" dropdown</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th>Timeline Nav</th></tr>
+              <tr><td>• <a>1850s-90s</a> → <code class="code-inline">#1850</code><br>• <a>1900s</a> → <code class="code-inline">#1900</code></td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Cells:</strong> every link becomes a menu entry. The first paragraph without a link is the button label (default "Select a Decade").</li>
+              <li><strong>Watch out:</strong> a custom label alone in its own cell is dropped, so keep it in the same cell as the list.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- widget -->
+        <details class="bg" id="block-widget">
+          <summary><span class="bg-name">Widget</span><span class="nav-status ns-progress">Dynamic</span><span class="bg-desc">Reviews, Where to Buy, OneTrust data request</span></summary>
+          <div class="bg-body">
+            <div class="bg-scroll"><table class="author-table">
+              <tr><th>Widget</th></tr>
+              <tr><td>Link to <code class="code-inline">/widgets/&lt;folder&gt;/&lt;name&gt;?param=value</code></td></tr>
+            </table></div>
+            <ul class="bg-notes">
+              <li><strong>Shortcut:</strong> a plain <code class="code-inline">/widgets/…</code> link anywhere on the page, even inside another block, becomes a widget.</li>
+              <li><strong>Widgets:</strong> <code class="code-inline">/widgets/bazaarvoice/reviews?productId=</code> (falls back to page <code class="code-inline">bvid</code>) · <code class="code-inline">/widgets/pricespider/where-to-buy?config=</code> (the SKU comes from the page URL) · <code class="code-inline">/widgets/onetrust/personal-data-request</code>.</li>
+              <li><strong>Watch out:</strong> query parameters become settings. If DA drops them from the link, they are read from the link text. Only <code class="code-inline">.html</code> or extension-less paths are accepted.</li>
+            </ul>
+          </div>
+        </details>
+        <p class="bg-empty" id="bg-empty" hidden>No block matches that filter.</p>
+      </section>
+
+      <section class="doc-section" id="section-styles">
+        <h2>
+          <span class="section-icon icon-navy">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 010 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 010 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 000 1.5h7.5a.75.75 0 000-1.5h-7.5z"/></svg>
+          </span>
+          Section styles
+        </h2>
+        <div class="section-rule"></div>
+        <p>Set with <code class="code-inline">Style</code> in a Section Metadata table. Several values can be combined, separated by commas.</p>
+        <h3>Any page</h3>
+        <table class="spec-table">
+          <thead><tr><th>Style</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td>light, highlight</td><td>Light grey band</td></tr>
+            <tr><td>light-blue, light-gray, light-yellow, light-purple, warm-tan, cool-tan</td><td>Story-page colour bands</td></tr>
+            <tr><td>dark-brown, dark-brown-large, dark-chocolate, plum-large</td><td>Dark bands with white text (<code class="code-inline">-large</code> = taller padding)</td></tr>
+            <tr><td>brand-color, brand-color-alt</td><td>Band in the brand theme's first or second colour</td></tr>
+            <tr><td>centered</td><td>Centres the text</td></tr>
+            <tr><td>blue-links</td><td>Blue in-text links on story pages</td></tr>
+            <tr><td>story-title, story-closing</td><td>Spacing on <code class="code-inline">template: story-plain</code> pages</td></tr>
+            <tr><td>faq</td><td>FAQ layout for an Accordion; a text-only faq section becomes centred copy in a tan box</td></tr>
+            <tr><td>carousel</td><td>Turns any Hero in the section into the recipe layout</td></tr>
+            <tr><td>activities</td><td>Required for Details and Directions</td></tr>
+            <tr><td>blue, purple, lime, gold, brown, navy, plum</td><td>Band colour for a <code class="code-inline">Hero (article)</code></td></tr>
+            <tr><td>animate-callout, animate-callout-article, animate-callout-secondary, animate-callout-text, animate-callout-button, animate-slide-card, animate-slide-icons, animate-slide-&lt;px&gt;, animate-rise, animate-fade, animate-fade-up, animate-come-in, animate-brighten</td><td>Scroll-in animations, run by <code class="code-inline">scripts/scroll-animations.js</code>. The <code class="code-inline">animate-callout*</code> presets animate a call-out's photo, heading, copy and button. <code class="code-inline">animate-slide-*</code> raise the content as it fades in. <code class="code-inline">rise</code>, <code class="code-inline">fade</code>, <code class="code-inline">fade-up</code> and <code class="code-inline">come-in</code> are single effects, and <code class="code-inline">brighten</code> lights images one after another. Modifiers: <code class="code-inline">animate-photo-&lt;ms&gt;</code>, <code class="code-inline">animate-secondary-&lt;ms&gt;</code>, <code class="code-inline">animate-replay</code></td></tr>
+          </tbody>
+        </table>
+        <h3>Hershey template pages (<code class="code-inline">template: hershey-home</code>)</h3>
+        <p>These work only on pages whose template is <code class="code-inline">hershey-home</code>.</p>
+        <table class="spec-table">
+          <thead><tr><th>Style</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td>cream, maroon, tan, teal, chocolate, brown</td><td>Colour bands (maroon, chocolate and brown use white text). cream, maroon and tan also recolour the brand hero panel.</td></tr>
+            <tr><td>backdrop</td><td>From 768px the first picture fills the band behind the content</td></tr>
+            <tr><td>pips, pips-end</td><td>Brand pips behind the band</td></tr>
+            <tr><td>tan-wave, shapes</td><td>Wave into the next tan band; faint brand shapes behind this and later bands</td></tr>
+            <tr><td>halloween, welcome</td><td>Seasonal background; centred intro on a subtle background</td></tr>
+            <tr><td>artwork</td><td>Full-width artwork; two pictures = desktop first, mobile second</td></tr>
+            <tr><td>related, social</td><td>Subtle grey band with a centred heading (the homepage "related" and social bands). <code class="code-inline">social</code> also shows its buttons as plain links.</td></tr>
+            <tr><td>supplies</td><td>With <code class="code-inline">artwork</code> on <code class="code-inline">theme: inspiration</code> pages: the supplies artwork band on /inspiration</td></tr>
+            <tr><td>newest, creme, recipes</td><td>Homepage bands (<code class="code-inline">theme: homepage</code> only)</td></tr>
+          </tbody>
+        </table>
+        <h3>Brand pages (brand <code class="code-inline">theme</code>)</h3>
+        <table class="spec-table">
+          <thead><tr><th>Style</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td>divider, divider-tall, divider-deep</td><td>Wave image between bands</td></tr>
+            <tr><td>brand-split, brand-split-reverse</td><td>Artwork on a split of the two brand colours</td></tr>
+            <tr><td>rule, decorated</td><td>Opens with a thick accent line; first picture sits behind the content</td></tr>
+            <tr><td>caramel-gradient, purple-gradient, silver-gradient, campaign-text</td><td>Campaign bands and centred campaign headings</td></tr>
+            <tr><td>Brand prefixes: ab-, ajm-, by-, cb-, choc-, hs-, ib-, jr-, kisses-, kk-, mounds-, oreo-, payday-, pirates-, rolo-, shaq-, sn-, ss-, sw-, tw-, zs-</td><td>Page-specific art direction in <code class="code-inline">design/themes/brands.css</code>. Each works only with its brand's theme (e.g. <code class="code-inline">kk-*</code> with <code class="code-inline">kit-kat-primary</code>).</td></tr>
+          </tbody>
+        </table>
+        <h3>In /nav and /footer</h3>
+        <table class="spec-table">
+          <thead><tr><th>Style</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td>hershey-nav</td><td>Switches on the Hershey header (search, utility bar)</td></tr>
+            <tr><td>newsletter, footer-brand, footer-links, footer-legal</td><td>Footer parts; see <a href="#block-footer" style="color:var(--brand-blue);">Footer</a></td></tr>
+          </tbody>
+        </table>
+        <div class="notice info">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span>The code adds classes such as <code class="code-inline">cards-container</code>, <code class="code-inline">link-group-section</code> and <code class="code-inline">timeline-dark</code> itself. Don't author them as styles.</span>
+        </div>
+      </section>
+
+      <section class="doc-section" id="page-metadata">
+        <h2>
+          <span class="section-icon icon-orange">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2h-7zM5 5.5A.5.5 0 015.5 5h5a.5.5 0 010 1h-5A.5.5 0 015 5.5zm0 2.5a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5A.5.5 0 015 8zm.5 2a.5.5 0 000 1h3a.5.5 0 000-1h-3z"/></svg>
+          </span>
+          Page metadata
+        </h2>
+        <div class="section-rule"></div>
+        <p>Keys in the page's <code class="code-inline">Metadata</code> table that change how blocks behave.</p>
+        <table class="spec-table">
+          <thead><tr><th>Key</th><th>What it does</th><th>Used on</th></tr></thead>
+          <tbody>
+            <tr><td>template</td><td>Page layout. <code class="code-inline">hershey-home</code> loads the Hershey theme and section styles. <code class="code-inline">hershey-recipe</code> is the recipe/activity layout. <code class="code-inline">story-craft</code>, <code class="code-inline">story-article</code>, <code class="code-inline">story-guide</code>, <code class="code-inline">story-wide</code> and <code class="code-inline">story-plain</code> are the story layouts.</td><td>All</td></tr>
+            <tr><td>theme</td><td>Colours and fonts. <code class="code-inline">hershey-primary</code> (products), <code class="code-inline">homepage</code>, <code class="code-inline">inspiration</code>, or a brand theme such as <code class="code-inline">reese-primary</code>. A brand page needs a Hershey template and a brand theme.</td><td>Product, brand, home</td></tr>
+            <tr><td>brand</td><td>Sheet tab for the product hero and nutrition tabs (<code class="code-inline">HERSHEY'S</code> → <code class="code-inline">hersheys</code>)</td><td>Product</td></tr>
+            <tr><td>bvid</td><td>14-digit GTIN: Bazaarvoice rating and reviews, product sheet row, nutrition row, Shop Now SKU. <code class="code-inline">bv-id</code> works for the hero only.</td><td>Product, recipe</td></tr>
+            <tr><td>image</td><td>Share image. On product pages a <code class="code-inline">/media_</code> image also becomes the hero's front image.</td><td>Product</td></tr>
+            <tr><td>nav, footer</td><td>Use a different nav or footer document</td><td>Any</td></tr>
+            <tr><td>header</td><td><code class="code-inline">off</code> removes the site header</td><td>Any</td></tr>
+            <tr><td>onetrust-id, launch-url, bazaarvoice-url</td><td>Third-party settings: OneTrust domain script, Adobe Launch library (Hershey's own are refused), Bazaarvoice script override</td><td>Any</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;">Paths also set the layout without metadata: <code class="code-inline">/about</code>, <code class="code-inline">/activities</code>, <code class="code-inline">/all-recipes</code>, <code class="code-inline">/products</code> and <code class="code-inline">/stories</code> pages get the Hershey product look (unless the template is <code class="code-inline">hershey-recipe</code>), and <code class="code-inline">/stories/</code> pages also get the story look.</p>
+      </section>
+
+      <section class="doc-section" id="da-tools">
+        <h2>
+          <span class="section-icon icon-blue">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm1.75-.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25H5.5v-13H1.75zM7 14.5h7.25a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H7v13z"/></svg>
+          </span>
+          DA Library: blocks, templates, themes and branch
+        </h2>
+        <div class="section-rule"></div>
+        <p>In the DA editor, open <strong>Panels</strong> (top right of the side panel). Under <strong>Library</strong> are <strong>Blocks</strong> and <strong>Templates</strong>; under <strong>Extensions</strong> are <strong>Themes</strong> and <strong>Branch</strong>. Blocks and Templates are DA content that authors maintain. Themes and Branch are code in this repo under <code class="code-inline">tools/</code>.</p>
+        <table class="spec-table">
+          <thead><tr><th>Panel</th><th>What it does</th><th>Where it lives</th></tr></thead>
+          <tbody>
+            <tr><td>Blocks</td><td>Inserts a ready-made block example into the page, and offers a <code class="code-inline">Section style</code> dropdown for Section Metadata.</td><td>Sheet <code class="code-inline">/docs/library/blocks</code> and one document per block in <code class="code-inline">/docs/library/blocks/</code></td></tr>
+            <tr><td>Templates</td><td>Starts a page from a full page layout.</td><td>Sheet <code class="code-inline">/docs/library/templates</code> and one document per template in <code class="code-inline">/docs/library/templates/</code></td></tr>
+            <tr><td>Themes</td><td>Shows the page's current <code class="code-inline">theme</code> and copies the right value for it.</td><td><code class="code-inline">tools/theme-picker.html</code>, with the list from <code class="code-inline">scripts/brand-themes.js</code></td></tr>
+            <tr><td>Branch</td><td>Opens the page in the editor against a code branch, or previews it on that branch.</td><td><code class="code-inline">tools/branch-switcher.html</code></td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:8px;">The panels themselves are registered in the site's DA configuration (<a href="https://da.live/config#/adobedrago/hersheys-eds/" target="_blank" rel="noopener" style="color:var(--brand-blue);">da.live/config#/adobedrago/hersheys-eds/</a>), not in this repo.</p>
+
+        <h3>Blocks library</h3>
+        <p>The library lists 21 blocks plus Section Metadata. Header and footer aren't in it because they come from <code class="code-inline">/nav</code> and <code class="code-inline">/footer</code>. Each entry opens a document such as <code class="code-inline">/docs/library/blocks/accordion</code>. That document holds a <code class="code-inline">Library Metadata</code> table (<code class="code-inline">name</code> = the label in the panel) followed by the block examples authors can insert.</p>
+        <div class="steps">
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">Create the example document</div><p>In DA, add <code class="code-inline">/docs/library/blocks/&lt;block-name&gt;</code>. Start with a <code class="code-inline">Library Metadata</code> table with one row: <code class="code-inline">name</code> | the label. Then add one example table per variant, filled with realistic content (see the <a href="#block-guide" style="color:var(--brand-blue);">Block authoring guide</a> for each block's rows and cells).</p></div></div>
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">Add it to the blocks sheet</div><p>In the <code class="code-inline">data</code> tab of <code class="code-inline">/docs/library/blocks</code>, add a row: <code class="code-inline">name</code> (the label) | <code class="code-inline">path</code> (<code class="code-inline">https://content.da.live/adobedrago/hersheys-eds/docs/library/blocks/&lt;block-name&gt;</code>).</p></div></div>
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">Preview and publish both</div><p>Preview and publish the example document and the sheet. Reload the editor to see the new entry.</p></div></div>
+        </div>
+        <p><strong>Section style dropdown.</strong> The <code class="code-inline">options</code> tab of the same sheet fills the <code class="code-inline">Section style</code> field on Section Metadata. Its columns are <code class="code-inline">key</code> (<code class="code-inline">style</code>), <code class="code-inline">blocks</code> (<code class="code-inline">section-metadata</code>), <code class="code-inline">type</code> (<code class="code-inline">multi</code>: several can be picked), <code class="code-inline">label</code>, and <code class="code-inline">values</code>. Values are written as <code class="code-inline">Label=value</code> pairs separated by <code class="code-inline">|</code>, e.g. <code class="code-inline">Band · Warm tan=warm-tan | Band · Light=light</code>. The value must be a style name from <a href="#section-styles" style="color:var(--brand-blue);">Section styles</a>.</p>
+
+        <h3>Templates</h3>
+        <p>Each template is a full page with placeholder content. Choosing one inserts it into the open page. Replace every placeholder, including the metadata values. There are 10 templates, listed in the same order as the sheet.</p>
+        <div class="bg-scroll"><table class="spec-table">
+          <thead><tr><th>Template</th><th>Use for</th><th>Blocks, in order</th><th>Metadata</th></tr></thead>
+          <tbody>
+            <tr><td>about page</td><td>About and content pages, e.g. <code class="code-inline">/about/faqs</code>, <code class="code-inline">/about/visit</code></td><td>Breadcrumb Trail · Hero (brand, square, overlap) in a <code class="code-inline">cream</code> section · Jump Links · Accordion in <code class="code-inline">faq</code> sections · Cards (callout) · Cards (slider, brands)</td><td><code class="code-inline">template: hershey-home</code> (set)</td></tr>
+            <tr><td>activities</td><td>Activity (craft) pages under <code class="code-inline">/activities/</code></td><td>Breadcrumb Trail · Hero in a <code class="code-inline">carousel</code> section · Details and Directions in an <code class="code-inline">activities</code> section · Cards (slider, related, recipes)</td><td><code class="code-inline">template: hershey-recipe</code> (set)</td></tr>
+            <tr><td>brand category</td><td><code class="code-inline">/brands/chocolate</code>, <code class="code-inline">/sweets</code>, <code class="code-inline">/snacks</code>, <code class="code-inline">/zero-sugar</code></td><td>Breadcrumb Trail · Hero (brand, square) · Columns (callout), (callout, square) · Cards (product, slider), (product) · Cards (slider, brands)</td><td><code class="code-inline">template: hershey-home</code> (set). Change <code class="code-inline">theme</code> from <code class="code-inline">chocolate-primary</code> to the category's theme.</td></tr>
+            <tr><td>brands</td><td>Brand landing pages, e.g. <code class="code-inline">/reeses</code></td><td>Hero (brand, square) · Columns (callout, square), (fact), (video, player), (article) · Cards (slider, brands), (product, slider), (grid) · Hero (marquee, band) · Instagram · Accordion, using the generic <code class="code-inline">brand-color</code>, <code class="code-inline">campaign-text</code> and <code class="code-inline">artwork</code> styles</td><td><code class="code-inline">template: hershey-home</code> (set). Change <code class="code-inline">theme</code> from <code class="code-inline">brand-primary</code> to the brand's theme (use Themes), and add the page to <code class="code-inline">/brands/brand-pages</code>.</td></tr>
+            <tr><td>brands hub</td><td>The <code class="code-inline">/brands</code> page only</td><td>Hero (brand, square) · Tabs (brand-tiles) · Cards (slider, brands), with <code class="code-inline">ab-*</code> section styles</td><td><code class="code-inline">template: hershey-home</code>, <code class="code-inline">theme: all-brands-primary</code> (set). The <code class="code-inline">ab-*</code> styles need this theme.</td></tr>
+            <tr><td>hershey recipe</td><td>Recipe pages under <code class="code-inline">/recipes/</code></td><td>Breadcrumb Trail · Hero (Recipe) · Recipe Details (Ingredients) · Newsletter Signup · Cards (slider, related, recipes) · Recipe Details (Nutrition) · Widget (reviews)</td><td><code class="code-inline">template: hershey-recipe</code> (set). Replace <code class="code-inline">bvid</code> (<code class="code-inline">000</code>).</td></tr>
+            <tr><td>product</td><td>Product pages under <code class="code-inline">/products/</code></td><td>Breadcrumb Trail · Hero (product) · Tabs (nutrition) in a <code class="code-inline">light-gray</code> section · Cards (product, related) · Widget (reviews)</td><td>Replace the placeholders: <code class="code-inline">theme</code> (<code class="code-inline">brand-primary</code>, e.g. <code class="code-inline">hershey-primary</code>), <code class="code-inline">brand</code> (<code class="code-inline">brand-name</code>, e.g. <code class="code-inline">hersheys</code>), <code class="code-inline">bvid</code> (14-digit GTIN)</td></tr>
+            <tr><td>recipe listing</td><td>Recipe search listing, as on <code class="code-inline">/all-recipes</code></td><td>Hersheys Search (recipes), with <code class="code-inline">title</code>, <code class="code-inline">placeholder</code> and <code class="code-inline">background</code> rows</td><td>None. For other listings, change the variant to <code class="code-inline">activities</code> or <code class="code-inline">products</code>.</td></tr>
+            <tr><td>story</td><td>Story pages under <code class="code-inline">/stories/</code></td><td>Breadcrumb Trail · Hero (article) in a coloured section · Columns (feature), (pair), (closing) · Cards (slider, related)</td><td><code class="code-inline">template: story-article</code> (set). Change to <code class="code-inline">story-craft</code>, <code class="code-inline">story-guide</code>, <code class="code-inline">story-wide</code> or <code class="code-inline">story-plain</code> as needed (see <a href="#page-metadata" style="color:var(--brand-blue);">Page metadata</a>).</td></tr>
+            <tr><td>story listing</td><td>The <code class="code-inline">/stories</code> listing</td><td>Hero (article, listing) in a <code class="code-inline">plum</code> section · Hersheys Search (stories)</td><td>None</td></tr>
+          </tbody>
+        </table></div>
+        <p style="margin-top:8px;">To add a template, create <code class="code-inline">/docs/library/templates/&lt;name&gt;</code> and add a row to the <code class="code-inline">/docs/library/templates</code> sheet: <code class="code-inline">key</code> (the label) | <code class="code-inline">value</code> (<code class="code-inline">https://content.da.live/adobedrago/hersheys-eds/docs/library/templates/&lt;name&gt;</code>). Then preview and publish both, and reload the editor.</p>
+        <div class="notice tip">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><strong>Rules for template documents.</strong> Everything in a template is copied into the new page, so keep only what the page needs. Don't add a <code class="code-inline">Library Metadata</code> table or instruction text; those belong in the block library and this guide. Metadata values must be the exact value with no notes, e.g. <code class="code-inline">story-article</code>. The code turns the value into page classes and splits it at commas, so a note breaks the layout.</span>
+        </div>
+
+        <h3>Themes</h3>
+        <p>Shows the open page's current <code class="code-inline">theme</code> and a button for each theme that fits the page. Clicking a theme <strong>copies</strong> its value; it doesn't change the page. Paste it into <strong>Page → Page Metadata → theme</strong>, then preview.</p>
+        <table class="spec-table">
+          <thead><tr><th>Page</th><th>Themes offered</th></tr></thead>
+          <tbody>
+            <tr><td><code class="code-inline">/products/…</code></td><td>Product themes: <code class="code-inline">hershey-primary</code> (Hershey's, the default), <code class="code-inline">reese-primary</code>, <code class="code-inline">cadbury-primary</code>, <code class="code-inline">payday-primary</code>, <code class="code-inline">rolo-primary</code></td></tr>
+            <tr><td>A page listed in <code class="code-inline">/brands/brand-pages</code></td><td>Brand page themes, e.g. <code class="code-inline">symphony-primary</code>, <code class="code-inline">kit-kat-primary</code>, <code class="code-inline">sour-strips-primary</code> (42 in all)</td></tr>
+            <tr><td>Any other page</td><td>None ("No theme applies to this page"). <strong>Show all themes</strong> lists every theme anyway.</td></tr>
+          </tbody>
+        </table>
+        <ul class="req-list" style="margin-top:8px;">
+          <li><strong>Brand pages sheet:</strong> <code class="code-inline">/brands/brand-pages</code> has one column, <code class="code-inline">path</code>, e.g. <code class="code-inline">/kisses</code>. An entry also covers the same page under <code class="code-inline">/brands</code> (<code class="code-inline">/snacks</code> matches <code class="code-inline">/brands/snacks</code>). A trailing <code class="code-inline">*</code> matches every page below a path (<code class="code-inline">/brands/*</code>). If the sheet can't be read, every theme is offered.</li>
+          <li><strong>Adding a theme</strong> is a code change: add an entry to <code class="code-inline">BRAND_THEMES</code> in <code class="code-inline">scripts/brand-themes.js</code> (<code class="code-inline">label</code>, <code class="code-inline">value</code>, and <code class="code-inline">file: 'brands'</code> for brand pages). Add its stylesheet: <code class="code-inline">design/themes/&lt;value&gt;.css</code> for product themes, or a block in <code class="code-inline">design/themes/brands.css</code> for brand themes. The panel picks the new theme up from the same file.</li>
+          <li><strong>Brand pages also need</strong> <code class="code-inline">template: hershey-home</code>. Without a Hershey template the theme isn't loaded.</li>
+        </ul>
+
+        <h3>Branch</h3>
+        <p>Lists the branches of <code class="code-inline">AdobeDrago/hersheys-eds</code> (<code class="code-inline">main</code> first, with a filter box). Use it to see a page with code that isn't merged yet.</p>
+        <ul class="req-list">
+          <li><strong>Branch name:</strong> reopens the editor with <code class="code-inline">?ref=&lt;branch&gt;</code>, so the canvas renders that branch's code. The current branch is highlighted. Choose <code class="code-inline">main</code> to go back.</li>
+          <li><strong>Preview:</strong> opens <code class="code-inline">&lt;branch&gt;--hersheys-eds--adobedrago.aem.page/&lt;path&gt;</code> in a new tab. This is the link a pull request needs.</li>
+          <li><strong>Branch names</strong> are turned into the form EDS uses, lower case with anything other than letters and digits as hyphens: <code class="code-inline">feature/brand</code> becomes <code class="code-inline">feature-brand</code>.</li>
+          <li><strong>Limits:</strong> the list is read from GitHub without signing in. It shows at most 100 branches, and GitHub allows about 60 lookups an hour per network, after which it shows "Could not load branches". Content is the same on every branch; only the code differs.</li>
+        </ul>
       </section>
 
       <section class="doc-section" id="supporting-modules">
@@ -1099,6 +1914,9 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
             <tr><td><code class="code-inline">bazaarvoice.js</code></td><td>Default export <code class="code-inline">loadBazaarvoice()</code>: loads <code class="code-inline">bv.js</code>, syncs tracking cookies to consent. Imported by <code class="code-inline">delayed.js</code> on pages with <code class="code-inline">[data-bv-show]</code>.</td></tr>
             <tr><td><code class="code-inline">recipes-search.js</code></td><td><code class="code-inline">DEFAULT_CONFIG</code>, <code class="code-inline">resolveConfig</code>, <code class="code-inline">absoluteUrl</code>, <code class="code-inline">mapHit</code>, <code class="code-inline">orderFacetValues</code>, <code class="code-inline">groupFacetFilters</code>, <code class="code-inline">searchRecipes</code>. Algolia client (search-only key, optional proxy <code class="code-inline">endpoint</code>). Imported by <code class="code-inline">hersheys-search.js</code>.</td></tr>
             <tr><td><code class="code-inline">delayed.js</code></td><td>Delayed phase: loads OneTrust (test domain script unless <code class="code-inline">onetrust-id</code> metadata is set), then <code class="code-inline">consent-check.js</code>; Bazaarvoice when needed.</td></tr>
+            <tr><td><code class="code-inline">algolia-recommend.js</code></td><td>Default export <code class="code-inline">fetchRelated()</code>: Algolia Recommend lookup keyed by the page's production path on www.hersheyland.com, falling back to records of the same template type; 4 s time limit. Imported by <code class="code-inline">cards-product.js</code> and <code class="code-inline">cards-recipes.js</code> for the related cards.</td></tr>
+            <tr><td><code class="code-inline">scroll-animations.js</code></td><td>Runs the <code class="code-inline">animate-*</code> section styles (rise, fade, fade-up, come-in, brighten and the call-out presets); loads <code class="code-inline">styles/scroll-animations.css</code>. Loaded by <code class="code-inline">scripts.js</code> when a section has an <code class="code-inline">animate-*</code> style.</td></tr>
+            <tr><td><code class="code-inline">scroll-reveal.js</code></td><td>Homepage only (<code class="code-inline">theme: homepage</code>): the Columns (feature) bands fade up as they scroll into view. Styles in <code class="code-inline">styles/hershey-home.css</code>; nothing is hidden for visitors who prefer reduced motion. Loaded by <code class="code-inline">scripts.js</code>.</td></tr>
           </tbody>
         </table>
         <h3 style="margin-top:20px;">Widgets, tools and design assets</h3>
@@ -1107,7 +1925,10 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <tbody>
             <tr><td><code class="code-inline">widgets/bazaarvoice/</code></td><td>Reviews and Q&amp;A widget; shows “couldn’t be loaded” if the script fails or nothing renders within 8–15 s.</td></tr>
             <tr><td><code class="code-inline">widgets/pricespider/</code></td><td>Where-to-buy widget (PriceSpider/Wayvia); tracking-id script only with consent; 15 s fallback message.</td></tr>
-            <tr><td><code class="code-inline">tools/theme-picker/</code></td><td>DA.live Themes panel for choosing a product page <code class="code-inline">theme</code> value; runs outside the site.</td></tr>
+            <tr><td><code class="code-inline">widgets/onetrust/</code></td><td>Personal data request form (OneTrust iframe), used on <code class="code-inline">/home/personal-data-request</code>; no parameters.</td></tr>
+            <tr><td><code class="code-inline">styles/</code></td><td><code class="code-inline">styles.css</code> (global, from <code class="code-inline">head.html</code>); <code class="code-inline">fonts.css</code> and <code class="code-inline">lazy-styles.css</code> (loaded after the first paint); <code class="code-inline">hershey-home.css</code> (Hershey template pages, via <code class="code-inline">hershey-theme.js</code>); <code class="code-inline">hershey-brand.css</code> (brand pages only); <code class="code-inline">scroll-animations.css</code> (with <code class="code-inline">animate-*</code> sections).</td></tr>
+            <tr><td><code class="code-inline">design/themes/</code></td><td><code class="code-inline">reese-primary.css</code>, <code class="code-inline">cadbury-primary.css</code>, <code class="code-inline">payday-primary.css</code>, <code class="code-inline">rolo-primary.css</code> (product page themes); <code class="code-inline">brands.css</code> (all brand page themes); <code class="code-inline">cocoa.css</code> (generated from <code class="code-inline">cocoa.tokens.json</code>, a Storybook preview theme only).</td></tr>
+            <tr><td><code class="code-inline">tools/theme-picker/</code></td><td>DA.live Themes panel: shows the page's <code class="code-inline">theme</code> and copies a value. Product themes on <code class="code-inline">/products/</code> pages, brand themes on pages listed in the <code class="code-inline">/brands/brand-pages</code> sheet; runs outside the site.</td></tr>
             <tr><td><code class="code-inline">tools/branch-switcher/</code></td><td>DA.live tool for switching the canvas to a code branch of AdobeDrago/hersheys-eds.</td></tr>
             <tr><td><code class="code-inline">design/</code></td><td>DTCG token catalog, source measurements, brand theme stylesheets and the token generator (excluded from delivery where listed in .hlxignore).</td></tr>
             <tr><td><code class="code-inline">storybook/</code></td><td>Isolated Storybook: Foundations, Default Content, Blocks and Widgets specimens, with catalog and browser tests.</td></tr>
@@ -1525,51 +2346,72 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <span class="section-icon icon-green">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
           </span>
-          Journey 6 · Brand pages <span class="status-badge sb-progress">In progress</span>
+          Journey 6 · Brand pages <span class="status-badge sb-done">Complete</span>
         </h2>
         <div class="section-rule"></div>
         <p>Brand landing pages (for example <code class="code-inline">/symphony</code>, <code class="code-inline">/kisses</code> or <code class="code-inline">/brands/sourstrips</code>) use a brand page theme from <code class="code-inline">scripts/brand-themes.js</code> (entries with <code class="code-inline">file: 'brands'</code>). A matching theme adds <code class="code-inline">hershey-brand</code> to the body and loads <code class="code-inline">styles/hershey-brand.css</code> before <code class="code-inline">design/themes/brands.css</code>.</p>
         <ul class="checklist">
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Hero (brand)</div>
               <div class="check-note">Brand logo, title and intro beside the brand photo; <code class="code-inline">hero-brand.js</code> / <code class="code-inline">hero-brand.css</code></div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Columns (fact, callout, article, video, quotes, blog)</div>
               <div class="check-note">Brand-only layouts; styles in <code class="code-inline">columns-brand.css</code></div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Cards (brands, spotlight, stories, tiles, shop, grid, content, brand slider)</div>
               <div class="check-note">Brand-page card variants; styles in <code class="code-inline">cards-brand.css</code> and <code class="code-inline">cards-brand-slider.css</code></div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Poll (quiz), Cards (wheel, quotes, steps), Hero (marquee)</div>
               <div class="check-note">KISSES quiz, spin-the-wheel, Oreo cup quotes, Rolo product slider and the ticker hero, matched to the live brand pages</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Instagram</div>
               <div class="check-note">Elfsight feed loaded without the consent gate, to match the live site</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Brand themes</div>
-              <div class="check-note">37 brand-page themes (<code class="code-inline">file: 'brands'</code> entries in <code class="code-inline">scripts/brand-themes.js</code>, including Symphony, YORK, KISSES, KIT KAT, REESE'S and Twizzlers) alongside the Reese's, Cadbury, Payday and Rolo product themes</div>
+              <div class="check-note">42 brand-page themes (<code class="code-inline">file: 'brands'</code> entries in <code class="code-inline">scripts/brand-themes.js</code>, including Symphony, YORK, KISSES, KIT KAT, REESE'S, Twizzlers, the four category themes and ALL BRANDS) alongside the Reese's, Cadbury, Payday and Rolo product themes</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Brand category pages</div>
+              <div class="check-note"><code class="code-inline">/brands/chocolate</code>, <code class="code-inline">/brands/sweets</code>, <code class="code-inline">/brands/snacks</code> and <code class="code-inline">/brands/zero-sugar</code>, with the <code class="code-inline">chocolate-primary</code>, <code class="code-inline">sweets-primary</code>, <code class="code-inline">snacks-primary</code> and <code class="code-inline">zero-sugar-primary</code> themes</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Brands hub and Tabs (brand-tiles)</div>
+              <div class="check-note"><code class="code-inline">/brands</code> lists every brand as logo tiles in tabs (<code class="code-inline">tabs-brand-tiles.js</code> / <code class="code-inline">.css</code>), themed by <code class="code-inline">all-brands-primary</code></div>
+            </div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body">
+              <div class="check-title">Brand pages sheet</div>
+              <div class="check-note">The DA sheet <code class="code-inline">/brands/brand-pages</code> (column <code class="code-inline">path</code>, trailing <code class="code-inline">*</code> = prefix) tells the Themes panel which pages get brand themes; an entry also matches the same page under <code class="code-inline">/brands</code></div>
             </div>
           </li>
         </ul>
@@ -1580,34 +2422,34 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <span class="section-icon icon-green">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
           </span>
-          Journey 7 · Activity pages <span class="status-badge sb-progress">In progress</span>
+          Journey 7 · Activity pages <span class="status-badge sb-done">Complete</span>
         </h2>
         <div class="section-rule"></div>
         <p>Activity (craft) detail pages author <code class="code-inline">template: hershey-recipe</code> and keep the recipe layout; the activities listing is the <code class="code-inline">activities</code> variant of hersheys-search and shares the product pages' brand tokens.</p>
         <ul class="checklist">
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Search (activities)</div>
               <div class="check-note">Find an Activity listing with banner, collapsible facets and Show More</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Hero (recipe) on activity pages</div>
               <div class="check-note">Image gallery with previous/next buttons; share and print labels say "activity"</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Details and Directions</div>
               <div class="check-note">You'll Need supplies, step-by-step directions and Make Mode; authored with Section Metadata <code class="code-inline">Style: activities</code></div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Newsletter Signup</div>
               <div class="check-note">Two-column email capture shared with recipe pages</div>
@@ -1621,27 +2463,27 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <span class="section-icon icon-green">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
           </span>
-          Journey 8 · About pages <span class="status-badge sb-progress">In progress</span>
+          Journey 8 · About pages <span class="status-badge sb-done">Complete</span>
         </h2>
         <div class="section-rule"></div>
         <p>DA holds four pages under <code class="code-inline">/about/</code>: <code class="code-inline">faqs</code>, <code class="code-inline">history</code>, <code class="code-inline">visit</code> and <code class="code-inline">newsletter</code>. Paths under <code class="code-inline">/about</code> take the product pages' brand tokens and fonts (<code class="code-inline">hershey-product</code>).</p>
         <ul class="checklist">
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">FAQs</div>
               <div class="check-note">Jump Links tiles, Accordion, Cards (callout) "Your Baking Questions, Answered", and a Hero; tan box for the text-only "More FAQs" section</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">History</div>
               <div class="check-note">Hero (video), Timeline Nav ("Select a Decade"), one Timeline block per decade, Link Group at the end</div>
             </div>
           </li>
           <li class="check-item">
-            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
             <div class="check-body">
               <div class="check-title">Visit and Newsletter</div>
               <div class="check-note">Pages exist in DA; their block usage was not reviewed here</div>
@@ -1719,6 +2561,32 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
   }, { rootMargin: '-64px 0px -70% 0px', threshold: 0 });
 
   sections.forEach((_, target) => observer.observe(target));
+})();
+
+// block authoring guide: filter, expand/collapse, open a card linked by #block-<name>
+(() => {
+  const cards = [...document.querySelectorAll('details.bg')];
+  const filter = document.getElementById('bg-filter');
+  const empty = document.getElementById('bg-empty');
+  if (!cards.length || !filter) return;
+  filter.addEventListener('input', () => {
+    const q = filter.value.trim().toLowerCase();
+    let shown = 0;
+    cards.forEach((card) => {
+      const match = !q || card.textContent.toLowerCase().includes(q);
+      card.hidden = !match;
+      if (match) shown += 1;
+    });
+    empty.hidden = shown > 0;
+  });
+  document.getElementById('bg-expand').addEventListener('click', () => cards.forEach((c) => { c.open = true; }));
+  document.getElementById('bg-collapse').addEventListener('click', () => cards.forEach((c) => { c.open = false; }));
+  const openFromHash = () => {
+    const target = document.getElementById(location.hash.slice(1));
+    if (target && target.matches('details.bg')) { target.open = true; target.scrollIntoView(); }
+  };
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
 })();
 </script>
 </body>
