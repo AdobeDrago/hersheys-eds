@@ -1043,6 +1043,15 @@
   }
 }
 
+/* kiss-shaped page indicators under the Newest Treats on phones and tablets */
+.hershey-home.homepage .newest .cards.slider.stories .cards-slider-dot {
+  background: url('/icons/kiss-indicator-inactive-blue.svg') center / contain no-repeat;
+}
+
+.hershey-home.homepage .newest .cards.slider.stories .cards-slider-dot[aria-current='true'] {
+  background-image: url('/icons/kiss-indicator-active-blue.svg');
+}
+
 /* the tile titles are plain maroon text, underlined only on hover, as on live */
 .hershey-home.homepage .newest .cards.stories h3 a:any-link {
   color: inherit;
@@ -1146,7 +1155,15 @@
 @media (width < 900px) {
   .hershey-home.homepage .columns.homepage-hero > div > .columns-img-col {
     order: 0;
-    margin-inline: -22px;
+    overflow: hidden;
+  }
+
+  /* the photo is a square with a wide white margin round the shaped cut-out; enlarge it and trim the
+     margin so the shape fills the width, as on live */
+  .hershey-home.homepage .columns.homepage-hero > div > .columns-img-col img {
+    width: 125%;
+    max-width: none;
+    margin: -9% -12.5%;
   }
 
   .hershey-home.homepage .columns.homepage-hero > div > div:not(.columns-img-col) {
@@ -1300,10 +1317,12 @@
   }
 
   .hershey-home.homepage .tabs.recipes .tabs-list button {
-    flex: 0 0 105px;
+    flex: 0 0 auto;
     height: 38px;
     border-radius: 19px;
+    padding: 0 14px;
     font-size: 14px;
+    white-space: nowrap;
     font-weight: 400;
     line-height: 1.2;
   }
