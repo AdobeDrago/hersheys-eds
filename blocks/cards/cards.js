@@ -48,7 +48,6 @@ function decorateSlider(block, list) {
   // brand pages, show one page indicator per page of cards
   const paged = ['related', 'callout', 'dots', 'brands'].some((name) => block.classList.contains(name))
     || (isBrandPage() && ['product', 'stories', 'content'].some((name) => block.classList.contains(name)))
-    // the homepage Newest Treats show them too (CSS hides them from 992px, where the arrows sit on the tiles)
     || (document.body.classList.contains('homepage') && block.classList.contains('stories'));
   // the brands sliders, and the product sliders on brand pages, page by the cards that fit whole
   // in the track, as on hersheyland.com (one card per page on phones)

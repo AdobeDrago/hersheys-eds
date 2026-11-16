@@ -9,7 +9,6 @@
  * dots; below 768px the track just swipes. The band is dark brown and sits on the section.
  */
 const WIDE = window.matchMedia('(width >= 768px)');
-// three tiles per page from 768px; below that one tile fills the track, so each tile is a page
 const pageSize = () => (WIDE.matches ? 3 : 1);
 
 const smooth = () => (window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth');
