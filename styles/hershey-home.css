@@ -681,6 +681,18 @@
   --hershey-component-link-group-light-padding-block-start: 20px;
 }
 
+/* the hero artwork is a circle on a transparent canvas with about 29% empty on the left: below 992px the
+   photo is pinned to the right so the circle starts at the edge, and from 992px it is centred in its half */
+.hershey-home.inspiration .hero.brand.square .hero-brand-media img {
+  object-position: 100% 50%;
+}
+
+@media (width >= 992px) {
+  .hershey-home.inspiration .hero.brand.square .hero-brand-media img {
+    object-position: 50% 50%;
+  }
+}
+
 .hershey-home.inspiration main > .maroon {
   --hershey-component-banner-foreground: #fff;
 }
