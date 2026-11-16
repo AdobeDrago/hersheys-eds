@@ -1049,19 +1049,8 @@
   text-decoration: none;
 }
 
-/* the story box is see-through, and its links are underlined (the stories variant's border) only while the
-   tile is hovered or focused, not at rest */
-.hershey-home.homepage .newest .cards.slider.stories > ul > li {
-  aspect-ratio: 5 / 7;
-}
-
-.hershey-home.homepage .newest .cards.stories .cards-card-body {
-  inset: calc(100% * 5 / 7) 0 auto;
-  padding: 12px 0 0;
-  background: transparent;
-  box-shadow: none;
-}
-
+/* the story box sits over the photo's lower edge, as on live (cards-brand.css); its links are underlined
+   (the stories variant's border) only while the tile is hovered or focused, not at rest */
 .hershey-home.homepage .newest .cards.stories .cards-card-body a:any-link {
   border-bottom-color: transparent;
 }
@@ -1157,10 +1146,18 @@
 @media (width < 900px) {
   .hershey-home.homepage .columns.homepage-hero > div > .columns-img-col {
     order: 0;
+    margin-inline: -22px;
   }
 
   .hershey-home.homepage .columns.homepage-hero > div > div:not(.columns-img-col) {
+    padding-inline: 20px;
     text-align: center;
+  }
+
+  /* the intro is 16px */
+  .hershey-home.homepage .columns.homepage-hero p {
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 
@@ -1294,13 +1291,27 @@
 
 /* below 900px the bar scrolls sideways, each tab a fixed 132px wide, and the creme buttons run full width */
 @media (width < 900px) {
+  /* a flat bar running edge to edge, three tabs showing */
   .hershey-home.homepage .tabs.recipes .tabs-list {
+    margin-inline: calc(50% - 50vw);
+    border-radius: 0;
+    padding: 5px 0;
     scrollbar-width: none;
   }
 
   .hershey-home.homepage .tabs.recipes .tabs-list button {
-    flex: 0 0 132px;
+    flex: 0 0 105px;
+    height: 38px;
+    border-radius: 19px;
+    font-size: 14px;
+    font-weight: 400;
     line-height: 1.2;
+  }
+
+  .hershey-home.homepage .tabs.recipes .tabs-panel-content p a:any-link {
+    color: var(--link-color);
+    font-weight: 500;
+    text-decoration-thickness: 1px;
   }
 
   .hershey-home.homepage .creme .columns.feature a.button {
