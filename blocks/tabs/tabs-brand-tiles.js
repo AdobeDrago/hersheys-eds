@@ -1,18 +1,120 @@
+import { createOptimizedPicture } from '../../scripts/aem.js';
+
 let tabsId = 0;
 
 /**
  * Tabs (brand-tiles) variant, loaded by tabs.js for `Tabs (brand-tiles)`, as on /brands.
  *
- * Content model: one row per tab, 2 cells.
- *   Cell 1: the tab label.
- *   Cell 2: the brand tiles, a list with one item per tile holding the tile image (a picture) and
- *   a link whose text is the brand name. Without a list, a paragraph with a picture followed by a
- *   paragraph with a link makes one tile.
+ * The tabs come from the brand-pages sheet (/brands/brand-pages.json; columns path, type, name,
+ * image): sheet rows with a name and an image are tiles, sorted by name. The first tab, A-Z, shows
+ * all of them; then there is one tab per type, in the order the types first appear in the sheet.
+ * A sheet row can have several types, comma-separated (`chocolate, sweet`).
+ *
+ * Authored rows (optional) override the sheet, one row per tab, 2 cells.
+ *   Cell 1: the tab label. It matches the sheet tab with that name (`A-Z` or `All` for A-Z;
+ *   singular and plural both match a type, `Sweets` = sweet) and replaces its label.
+ *   Cell 2 (optional): the brand tiles, a list with one item per tile holding the tile image
+ *   (a picture) and a link whose text is the brand name. Without a list, a paragraph with a
+ *   picture followed by a paragraph with a link makes one tile. Authored tiles replace the
+ *   tab's sheet tiles; an empty cell keeps them. A label that matches no sheet tab adds a tab
+ *   after the sheet tabs (it needs tiles). Deleting a row brings back that tab from the sheet.
+ * The sheet is only fetched when something is missing: a row without tiles, or one of the
+ * standard tabs (A-Z, Chocolate, Sweets, Snacks) not authored. Fully authored, it isn't loaded.
  * The whole tile links to the brand page; a link to another site opens in a new tab and gets an
  * external-link icon after its name.
  */
 
 const INTERNAL_HOSTS = /(^|\.)hersheyland\.com$/;
+const BRAND_SHEET = '/brands/brand-pages.json';
+const ALL_TABS = new Set(['az', 'all', 'allbrands']);
+// the sheet's tabs today; when every row has tiles and all of these are authored, the sheet
+// isn't loaded (a new type in the sheet then only shows once a row is emptied or deleted)
+const STANDARD_TABS = ['az', 'chocolate', 'sweet', 'snacks'];
+const byName = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
+
+/**
+ * @param {string} text
+ * @returns {string} lower case, letters and digits only (`A-Z` -> `az`)
+ */
+function toKey(text) {
+  return String(text).toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+let brandsPromise;
+
+/**
+ * The brand-pages sheet rows that make a tile (name and image), sorted by name (each keeps its
+ * sheet row index); fetched once.
+ * @returns {Promise<{index: number, path: string, name: string, image: string, types: string[]}[]>}
+ */
+function fetchBrands() {
+  brandsPromise = brandsPromise || fetch(BRAND_SHEET)
+    .then((resp) => (resp.ok ? resp.json() : {}))
+    .then((json) => json.data || json[':names']?.map((name) => json[name]?.data).find(Boolean) || [])
+    .then((rows) => rows
+      .map((row, index) => ({
+        index,
+        path: String(row.path || '').trim(),
+        name: String(row.name || '').trim(),
+        image: String(row.image || '').trim(),
+        types: String(row.type || '').split(',').map((type) => toKey(type)).filter(Boolean),
+      }))
+      .filter(({ path, name, image }) => path && name && image)
+      .sort((a, b) => byName.compare(a.name, b.name)))
+    .catch(() => []);
+  return brandsPromise;
+}
+
+/**
+ * @param {string} key a sheet tab (`az` or a type)
+ * @param {string} label an authored tab label
+ * @returns {boolean} whether the label names that tab (singular and plural both match)
+ */
+function isTab(key, label) {
+  const name = toKey(label);
+  if (key === 'az') return ALL_TABS.has(name);
+  return name === key || name === `${key}s` || `${name}s` === key;
+}
+
+/**
+ * A picture for a sheet image: site images (paths, or aem.page / aem.live media URLs) get the
+ * optimized renditions, other sites' images are used as they are.
+ * @param {string} image
+ * @returns {Element}
+ */
+function sheetPicture(image) {
+  let url;
+  try {
+    url = new URL(image, window.location.href);
+  } catch (error) {
+    return null;
+  }
+  const isSite = url.origin === window.location.origin
+    || (/\.aem\.(page|live)$/.test(url.hostname) && url.pathname.startsWith('/media_'));
+  if (isSite) return createOptimizedPicture(`${url.pathname}${url.search}`, '', false, [{ width: '750' }]);
+  const picture = document.createElement('picture');
+  const img = document.createElement('img');
+  img.src = url.href;
+  img.alt = '';
+  img.loading = 'lazy';
+  picture.append(img);
+  return picture;
+}
+
+/**
+ * @param {{path: string, name: string, image: string, types: string[]}[]} brands
+ * @param {string} key the sheet tab: `az` for every brand, else a type
+ * @returns {{picture: Element, link: HTMLAnchorElement}[]}
+ */
+function tilesFromSheet(brands, key) {
+  const onTab = ({ types }) => key === 'az' || types.includes(key);
+  return brands.filter(onTab).map(({ path, name, image }) => {
+    const link = document.createElement('a');
+    link.href = path;
+    link.textContent = name;
+    return { picture: sheetPicture(image), link };
+  }).filter(({ picture }) => picture);
+}
 
 /**
  * @param {HTMLAnchorElement} link
@@ -77,7 +179,46 @@ function buildTile({ picture, link }) {
   return item;
 }
 
-export default function decorate(block) {
+/**
+ * The tabs to show: A-Z and one per sheet type, then authored tabs the sheet doesn't have.
+ * Authored rows replace a sheet tab's label and, when they have tiles, its tiles.
+ * @param {{label: string, tiles: object[]}[]} authored
+ * @param {{index: number, types: string[]}[]} brands
+ * @returns {{key: string, label: string, tiles: object[]|null}[]} tiles null = from the sheet
+ */
+function tabsFor(authored, brands) {
+  const tabs = [];
+  if (brands.length) {
+    tabs.push({ key: 'az', label: 'A-Z', tiles: null });
+    // types in the order they first appear in the sheet (brands are sorted by name)
+    [...brands].sort((a, b) => a.index - b.index).forEach(({ types }) => types.forEach((type) => {
+      if (tabs.some(({ key }) => key === type)) return;
+      tabs.push({ key: type, label: type.charAt(0).toUpperCase() + type.slice(1), tiles: null });
+    }));
+  }
+  authored.forEach(({ label, tiles }) => {
+    if (!label) return;
+    const tab = tabs.find(({ key }) => isTab(key, label));
+    if (tab) {
+      tab.label = label;
+      if (tiles.length) tab.tiles = tiles;
+    } else {
+      tabs.push({ key: toKey(label), label, tiles });
+    }
+  });
+  return tabs;
+}
+
+export default async function decorate(block) {
+  const authored = [...block.children].map((row) => {
+    const [label, content] = [...row.children];
+    return { label: label?.textContent.trim() || '', tiles: content ? tilesFrom(content) : [] };
+  });
+  // the sheet is only loaded when something is missing: an empty row or a standard tab
+  const complete = authored.length
+    && authored.every(({ label, tiles }) => label && tiles.length)
+    && STANDARD_TABS.every((key) => authored.some(({ label }) => isTab(key, label)));
+  const brands = complete ? [] : await fetchBrands();
   tabsId += 1;
   const id = `brand-tiles-${tabsId}`;
   const bar = document.createElement('div');
@@ -89,19 +230,18 @@ export default function decorate(block) {
   bar.append(list);
   const tabs = [];
   const panels = [];
-  [...block.children].forEach((row, index) => {
-    const [label, content] = [...row.children];
-    const tiles = content ? tilesFrom(content).map(buildTile) : [];
-    if (!label?.textContent.trim() || !tiles.length) {
+  tabsFor(authored, brands).forEach(({ key, label, tiles: chosen }, index) => {
+    // authored tiles win; otherwise the tab's tiles come from the brand-pages sheet
+    const tiles = (chosen || tilesFromSheet(brands, key)).map(buildTile);
+    if (!tiles.length) {
       // eslint-disable-next-line no-console
-      console.error('Tabs (brand-tiles) row needs a label and at least one tile', row);
-      row.remove();
+      console.error(`Tabs (brand-tiles) tab "${label}" has no tiles (authored or from the brand-pages sheet)`);
       return;
     }
     const tab = document.createElement('button');
     tab.type = 'button';
     tab.id = `${id}-tab-${index}`;
-    tab.textContent = label.textContent.trim();
+    tab.textContent = label;
     tab.setAttribute('role', 'tab');
     tab.setAttribute('aria-controls', `${id}-panel-${index}`);
     const panel = document.createElement('div');
@@ -114,11 +254,11 @@ export default function decorate(block) {
     grid.className = 'brand-tiles-grid';
     grid.append(...tiles);
     panel.append(grid);
-    row.replaceWith(panel);
     list.append(tab);
     tabs.push(tab);
     panels.push(panel);
   });
+  block.replaceChildren(...panels);
   if (!tabs.length) return;
   const select = (index, focus = false) => {
     tabs.forEach((tab, i) => {
