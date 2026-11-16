@@ -60,10 +60,12 @@ async function fetchBrandPaths() {
   }
 }
 
+// an entry matches its own path and the same page under /brands (/snacks = /brands/snacks)
 function isBrandPath(path, brandPaths) {
-  return brandPaths.some((entry) => (entry.endsWith('*')
-    ? path.startsWith(entry.slice(0, -1))
-    : entry === path));
+  return brandPaths.some((entry) => [entry, `/brands${entry}`].some((candidate) => (
+    candidate.endsWith('*')
+      ? path.startsWith(candidate.slice(0, -1))
+      : candidate === path)));
 }
 
 // /products/ pages use the product themes (no `file`), listed brand pages the brand themes,

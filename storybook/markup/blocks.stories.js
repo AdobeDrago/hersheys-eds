@@ -8,6 +8,7 @@ import '@adobe/aem-boilerplate/blocks/cards/cards-product.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-quotes.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-steps.css';
 import '@adobe/aem-boilerplate/blocks/cards/cards-wheel.css';
+import '@adobe/aem-boilerplate/blocks/cards/cards-flip.css';
 import {
   contentArgTypes, createPage, element, link, picture, section, showcase,
 } from './story-helpers.js';
@@ -387,4 +388,54 @@ export const Wheel = {
       ],
     });
   },
+};
+
+const FLAVORS = ['Blue Raspberry', 'Strawberry', 'Green Apple', 'Cherry', 'Watermelon'];
+
+function flipRows({ frontArt }) {
+  return FLAVORS.map((name, i) => {
+    const pictures = [picture(`${name} front`, 800, 800)];
+    if (frontArt) pictures.push(picture(`${name} back`, 600, 600));
+    return [
+      cellOf(...pictures),
+      bodyCell({
+        title: name, copy: `Sour ${name.toLowerCase()} strips, flavor ${i + 1} of ${FLAVORS.length}.`, cta: 'Shop now',
+      }),
+    ];
+  });
+}
+
+/**
+ * `Cards (flip, slider)`: click a card to turn it over; Hide, a click on the back, or the close
+ * button turn it back. One picture is used on both faces (large on the front, small on the back).
+ * Check in Accessibility: the hidden face is inert and focus moves to the face now showing.
+ */
+export const FlipSlider = {
+  render: () => renderBrand('Pick a Flavor', {
+    classes: 'flip slider',
+    intro: false,
+    rows: flipRows({ frontArt: false }),
+  }),
+};
+
+/** `Cards (flip, slider)` with two pictures: the first is the front, the second the back. */
+export const FlipTwoPictures = {
+  render: () => renderBrand('Pick a Flavor', {
+    classes: 'flip slider',
+    intro: false,
+    rows: flipRows({ frontArt: true }),
+  }),
+};
+
+/** `Cards (flip, slider)` with a card missing its picture and one missing its body copy. */
+export const FlipMissingCells = {
+  render: () => renderBrand('Pick a Flavor', {
+    classes: 'flip slider',
+    intro: false,
+    rows: [
+      [bodyCell({ title: 'No picture', copy: 'This card has no picture.', cta: 'Shop now' })],
+      [imageCell('Picture only')],
+      ...flipRows({ frontArt: false }).slice(0, 2),
+    ],
+  }),
 };

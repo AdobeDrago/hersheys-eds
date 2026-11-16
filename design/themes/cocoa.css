@@ -1112,6 +1112,8 @@
   --hershey-system-motion-panel-easing: var(--hershey-reference-motion-easing-ease-in-out);
   --hershey-system-motion-search-duration: var(--hershey-reference-motion-duration-300);
   --hershey-system-motion-search-easing: var(--hershey-reference-motion-easing-ease-out);
+  --hershey-system-motion-tile-hover-duration: var(--hershey-reference-motion-duration-150);
+  --hershey-system-motion-tile-hover-easing: var(--hershey-reference-motion-easing-ease);
   --hershey-system-motion-accordion-duration: var(--hershey-reference-motion-duration-400);
   --hershey-system-motion-accordion-easing: var(--hershey-reference-motion-easing-ease-in-out);
   --hershey-system-motion-emphasis-duration: var(--hershey-reference-motion-duration-300);
@@ -1700,6 +1702,8 @@
   --hershey-component-header-motion-search-easing: var(--hershey-system-motion-search-easing);
   --hershey-component-header-motion-accordion-duration: var(--hershey-system-motion-accordion-duration);
   --hershey-component-header-motion-accordion-easing: var(--hershey-system-motion-accordion-easing);
+  --hershey-component-header-motion-tile-hover-duration: var(--hershey-system-motion-tile-hover-duration);
+  --hershey-component-header-motion-tile-hover-easing: var(--hershey-system-motion-tile-hover-easing);
   --hershey-component-header-utility-background: var(--hershey-system-color-surface-inverse);
   --hershey-component-header-utility-color: var(--hershey-system-color-text-inverse);
   --hershey-component-header-utility-height: var(--hershey-system-size-navigation-utility-height);

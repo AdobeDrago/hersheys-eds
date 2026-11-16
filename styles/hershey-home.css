@@ -645,6 +645,11 @@
   background: var(--hershey-system-color-surface-brand-band);
 }
 
+/* same for pages closing on a `cream` band, e.g. /about/faqs */
+.hershey-home:has(main > .section.cream:nth-last-child(-n+2)) .footer.hershey-footer .newsletter {
+  background: var(--hershey-system-color-surface-cream-light);
+}
+
 /* `teal` section style: a teal band, e.g. the hero and its confetti divider on /inspiration; a brand
    hero in the band takes the same colour */
 .hershey-home main > .teal {

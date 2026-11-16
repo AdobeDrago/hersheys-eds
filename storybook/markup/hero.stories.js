@@ -150,6 +150,18 @@ export const Article = {
   ]], { sectionStyle: style }).root,
 };
 
+/** Adds the <source> elements the backend delivers: a wide one, then the plain fallback. */
+function withSources(pic) {
+  const { src } = pic.querySelector('img');
+  [['(min-width: 600px)', 1200], [undefined, 750]].forEach(([media, width]) => {
+    const source = element('source');
+    if (media) source.media = media;
+    source.srcset = `${src}&width=${width}`;
+    pic.prepend(source);
+  });
+  return pic;
+}
+
 function brandCells({ logo = true, photo = true }) {
   return [
     photo ? cell(picture('Brand photo', 1200, 1200)) : cell(),
@@ -166,6 +178,21 @@ export const Brand = {
   render: () => renderVariant('brand', [brandCells({})], {
     note: 'Hero (brand). The panel colour comes from a brand theme, which Storybook does not load.',
   }).root,
+};
+
+/**
+ * `Hero (brand)` with two photos in the image cell: the first shows from 992px, the second below.
+ * The block folds the second into the first as <source> elements; resize the canvas to compare.
+ */
+export const BrandMobilePhoto = {
+  render: () => renderVariant('brand', [[
+    cell(picture('Desktop photo', 1200, 1200), withSources(picture('Mobile photo', 800, 1000))),
+    cell(
+      picture('Logo', 400, 200),
+      element('h1', '', 'Symphony'),
+      paragraph('Smooth milk chocolate, made for sharing.'),
+    ),
+  ]]).root,
 };
 
 /** `Hero (brand, square)`: square photo; from 992px the photo half is 740px tall. */

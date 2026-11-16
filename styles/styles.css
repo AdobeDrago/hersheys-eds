@@ -509,7 +509,7 @@ main .section.plum-large {
 }
 
 /* the empty section left by the page metadata must not add a gap before the footer */
-.hershey-story main > .section:empty {
+main > .section:empty {
   margin: 0;
 }
 

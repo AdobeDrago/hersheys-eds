@@ -624,6 +624,7 @@ header:has(.header.hershey-nav .nav-utility) {
   gap: var(--hershey-component-header-dropdown-item-gap);
   height: var(--hershey-component-header-submenu-card-height-mobile);
   font-size: var(--hershey-system-typography-caption-font-size);
+  text-decoration: none;
 }
 
 /* "See ... Ideas": no icon, a chevron right after the label */
@@ -654,6 +655,19 @@ header:has(.header.hershey-nav .nav-utility) {
   width: var(--hershey-component-header-submenu-icon-size);
   height: 100%;
   object-fit: contain;
+  transform-origin: right center;
+  transition: transform var(--hershey-component-header-motion-tile-hover-duration) var(--hershey-component-header-motion-tile-hover-easing);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.header.hershey-nav nav .nav-sections .nav-drop > ul > li > p:has(picture) {
+  overflow: hidden;
+}
+
+@media (hover: hover) {
+  .header.hershey-nav nav .nav-sections li > ul a:hover img {
+    transform: scale(1.2);
+  }
 }
 
 .header.hershey-nav :focus-visible {
@@ -669,7 +683,8 @@ header:has(.header.hershey-nav .nav-utility) {
   .header.hershey-nav nav .nav-hamburger-icon::before,
   .header.hershey-nav nav .nav-hamburger-icon::after,
   .header.hershey-nav nav .nav-sections .nav-drop,
-  .header.hershey-nav nav .nav-sections .nav-drop > ul {
+  .header.hershey-nav nav .nav-sections .nav-drop > ul,
+  .header.hershey-nav nav .nav-sections li > ul img {
     transition: none;
   }
 }
