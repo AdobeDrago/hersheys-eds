@@ -1043,13 +1043,13 @@
   }
 }
 
-/* kiss-shaped page indicators under the Newest Treats on phones and tablets */
+/* blue circle page indicators under the Newest Treats on phones and tablets, as on live */
 .hershey-home.homepage .newest .cards.slider.stories .cards-slider-dot {
-  background: url('/icons/kiss-indicator-inactive-blue.svg') center / contain no-repeat;
+  background: url('/icons/orb-indicator-inactive-blue.svg') center / contain no-repeat;
 }
 
 .hershey-home.homepage .newest .cards.slider.stories .cards-slider-dot[aria-current='true'] {
-  background-image: url('/icons/kiss-indicator-active-blue.svg');
+  background-image: url('/icons/orb-indicator-active-blue.svg');
 }
 
 /* the tile titles are plain maroon text, underlined only on hover, as on live */
