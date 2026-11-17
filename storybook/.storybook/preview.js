@@ -37,8 +37,10 @@ export default {
       },
     },
     options: {
-      storySort: {
-        order: [
+      storySort: (a, b) => {
+        // Named titles first (nested arrays order their children), the rest A-Z.
+        // Kept inline: Storybook only reads storySort when it is defined in this object.
+        const titleOrder = [
           'Foundations', [
             'Overview',
             'Color',
@@ -55,11 +57,39 @@ export default {
             'Unordered List', 'Ordered List', 'Blockquote', 'Image', 'Table', 'Divider',
           ],
           'Blocks', [
-            'Cards', 'Columns', 'Hero', 'Tabs', 'Widget Loader',
+            'Accordion', 'Banner', 'Breadcrumb Trail', 'Cards', 'Columns',
+            'Details and Directions', 'Hero', 'Hersheys Search', 'Jump Links', 'Link Group',
+            'Newsletter', 'Newsletter Signup',
             'Page Structure', ['Header', 'Footer', 'Fragment'],
+            'Poll', 'Recipe Details', 'Social Share', 'Tabs', 'Timeline', 'Timeline Nav',
+            'Widget Loader',
           ],
           'Widgets',
-        ],
+        ];
+        const rankIn = (order, name) => {
+          const i = order.indexOf(name);
+          return i === -1 ? Infinity : i;
+        };
+        const compareTitles = (ta, tb) => {
+          let order = titleOrder;
+          const pa = ta.split('/');
+          const pb = tb.split('/');
+          for (let i = 0; i < Math.min(pa.length, pb.length); i += 1) {
+            if (pa[i] !== pb[i]) {
+              return rankIn(order, pa[i]) - rankIn(order, pb[i]) || pa[i].localeCompare(pb[i]);
+            }
+            const next = order[order.indexOf(pa[i]) + 1];
+            order = Array.isArray(next) ? next : [];
+          }
+          return pa.length - pb.length;
+        };
+        // Within a component: Docs first, then Default, then stories A-Z.
+        const storyRank = (entry) => {
+          if (entry.type === 'docs') return 0;
+          return entry.name.replace(/\s*⚡$/, '') === 'Default' ? 1 : 2;
+        };
+        if (a.title !== b.title) return compareTitles(a.title, b.title);
+        return storyRank(a) - storyRank(b) || a.name.localeCompare(b.name);
       },
     },
   },

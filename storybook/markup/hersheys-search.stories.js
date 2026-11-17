@@ -123,19 +123,19 @@ function renderSearch(mockOptions, hitsPerPage = 6, type = 'recipes') {
 }
 
 export default {
-  title: 'Blocks/Search Recipes',
+  title: 'Blocks/Hersheys Search',
   parameters: {
     docs: { description: { component: 'Production Search (Recipes) decorator and CSS with a mocked Algolia response. Search, facet filters, sort and pagination all run through the real block code. The authored block is empty; optional rows (hits-per-page, endpoint, asset-origin) override the defaults.' } },
   },
 };
 
-export const Default = { render: () => renderSearch() };
-export const NoResults = { render: () => renderSearch({ empty: true }) };
-export const LoadError = { render: () => renderSearch({ fail: true }) };
+export const Default = { name: 'Default ⚡', render: () => renderSearch() };
+export const NoResults = { name: 'No Results ⚡', render: () => renderSearch({ empty: true }) };
+export const LoadError = { name: 'Load Error ⚡', render: () => renderSearch({ fail: true }) };
 
 /** `Search (activities)`: crafts listing with the “Find an Activity” banner. */
-export const Activities = { render: () => renderSearch({}, 6, 'activities') };
+export const Activities = { name: 'Activities ⚡', render: () => renderSearch({}, 6, 'activities') };
 /** `Search (products)`: product cards with portion, rating and seasonal label; brand facet. */
-export const Products = { render: () => renderSearch({}, 6, 'products') };
+export const Products = { name: 'Products ⚡', render: () => renderSearch({}, 6, 'products') };
 /** `Search (stories)`: no search banner (the page hero has the heading); season/category facets. */
-export const Stories = { render: () => renderSearch({}, 6, 'stories') };
+export const Stories = { name: 'Stories ⚡', render: () => renderSearch({}, 6, 'stories') };

@@ -63,9 +63,9 @@ export default {
 export const Default = {};
 export const Welcome = { args: { variant: 'welcome-cards' } };
 export const Products = { args: { variant: 'products' } };
-export const Related = { args: { variant: 'related' } };
+export const Related = { name: 'Related ⚡', args: { variant: 'related' } };
 export const Social = { args: { variant: 'social', count: 4 } };
-export const Slider = { args: { variant: 'slider', count: 5 } };
+export const Slider = { name: 'Slider ⚡', args: { variant: 'slider', count: 5 } };
 /** `Cards (callout)`: a kiss-dot carousel below 992px, a row of three from 992px. */
 export const Callout = { args: { variant: 'callout' } };
 export const TextOnly = { args: { showImage: false } };
@@ -96,6 +96,7 @@ function mockRecommend() {
 
 /** Empty `Cards (slider, related, recipes)`: cards come from Algolia Recommend (mocked). */
 export const RelatedRecipes = {
+  name: 'Related Recipes ⚡',
   render: () => {
     const root = createPage('Blocks', 'Cards', 'Related recipes are mocked; no request reaches Algolia.');
     const main = showcase(root);
@@ -290,6 +291,7 @@ export const Steps = {
 
 /** `Cards (slider, related, recipes)` with authored cards. Authored cards win over Algolia. */
 export const Recipes = {
+  name: 'Recipes ⚡',
   render: () => renderBrand('You Might Also Enjoy...', {
     classes: 'slider related recipes',
     eyebrow: '',

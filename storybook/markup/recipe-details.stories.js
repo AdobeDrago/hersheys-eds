@@ -93,5 +93,5 @@ function renderNutrition() {
   return root;
 }
 
-export const Ingredients = { render: renderIngredients };
-export const Nutrition = { render: renderNutrition };
+export const Ingredients = { name: 'Ingredients ⚡', render: renderIngredients };
+export const Nutrition = { name: 'Nutrition ⚡', render: renderNutrition };
