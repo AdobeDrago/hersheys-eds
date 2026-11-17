@@ -49,4 +49,4 @@ function renderActivities() {
   return root;
 }
 
-export const Activities = { render: renderActivities };
+export const Activities = { name: 'Activities ⚡', render: renderActivities };

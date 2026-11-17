@@ -96,6 +96,7 @@ function nutritionRender(factsCell) {
 
 /** `Tabs (nutrition)` with authored facts: "Name | amount | %DV" lines become aligned rows. */
 export const Nutrition = {
+  name: 'Nutrition ⚡',
   render: () => nutritionRender(FACTS_ROWS.map((text) => element('p', '', text))),
 };
 
@@ -129,6 +130,7 @@ const SHEET_ROW = {
  * other stories keep the real fetch.
  */
 export const NutritionFromSheet = {
+  name: 'Nutrition From Sheet ⚡',
   render: () => {
     markNutritionCssLoaded();
     const { root, tabs } = nutritionTabs([]);
@@ -199,7 +201,7 @@ const BRAND_TILES_ARGS = {
  * Home/End move between tabs; check the tab/panel relationships in Accessibility.
  */
 export const BrandTiles = {
-  name: 'Brand tiles',
+  name: 'Brand tiles ⚡',
   args: BRAND_TILES_ARGS,
   argTypes: {
     tabs: { control: 'object', description: 'Tab label and how many tiles it holds.' },
@@ -209,14 +211,14 @@ export const BrandTiles = {
 
 /** `Tabs (brand-tiles)` with no list: a picture paragraph then a link paragraph make a tile. */
 export const BrandTilesParagraphs = {
-  name: 'Brand tiles (paragraphs)',
+  name: 'Brand tiles (paragraphs) ⚡',
   args: BRAND_TILES_ARGS,
   render: (args) => renderBrandTiles({ ...args, paragraphs: true }),
 };
 
 /** `Tabs (brand-tiles)` with a single tab holding one tile. */
 export const BrandTilesSingle = {
-  name: 'Brand tiles (single)',
+  name: 'Brand tiles (single) ⚡',
   args: { heading: 'Explore & Shop Our Brands', tabs: { 'A-Z': 1 } },
   render: renderBrandTiles,
 };
