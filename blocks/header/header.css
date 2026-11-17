@@ -285,9 +285,12 @@ header nav .nav-tools {
   color: var(--text-color);
 }
 
-/* utility bar (optional 4th nav section): sits above the main bar and hides on scroll down */
+/* utility bar (optional 4th nav section): sits above the main bar and hides on scroll down.
+   The header tokens are scoped to the theme (.hershey-home/-product/-recipe) and the header block,
+   so on a page without a theme (e.g. /where-to-buy) <header> can't read them: the fallbacks
+   (the token values) keep the space for the fixed nav there, or the page slides under it. */
 header:has(.header.hershey-nav .nav-utility) {
-  height: calc(var(--nav-height) + var(--hershey-component-header-utility-height-mobile));
+  height: calc(var(--nav-height) + var(--hershey-component-header-utility-height-mobile, 44px));
 }
 
 .header.hershey-nav .nav-wrapper {
@@ -373,7 +376,7 @@ header:has(.header.hershey-nav .nav-utility) {
 
 @media (width >= 992px) {
   header:has(.header.hershey-nav .nav-utility) {
-    height: calc(var(--nav-height) + var(--hershey-component-header-utility-height));
+    height: calc(var(--nav-height) + var(--hershey-component-header-utility-height, 56px));
   }
 
   .header.hershey-nav .nav-wrapper {
