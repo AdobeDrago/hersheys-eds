@@ -8,7 +8,8 @@
  * The slider scrolls three tiles at a time with previous/next buttons and Hershey's Kiss page
  * dots; below 768px the track just swipes. The band is dark brown and sits on the section.
  */
-const PAGE_SIZE = 3;
+const WIDE = window.matchMedia('(width >= 768px)');
+const pageSize = () => (WIDE.matches ? 3 : 1);
 
 const smooth = () => (window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth');
 
@@ -69,19 +70,24 @@ export default function decorate(block) {
   });
   const dots = document.createElement('div');
   dots.className = 'link-group-dots';
-  const pages = Math.max(1, Math.ceil(tiles.length / PAGE_SIZE));
-  // each dot is a row of three tiles
-  for (let i = 0; i < pages; i += 1) {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.setAttribute('aria-label', `Show tiles ${i * PAGE_SIZE + 1} to ${Math.min((i + 1) * PAGE_SIZE, tiles.length)}`);
-    dot.addEventListener('click', () => {
-      const tile = track.querySelector('.link-group-tile');
-      const pitch = tile.offsetWidth + parseFloat(getComputedStyle(track).columnGap || '0');
-      scrollTo(Math.min(i * PAGE_SIZE * pitch, track.scrollWidth - track.clientWidth));
-    });
-    dots.append(dot);
-  }
+  let pages = 1;
+  // each dot is a page of tiles: a row of three, or one tile on phones
+  const buildDots = () => {
+    const size = pageSize();
+    pages = Math.max(1, Math.ceil(tiles.length / size));
+    dots.replaceChildren(...Array.from({ length: pages }, (_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Show tiles ${i * size + 1} to ${Math.min((i + 1) * size, tiles.length)}`);
+      dot.addEventListener('click', () => {
+        const tile = track.querySelector('.link-group-tile');
+        const pitch = tile.offsetWidth + parseFloat(getComputedStyle(track).columnGap || '0');
+        scrollTo(Math.min(i * size * pitch, track.scrollWidth - track.clientWidth));
+      });
+      return dot;
+    }));
+  };
+  buildDots();
   controls.append(prev, dots, next);
 
   const slider = document.createElement('div');
@@ -89,10 +95,11 @@ export default function decorate(block) {
   slider.append(track, controls);
 
   const update = () => {
+    if (dots.children.length !== Math.max(1, Math.ceil(tiles.length / pageSize()))) buildDots();
     const max = track.scrollWidth - track.clientWidth;
     const tile = track.querySelector('.link-group-tile');
     const pitch = tile ? tile.offsetWidth + parseFloat(getComputedStyle(track).columnGap || '0') : 1;
-    let page = Math.min(Math.round(track.scrollLeft / (PAGE_SIZE * pitch)), pages - 1);
+    let page = Math.min(Math.round(track.scrollLeft / (pageSize() * pitch)), pages - 1);
     if (max > 0 && track.scrollLeft >= max - 1) page = pages - 1;
     if (!(page >= 0)) page = 0;
     prev.disabled = track.scrollLeft <= 1;
