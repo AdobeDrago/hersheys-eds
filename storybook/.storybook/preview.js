@@ -8,14 +8,17 @@ import '../../design/themes/payday-primary.css';
 import '../../design/themes/rolo-primary.css';
 import '../../design/themes/brands.css';
 import '../../scripts/aem.js';
-import { DecoratorHelpers } from '@storybook/addon-themes';
-import { applyTheme, applyBrand, brandItems, themes } from './theme.js';
+// import { DecoratorHelpers } from '@storybook/addon-themes';
+// import { themes } from './theme.js';
+import { applyTheme, applyBrand, brandItems } from './theme.js';
 import docsPage from './docs.js';
 import '../foundations/foundations.css';
 import '../markup/markup.css';
 import '../foundations/design-workspace.css';
 
-DecoratorHelpers.initializeThemeState(Object.keys(themes), 'Hersheyland');
+// Hersheyland/Cocoa toolbar switch, disabled for now. Uncomment this line and the two imports
+// above to show it again; ?globals=theme:Cocoa still works without it.
+// DecoratorHelpers.initializeThemeState(Object.keys(themes), 'Hersheyland');
 window.hlx.codeBasePath = '';
 
 export default {
