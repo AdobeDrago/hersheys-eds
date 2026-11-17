@@ -1,9 +1,15 @@
 import '../../design/tokens.css';
 import '../../design/themes/cocoa.css';
 import '../../styles/hershey-home.css';
+import '../../styles/hershey-brand.css';
+import '../../design/themes/reese-primary.css';
+import '../../design/themes/cadbury-primary.css';
+import '../../design/themes/payday-primary.css';
+import '../../design/themes/rolo-primary.css';
+import '../../design/themes/brands.css';
 import '../../scripts/aem.js';
 import { DecoratorHelpers } from '@storybook/addon-themes';
-import { applyTheme, themes } from './theme.js';
+import { applyTheme, applyBrand, brandItems, themes } from './theme.js';
 import docsPage from './docs.js';
 import '../foundations/foundations.css';
 import '../markup/markup.css';
@@ -14,9 +20,17 @@ window.hlx.codeBasePath = '';
 
 export default {
   tags: ['autodocs'],
+  globalTypes: {
+    brand: {
+      description: 'Product or brand page theme (the `theme` page metadata)',
+      toolbar: { title: 'Brand theme', icon: 'paintbrush', items: brandItems, dynamicTitle: true },
+    },
+  },
+  initialGlobals: { brand: 'default' },
   decorators: [(story, context) => {
     const root = story();
     applyTheme(root, context.parameters.themes?.themeOverride || context.globals.theme || 'Hersheyland');
+    applyBrand(root, context.globals.brand);
     return root;
   }],
   parameters: {
