@@ -1663,7 +1663,7 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
               <tr><td>Dietary Info</td><td>Icon (or <code class="code-inline">:icon-name:</code>) followed by its label</td></tr>
             </table></div>
             <ul class="bg-notes">
-              <li><strong>Data:</strong> an empty or missing Nutrition Facts, Ingredients or Dietary Info tab, or an empty block, is filled from <code class="code-inline">/products/nutrition</code> using page metadata <code class="code-inline">brand</code> (sheet tab) and <code class="code-inline">bvid</code> (GTIN). Authored content always wins. Ingredients come from the <code class="code-inline">ingredients</code>, <code class="code-inline">allergens</code> (shown as "Contains: …") and <code class="code-inline">allergenNote</code> columns; Dietary Info from <code class="code-inline">dietary</code>, comma-separated labels whose names are also the icon names (OU-D → <code class="code-inline">/icons/ou-d.svg</code>; a label without an icon file shows as text).</li>
+              <li><strong>Data:</strong> an empty or missing Nutrition Facts tab, or an empty block, is filled from <code class="code-inline">/products/nutrition</code> using page metadata <code class="code-inline">brand</code> (sheet tab) and <code class="code-inline">bvid</code> (GTIN).</li>
               <li><strong>Watch out:</strong> put spaces around the pipes. The label must read "Nutrition Facts". A list becomes a table only if every item is a pipe row.</li>
             </ul>
             <h4>Tabs (brand-tiles) (/brands) <span class="nav-status ns-progress">Dynamic</span></h4>
