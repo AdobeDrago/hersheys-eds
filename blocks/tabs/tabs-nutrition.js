@@ -8,10 +8,14 @@ import { decorateIcons, getMetadata, toClassName } from '../../scripts/aem.js';
  *     (or "Label | value") become aligned rows; other paragraphs stay as text.
  *   Ingredients: plain paragraphs.
  *   Dietary Info: icon images (or :icon: tokens) each followed by a label.
- * Authored content wins. An empty Nutrition Facts tab, or a block without one (even an empty
- * block), is filled from the tab of the nutrition sheet named by the `brand` metadata
- * (/products/nutrition.json?sheet=<brand>, row matched by `bvid` GTIN). The sheet is only
- * requested then.
+ * Authored content wins. An empty Nutrition Facts, Ingredients or Dietary Info tab, or a
+ * block without one (even an empty block), is filled from the tab of the nutrition sheet
+ * named by the `brand` metadata (/products/nutrition.json?sheet=<brand>, row matched by
+ * `bvid` GTIN). The sheet is only requested then, and a tab is only added when its sheet
+ * columns have data:
+ *   Ingredients: `ingredients`, `allergens` (shown as "Contains: …"), `allergenNote`.
+ *   Dietary Info: `dietary`, comma-separated labels; each label is also the icon name
+ *   (OU-D -> /icons/ou-d.svg). A label without an icon file shows as text only.
  */
 
 const CELL_SEPARATOR = /\s+\|\s+/;
@@ -75,6 +79,10 @@ function textEl(tag, text) {
  * @returns {Element[]}
  */
 function buildFacts(row) {
+  const hasData = row.servingSize || row.servingsPerContainer
+    || FACTS.some(([, key, subRows = []]) => row[key] || row[`${key}DV`]
+      || subRows.some(([, subKey]) => row[subKey] || row[`${subKey}DV`]));
+  if (!hasData) return [];
   const out = [];
   if (row.servingSize) {
     const p = document.createElement('p');
@@ -115,6 +123,43 @@ function buildFacts(row) {
   out.push(facts, textEl('p', DV_FOOTNOTE));
   return out;
 }
+
+/**
+ * Builds Ingredients content from a sheet row, in the authored format.
+ * @param {Object} row
+ * @returns {Element[]}
+ */
+function buildIngredients(row) {
+  const out = [];
+  if (row.ingredients) out.push(textEl('p', row.ingredients));
+  if (row.allergens) out.push(textEl('p', `Contains: ${row.allergens}`));
+  if (row.allergenNote) out.push(textEl('p', row.allergenNote));
+  return out;
+}
+
+/**
+ * Builds Dietary Info content from a sheet row: an icon paragraph followed by its label,
+ * as authored, so decorateBadges groups them the same way.
+ * @param {Object} row
+ * @returns {Element[]}
+ */
+function buildDietary(row) {
+  return (row.dietary || '').split(',').map((label) => label.trim()).filter(Boolean)
+    .flatMap((label) => {
+      const icon = document.createElement('span');
+      icon.className = `icon icon-${toClassName(label)}`;
+      const p = document.createElement('p');
+      p.append(icon);
+      return [p, textEl('p', label)];
+    });
+}
+
+/* tabs the sheet can fill, in display order: [label, accepted label ids, builder] */
+const SHEET_TABS = [
+  ['Nutrition Facts', ['nutrition-facts'], buildFacts],
+  ['Ingredients', ['ingredients'], buildIngredients],
+  ['Dietary Info', ['dietary-info', 'dietary-information'], buildDietary],
+];
 
 /**
  * Splits "a | b | c" text into trimmed parts, or returns null when it is not a row.
@@ -290,16 +335,34 @@ export default async function decorate(block) {
     || cell.querySelector('picture, img'));
   // rows left blank in the document (no label, no content) are not tabs
   const rows = [...block.children].filter((row) => isAuthored([...row.children]));
-  const factsRow = rows.find((row) => toClassName(row.firstElementChild.textContent) === 'nutrition-facts');
-  const sheetRow = !factsRow || !isAuthored([...factsRow.children].slice(1))
+  const tabKey = (row) => toClassName(row.firstElementChild.textContent);
+  const findRow = (ids) => rows.find((row) => ids.includes(tabKey(row)));
+  const hasContent = (row) => row && isAuthored([...row.children].slice(1));
+  const sheetRow = SHEET_TABS.some(([, ids]) => !hasContent(findRow(ids)))
     ? await fetchNutritionRow() : null;
-  if (!factsRow && sheetRow) {
-    // no Nutrition Facts row authored: add the tab, filled from the sheet below
-    const row = document.createElement('div');
-    const label = document.createElement('div');
-    label.textContent = 'Nutrition Facts';
-    row.append(label, document.createElement('div'));
-    rows.unshift(row);
+
+  // tab key -> content built from the sheet, for tabs left empty or not authored
+  const sheetContent = new Map();
+  if (sheetRow) {
+    SHEET_TABS.forEach(([labelText, ids, build], index) => {
+      const authored = findRow(ids);
+      if (hasContent(authored)) return;
+      const content = build(sheetRow);
+      if (!content.length) return;
+      if (authored) {
+        sheetContent.set(tabKey(authored), content);
+        return;
+      }
+      // not authored: add the tab after the sheet tabs that come before it
+      const row = document.createElement('div');
+      const label = document.createElement('div');
+      label.textContent = labelText;
+      row.append(label, document.createElement('div'));
+      const before = SHEET_TABS.slice(0, index)
+        .map(([, prevIds]) => rows.indexOf(findRow(prevIds)));
+      rows.splice(Math.max(-1, ...before) + 1, 0, row);
+      sheetContent.set(tabKey(row), content);
+    });
   }
   if (!rows.length) return;
 
@@ -324,8 +387,10 @@ export default async function decorate(block) {
     panel.setAttribute('role', 'tabpanel');
     panel.setAttribute('aria-labelledby', `${prefix}-tab-${id}`);
     panel.tabIndex = 0;
-    if (id === 'nutrition-facts' && sheetRow && !isAuthored(contentCells)) {
-      panel.append(...buildFacts(sheetRow));
+    const fromSheet = sheetContent.get(toClassName(labelCell.textContent));
+    if (fromSheet) {
+      sheetContent.delete(toClassName(labelCell.textContent)); // fill one tab per key
+      panel.append(...fromSheet);
       panel.dataset.source = 'sheet';
     } else {
       contentCells.forEach((cell) => panel.append(...cell.childNodes));
@@ -334,6 +399,12 @@ export default async function decorate(block) {
     decorateIconTokens(panel);
     decorateBadges(panel);
     decoratePanelType(panel);
+    if (fromSheet) {
+      // a sheet label with no icon file keeps its text label, without a broken image
+      panel.querySelectorAll('.tabs-nutrition-badge .icon img').forEach((img) => {
+        img.addEventListener('error', () => img.parentElement.remove(), { once: true });
+      });
+    }
 
     // tab button: move the label nodes (no HTML strings, Trusted Types safe)
     const button = document.createElement('button');
