@@ -224,17 +224,19 @@ function preloadProductHero(doc) {
   } catch {
     // no page image
   }
-  const pageImage = !authored.has('imageFront') && image.includes('/media_');
-  // the hero reads the sheet only for fields the block leaves out (the page image stands in for
-  // the front image)
+  // the hero reads the sheet only for fields the block leaves out
   const needsSheet = ['imageFront', 'imageBack', 'title', 'size', 'description']
-    .some((field) => !authored.has(field) && !(field === 'imageFront' && pageImage));
+    .some((field) => !authored.has(field));
   const sheet = getMetadata('brand').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '');
+  const sheetRow = sheet && (getMetadata('bvid') || getMetadata('bv-id')).trim();
   if (needsSheet && sheet) {
     preloadLink({
       rel: 'preload', as: 'fetch', crossorigin: 'anonymous', href: `/products/product-master.json?sheet=${sheet}`,
     });
   }
+  // the sheet's image (bvid row) comes before the page image, so the page image is only
+  // preloaded when there is no sheet row to read
+  const pageImage = !authored.has('imageFront') && !sheetRow && image.includes('/media_');
   if (!pageImage) return;
   [['(min-width: 900px)', 1000], ['(max-width: 899px)', 750]].forEach(([media, width]) => {
     preloadLink({
