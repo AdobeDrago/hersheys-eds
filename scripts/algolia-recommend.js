@@ -24,11 +24,15 @@ const TIMEOUT = 4000;
  *   e.g. `product-detail` or `recipe-detail`
  * @param {number} options.max maximum number of hits
  * @param {number} [options.timeout] ms before the request is aborted
+ * @param {string} [options.url] production URL of the record to relate to; defaults to this
+ *   page's path on www.hersheyland.com
  * @returns {Promise<object[]>} raw Algolia hits
  */
-export default async function fetchRelated({ templateType, max, timeout = TIMEOUT }) {
+export default async function fetchRelated({
+  templateType, max, timeout = TIMEOUT, url,
+}) {
   const { pathname } = window.location;
-  const objectID = `${PRODUCTION}${pathname.endsWith('.html') ? pathname : `${pathname}.html`}`;
+  const objectID = url || `${PRODUCTION}${pathname.endsWith('.html') ? pathname : `${pathname}.html`}`;
   // AbortSignal.timeout isn't in Safari 15
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeout);
