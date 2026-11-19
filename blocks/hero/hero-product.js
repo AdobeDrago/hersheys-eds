@@ -214,7 +214,6 @@ const GALLERY_BREAKPOINTS = [{ media: '(min-width: 900px)', width: '1000' }, { w
 /**
  * The page's own product image: the `image` metadata (og:image) when it is an image of this site,
  * as on every migrated product page, where it is the front of the pack. Empty otherwise.
- * Only used as the front image when the product master sheet has no image for the `bvid`.
  * @returns {string} the image path
  */
 function metadataImage() {
@@ -660,29 +659,29 @@ function buildLabel(text) {
  * @returns {Promise<{ row: Element, media: Element, details: Element }>}
  */
 async function buildFromFields(block, fields) {
-  // the sheet is read only for what the block leaves out; a missing label alone does not need
-  // it (author `label` for one)
-  const needsSheet = SHEET_FIELDS.some((field) => !fields[field] && field !== 'label');
+  // the page's own product image needs nothing from the sheet: it starts loading right away
+  // (it is the LCP image) while the sheet is read for the rest
+  const pageImage = !fields.imageFront && metadataImage();
+  const early = pageImage && createOptimizedPicture(pageImage, '', true, GALLERY_BREAKPOINTS);
+  if (early) {
+    early.dataset.optimized = 'true';
+    early.querySelector('img').fetchPriority = 'high';
+  }
+  // the sheet is read only for what the block leaves out: the page's own image stands in for the
+  // front image, and a missing label alone does not need it (author `label` for one)
+  const needsSheet = SHEET_FIELDS.some((field) => !fields[field]
+    && field !== 'label' && !(field === 'imageFront' && pageImage));
   const { product, products } = needsSheet ? await findProduct() : {};
   const sheet = product || {};
   const authoredAlt = [fields.title, fields.size].map((cell) => cell?.textContent.trim())
     .filter(Boolean).join(', ');
   const alt = sheet.imageAlt || sheet.title || sheet.name || authoredAlt;
+  if (early) early.querySelector('img').alt = alt;
 
-  // front image: authored, else the sheet row's image (bvid), else the page's own image
-  // (image metadata), so a placeholder page image never hides the product's real front
   const media = document.createElement('div');
-  let front = null;
-  const pageImage = !fields.imageFront && !sheet.image && metadataImage();
-  if (fields.imageFront) {
-    front = fieldPicture(fields.imageFront, alt, true);
-  } else if (sheet.image) {
-    front = buildPicture(sheet.image.trim(), alt, true);
-  } else if (pageImage) {
-    front = createOptimizedPicture(pageImage, alt, true, GALLERY_BREAKPOINTS);
-    front.dataset.optimized = 'true';
-    front.querySelector('img').fetchPriority = 'high';
-  }
+  let front = early;
+  if (fields.imageFront) front = fieldPicture(fields.imageFront, alt, true);
+  else if (!early && sheet.image) front = buildPicture(sheet.image.trim(), alt, true);
   const back = fields.imageBack ? fieldPicture(fields.imageBack, alt)
     : sheet.imageBack && buildPicture(sheet.imageBack.trim(), sheet.imageBackAlt || alt);
   media.append(...[front, back].filter(Boolean));
