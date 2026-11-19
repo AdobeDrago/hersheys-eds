@@ -710,6 +710,10 @@
         <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm1.75-.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25H5.5v-13H1.75zM7 14.5h7.25a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H7v13z"/></svg>
         DA Library &amp; tools
       </a>
+      <a class="sidebar-link" href="#pdp-page">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 1A1.5 1.5 0 001 2.5v11A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-11A1.5 1.5 0 0013.5 1h-11zM3 3h4v4H3V3zm6 0h4v1.5H9V3zm0 2.5h4V7H9V5.5zM3 9h10v1.5H3V9zm0 2.5h10V13H3v-1.5z"/></svg>
+        PDP page
+      </a>
       <a class="sidebar-link" href="#supporting-modules">
         <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2h-7zM5 5.5A.5.5 0 015.5 5h5a.5.5 0 010 1h-5A.5.5 0 015 5.5zm0 2.5a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5A.5.5 0 015 8zm.5 2a.5.5 0 000 1h3a.5.5 0 000-1h-3z"/></svg>
         Supporting modules
@@ -1896,6 +1900,115 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <li><strong>Branch names</strong> are turned into the form EDS uses, lower case with anything other than letters and digits as hyphens: <code class="code-inline">feature/brand</code> becomes <code class="code-inline">feature-brand</code>.</li>
           <li><strong>Limits:</strong> the list is read from GitHub without signing in. It shows at most 100 branches, and GitHub allows about 60 lookups an hour per network, after which it shows "Could not load branches". Content is the same on every branch; only the code differs.</li>
         </ul>
+      </section>
+
+      <section class="doc-section" id="pdp-page">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 1A1.5 1.5 0 001 2.5v11A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-11A1.5 1.5 0 0013.5 1h-11zM3 3h4v4H3V3zm6 0h4v1.5H9V3zm0 2.5h4V7H9V5.5zM3 9h10v1.5H3V9zm0 2.5h10V13H3v-1.5z"/></svg>
+          </span>
+          PDP page (product detail page)
+        </h2>
+        <div class="section-rule"></div>
+        <p>A product page lives under <code class="code-inline">/products/</code> and is mostly data-driven. The document holds the page structure, empty blocks and a few metadata values. The product name, images, sizes, description, nutrition and related products are filled in from two sheets and Algolia when the page loads. Authored content always wins over the sheets.</p>
+        <table class="spec-table">
+          <thead><tr><th>Example</th><th>Link</th></tr></thead>
+          <tbody>
+            <tr><td>DA document</td><td><a href="https://da.live/canvas#/adobedrago/hersheys-eds/products/payday-chocolatey-covered-peanut-and-caramel-king-size-candy-bar-3-1-oz" target="_blank" rel="noopener" style="color:var(--brand-blue);">da.live/canvas#/adobedrago/hersheys-eds/products/payday-chocolatey-covered-peanut-and-caramel-king-size-candy-bar-3-1-oz</a></td></tr>
+            <tr><td>EDS preview</td><td><a href="https://main--hersheys-eds--adobedrago.aem.page/products/payday-chocolatey-covered-peanut-and-caramel-king-size-candy-bar-3-1-oz" target="_blank" rel="noopener" style="color:var(--brand-blue);">main--hersheys-eds--adobedrago.aem.page/products/payday-chocolatey-covered-peanut-and-caramel-king-size-candy-bar-3-1-oz</a></td></tr>
+          </tbody>
+        </table>
+
+        <h3>Page structure</h3>
+        <p>The PAYDAY example has these sections, top to bottom. Every block except the breadcrumb and the widget is left empty, so its content comes from data.</p>
+        <div class="bg-scroll"><table class="spec-table">
+          <thead><tr><th>Section</th><th>Content</th><th>Filled from</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><a href="#block-breadcrumb-trail" style="color:var(--brand-blue);">Breadcrumb Trail</a>: a list of links, Hersheyland (<code class="code-inline">/home</code>) · Products (<code class="code-inline">/products.html</code>) · the brand (<code class="code-inline">/products.html?brand=Payday</code>)</td><td>Authored</td></tr>
+            <tr><td>2</td><td><a href="#block-hero" style="color:var(--brand-blue);">Hero (product)</a>, empty</td><td>Product master sheet, brand tab, row matching <code class="code-inline">bvid</code></td></tr>
+            <tr><td>3, Section Metadata <code class="code-inline">Style: light-gray</code></td><td>H2 "Nutritional Information", the "Always refer to each package…" paragraph, then <a href="#block-tabs" style="color:var(--brand-blue);">Tabs (nutrition)</a>, empty</td><td>Nutrition sheet, brand tab, row matching <code class="code-inline">bvid</code></td></tr>
+            <tr><td>4, Section Metadata <code class="code-inline">Style: light-gray</code></td><td>H2 "Related Products", then <a href="#block-cards" style="color:var(--brand-blue);">Cards (product, related)</a>, empty</td><td>Algolia: products related to this page's hersheyland.com counterpart (up to 4)</td></tr>
+            <tr><td>5</td><td><a href="#block-widget" style="color:var(--brand-blue);">Widget</a> with the link <code class="code-inline">/widgets/bazaarvoice/reviews?productId=00010700858559</code></td><td>Bazaarvoice ratings and reviews</td></tr>
+          </tbody>
+        </table></div>
+        <p style="margin-top:8px;">The <code class="code-inline">Metadata</code> table at the end of the page:</p>
+        <table class="spec-table">
+          <thead><tr><th>Key</th><th>PAYDAY value</th><th>Why it matters</th></tr></thead>
+          <tbody>
+            <tr><td>Title, Description</td><td>The product name and the short description</td><td>Page title and share text. The sheet's <code class="code-inline">Meta Title</code> and <code class="code-inline">Meta Description</code> columns hold the values to copy.</td></tr>
+            <tr><td>Image</td><td>The front pack shot</td><td>Share image. A <code class="code-inline">/media_</code> image also becomes the hero's front image and is preloaded for LCP.</td></tr>
+            <tr><td>theme</td><td><code class="code-inline">payday-primary</code></td><td>Brand colours and fonts (see "Theme" below)</td></tr>
+            <tr><td>brand</td><td><code class="code-inline">payday</code></td><td>Which tab of the product master and nutrition sheets to load</td></tr>
+            <tr><td>bvid</td><td><code class="code-inline">00010700858559</code></td><td>14-digit GTIN: finds the product's row in both sheets, and is the Bazaarvoice and Shop Now id</td></tr>
+          </tbody>
+        </table>
+
+        <h3>How to build a new PDP</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">Check the product is in both sheets</div><p>Find the product's row in its brand tab of <code class="code-inline">/products/product-master</code> (by <code class="code-inline">14-Digit UPCs</code>) and of <code class="code-inline">/products/nutrition</code> (by <code class="code-inline">gtin</code>). Add or fix the rows if needed, and set <code class="code-inline">Notes</code> to <code class="code-inline">migrated</code> in the product master row. Preview and publish the sheets after any change.</p></div></div>
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">Create the document from the template</div><p>In DA, create the page under <code class="code-inline">/products/</code> with the path from the sheet's <code class="code-inline">Product Page URL</code>, without <code class="code-inline">.html</code> (e.g. <code class="code-inline">/products/payday-chocolatey-covered-peanut-and-caramel-king-size-candy-bar-3-1-oz</code>). Insert the <strong>product</strong> template from <a href="#da-tools" style="color:var(--brand-blue);">Library → Templates</a>.</p></div></div>
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">Clear the data-driven blocks</div><p>Empty the placeholder content in Hero (product), Tabs (nutrition) and Cards (product, related), keeping the block names. Anything left in a block is shown instead of the data, so only author a field to override the sheet (for example a <code class="code-inline">label</code> of <code class="code-inline">Limited Edition</code>).</p></div></div>
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">Fix the breadcrumb and reviews link</div><p>Change the breadcrumb's brand link text and <code class="code-inline">?brand=</code> value. In the reviews widget link, set <code class="code-inline">productId</code> to the product's GTIN, or remove <code class="code-inline">?productId=…</code> to use <code class="code-inline">bvid</code>.</p></div></div>
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">Fill in the metadata</div><p>Set Title, Description and Image, then <code class="code-inline">theme</code>, <code class="code-inline">brand</code> and <code class="code-inline">bvid</code> as in the table above. <code class="code-inline">bvid</code> must be the 14-digit GTIN, with leading zeros.</p></div></div>
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">Preview and check</div><p>Preview the page and check the hero (images, title, sizes), the Nutrition Facts, Ingredients and Dietary Info tabs, the related products and the rating. An empty hero or missing tabs usually means <code class="code-inline">brand</code> or <code class="code-inline">bvid</code> doesn't match a sheet row.</p></div></div>
+        </div>
+
+        <h3>Theme</h3>
+        <p>Every <code class="code-inline">/products/</code> page gets the base Hershey look. The <code class="code-inline">theme</code> metadata adds a brand theme on top, loaded from <code class="code-inline">design/themes/&lt;theme&gt;.css</code>.</p>
+        <table class="spec-table">
+          <thead><tr><th>Brand</th><th>theme value</th><th>Stylesheet</th></tr></thead>
+          <tbody>
+            <tr><td>Hershey's (default)</td><td><code class="code-inline">hershey-primary</code></td><td>None; base Hershey tokens only</td></tr>
+            <tr><td>Reese's</td><td><code class="code-inline">reese-primary</code></td><td><code class="code-inline">design/themes/reese-primary.css</code></td></tr>
+            <tr><td>Cadbury</td><td><code class="code-inline">cadbury-primary</code></td><td><code class="code-inline">design/themes/cadbury-primary.css</code></td></tr>
+            <tr><td>Payday</td><td><code class="code-inline">payday-primary</code></td><td><code class="code-inline">design/themes/payday-primary.css</code></td></tr>
+            <tr><td>Rolo</td><td><code class="code-inline">rolo-primary</code></td><td><code class="code-inline">design/themes/rolo-primary.css</code></td></tr>
+          </tbody>
+        </table>
+        <ul class="req-list" style="margin-top:8px;">
+          <li><strong>Setting it:</strong> open <a href="#da-tools" style="color:var(--brand-blue);">Extensions → Themes</a> in the DA editor. On a product page it lists only these product themes. Click one to copy its value, then paste it into <strong>Page → Page Metadata → theme</strong> and preview. You can also type the value directly.</li>
+          <li><strong>Adding a product theme</strong> is a code change: add <code class="code-inline">{ label, value }</code> (no <code class="code-inline">file</code>) to <code class="code-inline">BRAND_THEMES</code> in <code class="code-inline">scripts/brand-themes.js</code>, and create <code class="code-inline">design/themes/&lt;value&gt;.css</code> with the brand's token overrides (copy <code class="code-inline">payday-primary.css</code> as a starting point). The Themes panel picks it up from the same list.</li>
+          <li><strong>Don't use brand page themes</strong> (those with <code class="code-inline">file: 'brands'</code>, such as <code class="code-inline">payday-brand-primary</code>) on product pages. They are for brand landing pages.</li>
+        </ul>
+
+        <h3>Product master sheet</h3>
+        <p>DA sheet <code class="code-inline">/products/product-master</code>, served as <code class="code-inline">/products/product-master.json</code>. It has a <code class="code-inline">data</code> tab with every product (about 1,600 rows) and one tab per brand: <code class="code-inline">hersheys</code>, <code class="code-inline">reeses</code>, <code class="code-inline">cadbury</code>, <code class="code-inline">rolo</code>, <code class="code-inline">payday</code>. The hero only reads the brand tab (<code class="code-inline">/products/product-master.json?sheet=payday</code>); the whole file is too large to be served in one request.</p>
+        <ul class="req-list">
+          <li><strong>Tab name:</strong> the <code class="code-inline">brand</code> metadata in lower case with everything except letters and digits removed (<code class="code-inline">HERSHEY'S</code> → <code class="code-inline">hersheys</code>, <code class="code-inline">ROLO®</code> → <code class="code-inline">rolo</code>).</li>
+          <li><strong>Row:</strong> the one whose <code class="code-inline">14-Digit UPCs</code>, padded to 14 digits, equals <code class="code-inline">bvid</code>.</li>
+          <li><strong>The sheet is only fetched</strong> when a hero field is left empty, and it must be previewed and published for the fallback to work.</li>
+        </ul>
+        <div class="bg-scroll"><table class="spec-table">
+          <thead><tr><th>Column</th><th>Used for</th></tr></thead>
+          <tbody>
+            <tr><td><code class="code-inline">14-Digit UPCs</code></td><td>Matching the row to <code class="code-inline">bvid</code></td></tr>
+            <tr><td><code class="code-inline">Image URL</code>, <code class="code-inline">imageAlt</code></td><td>Front image (Scene7) and its alt text. Without an <code class="code-inline">imageAlt</code> column the alt is the product name; the existing <code class="code-inline">Image ALT Text</code> column isn't read.</td></tr>
+            <tr><td><code class="code-inline">imageBack</code>, <code class="code-inline">imageBackAlt</code></td><td>Back image; optional, adds the second gallery slide</td></tr>
+            <tr><td><code class="code-inline">Short Product Title</code>, else <code class="code-inline">productName</code></td><td>Hero title</td></tr>
+            <tr><td><code class="code-inline">On Page Description/product Details</code></td><td>Hero description</td></tr>
+            <tr><td><code class="code-inline">Occasion</code></td><td>Label pill: <code class="code-inline">Limited Edition</code> shows Limited Edition; <code class="code-inline">Halloween</code>, <code class="code-inline">Easter</code>, <code class="code-inline">Holiday</code>, <code class="code-inline">Valentine's</code> show Seasonal; anything else, no label</td></tr>
+            <tr><td><code class="code-inline">Product Family ID (lowercase and underscores for BV)</code>, <code class="code-inline">Notes</code></td><td>Size list: the other products in the tab with the same family id whose <code class="code-inline">Notes</code> is <code class="code-inline">migrated</code></td></tr>
+            <tr><td><code class="code-inline">Product Page URL</code></td><td>Size link (path without <code class="code-inline">.html</code>)</td></tr>
+            <tr><td><code class="code-inline">Weight (oz)</code>, <code class="code-inline">Count</code>, <code class="code-inline">Count Unit</code></td><td>Size label when the product name doesn't give one</td></tr>
+          </tbody>
+        </table></div>
+        <p style="margin-top:8px;">The Shop Now button isn't in the sheet; an empty <code class="code-inline">button</code> row links to <code class="code-inline">/where-to-buy</code>. Other columns are ignored by the code. When you migrate a product, set its row's <code class="code-inline">Notes</code> to <code class="code-inline">migrated</code> so the other sizes in its family link to it.</p>
+
+        <h3>Nutrition sheet</h3>
+        <p>DA sheet <code class="code-inline">/products/nutrition</code>, served as <code class="code-inline">/products/nutrition.json</code>, with one tab per brand: <code class="code-inline">hersheys</code>, <code class="code-inline">reeses</code>, <code class="code-inline">cadbury</code>, <code class="code-inline">rolo</code>, <code class="code-inline">payday</code>. Tabs (nutrition) loads the tab named by <code class="code-inline">brand</code> (same rule as above) and uses the row whose <code class="code-inline">gtin</code> equals <code class="code-inline">bvid</code>. Write <code class="code-inline">gtin</code> as all 14 digits, leading zeros included; it isn't padded.</p>
+        <div class="bg-scroll"><table class="spec-table">
+          <thead><tr><th>Tab</th><th>Columns</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Nutrition Facts</td><td><code class="code-inline">servingSize</code>, <code class="code-inline">servingsPerContainer</code>, then an amount and a <code class="code-inline">DV</code> column per nutrient: <code class="code-inline">calories</code>, <code class="code-inline">totalFat</code> / <code class="code-inline">totalFatDV</code>, <code class="code-inline">saturatedFat</code>, <code class="code-inline">transFat</code>, <code class="code-inline">cholesterol</code>, <code class="code-inline">sodium</code>, <code class="code-inline">totalCarbohydrates</code>, <code class="code-inline">dietaryFiber</code>, <code class="code-inline">totalSugars</code>, <code class="code-inline">addedSugars</code>, <code class="code-inline">protein</code>, <code class="code-inline">vitaminD</code>, <code class="code-inline">calcium</code>, <code class="code-inline">iron</code>, <code class="code-inline">potassium</code></td><td>Empty nutrients are left off. Added sugars shows as "Includes 13g Added Sugars". The % Daily Value footnote is added.</td></tr>
+            <tr><td>Ingredients</td><td><code class="code-inline">ingredients</code>, <code class="code-inline">allergens</code>, <code class="code-inline">allergenNote</code></td><td><code class="code-inline">allergens</code> shows as "Contains: Milk, Peanuts, Soy".</td></tr>
+            <tr><td>Dietary Info</td><td><code class="code-inline">dietary</code></td><td>Comma-separated labels, e.g. <code class="code-inline">OU-D, GLUTEN FREE</code>. Each label is also an icon name (<code class="code-inline">OU-D</code> → <code class="code-inline">/icons/ou-d.svg</code>); a label without an icon file shows as text.</td></tr>
+          </tbody>
+        </table></div>
+        <p style="margin-top:8px;">The <code class="code-inline">product</code> column is only for people reading the sheet. A tab appears on the page only when its columns have data. Authored content in a tab wins; an empty tab, or an empty block, is filled from the sheet.</p>
+        <div class="notice tip">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><strong>New brand.</strong> To build PDPs for a brand that has no tab yet, add a tab with the brand's tab name to both sheets (same columns as the existing tabs), preview and publish both, and use that name as the page's <code class="code-inline">brand</code>. If the brand needs its own colours, add a product theme as described above.</span>
+        </div>
       </section>
 
       <section class="doc-section" id="supporting-modules">
