@@ -211,13 +211,18 @@
   line-height: var(--hershey-component-tabs-nutrition-text-line-height-mobile, 20px);
 }
 
-.tabs.nutrition .tabs-nutrition-panel-text > p:not(.tabs-nutrition-allergen) {
+.tabs.nutrition .tabs-nutrition-panel-text > p {
   font-weight: var(--hershey-component-tabs-nutrition-row-font-weight, 450);
   line-height: var(--hershey-component-tabs-nutrition-text-paragraph-line-height, 24px);
 }
 
+/* "Contains" line and the notes after it: one bold box, lines without spacing */
 .tabs.nutrition .tabs-nutrition-allergen {
   font-weight: var(--hershey-component-tabs-nutrition-text-allergen-font-weight, 700);
+}
+
+.tabs.nutrition .tabs-nutrition-allergen > p {
+  margin: 0;
 }
 
 /* dietary badges */
@@ -323,7 +328,7 @@
     line-height: inherit;
   }
 
-  .tabs.nutrition .tabs-nutrition-panel-text > p:not(.tabs-nutrition-allergen) {
+  .tabs.nutrition .tabs-nutrition-panel-text > p {
     font-weight: inherit;
   }
 

@@ -315,7 +315,9 @@ function decorateBadges(panel) {
 }
 
 /**
- * Styling hooks: flags the panel by content type and marks the allergen statement.
+ * Styling hooks: flags the panel by content type and groups the allergen statement.
+ * As on hersheyland.com, the "Contains" paragraph and every paragraph after it (e.g. the
+ * "Manufactured on the same equipment…" note) form one allergen box.
  * @param {Element} panel
  */
 function decoratePanelType(panel) {
@@ -323,9 +325,13 @@ function decoratePanelType(panel) {
   if (panel.querySelector('.tabs-nutrition-table')) type = 'facts';
   else if (panel.querySelector('.tabs-nutrition-badges')) type = 'badges';
   panel.classList.add(`tabs-nutrition-panel-${type}`);
-  panel.querySelectorAll(':scope > p').forEach((p) => {
-    if (/^contains\b/i.test(p.textContent.trim())) p.classList.add('tabs-nutrition-allergen');
-  });
+  const paragraphs = [...panel.querySelectorAll(':scope > p')];
+  const start = paragraphs.findIndex((p) => /^contains\b/i.test(p.textContent.trim()));
+  if (start < 0) return;
+  const box = document.createElement('div');
+  box.className = 'tabs-nutrition-allergen';
+  paragraphs[start].before(box);
+  box.append(...paragraphs.slice(start));
 }
 
 export default async function decorate(block) {
