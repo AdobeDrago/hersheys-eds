@@ -1,4 +1,5 @@
-import fetchRelated from '../../scripts/algolia-recommend.js';
+import { getMetadata } from '../../scripts/aem.js';
+import fetchRelated, { PRODUCTION } from '../../scripts/algolia-recommend.js';
 
 const IMAGE_LINK = /\/is\/image\/|\.(?:png|jpe?g|webp|avif|gif)(?:[?#]|$)/i;
 const BVID_LINE = /^bvid\s*:/i;
@@ -17,10 +18,37 @@ const BVID_LINE = /^bvid\s*:/i;
  * `related` variant (`Cards (product, related)`): authored rows take precedence. Only when
  * no card is authored (no row with both an image and a heading) are the rows fetched from
  * Algolia: the products related to this page's production counterpart on
- * www.hersheyland.com, linking to their production pages.
+ * www.hersheyland.com, linking to their production pages. The counterpart is found from the
+ * `bvid` metadata: the `Product Page URL` of the row whose `14-Digit UPCs` matches it, in the
+ * tab of the product master sheet named by the `brand` metadata. Without a matching row
+ * (or `bvid`/`brand`), the page's own path is used.
  */
 
 const MAX_RELATED = 4;
+const PRODUCT_MASTER = '/products/product-master.json';
+
+/**
+ * Production URL of this page's product, from the product master sheet row matching the
+ * `bvid` metadata (the hero loads the same tab, so it is usually cached).
+ * @returns {Promise<string|undefined>}
+ */
+async function productionUrl() {
+  const gtin = (getMetadata('bvid') || getMetadata('bv-id')).trim();
+  const sheet = getMetadata('brand').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '');
+  if (!gtin || !sheet) return undefined;
+  try {
+    const resp = await fetch(`${PRODUCT_MASTER}?sheet=${sheet}`);
+    if (!resp.ok) return undefined;
+    const json = await resp.json();
+    const rows = Array.isArray(json.data) ? json.data : json.data?.data || [];
+    const url = rows.find((row) => String(row['14-Digit UPCs'] || '').trim() === gtin)?.['Product Page URL'];
+    const href = String(url || '').trim();
+    // Algolia only holds hersheyland.com records
+    return href.startsWith(`${PRODUCTION}/`) ? href : undefined;
+  } catch {
+    return undefined; // no sheet: fall back to the page path
+  }
+}
 
 /**
  * @param {Element} cell
@@ -90,7 +118,8 @@ function buildCard({
 
 async function decorateRelated(block) {
   try {
-    const hits = (await fetchRelated({ templateType: 'product-detail', max: MAX_RELATED }))
+    const url = await productionUrl();
+    const hits = (await fetchRelated({ templateType: 'product-detail', max: MAX_RELATED, url }))
       .filter((hit) => hit.hero?.image && hit.hero?.h1);
     if (!hits.length) return;
     const list = document.createElement('ul');
