@@ -714,6 +714,10 @@
         <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 1A1.5 1.5 0 001 2.5v11A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-11A1.5 1.5 0 0013.5 1h-11zM3 3h4v4H3V3zm6 0h4v1.5H9V3zm0 2.5h4V7H9V5.5zM3 9h10v1.5H3V9zm0 2.5h10V13H3v-1.5z"/></svg>
         PDP page
       </a>
+      <a class="sidebar-link" href="#pdp-data">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2.75A.75.75 0 011.75 2h3.5a.75.75 0 01.75.75v2.5a.75.75 0 01-.75.75H4.25v2.25h3V7.75A.75.75 0 018 7h3.5a.75.75 0 01.75.75v.5H14.25a.75.75 0 010 1.5H12.25v.5a.75.75 0 01-.75.75H8a.75.75 0 01-.75-.75v-.5h-3v2.5h1a.75.75 0 01.75.75v2a.75.75 0 01-.75.75h-3.5A.75.75 0 011 13.25v-2a.75.75 0 01.75-.75h1V6h-1A.75.75 0 011 5.25v-2.5z"/></svg>
+        PDP product data
+      </a>
       <a class="sidebar-link" href="#supporting-modules">
         <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2h-7zM5 5.5A.5.5 0 015.5 5h5a.5.5 0 010 1h-5A.5.5 0 015 5.5zm0 2.5a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5A.5.5 0 015 8zm.5 2a.5.5 0 000 1h3a.5.5 0 000-1h-3z"/></svg>
         Supporting modules
@@ -2009,6 +2013,83 @@ npm run lint:fix      <span class="cmt"># auto-fix JS + CSS where possible</span
           <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
           <span><strong>New brand.</strong> To build PDPs for a brand that has no tab yet, add a tab with the brand's tab name to both sheets (same columns as the existing tabs), preview and publish both, and use that name as the page's <code class="code-inline">brand</code>. If the brand needs its own colours, add a product theme as described above.</span>
         </div>
+      </section>
+
+      <section class="doc-section" id="pdp-data">
+        <h2>
+          <span class="section-icon icon-blue">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2.75A.75.75 0 011.75 2h3.5a.75.75 0 01.75.75v2.5a.75.75 0 01-.75.75H4.25v2.25h3V7.75A.75.75 0 018 7h3.5a.75.75 0 01.75.75v.5H14.25a.75.75 0 010 1.5H12.25v.5a.75.75 0 01-.75.75H8a.75.75 0 01-.75-.75v-.5h-3v2.5h1a.75.75 0 01.75.75v2a.75.75 0 01-.75.75h-3.5A.75.75 0 011 13.25v-2a.75.75 0 01.75-.75h1V6h-1A.75.75 0 011 5.25v-2.5z"/></svg>
+          </span>
+          Product data for PDPs and other sites
+        </h2>
+        <div class="section-rule"></div>
+        <p>Hersheyland's product detail pages (PDPs) are built from two sheets, the product master and the nutrition sheet, published as JSON. The same JSON can be read by B2B and other Hershey sites, so product facts are maintained once. For how to author the page itself, see <a href="#pdp-page" style="color:var(--brand-blue);">PDP page</a>.</p>
+
+        <h3>How the PDP is built</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">Product data goes into two DA sheets</div><p>Data from Hershey's product master spreadsheet is imported into Document Authoring (DA) by hand, into <code class="code-inline">/products/product-master</code> (names, images, descriptions, sizes) and <code class="code-inline">/products/nutrition</code> (Nutrition Facts, ingredients, allergens, dietary claims). Each sheet has one tab per brand: <code class="code-inline">hersheys</code>, <code class="code-inline">reeses</code>, <code class="code-inline">cadbury</code>, <code class="code-inline">rolo</code>, <code class="code-inline">payday</code>.</p></div></div>
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">Publishing turns each sheet into JSON</div><p>Edge Delivery Services serves a previewed or published sheet as JSON at the same path. No code or build step is needed, and the JSON updates whenever the sheet is published again.</p></div></div>
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">The PDP document only holds the keys</div><p>Each product page has its blocks left empty and two metadata values: <code class="code-inline">brand</code> picks the sheet tab and <code class="code-inline">bvid</code>, the product's 14-digit GTIN, picks the row.</p></div></div>
+          <div class="step"><div class="step-num"></div><div class="step-body"><div class="step-title">The blocks fill the page from the JSON</div><p>When the page loads, the product hero reads the product master row, and the nutrition tabs read the nutrition row. Anything an author types into a block takes priority over the sheet.</p></div></div>
+        </div>
+
+        <h3>What each sheet provides</h3>
+        <p>Example: <a href="https://main--hersheys-eds--adobedrago.aem.page/products/payday-chocolatey-covered-peanut-and-caramel-king-size-candy-bar-3-1-oz" target="_blank" rel="noopener" style="color:var(--brand-blue);">PAYDAY King Size bar</a>, GTIN <code class="code-inline">00010700858559</code>.</p>
+        <div class="bg-scroll"><table class="spec-table">
+          <thead><tr><th>Sheet</th><th>Row matched by</th><th>Fills on the PDP</th></tr></thead>
+          <tbody>
+            <tr><td>Product master</td><td><code class="code-inline">14-Digit UPCs</code></td><td>Hero (product): product name, front and back images (Scene7), description, size options, Seasonal or Limited Edition label</td></tr>
+            <tr><td>Nutrition</td><td><code class="code-inline">gtin</code></td><td>Tabs (nutrition): Nutrition Facts label, Ingredients with allergens, Dietary Info badges</td></tr>
+          </tbody>
+        </table></div>
+        <p style="margin-top:8px;">The same GTIN is also the Bazaarvoice product id (ratings and reviews) and the PriceSpider SKU (Where to Buy). Related products come from Algolia, not from these sheets. Every column the PDP reads is listed under <a href="#pdp-page" style="color:var(--brand-blue);">PDP page</a>.</p>
+
+        <h3>The JSON endpoints</h3>
+        <div class="url-grid">
+          <a class="url-card" href="https://main--hersheys-eds--adobedrago.aem.live/products/product-master.json?sheet=payday" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-blue"></span>Product master</span>
+            <span class="url-card-title">One brand tab per request</span>
+            <span class="url-card-url">https://main--hersheys-eds--adobedrago.aem.live/products/product-master.json</span>
+            <span class="url-card-desc">Add <code class="code-inline">?sheet=&lt;brand&gt;</code>, e.g. <code class="code-inline">?sheet=payday</code> (this link). Without it the whole sheet is too large to serve (HTTP 413).</span>
+          </a>
+          <a class="url-card" href="https://main--hersheys-eds--adobedrago.aem.live/products/nutrition.json" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-green"></span>Nutrition</span>
+            <span class="url-card-title">All brand tabs</span>
+            <span class="url-card-url">https://main--hersheys-eds--adobedrago.aem.live/products/nutrition.json</span>
+            <span class="url-card-desc">Returns every brand tab; add <code class="code-inline">?sheet=&lt;brand&gt;</code> for one.</span>
+          </a>
+        </div>
+        <p>Each tab returns <code class="code-inline">total</code>, <code class="code-inline">offset</code>, <code class="code-inline">limit</code> and <code class="code-inline">data</code>, an array of rows. Every row is an object keyed by the sheet's column names; all values are strings. Up to 1,000 rows come back per request; use <code class="code-inline">&amp;limit=</code> and <code class="code-inline">&amp;offset=</code> for more.</p>
+        <div class="code-block"><span class="cmt">// GET /products/nutrition.json?sheet=payday (shortened)</span>
+{
+  "total": 1, "offset": 0, "limit": 1, ":type": "sheet",
+  "data": [{
+    "gtin": <span class="str">"00010700858559"</span>,
+    "servingSize": <span class="str">"1/3 pack (29g)"</span>,
+    "calories": <span class="str">"140"</span>,
+    "totalFat": <span class="str">"8g"</span>, "totalFatDV": <span class="str">"10%"</span>,
+    "allergens": <span class="str">"Milk, Peanuts, Soy"</span>,
+    "dietary": <span class="str">"OU-D, GLUTEN FREE"</span>
+  }]
+}</div>
+
+        <h3>Reuse by B2B and other Hershey sites</h3>
+        <p>Any Hershey experience that needs product facts, such as a B2B or retailer portal, another brand site or an app, can read the same JSON instead of keeping its own copy. It looks a product up the same way the PDP does: brand tab, then GTIN.</p>
+        <div class="code-block"><span class="cmt">// look up one product by brand and GTIN</span>
+const base = <span class="str">'https://main--hersheys-eds--adobedrago.aem.live'</span>;
+const gtin = <span class="str">'00010700858559'</span>;
+const [master, nutrition] = await Promise.all([
+  fetch(`${base}/products/product-master.json?sheet=payday`).then((r) =&gt; r.json()),
+  fetch(`${base}/products/nutrition.json?sheet=payday`).then((r) =&gt; r.json()),
+]);
+const product = master.data.find((row) =&gt; row[<span class="str">'14-Digit UPCs'</span>].padStart(14, <span class="str">'0'</span>) === gtin);
+const facts = nutrition.data.find((row) =&gt; row.gtin === gtin);</div>
+        <p><strong>Benefits</strong></p>
+        <ul class="req-list">
+          <li><strong>One source of truth:</strong> a fix in the sheet reaches every site that reads it on the next publish.</li>
+          <li><strong>Nothing to host:</strong> the JSON is served and cached by Edge Delivery Services; consumers need no API or database.</li>
+          <li><strong>Simple contract:</strong> plain JSON over HTTPS, keyed by the GTIN that retail, Bazaarvoice and PriceSpider already use.</li>
+        </ul>
       </section>
 
       <section class="doc-section" id="supporting-modules">
